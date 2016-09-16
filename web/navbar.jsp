@@ -1,6 +1,11 @@
 
 <header class="main-header">
-
+<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+           <link rel="stylesheet" href="font-awesome-4.6.3/css/font-awesome.min.css">
+ <link rel="stylesheet" href="ionicons-2.0.1/css/ionicons.min.css">
+        <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+        <link rel="stylesheet" href="dist/css/skins/skin-blue.min.css">
+ 
     <!-- Logo -->
     <a href="index2.html" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
@@ -74,20 +79,20 @@
 
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu">
-        <!-- Optionally, you can add icons to the links -->
-        <li><a href="Homepage.jsp"><span>Home</span></a></li>
-        <li><a href="GetFarmersList"><span>Farmer Assistance</span> </a></li>
-        <li><a href="Farmer Details.jsp"><span>Farm Information</span></a></li>
-        <li><a href="Farmer Recommendation.jsp"><span>Farmer Recommendation</span> </a></li>
-         <li><a href="Weather Trends and Forecast.jsp"><span>Weather Trends and Forecast</span> </a></li>
-        <li><a href="Disaster Survey.jsp"><span>Disaster Survey</span> </a></li>
-        <li><a href="GetProjects"><span>Projects</span> </a></li>
-        <li><a href="Simulation.jsp"><span>Simulation</span> </a></li>
-        <li><a href="CropEstimate.jsp"><span>Crop Estimation</span> </a></li>
-        <li><a href="Update Variables.jsp"><span>Update Variables</span> </a></li>
-        <li><a href="ViewFarmerDropdown"><span>Comparison</span> </a></li>
+      <li class="header">Navigation</li>
+        <li class="active"><a href="Homepage.jsp"><i class="fa fa-link"></i><span>Home</span></a></li>
+        <li><a href="GetFarmersList"><i class="fa fa-link"></i><span>Farmer Assistance</span> </a></li>
+        <li><a href="Farmer Details.jsp"><i class="fa fa-link"></i><span>Farm Information</span></a></li>
+        <li><a href="Farmer Recommendation.jsp"><i class="fa fa-link"></i><span>Farmer Recommendation</span> </a></li>
+         <li><a href="Weather Trends and Forecast.jsp"><i class="fa fa-link"></i><span>Weather Trends and Forecast</span> </a></li>
+        <li><a href="Disaster Survey.jsp"><i class="fa fa-link"></i><span>Disaster Survey</span> </a></li>
+        <li><a href="GetProjects"><i class="fa fa-link"></i><span>Projects</span> </a></li>
+        <li><a href="Simulation.jsp"><i class="fa fa-link"></i><span>Simulation</span> </a></li>
+        <li><a href="CropEstimate.jsp"><i class="fa fa-link"></i><span>Crop Estimation</span> </a></li>
+        <li><a href="Update Variables.jsp"><i class="fa fa-link"></i><span>Update Variables</span> </a></li>
+        <li><a href="ViewFarmerDropdown"><i class="fa fa-link"></i><span>Comparison</span> </a></li>
        <!-- <li><a href="Solutions.jsp"><span>Solutions</span> </a></li>-->
-        <li><a href="ViewThresholds"><span>Thresholds</span> </a></li>
+        <li><a href="ViewThresholds"><i class="fa fa-link"></i><span>Thresholds</span> </a></li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>
