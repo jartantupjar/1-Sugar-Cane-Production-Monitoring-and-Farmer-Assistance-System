@@ -97,7 +97,7 @@
             $(function () {
                 var data = {
                     'South-East Asia': {
-                        'Sri Lanka': {
+                        'Test': {
                             'Communicable & other Group I': '75.5',
                             'Injuries': '89.0',
                             'Noncommunicable diseases': '501.2'
@@ -1052,7 +1052,8 @@
                     }
                 });
             });
-        </script>  
+        </script>
+        
 
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="dist/js/app.min.js"></script>

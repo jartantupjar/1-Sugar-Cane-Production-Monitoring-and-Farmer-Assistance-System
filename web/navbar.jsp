@@ -82,17 +82,9 @@
       <li class="header">Navigation</li>
         <li class="active"><a href="Homepage.jsp"><i class="fa fa-link"></i><span>Home</span></a></li>
         <li><a href="GetFarmersList"><i class="fa fa-link"></i><span>Farmer Assistance</span> </a></li>
-        <li><a href="Farmer Details.jsp"><i class="fa fa-link"></i><span>Farm Information</span></a></li>
-        <li><a href="Farmer Recommendation.jsp"><i class="fa fa-link"></i><span>Farmer Recommendation</span> </a></li>
-         <li><a href="Weather Trends and Forecast.jsp"><i class="fa fa-link"></i><span>Weather Trends and Forecast</span> </a></li>
-        <li><a href="Disaster Survey.jsp"><i class="fa fa-link"></i><span>Disaster Survey</span> </a></li>
-        <li><a href="GetProjects"><i class="fa fa-link"></i><span>Projects</span> </a></li>
-        <li><a href="Simulation.jsp"><i class="fa fa-link"></i><span>Simulation</span> </a></li>
-        <li><a href="CropEstimate.jsp"><i class="fa fa-link"></i><span>Crop Estimation</span> </a></li>
-        <li><a href="Update Variables.jsp"><i class="fa fa-link"></i><span>Update Variables</span> </a></li>
-        <li><a href="ViewFarmerDropdown"><i class="fa fa-link"></i><span>Comparison</span> </a></li>
-       <!-- <li><a href="Solutions.jsp"><span>Solutions</span> </a></li>-->
-        <li><a href="ViewThresholds"><i class="fa fa-link"></i><span>Thresholds</span> </a></li>
+        <li><a href="createProject.jsp"><i class="fa fa-link"></i><span>Create Project</span></a></li>
+        <li><a href="viewProjects.jsp"><i class="fa fa-link"></i><span>View Projects</span></a></li>
+       
       </ul>
       <!-- /.sidebar-menu -->
     </section>
