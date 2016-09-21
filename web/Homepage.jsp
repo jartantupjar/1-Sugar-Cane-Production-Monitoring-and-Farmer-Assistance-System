@@ -19,9 +19,22 @@
                     </h1>
                 </section>
                 <section class="content">
+         
+                    <div class="col-md-6" > 
+                        <div class="box box-info">
+                            <div class="box-header with-border">
+                                <h1 class="box-title">Area Harvested</h1>
+                                <div class="box-tools pull-right">
+                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                </div>
+                            </div>   
+                            <div class="box-body no-padding" id="container-rpm"></div>
+                        </div>
 
-
-                    <div class="col-md-10" > 
+                    </div>
+                   
+                    <div class="col-md-6" > 
                         <div class="box box-info">
                             <div class="box-header with-border">
                                 <h1 class="box-title">Area Harvested</h1>
@@ -35,7 +48,7 @@
 
                     </div>
                     <br>
-                    <div class="col-md-10" > 
+                    <div class="col-md-6" > 
                         <div class="box box-info">
                             <div class="box-header with-border">
                                 <h1 class="box-title">Area Harvested</h1>
@@ -77,7 +90,22 @@
                             </div>
 
                         </div>
-                    </div>    
+                    </div> 
+                    <br>
+                    <div class="col-md-6" > 
+                        <div class="box box-info">
+                            <div class="box-header with-border">
+                                <h1 class="box-title">Weather Forecast</h1>
+                                <div class="box-tools pull-right">
+                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                </div>
+                            </div>   
+                            <div class="box-body no-padding" id="container1"></div>
+                        </div>
+
+                    </div>
+                    
                 </section>
 
             </div>
@@ -94,7 +122,7 @@
 
         <script type="text/javascript" src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
         <script type="text/javascript">
-            $(function () {
+            $(function () {  // treemap code
                 var data = {
                     'South-East Asia': {
                         'Test': {
@@ -1045,20 +1073,110 @@
                             data: points
                         }],
                     subtitle: {
-                        text: 'Click points to drill down. Source: <a href="http://apps.who.int/gho/data/node.main.12?lang=en">WHO</a>.'
+                        text: 'Click points to drill down'
                     },
+                    
                     title: {
-                        text: 'Global Mortality Rate 2012, per 100 000 population'
+                        text: 'Production Tree Map of This date'
                     }
                 });
             });
         </script>
+        <script type="text/javascript">
+$(function () {  //gauge code
+
+    var gaugeOptions = {
+
+        chart: {
+            type: 'solidgauge'
+        },
+
+        title: null,
+
+        pane: {
+            center: ['50%', '85%'],
+            size: '140%',
+            startAngle: -90,
+            endAngle: 90,
+            background: {
+                backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || '#EEE',
+                innerRadius: '60%',
+                outerRadius: '100%',
+                shape: 'arc'
+            }
+        },
+
+        tooltip: {
+            enabled: false
+        },
+
+        // the value axis
+        yAxis: {
+            stops: [
+                [0.1, '#DF5353'], // red
+                [0.5, '#DDDF0D'], // yellow
+                [0.9, '#55BF3B'] // green 
+            ],
+            lineWidth: 0,
+            minorTickInterval: null,
+            tickAmount: 2,
+            title: {
+                y: -70
+            },
+            labels: {
+                y: 16
+            }
+        },
+
+        plotOptions: {
+            solidgauge: {
+                dataLabels: {
+                    y: 5,
+                    borderWidth: 0,
+                    useHTML: true
+                }
+            }
+        }
+    };
+
+   
+
+    // The RPM gauge
+    $('#container-rpm').highcharts(Highcharts.merge(gaugeOptions, {
+        yAxis: {
+            min: 0,
+            max: 5,
+            title: {
+                text: 'TC/HA'
+            }
+        },
+
+        series: [{
+            name: 'TC/HA',
+            data: [1],
+            dataLabels: {
+                format: '<div style="text-align:center"><span style="font-size:25px;color:' +
+                    ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y:.1f}  </span><br/>' +
+                       '<span style="font-size:12px;color:silver">*Production</span></div>'
+            },
+            tooltip: {
+                valueSuffix: ' TonsCane/AreaHarvested'
+            }
+        }]
+
+    }));
+
+});
+		</script>
         
 
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="dist/js/app.min.js"></script>
         <script src="Highcharts/highcharts.js"></script>
         <script src="Highcharts/modules/treemap.js"></script>
+        <script src="Highcharts/highcharts-more.js"></script>
+        <script src="Highcharts/modules/solid-gauge.js"></script>
+        <script src="Highcharts/modules/exporting.js"></script>
 
     </body>
 

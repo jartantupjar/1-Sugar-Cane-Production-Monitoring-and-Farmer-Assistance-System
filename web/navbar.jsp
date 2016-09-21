@@ -82,6 +82,9 @@
       <li class="header">Navigation</li>
         <li class="active"><a href="Homepage.jsp"><i class="fa fa-link"></i><span>Home</span></a></li>
         <li><a href="GetFarmersList"><i class="fa fa-link"></i><span>Farmer Assistance</span> </a></li>
+        <li><a href="WeatherTrends.jsp"><i class="fa fa-link"></i><span>Weather Trends</span> </a></li>
+        <li><a href="Calendar.jsp"><i class="fa fa-link"></i><span>Calendar</span> </a></li>
+
         <li><a href="createProject.jsp"><i class="fa fa-link"></i><span>Create Project</span></a></li>
         <li><a href="viewProjects.jsp"><i class="fa fa-link"></i><span>View Projects</span></a></li>
        
