@@ -41,11 +41,11 @@
             <div class="box-body">
               <!-- the events -->
               <div id="external-events">
-                <div class="external-event bg-green">Lunch</div>
-                <div class="external-event bg-yellow">Go home</div>
-                <div class="external-event bg-aqua">Do homework</div>
-                <div class="external-event bg-light-blue">Work on UI design</div>
-                <div class="external-event bg-red">Sleep tight</div>
+                <div class="external-event bg-green">Milling</div>
+                <div class="external-event bg-yellow">Harvesting</div>
+                <div class="external-event bg-aqua">Rainfall</div>
+                <div class="external-event bg-light-blue">Watering</div>
+                <div class="external-event bg-red">Typhoon</div>
                 <div class="checkbox">
                   <label for="drop-remove">
                     <input type="checkbox" id="drop-remove">
@@ -222,12 +222,12 @@
           borderColor: "#00c0ef" //Info (aqua)
         },
         {
-          title: 'Birthday Party',
+          title: 'Typhoon Warning',
           start: new Date(y, m, d + 1, 19, 0),
-          end: new Date(y, m, d + 1, 22, 30),
-          allDay: false,
-          backgroundColor: "#00a65a", //Success (green)
-          borderColor: "#00a65a" //Success (green)
+          end: new Date(y, m, d + 3, 22, 30),
+          url: 'http://localhost:8084/Reality/WeatherReport.jsp',
+          backgroundColor: "#f56954", //red
+          borderColor: "#f56954" //red
         },
         {
           title: 'Click for Google',

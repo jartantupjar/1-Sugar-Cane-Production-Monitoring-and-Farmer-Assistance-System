@@ -81,9 +81,11 @@
       <ul class="sidebar-menu">
       <li class="header">Navigation</li>
         <li class="active"><a href="Homepage.jsp"><i class="fa fa-link"></i><span>Home</span></a></li>
-        <li><a href="GetFarmersList"><i class="fa fa-link"></i><span>Farmer Assistance</span> </a></li>
         <li><a href="WeatherTrends.jsp"><i class="fa fa-link"></i><span>Weather Trends</span> </a></li>
         <li><a href="Calendar.jsp"><i class="fa fa-link"></i><span>Calendar</span> </a></li>
+        <li><a href="WeatherReport.jsp"><i class="fa fa-link"></i><span>Weather Report</span> </a></li>
+        <li><a href="Forum.jsp"><i class="fa fa-link"></i><span>Forum</span></a></li>
+        <li><a href="Problem.jsp"><i class="fa fa-link"></i><span>Problems</span></a></li>
 
       </ul>
       <!-- /.sidebar-menu -->
