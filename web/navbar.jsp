@@ -87,6 +87,9 @@
         <li><a href="Forum.jsp"><i class="fa fa-link"></i><span>Forum</span></a></li>
         <li><a href="Problem.jsp"><i class="fa fa-link"></i><span>Problems</span></a></li>
 
+        <li><a href="createProject.jsp"><i class="fa fa-link"></i><span>Create Project</span></a></li>
+        <li><a href="viewProjects.jsp"><i class="fa fa-link"></i><span>View Projects</span></a></li>
+       
       </ul>
       <!-- /.sidebar-menu -->
     </section>
