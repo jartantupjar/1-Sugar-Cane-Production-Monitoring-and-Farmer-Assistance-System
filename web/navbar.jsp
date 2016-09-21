@@ -84,10 +84,10 @@
         <li><a href="GetFarmersList"><i class="fa fa-link"></i><span>Farmer Assistance</span> </a></li>
         <li><a href="WeatherTrends.jsp"><i class="fa fa-link"></i><span>Weather Trends</span> </a></li>
         <li><a href="Calendar.jsp"><i class="fa fa-link"></i><span>Calendar</span> </a></li>
-
         <li><a href="createProject.jsp"><i class="fa fa-link"></i><span>Create Project</span></a></li>
-        <li><a href="viewProjects.jsp"><i class="fa fa-link"></i><span>View Projects</span></a></li>
-       
+        <li><a href="viewProjects.jsp"><i class="fa fa-link"></i><span>View Projects List</span></a></li>
+      <li><a href="viewFarmerProfile.jsp"><i class="fa fa-link"></i><span>Farmer Profile</span></a></li>
+        <li><a href="viewProjectDetails.jsp"><i class="fa fa-link"></i><span>Project Details</span></a></li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>
