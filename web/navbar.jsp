@@ -85,8 +85,7 @@
         <li><a href="Calendar.jsp"><i class="fa fa-link"></i><span>Calendar</span> </a></li>
         <li><a href="WeatherReport.jsp"><i class="fa fa-link"></i><span>Weather Report</span> </a></li>
         <li><a href="Forum.jsp"><i class="fa fa-link"></i><span>Forum</span></a></li>
-        <li><a href="Problem.jsp"><i class="fa fa-link"></i><span>Problems</span></a></li>
-
+        <li><a href="Problems.jsp"><i class="fa fa-link"></i><span>Problems</span></a></li>
         <li><a href="createProject.jsp"><i class="fa fa-link"></i><span>Create Project</span></a></li>
         <li><a href="viewProjects.jsp"><i class="fa fa-link"></i><span>View Projects</span></a></li>
        
