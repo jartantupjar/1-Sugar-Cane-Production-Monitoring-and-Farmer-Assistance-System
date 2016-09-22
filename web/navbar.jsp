@@ -86,10 +86,10 @@
         <li><a href="WeatherReport.jsp"><i class="fa fa-link"></i><span>Weather Report</span> </a></li>
         <li><a href="Forum.jsp"><i class="fa fa-link"></i><span>Forum</span></a></li>
         <li><a href="Problems.jsp"><i class="fa fa-link"></i><span>Problems</span></a></li>
-        <li><a href="createProject.jsp"><i class="fa fa-link"></i><span>Create Project</span></a></li>
+        <li><a href="createProject.jsp"><i class="fa fa-link"></i><span>Create Plans and Programs</span></a></li>
         <li><a href="viewProjects.jsp"><i class="fa fa-link"></i><span>View Projects List</span></a></li>
       <li><a href="viewFarmerProfile.jsp"><i class="fa fa-link"></i><span>Farmer Profile</span></a></li>
-        <li><a href="viewProjectDetails.jsp"><i class="fa fa-link"></i><span>Project Details</span></a></li>
+        <li><a href="viewProjectDetails.jsp"><i class="fa fa-link"></i><span>Program Details</span></a></li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>

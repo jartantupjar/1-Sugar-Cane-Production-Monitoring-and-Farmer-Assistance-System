@@ -22,7 +22,7 @@ comparison page add current vs historical details(past 2yrs)
                 <section class="content-header">
 
                     <h1>
-                       Farmer Profile
+                        Project List
                         <small>Optional description</small>
                     </h1>
                 </section>

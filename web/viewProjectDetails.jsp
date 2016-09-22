@@ -31,7 +31,7 @@ current vs then diagram
                 <section class="content-header">
 
                     <h1>
-                        Project Details
+                        Plan & Program Details
                         <small>Optional description</small>
                     </h1>
                 </section>
@@ -41,7 +41,7 @@ current vs then diagram
                             <div class="box box-primary">
                                 <div class="box-body box-profile">
 
-                                    <h3 class="profile-username text-center">Project Name</h3>
+                                    <h3 class="profile-username text-center">Program Name</h3>
 
                                     <ul class="list-group list-group-unbordered">
                                         <li class="list-group-item">
@@ -169,7 +169,7 @@ current vs then diagram
                         <div class="col-md-5"> 
                             <div class="box box-info collapsed-box" >
                                 <div class="box-header with-border">
-                                    <h1 class="box-title">Rec & Proj List</h1>
+                                    <h1 class="box-title">Rec & Prog List</h1>
                                     <div class="box-tools pull-right " >
                                         <button class="btn btn-box-tool"  data-widget="collapse"><i class="fa fa-minus"></i></button>
                                         <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>

@@ -39,7 +39,7 @@
                             </div>
 
                             <div class="box-body no-padding">
-                                <img height="500 px" width="800 px "  src="http://121.58.193.148/repo/himawari/24hour/irbig/latestHIM_irbig.gif" alt="res/latestHIM_irbig.gif">
+                                <img height="500" width="800"  src="http://121.58.193.148/repo/himawari/24hour/irbig/latestHIM_irbig.gif">
                             </div>
 
                         </div>
