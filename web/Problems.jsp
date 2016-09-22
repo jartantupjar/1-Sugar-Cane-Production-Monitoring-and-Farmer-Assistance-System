@@ -18,19 +18,16 @@
             <%@include file ="navbar.jsp" %>
             <div class="content-wrapper">
                 <section class="content-header">
-                    <h1>
-                        Page Header
-                        <small>Optional description</small>
-                    </h1>
+                   
                 </section>
                 <section class="content">
 
 
 
-                    <div class="col-md-10" > 
+                    <div class="col-md-12" > 
                         <div class="box box-info">
                             <div class="box-header with-border">
-                                <h1 class="box-title">Area Harvested</h1>
+                                <h1 class="box-title">Problems List</h1>
                                 <div class="box-tools pull-right">
                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                     <!-- In box-tools add this button if you intend to use the contacts pane -->
@@ -38,36 +35,28 @@
                                 </div>
                             </div>
 
-                            <div class="box-body no-padding">
-                                <table class="table table-bordered" >
-                                    <tbody>
-                                        <tr>
-                                            <th>Particulars</th>
-                                            <th>Estimated Production</th>
-                                            <th>Previous</th>
-                                            <th>This Week</th>
-                                            <th>To Date</th>
-                                            <th>Percent Completed</th>	
-                                        </tr>
-                                        <tr>	
-                                            <td>Area</td>
-                                            <td>5,000.00</td>
-                                            <td>3,850.00</td>
-                                            <td>350.00</td>
-                                            <td>4,200.00</td>
-                                            <td>
-                                                <div class="progress-group">
-                                                    <span class="progress-number"><b>84 %</b></span>
+                            <div class="box-body">
+                                    <table id="example" class="table  display table-hover" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>Municipality</th>
+                                                <th>Barangay</th>
+                                                <th>Problem</th>
+                                                <th>Loss</th>
+                                                <th>Status</th>
 
-                                                    <div class="progress sm">
-                                                        <div class="progress-bar progress-bar-green" style="width: 84%"></div>
-                                                    </div>
-                                                </div> <!-- closer of progress bars -->  
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Municipality</th>
+                                                <th>Barangay</th>
+                                                <th>Problem</th>
+
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
 
                         </div>
                     </div>        
@@ -81,5 +70,27 @@
         <script src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="dist/js/app.min.js"></script>
+        
+        <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+        <script>
+
+            $(document).ready(function () {
+                var table = $('#example').DataTable({
+                    'ajax': {
+                        'url': 'viewProbList'
+                    },
+                    'columnDefs': [{
+                            'targets': 0,
+                        
+                            'render': function (data, type, full, meta) {
+                                return '<a href="' + data + '">'+data+'</a>';
+                            }
+                        }]
+                });
+            });
+
+
+        </script>
     </body>
 </html>

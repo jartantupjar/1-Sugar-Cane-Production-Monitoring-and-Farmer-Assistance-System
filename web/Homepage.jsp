@@ -23,7 +23,7 @@
                     <div class="col-md-6" > 
                         <div class="box box-info">
                             <div class="box-header with-border">
-                                <h1 class="box-title">Area Harvested</h1>
+                                <h1 class="box-title">Yield of the week </h1>
                                 <div class="box-tools pull-right">
                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -37,7 +37,7 @@
                     <div class="col-md-6" > 
                         <div class="box box-info">
                             <div class="box-header with-border">
-                                <h1 class="box-title">Area Harvested</h1>
+                                <h1 class="box-title">Production Tree Map </h1>
                                 <div class="box-tools pull-right">
                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -101,7 +101,9 @@
                                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                 </div>
                             </div>   
-                            <div class="box-body no-padding" id="container1"></div>
+                            <div class="box-body no-padding" id="container1">
+                                <img height="300 px" width="780 px " src="res/WeatherForecast.PNG">
+                            </div>
                         </div>
 
                     </div>

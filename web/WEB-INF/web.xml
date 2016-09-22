@@ -20,6 +20,10 @@
         <servlet-name>viewProblemList</servlet-name>
         <servlet-class>controller.viewProblemList</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>viewProbList</servlet-name>
+        <servlet-class>controller.viewProbList</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>viewProblemList</servlet-name>
         <url-pattern>/viewProblemList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewProbList</servlet-name>
+        <url-pattern>/viewProbList</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
