@@ -92,6 +92,7 @@
         <li><a href="viewProjectDetails.jsp"><i class="fa fa-link"></i><span>Program Details</span></a></li>
         <li><a href="viewCropEstimate.jsp"><i class="fa fa-link"></i><span>Crop Estimate</span></a></li>
         <li><a href="farmerComparison.jsp"><i class="fa fa-link"></i><span>Farmer Comparison</span></a></li>
+         <li><a href="createNewRecommendation.jsp"><i class="fa fa-link"></i><span>Create Recommendation</span></a></li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>
