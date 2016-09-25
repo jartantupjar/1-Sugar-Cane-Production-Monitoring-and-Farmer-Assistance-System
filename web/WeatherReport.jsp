@@ -37,11 +37,9 @@
                                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                 </div>
                             </div>
-
                             <div class="box-body no-padding">
                                 <img height="500" width="800"  src="http://121.58.193.148/repo/himawari/24hour/irbig/latestHIM_irbig.gif">
                             </div>
-
                         </div>
                         <div class="box box-info">
                             <div class="box-header with-border">
@@ -52,11 +50,8 @@
                                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                 </div>
                             </div>
-
                             <div class="box-body no-padding">
-                             
                             </div>
-
                         </div>
                     </div>        
                     <!-- End of the column -->
@@ -70,19 +65,13 @@
                                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                 </div>
                             </div>
-
                             <div class="box-body no-padding">
-                               
                             </div>
-
                         </div>
                     </div>  
-
                 </section>
-
             </div>
             <footer class="main-footer">
-
                 <div class="pull-right hidden-xs">
                     <b>Version</b> 2.3.3
                 </div>
