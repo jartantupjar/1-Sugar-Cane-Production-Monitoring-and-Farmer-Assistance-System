@@ -2,8 +2,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file ="navbar.jsp" %>
 <%--
-comparison page add current vs historical details(past 2yrs)
-^can tell improvement or not
 
 
 --%>

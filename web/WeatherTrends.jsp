@@ -25,22 +25,54 @@
                     </h1>
                 </section>
                 <section class="content">
-
-                    <div class="col-md-10" > 
-                        <div class="box box-info">
-                            <div class="box-header with-border">
-                                <h1 class="box-title">Weather Trends</h1>
-                                <div class="box-tools pull-right">
-                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                </div>
-                            </div>   
-                            <div class="box-body no-padding" id="container1"></div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                            <label>Year</label>
+                                            <select class="form-control">
+                                                <option>2014</option>
+                                                <option>2015</option>
+                                                <option>2016</option>
+                                            </select>
+                                        </div>
                         </div>
-
+                        <div class="col-md-11" > 
+                            <div class="box box-info">
+                                <div class="box-header with-border">
+                                    <h1 class="box-title">Weather Trends</h1>
+                                    <div class="box-tools pull-right">
+                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                    </div>
+                                </div>
+                                <div class="box-body no-padding" id="container1"></div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                            <label>Year</label>
+                                            <select class="form-control">
+                                                <option>2014</option>
+                                                <option>2015</option>
+                                                <option>2016</option>
+                                            </select>
+                                        </div>
+                        </div>
+                        <br>
+                        <div class="col-md-11" > 
+                            <div class="box box-info">
+                                <div class="box-header with-border">
+                                    <h1 class="box-title">Weather Trends</h1>
+                                    <div class="box-tools pull-right">
+                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                    </div>
+                                </div>
+                                <div class="box-body no-padding" id="container2"></div>
+                            </div>
+                        </div>
                     </div>
-                    <br>
-
                 </section>
 
             </div>
@@ -73,7 +105,7 @@
                         }],
                     yAxis: [{// Primary yAxis
                             labels: {
-                                format: '{value}tc',
+                                format: '{value} tc/ha',
                                 style: {
                                     color: Highcharts.getOptions().colors[1]
                                 }
@@ -112,20 +144,97 @@
                         backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
                     },
                     series: [{
-                            name: 'Rainfall',
+                            name: 'Growth',
                             type: 'column',
                             yAxis: 1,
                             data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],
                             tooltip: {
-                                valueSuffix: ' mm'
+                                valueSuffix: 'tc/ha'
                             }
 
                         }, {
-                            name: 'Growth',
+                            name: 'Rainfall',
                             type: 'spline',
                             data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6],
                             tooltip: {
+                                valueSuffix: 'mm'
+                            }
+                        }]
+                });
+            });
+        </script>
+        <script type="text/javascript">
+            $(function () {
+                $('#container2').highcharts({
+                    chart: {
+                        zoomType: 'xy'
+                    },
+                    title: {
+                        text: 'Annual Rainfall and Production Trends (2015-2016)'
+                    },
+                    subtitle: {
+                        text: 'Source: WorldClimate.com'
+                    },
+                    xAxis: [{
+                            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                            crosshair: true
+                        }],
+                    yAxis: [{// Primary yAxis
+                            labels: {
+                                format: '{value} tc',
+                                style: {
+                                    color: Highcharts.getOptions().colors[1]
+                                }
+                            },
+                            title: {
+                                text: 'Production',
+                                style: {
+                                    color: Highcharts.getOptions().colors[1]
+                                }
+                            }
+                        }, {// Secondary yAxis
+                            title: {
+                                text: 'Rainfall',
+                                style: {
+                                    color: Highcharts.getOptions().colors[0]
+                                }
+                            },
+                            labels: {
+                                format: '{value} mm',
+                                style: {
+                                    color: Highcharts.getOptions().colors[0]
+                                }
+                            },
+                            opposite: true
+                        }],
+                    tooltip: {
+                        shared: true
+                    },
+                    legend: {
+                        layout: 'vertical',
+                        align: 'left',
+                        x: 120,
+                        verticalAlign: 'top',
+                        y: 100,
+                        floating: true,
+                        backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+                    },
+                    series: [{
+                            name: 'Production',
+                            type: 'column',
+                            yAxis: 1,
+                            data: [10.9, 11.5, 22.4, 33.2, 44.0, 54.0, 100.6, 110.5, 120.4, 130.1, 95.6, 20.4],
+                            tooltip: {
                                 valueSuffix: 'tc'
+                            }
+
+                        }, {
+                            name: 'Rainfall',
+                            type: 'spline',
+                            data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6],
+                            tooltip: {
+                                valueSuffix: 'mm'
                             }
                         }]
                 });
@@ -134,7 +243,10 @@
 
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="dist/js/app.min.js"></script>
+        <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
         <script src="Highcharts/highcharts.js"></script>
         <script src="Highcharts/modules/exporting.js"></script>
+        
     </body>
 </html>

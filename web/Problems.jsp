@@ -42,8 +42,10 @@
                                                 <th>Municipality</th>
                                                 <th>Barangay</th>
                                                 <th>Problem</th>
-                                                <th>Loss</th>
+                                                <th>Type</th>
                                                 <th>Status</th>
+                                                <th>Impact</th>
+                                                <th>Details</th>
 
                                             </tr>
                                         </thead>

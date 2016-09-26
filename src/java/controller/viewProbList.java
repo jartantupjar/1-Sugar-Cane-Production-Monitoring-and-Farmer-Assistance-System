@@ -43,6 +43,8 @@ public class viewProbList extends HttpServlet {
         sample_a.setMunicipality("San Fernando City");
         sample_a.setBarangay("Baliti");
         sample_a.setProb_loss(12.89);
+        sample_a.setType("Pest");
+        sample_a.setImpact("Low");
         sample_a.setStatus("Solved");
         Problems sample_b = new Problems();
         sample_b.setProb_id(2);
@@ -50,6 +52,8 @@ public class viewProbList extends HttpServlet {
         sample_b.setMunicipality("Porac");
         sample_b.setBarangay("Pio");
         sample_b.setProb_loss(09.89);
+        sample_b.setType("Disaster");
+        sample_b.setImpact("High");
         sample_b.setStatus("Ongoing");
         ArrayList<Problems> probT =  new ArrayList<Problems>();
         probT.add(sample_a);
@@ -60,8 +64,9 @@ public class viewProbList extends HttpServlet {
             obj.add(probT.get(i).getMunicipality());
             obj.add(probT.get(i).getBarangay());
             obj.add(probT.get(i).getProb_name());
-            obj.add(probT.get(i).getProb_loss().toString());
+            obj.add(probT.get(i).getType());
             obj.add(probT.get(i).getStatus());
+            obj.add(probT.get(i).getImpact());
             list.add(obj);
         }
         data.put("data", list);

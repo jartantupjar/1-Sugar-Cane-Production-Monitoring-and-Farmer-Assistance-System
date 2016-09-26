@@ -11,7 +11,7 @@ package entity;
  */
 public class Problems {
     private Integer prob_id;
-    private String prob_name, prob_details, barangay,municipality, status;
+    private String prob_name, prob_details, barangay,municipality, status,type,impact;
     private Double prob_loss;
 
     /**
@@ -110,5 +110,33 @@ public class Problems {
      */
     public void setProb_loss(Double prob_loss) {
         this.prob_loss = prob_loss;
+    }
+
+    /**
+     * @return the type
+     */
+    public String getType() {
+        return type;
+    }
+
+    /**
+     * @param type the type to set
+     */
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    /**
+     * @return the impact
+     */
+    public String getImpact() {
+        return impact;
+    }
+
+    /**
+     * @param impact the impact to set
+     */
+    public void setImpact(String impact) {
+        this.impact = impact;
     }
 }

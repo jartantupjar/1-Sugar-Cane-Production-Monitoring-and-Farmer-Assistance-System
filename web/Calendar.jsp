@@ -51,7 +51,27 @@
             <!-- /.box-body -->
           </div>
           <!-- /. box -->
-          
+          <div class="box box-danger">
+                            <div class="box-header with-border">
+                                <h1 class="box-title">Dates</h1>
+                                <div class="box-tools pull-right">
+                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                    <!-- In box-tools add this button if you intend to use the contacts pane -->
+                                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                </div>
+                            </div>
+
+                            <div class="box-body no-padding">
+                                <label> Planting Phase:  September 20 - September 30</label> <br>
+                                <label> Germination Phase:  October 01 - October 15</label><br>
+                                <label> Elongation Phase:  October 15 - October 31</label> <br>
+                                <label> Harvesting Phase:  November 01 - December 01</label> <br>
+                                <label> Milling Phase:  December 01- May 05 </label> <br>
+                                <a class="btn btn-app btn-linkedin">
+                                        <i class="fa fa-edit"></i> Edit dates
+                                    </a>
+                            </div>
+                        </div>  
         </div>
                     <div class="col-md-9" > 
                         <div class="box box-info">
@@ -67,11 +87,9 @@
                             <div class="box-body no-padding">
                                 <div id="calendar"></div>
                             </div>
-
                         </div>
                     </div>        
                     <br>
-
                 </section>
 
             </div>
