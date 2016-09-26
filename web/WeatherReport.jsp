@@ -43,6 +43,8 @@
                             </div>
 
                         </div>
+                    </div>
+                        <div class="col-md-2">
                         <div class="box box-info">
                             <div class="box-header with-border">
                                 <h1 class="box-title">Typhoon by City</h1>
@@ -53,14 +55,17 @@
                                 </div>
                             </div>
 
-                            <div class="box-body no-padding">
-                             
+                            <div class="btn-group-vertical" style="width: 100%" role="group" aria-label="...">
+                                <button class="btn btn-lg btn-info">Typhoon Alert</button>
+                                <button class="btn btn-lg btn-success">Weed Alert</button>
+                                <button class="btn btn-lg btn-danger">Fire Alert</button>
+                                <button class="btn btn-lg btn-warning">Pest Alert</button>
                             </div>
 
                         </div>
                     </div>        
                     <!-- End of the column -->
-                    <div class="col-md-6" > 
+                    <div class="col-md-3" > 
                         <div class="box box-info">
                             <div class="box-header with-border">
                                 <h1 class="box-title">Rainfall Level by City</h1>
@@ -76,7 +81,24 @@
                             </div>
 
                         </div>
-                    </div>  
+                    </div>
+                    <div class="col-md-12" > 
+                        <div class="box box-info">
+                            <div class="box-header with-border">
+                                <h1 class="box-title">Disaster Report</h1>
+                                <div class="box-tools pull-right">
+                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                    <!-- In box-tools add this button if you intend to use the contacts pane -->
+                                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                </div>
+                            </div>
+
+                            <div class="box-body no-padding">
+                               
+                            </div>
+
+                        </div>
+                    </div>
 
                 </section>
 

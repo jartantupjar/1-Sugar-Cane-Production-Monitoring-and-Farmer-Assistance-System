@@ -23,7 +23,7 @@
                     <div class="col-md-6" > 
                         <div class="box box-info">
                             <div class="box-header with-border">
-                                <h1 class="box-title">Yield of the week </h1>
+                                <h1 class="box-title">Yield of the week</h1>
                                 <div class="box-tools pull-right">
                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -1079,7 +1079,7 @@
                     },
                     
                     title: {
-                        text: 'Production Tree Map of This date'
+                        text: 'Yeild of this week'
                     }
                 });
             });
@@ -1147,7 +1147,7 @@ $(function () {  //gauge code
     $('#container-rpm').highcharts(Highcharts.merge(gaugeOptions, {
         yAxis: {
             min: 0,
-            max: 5,
+            max:  100,
             title: {
                 text: 'TC/HA'
             }
@@ -1155,7 +1155,7 @@ $(function () {  //gauge code
 
         series: [{
             name: 'TC/HA',
-            data: [1],
+            data: [10],
             dataLabels: {
                 format: '<div style="text-align:center"><span style="font-size:25px;color:' +
                     ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y:.1f}  </span><br/>' +
