@@ -32,7 +32,7 @@
                             <div class="col-md-3 form-group">
                                 <label>Municipality</label>
                                 <select class="form-control select2" style="width: 100%;">
-                                    <option selected="selected">Alabama</option>
+                                    <option selected="selected">All</option>
                                     <option>Alaska</option>
                                     <option>California</option>
                                     <option>Delaware</option>
@@ -44,8 +44,9 @@
                             <div class="col-md-3 form-group">
                                 <label>Barangay</label>
                                 <select class="form-control select2" style="width: 100%;">
-                                    <option selected="selected">Alabama</option>
-                                    <option>Alaska</option>
+                                    <option selected="selected"></option>
+                                    <option>San Fernando</option>
+                                    <option>Mexico</option>
                                     <option>California</option>
                                     <option>Delaware</option>
                                     <option>Tennessee</option>
@@ -58,7 +59,7 @@
                         <div class="col-md-10"> 
                             <div class="box box-info">
                                 <div class="box-header with-border">
-                                    <h1 class="box-title">Brgy List</h1>
+                                    <h1 class="box-title">Farm List</h1>
                                     <div class="box-tools pull-right">
                                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                         <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -69,6 +70,7 @@
                                     <table id="example" class="table  display table-hover" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
+                                                <th>Farm</th>
                                                 <th>Brgy</th>
                                                 <th>Estimated</th>
                                                 <th>Actual</th>
@@ -78,6 +80,7 @@
                                         </thead>
                                         <tfoot>
                                             <tr>
+                                                <th>Farm</th>
                                                 <th>Brgy</th>
                                                 <th>Estimated</th>
                                                 <th>Actual</th>
