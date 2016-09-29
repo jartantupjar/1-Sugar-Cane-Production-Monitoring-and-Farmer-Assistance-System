@@ -1,6 +1,6 @@
 <%-- 
-    Document   : Recommendations
-    Created on : 09 27, 16, 12:03:24 AM
+    Document   : viewProblemDetails
+    Created on : 09 29, 16, 7:34:58 AM
     Author     : Bryll Joey Delfin
 --%>
 <%@include file="security.jsp" %>
@@ -19,18 +19,18 @@
             <div class="content-wrapper">
                 <section class="content-header">
                     <h1>
-                        Page Header
-                        <small>Optional description</small>
+                        View Problem
+                        <small>Problem Details</small>
                     </h1>
                 </section>
                 <section class="content">
 
 
 
-                    <div class="col-md-12" > 
+                    <div class="col-md-10" > 
                         <div class="box box-info">
                             <div class="box-header with-border">
-                                <h1 class="box-title">Fixed Recommendations</h1>
+                                <h1 class="box-title">Problem</h1>
                                 <div class="box-tools pull-right">
                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                     <!-- In box-tools add this button if you intend to use the contacts pane -->
@@ -42,19 +42,16 @@
                                 <table class="table table-bordered" >
                                     <tbody>
                                         <tr>
-                                            <th>Recommendation</th>
-                                            <th>Phase</th>
-                                            <th>Period</th>
-                                            <th>Trigger</th>
-                                            <th>Description</th>
-                                            	
+                                            <th>Farm</th>
+                                            <th>Barangay</th>
+                                            <th>Farmer</th>
+                                            <th>Validation</th>	
                                         </tr>
                                         <tr>	
-                                            <td>Increase irrigation water by 10 mm</td>
-                                            <td>Germination</td>
-                                            <td>October 01 - October 31</td>
-                                            <td>October 01</td>
-                                            <td><p><li class="pull-right"><a href="viewRecommendationDetails.jsp"><b> View Details</b></a></li></p></td>
+                                            <td>Farm A</td>
+                                            <td>Pio</td>
+                                            <td>Farmer ABC</td>
+                                            <td>YES</td>
                                         </tr>
                                     </tbody>
                                 </table>

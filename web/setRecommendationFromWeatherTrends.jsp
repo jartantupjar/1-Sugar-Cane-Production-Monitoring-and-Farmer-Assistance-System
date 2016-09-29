@@ -1,6 +1,6 @@
 <%-- 
-    Document   : Recommendations
-    Created on : 09 27, 16, 12:03:24 AM
+    Document   : setRecommendationFromWeatherTrends
+    Created on : 09 29, 16, 6:07:12 AM
     Author     : Bryll Joey Delfin
 --%>
 <%@include file="security.jsp" %>
@@ -18,19 +18,16 @@
             <%@include file ="navbar.jsp" %>
             <div class="content-wrapper">
                 <section class="content-header">
-                    <h1>
-                        Page Header
-                        <small>Optional description</small>
-                    </h1>
+                    
                 </section>
                 <section class="content">
 
 
 
-                    <div class="col-md-12" > 
+                    <div class="col-md-10" > 
                         <div class="box box-info">
                             <div class="box-header with-border">
-                                <h1 class="box-title">Fixed Recommendations</h1>
+                                <h1 class="box-title">Recommendation</h1>
                                 <div class="box-tools pull-right">
                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                     <!-- In box-tools add this button if you intend to use the contacts pane -->
@@ -43,24 +40,22 @@
                                     <tbody>
                                         <tr>
                                             <th>Recommendation</th>
-                                            <th>Phase</th>
-                                            <th>Period</th>
-                                            <th>Trigger</th>
                                             <th>Description</th>
-                                            	
+                                            <th>Trigger</th>
                                         </tr>
                                         <tr>	
-                                            <td>Increase irrigation water by 10 mm</td>
-                                            <td>Germination</td>
-                                            <td>October 01 - October 31</td>
-                                            <td>October 01</td>
-                                            <td><p><li class="pull-right"><a href="viewRecommendationDetails.jsp"><b> View Details</b></a></li></p></td>
+                                            <td>Irrigation Recommendation for January</td>
+                                            <td>Farmers are suggested to put 30 mm or water to their crops</td>
+                                            <td><input type="text"  placeholder="mm" style="width: 100%"></td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
 
                         </div>
+                        <div class="btn btn-primary pull-right">
+                                        Save Changes
+                                    </div> 
                     </div>        
                     <br>
 

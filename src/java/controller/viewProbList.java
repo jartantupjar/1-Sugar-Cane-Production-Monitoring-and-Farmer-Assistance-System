@@ -61,8 +61,6 @@ public class viewProbList extends HttpServlet {
         JSONArray list = new JSONArray();
         for(int i=0;i<probT.size();i++){
             ArrayList<String> obj = new ArrayList<String>();
-            obj.add(probT.get(i).getMunicipality());
-            obj.add(probT.get(i).getBarangay());
             obj.add(probT.get(i).getProb_name());
             obj.add(probT.get(i).getType());
             obj.add(probT.get(i).getStatus());

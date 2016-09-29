@@ -62,16 +62,42 @@
                             </div>
 
                             <div class="box-body no-padding">
-                                <label> Planting Phase:  September 20 - September 30</label> <br>
-                                <label> Germination Phase:  October 01 - October 15</label><br>
-                                <label> Elongation Phase:  October 15 - October 31</label> <br>
-                                <label> Harvesting Phase:  November 01 - December 01</label> <br>
-                                <label> Milling Phase:  December 01- May 05 </label> <br>
-                                <a class="btn btn-app btn-linkedin">
+                                <label> Planting Phase:</label> <div class="input-group date">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                                <input type="text" class="form-control pull-right datepicker" name="datepicker" id="datepickerstart">
+                                            </div> <br>
+                                <label> Germination Phase:</label> <div class="input-group date">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                                <input type="text" class="form-control pull-right datepicker" name="datepicker" id="datepickerstart">
+                                            </div> <br>
+                                <label> Elongation Phase:</label> <div class="input-group date">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                                <input type="text" class="form-control pull-right datepicker" name="datepicker" id="datepickerstart">
+                                            </div>  <br>
+                                <label> Harvesting Phase:</label> <div class="input-group date">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                                <input type="text" class="form-control pull-right datepicker" name="datepicker" id="datepickerstart">
+                                            </div>  <br>
+                                <label> Milling Phase:</label> <div class="input-group date">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                                <input type="text" class="form-control pull-right datepicker" name="datepicker" id="datepickerstart">
+                                            </div>  <br>
+                                
+                            </div>
+                        </div>
+          <a class="btn btn-app btn-linkedin btn-lg pull-right">
                                         <i class="fa fa-edit"></i> Edit dates
                                     </a>
-                            </div>
-                        </div>  
         </div>
                     <div class="col-md-9" > 
                         <div class="box box-info">
@@ -86,6 +112,35 @@
 
                             <div class="box-body no-padding">
                                 <div id="calendar"></div>
+                            </div>
+                        </div>
+                        <div class="box box-info">
+                            <div class="box-header with-border">
+                                <h1 class="box-title">Recommendations</h1>
+                                <div class="box-tools pull-right">
+                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                    <!-- In box-tools add this button if you intend to use the contacts pane -->
+                                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                </div>
+                            </div>
+
+                            <div class="box-body no-padding">
+                                 <table class="table table-bordered" >
+                                    <tbody>
+                                        <tr>
+                                            <th>Recommendation</th>
+                                            <th>Description</th>
+                                            <th>Trigger</th>
+                                            <th>Period/Phase</th>
+                                        </tr>
+                                        <tr>	
+                                            <td>Recommended furrow distance</td>
+                                            <td>Farmers are recommended to have 1.5 meters of furrow distance</td>
+                                            <td> <input type="text" value="1.5 meters"</td>
+                                            <td>Planting Phase</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>        
@@ -118,6 +173,16 @@
 <!-- fullCalendar 2.2.5 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
 <script src="plugins/fullcalendar/fullcalendar.min.js"></script>
+<script src="plugins/datepicker/bootstrap-datepicker.js"></script>
+        <script>
+            $(function () {
+                $('.datepicker').datepicker({
+                    autoclose: true
+                });
+
+
+            });
+        </script>
 <!-- Page specific script -->
 
 

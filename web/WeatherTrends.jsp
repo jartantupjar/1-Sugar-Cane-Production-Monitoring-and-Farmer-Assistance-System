@@ -47,31 +47,13 @@
                                 </div>
                                 <div class="box-body no-padding" id="container1"></div>
                             </div>
+                            <li class="pull-right"><a href="setRecommendationFromWeatherTrends.jsp"><b>Set Recommendation</b></a>
+                                        
+                                    </li> 
                         </div>
                         <br>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                            <label>Year</label>
-                                            <select class="form-control">
-                                                <option>2014</option>
-                                                <option>2015</option>
-                                                <option>2016</option>
-                                            </select>
-                                        </div>
-                        </div>
-                        <br>
-                        <div class="col-md-11" > 
-                            <div class="box box-info">
-                                <div class="box-header with-border">
-                                    <h1 class="box-title">Weather Trends</h1>
-                                    <div class="box-tools pull-right">
-                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                    </div>
-                                </div>
-                                <div class="box-body no-padding" id="container2"></div>
-                            </div>
-                        </div>
+                        
+                        
                     </div>
                 </section>
 

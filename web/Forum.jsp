@@ -154,7 +154,7 @@
             <div class="content-wrapper">
                 <section class="content-header">
                     <h1>
-                        Page Header
+                        Forum
                     </h1>
                 </section>
                 <section class="content">
@@ -186,6 +186,7 @@
 														Adding Water Works !
                                                                                                             </a>
 														<span class="pull-right Approved">(Approved)</span>
+                                                                                                                <span class="pull-right">Counter : 100</span>
 													</h4>
 													<p class="summary">description</p>
 												</div>
@@ -204,6 +205,7 @@
 													<h4 class="title">
 														How to help get sugar canes
 														<span class="pull-right Pending">(Pending)</span>
+                                                                                                                <span class="pull-right">Counter : 10</span>
 													</h4>
 													<p class="summary">description</p>
 												</div>
@@ -222,6 +224,7 @@
 													<h4 class="title">
 														Harvesting Techniques to help you
 														<span class="pull-right Rejected">(Rejected)</span>
+                                                                                                                <span class="pull-right">Counter : 50</span>
 													</h4>
 													<p class="summary">description</p>
 												</div>
@@ -240,6 +243,7 @@
 													<h4 class="title">
 														10 ways to avoid pests
 														<span class="pull-right Approved">(Approved)</span>
+                                                                                                                <span class="pull-right">Counter : 30</span>
 													</h4>
 													<p class="summary">description</p>
 												</div>
@@ -258,6 +262,7 @@
 													<h4 class="title">
 														How to get potential yeild by your own
 														<span class="pull-right Pending">(Pending)</span>
+                                                                                                                <span class="pull-right">Counter : 35</span>
 													</h4>
 													<p class="summary">description</p>
 												</div>

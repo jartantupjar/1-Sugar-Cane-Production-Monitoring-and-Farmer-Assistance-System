@@ -55,8 +55,8 @@
 
               <p>I took this photo this morning. What do you guys think?</p>
               <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button>
-              <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> Like</button>
-              <span class="pull-right text-muted">127 likes - 3 comments</span>
+              <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> Approve </button>
+              <span class="pull-right text-muted">100 have approved your solution - 2 comments</span>
             </div>
             <!-- /.box-body -->
             <div class="box-footer box-comments">
@@ -72,6 +72,7 @@
                   It is a long established fact that a reader will be distracted
                   by the readable content of a page when looking at its layout.
                 </div>
+                <button type="button" class="btn btn-default btn-xs pull-right"><i class="fa fa-share"></i>Create Recommendation</button>
                 <!-- /.comment-text -->
               </div>
               <!-- /.box-comment -->
@@ -87,6 +88,7 @@
                   It is a long established fact that a reader will be distracted
                   by the readable content of a page when looking at its layout.
                 </div>
+                <button type="button" class="btn btn-default btn-xs pull-right"><i class="fa fa-share"></i>Create Recommendation</button>
                 <!-- /.comment-text -->
               </div>
               <!-- /.box-comment -->

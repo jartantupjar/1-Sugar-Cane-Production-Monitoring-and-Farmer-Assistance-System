@@ -39,8 +39,6 @@
                                     <table id="example" class="table  display table-hover" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
-                                                <th>Municipality</th>
-                                                <th>Barangay</th>
                                                 <th>Problem</th>
                                                 <th>Type</th>
                                                 <th>Status</th>

@@ -23,7 +23,7 @@
                     <div class="col-md-6" > 
                         <div class="box box-info">
                             <div class="box-header with-border">
-                                <h1 class="box-title">Yield of the week</h1>
+                                <h1 class="box-title">Yield of the week (Week)</h1>
                                 <div class="box-tools pull-right">
                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -37,7 +37,7 @@
                     <div class="col-md-6" > 
                         <div class="box box-info">
                             <div class="box-header with-border">
-                                <h1 class="box-title">Production Tree Map </h1>
+                                <h1 class="box-title">Yield Tree Map (Annual) </h1>
                                 <div class="box-tools pull-right">
                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -51,7 +51,7 @@
                     <div class="col-md-6" > 
                         <div class="box box-info">
                             <div class="box-header with-border">
-                                <h1 class="box-title">Area Harvested</h1>
+                                <h1 class="box-title">Area Harvested (Week)</h1>
                                 <div class="box-tools pull-right">
                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -76,14 +76,37 @@
                                             <td>350.00</td>
                                             <td>4,200.00</td>
                                             <td>
-                                                <div class="progress-group">
-                                                    <span class="progress-number"><b>84 %</b></span>
-
-                                                    <div class="progress sm">
-                                                        <div class="progress-bar progress-bar-green" style="width: 84%"></div>
-                                                    </div>
-                                                </div> <!-- closer of progress bars -->  
+                                                <div class="progress ">
+                                                            <div class="progress-bar progress-bar-green" style="width: 67%">67%</div>
+                                                        </div>
                                             </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                        <div class="box box-info">
+                            <div class="box-header with-border">
+                                <h1 class="box-title">Standing Crop (Week)</h1>
+                                <div class="box-tools pull-right">
+                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                </div>
+                            </div>
+
+                            <div class="box-body no-padding">
+                                <table class="table table-bordered" >
+                                    <tbody>
+                                        <tr>
+                                            <th>Particulars</th>
+                                            <th>Estimated Production</th>
+                                            	
+                                        </tr>
+                                        <tr>	
+                                            <td>Area</td>
+                                            <td>800.00</td>
+                                            
                                         </tr>
                                     </tbody>
                                 </table>
@@ -102,7 +125,22 @@
                                 </div>
                             </div>   
                             <div class="box-body no-padding" id="container1">
-                                <img height="300 px" width="780 px " src="res/WeatherForecast.PNG">
+                                <table class="table table-bordered" >
+                                    <tbody>
+                                        <tr>
+                                            <th>Percent chance between 9:00 - 10:00</th>
+                                            <th>Percent chance between 10:00 - 11:00</th>
+                                            <th>Percent chance between 11:00 - 12:00</th>
+                                            <th>Percent chance between 12:00 - 1:00</th>
+                                        </tr>
+                                        <tr>
+                                            <td>10%</td>
+                                            <td>10%</td>
+                                            <td>10%</td>
+                                            <td>10%</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
 

@@ -1,6 +1,6 @@
 <%-- 
-    Document   : Recommendations
-    Created on : 09 27, 16, 12:03:24 AM
+    Document   : viewRecommendationDetails
+    Created on : 09 29, 16, 7:29:30 AM
     Author     : Bryll Joey Delfin
 --%>
 <%@include file="security.jsp" %>
@@ -25,12 +25,11 @@
                 </section>
                 <section class="content">
 
-
-
+                    
                     <div class="col-md-12" > 
                         <div class="box box-info">
                             <div class="box-header with-border">
-                                <h1 class="box-title">Fixed Recommendations</h1>
+                                <h1 class="box-title">Recommendation</h1>
                                 <div class="box-tools pull-right">
                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                     <!-- In box-tools add this button if you intend to use the contacts pane -->
@@ -42,19 +41,18 @@
                                 <table class="table table-bordered" >
                                     <tbody>
                                         <tr>
-                                            <th>Recommendation</th>
-                                            <th>Phase</th>
-                                            <th>Period</th>
-                                            <th>Trigger</th>
-                                            <th>Description</th>
-                                            	
+                                            <th>Farm</th>
+                                            <th>Farmer</th>
+                                            <th>Barangay</th>
+                                            <th>Date</th>
+                                            <th>Helpfullness Counter</th>
                                         </tr>
                                         <tr>	
-                                            <td>Increase irrigation water by 10 mm</td>
-                                            <td>Germination</td>
-                                            <td>October 01 - October 31</td>
+                                            <td>Farm A</td>
+                                            <td>Farmer ABC</td>
+                                            <td>Pio</td>
                                             <td>October 01</td>
-                                            <td><p><li class="pull-right"><a href="viewRecommendationDetails.jsp"><b> View Details</b></a></li></p></td>
+                                            <td>100</td>
                                         </tr>
                                     </tbody>
                                 </table>
