@@ -27,7 +27,7 @@ comparison page add current vs historical details(past 2yrs)
                 <section class="content-header">
 
                     <h1>
-                        Farmer Comparison
+                        Farm Observation
                         <small>Optional description</small>
                     </h1>
                 </section>
@@ -211,29 +211,19 @@ comparison page add current vs historical details(past 2yrs)
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-5">
-                            <div class="box box-danger">
-                                <div class="box-header">
-                                    <h3 class="box-title">Action Tools</h3>
-                                </div>
+                        <div class="col-md-2 pull-right">
+                          
+                               
                                 <div class="box-body">
-                                    <a class="btn btn-app btn-linkedin">
-                                        <i class="fa fa-edit"></i> Create Survey
+                                    <a class="btn btn-app btn-linkedin" style="width: 100%">
+                                        <i class="fa fa-edit" ></i> Create Comparison
                                     </a>
-                                    <a class="btn btn-app bg-green">
-
-                                        <i class="fa fa-bullhorn"></i> Send Recommendation/Notification
-                                    </a>
-                                    
-                                    <a class="btn btn-app btn-soundcloud">
-
-                                        <i class="fa fa-inbox"></i> Determine Problem
-                                    </a>
+                                
 
 
                                 </div>
                                 <!-- /.box-body -->
-                            </div>    
+                   
 
                         </div>
 

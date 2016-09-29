@@ -41,16 +41,19 @@ current vs then diagram
                             <div class="box box-primary">
                                 <div class="box-body box-profile">
 
-                                    <h3 class="profile-username text-center">Program Name</h3>
+                                    <h3 class="profile-username text-center"><b>Soil Rehabilitation Program</b></h3>
 
                                     <ul class="list-group list-group-unbordered">
                                         <li class="list-group-item">
-                                            <b>Type of Project</b> <a class="pull-right">Technology</a>
+                                            <b>Type of Program</b> <a class="pull-right">Technology</a>
                                         </li>
                                         <li class="list-group-item">
-                                            <b>Expected Improvement</b> <p>
-                                                i expect there to be 10% increase in productivity</p>
-
+                                            <b>Expected Start Date:</b> <p class="pull-right">
+                                                1/12/2015</p>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Expected End Date:</b> <p class="pull-right">
+                                                5/25/2017</p>
                                         </li>
                                         <li class="list-group-item">
                                             <b>Description</b> 
@@ -71,11 +74,11 @@ current vs then diagram
                             </div>    
                         </div>
 
-                        <div class="col-md-9">
+                        <div class="col-md-6">
                             <!-- LINE CHART -->
                             <div class="box box-info">
                                 <div class="box-header with-border">
-                                    <h3 class="box-title">Info</h3>
+                                    <h3 class="box-title">Progress</h3>
 
                                     <div class="box-tools pull-right">
                                         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -83,34 +86,22 @@ current vs then diagram
                                         <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                     </div>
                                 </div>
-                                <div class="box-body table-responsive">
+                                <div class="box-body">
 
                                     <table class="table table-hover">
                                         <tbody><tr>
 
-                                                <th>Start Date</th>
-                                                <th>End Date</th>
-                                                <th>Progress</th>
-
-                                                <th>Resource</th>
-                                                <th>Budget</th>
-
                                             </tr>
                                             <tr>
 
-                                                <td>10/1/15</td>
-                                                <td>12/2/25</td>
                                                 <td> 
                                                     <div class="progress-group">
 
                                                         <div class="progress ">
-                                                            <div class="progress-bar progress-bar-green" style="width: 67%">90%</div>
+                                                            <div class="progress-bar progress-bar-green" style="width: 100%">90%</div>
                                                         </div>
                                                     </div> <!-- closer of progress bars -->  
                                                 </td>
-
-                                                <td>15</td>
-                                                <td>232000</td>
 
                                             </tr>
 
@@ -125,7 +116,24 @@ current vs then diagram
                                 <!-- /.box-body -->
                             </div>
                         </div>
-                        
+                        <div class="col-md-7" > 
+                            <div>   
+                                <h3>
+                                    DISTRICT/BARANGAY :
+
+                                </h3></div>
+                            <div class="box box-info collapsed-box">
+                                <div class="box-header with-border">
+                                    <h1 class="box-title">Observational Improvement (include color code for bar graph)</h1>
+                                    <div class="box-tools pull-right">
+                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                    </div>
+                                </div>   
+                                <div class="box-body" id="container1"> </div>
+                            </div>
+
+                        </div>
                         <div class="col-md-6" > 
                             <div class="box box-info collapsed-box">
                                 <div class="box-header with-border">
@@ -166,10 +174,10 @@ current vs then diagram
 
                             </div>
                         </div> 
-                        <div class="col-md-5"> 
+                        <div class="col-md-9"> 
                             <div class="box box-info collapsed-box" >
                                 <div class="box-header with-border">
-                                    <h1 class="box-title">Rec & Prog List</h1>
+                                    <h1 class="box-title">Barangay Progress</h1>
                                     <div class="box-tools pull-right " >
                                         <button class="btn btn-box-tool"  data-widget="collapse"><i class="fa fa-minus"></i></button>
                                         <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -180,28 +188,77 @@ current vs then diagram
                                     <table id="example" class="table  display table-hover" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
-                                                <th>Farm Name</th>
-                                                <th>Farm Name</th>
-                                                <th>Owner</th>
                                                 <th>Barangay</th>
+                                                <th>Problem 1</th>
+                                                <th>Problem 2</th>
+
 
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
-                                                <th></th>
-                                                <th>Farm Name</th>
-                                                <th>Owner</th>
                                                 <th>Barangay</th>
-
+                                                <th>Problem 1</th>
+                                                <th>Problem 2</th>
                                             </tr>
                                         </tfoot>
                                     </table>
+                                    <button class="btn btn-success pull-right" style="width: 10%" value="submit">Update</button>
                                 </div>
 
                             </div>
 
                         </div>
+                        <div class="col-md-12" > 
+                            <div class="box box-info">
+                                <div class="box-header with-border">
+                                    <h1 class="box-title">Targets: Soil Rehabilitation Program</h1>
+                                    <div class="box-tools pull-right">
+                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                    </div>
+                                </div>
+
+                                <div class="box-body">
+
+                                    <table class="table table-hover">
+                                        <tbody><tr>
+                                                <th style="width: 30%">Performance Indicator</th>
+                                                <th>2016</th>
+                                                <th>Actual</th>
+                                                <th>2017</th>
+                                                <th>Actual</th>
+                                                <th>2018</th>
+                                                <th>X</th>
+                                            </tr>
+                                            <tr>
+                                                <td>Hectares rehabilitated</td>
+                                                <td>7000</td>
+                                                <td><input value="4257"></td>
+                                                <td>20000</td>
+                                                <td><input value="17808"></td>
+                                                <td>20000</td>
+                                                <td>X</td>
+                                            </tr>
+                                            <tr>
+                                                <td><input value="No. of small farmers assisted" style="width: 100%"></td>
+                                                <td>3500</td>
+                                                <td><input value="2890"></td>
+                                                <td>7000</td>
+                                                <td><input value="5900"></td>
+                                                <td>7000</td>
+                                                <td>X</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <button class="btn btn-success pull-right" style="width: 10%" value="submit">Update</button>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        
+
 
 
                     </div>
@@ -225,6 +282,9 @@ current vs then diagram
 
         <script src="plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+        <script src="Highcharts/highcharts.js"></script>
+        <script src="Highcharts/modules/drilldown.js"></script>
+        <script src="Highcharts/modules/exporting.js"></script>
 
         <script>
 
@@ -255,6 +315,77 @@ current vs then diagram
             });
 
 
+        </script>
+        <script>
+            $(function () {
+
+                // Create the chart
+                $('#container1').highcharts({
+                    chart: {
+                        type: 'column'
+                    },
+                    title: {
+                        text: 'Basic drilldown'
+                    },
+                    xAxis: {
+                        type: 'category',
+                        categories: [
+                            "2011-12",
+                            "2012-13",
+                            "2013-14",
+                            "2014-15",
+                            "2015-16"
+                        ]
+
+                    },
+                    legend: {
+                        enabled: false
+                    },
+                    plotOptions: {
+                        series: {
+                            borderWidth: 0,
+                            dataLabels: {
+                                enabled: true
+                            }
+                        }
+                    },
+                    drilldown: {
+                        series: [{
+                                name: 'Test Drilldown',
+                                id: 'test',
+                                data: [
+                                    ['data A', 24.13],
+                                    ['data B', 17.2],
+                                    ['data C', 8.11],
+                                    ['data D', 5.33],
+                                    ['data E', 6.34]
+                                ]
+                            }]
+                    },
+                    series: [
+                        {
+                            "name": "Actual Yield",
+                            "data": [
+                                {y: 40351.62, drilldown: 'test'},
+                                51506.83,
+                                68566.23,
+                                80596.9228,
+                                94329.31
+                            ]
+                        },
+                        {
+                            "name": "Estimated Yield",
+                            "data": [
+                                40750.4963,
+                                56205.181,
+                                63776.2866,
+                                74912.5923,
+                                83801.83617
+                            ]
+                        }
+                    ]
+                });
+            });
         </script>
     </body>
 

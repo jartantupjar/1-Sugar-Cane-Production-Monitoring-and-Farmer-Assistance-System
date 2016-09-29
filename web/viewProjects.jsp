@@ -37,19 +37,21 @@
                                     <table id="example" class="table  display table-hover" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
-                                                <th>Farm Name</th>
-                                                <th>Farm Name</th>
-                                                <th>Owner</th>
-                                                <th>Barangay</th>
+                                                <th>Program</th>
+                                                <th>Date</th>
+                                                <th>Total Farms</th>
+                                                <th>Progress</th>
+                                                 <th>details</th>
 
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
-                                                <th></th>
-                                                <th>Farm Name</th>
-                                                <th>Owner</th>
-                                                <th>Barangay</th>
+                                               <th>Program</th>
+                                                <th>Date</th>
+                                                <th>Total Farms</th>
+                                                <th>Progress</th>
+                                                 <th>details</th>
 
                                             </tr>
                                         </tfoot>

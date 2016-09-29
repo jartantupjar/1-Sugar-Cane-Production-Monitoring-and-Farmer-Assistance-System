@@ -16,7 +16,7 @@
                 <section class="content-header">
 
                     <h1>
-                      Create Plan & Program
+                        Create Plan & Program
                         <small>Optional description</small>
                     </h1>
                 </section>
@@ -33,6 +33,14 @@
                                         <div class="form-group">
                                             <label for="projectname" class="control-label">Project Name:</label>
                                             <input type="text" class="form-control" name="projectname" id="projectname" placeholder="Name...">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Type</label>
+                                            <select class="form-control">
+                                                <option>Technology</option>
+                                                <option>Training</option>
+                                                <option>Practices</option>
+                                            </select>
                                         </div>
                                         <div  class="form-group">
                                             <label class="control-label" for="datepicker" >Date Start:</label>
@@ -54,30 +62,13 @@
                                             </div>
                                             <!-- /.input group -->
                                         </div>
-                                        <div class="form-group">
-                                            <label for="projectname" class="control-label">Required Budget</label>
-                                            <input type="number" class="form-control" id="budget" placeholder="P430000">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="projectname" class="control-label">Resource Allocation</label>
-                                            <input type="number" class="form-control" id="pplall" placeholder="9">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="projectname" class="control-label">Expected Improvement</label>
-                                            <input type="number" class="form-control" id="possyield" placeholder="to see in future if it is how much they expected to improve">
-                                        </div>
+
+
                                         <div class="form-group">
                                             <label>Description</label>
                                             <textarea class="form-control" name="Description" rows="2"  placeholder="Enter ..."></textarea>
                                         </div>
-                                        <div class="form-group">
-                                            <label>Type</label>
-                                            <select class="form-control">
-                                                <option>Technology</option>
-                                                <option>Training</option>
-                                                <option>Practices</option>
-                                            </select>
-                                        </div>
+
 
                                     </div>
                                 </div>
@@ -100,6 +91,8 @@
                                                     <th><input name="select_all" value="1" id="probTable-select-all" type="checkbox" /></th>
                                                     <th>Problem</th>
                                                     <th>Description</th>
+                                                    <th>Date Created</th>
+                                                    <th># of brgy</th>
                                                 </tr>
                                             </thead>
                                             <tfoot>
@@ -107,6 +100,8 @@
                                                     <th></th>
                                                     <th>Problem</th>
                                                     <th>Description</th>
+                                                    <th>Date Created</th>
+                                                    <th># of brgy</th>
 
                                                 </tr>
                                             </tfoot>
@@ -115,10 +110,10 @@
 
                                 </div>
                             </div> 
-                            <div class="col-md-6" > 
+                            <div class="col-md-12" > 
                                 <div class="box box-info">
                                     <div class="box-header with-border">
-                                        <h1 class="box-title">Brgy List</h1>
+                                        <h1 class="box-title">Targets: Soil Rehabilitation Program</h1>
                                         <div class="box-tools pull-right">
                                             <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                             <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -126,33 +121,38 @@
                                     </div>
 
                                     <div class="box-body">
-                                        <table id="example" class="table  display table-hover" cellspacing="0" width="100%">
-                                            <thead>
-                                                <tr>
-                                                    <th><input name="select_all" value="1" id="example-select-all" type="checkbox" /></th>
-                                                    <th>Farm Name</th>
-                                                    <th>Owner</th>
-                                                    <th>Barangay</th>
-
+                                        <table class="table table-hover">
+                                            <tbody><tr>
+                                                    <th style="width: 30%">Performance Indicator</th>
+                                                    <th>2016</th>
+                                                    <th>2017</th>
+                                                    <th>2018</th>
+                                                    <th>X</th>
                                                 </tr>
-                                            </thead>
-                                            <tfoot>
                                                 <tr>
-                                                    <th></th>
-                                                    <th>Farm Name</th>
-                                                    <th>Owner</th>
-                                                    <th>Barangay</th>
-
+                                                    <td><input value="Hectares rehabilitated" style="width: 100%"></td>
+                                                    <td><input value="7000"></td>
+                                                    <td><input value="20000"></td>
+                                                    <td><input value="20000"></td>
+                                                    <td>X</td>
                                                 </tr>
-                                            </tfoot>
+                                                <tr>
+                                                    <td><input value="No. of small farmers assisted" style="width: 100%"></td>
+                                                    <td><input value="3500"></td>
+                                                    <td><input value="7000"></td>
+                                                    <td><input value="7000"></td>
+                                                    <td>X</td>
+                                                </tr>
+                                            </tbody>
                                         </table>
+                                        <button class="btn btn-danger pull-right" style="width: 10%" value="submit">Add Row</button>
                                     </div>
 
                                 </div>
 
                             </div>
-                            <div class="col-md-5">                   
-                                <p><button class="btn btn-success" value="submit">Submit</button></p>
+                            <div class="col-md-3">                   
+                                <p><button class="btn btn-success" style="width: 40%" value="submit">Submit</button></p>
                             </div>
                         </form>
                     </div>
