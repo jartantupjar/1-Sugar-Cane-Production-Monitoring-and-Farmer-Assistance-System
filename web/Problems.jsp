@@ -23,7 +23,6 @@
                 <section class="content">
 
 
-
                     <div class="col-md-12" > 
                         <div class="box box-info">
                             <div class="box-header with-border">
@@ -42,16 +41,16 @@
                                                 <th>Problem</th>
                                                 <th>Type</th>
                                                 <th>Status</th>
-                                                <th>Impact</th>
-                                                <th>Details</th>
+                                                <th>Description</th>
+                                                <th>More Details</th>
 
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
-                                                <th>Municipality</th>
-                                                <th>Barangay</th>
                                                 <th>Problem</th>
+                                                <th>Type</th>
+                                                <th>Status</th>
 
                                             </tr>
                                         </tfoot>

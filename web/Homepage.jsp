@@ -14,8 +14,8 @@
             <div class="content-wrapper">
                 <section class="content-header">
                     <h1>
-                        Page Header
-                        <small>Optional description</small>
+                        Today's Date: Date
+                        <small>Week : blank</small>
                     </h1>
                 </section>
                 <section class="content">
@@ -23,7 +23,7 @@
                     <div class="col-md-6" > 
                         <div class="box box-info">
                             <div class="box-header with-border">
-                                <h1 class="box-title">Yield of the week (Week)</h1>
+                                <h1 class="box-title">Yield of the week (Yesterday's Week)</h1>
                                 <div class="box-tools pull-right">
                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -51,7 +51,7 @@
                     <div class="col-md-6" > 
                         <div class="box box-info">
                             <div class="box-header with-border">
-                                <h1 class="box-title">Area Harvested (Week)</h1>
+                                <h1 class="box-title">Area Harvested ( Yesterday's Week)</h1>
                                 <div class="box-tools pull-right">
                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -88,7 +88,7 @@
                         </div>
                         <div class="box box-info">
                             <div class="box-header with-border">
-                                <h1 class="box-title">Standing Crop (Week)</h1>
+                                <h1 class="box-title">Standing Crop (Yesterday's Week)</h1>
                                 <div class="box-tools pull-right">
                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -118,7 +118,7 @@
                     <div class="col-md-6" > 
                         <div class="box box-info">
                             <div class="box-header with-border">
-                                <h1 class="box-title">Weather Forecast</h1>
+                                <h1 class="box-title">Weather Forecast (Today)</h1>
                                 <div class="box-tools pull-right">
                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -128,10 +128,10 @@
                                 <table class="table table-bordered" >
                                     <tbody>
                                         <tr>
-                                            <th>Percent chance between 9:00 - 10:00</th>
-                                            <th>Percent chance between 10:00 - 11:00</th>
-                                            <th>Percent chance between 11:00 - 12:00</th>
-                                            <th>Percent chance between 12:00 - 1:00</th>
+                                            <th> % chance between 9:00 - 10:00</th>
+                                            <th> % chance between 10:00 - 11:00</th>
+                                            <th> % chance between 11:00 - 12:00</th>
+                                            <th> % chance between 12:00 - 1:00</th>
                                         </tr>
                                         <tr>
                                             <td>10%</td>

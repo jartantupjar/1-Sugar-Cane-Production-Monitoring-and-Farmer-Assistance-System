@@ -84,47 +84,6 @@
                                 </div>
                             </div>
 
-<div class="col-md-6" > 
-                                <div class="box box-info">
-                                    <div class="box-header">
-                                        <h1 class="box-title">To: </h1>
-                                      
-                                    </div>
-
-                                    <div class="box-body ">
-
-                                    <table class="table table-hover table-no-bordered">
-                                        <tbody><tr>
-                                                <th>Farmer Name</th>
-                                              
-                                            </tr>
-                                            <tr>
-                                                <td>John Doe</td>
-                                            
-                                            </tr>
-
-                                            <tr>
-                                                <td href="">henry ford</td>
-                                           
-                                            </tr>
-                                            <tr>
-
-                                                <td href="">Michael Johnathan</td>
-                                               
-                                            </tr>
-                                            <tr>
-                                                <td href="ff">Danny Frisk</td>
-                                              
-                                            </tr>
-                                        </tbody>
-                                    </table>
-
-
-                                </div>
-
-                                </div>
-
-                            </div>
                             <div class="col-md-6" > 
                                 <div class="box box-info">
                                     <div class="box-header with-border">
@@ -159,7 +118,7 @@
                             </div> 
                             
                             <div class="col-md-2">                   
-                                <p><button class="btn btn-primary" style="width: 100%" value="submit">Submit</button></p>
+                                <p><button class="btn btn-primary" style="width: 100%" value="submit">Create</button></p>
                             </div>
                         </form>
                     </div>

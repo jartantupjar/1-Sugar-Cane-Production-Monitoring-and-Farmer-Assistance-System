@@ -19,17 +19,67 @@
             <div class="content-wrapper">
                 <section class="content-header">
                     <h1>
-                        Page Header
+                        
+                        Recommendations Details 
                         <small>Optional description</small>
                     </h1>
                 </section>
                 <section class="content">
 
-                    
+                    <div class="col-md-6">
+                                <div class="box box-solid box-success">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">Recommendation Details</h3>
+                                    </div>
+                                    <br>
+                                    <div class="box-body">
+                                        <div class="form-group">
+                                            <label>Recommendation Name : </label>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Description : </label>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Details : </label>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Aims to prevent : <li><a href="#myModal" data-toggle="modal" data-target="#myModal">3</a> </li> </label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Send Alert</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row with-border">
+                                        <div class="col-md-4"><b>Fixed Message</b></div>
+                                        <div class="col-md-4 col-md-offset-4"><b> Farmers </b></div>
+                                    </div>
+                                    <div class="row with-border">
+                                        <div class="col-md-4"><input type="text" value="This is a warning to all farmers" disabled="true" id="warningalert"></div>
+                                        <div class="col-md-4 col-md-offset-4"><input type="checkbox" placeholder="Farmer ABC">Farmer ABC</div>
+                                    </div>
+                                    
+                                    
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Send</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-md-12" > 
                         <div class="box box-info">
                             <div class="box-header with-border">
-                                <h1 class="box-title">Recommendation</h1>
+                                <h1 class="box-title">Recommendation Details</h1>
                                 <div class="box-tools pull-right">
                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                     <!-- In box-tools add this button if you intend to use the contacts pane -->

@@ -19,8 +19,8 @@
             <div class="content-wrapper">
                 <section class="content-header">
                     <h1>
-                        Page Header
-                        <small>Optional description</small>
+                        Recommendations
+                        <small>Shows a list of recommendation</small>
                     </h1>
                 </section>
                 <section class="content">
@@ -54,7 +54,7 @@
                                             <td>Germination</td>
                                             <td>October 01 - October 31</td>
                                             <td>October 01</td>
-                                            <td><p><li class="pull-right"><a href="viewRecommendationDetails.jsp"><b> View Details</b></a></li></p></td>
+                                            <td><p><button class="pull-right"><a href="viewRecommendationDetails.jsp"><b> View Details</b></a></button></p></td>
                                         </tr>
                                     </tbody>
                                 </table>

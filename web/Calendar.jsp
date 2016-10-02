@@ -88,27 +88,27 @@
                                             </div>  <br>
                                 <label> Milling Phase:</label> <div class="input-group date">
                                                 <div class="input-group-addon">
-                                                    <i class="fa fa-calendar"></i>
-                                                </div>
-                                                <input type="text" class="form-control pull-right datepicker" name="datepicker" id="datepickerstart">
-                                            </div>  <br>
-                                
-                            </div>
-                        </div>
-          <a class="btn btn-app btn-linkedin btn-lg pull-right">
-                                        <i class="fa fa-edit"></i> Edit dates
-                                    </a>
-        </div>
-                    <div class="col-md-9" > 
-                        <div class="box box-info">
-                            <div class="box-header with-border">
-                                <h1 class="box-title">Calendar</h1>
-                                <div class="box-tools pull-right">
-                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                    <!-- In box-tools add this button if you intend to use the contacts pane -->
-                                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                                        <i class="fa fa-calendar"></i>
+                                                    </div>
+                                                    <input type="text" class="form-control pull-right datepicker" name="datepicker" id="datepickerstart">
+                                                </div>  <br>
+
                                 </div>
                             </div>
+              <a class="btn btn-app btn-linkedin btn-lg pull-right">
+                                            <i class="fa fa-edit"></i> Edit dates
+                                        </a>
+            </div>
+                        <div class="col-md-9" > 
+                            <div class="box box-info">
+                                <div class="box-header with-border">
+                                    <h1 class="box-title">Calendar</h1>
+                                    <div class="box-tools pull-right">
+                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                        <!-- In box-tools add this button if you intend to use the contacts pane -->
+                                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                    </div>
+                                </div>
 
                             <div class="box-body no-padding">
                                 <div id="calendar"></div>
@@ -224,9 +224,9 @@
         y = date.getFullYear();
     $('#calendar').fullCalendar({
       header: {
-        left: 'prev,next today',
+        left: 'prev,next today,',
         center: 'title',
-        right: 'month,agendaWeek,agendaDay'
+        right:'month,agendaWeek,agendaDay'
       },
       buttonText: {
         today: 'today',
