@@ -158,7 +158,7 @@
             var rows_selected = [];
             var table1 = $('#probTable').DataTable({
                 'ajax': {
-                    'url': 'viewProblemList'
+                    'url': 'viewProbList'
                 },
                 'columnDefs': [{
                         'targets': 0,

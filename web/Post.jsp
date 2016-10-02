@@ -72,7 +72,7 @@
                   It is a long established fact that a reader will be distracted
                   by the readable content of a page when looking at its layout.
                 </div>
-                <button type="button" class="btn btn-default btn-xs pull-right"><i class="fa fa-share"></i>Create Recommendation</button>
+                <button type="button" class="btn btn-default btn-xs pull-right"><i class="fa fa-share"></i><a href="createNewRecommendation.jsp">Create Recommendation</a></button>
                 <!-- /.comment-text -->
               </div>
               <!-- /.box-comment -->
@@ -88,7 +88,7 @@
                   It is a long established fact that a reader will be distracted
                   by the readable content of a page when looking at its layout.
                 </div>
-                <button type="button" class="btn btn-default btn-xs pull-right"><i class="fa fa-share"></i>Create Recommendation</button>
+                <button type="button" class="btn btn-default btn-xs pull-right"><i class="fa fa-share"></i><a href="createNewRecommendation.jsp">Create Recommendation</a></button>
                 <!-- /.comment-text -->
               </div>
               <!-- /.box-comment -->

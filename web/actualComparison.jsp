@@ -695,7 +695,7 @@ comparison page add current vs historical details(past 2yrs)
                                         <i class="fa fa-bullhorn"></i> Send Recommendation(redirect)
                                     </a>
 
-                                    <a class="btn btn-app btn-soundcloud">
+                                    <a class="btn btn-app btn-soundcloud" href="determineProblem.jsp">
 
                                         <i class="fa fa-inbox"></i> Determine Problem
                                     </a>

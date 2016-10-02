@@ -55,19 +55,22 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myModalLabel">Send Alert</h4>
+                                    <h4 class="modal-title" id="myModalLabel">Problems List</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <div class="row with-border">
-                                        <div class="col-md-4"><b>Fixed Message</b></div>
-                                        <div class="col-md-4 col-md-offset-4"><b> Farmers </b></div>
-                                    </div>
-                                    <div class="row with-border">
-                                        <div class="col-md-4"><input type="text" value="This is a warning to all farmers" disabled="true" id="warningalert"></div>
-                                        <div class="col-md-4 col-md-offset-4"><input type="checkbox" placeholder="Farmer ABC">Farmer ABC</div>
-                                    </div>
-                                    
-                                    
+                                    <table class="table table-bordered" >
+                                    <tbody>
+                                        <tr>
+                                            <th>Problem</th>
+                                            <th>Description</th>
+	
+                                        </tr>
+                                        <tr>	
+                                            <td>Pest</td>
+                                            <td><button><a href="Problems.jsp"><b> View Details</b></a></button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
