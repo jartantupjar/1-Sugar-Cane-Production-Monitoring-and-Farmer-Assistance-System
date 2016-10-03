@@ -37,7 +37,7 @@
                                         
                                         <div class="form-group">
                                             <label>Title</label>
-                                            <p> <input type="text" placeholder="Title of Problem" style="width: 100%"> </p>
+                                            <p> <input type="text" class="form-control" placeholder="Title of Problem" style="width: 100%"> </p>
                                         </div>
 
                                         <div class="form-group">

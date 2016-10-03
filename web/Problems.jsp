@@ -83,8 +83,9 @@
                             'targets': 0,
                         
                             'render': function (data, type, full, meta) {
-                                return '<a href="' + data + '">'+data+'</a>';
+                                return data+  '<a href="' + data + '">'+data+'</a>';
                             }
+                            
                         }]
                 });
             });

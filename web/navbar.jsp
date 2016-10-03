@@ -80,23 +80,45 @@
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu">
       <li class="header">Navigation</li>
-        <li class="active"><a href="Homepage.jsp"><i class="fa fa-link"></i><span>Home</span></a></li>
-        <li><a href="WeatherTrends.jsp"><i class="fa fa-link"></i><span>Weather Trends</span> </a></li>
-        <li><a href="Calendar.jsp"><i class="fa fa-link"></i><span>Calendar</span> </a></li>
-        <li><a href="WeatherReport.jsp"><i class="fa fa-link"></i><span>Weather Report</span> </a></li>
-        <li><a href="Forum.jsp"><i class="fa fa-link"></i><span>Forum</span></a></li>
-        <li><a href="Problems.jsp"><i class="fa fa-link"></i><span>Problems</span></a></li>
-        <li><a href="createProject.jsp"><i class="fa fa-link"></i><span>Create Plans and Programs</span></a></li>
-        <li><a href="viewProjects.jsp"><i class="fa fa-link"></i><span>View Projects List</span></a></li>
-      <li><a href="viewFarmerProfile.jsp"><i class="fa fa-link"></i><span>Farmer Profile</span></a></li>
-        <li><a href="viewProjectDetails.jsp"><i class="fa fa-link"></i><span>Program Details</span></a></li>
-        <li><a href="viewCropEstimate.jsp"><i class="fa fa-link"></i><span>Crop Estimate</span></a></li>
-        <li><a href="farmerComparison.jsp"><i class="fa fa-link"></i><span>Farm Observation</span></a></li>
-         <li><a href="actualComparison.jsp"><i class="fa fa-link"></i><span>Farm Comparison</span></a></li>
-         <li><a href="createNewRecommendation.jsp"><i class="fa fa-link"></i><span>Create Recommendation</span></a></li>
-         <li><a href="Recommendations.jsp"><i class="fa fa-link"></i><span>Recommendations</span></a></li>
-        
-      
+      <li class="treeview">
+          <a href="#">
+            <i class="fa fa-share"></i> <span>MDO</span>
+            <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu" style="display: none;">
+           <li class="active"><a href="Homepage.jsp"><i class="fa fa-link"></i><span>Home</span></a></li>
+           <li class="active"><a href="Disaster Report.jsp"><i class="fa fa-link"></i><span>Alerts</span></a></li>
+           <li><a href="WeatherReport.jsp"><i class="fa fa-link"></i><span>Weather Report</span> </a></li>
+           <li><a href="WeatherTrends.jsp"><i class="fa fa-link"></i><span>Weather Trends</span> </a></li>
+           <li><a href="Forum.jsp"><i class="fa fa-link"></i><span>Forum</span></a></li>
+           <li><a href="Recommendations.jsp"><i class="fa fa-link"></i><span>Recommendations</span></a></li>
+           <li><a href="Problems.jsp"><i class="fa fa-link"></i><span>Problems</span></a></li>
+           <li><a href="Calendar.jsp"><i class="fa fa-link"></i><span>Calendar</span> </a></li>
+           <li><a href="farmerComparison.jsp"><i class="fa fa-link"></i><span>Farm Observation</span></a></li>
+           <li><a href="viewCropEstimate.jsp"><i class="fa fa-link"></i><span>Crop Estimate (Options)</span></a></li>
+           <li><a href="viewProjects.jsp"><i class="fa fa-link"></i><span>View Projects List</span></a></li>
+           <li><a href="viewProjectDetails.jsp"><i class="fa fa-link"></i><span>Program Details</span></a></li>
+           <li><a href="viewFarmerProfile.jsp"><i class="fa fa-link"></i><span>Farmer Profile</span></a></li>
+          </ul>
+        </li>   
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-share"></i> <span>Board</span>
+            <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu" style="display: none;">
+           <li class="active"><a href="#"><i class="fa fa-link"></i><span>Weekly Statistics</span></a></li>
+           <li><a href="#"><i class="fa fa-link"></i><span>Pampanga Performance (Summary)</span> </a></li>
+           <li><a href="#"><i class="fa fa-link"></i><span>Weather Trends</span> </a></li>
+           <li><a href="Problems.jsp"><i class="fa fa-link"></i><span>Problems (Reoccuring)</span></a></li>
+           <li><a href="Calendar.jsp"><i class="fa fa-link"></i><span>Calendar</span> </a></li>
+           <li><a href="farmerComparison.jsp"><i class="fa fa-link"></i><span>Farm Observation</span></a></li>
+           <li><a href="viewCropEstimate.jsp"><i class="fa fa-link"></i><span>Crop Estimate</span></a></li>
+           <li><a href="viewProjects.jsp"><i class="fa fa-link"></i><span>View Projects List</span></a></li>
+           <li><a href="viewProjectDetails.jsp"><i class="fa fa-link"></i><span>Program Details</span></a></li>
+           <li><a href="createProject.jsp"><i class="fa fa-link"></i><span>Create Plans and Programs</span></a></li>
+          </ul>
+        </li> 
       </ul>
       <!-- /.sidebar-menu -->
     </section>
