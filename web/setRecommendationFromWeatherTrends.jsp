@@ -41,7 +41,7 @@
                                         <tr>
                                             <th>Recommendation</th>
                                             <th>Description</th>
-                                            <th>Trigger</th>
+                                            <th>Config</th>
                                         </tr>
                                         <tr>	
                                             <td>Irrigation Recommendation for January</td>

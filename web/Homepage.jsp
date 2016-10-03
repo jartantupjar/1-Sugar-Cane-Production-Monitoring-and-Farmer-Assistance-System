@@ -100,8 +100,7 @@
                                     <tbody>
                                         <tr>
                                             <th>Particulars</th>
-                                            <th>Estimated Production</th>
-                                            	
+                                            <th>Estimated Production</th>	
                                         </tr>
                                         <tr>	
                                             <td>Area</td>
@@ -128,8 +127,8 @@
                                 <table class="table table-bordered" >
                                     <tbody>
                                         <tr>
-                                            <th> % chance between 9:00 - 10:00</th>
-                                            <th> % chance between 10:00 - 11:00</th>
+                                            <th> mm of rain yestarday</th>
+                                            <th> </th>
                                             <th> % chance between 11:00 - 12:00</th>
                                             <th> % chance between 12:00 - 1:00</th>
                                         </tr>
