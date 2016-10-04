@@ -48,7 +48,7 @@
                                             <th>Description</th>
                                             <th>Phase</th>
                                             <th>Period</th>
-                                            <th>Trigger</th>
+                                            <th>Config</th>
                                             <th></th>
                                         </tr>
 
@@ -80,7 +80,7 @@
                     'columnDefs': [{
                             'targets': 6,
                             'render': function (data, type, full, meta) {
-                                return '<a href="viewRecDetails?id=' + data + '" class="btn btn-primary">' + 'more details' + '</a>';
+                                return '<a href="viewRecDetails?id=' + data + '" class="btn btn-primary text-center">' + 'more details' + '</a>';
                             }
 
                         }]

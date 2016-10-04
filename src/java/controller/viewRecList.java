@@ -48,7 +48,7 @@ public class viewRecList extends HttpServlet {
             obj.add(recList.get(i).getType());
             obj.add(recList.get(i).getDescription());
             obj.add(recList.get(i).getPhase());
-            obj.add(recList.get(i).getDate_start() + "-" + recList.get(i).getDate_end());
+            obj.add(recList.get(i).getDate_start() + " - " + recList.get(i).getDate_end());
             if (recList.get(i).getTrigger_date() != null) {
                 obj.add(recList.get(i).getTrigger_date().toString());
             } else {
