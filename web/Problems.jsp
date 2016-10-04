@@ -80,10 +80,10 @@
                         'url': 'viewProbList'
                     },
                     'columnDefs': [{
-                            'targets': 0,
+                            'targets': 4,
                         
                             'render': function (data, type, full, meta) {
-                                return data+  '<a href="' + data + '">'+data+'</a>';
+                                return'<a href="' + data + '" class="btn btn-primary">details</a>';
                             }
                             
                         }]

@@ -1,8 +1,12 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="entity.User"%>
-<%
-    User user = (User) session.getAttribute("user");
-    if (user == null){
-        response.sendRedirect("index.jsp");
-        return;
-    }
-%>
+
+
+
+<c:choose>
+        
+ <c:when test="${user == null}">
+       <c:redirect url="index.jsp"/>
+    </c:when>
+ 
+</c:choose>

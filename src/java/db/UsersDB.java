@@ -1,3 +1,4 @@
+// reality
 package db;
 
 import entity.User;
@@ -14,7 +15,7 @@ public class UsersDB {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select * from SRA_Users where username = ? and password=password(?) ";
+            String query = "select * from users where username = ? and password=password(?) ";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, user.getUsername());
             pstmt.setString(2, user.getPassword());
@@ -23,9 +24,9 @@ public class UsersDB {
             if (rs.next()) {
                 tempUser = new User();
                 tempUser.setUsername(user.getUsername());
-                tempUser.setFirst_name(rs.getString("first_name"));
-                tempUser.setLast_name(rs.getString("last_name"));
-                tempUser.setGroup(rs.getString("group"));
+          
+                tempUser.setName(rs.getString("name"));
+                tempUser.setGroup(rs.getString("role"));
 
             }
             pstmt.close();
@@ -46,12 +47,11 @@ public class UsersDB {
             Connection conn = myFactory.getConnection();
             
             
-            String query = "insert into SRA_Users values (?,password(?),?,?,?)";
+            String query = "insert into Users values (?,password(?),?,?)";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, user.getUsername());
             pstmt.setString(2, user.getPassword());
-            pstmt.setString(3, user.getLast_name());
-            pstmt.setString(4, user.getFirst_name());
+            pstmt.setString(4, user.getName());
             pstmt.setString(5, user.getGroup());
             int isSuccess = pstmt.executeUpdate();
             pstmt.close();

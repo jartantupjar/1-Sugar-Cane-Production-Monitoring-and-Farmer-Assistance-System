@@ -1,4 +1,4 @@
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <header class="main-header">
 <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
            <link rel="stylesheet" href="font-awesome-4.6.3/css/font-awesome.min.css">
@@ -33,14 +33,15 @@
           
               <li class="time-label text-center">
                   <a class="bg-purple text-center">
-                    10 Feb. 2014
+                  <c:set var="todayDate" scope="session" value="10 Feb. 2014"/>
+                  <c:out value="${todayDate}">${todayDate}</c:out> 
                   </a>
             </li>
          
             <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
               <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">Alexander Pierce</span>
+              <span class="hidden-xs">  <c:out value="${user.name}"></c:out></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -48,8 +49,8 @@
                 <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                  <p>
-                  <%= user.getFirst_name() +" "+ user.getLast_name() %>
-                  <small><%= user.getGroup() %></small>
+              <c:out value="${user.name}"></c:out>
+                  <small>  <c:out value="${user.group}"></c:out></small>
                 </p>
               </li>
               <!-- Menu Body -->
@@ -82,9 +83,9 @@
           <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p><%= user.getFirst_name() +" "+ user.getLast_name() %>
+        <p><c:out value="${user.name}"></c:out>
           </p>
-              <small><%= user.getGroup() %></small>
+              <small><c:out value="${user.group}"></c:out></small>
         </div>
       </div>
         
