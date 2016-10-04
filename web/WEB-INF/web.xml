@@ -24,6 +24,14 @@
         <servlet-name>viewProbList</servlet-name>
         <servlet-class>controller.viewProbList</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>getACropAssessment</servlet-name>
+        <servlet-class>controller.getACropAssessment</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>getRecomList</servlet-name>
+        <servlet-class>controller.getRecomList</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
@@ -47,6 +55,14 @@
     <servlet-mapping>
         <servlet-name>viewProbList</servlet-name>
         <url-pattern>/viewProbList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getACropAssessment</servlet-name>
+        <url-pattern>/getACropAssessment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getRecomList</servlet-name>
+        <url-pattern>/getRecomList</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -127,10 +127,10 @@
                                 <table class="table table-bordered" >
                                     <tbody>
                                         <tr>
-                                            <th> mm of rain yestarday</th>
-                                            <th> </th>
-                                            <th> % chance between 11:00 - 12:00</th>
-                                            <th> % chance between 12:00 - 1:00</th>
+                                            <th> mm of rain yesterday</th>
+                                            <th> mm of rain today</th>
+                                            <th> mm of rain tomorrow</th>
+                                            <th> mm of rain day after tom</th>
                                         </tr>
                                         <tr>
                                             <td>10%</td>
