@@ -31,20 +31,29 @@
                                         <h3 class="box-title">Problem Details</h3>
                                     </div>
                                     <br>
-                                    <div class="box-body">
-                                        <div class="form-group">
-                                            <label>Problem Name : </label>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Type : </label>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Total Farms Affected : </label>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Number of Solutions : <li><a href="#myModal" data-toggle="modal" data-target="#myModal">3</a> </li> </label>
-                                        </div>
-                                    </div>
+                                    <ul class="list-group list-group-unbordered">
+
+
+                                        <li class="list-group-item">
+                                            <b>Problem Name</b> <a class="pull-right">
+                                                <c:out value="${problem.prob_name}">${problem.prob_name}</c:out>
+                                            </a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Type</b> <a class="pull-right">
+                                               
+                                            </a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Total Farms Affected </b> <a class="pull-right">
+                                                
+                                            </a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Number of Solutions</b> <a class="pull-right">
+                                                </a>
+                                        </li>
+                                    </ul>
 
                                 </div>
                             </div>

@@ -60,7 +60,7 @@ public class ProblemsDB {
             Connection conn = myFactory.getConnection();
             String query = "select * from sra.problems where id = ? ;";
             PreparedStatement pstmt = conn.prepareStatement(query);
-            
+            pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
             Problems p = null;
             if (rs.next()) {
