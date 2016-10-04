@@ -36,6 +36,10 @@
         <servlet-name>viewProbDetails</servlet-name>
         <servlet-class>controller.viewProbDetails</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>viewRecList</servlet-name>
+        <servlet-class>controller.viewRecList</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
@@ -71,6 +75,10 @@
     <servlet-mapping>
         <servlet-name>viewProbDetails</servlet-name>
         <url-pattern>/viewProbDetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewRecList</servlet-name>
+        <url-pattern>/viewRecList</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

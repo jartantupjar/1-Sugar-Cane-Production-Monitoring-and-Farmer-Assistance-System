@@ -12,8 +12,11 @@ import java.sql.Date;
  * @author Bryll Joey Delfin
  */
 public class Recommendation {
+    private int id ;
+    private double trigger_num;
     private String recommendation_name, type, description, status, phase;
-    private Date date_start, date_create, date_end; 
+   
+    private Date date_start, date_create, date_end , trigger_date; 
 
     /**
      * @return the recommendation_name
@@ -125,5 +128,47 @@ public class Recommendation {
      */
     public void setDate_end(Date date_end) {
         this.date_end = date_end;
+    }
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    /**
+     * @return the trigger_num
+     */
+    public double getTrigger_num() {
+        return trigger_num;
+    }
+
+    /**
+     * @param trigger_num the trigger_num to set
+     */
+    public void setTrigger_num(double trigger_num) {
+        this.trigger_num = trigger_num;
+    }
+
+    /**
+     * @return the trigger_date
+     */
+    public Date getTrigger_date() {
+        return trigger_date;
+    }
+
+    /**
+     * @param trigger_date the trigger_date to set
+     */
+    public void setTrigger_date(Date trigger_date) {
+        this.trigger_date = trigger_date;
     }
 }

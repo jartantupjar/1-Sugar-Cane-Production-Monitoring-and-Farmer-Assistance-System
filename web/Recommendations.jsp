@@ -12,6 +12,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>SRA | Home</title>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
@@ -38,25 +39,20 @@
                                 </div>
                             </div>
 
-                            <div class="box-body no-padding">
-                                <table class="table table-bordered" >
-                                    <tbody>
+                            <div class="box-body">
+                                <table id="recList" class="table table-bordered">
+                                    <thead>
                                         <tr>
                                             <th>Recommendation</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
                                             <th>Phase</th>
                                             <th>Period</th>
                                             <th>Trigger</th>
-                                            <th>Description</th>
-                                            	
+                                            <th></th>
                                         </tr>
-                                        <tr>	
-                                            <td>Increase irrigation water by 10 mm</td>
-                                            <td>Germination</td>
-                                            <td>October 01 - October 31</td>
-                                            <td>October 01</td>
-                                            <td><p><button class="pull-right"><a href="viewRecommendationDetails.jsp"><b> View Details</b></a></button></p></td>
-                                        </tr>
-                                    </tbody>
+
+                                    </thead>
                                 </table>
                             </div>
 
@@ -72,5 +68,26 @@
         <script src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="dist/js/app.min.js"></script>
+        <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+        <script>
+
+            $(document).ready(function () {
+                var table = $('#recList').DataTable({
+                    'ajax': {
+                        'url': 'viewRecList'
+                    },
+                    'columnDefs': [{
+                            'targets': 6,
+                            'render': function (data, type, full, meta) {
+                                return '<a href="viewRecDetails?id=' + data + '" class="btn btn-primary">' + 'more details' + '</a>';
+                            }
+
+                        }]
+                });
+            });
+
+
+        </script>
     </body>
 </html>
