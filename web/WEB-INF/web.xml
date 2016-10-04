@@ -32,6 +32,10 @@
         <servlet-name>getRecomList</servlet-name>
         <servlet-class>controller.getRecomList</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>viewProbDetails</servlet-name>
+        <servlet-class>controller.viewProbDetails</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
@@ -63,6 +67,10 @@
     <servlet-mapping>
         <servlet-name>getRecomList</servlet-name>
         <url-pattern>/getRecomList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewProbDetails</servlet-name>
+        <url-pattern>/viewProbDetails</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

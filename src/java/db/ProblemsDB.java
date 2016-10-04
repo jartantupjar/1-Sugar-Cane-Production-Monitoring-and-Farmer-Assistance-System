@@ -7,6 +7,7 @@ package db;
 
 import entity.Problems;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -47,6 +48,36 @@ public class ProblemsDB {
             conn.close();
             
             return pT;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProblemsDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public Problems getProblemsDetails(int id) {
+        try {
+            // put functions here : previous week production, this week production
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select * from sra.problems where id = ? ;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            
+            ResultSet rs = pstmt.executeQuery();
+            Problems p = null;
+            if (rs.next()) {
+                do {
+                    p = new Problems();
+                    p.setProb_id(rs.getInt("id"));
+                    p.setProb_name(rs.getString("name"));
+                    p.setProb_details(rs.getString("description"));
+                    p.setStatus(rs.getString("status"));
+                    p.setType(rs.getString("type"));
+                } while (rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            
+            return p;
         } catch (SQLException ex) {
             Logger.getLogger(ProblemsDB.class.getName()).log(Level.SEVERE, null, ex);
         }

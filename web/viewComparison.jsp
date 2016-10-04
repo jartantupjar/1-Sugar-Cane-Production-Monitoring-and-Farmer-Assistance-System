@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="security.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file ="navbar.jsp" %>
@@ -67,15 +68,9 @@ comparison page add current vs historical details(past 2yrs)
                             <div class="box box-success">
                                 <div class="box-header with-border">
                                     <h1 class="box-title">Farm Site Pic</h1>
-                                   
                                 </div>
                                 <div class="box-body">
-                                   
-                            
-                                        <img src="dist/img/user2-160x160.jpg" style="height: 450 px ; width: 400 px">
-                                    
-                                 
-
+                                    <img src="dist/img/user2-160x160.jpg" style="height: 450 px ; width: 400 px">
                                 </div>
                             </div>
 
@@ -185,37 +180,37 @@ comparison page add current vs historical details(past 2yrs)
                             </div>
                         </div>
                         <div class="col-md-6" > 
-                                <div class="box box-info collapsed-box">
-                                    <div class="box-header with-border">
-                                        <h1 class="box-title">Problems List</h1>
-                                        <div class="box-tools pull-right">
-                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                        </div>
+                            <div class="box box-info collapsed-box">
+                                <div class="box-header with-border">
+                                    <h1 class="box-title">Problems List</h1>
+                                    <div class="box-tools pull-right">
+                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                     </div>
-
-                                    <div class="box-body">
-                                        <table id="probTable" class="table  dispTable table-hover" cellspacing="0" width="100%">
-                                            <thead>
-                                                <tr>
-                                                    <th><input name="select_all" value="1" id="probTable-select-all" type="checkbox" /></th>
-                                                    <th>Problem</th>
-                                                    <th>Description</th>
-                                                </tr>
-                                            </thead>
-                                            <tfoot>
-                                                <tr>
-                                                    <th></th>
-                                                    <th>Problem</th>
-                                                    <th>Description</th>
-
-                                                </tr>
-                                            </tfoot>
-                                        </table>
-                                    </div>
-
                                 </div>
-                            </div> 
+
+                                <div class="box-body">
+                                    <table id="probTable" class="table  dispTable table-hover" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th><input name="select_all" value="1" id="probTable-select-all" type="checkbox" /></th>
+                                                <th>Problem</th>
+                                                <th>Description</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th></th>
+                                                <th>Problem</th>
+                                                <th>Description</th>
+
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div> 
                         <div class="col-md-6"> 
                             <div class="box box-info collapsed-box" >
                                 <div class="box-header with-border">
@@ -252,7 +247,7 @@ comparison page add current vs historical details(past 2yrs)
                             </div>
 
                         </div>
-                        
+
 
                     </div>
                 </section>
@@ -290,9 +285,9 @@ comparison page add current vs historical details(past 2yrs)
                             }
                         }]
                 });
-                
+
                 var table1 = $('#probTable').DataTable({
-                     'ajax': {
+                    'ajax': {
                         'url': 'viewBrgyList'
                     },
                     'columnDefs': [{
