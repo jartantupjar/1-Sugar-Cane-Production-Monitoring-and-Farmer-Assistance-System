@@ -24,25 +24,28 @@ public class ProblemsDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select * from problem;";
+            String query = "select * from sra.problems;";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             ArrayList<Problems> pT = null;
             Problems p;
             if (rs.next()) {
-                pT = new ArrayList<Problems>();
+                
                 do {
+                    pT = new ArrayList<Problems>();
                     p = new Problems();
                     p.setProb_id(rs.getInt("id"));
                     p.setProb_name(rs.getString("name"));
                     p.setProb_details(rs.getString("description"));
                     p.setStatus(rs.getString("status"));
-                    
+                    p.setType(rs.getString("type"));
+                    pT.add(p);
                 } while (rs.next());
             }
             rs.close();
             stmt.close();
             conn.close();
+            
             return pT;
         } catch (SQLException ex) {
             Logger.getLogger(ProblemsDB.class.getName()).log(Level.SEVERE, null, ex);
