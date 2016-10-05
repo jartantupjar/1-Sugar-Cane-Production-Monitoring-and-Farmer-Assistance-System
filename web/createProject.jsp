@@ -26,12 +26,13 @@
                             <div class="col-md-6">
                                 <div class="box box-solid box-success">
                                     <div class="box-header with-border">
-                                        <h3 class="box-title">Project Details</h3>
+                                        <h3 class="box-title">Program Details</h3>
                                     </div>
                                     <br>
                                     <div class="box-body">
+
                                         <div class="form-group">
-                                            <label for="projectname" class="control-label">Project Name:</label>
+                                            <label for="projectname" class="control-label">Program Name:</label>
                                             <input type="text" class="form-control" name="projectname" id="projectname" placeholder="Name...">
                                         </div>
                                         <div class="form-group">
@@ -90,21 +91,13 @@
                                                 <tr>
                                                     <th><input name="select_all" value="1" id="probTable-select-all" type="checkbox" /></th>
                                                     <th>Problem</th>
+                                                    <th>Status</th>
+                                                    <th>Type</th>
                                                     <th>Description</th>
-                                                    <th>Date Created</th>
-                                                    <th># of brgy</th>
+                                                    <th># brgy</th>
                                                 </tr>
                                             </thead>
-                                            <tfoot>
-                                                <tr>
-                                                    <th></th>
-                                                    <th>Problem</th>
-                                                    <th>Description</th>
-                                                    <th>Date Created</th>
-                                                    <th># of brgy</th>
 
-                                                </tr>
-                                            </tfoot>
                                         </table>
                                     </div>
 
@@ -192,40 +185,10 @@
             $(document).ready(function () {
                 var rows_selected = [];
 
-                var table = $('#example').DataTable({
-                    'ajax': {
-                        'url': 'viewBrgyList'
-                    },
-                    'columnDefs': [{
-                            'targets': 0,
-                            'searchable': false,
-                            'orderable': false,
-                            'className': 'dt-body-center',
-                            'render': function (data, type, full, meta) {
-                                return '<input type="checkbox" name="id[]" id="buttonClick" value="'
-                                        + $('<div/>').text(data).html() + '">';
-                            }
-                        }],
-                    'select': {
-                        'style': 'multi'
-                    },
-                    'order': [[1, 'asc']]
-                            //      ,
-                            //       'rowCallback': function(row, data, dataIndex){
-                            //         // Get row ID
-                            //       var rowId = data[0];
-                            //       // alert(rowId);
-                            //         // If row ID is in the list of selected row IDs
-                            //         if($.inArray(rowId, rows_selected) !== -1){
-                            //            $(row).find('input[type="checkbox"]').prop('checked', true);
-                            //            $(row).addClass('selected');
-                            //         }
-                            //      }     
 
-                });
                 var table1 = $('#probTable').DataTable({
                     'ajax': {
-                        'url': 'viewProblemList'
+                        'url': 'viewPlansProblemTable'
                     },
                     'columnDefs': [{
                             'targets': 0,
@@ -280,12 +243,7 @@
 
                 });
 
-                $('#example-select-all').on('click', function () {
-                    // Check/uncheck all checkboxes in the table
-                    var rows = table.rows({'search': 'applied'}).nodes();
-                    $('input[type="checkbox"]', rows).prop('checked', this.checked);
 
-                });
                 $('#probTable-select-all').on('click', function () {
                     // Check/uncheck all checkboxes in the table
                     var rows = table1.rows({'search': 'applied'}).nodes();

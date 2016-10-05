@@ -16,7 +16,7 @@
                 <section class="content-header">
 
                     <h1>
-                        Project List
+                        Plans & Programs List
                         <small>Optional description</small>
                     </h1>
                 </section>
@@ -26,7 +26,7 @@
                         <div class="col-md-10"> 
                             <div class="box box-info">
                                 <div class="box-header with-border">
-                                    <h1 class="box-title">Brgy List</h1>
+                                 <!--   <h1 class="box-title">Brgy List</h1> -->
                                     <div class="box-tools pull-right">
                                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                         <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -45,16 +45,7 @@
 
                                             </tr>
                                         </thead>
-                                        <tfoot>
-                                            <tr>
-                                               <th>Program</th>
-                                                <th>Date</th>
-                                                <th>Total Farms</th>
-                                                <th>Progress</th>
-                                                 <th>details</th>
-
-                                            </tr>
-                                        </tfoot>
+                                   
                                     </table>
                                 </div>
 

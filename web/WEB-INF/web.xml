@@ -49,6 +49,10 @@
         <servlet-class>controller.viewFRTable</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>viewPlansProblemTable</servlet-name>
+        <servlet-class>controller.viewPlansProblemTable</servlet-class>
+    </servlet>          
+    <servlet>
         <servlet-name>viewPRT</servlet-name>
         <servlet-class>controller.viewPRT</servlet-class>
     </servlet>
@@ -101,8 +105,14 @@
         <url-pattern>/viewFRTable</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+
+        <servlet-name>viewPlansProblemTable</servlet-name>
+        <url-pattern>/viewPlansProblemTable</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>viewPRT</servlet-name>
         <url-pattern>/viewPRT</url-pattern>
+
     </servlet-mapping>
     <session-config>
         <session-timeout>

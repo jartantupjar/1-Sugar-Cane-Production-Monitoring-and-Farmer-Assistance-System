@@ -111,7 +111,7 @@
            <li><a href="Calendar.jsp"><i class="fa fa-link"></i><span>Calendar</span> </a></li>
            <li><a href="farmerComparison.jsp"><i class="fa fa-link"></i><span>Farm Observation</span></a></li>
            <li><a href="viewCropEstimate.jsp"><i class="fa fa-link"></i><span>Crop Estimate (Options)</span></a></li>
-           <li><a href="viewProjects.jsp"><i class="fa fa-link"></i><span>View Projects List</span></a></li>
+           <li><a href="viewProjects.jsp"><i class="fa fa-link"></i><span>View Programs List</span></a></li>
            <li><a href="viewProjectDetails.jsp"><i class="fa fa-link"></i><span>Program Details</span></a></li>
            <li><a href="viewFarmerProfile.jsp"><i class="fa fa-link"></i><span>Farmer Profile</span></a></li>
           </ul>
