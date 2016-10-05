@@ -42,6 +42,7 @@
                                                 <th>Type</th>
                                                 <th>Status</th>
                                                 <th>Description</th>
+                                                <th>Total Farms Affected</th>
                                                 <th>More Details</th>
 
                                             </tr>
@@ -80,7 +81,7 @@
                         'url': 'viewProbList'
                     },
                     'columnDefs': [{
-                            'targets': 4,
+                            'targets': 5,
                         
                             'render': function (data, type, full, meta) {
                                 return '<a href="viewProbDetails?id=' + data + '" class="btn btn-primary btn-xs">'+'more details'+'</a>';

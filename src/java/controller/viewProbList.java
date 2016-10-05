@@ -48,6 +48,7 @@ public class viewProbList extends HttpServlet {
             obj.add(probT.get(i).getType());
             obj.add(probT.get(i).getStatus());
             obj.add(probT.get(i).getProb_details());
+            obj.add(probT.get(i).getTotalFarms().toString());
             obj.add(probT.get(i).getProb_id().toString());
             list.add(obj);
         }

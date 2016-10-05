@@ -25,36 +25,38 @@
                 </section>
                 <section class="content">
 
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="box box-solid box-success">
                                     <div class="box-header with-border">
                                         <h3 class="box-title">Problem Details</h3>
                                     </div>
                                     <br>
+                                    <div class="box-body">
                                     <ul class="list-group list-group-unbordered">
 
 
                                         <li class="list-group-item">
-                                            <b>Problem Name</b> <a class="pull-right">
+                                            <b>Problem Name : </b> <a class="pull-right"><b>
                                                 <c:out value="${problem.prob_name}">${problem.prob_name}</c:out>
-                                            </a>
+                                                </b> </a>
                                         </li>
                                         <li class="list-group-item">
                                             <b>Type</b> <a class="pull-right">
-                                               
+                                                <c:out value="${problem.type}">${problem.type}</c:out>
                                             </a>
                                         </li>
                                         <li class="list-group-item">
                                             <b>Total Farms Affected </b> <a class="pull-right">
-                                                
+                                                <c:out value="${problem.totalFarms}">${problem.totalFarms}</c:out>
                                             </a>
                                         </li>
                                         <li class="list-group-item">
-                                            <b>Number of Solutions</b> <a class="pull-right">
+                                            <b>Number of Solutions</b> <a class="pull-right" href="#myModal" data-toggle="modal" data-target="#myModal">
+                                                <c:out value="${problem.totalFarms}">${problem.totalFarms}</c:out>
                                                 </a>
                                         </li>
                                     </ul>
-
+                                    </div>
                                 </div>
                             </div>
                     <!-- Modal -->
@@ -88,7 +90,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-10" > 
+                    <div class="col-md-8" > 
                         <div class="box box-info">
                             <div class="box-header with-border">
                                 <h1 class="box-title">Problem</h1>

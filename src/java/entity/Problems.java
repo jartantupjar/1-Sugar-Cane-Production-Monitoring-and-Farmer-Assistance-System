@@ -10,7 +10,7 @@ package entity;
  * @author Bryll Joey Delfin
  */
 public class Problems {
-    private Integer prob_id;
+    private Integer prob_id, totalFarms;
     private String prob_name, prob_details, barangay,municipality, status,type,impact;
     private Double prob_loss;
 
@@ -138,5 +138,19 @@ public class Problems {
      */
     public void setImpact(String impact) {
         this.impact = impact;
+    }
+
+    /**
+     * @return the totalFarms
+     */
+    public Integer getTotalFarms() {
+        return totalFarms;
+    }
+
+    /**
+     * @param totalFarms the totalFarms to set
+     */
+    public void setTotalFarms(Integer totalFarms) {
+        this.totalFarms = totalFarms;
     }
 }
