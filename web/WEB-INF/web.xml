@@ -48,6 +48,10 @@
         <servlet-name>viewFRTable</servlet-name>
         <servlet-class>controller.viewFRTable</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>viewPRT</servlet-name>
+        <servlet-class>controller.viewPRT</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
@@ -95,6 +99,10 @@
     <servlet-mapping>
         <servlet-name>viewFRTable</servlet-name>
         <url-pattern>/viewFRTable</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewPRT</servlet-name>
+        <url-pattern>/viewPRT</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

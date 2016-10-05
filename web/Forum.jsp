@@ -159,127 +159,8 @@
                 </section>
                 <section class="content">
 			<div class="col-md-12">
-				<div class="panel panel-default">
-					<div class="panel-body">
-						<div class="pull-right">
-							<div class="btn-group">
-								<button type="button" class="btn btn-success btn-filter" data-target="Approved">Approved</button>
-								<button type="button" class="btn btn-warning btn-filter" data-target="Pending">Pending</button>
-								<button type="button" class="btn btn-danger btn-filter" data-target="Rejected">Rejected</button>
-								<button type="button" class="btn btn-default btn-filter" data-target="all">All</button>
-							</div>
-						</div>
-						<div class="table-container">
-							<table class="table table-filter">
-								<tbody>
-									<tr data-status="Approved">
-										
-										<td>
-											<div class="media">
-												<a href="#" class="pull-left">
-													<img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
-												</a>
-												<div class="media-body">
-													<span class="media-meta pull-right">February 13, 2016</span>
-													<h4 class="title">
-                                                                                                            <a href="Post.jsp">
-														Adding Water Works !
-                                                                                                            </a>
-														<span class="pull-right Approved">(Approved)</span>
-                                                                                                                <span class="pull-right">Counter : 100</span>
-													</h4>
-													<p class="summary">description</p>
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr data-status="Pending">
-										
-										<td>
-											<div class="media">
-												<a href="#" class="pull-left">
-													<img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
-												</a>
-												<div class="media-body">
-													<span class="media-meta pull-right">May 13, 2016</span>
-													<h4 class="title">
-														How to help get sugar canes
-														<span class="pull-right Pending">(Pending)</span>
-                                                                                                                <span class="pull-right">Counter : 10</span>
-													</h4>
-													<p class="summary">description</p>
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr data-status="Rejected">
-										
-										<td>
-											<div class="media">
-												<a href="#" class="pull-left">
-													<img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
-												</a>
-												<div class="media-body">
-													<span class="media-meta pull-right">April 13, 2016</span>
-													<h4 class="title">
-														Harvesting Techniques to help you
-														<span class="pull-right Rejected">(Rejected)</span>
-                                                                                                                <span class="pull-right">Counter : 50</span>
-													</h4>
-													<p class="summary">description</p>
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr data-status="Approved" class="selected">
-										
-										<td>
-											<div class="media">
-												<a href="#" class="pull-left">
-													<img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
-												</a>
-												<div class="media-body">
-													<span class="media-meta pull-right">March 13, 2016</span>
-													<h4 class="title">
-														10 ways to avoid pests
-														<span class="pull-right Approved">(Approved)</span>
-                                                                                                                <span class="pull-right">Counter : 30</span>
-													</h4>
-													<p class="summary">description</p>
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr data-status="Pending">
-										
-										<td>
-											<div class="media">
-												<a href="#" class="pull-left">
-													<img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
-												</a>
-												<div class="media-body">
-													<span class="media-meta pull-right">January 13, 2016</span>
-													<h4 class="title">
-														How to get potential yeild by your own
-														<span class="pull-right Pending">(Pending)</span>
-                                                                                                                <span class="pull-right">Counter : 35</span>
-													</h4>
-													<p class="summary">description</p>
-												</div>
-											</div>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-				<div class="content-footer">
-					<p>
-						Page © - 2016 <br>
-						Powered By <a href="https://www.facebook.com/tavo.qiqe.lucero" target="_blank">TavoQiqe</a>
-					</p>
-				</div>
+				
+				
 			</div>
                 </section>
 
@@ -289,28 +170,6 @@
         <script src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="dist/js/app.min.js"></script>
-        <script>
-            $(document).ready(function () {
-
-	$('.star').on('click', function () {
-      $(this).toggleClass('star-checked');
-    });
-
-    $('.ckbox label').on('click', function () {
-      $(this).parents('tr').toggleClass('selected');
-    });
-
-    $('.btn-filter').on('click', function () {
-      var $target = $(this).data('target');
-      if ($target != 'all') {
-        $('.table tr').css('display', 'none');
-        $('.table tr[data-status="' + $target + '"]').fadeIn('slow');
-      } else {
-        $('.table tr').css('display', 'none').fadeIn('slow');
-      }
-    });
-
- });
-        </script>
+        
     </body>
 </html>
