@@ -30,10 +30,9 @@ public class ProblemsDB {
             ResultSet rs = stmt.executeQuery(query);
             ArrayList<Problems> pT = null;
             Problems p;
-            if (rs.next()) {
-                
+            if (rs.next()) { 
+                 pT = new ArrayList<Problems>();
                 do {
-                    pT = new ArrayList<Problems>();
                     p = new Problems();
                     p.setProb_id(rs.getInt("id"));
                     p.setProb_name(rs.getString("name"));

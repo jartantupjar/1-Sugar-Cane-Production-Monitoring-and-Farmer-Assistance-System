@@ -36,6 +36,18 @@
         <servlet-name>viewProbDetails</servlet-name>
         <servlet-class>controller.viewProbDetails</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>viewRecList</servlet-name>
+        <servlet-class>controller.viewRecList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewRecDetails</servlet-name>
+        <servlet-class>controller.viewRecDetails</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewFRTable</servlet-name>
+        <servlet-class>controller.viewFRTable</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
@@ -71,6 +83,18 @@
     <servlet-mapping>
         <servlet-name>viewProbDetails</servlet-name>
         <url-pattern>/viewProbDetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewRecList</servlet-name>
+        <url-pattern>/viewRecList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewRecDetails</servlet-name>
+        <url-pattern>/viewRecDetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewFRTable</servlet-name>
+        <url-pattern>/viewFRTable</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
