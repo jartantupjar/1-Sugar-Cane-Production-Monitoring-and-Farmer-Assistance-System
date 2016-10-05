@@ -25,7 +25,7 @@ public class ProblemsDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select * from sra.problems;";
+            String query = "SELECT p.id, p.name,p.description,p.status,p.type,count(pf.Fields_id) as counter from sra.problems p join sra.`problems-fields` pf on p.id = pf.Problems_id join sra.fields f on pf.Problems_id = f.id where pf.validated = 'Y' ;";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             ArrayList<Problems> pT = null;
@@ -39,6 +39,7 @@ public class ProblemsDB {
                     p.setProb_details(rs.getString("description"));
                     p.setStatus(rs.getString("status"));
                     p.setType(rs.getString("type"));
+                    p.setTotalFarms(rs.getInt("counter"));
                     pT.add(p);
                 } while (rs.next());
             }
@@ -57,9 +58,9 @@ public class ProblemsDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select * from sra.problems where id = ? ;";
+            String query = "select p.id, p.name, p.description, p.status,p.type, count(pf.Fields_id) as counter from sra.problems p join sra.`problems-fields` pf on p.id = pf.Problems_id where id = ? ;";
             PreparedStatement pstmt = conn.prepareStatement(query);
-            
+            pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
             Problems p = null;
             if (rs.next()) {
@@ -70,6 +71,7 @@ public class ProblemsDB {
                     p.setProb_details(rs.getString("description"));
                     p.setStatus(rs.getString("status"));
                     p.setType(rs.getString("type"));
+                    p.setTotalFarms(rs.getInt("counter"));
                 } while (rs.next());
             }
             rs.close();
