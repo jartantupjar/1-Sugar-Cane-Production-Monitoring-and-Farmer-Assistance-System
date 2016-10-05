@@ -78,7 +78,7 @@
                             <div class="col-md-6" > 
                                 <div class="box box-info">
                                     <div class="box-header with-border">
-                                        <h1 class="box-title">Problems List</h1>
+                                        <h1 class="box-title">Problems List(change counter to brgy)</h1>
                                         <div class="box-tools pull-right">
                                             <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                             <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -91,9 +91,9 @@
                                                 <tr>
                                                     <th><input name="select_all" value="1" id="probTable-select-all" type="checkbox" /></th>
                                                     <th>Problem</th>
+                                                    <th>Description</th>
                                                     <th>Status</th>
                                                     <th>Type</th>
-                                                    <th>Description</th>
                                                     <th># brgy</th>
                                                 </tr>
                                             </thead>
@@ -176,9 +176,7 @@
                 $('.datepicker').datepicker({
                     autoclose: true
                 });
-
-
-            });
+ });
         </script>
         <script>
 

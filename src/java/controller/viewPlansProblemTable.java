@@ -35,10 +35,12 @@ public class viewPlansProblemTable extends BaseServlet {
         if (bct != null) {
             for (int i = 0; i < bct.size(); i++) {
                 ArrayList<String> obj = new ArrayList<String>();
-                obj.add(bct.get(i).get);
-                obj.add(bct.get(i).getBrgy());
+                 obj.add(Integer.toString(bct.get(i).getProb_id()));
+                obj.add(bct.get(i).getProb_name());
+               obj.add(bct.get(i).getProb_details());
+                obj.add(bct.get(i).getType());
                 obj.add(bct.get(i).getMunicipality());
-                obj.add(bct.get(i).getApproved());
+                obj.add(Integer.toString(bct.get(i).getTotalFarms()));
                 list.add(obj);
             }
         }
