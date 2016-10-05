@@ -11,7 +11,7 @@ package entity;
  */
 public class Problems {
     private Integer prob_id, totalFarms;
-    private String prob_name, prob_details, barangay,municipality, status,type,impact;
+    private String prob_name, prob_details, barangay,municipality, status,type,impact,farmer,farm,validation;
     private Double prob_loss;
 
     /**
@@ -152,5 +152,47 @@ public class Problems {
      */
     public void setTotalFarms(Integer totalFarms) {
         this.totalFarms = totalFarms;
+    }
+
+    /**
+     * @return the farmer
+     */
+    public String getFarmer() {
+        return farmer;
+    }
+
+    /**
+     * @param farmer the farmer to set
+     */
+    public void setFarmer(String farmer) {
+        this.farmer = farmer;
+    }
+
+    /**
+     * @return the farm
+     */
+    public String getFarm() {
+        return farm;
+    }
+
+    /**
+     * @param farm the farm to set
+     */
+    public void setFarm(String farm) {
+        this.farm = farm;
+    }
+
+    /**
+     * @return the validation
+     */
+    public String getValidation() {
+        return validation;
+    }
+
+    /**
+     * @param validation the validation to set
+     */
+    public void setValidation(String validation) {
+        this.validation = validation;
     }
 }

@@ -117,4 +117,35 @@ public class ProblemsDB {
         }
         return null;
     }
+    public ArrayList<Problems> showProblembyFarm(int id) {
+        try {
+            // put functions here : previous week production, this week production
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "Select f.id,f.barangay,f.Farmers_name,pf.validated from sra.problems p join sra.`problems-fields` pf on p.id = pf.Problems_id join sra.fields f on pf.Problems_id = f.id;";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            ArrayList<Problems> pT = null;
+            Problems p;
+            if (rs.next()) { 
+                 pT = new ArrayList<Problems>();
+                do {
+                    p = new Problems();
+                    p.setProb_id(rs.getInt("id"));
+                    p.setBarangay(rs.getString("barangay"));
+                    p.setFarmer(rs.getString("Farmers_name"));
+                    p.setValidation(rs.getString("validated"));
+                    pT.add(p);
+                } while (rs.next());
+            }
+            rs.close();
+            stmt.close();
+            conn.close();
+            
+            return pT;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProblemsDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }
