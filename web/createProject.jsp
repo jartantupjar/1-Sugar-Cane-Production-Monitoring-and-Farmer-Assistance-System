@@ -26,12 +26,13 @@
                             <div class="col-md-6">
                                 <div class="box box-solid box-success">
                                     <div class="box-header with-border">
-                                        <h3 class="box-title">Project Details</h3>
+                                        <h3 class="box-title">Program Details</h3>
                                     </div>
                                     <br>
                                     <div class="box-body">
+                                        
                                         <div class="form-group">
-                                            <label for="projectname" class="control-label">Project Name:</label>
+                                            <label for="projectname" class="control-label">Program Name:</label>
                                             <input type="text" class="form-control" name="projectname" id="projectname" placeholder="Name...">
                                         </div>
                                         <div class="form-group">
@@ -95,16 +96,7 @@
                                                     <th># of brgy</th>
                                                 </tr>
                                             </thead>
-                                            <tfoot>
-                                                <tr>
-                                                    <th></th>
-                                                    <th>Problem</th>
-                                                    <th>Description</th>
-                                                    <th>Date Created</th>
-                                                    <th># of brgy</th>
-
-                                                </tr>
-                                            </tfoot>
+                                
                                         </table>
                                     </div>
 

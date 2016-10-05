@@ -42,7 +42,7 @@
                                                     </b> </p>
                                             </li>
                                             <li class="list-group-item">
-                                                <b>Description </b><p class="">
+                                                <b>Description </b><p class="text-right text-bold">
                                                 <c:out value="${recdet.description}">${recdet.description}</c:out>
                                                 </p>
                                             </li>
@@ -180,7 +180,7 @@
                                                 <th>Farmer</th>
                                                 <th>Barangay</th>
                                                 <th>Date</th>
-                                                <th>Helpfulness Counter(Validation?Approval?)</th>
+                                                <th>Validation</th>
                                             </tr>
                                        </thead>
                                     </table>
