@@ -100,11 +100,19 @@
                     $.fn.dataTable.tables({visible: false, api: true}).columns.adjust();
                 });
                 $('table.table').DataTable({
-                    'ajax' : {'url': ''
+                    'ajax' : {'url': 'viewForumList'
                             },
                     scrollY: 200,
                     scrollCollapse: true,
-                    paging: false
+                    paging: false,
+                    'columnDefs': [{
+                        'targets': 1,
+                        'searchable': false,
+                        'orderable': false,
+                        'render': function (data, type, full, meta) {
+                           return '<a href="viewPostDetails?id=' + data + '">'+data+'</a>';
+                        }
+                    }]
                 });
 
                 // Apply a search to the second table for the demo

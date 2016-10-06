@@ -53,6 +53,25 @@ public class ProblemsDB {
         }
         return null;
     }
+    public int addRecommendation(Integer recid, Integer probid) {
+        try {
+            // put functions here : previous week production, this week production
+            int i = 0;
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "Insert into sra.`recommendations-problems` values (?,?);";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, recid);
+            pstmt.setInt(2, probid);
+            i = pstmt.executeUpdate();
+            pstmt.close();
+            conn.close();
+            return i;
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(subjectiveRecDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
     public ArrayList<Problems> getProblemsWithBrgy() {
         try {
             // put functions here : previous week production, this week production

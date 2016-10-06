@@ -22,8 +22,8 @@
                 </section>
                 <section class="content">
                     <div class="row">
-                        <form id="frm-example" action="CreateNewProject">
-                            
+                        <form id="frm-example" action="createNewRecommendation">
+
                             <div class="col-md-6">
                                 <div class="box box-solid box-success">
                                     <div class="box-header with-border">
@@ -33,11 +33,11 @@
                                     <div class="box-body">
                                         <div class="form-group">
                                             <label for="projectname" class="control-label">Title</label>
-                                            <input type="text" class="form-control" name="projectname" id="projectname" placeholder="Name...">
+                                            <input type="text" class="form-control" name="recommendation_name" id="recommendation_name" placeholder="Name...">
                                         </div>
                                         <div class="form-group">
                                             <label>Period:</label>
-                                            <select class="form-control">
+                                            <select class="form-control" name="period">
                                                 <option>Planting</option>
                                                 <option>Maturing</option>
                                                 <option>Harvesting</option>
@@ -45,7 +45,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Type of Recommendation</label>
-                                            <select class="form-control">
+                                            <select class="form-control" name="type">
                                                 <option>Advice</option>
                                                 <option>Trial Testing</option>
                                                 <option>Techniques</option>
@@ -63,23 +63,23 @@
                                         </div>
 
 
-                                  
-                                    <div  class="form-group">
-                                        <label class="control-label" for="dateend" >Date End:</label>
-                                        <div class="input-group date">
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-calendar"></i>
-                                            </div>
-                                            <input type="text" class="form-control pull-right datepicker" name="dateend" id="datepickerend">
-                                        </div>
-                                        <!-- /.input group -->
-                                    </div>
 
-                                    <div class="form-group">
-                                        <label>Description</label>
-                                        <textarea class="form-control" name="Description" rows="2"  placeholder="Enter ..."></textarea>
+                                        <div  class="form-group">
+                                            <label class="control-label" for="dateend" >Date End:</label>
+                                            <div class="input-group date">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                                <input type="text" class="form-control pull-right datepicker" name="dateend" id="datepickerend">
+                                            </div>
+                                            <!-- /.input group -->
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Description</label>
+                                            <textarea class="form-control" name="description" rows="2" id="description"  placeholder="Enter ..."></textarea>
+                                        </div>
                                     </div>
-  </div>
 
                                 </div>
                             </div>
@@ -116,7 +116,7 @@
 
                                 </div>
                             </div> 
-                            
+
                             <div class="col-md-2">                   
                                 <p><button class="btn btn-primary" style="width: 100%" value="submit">Create</button></p>
                             </div>
@@ -176,21 +176,27 @@
                 'order': [[1, 'asc']]
 
             });
-            table1.$('input[type="checkbox"]').each(function () {
-                // If checkbox doesn't exist in DOM
-                if (!$.contains(document, this)) {
-                    // If checkbox is checked
-                    if (this.checked) {
-                        // Create a hidden element 
-                        $(form).append(
-                                $('<input>')
-                                .attr('type', 'hidden')
-                                .attr('name', this.name)
-                                .val(this.value)
-                                );
+            $('#frm-example').on('submit', function (e) {
+                var form = this;
+
+                table1.$('input[type="checkbox"]').each(function () {
+                    // If checkbox doesn't exist in DOM
+                    if (!$.contains(document, this)) {
+                        // If checkbox is checked
+                        if (this.checked) {
+                            // Create a hidden element 
+                            $(form).append(
+                                    $('<input>')
+                                    .attr('type', 'hidden')
+                                    .attr('name', this.name)
+                                    .val(this.value)
+                                    );
+                        }
                     }
-                }
+                });
+
             });
+            
 
             $('#probTable-select-all').on('click', function () {
                 // Check/uncheck all checkboxes in the table
@@ -198,7 +204,7 @@
                 $('input[type="checkbox"]', rows).prop('checked', this.checked);
             });
         });
-</script>
+    </script>
 </body>
 
 </html>

@@ -51,10 +51,18 @@
     <servlet>
         <servlet-name>viewPlansProblemTable</servlet-name>
         <servlet-class>controller.viewPlansProblemTable</servlet-class>
-    </servlet>          
+    </servlet>
     <servlet>
         <servlet-name>viewPRT</servlet-name>
         <servlet-class>controller.viewPRT</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewForumList</servlet-name>
+        <servlet-class>controller.viewForumList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>createNewRecommendation</servlet-name>
+        <servlet-class>controller.createNewRecommendation</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
@@ -105,14 +113,20 @@
         <url-pattern>/viewFRTable</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-
         <servlet-name>viewPlansProblemTable</servlet-name>
         <url-pattern>/viewPlansProblemTable</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>viewPRT</servlet-name>
         <url-pattern>/viewPRT</url-pattern>
-
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewForumList</servlet-name>
+        <url-pattern>/viewForumList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>createNewRecommendation</servlet-name>
+        <url-pattern>/createNewRecommendation</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
