@@ -5,9 +5,9 @@
  */
 package controller;
 
-
 import db.ProgramsDB;
 import entity.Programs;
+import entity.programsKPI;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
@@ -40,80 +40,74 @@ public class createNewProgram extends BaseServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-   public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-       
         PrintWriter out = response.getWriter();
-            
-                
-            Programs newProg = new Programs();
-            ProgramsDB progdb = new ProgramsDB();
-            
-              Enumeration<String> parameterNames = request.getParameterNames();
-              
-              
-         
-            newProg.setProg_name(request.getParameter("projectname"));
-           
-            SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-DD");
-       try {
-           System.out.println(request.getParameter("datepickerstart"));
-           System.out.println(request.getParameter("todayDate")+"TODAYS DATE");
-       Date dateinitial= (Date) sdf.parse(request.getParameter("datepickerstart"));
-       System.out.println(dateinitial);
-        newProg.setDate_initial(dateinitial);
-       } catch (ParseException ex) {
-           Logger.getLogger(createNewProgram.class.getName()).log(Level.SEVERE, null, ex);
-       }
-            
-            java.sql.Date datecreated = Date.valueOf(request.getParameter("todayDate"));
-            
-            
-            Date dateended = Date.valueOf(request.getParameter("datepickerend"));
-            newProg.setDate_created(datecreated);
-           
-            newProg.setDate_end(dateended);
-            newProg.setDescription(request.getParameter("Description"));
-            newProg.setType("P");
-            
-            
-            String paramName;
-          ArrayList<String>farmlist =new ArrayList<String>();
-          ArrayList<String>problist =new ArrayList<String>();
-          
-           while (parameterNames.hasMoreElements()) {
+
+        Programs newProg = new Programs();
+        ProgramsDB progdb = new ProgramsDB();
+
+        Enumeration<String> parameterNames = request.getParameterNames();
+
+        newProg.setProg_name(request.getParameter("projectname"));
+
+        try {
+            String reserv = request.getParameter("reservation");
+
+            String[] lines = reserv.split("-");
+            System.out.println("TODAYS DATE");
+            String inidate = lines[0];
+            java.util.Date inicheck = new SimpleDateFormat("dd/MM/yyyy").parse(inidate);
+            Date modifiediniDate = new java.sql.Date(inicheck.getTime());
+            newProg.setDate_initial(modifiediniDate);
+
+            String enddate = lines[1];
+            java.util.Date endcheck = new SimpleDateFormat("dd/MM/yyyy").parse(enddate);
+            Date modifiedendDate = new java.sql.Date(endcheck.getTime());
+            newProg.setDate_end(modifiedendDate);
+
+            newProg.setDate_created(modifiediniDate);
+        } catch (ParseException ex) {
+            Logger.getLogger(createNewProgram.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        newProg.setDescription(request.getParameter("Description"));
+        newProg.setType("P");
+
+        String paramName;
+        ArrayList<programsKPI> kpis = new ArrayList<programsKPI>();
+
+        programsKPI pkpi = null;
+        while (parameterNames.hasMoreElements()) {
             paramName = parameterNames.nextElement();
             //System.out.println(paramName);
-            if (paramName.substring(0, 2).equals("id")) {
-                for(int i=0;i<request.getParameterValues(paramName).length;i++){
-                     farmlist.add(request.getParameterValues(paramName)[i]);
-                 System.out.println(request.getParameterValues(paramName)[i]);
-                }
-            } 
-            else if (paramName.substring(0, 6).equals("probid")) {
-                for(int i=0;i<request.getParameterValues(paramName).length;i++){
-                     problist.add(request.getParameterValues(paramName)[i]);
-                 System.out.println(request.getParameterValues(paramName)[i]);
+            System.out.println(paramName);
+            if (paramName != null) {
+                if (paramName.substring(0, 1).equals("y")) {
+                    pkpi.setYear(Double.parseDouble(request.getParameterValues(paramName)[0]));
+                } else if (paramName.substring(0, 2).equals("yy")) {
+                    pkpi.setYear1(Double.parseDouble(request.getParameterValues(paramName)[0]));
+                } else if (paramName.substring(0, 3).equals("yyy")) {
+                    pkpi.setYear2(Double.parseDouble(request.getParameterValues(paramName)[0]));
+                    kpis.add(pkpi);
                 }
 
+            }
         }
-           }
-            boolean test = progdb.createNewProgram(newProg);
-            
+        boolean test = progdb.createNewProgram(newProg);
+        //addprogKPI
 
-            if(test){
-                ServletContext context = getServletContext();
-                RequestDispatcher rd = context.getRequestDispatcher("/viewProjects.jsp");
-                rd.forward(request, response);
-            }
-            else{
-                ServletContext context = getServletContext();
-                RequestDispatcher rd = context.getRequestDispatcher("/Homepage.jsp");
-                rd.forward(request, response);
-            }
-            
+        if (test) {
+            ServletContext context = getServletContext();
+            RequestDispatcher rd = context.getRequestDispatcher("/viewProjects.jsp");
+            rd.forward(request, response);
+        } else {
+            ServletContext context = getServletContext();
+            RequestDispatcher rd = context.getRequestDispatcher("/Homepage.jsp");
+            rd.forward(request, response);
         }
-        
+
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

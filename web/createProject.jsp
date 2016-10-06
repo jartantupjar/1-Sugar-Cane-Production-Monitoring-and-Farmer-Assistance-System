@@ -52,30 +52,11 @@
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
-                                                <input type="text" class="form-control reservation pull-right" id="reservation">
+                                                <input type="text" class="form-control reservation pull-right" name="reservation" id="reservation">
                                             </div>
                                             <!-- /.input group -->
                                         </div>
-                                        <div  class="form-group">
-                                            <label class="control-label" for="datepicker" >Date Start:</label>
-                                            <div class="input-group date">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-calendar"></i>
-                                                </div>
-                                                <input type="text" class="form-control pull-right datepicker" name="datepicker" id="datepickerstart">
-                                            </div>
-                                            <!-- /.input group -->
-                                        </div>
-                                        <div  class="form-group">
-                                            <label class="control-label" for="dateend" >Date End:</label>
-                                            <div class="input-group date">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-calendar"></i>
-                                                </div>
-                                                <input type="text" class="form-control pull-right datepicker" name="dateend" id="datepickerend">
-                                            </div>
-                                            <!-- /.input group -->
-                                        </div>
+                                      
 
 
                                         <div class="form-group">
@@ -185,9 +166,9 @@
             $(function () {
 
                 //Datemask dd/mm/yyyy
-                $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+                $("#datemask").inputmask("yyyy-mm-dd", {"placeholder": "yyyy-mm-dd"});
                 //Datemask2 mm/dd/yyyy
-                $("#datemask2").inputmask("mm/dd/yyyy", {"placeholder": "mm/dd/yyyy"});
+                $("#datemask2").inputmask("yyyy-mm-dd", {"placeholder": "yyyy-mm-dd"});
                 $('.datepicker').datepicker({
                     autoclose: true
                 });
@@ -225,6 +206,7 @@
                                     <td><input class='form-control' name = 'yyy" + rowNum + "' value='20000' /></td>\n\
                                     <td id='deleterow'><div class='glyphicon glyphicon-remove'></div></td> \n\
         </tr>");
+        alert(rowNum);
                 rowNum++;
 
                 $("#addRow").on("click", function () {
@@ -235,7 +217,7 @@
                                     <td><input class='form-control'  name = 'yy" + rowNum + "' required/></td>\n\
                                     <td><input class='form-control' name = 'yyy" + rowNum + "'  /></td>\n\
                                     <td id='deleterow'><div class='glyphicon glyphicon-remove'></div></td> \n\
-        </tr>");
+        </tr>");alert(rowNum);
                     rowNum++;
 
                 });

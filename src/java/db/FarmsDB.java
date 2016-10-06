@@ -57,7 +57,7 @@ public class FarmsDB {
         }
         return false;
     }
-    public ArrayList<Farm> getFarmsTable() {
+    public ArrayList<Farm> getFarTable() {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
