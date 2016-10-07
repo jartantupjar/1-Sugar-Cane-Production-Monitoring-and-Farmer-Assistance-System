@@ -5,6 +5,7 @@
  */
 package entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -14,7 +15,8 @@ import java.util.Date;
 public class Programs {
     private String prog_name,type,description;
     private Date date_created, date_initial,date_end;
-
+    private int tFarms;
+  private ArrayList<String> probid;
     /**
      * @return the prog_name
      */
@@ -97,6 +99,34 @@ public class Programs {
      */
     public void setDate_end(Date date_end) {
         this.date_end = date_end;
+    }
+
+    /**
+     * @return the probid
+     */
+    public ArrayList<String> getProbid() {
+        return probid;
+    }
+
+    /**
+     * @param probid the probid to set
+     */
+    public void setProbid(ArrayList<String> probid) {
+        this.probid = probid;
+    }
+
+    /**
+     * @return the tFarms
+     */
+    public int gettFarms() {
+        return tFarms;
+    }
+
+    /**
+     * @param tFarms the tFarms to set
+     */
+    public void settFarms(int tFarms) {
+        this.tFarms = tFarms;
     }
            
 }

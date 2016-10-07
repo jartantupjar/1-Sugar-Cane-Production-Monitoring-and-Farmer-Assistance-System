@@ -75,26 +75,63 @@ public class createNewProgram extends BaseServlet {
         newProg.setType("P");
 
         String paramName;
-        ArrayList<programsKPI> kpis = new ArrayList<programsKPI>();
+        ArrayList<programsKPI> kpis = new ArrayList();
 
         programsKPI pkpi = null;
+        int sYear = 2014;
+        int tYears = 3;
+
+        int count = 0;
+        ArrayList<String> problist = new ArrayList();
+
         while (parameterNames.hasMoreElements()) {
             paramName = parameterNames.nextElement();
-            //System.out.println(paramName);
             System.out.println(paramName);
-            if (paramName != null) {
-                if (paramName.substring(0, 1).equals("y")) {
-                    pkpi.setYear(Double.parseDouble(request.getParameterValues(paramName)[0]));
-                } else if (paramName.substring(0, 2).equals("yy")) {
-                    pkpi.setYear1(Double.parseDouble(request.getParameterValues(paramName)[0]));
-                } else if (paramName.substring(0, 3).equals("yyy")) {
-                    pkpi.setYear2(Double.parseDouble(request.getParameterValues(paramName)[0]));
-                    kpis.add(pkpi);
+
+            if (paramName.substring(0, 2).equals("y" + count)) {
+                ArrayList<Double> value = new ArrayList<>();
+                for (int i = 0; i < request.getParameterValues(paramName).length; i++) {
+                    System.out.println(request.getParameterValues(paramName)[i]);
+                    value.add(Double.parseDouble(request.getParameterValues(paramName)[i]));
+                }
+                pkpi.setValues(value);
+                kpis.add(pkpi);
+            } else if (paramName.substring(0, 3).equals("kpi")) {
+                System.out.println(paramName.substring(3, 4) + " :counter");
+                count = Integer.parseInt(paramName.substring(3, 4));
+                pkpi = new programsKPI();
+                pkpi.setKpi(request.getParameterValues(paramName)[0]);
+                pkpi.setKpi_year(sYear);
+                pkpi.settYears(tYears);
+                System.out.println(request.getParameterValues(paramName)[0]);
+            } else if (paramName.substring(0, 6).equals("probid")) {
+
+                for (String parameterValue : request.getParameterValues(paramName)) {
+                    System.out.println(parameterValue);
+                    problist.add(parameterValue);
+                }
+                if (problist.isEmpty() == false) {
+                    newProg.setProbid(problist);
+                }else{
+                    newProg.setProbid(null);
                 }
 
             }
+
         }
-        boolean test = progdb.createNewProgram(newProg);
+
+        for (programsKPI kpi : kpis) {
+            System.out.print("/" + kpi.getKpi() + "/");
+            for (int a = 0; a < kpi.getValues().size(); a++) {
+                System.out.println("/" + kpi.getValues().get(a) + "/");
+            }
+        }
+
+        boolean test = progdb.createNewProgram(newProg, kpis);
+        if(problist.isEmpty()==false){
+                boolean probSuccess = progdb.addProgProb(problist, newProg.getProg_name());   
+        }
+
         //addprogKPI
 
         if (test) {
