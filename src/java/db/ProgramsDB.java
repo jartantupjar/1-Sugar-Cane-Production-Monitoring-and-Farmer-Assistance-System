@@ -5,6 +5,7 @@
  */
 package db;
 
+import entity.Problems;
 import entity.Programs;
 import entity.programsKPI;
 import java.sql.Connection;
@@ -22,14 +23,14 @@ import java.util.logging.Logger;
  * @author ndrs
  */
 public class ProgramsDB {
-    
+
     public boolean createNewProgram(Programs prog, ArrayList<programsKPI> kpis) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "insert into programs values (?,?,?,?,?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(query);
-            
+
             pstmt.setString(1, prog.getProg_name());
             pstmt.setDate(2, (Date) prog.getDate_created());
             pstmt.setDate(3, (Date) prog.getDate_initial());
@@ -38,23 +39,23 @@ public class ProgramsDB {
             pstmt.setString(6, prog.getType());
             pstmt.setString(7, "Tarlac");
             int isSuccess = pstmt.executeUpdate();
-            
+
             kpis.get(0).setProgram_name(prog.getProg_name());
-            
+
             pstmt.close();
-            
+
             boolean kpisSuccess = addKPIs(kpis);
-            
+
             conn.close();
-            
+
             return isSuccess == 1 && kpisSuccess;
         } catch (SQLException ex) {
             Logger.getLogger(UsersDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
-        
+
     }
-    
+
     public boolean addKPIs(ArrayList<programsKPI> kpis) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
@@ -62,7 +63,7 @@ public class ProgramsDB {
             String query = "insert into kpis (year,Programs_name,name,value) values (?,?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(query);
             for (int i = 0; i < kpis.size(); i++) {
-                
+
                 int sYear = kpis.get(i).getKpi_year();
                 for (int a = 0; a < kpis.get(i).getValues().size(); a++) {
                     pstmt.setInt(1, sYear + a);
@@ -71,7 +72,7 @@ public class ProgramsDB {
                     pstmt.setDouble(4, kpis.get(i).getValues().get(a));
                     pstmt.addBatch();
                 }
-                
+
             }
             pstmt.executeBatch();
             pstmt.close();
@@ -81,34 +82,38 @@ public class ProgramsDB {
             Logger.getLogger(UsersDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
-        
+
     }
-    
+
     public boolean addProgProb(ArrayList<String> probids, String prog_name) {
         try {
-            
+
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "insert into `Programs-Problems` (Programs_name,Problems_id,status) values (?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(query);
-            
+
             for (int i = 0; i < probids.size(); i++) {
-                pstmt.setInt(1, Integer.parseInt(probids.get(i)));
-                pstmt.setString(2, prog_name);
+
+                pstmt.setString(1, prog_name);
+                pstmt.setInt(2, Integer.parseInt(probids.get(i)));
                 pstmt.setString(3, "Validated");
+                pstmt.addBatch();
             }
+            System.out.println("ADDED PROBLEMS TO PROGRAMS");
             pstmt.executeBatch();
             pstmt.close();
             conn.close();
+
             return true;
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(UsersDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
-        
+
     }
-    
+
     public ArrayList<Programs> viewProgramsTable() {
         try {
             // put functions here : previous week production, this week production
@@ -132,12 +137,80 @@ public class ProgramsDB {
             rs.close();
             pstmt.close();
             conn.close();
-            
+
             return list;
         } catch (SQLException ex) {
             Logger.getLogger(ProblemsDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
-    
+
+    public Programs viewProgDetails(String prog_name) {
+        try {
+            // put functions here : previous week production, this week production
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select * from programs where name=?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, prog_name);
+            ResultSet rs = pstmt.executeQuery();
+
+            Programs p = null;
+            if (rs.next()) {
+
+                p = new Programs();
+                p.setProg_name(rs.getString("name"));
+                p.setDate_created(rs.getDate("date_created"));
+                p.setDate_initial(rs.getDate("date_initial"));
+                p.setDate_end(rs.getDate("date_end"));
+                p.setDescription(rs.getString("description"));
+                p.setType(rs.getString("status"));
+                //p.setProgress(rs.getInt("progress"));
+                // p.settFarms(rs.getInt("count"));
+
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+
+            return p;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProblemsDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public ArrayList<Problems> viewProgProb(String prog_name) {
+        try {
+            // put functions here : previous week production, this week production
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select p.id,p.name,p.description from problems p join `programs-problems` pp on p.id=pp.Problems_id where pp.Programs_name=?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, prog_name);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<Problems> list = null;
+            Problems p = null;
+            if (rs.next()) {
+                list = new ArrayList<>();
+                do {
+                    p = new Problems();
+                    p.setProb_id(rs.getInt("id"));
+                    p.setProb_name(rs.getString("name"));
+                    p.setProb_details(rs.getString("description"));
+                    list.add(p);
+                } while (rs.next());
+            }
+
+            rs.close();
+            pstmt.close();
+            conn.close();
+
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProblemsDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
 }

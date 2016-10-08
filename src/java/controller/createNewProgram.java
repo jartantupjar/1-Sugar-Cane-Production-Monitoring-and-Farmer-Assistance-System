@@ -105,17 +105,13 @@ public class createNewProgram extends BaseServlet {
                 pkpi.settYears(tYears);
                 System.out.println(request.getParameterValues(paramName)[0]);
             } else if (paramName.substring(0, 6).equals("probid")) {
-
-                for (String parameterValue : request.getParameterValues(paramName)) {
-                    System.out.println(parameterValue);
-                    problist.add(parameterValue);
+        
+                 for (int i = 0; i < request.getParameterValues(paramName).length; i++) {
+                    System.out.println(request.getParameterValues(paramName)[i]+"problem id");
+                    problist.add(request.getParameterValues(paramName)[i]);
+                    
                 }
-                if (problist.isEmpty() == false) {
-                    newProg.setProbid(problist);
-                }else{
-                    newProg.setProbid(null);
-                }
-
+              
             }
 
         }
@@ -136,7 +132,7 @@ public class createNewProgram extends BaseServlet {
 
         if (test) {
             ServletContext context = getServletContext();
-            RequestDispatcher rd = context.getRequestDispatcher("/viewProjects.jsp");
+            RequestDispatcher rd = context.getRequestDispatcher("/viewPrograms.jsp");
             rd.forward(request, response);
         } else {
             ServletContext context = getServletContext();

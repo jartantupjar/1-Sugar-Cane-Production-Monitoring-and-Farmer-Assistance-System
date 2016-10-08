@@ -1,0 +1,48 @@
+package controller;
+
+import db.ProgramsDB;
+import db.fixedRecDB;
+import entity.FarmRecTable;
+import entity.Problems;
+import entity.Programs;
+import entity.Recommendation;
+import java.io.IOException;
+import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+public class viewProgramDetails extends BaseServlet {
+
+    @Override
+    public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        ServletContext context = getServletContext();
+        
+ProgramsDB progdb= new ProgramsDB();
+        HttpSession session = request.getSession();
+        Programs prog;
+      ArrayList<Problems>probList;
+        String name= request.getParameter("name");
+        prog = progdb.viewProgDetails(name);
+         probList = progdb.viewProgProb(name);
+        prog.settFarms(42);
+        prog.setProgress(42);
+ session.setAttribute("progdet", prog);
+     session.setAttribute("prob", probList);
+        session.setAttribute("name", name);
+    
+        RequestDispatcher rd = context.getRequestDispatcher("/viewProgramDetails.jsp");
+
+        rd.forward(request, response);
+        
+        response.setCharacterEncoding("utf-8");
+ 
+    }
+
+}

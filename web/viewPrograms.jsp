@@ -92,7 +92,7 @@
                         {
                             'targets': 4,
                             'render': function (data, type, full, meta) {
-                                return '<a href="viewProgDetails?id=' + data + '" class="btn btn-primary text-center">' + 'more details' + '</a>';
+                                return '<a href="viewProgramDetails?name=' + data + '" class="btn btn-primary text-center">' + 'more details' + '</a>';
                             }
                         }
 

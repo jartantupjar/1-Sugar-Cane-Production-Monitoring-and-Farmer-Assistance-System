@@ -58,7 +58,7 @@ public class ProblemsDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT p.id, p.name,p.description,p.status,p.type,count(pf.Fields_id) as counter from sra.problems p join sra.`problems-fields` pf on p.id = pf.Problems_id join sra.fields f on pf.Problems_id = f.id where pf.validated = 'Y' ;";
+            String query = "SELECT p.id, p.name,p.description,p.status,p.type,count(pf.Fields_id) as counter from sra.problems p join sra.`problems-fields` pf on p.id = pf.Problems_id join sra.fields f on pf.Problems_id = f.id where pf.validated = 'Y' group by pf.problems_id ;";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             ArrayList<Problems> pT = null;

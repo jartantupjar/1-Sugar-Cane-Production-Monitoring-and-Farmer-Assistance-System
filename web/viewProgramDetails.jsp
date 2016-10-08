@@ -41,29 +41,26 @@ current vs then diagram
                             <div class="box box-primary">
                                 <div class="box-body box-profile">
 
-                                    <h3 class="profile-username text-center"><b>Soil Rehabilitation Program</b></h3>
+                                    <h3 class="profile-username text-center"><b><c:out value="${progdet.prog_name}">${progdet.prog_name}</c:out></b></h3>
 
                                     <ul class="list-group list-group-unbordered">
                                         <li class="list-group-item">
-                                            <b>Type of Program</b> <a class="pull-right">Technology</a>
+                                            <b>Type of Program</b> <a class="pull-right"><c:out value="${progdet.type}">${progdet.type}</c:out></a>
                                         </li>
                                         <li class="list-group-item">
-                                            <b>Expected Start Date:</b> <p class="pull-right">
-                                                1/12/2015</p>
+                                            <b>Expected Start Date:</b> <p class="pull-right"><c:out value="${progdet.date_initial}">${progdet.date_initial}</c:out></p>
                                         </li>
                                         <li class="list-group-item">
-                                            <b>Expected End Date:</b> <p class="pull-right">
-                                                5/25/2017</p>
+                                            <b>Expected End Date:</b> <p class="pull-right"><c:out value="${progdet.date_end}">${progdet.date_end}</c:out></p>
                                         </li>
                                         <li class="list-group-item">
                                             <b>Description</b> 
-                                            <p>
-                                                i expect there to be 10% increase in productivity</p>
-
+                                            <p class="text-center pull-right">
+                                             <c:out value="${progdet.description}">${progdet.description}</c:out></p>
                                         </li>
                                         <li class="list-group-item">
-                                            <b>Total Farms Affected</b> <a class="pull-right">
-                                                39
+                                            <b>Total Farms Affected</b> <a  class="pull-right">
+                                          <c:out value="${progdet.tFarms}">${progdet.tFarms}</c:out>
                                             </a>
                                         </li>
 
@@ -98,7 +95,7 @@ current vs then diagram
                                                     <div class="progress-group">
 
                                                         <div class="progress ">
-                                                            <div class="progress-bar progress-bar-green" style="width: 100%">90%</div>
+                                                            <div class="progress-bar progress-bar-green" style="width: ${progdet.progress}%">  <c:out value="${progdet.progress}">${progdet.progress}</c:out></div>
                                                         </div>
                                                     </div> <!-- closer of progress bars -->  
                                                 </td>
@@ -151,20 +148,17 @@ current vs then diagram
                                                 <th>Problem</th>
                                                 <th>Description</th>
                                             </tr>
+                                        <c:forEach items="${prob}" var="plist">
                                             <tr>
-
+                                                     <td><c:out value="${plist.prob_name}"></c:out></td>
+                                                     <td><c:out value="${plist.prob_details}"></c:out></td>
+                                            </tr>
+                                        </c:forEach>
+                                            <tr>
                                                 <td>Overfertilization</td>
                                                 <td>Requires training farmers about the effects and good practices </td>
-
-
                                             </tr>
-                                            <tr>
-
-                                                <td>Overfertilization</td>
-                                                <td>Requires training farmers about the effects and good practices </td>
-
-
-                                            </tr>
+                                            
 
 
 
