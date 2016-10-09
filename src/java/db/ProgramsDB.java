@@ -213,4 +213,60 @@ public class ProgramsDB {
         return null;
     }
 
+    public ArrayList<programsKPI> viewProgTargets(String prog_name) {
+        try {
+            // put functions here : previous week production, this week production
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select year,Programs_name,name,value,actual,(select count(DISTINCT year) from kpis where Programs_name=?) as count from kpis where programs_name=? order by name;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, prog_name);
+              pstmt.setString(2, prog_name);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<programsKPI> list = null;
+            programsKPI p = null;
+            if (rs.next()) {
+                list = new ArrayList<>();
+
+                do {
+                    p = new programsKPI();
+                    p.setKpi(rs.getString("name"));
+                    p.setKpi_year(rs.getInt("year"));
+                    p.settYears(rs.getInt("count"));
+
+                    ArrayList<Double> values = new ArrayList();
+                    ArrayList<Double> avalues = new ArrayList();
+                    int counter = p.gettYears();
+                    do {
+                         System.out.println( rs.getRow()+"row no");                  
+                        System.out.println(counter);
+                        System.out.println(rs.getDouble("value")+"value");
+                       System.out.println(rs.getDouble("actual")+"actual");
+                        values.add(rs.getDouble("value"));
+                        avalues.add(rs.getDouble("actual"));
+                         if (counter>0) {
+                            rs.next();
+                            System.out.println( rs.getRow()+"row no");     
+                        }
+                        counter--;
+                       
+
+                    } while (counter !=0);
+                    p.setValues(values);
+                    p.setaValues(avalues);
+                    list.add(p);
+                } while (rs.next());
+            }
+
+            rs.close();
+            pstmt.close();
+            conn.close();
+
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProblemsDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
 }

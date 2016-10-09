@@ -6,6 +6,7 @@ import entity.FarmRecTable;
 import entity.Problems;
 import entity.Programs;
 import entity.Recommendation;
+import entity.programsKPI;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
@@ -23,26 +24,29 @@ public class viewProgramDetails extends BaseServlet {
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         ServletContext context = getServletContext();
-        
-ProgramsDB progdb= new ProgramsDB();
+
+        ProgramsDB progdb = new ProgramsDB();
         HttpSession session = request.getSession();
         Programs prog;
-      ArrayList<Problems>probList;
-        String name= request.getParameter("name");
+        ArrayList<Problems> probList;
+        ArrayList<programsKPI> kpilist;
+        String name = request.getParameter("name");
         prog = progdb.viewProgDetails(name);
-         probList = progdb.viewProgProb(name);
+        probList = progdb.viewProgProb(name);
+        kpilist = progdb.viewProgTargets(name);
         prog.settFarms(42);
         prog.setProgress(42);
- session.setAttribute("progdet", prog);
-     session.setAttribute("prob", probList);
+        session.setAttribute("progdet", prog);
+        session.setAttribute("prob", probList);
+        session.setAttribute("kpis", kpilist);
         session.setAttribute("name", name);
-    
+
         RequestDispatcher rd = context.getRequestDispatcher("/viewProgramDetails.jsp");
 
         rd.forward(request, response);
-        
+
         response.setCharacterEncoding("utf-8");
- 
+
     }
 
 }

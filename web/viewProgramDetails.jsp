@@ -41,124 +41,124 @@ current vs then diagram
                             <div class="box box-primary">
                                 <div class="box-body box-profile">
 
-                                    <h3 class="profile-username text-center"><b><c:out value="${progdet.prog_name}">${progdet.prog_name}</c:out></b></h3>
+                                    <h3 class="profile-username text-center"><b><c:out value="${progdet.prog_name}"></c:out></b></h3>
 
-                                    <ul class="list-group list-group-unbordered">
-                                        <li class="list-group-item">
-                                            <b>Type of Program</b> <a class="pull-right"><c:out value="${progdet.type}">${progdet.type}</c:out></a>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <b>Expected Start Date:</b> <p class="pull-right"><c:out value="${progdet.date_initial}">${progdet.date_initial}</c:out></p>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <b>Expected End Date:</b> <p class="pull-right"><c:out value="${progdet.date_end}">${progdet.date_end}</c:out></p>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <b>Description</b> 
-                                            <p class="text-center pull-right">
-                                             <c:out value="${progdet.description}">${progdet.description}</c:out></p>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <b>Total Farms Affected</b> <a  class="pull-right">
-                                          <c:out value="${progdet.tFarms}">${progdet.tFarms}</c:out>
-                                            </a>
-                                        </li>
+                                        <ul class="list-group list-group-unbordered">
+                                            <li class="list-group-item">
+                                                <b>Type of Program</b> <a class="pull-right"><c:out value="${progdet.type}"></c:out></a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <b>Expected Start Date:</b> <p class="pull-right"><c:out value="${progdet.date_initial}"></c:out></p>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <b>Expected End Date:</b> <p class="pull-right"><c:out value="${progdet.date_end}"></c:out></p>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <b>Description</b> 
+                                                <p class="text-center pull-right">
+                                                <c:out value="${progdet.description}"></c:out></p>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <b>Total Farms Affected</b> <a  class="pull-right">
+                                                <c:out value="${progdet.tFarms}"></c:out>
+                                                </a>
+                                            </li>
 
-                                    </ul>
+                                        </ul>
 
-                                </div>
-                                <!-- /.box-body -->
-                            </div>    
-                        </div>
-
-                        <div class="col-md-6">
-                            <!-- LINE CHART -->
-                            <div class="box box-info">
-                                <div class="box-header with-border">
-                                    <h3 class="box-title">Progress</h3>
-
-                                    <div class="box-tools pull-right">
-                                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                     </div>
-                                </div>
-                                <div class="box-body">
-
-                                    <table class="table table-hover">
-                                        <tbody><tr>
-
-                                            </tr>
-                                            <tr>
-
-                                                <td> 
-                                                    <div class="progress-group">
-
-                                                        <div class="progress ">
-                                                            <div class="progress-bar progress-bar-green" style="width: ${progdet.progress}%">  <c:out value="${progdet.progress}">${progdet.progress}</c:out></div>
-                                                        </div>
-                                                    </div> <!-- closer of progress bars -->  
-                                                </td>
-
-                                            </tr>
-
-
-
-
-                                        </tbody>
-                                    </table>
-
-
-                                </div>
-                                <!-- /.box-body -->
-                            </div>
-                        </div>
-                        <div class="col-md-7" > 
-                            <div>   
-                                <h3>
-                                    DISTRICT/BARANGAY :
-
-                                </h3></div>
-                            <div class="box box-info collapsed-box">
-                                <div class="box-header with-border">
-                                    <h1 class="box-title">Observational Improvement (include color code for bar graph)</h1>
-                                    <div class="box-tools pull-right">
-                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                    </div>
-                                </div>   
-                                <div class="box-body" id="container1"> </div>
+                                    <!-- /.box-body -->
+                                </div>    
                             </div>
 
-                        </div>
-                        <div class="col-md-6" > 
-                            <div class="box box-info collapsed-box">
-                                <div class="box-header with-border">
-                                    <h1 class="box-title">Problems List</h1>
-                                    <div class="box-tools pull-right">
-                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                            <div class="col-md-6">
+                                <!-- LINE CHART -->
+                                <div class="box box-info">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">Progress</h3>
+
+                                        <div class="box-tools pull-right">
+                                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                        </div>
                                     </div>
+                                    <div class="box-body">
+
+                                        <table class="table table-hover">
+                                            <tbody><tr>
+
+                                                </tr>
+                                                <tr>
+
+                                                    <td> 
+                                                        <div class="progress-group">
+
+                                                            <div class="progress ">
+                                                                <div class="progress-bar progress-bar-green" style="width: ${progdet.progress}%">  <c:out value="${progdet.progress}"></c:out></div>
+                                                            </div>
+                                                        </div> <!-- closer of progress bars -->  
+                                                    </td>
+
+                                                </tr>
+
+
+
+
+                                            </tbody>
+                                        </table>
+
+
+                                    </div>
+                                    <!-- /.box-body -->
+                                </div>
+                            </div>
+                            <div class="col-md-7" > 
+                                <div>   
+                                    <h3>
+                                        DISTRICT/BARANGAY :
+
+                                    </h3></div>
+                                <div class="box box-info collapsed-box">
+                                    <div class="box-header with-border">
+                                        <h1 class="box-title">Observational Improvement (include color code for bar graph)</h1>
+                                        <div class="box-tools pull-right">
+                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                        </div>
+                                    </div>   
+                                    <div class="box-body" id="container1"> </div>
                                 </div>
 
-                                <div class="box-body">
-                                    <table class="table table-hover">
-                                        <tbody><tr>
+                            </div>
+                            <div class="col-md-6" > 
+                                <div class="box box-info collapsed-box">
+                                    <div class="box-header with-border">
+                                        <h1 class="box-title">Problems List</h1>
+                                        <div class="box-tools pull-right">
+                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                        </div>
+                                    </div>
 
-                                                <th>Problem</th>
-                                                <th>Description</th>
-                                            </tr>
-                                        <c:forEach items="${prob}" var="plist">
-                                            <tr>
-                                                     <td><c:out value="${plist.prob_name}"></c:out></td>
-                                                     <td><c:out value="${plist.prob_details}"></c:out></td>
-                                            </tr>
-                                        </c:forEach>
-                                            <tr>
-                                                <td>Overfertilization</td>
-                                                <td>Requires training farmers about the effects and good practices </td>
-                                            </tr>
-                                            
+                                    <div class="box-body">
+                                        <table class="table table-hover">
+                                            <tbody><tr>
+
+                                                    <th>Problem</th>
+                                                    <th>Description</th>
+                                                </tr>
+                                            <c:forEach items="${prob}" var="plist">
+                                                <tr>
+                                                    <td><c:out value="${plist.prob_name}"></c:out></td>
+                                                    <td><c:out value="${plist.prob_details}"></c:out></td>
+                                                    </tr>
+                                            </c:forEach>
+                                            <!--> <tr>
+                                                        <td>Overfertilization</td>
+                                                        <td>Requires training farmers about the effects and good practices </td>
+                                                    </tr>  <-->
+
 
 
 
@@ -206,7 +206,7 @@ current vs then diagram
                         <div class="col-md-12" > 
                             <div class="box box-info">
                                 <div class="box-header with-border">
-                                    <h1 class="box-title">Targets: Soil Rehabilitation Program</h1>
+                                    <h1 class="box-title">Soil Rehabilitation Program</h1>
                                     <div class="box-tools pull-right">
                                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                         <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -216,33 +216,28 @@ current vs then diagram
                                 <div class="box-body">
 
                                     <table class="table table-hover">
-                                        <tbody><tr>
+                                        <thead><tr>
                                                 <th style="width: 30%">Performance Indicator</th>
-                                                <th>2016</th>
+                                            <c:forEach  var="yrlist" begin="${kpis[0].kpi_year}" end="${kpis[0].kpi_year-1+kpis[0].tYears}">
+                                            <th><c:out value="${yrlist}"/></th>
                                                 <th>Actual</th>
-                                                <th>2017</th>
-                                                <th>Actual</th>
-                                                <th>2018</th>
-                                                <th>X</th>
+                                            </c:forEach>
+                                              
+
                                             </tr>
-                                            <tr>
-                                                <td>Hectares rehabilitated</td>
-                                                <td>7000</td>
-                                                <td><input value="4257"></td>
-                                                <td>20000</td>
-                                                <td><input value="17808"></td>
-                                                <td>20000</td>
-                                                <td>X</td>
-                                            </tr>
-                                            <tr>
-                                                <td><input value="No. of small farmers assisted" style="width: 100%"></td>
-                                                <td>3500</td>
-                                                <td><input value="2890"></td>
-                                                <td>7000</td>
-                                                <td><input value="5900"></td>
-                                                <td>7000</td>
-                                                <td>X</td>
-                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                         
+                                            <c:forEach items="${kpis}" var="kpilist" varStatus="loopCount">
+                                                <tr>
+                                                    <td><c:out value="${kpilist.kpi}"/></td>
+                                                    <c:forEach items="${kpilist.values}" var="yearloop" varStatus="aCountr">
+                                                        
+                                                        <td><c:out value="${yearloop}" /></td>
+                                                        <td><input class='form-control' name = "y${loopCount.count}[]" value='${kpilist.aValues[aCountr.index]}' /></td>
+                                                        </c:forEach>
+                                                </tr>
+                                            </c:forEach>
                                         </tbody>
                                     </table>
                                     <button class="btn btn-success pull-right" style="width: 10%" value="submit">Update</button>
@@ -251,7 +246,7 @@ current vs then diagram
                             </div>
 
                         </div>
-                        
+
 
 
 
@@ -280,36 +275,7 @@ current vs then diagram
         <script src="Highcharts/modules/drilldown.js"></script>
         <script src="Highcharts/modules/exporting.js"></script>
 
-        <script>
-
-            $(document).ready(function () {
-                var table = $('#example').DataTable({
-                    'ajax': {
-                        'url': 'viewBrgyList'
-                    },
-                    'columnDefs': [{
-                            'targets': 0,
-                            'render': function (data, type, full, meta) {
-                                return '<a href="' + data + '">' + data + '</a>';
-                            }
-                        }]
-                });
-
-                var table1 = $('#probTable').DataTable({
-                    'ajax': {
-                        'url': 'viewBrgyList'
-                    },
-                    'columnDefs': [{
-                            'targets': 0,
-                            'render': function (data, type, full, meta) {
-                                return '<a href="' + data + '">' + data + '</a>';
-                            }
-                        }]
-                });
-            });
-
-
-        </script>
+        
         <script>
             $(function () {
 

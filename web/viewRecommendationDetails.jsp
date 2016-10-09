@@ -33,40 +33,40 @@
 
                                         <li class="list-group-item">
                                             <b>Recommendation </b>  <p class="pull-right"><b>
-                                                    <c:out value="${recdet.recommendation_name}">${recdet.recommendation_name}</c:out>
+                                                    <c:out value="${recdet.recommendation_name}"></c:out>
                                                     </b></p>
                                             </li>
                                             <li class="list-group-item">
                                                 <b>Type</b><p class="pull-right"><b>
-                                                    <c:out value="${recdet.type}">${recdet.type}</c:out>
+                                                    <c:out value="${recdet.type}"></c:out>
                                                     </b> </p>
                                             </li>
                                             <li class="list-group-item">
                                                 <b>Description </b><p class="text-right text-bold">
-                                                <c:out value="${recdet.description}">${recdet.description}</c:out>
+                                                <c:out value="${recdet.description}"></c:out>
                                                 </p>
                                             </li>
                                             <li class="list-group-item">
                                                 <b>Phase</b> <p class="pull-right"><b>
-                                                    <c:out value="${recdet.phase}">${recdet.phase}</c:out>
+                                                    <c:out value="${recdet.phase}"></c:out>
 
                                                     </b> </p>
                                             </li>
                                             <li class="list-group-item">
                                                 <b>Status</b> <p class="pull-right"><b>
-                                                    <c:out value="${recdet.status}">${recdet.status}</c:out>
+                                                    <c:out value="${recdet.status}"></c:out>
 
                                                     </b> </p>
                                             </li>
                                             <li class="list-group-item">
                                                 <b> Date Created</b> <p class="pull-right"><b>
-                                                    <c:out value="${recdet.date_create}">${recdet.date_create}</c:out>
+                                                    <c:out value="${recdet.date_create}"></c:out>
                                                     </b> </p>
                                             </li>
 
                                             <li class="list-group-item">
                                                 <b>Period</b> <p class="pull-right"><b>
-                                                    <c:out value="${recdet.date_start}">${recdet.date_start}</c:out> - <c:out value="${recdet.date_end}">${recdet.end}</c:out>  
+                                                    <c:out value="${recdet.date_start}"></c:out> - <c:out value="${recdet.date_end}"></c:out>  
 
                                                     </b> </p>
                                             </li>
@@ -75,10 +75,10 @@
                                                 <b class="text-green">Configuration</b>  <p class="pull-right text-green"> <b>
                                                     <c:choose>
                                                         <c:when test='${recdet.trigger_date !=null}'>
-                                                            <c:out value="${recdet.trigger_date}">${recdet.trigger_date}</c:out> 
+                                                            <c:out value="${recdet.trigger_date}"></c:out> 
                                                         </c:when>
                                                         <c:otherwise>
-                                                            <c:out value="${recdet.trigger_num}"> ${recdet.num}</c:out> 
+                                                            <c:out value="${recdet.trigger_num}"></c:out> 
                                                         </c:otherwise>
                                                     </c:choose>
                                                 </b> </p>
