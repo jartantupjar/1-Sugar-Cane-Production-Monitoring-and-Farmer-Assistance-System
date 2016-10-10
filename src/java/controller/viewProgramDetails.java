@@ -9,6 +9,7 @@ import entity.Recommendation;
 import entity.programsKPI;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -31,9 +32,17 @@ public class viewProgramDetails extends BaseServlet {
         ArrayList<Problems> probList;
         ArrayList<programsKPI> kpilist;
         String name = request.getParameter("name");
+        ;
+        System.err.println("TODAYS user " + session.getAttribute("user"));
+        System.err.println("TODAYS DATE " + session.getAttribute("todayDate"));
+        Enumeration<String> attrNames = request.getAttributeNames();
+        while (attrNames.hasMoreElements()) {
+            System.out.println(attrNames);
+        }
+
         prog = progdb.viewProgDetails(name);
         probList = progdb.viewProgProb(name);
-        kpilist = progdb.viewProgTargets(name);
+        kpilist = progdb.viewProg1Targets(name);
         prog.settFarms(42);
         prog.setProgress(42);
         session.setAttribute("progdet", prog);

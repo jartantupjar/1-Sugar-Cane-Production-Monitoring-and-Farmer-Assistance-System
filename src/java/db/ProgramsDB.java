@@ -85,6 +85,35 @@ public class ProgramsDB {
 
     }
 
+    public boolean updateKPIs(ArrayList<programsKPI> kpis) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "UPDATE kpis SET actual=? WHERE year=? and Programs_name=? and name=?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            for (int i = 0; i < kpis.size(); i++) {
+
+                int sYear = kpis.get(i).getKpi_year();
+                for (int a = 0; a < kpis.get(i).getaValues().size(); a++) {
+                    pstmt.setDouble(1, kpis.get(i).getaValues().get(a));
+                    pstmt.setInt(2, sYear + a);
+                    pstmt.setString(3, kpis.get(0).getProgram_name());
+                    pstmt.setString(4, kpis.get(i).getKpi());
+                    pstmt.addBatch();
+                }
+
+            }
+            pstmt.executeBatch();
+            pstmt.close();
+            conn.close();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(UsersDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+
+    }
+
     public boolean addProgProb(ArrayList<String> probids, String prog_name) {
         try {
 
@@ -212,8 +241,67 @@ public class ProgramsDB {
         }
         return null;
     }
+//works only for 1 row
+//    public ArrayList<programsKPI> viewProgTargets(String prog_name) {
+//        try {
+//            // put functions here : previous week production, this week production
+//            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+//            Connection conn = myFactory.getConnection();
+//            String query = "select year,Programs_name,name,value,actual,(select count(DISTINCT year) from kpis where Programs_name=?) as count from kpis where programs_name=? order by name;";
+//            PreparedStatement pstmt = conn.prepareStatement(query);
+//            pstmt.setString(1, prog_name);
+//            pstmt.setString(2, prog_name);
+//            ResultSet rs = pstmt.executeQuery();
+//            ArrayList<programsKPI> list = null;
+//            programsKPI p = null;
+//            if (rs.next()) {
+//                list = new ArrayList<>();
+//
+//                do {
+//                    p = new programsKPI();
+//                    p.setKpi(rs.getString("name"));
+//                    p.setKpi_year(rs.getInt("year"));
+//                    p.settYears(rs.getInt("count"));
+//
+//                    ArrayList<Double> values = new ArrayList();
+//                    ArrayList<Double> avalues = new ArrayList();
+//                    int counter = p.gettYears();
+//                    do {
+//                        String namechkr = rs.getString("name");
+//                        System.out.println(rs.getRow() + "row no");
+//                        System.out.println(counter);
+//                        System.out.println(rs.getDouble("value") + "value");
+//                        System.out.println(rs.getDouble("actual") + "actual");
+//                        values.add(rs.getDouble("value"));
+//                        avalues.add(rs.getDouble("actual"));
+//                        if (counter > 0) {
+//                            rs.next();
+//                            System.out.println(rs.getRow() + "row no");
+//                        }
+//
+//                        
+//                        counter--;
+//
+//                    } while (counter > 0);
+//
+//                    p.setValues(values);
+//                    p.setaValues(avalues);
+//                    list.add(p);
+//                } while (rs.next());
+//            }
+//
+//            rs.close();
+//            pstmt.close();
+//            conn.close();
+//
+//            return list;
+//        } catch (SQLException ex) {
+//            Logger.getLogger(ProblemsDB.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return null;
+//    }
 
-    public ArrayList<programsKPI> viewProgTargets(String prog_name) {
+    public ArrayList<programsKPI> viewProg1Targets(String prog_name) {
         try {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
@@ -221,7 +309,7 @@ public class ProgramsDB {
             String query = "select year,Programs_name,name,value,actual,(select count(DISTINCT year) from kpis where Programs_name=?) as count from kpis where programs_name=? order by name;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, prog_name);
-              pstmt.setString(2, prog_name);
+            pstmt.setString(2, prog_name);
             ResultSet rs = pstmt.executeQuery();
             ArrayList<programsKPI> list = null;
             programsKPI p = null;
@@ -237,21 +325,26 @@ public class ProgramsDB {
                     ArrayList<Double> values = new ArrayList();
                     ArrayList<Double> avalues = new ArrayList();
                     int counter = p.gettYears();
-                    do {
-                         System.out.println( rs.getRow()+"row no");                  
+
+                    for (int c = p.gettYears(); c > 0; c--) {
+                        String namechkr = rs.getString("name");
+                        System.out.println(rs.getRow() + "row no");
                         System.out.println(counter);
-                        System.out.println(rs.getDouble("value")+"value");
-                       System.out.println(rs.getDouble("actual")+"actual");
+                        System.out.println(rs.getDouble("value") + "value");
+                        System.out.println(rs.getDouble("actual") + "actual");
                         values.add(rs.getDouble("value"));
                         avalues.add(rs.getDouble("actual"));
-                         if (counter>0) {
+                        if (counter > 0) {
                             rs.next();
-                            System.out.println( rs.getRow()+"row no");     
+                            System.out.println(rs.getRow() + "row no");
                         }
-                        counter--;
-                       
 
-                    } while (counter !=0);
+                        if (c == 1) {
+                            rs.previous();
+                        }
+
+                    }
+
                     p.setValues(values);
                     p.setaValues(avalues);
                     list.add(p);

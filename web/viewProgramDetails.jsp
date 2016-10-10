@@ -6,9 +6,7 @@ brgy profile
 
 details budget etc.
     update*
-progress completion
-location affected
-problems tackling
+
 
 improvement since implementation
 
@@ -37,6 +35,7 @@ current vs then diagram
                 </section>
                 <section class="content">
                     <div class="row">
+
                         <div class="col-md-3">
                             <div class="box box-primary">
                                 <div class="box-body box-profile">
@@ -94,7 +93,7 @@ current vs then diagram
                                                     <td> 
                                                         <div class="progress-group">
 
-                                                            <div class="progress ">
+                                                            <div class="">
                                                                 <div class="progress-bar progress-bar-green" style="width: ${progdet.progress}%">  <c:out value="${progdet.progress}"></c:out></div>
                                                             </div>
                                                         </div> <!-- closer of progress bars -->  
@@ -143,11 +142,13 @@ current vs then diagram
 
                                     <div class="box-body">
                                         <table class="table table-hover">
-                                            <tbody><tr>
-
+                                            <thead>
+                                                <tr>
                                                     <th>Problem</th>
                                                     <th>Description</th>
                                                 </tr>
+                                            </thead>
+                                            <tbody>
                                             <c:forEach items="${prob}" var="plist">
                                                 <tr>
                                                     <td><c:out value="${plist.prob_name}"></c:out></td>
@@ -155,14 +156,12 @@ current vs then diagram
                                                     </tr>
                                             </c:forEach>
                                             <!--> <tr>
-                                                        <td>Overfertilization</td>
-                                                        <td>Requires training farmers about the effects and good practices </td>
-                                                    </tr>  <-->
-
-
-
+                                                            <td>Overfertilization</td>
+                                                            <td>Requires training farmers about the effects and good practices </td>
+                                                        </tr>  <-->
 
                                         </tbody>
+
                                     </table>
                                 </div>
 
@@ -203,48 +202,54 @@ current vs then diagram
                             </div>
 
                         </div>
+
+
+
                         <div class="col-md-12" > 
-                            <div class="box box-info">
-                                <div class="box-header with-border">
-                                    <h1 class="box-title">Soil Rehabilitation Program</h1>
-                                    <div class="box-tools pull-right">
-                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                    </div>
-                                </div>
+                            <form id="kpitable" action="updateKPIProgram" >
+                                <div class="box box-info">
+                                    <div class="box-header with-border">
+                                        <h1 class="box-title"><input name="prog_name" class="form-control hidden" value="${progdet.prog_name}"/><c:out value="${progdet.prog_name}"></c:out></h1>
+                                            <div class="box-tools pull-right">
+                                                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                                <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                            </div>
+                                        </div>
 
-                                <div class="box-body">
+                                        <div class="box-body">
 
-                                    <table class="table table-hover">
-                                        <thead><tr>
-                                                <th style="width: 30%">Performance Indicator</th>
+                                            <table class="table table-hover">
+                                                <thead><tr>
+                                                        <th style="width: 30%">Performance Indicator</th>
+                                                <input value="${kpis[0].kpi_year}" name="kpi_year" class="form-control hidden" />
+                                            <input value="${kpis[0].tYears}" name="tYears" class="form-control hidden" />
                                             <c:forEach  var="yrlist" begin="${kpis[0].kpi_year}" end="${kpis[0].kpi_year-1+kpis[0].tYears}">
-                                            <th><c:out value="${yrlist}"/></th>
+                                                <th><c:out value="${yrlist}"/></th>
                                                 <th>Actual</th>
-                                            </c:forEach>
-                                              
+                                                </c:forEach>
+
 
                                             </tr>
-                                        </thead>
-                                        <tbody>
-                                         
-                                            <c:forEach items="${kpis}" var="kpilist" varStatus="loopCount">
-                                                <tr>
-                                                    <td><c:out value="${kpilist.kpi}"/></td>
-                                                    <c:forEach items="${kpilist.values}" var="yearloop" varStatus="aCountr">
-                                                        
-                                                        <td><c:out value="${yearloop}" /></td>
-                                                        <td><input class='form-control' name = "y${loopCount.count}[]" value='${kpilist.aValues[aCountr.index]}' /></td>
-                                                        </c:forEach>
-                                                </tr>
-                                            </c:forEach>
-                                        </tbody>
-                                    </table>
-                                    <button class="btn btn-success pull-right" style="width: 10%" value="submit">Update</button>
+                                            </thead>
+                                            <tbody>
+
+                                                <c:forEach items="${kpis}" var="kpilist" varStatus="loopCount">
+                                                    <tr>
+                                                        <td><input class='form-control hidden' name = "kNa${loopCount.count}[]" value='${kpilist.kpi}'/><c:out value="${kpilist.kpi}"/></td>
+                                                            <c:forEach items="${kpilist.values}" var="yearloop" varStatus="aCountr">
+
+                                                            <td><c:out value="${yearloop}" /></td>
+                                                            <td><input class='form-control' name = "y${loopCount.count}[]" value='${kpilist.aValues[aCountr.index]}' /></td>
+                                                            </c:forEach>
+                                                    </tr>
+                                                </c:forEach>
+                                            </tbody>
+                                        </table>
+                                        <button class="btn btn-success pull-right" style="width: 10%" value="submit" form="kpitable">Update</button>
+                                    </div>
+
                                 </div>
-
-                            </div>
-
+                            </form>
                         </div>
 
 
@@ -275,7 +280,7 @@ current vs then diagram
         <script src="Highcharts/modules/drilldown.js"></script>
         <script src="Highcharts/modules/exporting.js"></script>
 
-        
+
         <script>
             $(function () {
 

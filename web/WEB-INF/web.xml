@@ -64,6 +64,10 @@
         <servlet-name>viewProgramDetails</servlet-name>
         <servlet-class>controller.viewProgramDetails</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>updateKPIProgram</servlet-name>
+        <servlet-class>controller.updateKPIProgram</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
@@ -127,6 +131,10 @@
     <servlet-mapping>
         <servlet-name>viewProgramDetails</servlet-name>
         <url-pattern>/viewProgramDetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateKPIProgram</servlet-name>
+        <url-pattern>/updateKPIProgram</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

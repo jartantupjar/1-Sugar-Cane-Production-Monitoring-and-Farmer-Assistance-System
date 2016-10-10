@@ -29,7 +29,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Bryll Joey Delfin
  */
-public class createNewProgram extends BaseServlet {
+public class updateKPIProgram extends BaseServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,95 +44,61 @@ public class createNewProgram extends BaseServlet {
 
         PrintWriter out = response.getWriter();
 
-        Programs newProg = new Programs();
+       
         ProgramsDB progdb = new ProgramsDB();
 
         Enumeration<String> parameterNames = request.getParameterNames();
 
-        newProg.setProg_name(request.getParameter("projectname"));
-
-        try {
-            String reserv = request.getParameter("reservation");
-
-            String[] lines = reserv.split("-");
-         
-            String inidate = lines[0];
-            java.util.Date inicheck = new SimpleDateFormat("MM/dd/yyyy").parse(inidate);
-
-            
-            Date modifiediniDate = new java.sql.Date(inicheck.getTime());
-         
-            newProg.setDate_initial(modifiediniDate);
-
-            String enddate = lines[1];
-            java.util.Date endcheck = new SimpleDateFormat("MM/dd/yyyy").parse(enddate);
-            Date modifiedendDate = new java.sql.Date(endcheck.getTime());
-            newProg.setDate_end(modifiedendDate);
-
-            newProg.setDate_created(modifiediniDate);
-        } catch (ParseException ex) {
-            Logger.getLogger(createNewProgram.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        newProg.setDescription(request.getParameter("Description"));
-        newProg.setType("P");
+       String prog_name=request.getParameter("prog_name");
 
         String paramName;
         ArrayList<programsKPI> kpis = new ArrayList();
 
         programsKPI pkpi = null;
-        int sYear = 2014;
-        int tYears = 3;
+        int sYear = Integer.parseInt(request.getParameter("kpi_year"));
+   
+        int tYears = Integer.parseInt(request.getParameter("tYears"));
 
         int count = 0;
-        ArrayList<String> problist = new ArrayList();
+   
 
         while (parameterNames.hasMoreElements()) {
             paramName = parameterNames.nextElement();
             System.out.println(paramName);
 
-            if (paramName.substring(0, 2).equals("y" + count)) {
+            if (paramName.startsWith("y" + count)) {
                 ArrayList<Double> value = new ArrayList<>();
                 for (int i = 0; i < request.getParameterValues(paramName).length; i++) {
                     System.out.println(request.getParameterValues(paramName)[i]);
                     value.add(Double.parseDouble(request.getParameterValues(paramName)[i]));
                 }
-                pkpi.setValues(value);
+                pkpi.setaValues(value);
                 kpis.add(pkpi);
-            } else if (paramName.substring(0, 3).equals("kpi")) {
+            } else if (paramName.startsWith("kNa")) {
                 System.out.println(paramName.substring(3, 4) + " :counter");
+                
                 count = Integer.parseInt(paramName.substring(3, 4));
                 pkpi = new programsKPI();
+                pkpi.setProgram_name(prog_name);
                 pkpi.setKpi(request.getParameterValues(paramName)[0]);
                 pkpi.setKpi_year(sYear);
                 pkpi.settYears(tYears);
                 System.out.println(request.getParameterValues(paramName)[0]);
-            } else if (paramName.substring(0, 6).equals("probid")) {
-        
-                 for (int i = 0; i < request.getParameterValues(paramName).length; i++) {
-                    System.out.println(request.getParameterValues(paramName)[i]+"problem id");
-                    problist.add(request.getParameterValues(paramName)[i]);
-                    
-                }
-              
             }
 
         }
 
         for (programsKPI kpi : kpis) {
             System.out.print("/" + kpi.getKpi() + "/");
-            for (int a = 0; a < kpi.getValues().size(); a++) {
-                System.out.println("/" + kpi.getValues().get(a) + "/");
+            for (int a = 0; a < kpi.getaValues().size(); a++) {
+                System.out.println("/" + kpi.getaValues().get(a) + "/");
             }
         }
 
-        boolean test = progdb.createNewProgram(newProg, kpis);
-        if(problist.isEmpty()==false){
-                boolean probSuccess = progdb.addProgProb(problist, newProg.getProg_name());   
-        }
+        boolean test = progdb.updateKPIs(kpis);
+   
 
         //addprogKPI
-
         if (test) {
             ServletContext context = getServletContext();
             RequestDispatcher rd = context.getRequestDispatcher("/viewPrograms.jsp");
