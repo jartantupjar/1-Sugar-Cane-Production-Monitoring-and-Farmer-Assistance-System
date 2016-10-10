@@ -6,6 +6,7 @@
 package db;
 
 import entity.FarmRecTable;
+import entity.Problems;
 import entity.Recommendation;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -134,5 +135,36 @@ public class fixedRecDB {
         }
         return null;
     }
+ public ArrayList<Problems> viewProbRecTable(int id) {
+        try {
+            // put functions here : previous week production, this week production
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select p.id,p.name,p.description from `recommendations-problems`rp join Problems p on rp.Problems_id=p.id where Recommendations_id=?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<Problems> list = null;
+            Problems p;
+            if (rs.next()) {
+                list = new ArrayList<Problems>();
+                do {
 
+                    p = new Problems();
+                    p.setProb_id(rs.getInt("id"));
+                    p.setProb_name(rs.getString("name"));
+                    p.setProb_details(rs.getString("description"));
+                   list.add(p);
+                } while (rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProblemsDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }
