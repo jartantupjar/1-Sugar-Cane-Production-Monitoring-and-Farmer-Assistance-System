@@ -40,7 +40,7 @@ public class viewForumList extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             ForumDB fdb = new ForumDB();
             ArrayList<Forum> fT = new ArrayList<Forum>();
-            fT = fdb.getProblemsList();
+            fT = fdb.getForumsList();
             JSONObject data  = new JSONObject();
             JSONArray list  = new JSONArray();
             if(fT != null){

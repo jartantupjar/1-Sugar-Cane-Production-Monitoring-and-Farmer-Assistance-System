@@ -5,16 +5,20 @@
         <servlet-class>controller.BaseServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>viewForumList</servlet-name>
+        <servlet-class>controller.viewForumList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>createNewRecommendation</servlet-name>\
+        <servlet-class>controller.createNewRecommendation</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>Login</servlet-name>
         <servlet-class>controller.Login</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Logout</servlet-name>
         <servlet-class>controller.Logout</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>viewBrgyList</servlet-name>
-        <servlet-class>controller.viewBrgyList</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>viewProblemList</servlet-name>
@@ -57,12 +61,12 @@
         <servlet-class>controller.viewPRT</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>viewForumList</servlet-name>
-        <servlet-class>controller.viewForumList</servlet-class>
+        <servlet-name>createNewProgram</servlet-name>
+        <servlet-class>controller.createNewProgram</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>createNewRecommendation</servlet-name>
-        <servlet-class>controller.createNewRecommendation</servlet-class>
+        <servlet-name>viewPostDetails</servlet-name>
+        <servlet-class>controller.viewPostDetails</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
@@ -75,10 +79,6 @@
     <servlet-mapping>
         <servlet-name>Logout</servlet-name>
         <url-pattern>/Logout</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>viewBrgyList</servlet-name>
-        <url-pattern>/viewBrgyList</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>viewProblemList</servlet-name>
@@ -113,6 +113,14 @@
         <url-pattern>/viewFRTable</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>viewForumList</servlet-name>
+        <url-pattern>/viewForumList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>createNewRecommendation</servlet-name>
+        <url-pattern>/createNewRecommendation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>viewPlansProblemTable</servlet-name>
         <url-pattern>/viewPlansProblemTable</url-pattern>
     </servlet-mapping>
@@ -121,12 +129,12 @@
         <url-pattern>/viewPRT</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>viewForumList</servlet-name>
-        <url-pattern>/viewForumList</url-pattern>
+        <servlet-name>createNewProgram</servlet-name>
+        <url-pattern>/createNewProgram</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>createNewRecommendation</servlet-name>
-        <url-pattern>/createNewRecommendation</url-pattern>
+        <servlet-name>viewPostDetails</servlet-name>
+        <url-pattern>/viewPostDetails</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

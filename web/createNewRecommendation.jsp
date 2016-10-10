@@ -38,9 +38,13 @@
                                         <div class="form-group">
                                             <label>Period:</label>
                                             <select class="form-control" name="period">
+                                                <option>Germination</option>
+                                                <option>Tillering</option>
+                                                <option>Stalk Elongation</option>
+                                                <option>Yield Formation</option>
+                                                <option>Ripening</option>
+                                                <option>Milling</option>
                                                 <option>Planting</option>
-                                                <option>Maturing</option>
-                                                <option>Harvesting</option>
                                             </select>
                                         </div>
                                         <div class="form-group">

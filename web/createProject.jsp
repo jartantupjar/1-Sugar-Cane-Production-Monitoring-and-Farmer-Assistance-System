@@ -7,6 +7,8 @@
         <title>SRA | Home</title>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css"> 
+        <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker-bs3.css">
+        <link rel="stylesheet" href="plugins/datepicker/datepicker3.css">
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
 
@@ -16,17 +18,17 @@
                 <section class="content-header">
 
                     <h1>
-                        Create Plan & Program
+                        Create Plan & Program 
                         <small>Optional description</small>
                     </h1>
                 </section>
                 <section class="content">
                     <div class="row">
-                        <form id="frm-example" action="CreateNewProject">
+                        <form id="frm-example" action="createNewProgram">
                             <div class="col-md-6">
                                 <div class="box box-solid box-success">
                                     <div class="box-header with-border">
-                                        <h3 class="box-title">Program Details</h3>
+                                        <h3 class="box-title">Program Details(STATUS-TYPE QUESTION,STEPS,)</h3>
                                     </div>
                                     <br>
                                     <div class="box-body">
@@ -43,26 +45,18 @@
                                                 <option>Practices</option>
                                             </select>
                                         </div>
-                                        <div  class="form-group">
-                                            <label class="control-label" for="datepicker" >Date Start:</label>
-                                            <div class="input-group date">
+                                        <div class="form-group">
+                                            <label>Date range:</label>
+
+                                            <div class="input-group">
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
-                                                <input type="text" class="form-control pull-right datepicker" name="datepicker" id="datepickerstart">
+                                                <input type="text" class="form-control reservation pull-right" name="reservation" id="reservation">
                                             </div>
                                             <!-- /.input group -->
                                         </div>
-                                        <div  class="form-group">
-                                            <label class="control-label" for="dateend" >Date End:</label>
-                                            <div class="input-group date">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-calendar"></i>
-                                                </div>
-                                                <input type="text" class="form-control pull-right datepicker" name="dateend" id="datepickerend">
-                                            </div>
-                                            <!-- /.input group -->
-                                        </div>
+                                      
 
 
                                         <div class="form-group">
@@ -78,7 +72,7 @@
                             <div class="col-md-6" > 
                                 <div class="box box-info">
                                     <div class="box-header with-border">
-                                        <h1 class="box-title">Problems List</h1>
+                                        <h1 class="box-title">Problems List(change COUNTER to brgy)</h1>
                                         <div class="box-tools pull-right">
                                             <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                             <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -91,9 +85,9 @@
                                                 <tr>
                                                     <th><input name="select_all" value="1" id="probTable-select-all" type="checkbox" /></th>
                                                     <th>Problem</th>
+                                                    <th>Description</th>
                                                     <th>Status</th>
                                                     <th>Type</th>
-                                                    <th>Description</th>
                                                     <th># brgy</th>
                                                 </tr>
                                             </thead>
@@ -103,49 +97,41 @@
 
                                 </div>
                             </div> 
+
+
                             <div class="col-md-12" > 
                                 <div class="box box-info">
                                     <div class="box-header with-border">
                                         <h1 class="box-title">Key Performance Indicators</h1>
                                         <div class="box-tools pull-right">
                                             <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                         </div>
                                     </div>
-
                                     <div class="box-body">
-                                        <table class="table table-hover">
-                                            <tbody><tr>
+                                        <table class = "table table-bordered bull" id = "listOfItems">
+                                            <thead>
+                                                <tr>
                                                     <th style="width: 30%">Performance Indicator</th>
                                                     <th>2016</th>
                                                     <th>2017</th>
                                                     <th>2018</th>
-                                                    <th>X</th>
+                                                    <th></th>
+
                                                 </tr>
-                                                <tr>
-                                                    <td><input value="Hectares rehabilitated" style="width: 100%"></td>
-                                                    <td><input value="7000"></td>
-                                                    <td><input value="20000"></td>
-                                                    <td><input value="20000"></td>
-                                                    <td>X</td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input value="No. of small farmers assisted" style="width: 100%"></td>
-                                                    <td><input value="3500"></td>
-                                                    <td><input value="7000"></td>
-                                                    <td><input value="7000"></td>
-                                                    <td>X</td>
-                                                </tr>
+                                            </thead>
+                                            <tbody>                      
                                             </tbody>
                                         </table>
-                                        <button class="btn btn-danger pull-right" style="width: 10%" value="submit">Add Row</button>
+
+                                        <br/>
+                                        <button  class="btn btn-danger  pull-right" style="width: 8%"  id ="addRow"><span class = "glyphicon glyphicon-plus"></span> Row</button>
+
                                     </div>
 
                                 </div>
-
                             </div>
-                            <div class="col-md-3">                   
-                                <p><button class="btn btn-success" style="width: 40%" value="submit">Submit</button></p>
+                            <div class="col-md-8 pun">                   
+                                <p><button class="btn btn-success btn-block pull-right " style="width: 50%; height: 6%" value="submit">Submit</button></p>
                             </div>
                         </form>
                     </div>
@@ -165,20 +151,81 @@
 
         <script type="text/javascript" src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="dist/js/app.min.js"></script>
-        <script src="Highcharts/highcharts.js"></script>
+
         <script src="plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
         <script type="text/javascript" src="plugins/datatable/dataTables.checkboxes.min.js"></script>
+        <script src="plugins/input-mask/jquery.inputmask.js"></script>
+        <script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+        <script src="plugins/input-mask/jquery.inputmask.extensions.js"></script>
+        <script src="plugins/daterangepicker/moment.min.js"></script>
+        <script src="plugins/daterangepicker/daterangepicker.js"></script>
         <script src="plugins/datepicker/bootstrap-datepicker.js"></script>
+        <script src="dist/js/app.min.js"></script>
         <script>
             $(function () {
+
+                //Datemask dd/mm/yyyy
+                $("#datemask").inputmask("yyyy-mm-dd", {"placeholder": "yyyy-mm-dd"});
+                //Datemask2 mm/dd/yyyy
+                $("#datemask2").inputmask("yyyy-mm-dd", {"placeholder": "yyyy-mm-dd"});
                 $('.datepicker').datepicker({
                     autoclose: true
                 });
 
+                $('#reservation').daterangepicker();
+                $('#datepicker').datepicker({
+                    autoclose: true
+                });
+
+
 
             });
+        </script>
+        <script>
+
+            var rowNum = 1;
+
+
+            $('#listOfItems').ready(function () {
+                $("#listOfItems").on('click', '#deleterow', function () {
+                    var $killrow = $(this).parent('tr');
+                    $killrow.addClass("danger");
+                    $killrow.fadeOut(1000, function () {
+                        $(this).remove();
+                    });
+                });
+            });
+
+
+            $(document).ready(function () {
+                $('#listOfItems tbody:last').append("<tr>\n\
+                                      <td><input class='form-control' style='width: 100%' name = 'kpi" + rowNum + "' value='Hectares rehabilitated' required/></td>\n\
+                                    <td><input class='form-control' name = 'y" + rowNum + "' value='700' required/></td>\n\
+                                    <td><input class='form-control'  name = 'yy" + rowNum + "' value='20000' required/></td>\n\
+                                    <td><input class='form-control' name = 'yyy" + rowNum + "' value='20000' /></td>\n\
+                                    <td id='deleterow'><div class='glyphicon glyphicon-remove'></div></td> \n\
+        </tr>");
+        alert(rowNum);
+                rowNum++;
+
+                $("#addRow").on("click", function () {
+
+                    $('#listOfItems tbody:last').append("<tr>\n\
+                                  <td><input class='form-control' style='width: 100%' name = 'kpi" + rowNum + "'  required/></td>\n\
+                                    <td><input class='form-control' name = 'y" + rowNum + "'  required/></td>\n\
+                                    <td><input class='form-control'  name = 'yy" + rowNum + "' required/></td>\n\
+                                    <td><input class='form-control' name = 'yyy" + rowNum + "'  /></td>\n\
+                                    <td id='deleterow'><div class='glyphicon glyphicon-remove'></div></td> \n\
+        </tr>");alert(rowNum);
+                    rowNum++;
+
+                });
+
+            });
+
+
+
         </script>
         <script>
 
@@ -256,6 +303,9 @@
 
 
         </script>
+
+
+
     </body>
 
 </html>

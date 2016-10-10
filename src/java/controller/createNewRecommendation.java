@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.System.out;
 import java.sql.Date;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -55,17 +56,20 @@ public class createNewRecommendation extends HttpServlet {
             String dates = request.getParameter("datepicker");
             String datee = request.getParameter("dateend");
             try {
-                
-                java.util.Date date = new SimpleDateFormat("DD/MM/YY").parse(dates);
-                Date Sdate = new java.sql.Date(date.getTime());
+                DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+                java.util.Date date = new java.util.Date();
+                date = formatter.parse(dates);
+                java.sql.Date Sdate = new java.sql.Date(date.getTime());
                 r.setDate_start(Sdate);
-                r.setDate_create(Sdate);
+               // r.setDate_create(Sdate);
             } catch (ParseException ex) {
                 Logger.getLogger(createNewRecommendation.class.getName()).log(Level.SEVERE, null, ex);
             }
             try {
-                java.util.Date date = new SimpleDateFormat("DD/MM/YY").parse(datee);
-                Date Edate = new java.sql.Date(date.getTime());
+                java.util.Date datend = new java.util.Date();
+                DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+                datend = formatter.parse(datee);
+                Date Edate = new java.sql.Date(datend.getTime());
                 r.setDate_end(Edate);
                 r.setTrigger_date(Edate);
             } catch (ParseException ex) {
@@ -74,22 +78,23 @@ public class createNewRecommendation extends HttpServlet {
             r.setDescription(request.getParameter("description"));
             r.setStatus("Ongoing");
             r.setTrigger_num(10);
-            int i = recDB.addRecommendation(r);
+            int check = recDB.addRecommendation(r);
              Enumeration<String> parameterNames = request.getParameterNames();
             String paramName;
             ArrayList<String> pT = new ArrayList<String>();
             while (parameterNames.hasMoreElements()) {
                  paramName = parameterNames.nextElement();
-            if (paramName.substring(0, 6).equals("probid")) {
-                     for (String parameterValue : request.getParameterValues(paramName)) {
-                         pT.add(parameterValue);
-                         System.out.println(parameterValue);
-                     }
+                 System.out.println(paramName);
+            if (paramName.startsWith("probid")) {
+                for(int i=0;i<request.getParameterValues(paramName).length;i++){
+                     pT.add(request.getParameterValues(paramName)[i]);
+                 System.out.println(request.getParameterValues(paramName)[i]);
+                }
 
         }
             }
-            
-            if (i == 1){
+            System.out.println(check);
+            if (check == 1){
                 
                 ServletContext context = getServletContext();
                 RequestDispatcher rd = context.getRequestDispatcher("/Homepage.jsp");
