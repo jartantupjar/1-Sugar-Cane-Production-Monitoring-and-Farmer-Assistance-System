@@ -130,7 +130,7 @@
                                         <tr>
                                             <th>Recommendation</th>
                                             <th>Description</th>
-                                            <th>Trigger</th>
+                                            <th>Config</th>
                                             <th>Period/Phase</th>
                                         </tr>
                                         <tr>	

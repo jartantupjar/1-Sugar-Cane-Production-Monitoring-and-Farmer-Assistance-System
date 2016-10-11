@@ -201,21 +201,21 @@
             $(document).ready(function () {
                 $('#listOfItems tbody:last').append("<tr>\n\
                                       <td><input class='form-control' style='width: 100%' name = 'kpi" + rowNum + "' value='Hectares rehabilitated' required/></td>\n\
-                                    <td><input class='form-control' name = 'y" + rowNum + "' value='700' required/></td>\n\
-                                    <td><input class='form-control'  name = 'yy" + rowNum + "' value='20000' required/></td>\n\
-                                    <td><input class='form-control' name = 'yyy" + rowNum + "' value='20000' /></td>\n\
+                                    <td><input class='form-control' name = 'y" + rowNum + "[]' value='700' required/></td>\n\
+                                    <td><input class='form-control'  name = 'y" + rowNum + "[]' value='20000' required/></td>\n\
+                                    <td><input class='form-control' name = 'y" + rowNum + "[]' value='20000' /></td>\n\
                                     <td id='deleterow'><div class='glyphicon glyphicon-remove'></div></td> \n\
         </tr>");
-        alert(rowNum);
+       
                 rowNum++;
 
                 $("#addRow").on("click", function () {
 
                     $('#listOfItems tbody:last').append("<tr>\n\
                                   <td><input class='form-control' style='width: 100%' name = 'kpi" + rowNum + "'  required/></td>\n\
-                                    <td><input class='form-control' name = 'y" + rowNum + "'  required/></td>\n\
-                                    <td><input class='form-control'  name = 'yy" + rowNum + "' required/></td>\n\
-                                    <td><input class='form-control' name = 'yyy" + rowNum + "'  /></td>\n\
+                                    <td><input class='form-control' name = 'y" + rowNum + "[]'  required/></td>\n\
+                                    <td><input class='form-control'  name = 'y" + rowNum + "[]' required/></td>\n\
+                                    <td><input class='form-control' name = 'y" + rowNum + "[]'  /></td>\n\
                                     <td id='deleterow'><div class='glyphicon glyphicon-remove'></div></td> \n\
         </tr>");alert(rowNum);
                     rowNum++;

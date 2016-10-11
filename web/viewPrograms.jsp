@@ -26,7 +26,7 @@
                         <div class="col-md-10"> 
                             <div class="box box-info">
                                 <div class="box-header with-border">
-                                 <!--   <h1 class="box-title">Brgy List</h1> -->
+                                    <!--   <h1 class="box-title">Brgy List</h1> -->
                                     <div class="box-tools pull-right">
                                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                         <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -34,18 +34,18 @@
                                 </div>
 
                                 <div class="box-body">
-                                    <table id="example" class="table  display table-hover" cellspacing="0" width="100%">
+                                    <table id="example" class="table display table-hover" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>Program</th>
                                                 <th>Date</th>
                                                 <th>Total Farms</th>
                                                 <th>Progress</th>
-                                                 <th>details</th>
+                                                <th>Details</th>
 
                                             </tr>
                                         </thead>
-                                   
+
                                     </table>
                                 </div>
 
@@ -80,15 +80,23 @@
             $(document).ready(function () {
                 var table = $('#example').DataTable({
                     'ajax': {
-                        'url': 'viewBrgyList'
+                        'url': 'viewProgramsTable'
                     },
-                    'columnDefs': [{
-                            'targets': 0,
-                        
+                    'columnDefs': [
+                        {
+                            'targets': 3,
                             'render': function (data, type, full, meta) {
-                                return '<a href="' + data + '">'+data+'</a>';
+                                return '<span class="badge bg-yellow" style="width: 30%">' + data + '%</span>';
                             }
-                        }]
+                        },
+                        {
+                            'targets': 4,
+                            'render': function (data, type, full, meta) {
+                                return '<a href="viewProgramDetails?name=' + data + '" class="btn btn-primary text-center">' + 'more details' + '</a>';
+                            }
+                        }
+
+                    ]
                 });
             });
 

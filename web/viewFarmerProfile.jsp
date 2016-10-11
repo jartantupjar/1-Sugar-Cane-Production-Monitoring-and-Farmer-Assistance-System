@@ -108,12 +108,7 @@
                                                 <td>1.23</td>
                                                 <td>35%</td>
                                                 <td> 
-                                                    <div class="progress-group">
-                                                        <span class="progress-number"><b>90 %</b></span>
-                                                        <div class="progress sm">
-                                                            <div class="progress-bar progress-bar-green" style="width: 80%"></div>
-                                                        </div>
-                                                    </div> <!-- closer of progress bars -->  
+                                                   <span class="badge bg-light-blue block">30%</span><!-- closer of progress bars -->  
                                                 </td>
                                                 <td>tpeh31</td>
                                                 <td>3%</td>
@@ -127,11 +122,11 @@
                                                 <td>80%</td>
                                                 <td>
                                                     <div class="progress-group">
-                                                        <span class="progress-number"><b>20 %</b></span>
+                                                        
 
-                                                        <div class="progress sm">
-                                                            <div class="progress-bar progress-bar-danger" style="width: 20%"></div>
-                                                        </div>
+                                                      <span class="progress-number"><b>6 %</b></span>  <div class="progress progress-sm progress-striped active">
+                      <div class="progress-bar progress-bar-primary" style="width: 30%"></div>
+                    </div>
                                                     </div> <!-- closer of progress bars -->  
                                                 </td>
                                                 <td>TPEH43</td>

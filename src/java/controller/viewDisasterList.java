@@ -5,23 +5,23 @@
  */
 package controller;
 
-import db.ForumDB;
-import entity.Forum;
+import db.ProblemsDB;
+import entity.Problems;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 /**
  *
  * @author Bryll Joey Delfin
  */
-public class viewPostDetails extends HttpServlet {
+public class viewDisasterList extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,27 +34,26 @@ public class viewPostDetails extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            Forum item = new Forum();
-            ForumDB fdb = new ForumDB();
-            item.setId(Integer.parseInt(request.getParameter("id")));
-            System.out.println(item.getId()+"Laman");
-            Forum post =  fdb.getForumDetails(item.getId());
-           
-            if(post!=null){
-                HttpSession session = request.getSession();
-                session.setAttribute("post", post);
-                ServletContext context = getServletContext();
-                RequestDispatcher rd = context.getRequestDispatcher("/Post.jsp");
-                rd.forward(request, response);
-            }
-            else{
-                ServletContext context = getServletContext();
-                RequestDispatcher rd = context.getRequestDispatcher("/Homepage.jsp");
-                rd.forward(request, response);
-            }
+        PrintWriter out = response.getWriter();
+        JSONObject data= new JSONObject();
+        ProblemsDB pdb = new ProblemsDB();
+        ArrayList<Problems> probT = new ArrayList<Problems>();
+        probT = pdb.getDisastersList();
+        JSONArray list = new JSONArray();
+        for(int i=0;i<probT.size();i++){
+            ArrayList<String> obj = new ArrayList<String>();
+            obj.add(probT.get(i).getType());
+            obj.add(probT.get(i).getProb_id().toString());
+            obj.add(probT.get(i).getProb_details());
+            obj.add(probT.get(i).getTotalFarms().toString());        
+            obj.add(probT.get(i).getProb_id().toString());
+            list.add(obj);
         }
+        data.put("data", list);
+        response.setContentType("applications/json");
+        response.setCharacterEncoding("utf-8");
+        response.getWriter().write(data.toString());
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

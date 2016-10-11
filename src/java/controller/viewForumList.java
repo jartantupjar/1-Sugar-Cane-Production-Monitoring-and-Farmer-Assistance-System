@@ -46,8 +46,9 @@ public class viewForumList extends HttpServlet {
             if(fT != null){
                for(int i = 0; i< fT.size(); i++){
                    ArrayList<String> obj = new ArrayList<String>();
-                   obj.add(fT.get(i).getFarmer());
+                   
                    obj.add(fT.get(i).getId().toString());
+                   obj.add(fT.get(i).getFarmer());
                    obj.add(fT.get(i).getId().toString());
                    obj.add(fT.get(i).getStatus());
                    obj.add(fT.get(i).getDate_posted().toString());

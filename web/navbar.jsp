@@ -34,7 +34,8 @@
               <li class="time-label text-center">
                   <a class="bg-purple text-center">
                   <c:set var="todayDate" scope="session" value="10 Feb. 2014"/>
-                  <c:out value="${todayDate}">${todayDate}</c:out> 
+                
+                  <c:out value="${todayDate}"></c:out> 
                   </a>
             </li>
          
@@ -112,8 +113,8 @@
            <li><a href="Calendar.jsp"><i class="fa fa-link"></i><span>Calendar</span> </a></li>
            <li><a href="farmerComparison.jsp"><i class="fa fa-link"></i><span>Farm Observation</span></a></li>
            <li><a href="viewCropEstimate.jsp"><i class="fa fa-link"></i><span>Crop Estimate (Options)</span></a></li>
-           <li><a href="viewProjects.jsp"><i class="fa fa-link"></i><span>View Programs List</span></a></li>
-           <li><a href="viewProjectDetails.jsp"><i class="fa fa-link"></i><span>Program Details</span></a></li>
+           <li><a href="viewPrograms.jsp"><i class="fa fa-link"></i><span>View Programs</span></a></li>
+         
            <li><a href="viewFarmerProfile.jsp"><i class="fa fa-link"></i><span>Farmer Profile</span></a></li>
           </ul>
         </li>   
@@ -130,8 +131,8 @@
            <li><a href="Calendar.jsp"><i class="fa fa-link"></i><span>Calendar</span> </a></li>
            <li><a href="farmerComparison.jsp"><i class="fa fa-link"></i><span>Farm Observation</span></a></li>
            <li><a href="viewCropEstimate.jsp"><i class="fa fa-link"></i><span>Crop Estimate</span></a></li>
-           <li><a href="viewProjects.jsp"><i class="fa fa-link"></i><span>View Projects List</span></a></li>
-           <li><a href="viewProjectDetails.jsp"><i class="fa fa-link"></i><span>Program Details</span></a></li>
+           <li><a href="viewPrograms.jsp"><i class="fa fa-link"></i><span>View Programs</span></a></li>
+          
            <li><a href="createProject.jsp"><i class="fa fa-link"></i><span>Create Plans and Programs</span></a></li>
           </ul>
         </li> 

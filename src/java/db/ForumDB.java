@@ -52,13 +52,13 @@ public class ForumDB {
         }
         return null;
     }
-    public Forum getForumDetails(Forum forum){
+    public Forum getForumDetails(Integer id){
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "SELECT * FROM sra.posts where id = ? ;";
             PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setInt(0, forum.getId());
+            pstmt.setInt(1,id);
             ResultSet rs = pstmt.executeQuery();
             ArrayList<Forum> fT = null;
             Forum f = null;
@@ -71,7 +71,6 @@ public class ForumDB {
                         f.setMessage(rs.getString("message"));
                         f.setDate_started(rs.getDate("date_started"));
                         f.setDate_posted(rs.getDate("date_posted"));
-                        fT.add(f);
                     } while (rs.next());
                 }
                 rs.close();

@@ -41,8 +41,8 @@
                                 <table id="myTable1" class="table table-striped table-bordered" cellspacing="10" width="100%">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
                                             <th>Title</th>
+                                            <th>Name</th>
                                             <th>Counter</th>
                                             <th>Status</th>
                                             <th>Date</th>
@@ -55,8 +55,9 @@
                                 <table id="myTable2" class="table table-striped table-bordered" cellspacing="10" width="100%">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
+                                            
                                             <th>Title</th>
+                                            <th>Name</th>
                                             <th>Counter</th>
                                             <th>Status</th>
                                             <th>Date</th>
@@ -69,8 +70,9 @@
                                 <table id="myTable3" class="table table-striped table-bordered" cellspacing="10" width="100%">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
+                                            
                                             <th>Title</th>
+                                            <th>Name</th>
                                             <th>Counter</th>
                                             <th>Status</th>
                                             <th>Date</th>
@@ -106,17 +108,18 @@
                     scrollCollapse: true,
                     paging: false,
                     'columnDefs': [{
-                        'targets': 1,
+                        'targets': 0,
                         'searchable': false,
                         'orderable': false,
                         'render': function (data, type, full, meta) {
-                           return '<a href="viewPostDetails?id=' + data + '">'+data+'</a>';
+                           return '<a href="viewPostDetails?id=' + data + '" class="btn btn-primnary btn-xs">'+data+'</a>';
                         }
                     }]
                 });
 
                 // Apply a search to the second table for the demo
-                $('#myTable2').DataTable().search('New York').draw();
+                $('#myTable2').DataTable().search('Accepted').draw();
+                $('#myTable3').DataTable().search('Pending').draw();
             });
 
 

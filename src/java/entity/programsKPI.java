@@ -5,14 +5,17 @@
  */
 package entity;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author ndrs
  */
 public class programsKPI {
-    private String kpi;
-    private Double year,year1,year2;
-
+    private String kpi, program_name;
+    private int kpi_year,tYears;
+    
+    private ArrayList<Double> values,aValues;
     /**
      * @return the kpi
      */
@@ -30,43 +33,77 @@ public class programsKPI {
     /**
      * @return the year
      */
-    public Double getYear() {
-        return year;
+
+    /**
+     * @return the program_name
+     */
+    public String getProgram_name() {
+        return program_name;
     }
 
     /**
-     * @param year the year to set
+     * @param program_name the program_name to set
      */
-    public void setYear(Double year) {
-        this.year = year;
+    public void setProgram_name(String program_name) {
+        this.program_name = program_name;
     }
 
     /**
-     * @return the year1
+     * @return the kpi_year
      */
-    public Double getYear1() {
-        return year1;
+    public int getKpi_year() {
+        return kpi_year;
     }
 
     /**
-     * @param year1 the year1 to set
+     * @param kpi_year the kpi_year to set
      */
-    public void setYear1(Double year1) {
-        this.year1 = year1;
+    public void setKpi_year(int kpi_year) {
+        this.kpi_year = kpi_year;
     }
 
     /**
-     * @return the year2
+     * @return the values
      */
-    public Double getYear2() {
-        return year2;
+    public ArrayList<Double> getValues() {
+        return values;
     }
 
     /**
-     * @param year2 the year2 to set
+     * @param values the values to set
      */
-    public void setYear2(Double year2) {
-        this.year2 = year2;
+    public void setValues(ArrayList<Double> values) {
+        this.values = values;
     }
+
+    /**
+     * @return the aValues
+     */
+    public ArrayList<Double> getaValues() {
+        return aValues;
+    }
+
+    /**
+     * @param aValues the aValues to set
+     */
+    public void setaValues(ArrayList<Double> aValues) {
+        this.aValues = aValues;
+    }
+
+    /**
+     * @return the tYears
+     */
+    public int gettYears() {
+        return tYears;
+    }
+
+    /**
+     * @param tYears the tYears to set
+     */
+    public void settYears(int tYears) {
+        this.tYears = tYears;
+    }
+
+
     
 }
