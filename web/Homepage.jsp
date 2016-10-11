@@ -19,7 +19,7 @@
                     </h1>
                 </section>
                 <section class="content">
-         
+
                     <div class="col-md-6" > 
                         <div class="box box-info">
                             <div class="box-header with-border">
@@ -33,7 +33,7 @@
                         </div>
 
                     </div>
-                   
+
                     <div class="col-md-6" > 
                         <div class="box box-info">
                             <div class="box-header with-border">
@@ -77,8 +77,8 @@
                                             <td>4,200.00</td>
                                             <td>
                                                 <div class="progress ">
-                                                            <div class="progress-bar progress-bar-green" style="width: 67%">67%</div>
-                                                        </div>
+                                                    <div class="progress-bar progress-bar-green" style="width: 67%">67%</div>
+                                                </div>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -105,7 +105,7 @@
                                         <tr>	
                                             <td>Area</td>
                                             <td>800.00</td>
-                                            
+
                                         </tr>
                                     </tbody>
                                 </table>
@@ -144,7 +144,7 @@
                         </div>
 
                     </div>
-                    
+
                 </section>
 
             </div>
@@ -160,6 +160,98 @@
 
 
         <script type="text/javascript" src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
+
+        <script type="text/javascript">
+            $.ajax({
+                url: "loadTreeMapData",
+                type: 'POST',
+                dataType: "JSON",
+                success: function (data) {
+                    var points = [],
+                            municipalP,
+                            municipalI = 0,
+                            municipalVal,
+                            barangayP,
+                            barangayI,
+                            farmerP,
+                            farmerI,
+                            municipal,
+                            barangay,
+                            farmer;
+
+                    for (municipal in data) {
+                        if (data.hasOwnProperty(municipal)) {
+                            municipalVal = 0;
+                            municipalP = {
+                                id: 'id_' + municipalI,
+                                name: municipal,
+                                color: Highcharts.getOptions().colors[municipalI]
+                            };
+                            barangayI = 0;
+                            for (barangay in data[municipal]) {
+                                if (data[municipal].hasOwnProperty(barangay)) {
+                                    barangayP = {
+                                        id: municipalP.id + '_' + barangayI,
+                                        name: barangay,
+                                        parent: municipalP.id
+                                    };
+                                    points.push(barangayP);
+
+                                    farmerI = 0;
+                                    for (farmer in data[municipal][barangay]) {
+                                        if (data[municipal][barangay].hasOwnProperty(farmer)) {
+                                            farmerP = {
+                                                id: barangayP.id + '_' + farmerI,
+                                                name: farmer,
+                                                parent: barangayP.id,
+                                                value: Math.round(+data[municipal][barangay][farmer])
+                                            };
+                                            municipalVal += farmerP.value;
+                                            points.push(farmerP);
+                                            farmerI = farmerI + 1;
+                                        }
+                                    }
+                                    barangayI = barangayI + 1;
+                                }
+                            }
+                            municipalP.value = Math.round(municipalVal + barangayI);
+                            points.push(municipalP);
+                            municipalI = municipalI + 1;
+                        }
+                    }
+                    $('#container1').highcharts({
+                        series: [{
+                                type: 'treemap',
+                                layoutAlgorithm: 'squarified',
+                                allowDrillToNode: true,
+                                animationLimit: 1000,
+                                dataLabels: {
+                                    enabled: false
+                                },
+                                levelIsConstant: false,
+                                levels: [{
+                                        level: 1,
+                                        dataLabels: {
+                                            enabled: true
+                                        },
+                                        borderWidth: 3
+                                    }],
+                                data: points
+                            }],
+                        subtitle: {
+                            text: 'Click points to drill down'
+                        },
+                        title: {
+                            text: 'Production of last year'
+                        }
+                    });
+
+
+                }});
+
+
+
+        </script>
         <script type="text/javascript">
             $(function () {  // treemap code
                 var data = {
@@ -221,7 +313,7 @@
                         }
                     },
                     'Europe': {
-                        'Hungary': {
+                        'Test': {
                             'Communicable & other Group I': '16.8',
                             'Noncommunicable diseases': '602.8',
                             'Injuries': '44.3'
@@ -1092,7 +1184,7 @@
                         regionI = regionI + 1;
                     }
                 }
-                $('#container1').highcharts({
+                $('#container2').highcharts({
                     series: [{
                             type: 'treemap',
                             layoutAlgorithm: 'squarified',
@@ -1114,7 +1206,6 @@
                     subtitle: {
                         text: 'Click points to drill down'
                     },
-                    
                     title: {
                         text: 'Yeild of this week'
                     }
@@ -1122,92 +1213,85 @@
             });
         </script>
         <script type="text/javascript">
-$(function () {  //gauge code
+            $(function () {  //gauge code
 
-    var gaugeOptions = {
+                var gaugeOptions = {
+                    chart: {
+                        type: 'solidgauge'
+                    },
+                    title: null,
+                    pane: {
+                        center: ['50%', '85%'],
+                        size: '140%',
+                        startAngle: -90,
+                        endAngle: 90,
+                        background: {
+                            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || '#EEE',
+                            innerRadius: '60%',
+                            outerRadius: '100%',
+                            shape: 'arc'
+                        }
+                    },
+                    tooltip: {
+                        enabled: false
+                    },
+                    // the value axis
+                    yAxis: {
+                        stops: [
+                            [0.1, '#DF5353'], // red
+                            [0.5, '#DDDF0D'], // yellow
+                            [0.9, '#55BF3B'] // green 
+                        ],
+                        lineWidth: 0,
+                        minorTickInterval: null,
+                        tickAmount: 2,
+                        title: {
+                            y: -70
+                        },
+                        labels: {
+                            y: 16
+                        }
+                    },
+                    plotOptions: {
+                        solidgauge: {
+                            dataLabels: {
+                                y: 5,
+                                borderWidth: 0,
+                                useHTML: true
+                            }
+                        }
+                    }
+                };
 
-        chart: {
-            type: 'solidgauge'
-        },
 
-        title: null,
 
-        pane: {
-            center: ['50%', '85%'],
-            size: '140%',
-            startAngle: -90,
-            endAngle: 90,
-            background: {
-                backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || '#EEE',
-                innerRadius: '60%',
-                outerRadius: '100%',
-                shape: 'arc'
-            }
-        },
+                // The RPM gauge
+                $('#container-rpm').highcharts(Highcharts.merge(gaugeOptions, {
+                    yAxis: {
+                        min: 0,
+                        max: 100,
+                        title: {
+                            text: 'TC/HA'
+                        }
+                    },
+                    series: [{
+                            name: 'TC/HA',
+                            data: [10],
+                            dataLabels: {
+                                format: '<div style="text-align:center"><span style="font-size:25px;color:' +
+                                        ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y:.1f}  </span><br/>' +
+                                        '<span style="font-size:12px;color:silver">*Production</span></div>'
+                            },
+                            tooltip: {
+                                valueSuffix: ' TonsCane/AreaHarvested'
+                            }
+                        }]
 
-        tooltip: {
-            enabled: false
-        },
+                }));
 
-        // the value axis
-        yAxis: {
-            stops: [
-                [0.1, '#DF5353'], // red
-                [0.5, '#DDDF0D'], // yellow
-                [0.9, '#55BF3B'] // green 
-            ],
-            lineWidth: 0,
-            minorTickInterval: null,
-            tickAmount: 2,
-            title: {
-                y: -70
-            },
-            labels: {
-                y: 16
-            }
-        },
+            });
+        </script>
 
-        plotOptions: {
-            solidgauge: {
-                dataLabels: {
-                    y: 5,
-                    borderWidth: 0,
-                    useHTML: true
-                }
-            }
-        }
-    };
-
-   
-
-    // The RPM gauge
-    $('#container-rpm').highcharts(Highcharts.merge(gaugeOptions, {
-        yAxis: {
-            min: 0,
-            max:  100,
-            title: {
-                text: 'TC/HA'
-            }
-        },
-
-        series: [{
-            name: 'TC/HA',
-            data: [10],
-            dataLabels: {
-                format: '<div style="text-align:center"><span style="font-size:25px;color:' +
-                    ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y:.1f}  </span><br/>' +
-                       '<span style="font-size:12px;color:silver">*Production</span></div>'
-            },
-            tooltip: {
-                valueSuffix: ' TonsCane/AreaHarvested'
-            }
-        }]
-
-    }));
-
-});
-		</script>
-        
 
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="dist/js/app.min.js"></script>
