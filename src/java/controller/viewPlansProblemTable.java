@@ -27,8 +27,8 @@ public class viewPlansProblemTable extends BaseServlet {
       
         Problems prob = new Problems();
       
-
-        ArrayList<Problems> bct = probdb.getProblemsWithBrgy();
+   ArrayList<Problems> bct = probdb.getAllProblems();
+        //ArrayList<Problems> bct = probdb.getProblemsWithBrgy();
         
         JSONObject data = new JSONObject();
         JSONArray list = new JSONArray();

@@ -146,12 +146,14 @@ public class fixedRecDB {
             ResultSet rs = pstmt.executeQuery();
             ArrayList<Problems> list = null;
             Problems p;
+                 System.out.println("ran aims to prev");
             if (rs.next()) {
                 list = new ArrayList<Problems>();
                 do {
 
                     p = new Problems();
                     p.setProb_id(rs.getInt("id"));
+               
                     p.setProb_name(rs.getString("name"));
                     p.setProb_details(rs.getString("description"));
                    list.add(p);
