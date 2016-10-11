@@ -28,7 +28,7 @@ public class fixedRecDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select * from sra.recommendations;";
+            String query = "select * from recommendations;";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             ArrayList<Recommendation> list = null;
@@ -68,7 +68,7 @@ public class fixedRecDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select * from `recommendations-farmers` sf join fields f on sf.farmers_name=f.farmers_name where sf.recommendations_id= ?;";
+            String query = "select * from `recommendations-fields` rf join fields f on rf.fields_id=f.id where rf.recommendations_id=?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
@@ -84,7 +84,7 @@ public class fixedRecDB {
                     r.setBrgy(rs.getString("barangay"));
                     r.setMunicipality(rs.getString("municipality"));
                    // r.setDate_updated(2014-2-2);
-                    r.setApproved(rs.getString("Y"));
+                    r.setApproved(rs.getString("approved"));
                    
                     list.add(r);
                 } while (rs.next());
@@ -105,7 +105,7 @@ public class fixedRecDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select * from sra.recommendations sr where sr.id=? ;";
+            String query = "select * from recommendations sr where sr.id=? ;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
