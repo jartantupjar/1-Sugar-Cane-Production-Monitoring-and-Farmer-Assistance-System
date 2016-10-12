@@ -5,18 +5,16 @@
  */
 package controller;
 
-import db.ProblemsDB;
-import entity.Problems;
+import com.google.gson.JsonObject;
+import db.ForumDB;
+import entity.Forum;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -24,7 +22,7 @@ import org.json.simple.JSONObject;
  *
  * @author Bryll Joey Delfin
  */
-public class viewProbDetails extends HttpServlet {
+public class viewForumList extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,22 +38,27 @@ public class viewProbDetails extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            Problems prob = new Problems();
-            int i = Integer.parseInt(request.getParameter("id"));
-            ProblemsDB probDB = new ProblemsDB();
-            Problems p = probDB.getProblemsDetails(i);
-            ArrayList<Problems> probList = null;
-            if(p != null){
-                probList = new ArrayList<Problems>();
-                probList = probDB.showProblembyFarm(i);
-                HttpSession session = request.getSession();
-                session.setAttribute("problem", p);
-                session.setAttribute("probid", i);
-                ServletContext context = getServletContext();
-                RequestDispatcher rd = context.getRequestDispatcher("/viewProblemDetails.jsp");
-                rd.forward(request, response);
+            ForumDB fdb = new ForumDB();
+            ArrayList<Forum> fT = new ArrayList<Forum>();
+            fT = fdb.getForumsList();
+            JSONObject data  = new JSONObject();
+            JSONArray list  = new JSONArray();
+            if(fT != null){
+               for(int i = 0; i< fT.size(); i++){
+                   ArrayList<String> obj = new ArrayList<String>();
+                   
+                   obj.add(fT.get(i).getId().toString());
+                   obj.add(fT.get(i).getFarmer());
+                   obj.add(fT.get(i).getId().toString());
+                   obj.add(fT.get(i).getStatus());
+                   obj.add(fT.get(i).getDate_posted().toString());
+                   list.add(obj);
+               } 
             }
-            
+            data.put("data", list);
+          response.setContentType("applications/json");
+        response.setCharacterEncoding("utf-8");
+        response.getWriter().write(data.toString());
         }
     }
 

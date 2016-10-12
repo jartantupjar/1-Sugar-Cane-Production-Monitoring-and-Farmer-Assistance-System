@@ -9,7 +9,6 @@ import db.ProblemsDB;
 import entity.Problems;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -17,14 +16,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 
 /**
  *
  * @author Bryll Joey Delfin
  */
-public class viewProbDetails extends HttpServlet {
+public class sendAlert extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,23 +36,16 @@ public class viewProbDetails extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            Problems prob = new Problems();
+            
+            Problems p = new Problems();
+            ProblemsDB pdb = new ProblemsDB();
             int i = Integer.parseInt(request.getParameter("id"));
-            ProblemsDB probDB = new ProblemsDB();
-            Problems p = probDB.getProblemsDetails(i);
-            ArrayList<Problems> probList = null;
-            if(p != null){
-                probList = new ArrayList<Problems>();
-                probList = probDB.showProblembyFarm(i);
+            p = pdb.getAlertDetails(i);
                 HttpSession session = request.getSession();
                 session.setAttribute("problem", p);
-                session.setAttribute("probid", i);
                 ServletContext context = getServletContext();
-                RequestDispatcher rd = context.getRequestDispatcher("/viewProblemDetails.jsp");
+                RequestDispatcher rd = context.getRequestDispatcher("/sendAlert.jsp");
                 rd.forward(request, response);
-            }
-            
         }
     }
 

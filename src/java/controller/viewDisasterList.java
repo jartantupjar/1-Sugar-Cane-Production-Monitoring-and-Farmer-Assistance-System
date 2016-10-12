@@ -10,13 +10,10 @@ import entity.Problems;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -24,7 +21,7 @@ import org.json.simple.JSONObject;
  *
  * @author Bryll Joey Delfin
  */
-public class viewProbDetails extends HttpServlet {
+public class viewDisasterList extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,26 +34,26 @@ public class viewProbDetails extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            Problems prob = new Problems();
-            int i = Integer.parseInt(request.getParameter("id"));
-            ProblemsDB probDB = new ProblemsDB();
-            Problems p = probDB.getProblemsDetails(i);
-            ArrayList<Problems> probList = null;
-            if(p != null){
-                probList = new ArrayList<Problems>();
-                probList = probDB.showProblembyFarm(i);
-                HttpSession session = request.getSession();
-                session.setAttribute("problem", p);
-                session.setAttribute("probid", i);
-                ServletContext context = getServletContext();
-                RequestDispatcher rd = context.getRequestDispatcher("/viewProblemDetails.jsp");
-                rd.forward(request, response);
-            }
-            
+        PrintWriter out = response.getWriter();
+        JSONObject data= new JSONObject();
+        ProblemsDB pdb = new ProblemsDB();
+        ArrayList<Problems> probT = new ArrayList<Problems>();
+        probT = pdb.getDisastersList();
+        JSONArray list = new JSONArray();
+        for(int i=0;i<probT.size();i++){
+            ArrayList<String> obj = new ArrayList<String>();
+            obj.add(probT.get(i).getType());
+            obj.add(probT.get(i).getDate_updated().toString());
+            obj.add(probT.get(i).getBarangay());
+            obj.add(probT.get(i).getTotalFarms().toString());        
+            obj.add(probT.get(i).getProb_id().toString());
+            list.add(obj);
         }
+        data.put("data", list);
+        response.setContentType("applications/json");
+        response.setCharacterEncoding("utf-8");
+        response.getWriter().write(data.toString());
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

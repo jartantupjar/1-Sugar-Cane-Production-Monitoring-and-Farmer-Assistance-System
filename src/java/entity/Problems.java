@@ -5,14 +5,17 @@
  */
 package entity;
 
+import java.sql.Date;
+
 /**
  *
  * @author Bryll Joey Delfin
  */
 public class Problems {
-    private Integer prob_id, totalFarms;
+    private Integer prob_id, totalFarms, fields_id;
     private String prob_name, prob_details, barangay,municipality, status,type,impact,farmer,farm,validation;
     private Double prob_loss;
+    private Date date_updated;
 
     /**
      * @return the prob_id
@@ -194,5 +197,33 @@ public class Problems {
      */
     public void setValidation(String validation) {
         this.validation = validation;
+    }
+
+    /**
+     * @return the date_updated
+     */
+    public Date getDate_updated() {
+        return date_updated;
+    }
+
+    /**
+     * @param date_updated the date_updated to set
+     */
+    public void setDate_updated(Date date_updated) {
+        this.date_updated = date_updated;
+    }
+
+    /**
+     * @return the fields_id
+     */
+    public Integer getFields_id() {
+        return fields_id;
+    }
+
+    /**
+     * @param fields_id the fields_id to set
+     */
+    public void setFields_id(Integer fields_id) {
+        this.fields_id = fields_id;
     }
 }

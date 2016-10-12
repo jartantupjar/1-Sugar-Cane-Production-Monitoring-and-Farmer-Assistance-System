@@ -12,6 +12,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>SRA | Home</title>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css"> 
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
@@ -35,9 +36,10 @@
                             </div>
 
                             <div class="box-body">
-                                    <table id="example" class="table  display table-hover" cellspacing="0" width="100%">
+                                    <table id="example" class="table table-bordered" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
+                                                <th>ID</th>
                                                 <th>Problem</th>
                                                 <th>Type</th>
                                                 <th>Status</th>
@@ -49,6 +51,7 @@
                                         </thead>
                                         <tfoot>
                                             <tr>
+                                                <th>ID</th>
                                                 <th>Problem</th>
                                                 <th>Type</th>
                                                 <th>Status</th>
@@ -81,7 +84,7 @@
                         'url': 'viewProbList'
                     },
                     'columnDefs': [{
-                            'targets': 5,
+                            'targets': 6,
                         
                             'render': function (data, type, full, meta) {
                                 return '<a href="viewProbDetails?id=' + data + '" class="btn btn-primary btn-xs">'+'more details'+'</a>';

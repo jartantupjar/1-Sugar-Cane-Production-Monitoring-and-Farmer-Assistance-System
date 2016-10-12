@@ -12,6 +12,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>SRA | Home</title>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css"> 
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
@@ -37,26 +38,18 @@
                                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                 </div>
                             </div>
-                            <div class="box-body no-padding">
-                                <table class="table table-bordered">
-                                    <tbody>
+                            <div class="box-body">
+                                <table id="example" class="table table-bordered" >
+                                    <thead>
                                         <tr>
                                             <th>Type</th>
                                             <th>Date</th>
                                             <th>Location</th>
                                             <th>Recorded Count</th>
-                                            <th>Damage</th>
                                             <th>Alert</th>
                                         </tr>
-                                        <tr>
-                                            <td>Pest</td>
-                                            <td>2016-09-28</td>
-                                            <td>Pio</td>
-                                            <td>12</td>
-                                            <td>100</td>
-                                            <td><button type="button" class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#myModal" style="width: 100%">Send Alert</button></td>
-                                        </tr>
-                                    </tbody>
+                                        
+                                    </thead>
                                 </table>
                             </div>
 
@@ -64,34 +57,6 @@
                     </div>
                     
                             </div>
-                    <!-- Modal -->
-                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                        <div class="modal-dialog modal-lg" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myModalLabel">Send Alert</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="row with-border">
-                                        <div class="col-md-4"><b>Fixed Message</b></div>
-                                        <div class="col-md-4 col-md-offset-4"><b> Farmers </b></div>
-                                    </div>
-                                    <div class="row with-border">
-                                        <div class="col-md-4"><input type="text" value="This is a warning to all farmers" disabled="true" id="warningalert"></div>
-                                        <div class="col-md-4 col-md-offset-4"><input type="checkbox" placeholder="Farmer ABC">Farmer ABC</div>
-                                    </div>
-                                    
-                                    
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Send</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                         </div>
                     </div>        
                     <br>
@@ -104,5 +69,28 @@
         <script src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="dist/js/app.min.js"></script>
+        
+        <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+        <script>
+
+            $(document).ready(function () {
+                var table = $('#example').DataTable({
+                    'ajax': {
+                        'url': 'viewDisasterList'
+                    },
+                    'columnDefs': [{
+                            'targets': 4,
+                        
+                            'render': function (data, type, full, meta) {
+                                return '<a class="btn btn-primary btn-xs pull-right" href="sendAlert?id='+ data +'">' +'Send Alert' +'</a>' ;
+                            }
+                            
+                        }]
+                });
+            });
+
+
+        </script>
     </body>
 </html>

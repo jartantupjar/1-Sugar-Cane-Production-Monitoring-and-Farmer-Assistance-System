@@ -46,10 +46,10 @@ public class viewPRT extends HttpServlet {
         if (probT != null) {
             for (int i = 0; i < probT.size(); i++) {
                 ArrayList<String> obj = new ArrayList<String>();
-                obj.add(probT.get(i).getProb_id().toString());
+                obj.add(probT.get(i).getFields_id().toString());
                 obj.add(probT.get(i).getFarmer());
-                obj.add(probT.get(i).getBarangay());
-                obj.add(probT.get(i).getValidation());
+                obj.add(probT.get(i).getStatus());
+                //obj.add(probT.get(i).getValidation());
                 list.add(obj);
             }
         }

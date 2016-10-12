@@ -12,7 +12,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>SRA | Home</title>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-
+        <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css"> 
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
@@ -41,8 +41,8 @@
                                 <table id="myTable1" class="table table-striped table-bordered" cellspacing="10" width="100%">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
                                             <th>Title</th>
+                                            <th>Name</th>
                                             <th>Counter</th>
                                             <th>Status</th>
                                             <th>Date</th>
@@ -55,8 +55,9 @@
                                 <table id="myTable2" class="table table-striped table-bordered" cellspacing="10" width="100%">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
+                                            
                                             <th>Title</th>
+                                            <th>Name</th>
                                             <th>Counter</th>
                                             <th>Status</th>
                                             <th>Date</th>
@@ -69,8 +70,9 @@
                                 <table id="myTable3" class="table table-striped table-bordered" cellspacing="10" width="100%">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
+                                            
                                             <th>Title</th>
+                                            <th>Name</th>
                                             <th>Counter</th>
                                             <th>Status</th>
                                             <th>Date</th>
@@ -100,15 +102,24 @@
                     $.fn.dataTable.tables({visible: false, api: true}).columns.adjust();
                 });
                 $('table.table').DataTable({
-                    'ajax' : {'url': ''
+                    'ajax' : {'url': 'viewForumList'
                             },
                     scrollY: 200,
                     scrollCollapse: true,
-                    paging: false
+                    paging: false,
+                    'columnDefs': [{
+                        'targets': 0,
+                        'searchable': false,
+                        'orderable': false,
+                        'render': function (data, type, full, meta) {
+                           return '<a href="viewPostDetails?id=' + data + '" class="btn btn-primnary btn-xs">'+data+'</a>';
+                        }
+                    }]
                 });
 
                 // Apply a search to the second table for the demo
-                $('#myTable2').DataTable().search('New York').draw();
+                $('#myTable2').DataTable().search('Accepted').draw();
+                $('#myTable3').DataTable().search('Pending').draw();
             });
 
 

@@ -5,11 +5,10 @@
  */
 package controller;
 
-import db.ProblemsDB;
-import entity.Problems;
+import db.ForumDB;
+import entity.Forum;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -17,14 +16,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 
 /**
  *
  * @author Bryll Joey Delfin
  */
-public class viewProbDetails extends HttpServlet {
+public class viewPostDetails extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,23 +36,24 @@ public class viewProbDetails extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            Problems prob = new Problems();
-            int i = Integer.parseInt(request.getParameter("id"));
-            ProblemsDB probDB = new ProblemsDB();
-            Problems p = probDB.getProblemsDetails(i);
-            ArrayList<Problems> probList = null;
-            if(p != null){
-                probList = new ArrayList<Problems>();
-                probList = probDB.showProblembyFarm(i);
+            Forum item = new Forum();
+            ForumDB fdb = new ForumDB();
+            item.setId(Integer.parseInt(request.getParameter("id")));
+            System.out.println(item.getId()+"Laman");
+            Forum post =  fdb.getForumDetails(item.getId());
+           
+            if(post!=null){
                 HttpSession session = request.getSession();
-                session.setAttribute("problem", p);
-                session.setAttribute("probid", i);
+                session.setAttribute("post", post);
                 ServletContext context = getServletContext();
-                RequestDispatcher rd = context.getRequestDispatcher("/viewProblemDetails.jsp");
+                RequestDispatcher rd = context.getRequestDispatcher("/Post.jsp");
                 rd.forward(request, response);
             }
-            
+            else{
+                ServletContext context = getServletContext();
+                RequestDispatcher rd = context.getRequestDispatcher("/Homepage.jsp");
+                rd.forward(request, response);
+            }
         }
     }
 
