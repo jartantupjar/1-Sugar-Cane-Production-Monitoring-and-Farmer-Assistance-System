@@ -6,6 +6,14 @@ comparison page add current vs historical details(past 2yrs)
 ^can tell improvement or not
 
 
+on barangay selection 
+	farms list and their productivity
+		select to go to profile
+			select comparison to run comparison
+
+
+
+
 --%>
 <html>
     <head>

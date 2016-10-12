@@ -54,7 +54,7 @@ current vs then diagram
                                             </li>
                                             <li class="list-group-item">
                                                 <b>Description</b> 
-                                                <p class="text-center pull-right">
+                                                <p class="text-center text-center">
                                                 <c:out value="${progdet.description}"></c:out></p>
                                             </li>
                                             <li class="list-group-item">

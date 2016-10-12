@@ -36,6 +36,7 @@ public class viewFRTable extends BaseServlet {
                 obj.add(fct.get(i).getName());
                 obj.add(fct.get(i).getBrgy());
                 obj.add(fct.get(i).getMunicipality());
+                 obj.add(fct.get(i).getDate_updated().toString());
                 obj.add(fct.get(i).getApproved());
                 list.add(obj);
             }

@@ -13,6 +13,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -23,6 +24,28 @@ import java.util.logging.Logger;
  * @author ndrs
  */
 public class ProgramsDB {
+    public Date StringtoSQLDate(String sdate) {
+        try {
+            java.util.Date endcheck = new SimpleDateFormat("MM/dd/yyyy").parse(sdate);
+            Date modifiedendDate = new java.sql.Date(endcheck.getTime());
+            return modifiedendDate;
+        } catch (ParseException ex) {
+            Logger.getLogger(ProgramsDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          return null;
+
+    }
+      public java.util.Date SQLDatetoUtil(String sdate) {
+        try {
+            java.util.Date endcheck = new SimpleDateFormat("yyyy-MM/dd").parse(sdate);
+            java.util.Date modifiedendDate = new java.util.Date(endcheck.getTime());
+            return modifiedendDate;
+        } catch (ParseException ex) {
+            Logger.getLogger(ProgramsDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          return null;
+
+    }
 
     public boolean createNewProgram(Programs prog, ArrayList<programsKPI> kpis) {
         try {
@@ -158,7 +181,12 @@ public class ProgramsDB {
                 do {
                     p = new Programs();
                     p.setProg_name(rs.getString("name"));
-                    p.setDate_created(rs.getDate("date_created"));
+                    if(rs.getDate("date_created")==null){
+                      p.setDate_created(StringtoSQLDate("23/06/2015"));   
+                    }else{
+                           p.setDate_created(  rs.getDate("date_created"));
+                    }
+                 
                     p.settFarms(rs.getInt("count"));
                     list.add(p);
                 } while (rs.next());

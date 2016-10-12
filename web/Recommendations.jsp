@@ -13,6 +13,8 @@
         <title>SRA | Home</title>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+           <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+       <link href="plugins/pace2/pace-theme-center-simple.css" rel="stylesheet" />
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
@@ -25,7 +27,7 @@
                     </h1>
                 </section>
                 <section class="content">
-
+                    <div class="row">
 
 
                     <div class="col-md-12" > 
@@ -59,7 +61,7 @@
                         </div>
                     </div>        
                     <br>
-
+</div>
                 </section>
 
             </div>
@@ -68,6 +70,7 @@
         <script src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="dist/js/app.min.js"></script>
+        <script src="plugins/pace2/pace.min.js"></script>
         <script src="plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
         <script>

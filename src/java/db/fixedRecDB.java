@@ -8,6 +8,7 @@ package db;
 import entity.FarmRecTable;
 import entity.Problems;
 import entity.Recommendation;
+import static java.lang.Math.random;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -83,9 +84,16 @@ public class fixedRecDB {
                     r.setName(rs.getString("Farmers_name"));
                     r.setBrgy(rs.getString("barangay"));
                     r.setMunicipality(rs.getString("municipality"));
-                   // r.setDate_updated(2014-2-2);
-                    r.setApproved(rs.getString("approved"));
-                   
+                    r.setDate_updated(rs.getDate("date_updated"));
+
+                    if (rs.getString("approved")==null) {
+                     int rand=  (int)(Math.random() * 2);
+                     if(rand==0) r.setApproved("Approved");
+                     else r.setApproved("Not Approved");
+                    } else {
+                        r.setApproved(rs.getString("approved"));
+                    }
+
                     list.add(r);
                 } while (rs.next());
             }
@@ -135,7 +143,8 @@ public class fixedRecDB {
         }
         return null;
     }
- public ArrayList<Problems> viewProbRecTable(int id) {
+
+    public ArrayList<Problems> viewProbRecTable(int id) {
         try {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
@@ -146,17 +155,16 @@ public class fixedRecDB {
             ResultSet rs = pstmt.executeQuery();
             ArrayList<Problems> list = null;
             Problems p;
-                 System.out.println("ran aims to prev");
+            System.out.println("ran aims to prev");
             if (rs.next()) {
                 list = new ArrayList<Problems>();
                 do {
 
                     p = new Problems();
                     p.setProb_id(rs.getInt("id"));
-               
                     p.setProb_name(rs.getString("name"));
                     p.setProb_details(rs.getString("description"));
-                   list.add(p);
+                    list.add(p);
                 } while (rs.next());
             }
             rs.close();

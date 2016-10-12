@@ -6,6 +6,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>SRA | Home</title>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+       <link href="plugins/pace2/pace-theme-center-circle.css" rel="stylesheet" />
+        
+       
+        
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
 
@@ -19,7 +23,7 @@
                     </h1>
                 </section>
                 <section class="content">
-
+<div class="row">
                     <div class="col-md-6" > 
                         <div class="box box-info">
                             <div class="box-header with-border">
@@ -43,7 +47,7 @@
                                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                 </div>
                             </div>   
-                            <div class="box-body no-padding" id="container1" style="height: 100%"></div>
+                            <div class="box-body" id="container1" style="height: 120%"></div>
                         </div>
 
                     </div>
@@ -144,7 +148,7 @@
                         </div>
 
                     </div>
-
+</div>
                 </section>
 
             </div>
@@ -160,14 +164,16 @@
 
 
         <script type="text/javascript" src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
-
+  <script src="plugins/pace2/pace.min.js"></script>
         <script type="text/javascript">
-            $.ajax({
+          
+    Pace.track(function(){
+    $.ajax({
                 url: "loadTreeMapData",
                 type: 'POST',
                 dataType: "JSON",
                 success: function (data) {
-                        var points = [],
+                    var points = [],
                             municipalP,
                             municipalI = 0,
                             municipalVal,
@@ -194,7 +200,7 @@
                                         id: municipalP.id + '_' + barangayI,
                                         name: barangay,
                                         parent: municipalP.id
-                                        
+
                                     };
                                     points.push(barangayP);
 
@@ -223,7 +229,7 @@
                     $('#container1').highcharts({
                         series: [{
                                 type: 'treemap',
-                                layoutAlgorithm: 'strip',
+                                layoutAlgorithm: 'squarified',
                                 allowDrillToNode: true,
                                 animationLimit: 1000,
                                 turboThreshold: 5000,
@@ -233,16 +239,19 @@
                                 levelIsConstant: false,
                                 levels: [{
                                         level: 1,
-                                        dataLabels: {useHTML:true,
-					enabled: true,
-                    formatter:function(){
-                        if(this.point.isLeaf) {
-                            
-                            return '<a href="http://www.google.com" target="_blank">' + this.key + '</div>';
-                        } else {
-                            return '<a href="http://www.google.com" target="_blank">' + this.key + '</div>';
-                        }
-                    }
+                                        dataLabels: {useHTML: true,
+                                            enabled: true,
+                                            formatter: function () {
+
+
+                                                if (this.point.isLeaf) {
+                                                    return this.key;
+                                                } else {
+
+                                                    return '<a style="color:white" href="Recommendations?name=' + this.name + '"   target="_blank">' + this.key + '</div>';
+
+                                                }
+                                            }
                                         },
                                         borderWidth: 3
                                     }],
@@ -258,11 +267,11 @@
 
 
                 }});
-
+});
 
 
         </script>
-        
+
         <script type="text/javascript">
             $(function () {  //gauge code
 
