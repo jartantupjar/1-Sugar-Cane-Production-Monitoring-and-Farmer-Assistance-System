@@ -6,6 +6,7 @@
 package db;
 
 import entity.FarmRecTable;
+import entity.Problems;
 import entity.Recommendation;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -27,7 +28,7 @@ public class fixedRecDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select * from sra.recommendations;";
+            String query = "select * from recommendations;";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             ArrayList<Recommendation> list = null;
@@ -67,7 +68,7 @@ public class fixedRecDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select * from `recommendations-farmers` sf join fields f on sf.farmers_name=f.farmers_name where sf.recommendations_id= ?;";
+            String query = "select * from `recommendations-fields` rf join fields f on rf.fields_id=f.id where rf.recommendations_id=?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
@@ -83,7 +84,7 @@ public class fixedRecDB {
                     r.setBrgy(rs.getString("barangay"));
                     r.setMunicipality(rs.getString("municipality"));
                    // r.setDate_updated(2014-2-2);
-                    r.setApproved(rs.getString("Y"));
+                    r.setApproved(rs.getString("approved"));
                    
                     list.add(r);
                 } while (rs.next());
@@ -104,7 +105,7 @@ public class fixedRecDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select * from sra.recommendations sr where sr.id=? ;";
+            String query = "select * from recommendations sr where sr.id=? ;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
@@ -134,5 +135,38 @@ public class fixedRecDB {
         }
         return null;
     }
+ public ArrayList<Problems> viewProbRecTable(int id) {
+        try {
+            // put functions here : previous week production, this week production
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select p.id,p.name,p.description from `recommendations-problems`rp join Problems p on rp.Problems_id=p.id where Recommendations_id=?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<Problems> list = null;
+            Problems p;
+                 System.out.println("ran aims to prev");
+            if (rs.next()) {
+                list = new ArrayList<Problems>();
+                do {
 
+                    p = new Problems();
+                    p.setProb_id(rs.getInt("id"));
+               
+                    p.setProb_name(rs.getString("name"));
+                    p.setProb_details(rs.getString("description"));
+                   list.add(p);
+                } while (rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProblemsDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }

@@ -97,7 +97,7 @@ public class createNewRecommendation extends HttpServlet {
             if (check == 1){
                 
                 ServletContext context = getServletContext();
-                RequestDispatcher rd = context.getRequestDispatcher("/Homepage.jsp");
+                RequestDispatcher rd = context.getRequestDispatcher("/Recommendation.jsp");
                 HttpSession session = request.getSession();
                 rd.forward(request, response);
             }

@@ -50,9 +50,15 @@
                                         <div class="form-group">
                                             <label>Type of Recommendation</label>
                                             <select class="form-control" name="type">
-                                                <option>Advice</option>
-                                                <option>Trial Testing</option>
-                                                <option>Techniques</option>
+                                                <option>Land Preparation</option>
+                                                <option>Planting</option>
+                                                <option>Fertilization</option>
+                                                <option>Ratoon Crop</option>
+                                                <option>Harvesting</option>
+                                                <option>Irrigation and Drainage</option>
+                                                <option>Cultivation</option>
+                                                <option>Weeding</option>
+                                                <option>Pest and Disease Control</option>
                                             </select>
                                         </div>
                                         <div  class="form-group">

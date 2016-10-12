@@ -41,16 +41,16 @@ public class viewProbDetails extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             Problems prob = new Problems();
-            prob.setProb_id(Integer.parseInt(request.getParameter("id")));
+            int i = Integer.parseInt(request.getParameter("id"));
             ProblemsDB probDB = new ProblemsDB();
-            Problems p = probDB.getProblemsDetails(prob.getProb_id());
+            Problems p = probDB.getProblemsDetails(i);
             ArrayList<Problems> probList = null;
             if(p != null){
                 probList = new ArrayList<Problems>();
-                probList = probDB.showProblembyFarm(Integer.parseInt(request.getParameter("id")));
+                probList = probDB.showProblembyFarm(i);
                 HttpSession session = request.getSession();
                 session.setAttribute("problem", p);
-                session.setAttribute("probid", request.getParameter("id"));
+                session.setAttribute("probid", i);
                 ServletContext context = getServletContext();
                 RequestDispatcher rd = context.getRequestDispatcher("/viewProblemDetails.jsp");
                 rd.forward(request, response);

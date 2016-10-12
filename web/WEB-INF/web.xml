@@ -56,9 +56,41 @@
         <servlet-name>createNewProgram</servlet-name>
         <servlet-class>controller.createNewProgram</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>viewProgramsTable</servlet-name>
+        <servlet-class>controller.viewProgramsTable</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewProgramDetails</servlet-name>
+        <servlet-class>controller.viewProgramDetails</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>updateKPIProgram</servlet-name>
+        <servlet-class>controller.updateKPIProgram</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>loadTreeMapData</servlet-name>
+        <servlet-class>controller.loadTreeMapData</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>createNewRecommendation</servlet-name>
+        <servlet-class>controller.createNewRecommendation</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewDisasterList</servlet-name>
+        <servlet-class>controller.viewDisasterList</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewDisasterList</servlet-name>
+        <url-pattern>/viewDisasterList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>createNewRecommendation</servlet-name>
+        <url-pattern>/createNewRecommendation</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -111,6 +143,22 @@
     <servlet-mapping>
         <servlet-name>createNewProgram</servlet-name>
         <url-pattern>/createNewProgram</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewProgramsTable</servlet-name>
+        <url-pattern>/viewProgramsTable</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewProgramDetails</servlet-name>
+        <url-pattern>/viewProgramDetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateKPIProgram</servlet-name>
+        <url-pattern>/updateKPIProgram</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>loadTreeMapData</servlet-name>
+        <url-pattern>/loadTreeMapData</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

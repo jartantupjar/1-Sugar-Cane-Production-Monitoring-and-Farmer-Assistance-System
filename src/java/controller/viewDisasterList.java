@@ -43,8 +43,8 @@ public class viewDisasterList extends HttpServlet {
         for(int i=0;i<probT.size();i++){
             ArrayList<String> obj = new ArrayList<String>();
             obj.add(probT.get(i).getType());
-            obj.add(probT.get(i).getProb_id().toString());
-            obj.add(probT.get(i).getProb_details());
+            obj.add(probT.get(i).getDate_updated().toString());
+            obj.add(probT.get(i).getBarangay());
             obj.add(probT.get(i).getTotalFarms().toString());        
             obj.add(probT.get(i).getProb_id().toString());
             list.add(obj);

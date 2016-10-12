@@ -1,9 +1,7 @@
 package controller;
 
-import db.ProblemsDB;
 import db.fixedRecDB;
 import entity.FarmRecTable;
-import entity.Problems;
 import entity.Recommendation;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,35 +14,40 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-public class viewPlansProblemTable extends BaseServlet {
+public class loadTreeMapData extends BaseServlet {
 
     @Override
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         ServletContext context = getServletContext();
-        ProblemsDB probdb = new ProblemsDB();
+        fixedRecDB recdb = new fixedRecDB();
 
+        HttpSession session = request.getSession();
+        Recommendation rec = new Recommendation();
       
-        Problems prob = new Problems();
-      
-   ArrayList<Problems> bct = probdb.getAllProblems();
-        //ArrayList<Problems> bct = probdb.getProblemsWithBrgy();
-        
+
+        ArrayList<FarmRecTable> fct=new ArrayList() ;
+      //ArrayList<FarmRecTable>   fct= recdb.viewFarmRecTable(Integer.parseInt(request.getParameter("1")));
+             JSONObject fdata = new JSONObject();
         JSONObject data = new JSONObject();
         JSONArray list = new JSONArray();
-        if (bct != null) {
-            for (int i = 0; i < bct.size(); i++) {
-                ArrayList<String> obj = new ArrayList<String>();
-                 obj.add(Integer.toString(bct.get(i).getProb_id()));
-                obj.add(bct.get(i).getProb_name());
-               obj.add(bct.get(i).getProb_details());
-                obj.add(bct.get(i).getType());
-                obj.add(bct.get(i).getMunicipality());
-                obj.add(Integer.toString(bct.get(i).getTotalFarms()));
-                list.add(obj);
+
+      
+             for (int x = 0; x < 3; x++) {
+                  JSONObject mdata = new JSONObject();
+                 
+            for (int i = 0; i < 3; i++) {
+                JSONObject trial = new JSONObject();
+                trial.put("farm1", 1);
+                trial.put("farm2", 2);
+                trial.put("farm3", 3);
+                mdata.put("barangay"+i,trial);
             }
-        }
-            data.put("data", list);
+             data.put("municipal"+x, mdata);
+            
+             }
+        System.out.println(data.toString());
+      //data.put("data", list);
           response.setContentType("applications/json");
         response.setCharacterEncoding("utf-8");
         response.getWriter().write(data.toString());

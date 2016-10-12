@@ -12,6 +12,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>SRA | Home</title>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css"> 
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
@@ -38,8 +39,8 @@
                                 </div>
                             </div>
                             <div class="box-body">
-                                <table id="example" class="table table-bordered" cellspacing="10" width="100%">
-                                    <head>
+                                <table id="example" class="table table-bordered" >
+                                    <thead>
                                         <tr>
                                             <th>Type</th>
                                             <th>Date</th>
@@ -48,15 +49,7 @@
                                             <th>Alert</th>
                                         </tr>
                                         
-                                    </head>
-                                    <tfoot>
-                                            <tr>
-                                                <th>Type</th>
-                                                <th>Date</th>
-                                                <th>Location</th>
-
-                                            </tr>
-                                        </tfoot>
+                                    </thead>
                                 </table>
                             </div>
 
@@ -64,43 +57,6 @@
                     </div>
                     
                             </div>
-                    <!-- Modal -->
-                    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                        <div class="modal-dialog modal-lg" role="document">
-                            <div class="modal-content">
-                                <form id="frm-example" action="?">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myModalLabel">Send Alert</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="row with-border">
-                                        <div class="col-md-4"><b>Fixed Message</b></div>
-                                        <div class="col-md-4 col-md-offset-4"><b> Farmers </b></div>
-                                    </div>
-                                    <br>
-                                    <div class="row with-border">
-                                        <div class="col-md-4"><input type="text" value="This is a warning to all farmers" disabled="true" id="warningalert"></div>
-                                        <div class="col-md-4 col-md-offset-4">Farmer ABC</div>
-                                    </div>
-                                    <br>
-                                    <br>
-                                    <div class="row with-border">
-                                        <div class="col-md-4"><b>Your Message:</b></div>
-                                    </div>
-                                    <div class="row with-border">
-                                        <div class="col-md-4"><textarea rows="5" cols="50" name="Message" form="frm-example" ></textarea></div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <input type="submit" class="btn btn-primary" value="Send">
-                                </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
                         </div>
                     </div>        
                     <br>
@@ -127,7 +83,7 @@
                             'targets': 4,
                         
                             'render': function (data, type, full, meta) {
-                                return '<button type="button" class="btn btn-primary btn-xs pull-right" data-toggle="modal" data-target="#myModal'+ data +'">' +'Send Alert' +'</button>' ;
+                                return '<a class="btn btn-primary btn-xs pull-right" href="sendAlert?id="'+ data +'>' +'Send Alert' +'</a>' ;
                             }
                             
                         }]

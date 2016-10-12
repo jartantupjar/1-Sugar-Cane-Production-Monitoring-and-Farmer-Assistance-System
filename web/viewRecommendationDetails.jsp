@@ -8,7 +8,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>SRA | Home</title>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-            <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+        <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
@@ -27,7 +27,7 @@
                             <div class="box box-primary">
                                 <div class="box-body box-profile">
 
-                                    <!--   <h3 class="profile-username text-center">Recommendation Details:</h3> -->
+                                      <h3 class="profile-username text-center">Recommendation Details:</h3> 
                                     <ul class="list-group list-group-unbordered">
 
 
@@ -83,19 +83,15 @@
                                                     </c:choose>
                                                 </b> </p>
                                         </li>
-                                        <li class="list-group-item">
-                                            <a href="#myModal" data-toggle="modal" data-target="#myModal"> <b class="text-red">Aims to prevent:</b> </a><a href="#myModal" data-toggle="modal" data-target="#myModal" class="pull-right"><b>
-                                                    3
-                                                </b> </a>
-                                        </li>
+                                      
                                         <li class="list-group-item text-maroon">
                                             <b> Helpfulness Counter</b> <p class="pull-right"><b>
-                                                   79
-                                                    </b> </p>
-                                            </li>
-                                            <li class="list-group-item">
-                                                <b>Recorded Effects?</b> <p class="pull-right"><b>
-                                                   None
+                                                    79
+                                                </b> </p>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Recorded Effects?</b> <p class="pull-right"><b>
+                                                    None
                                                 </b> </p>
                                         </li>
 
@@ -107,28 +103,37 @@
                         <div class="col-md-6">
                             <div class="box box-solid box-success">
                                 <div class="box-header with-border">
-                                    <h3 class="box-title">Recommendation Details(do aims to prevent func)(TO farm not farmer DB DB DB)(ask bj resend validation)(date updated??)(char(1) approved?)</h3>
+                                    <h3 class="box-title">Recommendation Details(do aims to prevent func)(TO farm not farmer DB DB DB)(ask bj resend validation)(date updated for each farm??)(char(1) approved?)</h3>
                                 </div>
-                                <br>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="box box-solid box-success">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">Aims To Prevent The Following:</h3>
+                                </div>
                                 <div class="box-body">
-                                    <div class="form-group">
-                                        <label>Recommendation Name : </label>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Description : </label>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Details : </label>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Aims to prevent : <a href="#myModal" data-toggle="modal" data-target="#myModal">3</a> </label>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Helpfullness Counter:  <a>3</a> </label>
-                                    </div>
-
+                                    <table class="table table-bordered" >
+                                        <thead>
+                                            <tr>
+                                                <th>Problem</th>
+                                                <th>Description</th>
+                                                <th>Details</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <c:forEach var="plist" items="${problist}">
+                                            
+                                            <tr>	
+                                                <td>${plist.prob_name}</td>
+                                                <td>${plist.prob_details}</td>
+                                                <td><a class="btn btn-primary" href="viewProbDetails?id=${plist.prob_id}" >details</a></td>
+                                            </tr
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
                                 </div>
-
                             </div>
                         </div>
                         <!-- Modal -->
@@ -182,7 +187,7 @@
                                                 <th>Date</th>
                                                 <th>Validation</th>
                                             </tr>
-                                       </thead>
+                                        </thead>
                                     </table>
                                 </div>
 
@@ -206,7 +211,6 @@
 
             $(document).ready(function () {
                 var table = $('#recList1').DataTable({
-                    
                     'ajax': {
                         'url': 'viewFRTable?id=${id}'
                     }
