@@ -83,7 +83,7 @@
                             'targets': 4,
                         
                             'render': function (data, type, full, meta) {
-                                return '<a class="btn btn-primary btn-xs pull-right" href="sendAlert?id="'+ data +'>' +'Send Alert' +'</a>' ;
+                                return '<a class="btn btn-primary btn-xs pull-right" href="sendAlert?id='+ data +'">' +'Send Alert' +'</a>' ;
                             }
                             
                         }]

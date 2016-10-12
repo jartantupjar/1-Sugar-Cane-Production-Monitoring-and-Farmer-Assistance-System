@@ -111,16 +111,9 @@
                                                     <th><input name="select_all" value="1" id="probTable-select-all" type="checkbox" /></th>
                                                     <th>Problem</th>
                                                     <th>Description</th>
+                                                    <th>Total Farms Affected</th>
                                                 </tr>
                                             </thead>
-                                            <tfoot>
-                                                <tr>
-                                                    <th></th>
-                                                    <th>Problem</th>
-                                                    <th>Description</th>
-
-                                                </tr>
-                                            </tfoot>
                                         </table>
                                     </div>
 

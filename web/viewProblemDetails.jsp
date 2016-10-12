@@ -65,7 +65,7 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myModalLabel">Send Alert</h4>
+                                    <h4 class="modal-title" id="myModalLabel">Send Recommendation</h4>
                                 </div>
                                 <div class="modal-body">
                                     <table class="table table-bordered" >
@@ -106,8 +106,8 @@
                                     <thead>
                                         <tr>
                                             <th>Farm</th>
-                                            <th>Barangay</th>
                                             <th>Farmer</th>
+                                            <th>Status</th>
                                             <th>Validation</th>	
                                         </tr>
                                     </thead>

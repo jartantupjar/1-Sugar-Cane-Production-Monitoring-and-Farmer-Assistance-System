@@ -6,23 +6,22 @@
 package controller;
 
 import db.ProblemsDB;
-import entity.FarmRecTable;
 import entity.Problems;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Bryll Joey Delfin
  */
-public class viewPRT extends HttpServlet {
+public class sendAlert extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,26 +36,16 @@ public class viewPRT extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-           
-        ArrayList<Problems> probT = new ArrayList<Problems>();
-        ProblemsDB pdb = new ProblemsDB();
-        probT = pdb.showProblembyFarm(Integer.parseInt(request.getParameter("probid")));
-        JSONObject data = new JSONObject();
-        JSONArray list = new JSONArray();
-        if (probT != null) {
-            for (int i = 0; i < probT.size(); i++) {
-                ArrayList<String> obj = new ArrayList<String>();
-                obj.add(probT.get(i).getFields_id().toString());
-                obj.add(probT.get(i).getFarmer());
-                obj.add(probT.get(i).getStatus());
-                //obj.add(probT.get(i).getValidation());
-                list.add(obj);
-            }
-        }
-      data.put("data", list);
-          response.setContentType("applications/json");
-        response.setCharacterEncoding("utf-8");
-        response.getWriter().write(data.toString());
+            
+            Problems p = new Problems();
+            ProblemsDB pdb = new ProblemsDB();
+            int i = Integer.parseInt(request.getParameter("id"));
+            p = pdb.getAlertDetails(i);
+                HttpSession session = request.getSession();
+                session.setAttribute("problem", p);
+                ServletContext context = getServletContext();
+                RequestDispatcher rd = context.getRequestDispatcher("/sendAlert.jsp");
+                rd.forward(request, response);
         }
     }
 

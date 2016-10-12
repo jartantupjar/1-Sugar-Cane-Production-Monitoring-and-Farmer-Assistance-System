@@ -25,7 +25,8 @@ public class ProblemsDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT p.id, p.name,p.description,p.status,p.type,count(pf.Fields_id) as counter from problems p join `problems-fields` pf on p.id = pf.Problems_id join fields f on pf.Problems_id = f.id ;";
+            String query = "SELECT p.id, p.name,p.description,p.status,p.type,count(pf.Fields_id) as counter from problems p join `problems-fields` pf on p.id = pf.Problems_id join fields f on pf.Fields_id = f.id \n" +
+                            "group by p.id, p.type;";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             ArrayList<Problems> pT = null;
@@ -143,7 +144,38 @@ public class ProblemsDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select p.id, p.name, p.description, p.status,p.type, count(pf.Fields_id) as counter from problems p join `problems-fields` pf on p.id = pf.Problems_id where pf.id = ? ;";
+            String query = "select p.id, p.name, p.description, p.status,p.type, count(pf.Fields_id) as counter from problems p join `problems-fields` pf on p.id = pf.Problems_id where p.id = ?  ;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+            Problems p = null;
+            if (rs.next()) {
+                do {
+                    p = new Problems();
+                    p.setProb_id(rs.getInt("id"));
+                    p.setProb_name(rs.getString("name"));
+                    p.setProb_details(rs.getString("description"));
+                    p.setStatus(rs.getString("status"));
+                    p.setType(rs.getString("type"));
+                    p.setTotalFarms(rs.getInt("counter"));
+                } while (rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            
+            return p;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProblemsDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public Problems getAlertDetails(int id) {
+        try {
+            // put functions here : previous week production, this week production
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select p.id, p.name, p.description, p.status,p.type, count(pf.Fields_id) as counter from problems p join `problems-fields` pf on p.id = pf.Problems_id where p.id = ?  ;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
@@ -174,24 +206,25 @@ public class ProblemsDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "Select f.id,f.barangay,f.Farmers_name,pf.validated from problems p join `problems-fields` pf on p.id = pf.Problems_id join fields f on pf.Problems_id = f.id;";
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
+            String query = "select f.Farmers_name,pf.Fields_id, p.status from problems p join `problems-fields` pf on p.id = pf.Problems_id join `fields` f on pf.Fields_id = f.id where p.id = ?  ;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
             ArrayList<Problems> pT = null;
             Problems p;
             if (rs.next()) { 
                  pT = new ArrayList<Problems>();
                 do {
                     p = new Problems();
-                    p.setProb_id(rs.getInt("id"));
-                    p.setBarangay(rs.getString("barangay"));
+                    p.setFields_id(rs.getInt("Fields_id"));
                     p.setFarmer(rs.getString("Farmers_name"));
-                    p.setValidation(rs.getString("validated"));
+                    p.setStatus(rs.getString("status"));
+                    //p.setValidation(rs.getString("validated"));
                     pT.add(p);
                 } while (rs.next());
             }
             rs.close();
-            stmt.close();
+            pstmt.close();
             conn.close();
             
             return pT;
@@ -202,13 +235,13 @@ public class ProblemsDB {
     }
     public ArrayList<Problems> getDisastersList() {
         try {
-            // put functions here : previous week production, this week production
+            // for the page of disaster alert.... shows all disaster problems (which are not subjective)
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "select p.id, p.type, f.municipality, f.barangay, pf.date ,count(pf.Fields_id) as 'recorded count'\n" +
 "from problems p join `problems-fields` pf on p.id = pf.problems_id join fields f on pf.Fields_id = f.id\n" +
 "where p.type != 'Subjective'\n" +
-"group by p.id, p.type, f.municipality, f.barangay;";
+"group by p.id, p.type, f.municipality, f.barangay order by pf.date;";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             ArrayList<Problems> pT = null;

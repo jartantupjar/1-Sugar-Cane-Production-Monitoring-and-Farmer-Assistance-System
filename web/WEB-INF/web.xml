@@ -80,6 +80,10 @@
         <servlet-name>viewDisasterList</servlet-name>
         <servlet-class>controller.viewDisasterList</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>sendAlert</servlet-name>
+        <servlet-class>controller.sendAlert</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
@@ -159,6 +163,10 @@
     <servlet-mapping>
         <servlet-name>loadTreeMapData</servlet-name>
         <url-pattern>/loadTreeMapData</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>sendAlert</servlet-name>
+        <url-pattern>/sendAlert</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
