@@ -22,28 +22,21 @@ public class loadTreeMapData extends BaseServlet {
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         ProductionDB proddb = new ProductionDB();
-        ArrayList<prodMunicipality> list = proddb.getProdMunicipalforYear(2016);
+        ArrayList<prodMunicipality> list = proddb.getProdMunicipalforYear(2015);
         JSONObject data = new JSONObject();
 
         
-for(int x=0; x<list.size(); x++){
-      
-       JSONObject trial = new JSONObject();
-      
-      for (int i = 0; i < list.get(x).getBrgy().size(); i++) {
-               
-                  JSONObject farm = new JSONObject();
-                  
-                for(int y=0; y<list.get(x).getBrgy().get(i).getFarmer().size();y++){
-                   
-                 farm.put(list.get(x).getBrgy().get(i).getFarmer().get(y).getName(), list.get(x).getBrgy().get(i).getFarmer().get(y).getProduction());
+        for (prodMunicipality list1 : list) {
+            JSONObject trial = new JSONObject();
+            for (int i = 0; i < list1.getBrgy().size(); i++) {
+                JSONObject farm = new JSONObject();
+                for (int y = 0; y < list1.getBrgy().get(i).getFarmer().size(); y++) {
+                    farm.put(list1.getBrgy().get(i).getFarmer().get(y).getName(), list1.getBrgy().get(i).getFarmer().get(y).getProduction());
                 }
-                trial.put(list.get(x).getBrgy().get(i).getBarangay(),farm);
-               
+                trial.put(list1.getBrgy().get(i).getBarangay(), farm);
             }
-      
-   data.put(list.get(x).getMunicipal(),trial);
-}
+            data.put(list1.getMunicipal(), trial);
+        }
 //        for (int x = 0; x < 3; x++) {
 //            JSONObject mdata = new JSONObject();
 //

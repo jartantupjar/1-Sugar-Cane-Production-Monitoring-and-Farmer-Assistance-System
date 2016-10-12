@@ -233,8 +233,16 @@
                                 levelIsConstant: false,
                                 levels: [{
                                         level: 1,
-                                        dataLabels: {
-                                            enabled: true
+                                        dataLabels: {useHTML:true,
+					enabled: true,
+                    formatter:function(){
+                        if(this.point.isLeaf) {
+                            
+                            return '<a href="http://www.google.com" target="_blank">' + this.key + '</div>';
+                        } else {
+                            return '<a href="http://www.google.com" target="_blank">' + this.key + '</div>';
+                        }
+                    }
                                         },
                                         borderWidth: 3
                                     }],
