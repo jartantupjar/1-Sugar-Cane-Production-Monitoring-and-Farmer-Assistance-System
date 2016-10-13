@@ -37,16 +37,16 @@ public  class viewFarmerProfile extends BaseServlet {
         FarmerDB farmerdb = new FarmerDB();
         HttpSession session = request.getSession();
         Farmer farmer;
-       
+       ////////////////****** TODO CHECK IF NAME IS A FARMR
         String name = request.getParameter("name");
-        ;
+        
         System.err.println("TODAYS user " + session.getAttribute("user"));
         System.err.println("TODAYS DATE " + session.getAttribute("todayDate"));
      
         farmer = farmerdb.viewFarmerDetails(name);
     
         session.setAttribute("farmDet", farmer);
-        
+        session.setAttribute("farm", name);
 
         RequestDispatcher rd = context.getRequestDispatcher("/viewFarmerProfile.jsp");
 

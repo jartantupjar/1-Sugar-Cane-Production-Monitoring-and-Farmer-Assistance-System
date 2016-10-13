@@ -88,6 +88,14 @@
         <servlet-name>viewFarmerProfile</servlet-name>
         <servlet-class>controller.viewFarmerProfile</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>viewFarmerRecT</servlet-name>
+        <servlet-class>controller.viewFarmerRecT</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewFarmerProbT</servlet-name>
+        <servlet-class>controller.viewFarmerProbT</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
@@ -175,6 +183,14 @@
     <servlet-mapping>
         <servlet-name>viewFarmerProfile</servlet-name>
         <url-pattern>/viewFarmerProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewFarmerRecT</servlet-name>
+        <url-pattern>/viewFarmerRecT</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewFarmerProbT</servlet-name>
+        <url-pattern>/viewFarmerProbT</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

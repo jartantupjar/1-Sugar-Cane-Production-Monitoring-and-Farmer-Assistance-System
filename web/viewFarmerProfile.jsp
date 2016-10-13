@@ -220,16 +220,10 @@
                                                 <th><input name="select_all" value="1" id="probTable-select-all" type="checkbox" /></th>
                                                 <th>Problem</th>
                                                 <th>Description</th>
+                                                 <th></th>
                                             </tr>
                                         </thead>
-                                        <tfoot>
-                                            <tr>
-                                                <th></th>
-                                                <th>Problem</th>
-                                                <th>Description</th>
-
-                                            </tr>
-                                        </tfoot>
+                                        
                                     </table>
                                 </div>
 
@@ -238,7 +232,7 @@
                         <div class="col-md-6"> 
                             <div class="box box-info collapsed-box" >
                                 <div class="box-header with-border">
-                                    <h1 class="box-title">Rec & Proj List</h1>
+                                    <h1 class="box-title">Rec & Proj List(add list of programs)</h1>
                                     <div class="box-tools pull-right " >
                                         <button class="btn btn-box-tool"  data-widget="collapse"><i class="fa fa-minus"></i></button>
                                         <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -246,25 +240,16 @@
                                 </div>
 
                                 <div class="box-body">
-                                    <table id="example" class="table  display table-hover" cellspacing="0" width="100%">
+                                    <table id="recTable" class="table  display table-hover" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
-                                                <th>Farm Name</th>
-                                                <th>Farm Name</th>
-                                                <th>Owner</th>
-                                                <th>Barangay</th>
+                                                <th>Rec/Program</th>
+                                                <th>Description</th>
+                                                <th></th>
 
                                             </tr>
                                         </thead>
-                                        <tfoot>
-                                            <tr>
-                                                <th></th>
-                                                <th>Farm Name</th>
-                                                <th>Owner</th>
-                                                <th>Barangay</th>
-
-                                            </tr>
-                                        </tfoot>
+                                       
                                     </table>
                                 </div>
 
@@ -298,26 +283,26 @@
         <script>
 
             $(document).ready(function () {
-                var table = $('#example').DataTable({
+                var table = $('#recTable').DataTable({
                     'ajax': {
-                        'url': 'viewBrgyList'
+                        'url': 'viewFarmerRecT?name=${farm}'
                     },
                     'columnDefs': [{
-                            'targets': 0,
+                            'targets': 2,
                             'render': function (data, type, full, meta) {
-                                return '<a href="' + data + '">' + data + '</a>';
+                                return '<a href="' + data + '">details</a>';
                             }
                         }]
                 });
 
                 var table1 = $('#probTable').DataTable({
                     'ajax': {
-                        'url': 'viewBrgyList'
+                        'url': 'viewFarmerProbT?name=${farm}'
                     },
                     'columnDefs': [{
-                            'targets': 0,
+                            'targets': 2,
                             'render': function (data, type, full, meta) {
-                                return '<a href="' + data + '">' + data + '</a>';
+                                return '<a href="' + data + '">details</a>';
                             }
                         }]
                 });
