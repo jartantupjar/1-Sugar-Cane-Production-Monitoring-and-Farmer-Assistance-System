@@ -248,7 +248,7 @@
                                                     return this.key;
                                                 } else {
 
-                                                    return '<a style="color:white" href="Recommendations?name=' + this.name + '"   target="_blank">' + this.key + '</div>';
+                                                    return '<a style="color:white" href="viewFarmerProfile?name=' + this.key + '"   target="_blank">' + this.key + '</div>';
 
                                                 }
                                             }

@@ -84,6 +84,10 @@
         <servlet-name>sendAlert</servlet-name>
         <servlet-class>controller.sendAlert</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>viewFarmerProfile</servlet-name>
+        <servlet-class>controller.viewFarmerProfile</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
@@ -167,6 +171,10 @@
     <servlet-mapping>
         <servlet-name>sendAlert</servlet-name>
         <url-pattern>/sendAlert</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewFarmerProfile</servlet-name>
+        <url-pattern>/viewFarmerProfile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

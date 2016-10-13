@@ -20,7 +20,7 @@
                 <section class="content-header">
 
                     <h1>
-                       Farmer Profile
+                        Farmer Profile
                         <small>Optional description</small>
                     </h1>
                 </section>
@@ -30,13 +30,14 @@
                             <div class="box box-primary">
                                 <div class="box-body box-profile">
 
-                                    <h3 class="profile-username text-center">Henry</h3>
+                                    <h3 class="profile-username text-center"><c:out value="${farmDet.name}"/> </h3>
 
-                                    <p class="text-muted text-center">Jose</p>
+                                    <!-- <p class="text-muted text-center">Jose</p> -->
 
                                     <ul class="list-group list-group-unbordered">
+
                                         <li class="list-group-item">
-                                            <b>Phone Number</b> <a class="pull-right">0949395893</a>
+                                            <b>Phone Number</b> <a class="pull-right"><c:out value="${farmDet.phone}"/> </a>
                                         </li>
                                         <li class="list-group-item">
                                             <b>Gender</b> <a class="pull-right">
@@ -55,29 +56,54 @@
                                         <li class="list-group-item">
                                             <b>Address</b> <a class="">#3 sugarcane st. brgy regulations</a>
                                         </li>
+                                        <li class="list-group-item">
+                                            <b>Current Production</b> <a class="pull-right">5</a>
+                                        </li>
+                                         <li class="list-group-item">
+                                            <b>Total Harvest </b> <a class="pull-right">5</a>
+                                        </li>
+                                         <li class="list-group-item">
+                                            <b>Current Production</b> <a class="pull-right">5</a>
+                                        </li>
+                                         <li class="list-group-item">
+                                            <b>Current TC/HA</b> <a class="pull-right">
+                                                2.3
+                                            </a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>AVG TC/HA</b> <a class="pull-right">
+                                                2.3
+                                            </a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Total HA</b> <a class="pull-right">
+                                                153
+                                            </a>
+                                        </li>
                                     </ul>
 
                                 </div>
                                 <!-- /.box-body -->
                             </div>    
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <div class="box box-success">
                                 <div class="box-header with-border">
                                     <h1 class="box-title">Farm Site Pic</h1>
-                                   
+
                                 </div>
                                 <div class="box-body">
-                                   
-                            
-                                        <img src="dist/img/user2-160x160.jpg" style="height: 450 px ; width: 400 px">
-                                    
-                                 
+
+
+                                    <img src="dist/img/user2-160x160.jpg" alt="crop" width="370" height="400">
+
+
 
                                 </div>
                             </div>
 
                         </div>
+                        
                         <div class="col-md-10">
                             <!-- LINE CHART -->
                             <div class="box box-info">
@@ -108,7 +134,7 @@
                                                 <td>1.23</td>
                                                 <td>35%</td>
                                                 <td> 
-                                                   <span class="badge bg-light-blue block">30%</span><!-- closer of progress bars -->  
+                                                    <span class="badge bg-light-blue block">30%</span><!-- closer of progress bars -->  
                                                 </td>
                                                 <td>tpeh31</td>
                                                 <td>3%</td>
@@ -122,11 +148,11 @@
                                                 <td>80%</td>
                                                 <td>
                                                     <div class="progress-group">
-                                                        
 
-                                                      <span class="progress-number"><b>6 %</b></span>  <div class="progress progress-sm progress-striped active">
-                      <div class="progress-bar progress-bar-primary" style="width: 30%"></div>
-                    </div>
+
+                                                        <span class="progress-number"><b>6 %</b></span>  <div class="progress progress-sm progress-striped active">
+                                                            <div class="progress-bar progress-bar-primary" style="width: 30%"></div>
+                                                        </div>
                                                     </div> <!-- closer of progress bars -->  
                                                 </td>
                                                 <td>TPEH43</td>
@@ -178,37 +204,37 @@
                             </div>
                         </div>
                         <div class="col-md-6" > 
-                                <div class="box box-info collapsed-box">
-                                    <div class="box-header with-border">
-                                        <h1 class="box-title">Problems List</h1>
-                                        <div class="box-tools pull-right">
-                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                        </div>
+                            <div class="box box-info collapsed-box">
+                                <div class="box-header with-border">
+                                    <h1 class="box-title">Problems List</h1>
+                                    <div class="box-tools pull-right">
+                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                     </div>
-
-                                    <div class="box-body">
-                                        <table id="probTable" class="table  dispTable table-hover" cellspacing="0" width="100%">
-                                            <thead>
-                                                <tr>
-                                                    <th><input name="select_all" value="1" id="probTable-select-all" type="checkbox" /></th>
-                                                    <th>Problem</th>
-                                                    <th>Description</th>
-                                                </tr>
-                                            </thead>
-                                            <tfoot>
-                                                <tr>
-                                                    <th></th>
-                                                    <th>Problem</th>
-                                                    <th>Description</th>
-
-                                                </tr>
-                                            </tfoot>
-                                        </table>
-                                    </div>
-
                                 </div>
-                            </div> 
+
+                                <div class="box-body">
+                                    <table id="probTable" class="table  dispTable table-hover" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th><input name="select_all" value="1" id="probTable-select-all" type="checkbox" /></th>
+                                                <th>Problem</th>
+                                                <th>Description</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th></th>
+                                                <th>Problem</th>
+                                                <th>Description</th>
+
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div> 
                         <div class="col-md-6"> 
                             <div class="box box-info collapsed-box" >
                                 <div class="box-header with-border">
@@ -245,7 +271,7 @@
                             </div>
 
                         </div>
-                        
+
 
                     </div>
                 </section>
@@ -283,9 +309,9 @@
                             }
                         }]
                 });
-                
+
                 var table1 = $('#probTable').DataTable({
-                     'ajax': {
+                    'ajax': {
                         'url': 'viewBrgyList'
                     },
                     'columnDefs': [{
