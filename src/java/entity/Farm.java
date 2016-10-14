@@ -11,12 +11,10 @@ package entity;
  */
 public class Farm {
 
-    private String owner;
-    private String farm_name;
-    private String district,barangay;
-    private double area;
+    private int id;
+    private String farmer,district,barangay,municipality,variety;
+    private double area,yield,totalA,totalHa;
     private String management_type;
-    private String address;
     private double nitrogen, phosporus, potassium, ph_level;
     private String boundaries;
     private double latCenter;
@@ -24,31 +22,31 @@ public class Farm {
     private boolean selected;
 
     /**
-     * @return the owner
+     * @return the id
      */
-    public String getOwner() {
-        return owner;
+    public int getId() {
+        return id;
     }
 
     /**
-     * @param owner the owner to set
+     * @param id the id to set
      */
-    public void setOwner(String owner) {
-        this.owner = owner;
+    public void setId(int id) {
+        this.id = id;
     }
 
     /**
-     * @return the farm_name
+     * @return the farmer
      */
-    public String getFarm_name() {
-        return farm_name;
+    public String getFarmer() {
+        return farmer;
     }
 
     /**
-     * @param farm_name the farm_name to set
+     * @param farmer the farmer to set
      */
-    public void setFarm_name(String farm_name) {
-        this.farm_name = farm_name;
+    public void setFarmer(String farmer) {
+        this.farmer = farmer;
     }
 
     /**
@@ -63,6 +61,20 @@ public class Farm {
      */
     public void setDistrict(String district) {
         this.district = district;
+    }
+
+    /**
+     * @return the barangay
+     */
+    public String getBarangay() {
+        return barangay;
+    }
+
+    /**
+     * @param barangay the barangay to set
+     */
+    public void setBarangay(String barangay) {
+        this.barangay = barangay;
     }
 
     /**
@@ -192,20 +204,6 @@ public class Farm {
     }
 
     /**
-     * @return the address
-     */
-    public String getAddress() {
-        return address;
-    }
-
-    /**
-     * @param address the address to set
-     */
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    /**
      * @return the selected
      */
     public boolean isSelected() {
@@ -220,17 +218,76 @@ public class Farm {
     }
 
     /**
-     * @return the barangay
+     * @return the municipality
      */
-    public String getBarangay() {
-        return barangay;
+    public String getMunicipality() {
+        return municipality;
     }
 
     /**
-     * @param barangay the barangay to set
+     * @param municipality the municipality to set
      */
-    public void setBarangay(String barangay) {
-        this.barangay = barangay;
+    public void setMunicipality(String municipality) {
+        this.municipality = municipality;
     }
+
+    /**
+     * @return the variety
+     */
+    public String getVariety() {
+        return variety;
+    }
+
+    /**
+     * @param variety the variety to set
+     */
+    public void setVariety(String variety) {
+        this.variety = variety;
+    }
+
+    /**
+     * @return the yield
+     */
+    public double getYield() {
+        return yield;
+    }
+
+    /**
+     * @param yield the yield to set
+     */
+    public void setYield(double yield) {
+        this.yield = yield;
+    }
+
+    /**
+     * @return the totalA
+     */
+    public double getTotalA() {
+        return totalA;
+    }
+
+    /**
+     * @param totalA the totalA to set
+     */
+    public void setTotalA(double totalA) {
+        this.totalA = totalA;
+    }
+
+    /**
+     * @return the totalHa
+     */
+    public double getTotalHa() {
+        return totalHa;
+    }
+
+    /**
+     * @param totalHa the totalHa to set
+     */
+    public void setTotalHa(double totalHa) {
+        this.totalHa = totalHa;
+    }
+
+
+
 
 }

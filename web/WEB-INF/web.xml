@@ -96,6 +96,10 @@
         <servlet-name>viewFarmerProbT</servlet-name>
         <servlet-class>controller.viewFarmerProbT</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>viewFarmersFieldTable</servlet-name>
+        <servlet-class>controller.viewFarmersFieldTable</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
@@ -191,6 +195,10 @@
     <servlet-mapping>
         <servlet-name>viewFarmerProbT</servlet-name>
         <url-pattern>/viewFarmerProbT</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewFarmersFieldTable</servlet-name>
+        <url-pattern>/viewFarmersFieldTable</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -38,16 +38,45 @@ public class FarmerDB {
                  p = new Farmer();
                  p.setName(name);
                  p.setPhone(rs.getString("cell_num"));
-//              p.setProduction(rs.getDouble("currProduction"));
-//             p.setCurYield(rs.getDouble("curYield"));
-//               p.setTfarms(rs.getDouble("avgYield"));
-//             p.setTfarms(rs.getDouble("totalHa"));
+                   p=viewHistProdDetails(p);
              }
+             
              rs.close();
              pstmt.close();
              conn.close();
              
              return p;
+         } catch (SQLException ex) {
+             Logger.getLogger(FarmerDB.class.getName()).log(Level.SEVERE, null, ex);
+         }
+      return null;
+     }
+       public Farmer viewHistProdDetails(Farmer f) {
+        
+         try {
+             // put functions here : previous week production, this week production
+             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+             Connection conn = myFactory.getConnection();
+             String query = "select sum(tons_cane) as totProd,avg(tons_cane) as avgProd,sum(area) as tarea,avg(area) as avgarea,avg(tons_cane)/avg(area) as avgyield,avg(tons_cane/area) as tavgyield,count(DISTINCT year) as tyears from historicalproduction where Farmers_name=? ;";
+             PreparedStatement pstmt = conn.prepareStatement(query);
+             pstmt.setString(1, f.getName());
+             ResultSet rs = pstmt.executeQuery();
+             
+             if (rs.next()) {
+   
+            f.setTotalProd(rs.getDouble("totProd"));
+          f.setAvgProd(rs.getDouble("avgProd"));
+          f.setTotalArea(rs.getDouble("tarea"));
+          f.setAvgArea(rs.getDouble("avgarea"));
+          f.setAvgYield(rs.getDouble("avgyield"));
+          f.setTavgYield(rs.getDouble("tavgyield"));
+          f.settYears(rs.getInt("tyears"));
+             }
+             rs.close();
+             pstmt.close();
+             conn.close();
+             
+             return f;
          } catch (SQLException ex) {
              Logger.getLogger(FarmerDB.class.getName()).log(Level.SEVERE, null, ex);
          }

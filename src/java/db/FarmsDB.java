@@ -13,14 +13,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class FarmsDB {
+    
     public boolean createFarm(Farm farm){
+        //DOESNT WORK
         try{
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "insert into farms(owner, farm_name, boundary, area) values (?,?,?,?)";
             PreparedStatement pstmt= conn.prepareStatement(query);
-            pstmt.setString(1, farm.getOwner());
-            pstmt.setString(2, farm.getFarm_name());
+         
             pstmt.setString(3, farm.getBoundaries());
             pstmt.setDouble(4, farm.getArea());
             int i = pstmt.executeUpdate();
@@ -33,6 +34,7 @@ public class FarmsDB {
         return false;
     }
     public boolean editFarm(Farm farm){
+        //DOESNT WORK
         try{
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
@@ -41,13 +43,12 @@ public class FarmsDB {
             PreparedStatement pstmt= conn.prepareStatement(query);
             pstmt.setString(1, farm.getDistrict());
             pstmt.setString(2, farm.getManagement_type());
-            pstmt.setString(3, farm.getAddress());
+   
             pstmt.setDouble(4, farm.getNitrogen());
             pstmt.setDouble(5, farm.getPhosporus());
             pstmt.setDouble(6, farm.getPotassium());
             pstmt.setDouble(7, farm.getPhosporus());
-            pstmt.setString(8, farm.getOwner());
-            pstmt.setString(9, farm.getFarm_name());
+       
             int i = pstmt.executeUpdate();
             pstmt.close();
             conn.close();
@@ -58,27 +59,33 @@ public class FarmsDB {
         return false;
     }
     public ArrayList<Farm> getFarTable() {
+   return null;
+    }
+      public ArrayList<Farm> getFarmerFieldsTable(String fname) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select f.farm_name,f.owner,f.barangay from farms f;";
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
+            String query = "select id,Farmers_name,barangay,municipality,area from fields where farmers_name=?;";
+           PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, fname);
+            ResultSet rs= pstmt.executeQuery();
             ArrayList<Farm> farms = null;
             Farm farm;
             if (rs.next()) {
                 farms = new ArrayList<Farm>();
                 do {
                     farm = new Farm();
-                    farm.setFarm_name(rs.getString(1));
-                    farm.setOwner(rs.getString(2));
-                    farm.setBarangay(rs.getString(3));
-                  
+                    farm.setId(rs.getInt("id"));
+                    farm.setFarmer(fname);
+                    farm.setArea(rs.getDouble("area"));
+                    farm.setBarangay(rs.getString("barangay"));
+                    farm.setMunicipality(rs.getString("municipality"));
                     farms.add(farm);
+                    
                 } while (rs.next());
             }
             rs.close();
-            stmt.close();
+            pstmt.close();
             conn.close();
             return farms;
         } catch (SQLException ex) {

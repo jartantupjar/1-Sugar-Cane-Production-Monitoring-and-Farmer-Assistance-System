@@ -37,22 +37,22 @@
 
                                         <li class="list-group-item">
                                             <b>Problem Name : </b> <a class="pull-right"><b>
-                                                <c:out value="${problem.prob_name}">${problem.prob_name}</c:out>
+                                                <c:out value="${problem.prob_name}"></c:out>
                                                 </b> </a>
                                         </li>
                                         <li class="list-group-item">
                                             <b>Type</b> <a class="pull-right">
-                                                <c:out value="${problem.type}">${problem.type}</c:out>
+                                                <c:out value="${problem.type}"></c:out>
                                             </a>
                                         </li>
                                         <li class="list-group-item">
                                             <b>Total Farms Affected </b> <a class="pull-right">
-                                                <c:out value="${problem.totalFarms}">${problem.totalFarms}</c:out>
+                                                <c:out value="${problem.totalFarms}"></c:out>
                                             </a>
                                         </li>
                                         <li class="list-group-item">
                                             <b>Number of Solutions</b> <a class="pull-right" href="#myModal" data-toggle="modal" data-target="#myModal">
-                                                <c:out value="${problem.totalFarms}">${problem.totalFarms}</c:out>
+                                                <c:out value="${problem.totalFarms}"></c:out>
                                                 </a>
                                         </li>
                                     </ul>
@@ -101,7 +101,7 @@
                                 </div>
                             </div>
 
-                            <div class="box-body no-padding">
+                            <div class="box-body">
                                 <table class="table table-bordered" id="example">
                                     <thead>
                                         <tr>

@@ -2,6 +2,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file ="navbar.jsp" %>
 <%--
+CREATE MUNICPAL SUMMARY
+CREATE BRGY SUMMARY
+ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
 
 
 --%>
@@ -56,30 +59,7 @@
                                         <li class="list-group-item">
                                             <b>Address</b> <a class="">#3 sugarcane st. brgy regulations</a>
                                         </li>
-                                        <li class="list-group-item">
-                                            <b>Current Production</b> <a class="pull-right">5</a>
-                                        </li>
-                                         <li class="list-group-item">
-                                            <b>Total Harvest </b> <a class="pull-right">5</a>
-                                        </li>
-                                         <li class="list-group-item">
-                                            <b>Current Production</b> <a class="pull-right">5</a>
-                                        </li>
-                                         <li class="list-group-item">
-                                            <b>Current TC/HA</b> <a class="pull-right">
-                                                2.3
-                                            </a>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <b>AVG TC/HA</b> <a class="pull-right">
-                                                2.3
-                                            </a>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <b>Total HA</b> <a class="pull-right">
-                                                153
-                                            </a>
-                                        </li>
+
                                     </ul>
 
                                 </div>
@@ -97,14 +77,58 @@
 
                                     <img src="dist/img/user2-160x160.jpg" alt="crop" width="370" height="400">
 
-
-
                                 </div>
                             </div>
 
                         </div>
-                        
-                        <div class="col-md-10">
+                        <div class="col-md-4">
+                            <div class="box box-primary">
+                                <div class="box-body box-profile">
+
+                                    <h3 class="profile-username text-center">Production Details : <c:out value="${farmDet.tYears}"/> year/s worth of data </h3>
+
+                                    <!-- <p class="text-muted text-center">Jose</p> -->
+
+                                    <ul class="list-group list-group-unbordered">
+
+                                        <li class="list-group-item">
+                                            <b>Current Production</b> <a class="pull-right"></a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Current Area Harvested</b> <a class="pull-right"></a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Current Yield</b> <a class="pull-right"></a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Total Production</b> <a class="pull-right"><c:out value="${farmDet.totalProd}"/> </a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Total Area Harvested</b> <a class="pull-right"><c:out value="${farmDet.totalArea}"/> </a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Average Production</b> <a class="pull-right"><c:out value="${farmDet.avgProd}"/> </a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Average Area Harvested</b> <a class="pull-right">
+                                                <c:out value="${farmDet.avgArea}"/> 
+                                            </a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Average Yield(avg(TC)/avg(HA))</b> <a class="pull-right"><c:out value="${farmDet.avgYield}"/> 
+                                            </a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Total Average Yield (avg(TC/HA))</b> <a class="pull-right"><c:out value="${farmDet.tavgYield}"/> 
+                                            </a>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                                <!-- /.box-body -->
+                            </div>    
+                        </div>
+                        <div class="col-md-12">
                             <!-- LINE CHART -->
                             <div class="box box-info">
                                 <div class="box-header with-border">
@@ -118,84 +142,38 @@
                                 </div>
                                 <div class="box-body table-responsive">
 
-                                    <table class="table table-hover">
-                                        <tbody><tr>
-                                                <th>Farmer Name</th>
+                                    <table id="fieldtable" class="table table-hover">
+                                        <thead><tr>
+                                                <th>id</th>
+                                                <th>Barangay</th>
+                                                <th>Municipality</th>
+                                                <th>Area</th>
                                                 <th>Yield</th>
-                                                <th>Farm Size</th>
                                                 <th>% completed</th>
                                                 <th>Cane Variety</th>
-                                                <th>%PC</th>
-                                                <th>%RC</th>
-                                                <th>detailsbtn</th>
+                                                <th></th>
                                             </tr>
-                                            <tr>
-                                                <td>John Doe</td>
-                                                <td>1.23</td>
-                                                <td>35%</td>
-                                                <td> 
-                                                    <span class="badge bg-light-blue block">30%</span><!-- closer of progress bars -->  
-                                                </td>
-                                                <td>tpeh31</td>
-                                                <td>3%</td>
-                                                <td>77%</td>
-                                                <td>detailsbtn</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td href="">henry ford</td>
-                                                <td>1.23</td>
-                                                <td>80%</td>
-                                                <td>
-                                                    <div class="progress-group">
+                                        </thead>
+<!--                                        <tr>
+                                            <td >henry ford</td>
+                                            <td>1.23</td>
+                                            <td>80%</td>
+                                            <td>
+                                                <div class="progress-group">
 
 
-                                                        <span class="progress-number"><b>6 %</b></span>  <div class="progress progress-sm progress-striped active">
-                                                            <div class="progress-bar progress-bar-primary" style="width: 30%"></div>
-                                                        </div>
-                                                    </div> <!-- closer of progress bars -->  
-                                                </td>
-                                                <td>TPEH43</td>
-                                                <td>3%</td>
-                                                <td>77%</td>
-                                                <td>detailsbtn</td>
-                                            </tr>
-                                            <tr>
+                                                    <span class="progress-number"><b>6 %</b></span>  <div class="progress progress-sm progress-striped active">
+                                                        <div class="progress-bar progress-bar-primary" style="width: 30%"></div>
+                                                    </div>
+                                                </div>  closer of progress bars   
+                                            </td>
+                                            <td>TPEH43</td>
+                                            <td>3%</td>
+                                            <td>77%</td>
+                                            <td>detailsbtn</td>
+                                        </tr>-->
 
-                                                <td href="">Michael Johnathan</td>
-                                                <td>1.23</td>
-                                                <td>80%</td>
-                                                <td><div class="progress-group">
-                                                        <span class="progress-number"><b>40 %</b></span>
-
-                                                        <div class="progress sm">
-                                                            <div class="progress-bar progress-bar-warning" style="width: 40%"></div>
-                                                        </div>
-                                                    </div> <!-- closer of progress bars -->  </td>
-                                                <td>TPEH43</td>
-                                                <td>3%</td>
-                                                <td>77%</td>
-                                                <td>detailsbtn</td>
-                                            </tr>
-                                            <tr>
-                                                <td href="">Danny Frisk</td>
-                                                <td>1.23</td>
-                                                <td>80%</td>
-                                                <td>
-                                                    <div class="progress-group">
-                                                        <span class="progress-number"><b>80 %</b></span>
-
-                                                        <div class="progress sm">
-                                                            <div class="progress-bar progress-bar-green" style="width: 80%"></div>
-                                                        </div>
-                                                    </div> <!-- closer of progress bars -->  
-                                                </td>
-                                                <td>TPEH43</td>
-                                                <td>3%</td>
-                                                <td>77%</td>
-                                                <td>detailsbtn</td>
-                                            </tr>
-                                        </tbody>
+                                   
                                     </table>
 
 
@@ -204,7 +182,7 @@
                             </div>
                         </div>
                         <div class="col-md-6" > 
-                            <div class="box box-info collapsed-box">
+                            <div class="box box-info">
                                 <div class="box-header with-border">
                                     <h1 class="box-title">Problems List</h1>
                                     <div class="box-tools pull-right">
@@ -220,17 +198,17 @@
                                                 <th><input name="select_all" value="1" id="probTable-select-all" type="checkbox" /></th>
                                                 <th>Problem</th>
                                                 <th>Description</th>
-                                                 <th></th>
+                                                <th></th>
                                             </tr>
                                         </thead>
-                                        
+
                                     </table>
                                 </div>
 
                             </div>
                         </div> 
                         <div class="col-md-6"> 
-                            <div class="box box-info collapsed-box" >
+                            <div class="box box-info" >
                                 <div class="box-header with-border">
                                     <h1 class="box-title">Rec & Proj List(add list of programs)</h1>
                                     <div class="box-tools pull-right " >
@@ -249,7 +227,7 @@
 
                                             </tr>
                                         </thead>
-                                       
+
                                     </table>
                                 </div>
 
@@ -283,6 +261,23 @@
         <script>
 
             $(document).ready(function () {
+                   var table = $('#fieldtable').DataTable({
+                    'ajax': {
+                        'url': 'viewFarmersFieldTable?name=${farm}'
+                    },
+                    'columnDefs': [{
+                            'targets': 5,
+                            'render': function (data, type, full, meta) {
+                                    return   '<div class="progress-group"> <span class="progress-number"><b>' + data + ' </b></span>  <div class="progress progress-sm progress-striped active"><div class="progress-bar progress-bar-primary" style="width: ' + data + '%"></div></div> </div>';
+                               
+                            }
+                        },{
+                            'targets': 7,
+                            'render': function (data, type, full, meta) {
+                                return '<a class="btn btn-primary" href="' + data + '">details</a>';
+                            }
+                        }]
+                });
                 var table = $('#recTable').DataTable({
                     'ajax': {
                         'url': 'viewFarmerRecT?name=${farm}'
@@ -290,7 +285,7 @@
                     'columnDefs': [{
                             'targets': 2,
                             'render': function (data, type, full, meta) {
-                                return '<a href="' + data + '">details</a>';
+                                return '<a class="btn btn-primary" href="viewRecDetails?id=' + data + '">details</a>';
                             }
                         }]
                 });
@@ -302,7 +297,7 @@
                     'columnDefs': [{
                             'targets': 2,
                             'render': function (data, type, full, meta) {
-                                return '<a href="' + data + '">details</a>';
+                                return '<a class="btn btn-primary" href="viewProbDetails?id=' + data + '">details</a>';
                             }
                         }]
                 });

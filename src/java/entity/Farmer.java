@@ -10,9 +10,9 @@ package entity;
  * @author ndrs
  */
 public class Farmer {
-    private int id,tfarms ;
+    private int id,tfarms, tYears ;
     private String name,phone,year;
-    private Double production,curYield,avgYield,totalHa;    
+    private Double production,totalProd,avgProd,totalArea,avgArea,curYield,avgYield,tavgYield,tYield;    
 
     /**
      * @return the id
@@ -126,17 +126,102 @@ public class Farmer {
         this.avgYield = avgYield;
     }
 
+
     /**
-     * @return the totalHa
+     * @return the tYears
      */
-    public Double getTotalHa() {
-        return totalHa;
+    public int gettYears() {
+        return tYears;
     }
 
     /**
-     * @param totalHa the totalHa to set
+     * @param tYears the tYears to set
      */
-    public void setTotalHa(Double totalHa) {
-        this.totalHa = totalHa;
+    public void settYears(int tYears) {
+        this.tYears = tYears;
+    }
+
+    /**
+     * @return the totalProd
+     */
+    public Double getTotalProd() {
+        return totalProd;
+    }
+
+    /**
+     * @param totalProd the totalProd to set
+     */
+    public void setTotalProd(Double totalProd) {
+        this.totalProd = totalProd;
+    }
+
+    /**
+     * @return the avgProd
+     */
+    public Double getAvgProd() {
+        return avgProd;
+    }
+
+    /**
+     * @param avgProd the avgProd to set
+     */
+    public void setAvgProd(Double avgProd) {
+        this.avgProd = avgProd;
+    }
+
+    /**
+     * @return the totalArea
+     */
+    public Double getTotalArea() {
+        return totalArea;
+    }
+
+    /**
+     * @param totalArea the totalArea to set
+     */
+    public void setTotalArea(Double totalArea) {
+        this.totalArea = totalArea;
+    }
+
+    /**
+     * @return the avgArea
+     */
+    public Double getAvgArea() {
+        return avgArea;
+    }
+
+    /**
+     * @param avgArea the avgArea to set
+     */
+    public void setAvgArea(Double avgArea) {
+        this.avgArea = avgArea;
+    }
+
+    /**
+     * @return the tavgYield
+     */
+    public Double getTavgYield() {
+        return tavgYield;
+    }
+
+    /**
+     * @param tavgYield the tavgYield to set
+     */
+    public void setTavgYield(Double tavgYield) {
+        this.tavgYield = tavgYield;
+    }
+
+    /**
+     * @return the tYield
+     */
+    public Double gettYield() {
+        return tYield;
+    }
+
+    /**
+     * @param tYield the tYield to set
+     */
+    public void settYield(Double tYield) {
+        this.tYield = tYield;
     }
 }
