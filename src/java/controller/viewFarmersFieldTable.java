@@ -39,6 +39,7 @@ public class viewFarmersFieldTable extends BaseServlet {
                 obj.add(Integer.toString(farms.get(i).getId()));
                 obj.add(farms.get(i).getBarangay());
                 obj.add(farms.get(i).getMunicipality());
+                 obj.add("2015-11-12");
                 obj.add(Double.toString(farms.get(i).getArea()));
                 obj.add(Double.toString(42.79));
                 obj.add(Double.toString(12));

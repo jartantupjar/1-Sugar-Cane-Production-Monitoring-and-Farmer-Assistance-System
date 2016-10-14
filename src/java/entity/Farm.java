@@ -5,6 +5,8 @@
  */
 package entity;
 
+import java.sql.Date;
+
 /**
  *
  * @author Bryll Joey Delfin
@@ -13,6 +15,7 @@ public class Farm {
 
     private int id;
     private String farmer,district,barangay,municipality,variety;
+    private Date date_updated;
     private double area,yield,totalA,totalHa;
     private String management_type;
     private double nitrogen, phosporus, potassium, ph_level;
@@ -285,6 +288,20 @@ public class Farm {
      */
     public void setTotalHa(double totalHa) {
         this.totalHa = totalHa;
+    }
+
+    /**
+     * @return the date_updated
+     */
+    public Date getDate_updated() {
+        return date_updated;
+    }
+
+    /**
+     * @param date_updated the date_updated to set
+     */
+    public void setDate_updated(Date date_updated) {
+        this.date_updated = date_updated;
     }
 
 

@@ -147,6 +147,7 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                                                 <th>id</th>
                                                 <th>Barangay</th>
                                                 <th>Municipality</th>
+                                                <th>Date Updated</th>
                                                 <th>Area</th>
                                                 <th>Yield</th>
                                                 <th>% completed</th>
@@ -266,13 +267,13 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                         'url': 'viewFarmersFieldTable?name=${farm}'
                     },
                     'columnDefs': [{
-                            'targets': 5,
+                            'targets': 6,
                             'render': function (data, type, full, meta) {
                                     return   '<div class="progress-group"> <span class="progress-number"><b>' + data + ' </b></span>  <div class="progress progress-sm progress-striped active"><div class="progress-bar progress-bar-primary" style="width: ' + data + '%"></div></div> </div>';
                                
                             }
                         },{
-                            'targets': 7,
+                            'targets': 8,
                             'render': function (data, type, full, meta) {
                                 return '<a class="btn btn-primary" href="' + data + '">details</a>';
                             }

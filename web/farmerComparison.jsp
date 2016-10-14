@@ -23,7 +23,7 @@ on barangay selection
         <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
 
         <link rel="stylesheet" href="plugins/select2/select2.min.css">
-
+  
 
 
     </head>
@@ -162,7 +162,7 @@ on barangay selection
                             <!--<label class="pull-left">Multiple</label> !-->
                             <div class="col-md-7">
 
-                                <select class="select2" multiple="multiple" data-placeholder="Select a Tag" style="width: 100%;">
+                                <select id="select2" class="select2" multiple="multiple" data-placeholder="Select a Tag" style="width: 100%;">
                                     <option>Yield</option>
                                     <option>Total Size</option>
                                     <option>Variety</option>
@@ -176,7 +176,7 @@ on barangay selection
 
                             <div class="col-sm-1">
 
-                                <div class="btn btn-primary" style="width: 100%">Search</div>
+                                <button id="sButton" class="btn btn-primary" type="submit" style="width: 100%">Search</button>
                             </div>
 
                         </div>
@@ -253,16 +253,30 @@ on barangay selection
 
         <script type="text/javascript" src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="plugins/select2/select2.full.min.js"></script>
+        <script src="plugins/select2/select2.min.js"></script>
 
         <script src="dist/js/app.min.js"></script>
 
         <script type="text/javascript">
             $(function () {
-                $(".select2").select2();
+                var data = [{ id: 0, text: 'enhancement' }, { id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }];
+
+                $("#select2").select2({
+                    data: data
+                    
+                    
+                });
+         $("#sButton").on("click", function () {
+    
+                var test= $("#select2").val();
+               console.log(test);
+                alert(test);
+});
             });
         </script>
+<script type="text/javascript">
 
+        </script>
         <script src="plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
 
