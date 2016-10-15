@@ -58,8 +58,49 @@ public class FarmsDB {
         return false;
     }
 
-    public ArrayList<Farm> getFarTable() {
-        return null;
+    public ArrayList<String> getTags(Farm f) {
+        ArrayList<String> taglist=new ArrayList<>();
+      if(f.getArea()!=0) taglist.add("area");
+       if(f.getBarangay()!=null) taglist.add("barangay");
+       if(f.getMunicipality()!=null) taglist.add("municipality"); 
+       if(f.getFarmer()!=null) taglist.add("farmer");
+       if(f.getYield()!=0) taglist.add("yield");
+       if(f.getTotalHa()!=0) taglist.add("totalHa");
+       if(f.getProduction()!=0) taglist.add("production");
+     //soil analysis
+       SoilAnalysis sa= f.getSoilanalysis();
+       if(sa.getPh_lvl()!=0) taglist.add("ph lvl"); 
+       if(sa.getOrganic_matter()!=0) taglist.add("OM");
+       if(sa.getPhosphorus()!=0) taglist.add("Phosphorus");
+       if(sa.getPotassium()!=0) taglist.add("Potassium");
+     //TILLER      
+         Tillers till= f.getTillers();
+       if(till.getRep()!=0) taglist.add("Rep");
+       if(till.getCount()!=0) taglist.add("Count");
+     //FERTILIZER
+        Fertilizer fz= f.getFertilizer();
+          if(fz.getFertilizer()!=null) taglist.add("Fertilizer");
+        if(fz.getFirst_dose()!=null) taglist.add("first dose");
+         if(fz.getSecond_dose()!=null) taglist.add("second dose");
+         //CROP VAL
+      CropValidation cv= f.getCropVal();
+       if(cv.getVariety()!=null) taglist.add("variety");
+       if(cv.getCrop_class()!=null) taglist.add("crop class");
+       if(cv.getTexture()!=null) taglist.add("texture");
+       if(cv.getFarming_system()!=null) taglist.add("farming system");
+       if(cv.getTopography()!=null) taglist.add("topography");
+       if(cv.getFurrow_distance()!=null) taglist.add("furrow dist");
+       if(cv.getPlanting_density()!=null) taglist.add("plant density");
+       if(cv.getPlanting_date()!=null) taglist.add("plant date");
+       if(cv.getHarvest_date()!=null) taglist.add("harvest date");
+       if(cv.getDate_millable()!=null) taglist.add("date mill");
+       if(cv.getNum_millable()!=0) taglist.add("num mill");
+       if(cv.getAvg_millable_stool()!=null) taglist.add("avgMilStool");
+       if(cv.getBrix()!=null) taglist.add("Brix");
+       if(cv.getStalk_length()!=null) taglist.add("Stalk Len");
+       if(cv.getDiameter()!=null) taglist.add("diameter");
+       if(cv.getWeight()!=null) taglist.add("weight");
+       return taglist;
     }
 
     public ArrayList<Farm> getFarmerFieldsTable(String fname) {

@@ -72,7 +72,7 @@ on barangay selection
                                         </li>
                                         <li class="list-group-item">
                                             <b>Total Area</b> <a class="pull-right">
-                                                <c:out value="${farm.totalA}"/></a>
+                                                <c:out value="${farm.area}"/></a>
                                         </li>
                                         <li class="list-group-item">
                                             <b>Production(TC)</b> <a class="pull-right">
@@ -300,13 +300,13 @@ on barangay selection
                                             </li>
                                             <li class="list-group-item">
                                                 <b>Phosphorus</b> <a class="pull-right">
-                                                     <c:out value="${farm.soilanalysis.phosphorus}"/>
+                                                    <c:out value="${farm.soilanalysis.phosphorus}"/>
                                                 </a>
                                             </li>
 
                                             <li class="list-group-item">
                                                 <b>Potassium</b> <a class="pull-right">
-                                                 <c:out value="${farm.soilanalysis.potassium}"/>
+                                                    <c:out value="${farm.soilanalysis.potassium}"/>
                                                 </a>
                                             </li>
                                         </ul>
@@ -459,17 +459,28 @@ on barangay selection
         </script>
         <script type="text/javascript">
             $(function () {
-                var data = [{id: 0, text: 'enhancement'}, {id: 1, text: 'bug'}, {id: 2, text: 'duplicate'}, {id: 3, text: 'invalid'}, {id: 4, text: 'wontfix'}];
-                $("#select2").select2({
+
+                $.ajax({
+                    url: 'createTagList?id=${id}',
+                    type: 'POST',
+                    dataType: "JSON",
+                    success: function (data) {
+                          $("#select2").select2({
                     data: data
 
 
                 });
+                    }});
+              
+               //  var data = ['enhancement', 'bug', 'duplicate','invalid', 'wontfix'];                          
+                // var data = [{text: 'enhancement'}, {text: 'bug'}, {text: 'duplicate'}, {text: 'invalid'}, {text: 'wontfix'}];      
+                // var data = [{id: 0, text: 'enhancement'}, {id: 1, text: 'bug'}, {id: 2, text: 'duplicate'}, {id: 3, text: 'invalid'}, {id: 4, text: 'wontfix'}];
+             
                 $("#sButton").on("click", function () {
                     var test = $("#select2").val();
 
                     $.ajax({
-                        url: 'searchSimilarFarms?tag=' + test + '"',
+                        url: 'searchSimilarFarms?tag=' + test + '',
                         type: 'POST',
 //                    dataType: "JSON",
                         success: function (data) {

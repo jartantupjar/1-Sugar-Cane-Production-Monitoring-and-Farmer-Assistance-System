@@ -108,6 +108,10 @@
         <servlet-name>viewFieldDetails</servlet-name>
         <servlet-class>controller.viewFieldDetails</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>createTagList</servlet-name>
+        <servlet-class>controller.createTagList</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
@@ -215,6 +219,10 @@
     <servlet-mapping>
         <servlet-name>viewFieldDetails</servlet-name>
         <url-pattern>/viewFieldDetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>createTagList</servlet-name>
+        <url-pattern>/createTagList</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

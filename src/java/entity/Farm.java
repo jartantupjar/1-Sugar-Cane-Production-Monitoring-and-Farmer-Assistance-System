@@ -20,7 +20,7 @@ public class Farm {
     private Fertilizer fertilizer;
     private Tillers tillers;
     private Date date_updated;
-    private double area,yield,totalA,totalHa,production;
+    private double area,yield,totalHa,production;
     private String management_type,boundaries;
     private double latCenter,lngCenter;
   
@@ -194,19 +194,6 @@ public class Farm {
         this.yield = yield;
     }
 
-    /**
-     * @return the totalA
-     */
-    public double getTotalA() {
-        return totalA;
-    }
-
-    /**
-     * @param totalA the totalA to set
-     */
-    public void setTotalA(double totalA) {
-        this.totalA = totalA;
-    }
 
     /**
      * @return the totalHa
