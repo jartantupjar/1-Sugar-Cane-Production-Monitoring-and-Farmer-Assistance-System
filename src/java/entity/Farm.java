@@ -13,15 +13,17 @@ import java.sql.Date;
  */
 public class Farm {
 
-    private int id;
-    private String farmer,district,barangay,municipality,variety;
+    private int id,year;
+    private String farmer,district,barangay,municipality;
+    private SoilAnalysis soilanalysis;
+    private CropValidation CropVal;
+    private Fertilizer fertilizer;
+    private Tillers tillers;
     private Date date_updated;
     private double area,yield,totalA,totalHa;
-    private String management_type;
-    private double nitrogen, phosporus, potassium, ph_level;
-    private String boundaries;
-    private double latCenter;
-    private double lngCenter;
+    private String management_type,boundaries;
+    private double latCenter,lngCenter;
+  
     private boolean selected;
 
     /**
@@ -109,62 +111,6 @@ public class Farm {
     }
 
     /**
-     * @return the nitrogen
-     */
-    public double getNitrogen() {
-        return nitrogen;
-    }
-
-    /**
-     * @param nitrogen the nitrogen to set
-     */
-    public void setNitrogen(double nitrogen) {
-        this.nitrogen = nitrogen;
-    }
-
-    /**
-     * @return the phosporus
-     */
-    public double getPhosporus() {
-        return phosporus;
-    }
-
-    /**
-     * @param phosporus the phosporus to set
-     */
-    public void setPhosporus(double phosporus) {
-        this.phosporus = phosporus;
-    }
-
-    /**
-     * @return the potassium
-     */
-    public double getPotassium() {
-        return potassium;
-    }
-
-    /**
-     * @param potassium the potassium to set
-     */
-    public void setPotassium(double potassium) {
-        this.potassium = potassium;
-    }
-
-    /**
-     * @return the ph_level
-     */
-    public double getPh_level() {
-        return ph_level;
-    }
-
-    /**
-     * @param ph_level the ph_level to set
-     */
-    public void setPh_level(double ph_level) {
-        this.ph_level = ph_level;
-    }
-
-    /**
      * @return the boundaries
      */
     public String getBoundaries() {
@@ -233,21 +179,7 @@ public class Farm {
     public void setMunicipality(String municipality) {
         this.municipality = municipality;
     }
-
-    /**
-     * @return the variety
-     */
-    public String getVariety() {
-        return variety;
-    }
-
-    /**
-     * @param variety the variety to set
-     */
-    public void setVariety(String variety) {
-        this.variety = variety;
-    }
-
+ 
     /**
      * @return the yield
      */
@@ -302,6 +234,76 @@ public class Farm {
      */
     public void setDate_updated(Date date_updated) {
         this.date_updated = date_updated;
+    }
+
+    /**
+     * @return the CropVal
+     */
+    public CropValidation getCropVal() {
+        return CropVal;
+    }
+
+    /**
+     * @param CropVal the CropVal to set
+     */
+    public void setCropVal(CropValidation CropVal) {
+        this.CropVal = CropVal;
+    }
+
+    /**
+     * @return the year
+     */
+    public int getYear() {
+        return year;
+    }
+
+    /**
+     * @param year the year to set
+     */
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    /**
+     * @return the fertilizer
+     */
+    public Fertilizer getFertilizer() {
+        return fertilizer;
+    }
+
+    /**
+     * @param fertilizer the fertilizer to set
+     */
+    public void setFertilizer(Fertilizer fertilizer) {
+        this.fertilizer = fertilizer;
+    }
+
+    /**
+     * @return the tillers
+     */
+    public Tillers getTillers() {
+        return tillers;
+    }
+
+    /**
+     * @param tillers the tillers to set
+     */
+    public void setTillers(Tillers tillers) {
+        this.tillers = tillers;
+    }
+
+    /**
+     * @return the soilanalysis
+     */
+    public SoilAnalysis getSoilanalysis() {
+        return soilanalysis;
+    }
+
+    /**
+     * @param soilanalysis the soilanalysis to set
+     */
+    public void setSoilanalysis(SoilAnalysis soilanalysis) {
+        this.soilanalysis = soilanalysis;
     }
 
 

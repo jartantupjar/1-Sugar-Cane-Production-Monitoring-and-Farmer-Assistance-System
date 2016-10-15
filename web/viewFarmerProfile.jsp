@@ -275,7 +275,7 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                         },{
                             'targets': 8,
                             'render': function (data, type, full, meta) {
-                                return '<a class="btn btn-primary" href="' + data + '">details</a>';
+                                return '<a class="btn btn-primary" href="viewFieldDetails?id=' + data + '">details</a>';
                             }
                         }]
                 });

@@ -7,9 +7,9 @@ comparison page add current vs historical details(past 2yrs)
 
 
 on barangay selection 
-	farms list and their productivity
-		select to go to profile
-			select comparison to run comparison
+        farms list and their productivity
+                select to go to profile
+                        select comparison to run comparison
 
 
 
@@ -23,7 +23,7 @@ on barangay selection
         <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
 
         <link rel="stylesheet" href="plugins/select2/select2.min.css">
-  
+
 
 
     </head>
@@ -41,50 +41,62 @@ on barangay selection
                 </section>
                 <section class="content">
                     <div class="row">
+
                         <div class="col-md-4">
                             <div class="box box-primary">
                                 <div class="box-body box-profile">
 
-                                    <h3 class="profile-username text-center">Farm Details:</h3>
+                                    <h3 class="profile-username text-center">Farm Details for Year 2015:</h3>
                                     <ul class="list-group list-group-unbordered">
-
+                                        <li class="list-group-item">
+                                            <b>Field ID</b> <a class="pull-right">
+                                                FTYEM-21
+                                            </a>
+                                        </li>
 
                                         <li class="list-group-item">
-                                            <b>Crop Variety</b> <a class="pull-right">
+                                            <b>Farmer</b> <a class="pull-right">
                                                 FTYEM-21
                                             </a>
                                         </li>
                                         <li class="list-group-item">
-                                            <b>PC</b> <a class="pull-right">
+                                            <b>Barangay</b> <a class="pull-right">
                                                 80%
                                             </a>
                                         </li>
                                         <li class="list-group-item">
-                                            <b>RC</b> <a class="pull-right">
+                                            <b>Municipality</b> <a class="pull-right">
                                                 20%
                                             </a>
                                         </li>
                                         <li class="list-group-item">
-                                            <b>Civil Status</b> <a class="pull-right">
+                                            <b>Total Area</b> <a class="pull-right">
                                                 Married</a>
                                         </li>
-
                                         <li class="list-group-item">
-                                            <b>TC/HA</b> <a class="pull-right">
-                                                2.5
-                                            </a>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <b>Total Farm HA</b> <a class="pull-right">
+                                            <b>Production(TC)</b> <a class="pull-right">
                                                 13
                                             </a>
                                         </li>
+                                        <li class="list-group-item">
+                                            <b>Harvested Area</b> <a class="pull-right">
+                                                2.5
+                                            </a>
+                                        </li>
 
-
-
+                                        <li class="list-group-item">
+                                            <b>Current Yield(tc/ha)</b> <a class="pull-right">
+                                                13
+                                            </a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Average Yield(avg(tc)/avg(ha))</b> <a class="pull-right">
+                                                13
+                                            </a>
+                                        </li>
                                     </ul>
                                     <div class="btn btn-primary pull-right">
-                                        More Details
+                                        View Farmer Profile
                                     </div>                              
                                 </div>
                             </div>
@@ -102,61 +114,212 @@ on barangay selection
                                     <img src="dist/img/user2-160x160.jpg" alt="crop" width="370" height="400" >
                                 </div>
                             </div>
-
                         </div>
                         <div class="col-md-4">
                             <div class="box box-primary">
                                 <div class="box-body box-profile">
 
-                                    <h3 class="profile-username text-center">Farmer:</h3>
-
-                                    <p class="text-muted text-center">John Mike</p>
-
+                                    <h3 class="profile-username text-center">Crop Validation for Year 2015</h3>
                                     <ul class="list-group list-group-unbordered">
 
+
                                         <li class="list-group-item">
-                                            <b>Phone Number</b> <a class="pull-right">0949395893</a>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <b>Gender</b> <a class="pull-right">
-                                                Male
+                                            <b>Crop Variety</b> <a class="pull-right">
+                                                FTYEM-21
                                             </a>
                                         </li>
                                         <li class="list-group-item">
-                                            <b>Education</b> <a class="pull-right">
-                                                Highschool
+                                            <b>Crop Class</b> <a class="pull-right">
+                                                80%
                                             </a>
                                         </li>
                                         <li class="list-group-item">
-                                            <b>Civil Status</b> <a class="pull-right">
+                                            <b>Texture</b> <a class="pull-right">
+                                                20%
+                                            </a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Farming System</b> <a class="pull-right">
                                                 Married</a>
                                         </li>
+
                                         <li class="list-group-item">
-                                            <b>Address</b> <a class="">#3 sugarcane st. brgy regulations</a>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <b>No of Farms</b> <a class="pull-right">5</a>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <b>TC/HA</b> <a class="pull-right">
-                                                2.3
+                                            <b>Topography</b> <a class="pull-right">
+                                                2.5
                                             </a>
                                         </li>
                                         <li class="list-group-item">
-                                            <b>Total HA</b> <a class="pull-right">
-                                                153
+                                            <b>Furrow Distance</b> <a class="pull-right">
+                                                13
                                             </a>
                                         </li>
-
-
+                                        <li class="list-group-item">
+                                            <b>Planting Density</b> <a class="pull-right">
+                                                13
+                                            </a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Planting Date???</b> <a class="pull-right">
+                                                13
+                                            </a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Harvest Date</b> <a class="pull-right">
+                                                13
+                                            </a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Date Millable</b> <a class="pull-right">
+                                                13
+                                            </a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Number Millable</b> <a class="pull-right">
+                                                13
+                                            </a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Average Millable Stool</b> <a class="pull-right">
+                                                13
+                                            </a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Brix</b> <a class="pull-right">
+                                                13
+                                            </a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Stalk Length</b> <a class="pull-right">
+                                                13
+                                            </a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Diameter</b> <a class="pull-right">
+                                                13
+                                            </a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Weight</b> <a class="pull-right">
+                                                13
+                                            </a>
+                                        </li>
                                     </ul>
-                                    <div class="btn btn-primary pull-right">
-                                        View Profile
-                                    </div>   
-                                </div>
-                                <!-- /.box-body -->
-                            </div>
 
+                                    <div class="btn btn-primary pull-right">
+                                        More Details
+                                    </div>                              
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+
+                            <div class="col-md-4">
+                                <div class="box box-primary">
+                                    <div class="box-header">
+                                        <h1 class="box-title">Crop Monitoring for January 2015</h1>
+                                        <div class="box-tools pull-right">
+                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="box-body box-profile">
+                                        <ul class="list-group list-group-unbordered">
+
+                                            <li class="list-group-item">
+                                                <b>Phone Number</b> <a class="pull-right">0949395893</a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <b>Gender</b> <a class="pull-right">
+                                                    Male
+                                                </a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <b>Education</b> <a class="pull-right">
+                                                    Highschool
+                                                </a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <b>Civil Status</b> <a class="pull-right">
+                                                    Married</a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <b>Address</b> <a class="">#3 sugarcane st. brgy regulations</a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <b>No of Farms</b> <a class="pull-right">5</a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <b>TC/HA</b> <a class="pull-right">
+                                                    2.3
+                                                </a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <b>Total HA</b> <a class="pull-right">
+                                                    153
+                                                </a>
+                                            </li>
+
+
+                                        </ul>
+                                        <div class="btn btn-primary pull-right">
+                                            View Profile
+                                        </div>   
+                                    </div>
+                                    <!-- /.box-body -->
+                                </div>
+
+                            </div>
+                            <div class="col-md-4">
+                                <div class="box box-primary">
+                                    <div class="box-body box-profile">
+
+                                        <h3 class="profile-username text-center">Soil Details for year 2015:</h3>
+                                        <ul class="list-group list-group-unbordered">
+
+
+                                            <li class="list-group-item">
+                                                <b>Fertilizer</b> <a class="pull-right">
+                                                    FTYEM-21
+                                                </a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <b>First Dose</b> <a class="pull-right">
+                                                    80%
+                                                </a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <b>Second Dose</b> <a class="pull-right">
+                                                    20%
+                                                </a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <b>PH Level</b> <a class="pull-right">
+                                                    Married</a>
+                                            </li>
+
+                                            <li class="list-group-item">
+                                                <b>Organic Matter</b> <a class="pull-right">
+                                                    2.5
+                                                </a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <b>Phosphorus</b> <a class="pull-right">
+                                                    13
+                                                </a>
+                                            </li>
+
+                                            <li class="list-group-item">
+                                                <b>Potassium</b> <a class="pull-right">
+                                                    13
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <div class="btn btn-primary pull-right">
+                                            More Details
+                                        </div>                              
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-12">
                             <!--<label class="pull-left">Multiple</label> !-->
@@ -220,18 +383,18 @@ on barangay selection
                             </div>
                         </div>
                         <div class="col-md-2 pull-right">
-                          
-                               
-                                <div class="box-body">
-                                    <a class="btn btn-app btn-linkedin" style="width: 100%">
-                                        <i class="fa fa-edit" ></i> Create Comparison
-                                    </a>
-                                
 
 
-                                </div>
-                                <!-- /.box-body -->
-                   
+                            <div class="box-body">
+                                <a class="btn btn-app btn-linkedin" style="width: 100%">
+                                    <i class="fa fa-edit" ></i> Create Comparison
+                                </a>
+
+
+
+                            </div>
+                            <!-- /.box-body -->
+
 
                         </div>
 
@@ -259,22 +422,29 @@ on barangay selection
 
         <script type="text/javascript">
             $(function () {
-                var data = [{ id: 0, text: 'enhancement' }, { id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }];
-
+                var data = [{id: 0, text: 'enhancement'}, {id: 1, text: 'bug'}, {id: 2, text: 'duplicate'}, {id: 3, text: 'invalid'}, {id: 4, text: 'wontfix'}];
                 $("#select2").select2({
                     data: data
-                    
-                    
+
+
                 });
-         $("#sButton").on("click", function () {
-    
-                var test= $("#select2").val();
-               console.log(test);
-                alert(test);
-});
-            });
-        </script>
-<script type="text/javascript">
+                $("#sButton").on("click", function () {
+                    var test = $("#select2").val();
+
+                    $.ajax({
+                        url: 'searchSimilarFarms?tag=' + test + '"',
+                        type: 'POST',
+//                    dataType: "JSON",
+                        success: function (data) {
+
+                            alert("it worked!!!!!");
+
+
+                        }
+                    });
+                });
+            });</script>
+        <script type="text/javascript">
 
         </script>
         <script src="plugins/datatables/jquery.dataTables.min.js"></script>
@@ -284,7 +454,6 @@ on barangay selection
 
             $(document).ready(function () {
                 var rows_selected = [];
-
                 var table = $('#example').DataTable({
                     'ajax': {
                         'url': 'viewBrgyList'
@@ -316,10 +485,8 @@ on barangay selection
                             //      }     
 
                 });
-
                 $('#frm-example').on('submit', function (e) {
                     var form = this;
-
                     // Iterate over all checkboxes in the table
                     table.$('input[type="checkbox"]').each(function () {
                         // If checkbox doesn't exist in DOM
@@ -337,16 +504,11 @@ on barangay selection
                         }
                     });
                 });
-
                 $('#example-select-all').on('click', function () {
                     // Check/uncheck all checkboxes in the table
                     var rows = table.rows({'search': 'applied'}).nodes();
                     $('input[type="checkbox"]', rows).prop('checked', this.checked);
-
                 });
-
-
-
             });
 
 
