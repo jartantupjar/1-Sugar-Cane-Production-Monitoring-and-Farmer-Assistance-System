@@ -105,7 +105,7 @@ on barangay selection
                         <div class="col-md-4">
                             <div class="box box-primary">
                                 <div class="box-header">
-                                    <h1 class="box-title">Crop Validation for ${farm.CropVal.year}</h1>
+                                    <h1 class="box-title">Crop Validation for ${farm.cropVal.year}</h1>
                                     <div class="box-tools pull-right">
                                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                     </div>
@@ -118,82 +118,82 @@ on barangay selection
 
                                         <li class="list-group-item">
                                             <b>Crop Variety</b> <a class="pull-right">
-                                                <c:out value="${farm.CropVal.variety}"/>
+                                                <c:out value="${farm.cropVal.variety}"/>
                                             </a>
                                         </li>
                                         <li class="list-group-item">
                                             <b>Crop Class</b> <a class="pull-right">
-                                                <c:out value="${farm.CropVal.crop_class}"/>
+                                                <c:out value="${farm.cropVal.crop_class}"/>
                                             </a>
                                         </li>
                                         <li class="list-group-item">
                                             <b>Texture</b> <a class="pull-right">
-                                                <c:out value="${farm.CropVal.texture}"/>
+                                                <c:out value="${farm.cropVal.texture}"/>
                                             </a>
                                         </li>
                                         <li class="list-group-item">
                                             <b>Farming System</b> <a class="pull-right">
-                                                <c:out value="${farm.CropVal.farming_system}"/> </a>
+                                                <c:out value="${farm.cropVal.farming_system}"/> </a>
                                         </li>
 
                                         <li class="list-group-item">
                                             <b>Topography</b> <a class="pull-right">
-                                                <c:out value="${farm.CropVal.topography}"/>
+                                                <c:out value="${farm.cropVal.topography}"/>
                                             </a>
                                         </li>
                                         <li class="list-group-item">
                                             <b>Furrow Distance</b> <a class="pull-right">
-                                                <c:out value="${farm.CropVal.furrow_distance}"/>
+                                                <c:out value="${farm.cropVal.furrow_distance}"/>
                                             </a>
                                         </li>
                                         <li class="list-group-item">
                                             <b>Planting Density</b> <a class="pull-right">
-                                                <c:out value="${farm.CropVal.planting_density}"/>
+                                                <c:out value="${farm.cropVal.planting_density}"/>
                                             </a>
                                         </li>
                                         <li class="list-group-item">
                                             <b>Planting Date???</b> <a class="pull-right">
-                                                <c:out value="${farm.CropVal.planting_date}"/>
+                                                <c:out value="${farm.cropVal.planting_date}"/>
                                             </a>
                                         </li>
                                         <li class="list-group-item">
                                             <b>Harvest Date</b> <a class="pull-right">
-                                                <c:out value="${farm.CropVal.harvest_date}"/>
+                                                <c:out value="${farm.cropVal.harvest_date}"/>
                                             </a>
                                         </li>
                                         <li class="list-group-item">
                                             <b>Date Millable</b> <a class="pull-right">
-                                                <c:out value="${farm.CropVal.date_millable}"/>
+                                                <c:out value="${farm.cropVal.date_millable}"/>
                                             </a>
                                         </li>
                                         <li class="list-group-item">
                                             <b>Number Millable</b> <a class="pull-right">
-                                                <c:out value="${farm.CropVal.num_millable}"/>
+                                                <c:out value="${farm.cropVal.num_millable}"/>
                                             </a>
                                         </li>
                                         <li class="list-group-item">
                                             <b>Average Millable Stool</b> <a class="pull-right">
-                                                <c:out value="${farm.CropVal.avg_millable_stool}"/>
+                                                <c:out value="${farm.cropVal.avg_millable_stool}"/>
                                             </a>
                                         </li>
                                         <li class="list-group-item">
                                             <b>Brix</b> <a class="pull-right">
-                                                <c:out value="${farm.CropVal.brix}"/>
+                                                <c:out value="${farm.cropVal.brix}"/>
                                             </a>
                                         </li>
                                         <li class="list-group-item">
                                             <b>Stalk Length</b> <a class="pull-right">
-                                                <c:out value="${farm.CropVal.stalk_length}"/>
+                                                <c:out value="${farm.cropVal.stalk_length}"/>
                                             </a>
                                         </li>
                                         <li class="list-group-item">
                                             <b>Diameter</b> <a class="pull-right">
-                                                <c:out value="${farm.CropVal.diameter}"/>
+                                                <c:out value="${farm.cropVal.diameter}"/>
                                             </a>
                                         </li>
                                         <li class="list-group-item">
                                             <b>Weight</b> <a class="pull-right">
-                                                <c:out value="${farm.CropVal.weight}"/>
+                                                <c:out value="${farm.cropVal.weight}"/>
                                             </a>
                                         </li>
                                     </ul>

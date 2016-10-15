@@ -99,6 +99,7 @@ public class FarmsDB {
 
         Farm farm = null;
         farm = getBasicFieldDetails(fid);
+        farm.setYear(2015);
         // farmproductiondetails
         farm.setSoilanalysis(getFieldSoilAnalysis(farm.getId()));
         farm.setFertilizer(getFieldFertilizers(farm.getId(),2015));
@@ -236,11 +237,13 @@ public class FarmsDB {
                pstmt.setInt(2, year);
             ResultSet rs = pstmt.executeQuery();
             CropValidation cv = null;
+      
             if (rs.next()) {
                 cv = new CropValidation();
                 cv.setYear(rs.getInt("year"));
                   cv.setField_id(rs.getInt("Fields_id"));
                  cv.setVariety(rs.getString("variety"));
+                 System.out.println("crop val not null"+ cv.getVariety());
                  cv.setCrop_class(rs.getString("crop_class"));
                  cv.setTexture(rs.getString("texture"));
                  cv.setFarming_system(rs.getString("farming_system"));

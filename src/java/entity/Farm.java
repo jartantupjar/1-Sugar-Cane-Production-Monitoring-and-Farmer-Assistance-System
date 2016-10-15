@@ -16,7 +16,7 @@ public class Farm {
     private int id,year;
     private String farmer,district,barangay,municipality;
     private SoilAnalysis soilanalysis;
-    private CropValidation CropVal;
+    private CropValidation cropVal;
     private Fertilizer fertilizer;
     private Tillers tillers;
     private Date date_updated;
@@ -236,20 +236,7 @@ public class Farm {
         this.date_updated = date_updated;
     }
 
-    /**
-     * @return the CropVal
-     */
-    public CropValidation getCropVal() {
-        return CropVal;
-    }
-
-    /**
-     * @param CropVal the CropVal to set
-     */
-    public void setCropVal(CropValidation CropVal) {
-        this.CropVal = CropVal;
-    }
-
+   
     /**
      * @return the year
      */
@@ -318,6 +305,20 @@ public class Farm {
      */
     public void setProduction(double production) {
         this.production = production;
+    }
+
+    /**
+     * @return the cropVal
+     */
+    public CropValidation getCropVal() {
+        return cropVal;
+    }
+
+    /**
+     * @param cropVal the cropVal to set
+     */
+    public void setCropVal(CropValidation cropVal) {
+        this.cropVal = cropVal;
     }
 
 
