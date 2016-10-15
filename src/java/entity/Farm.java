@@ -20,7 +20,7 @@ public class Farm {
     private Fertilizer fertilizer;
     private Tillers tillers;
     private Date date_updated;
-    private double area,yield,totalA,totalHa;
+    private double area,yield,totalA,totalHa,production;
     private String management_type,boundaries;
     private double latCenter,lngCenter;
   
@@ -304,6 +304,20 @@ public class Farm {
      */
     public void setSoilanalysis(SoilAnalysis soilanalysis) {
         this.soilanalysis = soilanalysis;
+    }
+
+    /**
+     * @return the production
+     */
+    public double getProduction() {
+        return production;
+    }
+
+    /**
+     * @param production the production to set
+     */
+    public void setProduction(double production) {
+        this.production = production;
     }
 
 

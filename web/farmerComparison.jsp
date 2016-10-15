@@ -26,6 +26,7 @@ on barangay selection
 
 
 
+
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
 
@@ -46,62 +47,162 @@ on barangay selection
                             <div class="box box-primary">
                                 <div class="box-body box-profile">
 
-                                    <h3 class="profile-username text-center">Farm Details for Year 2015:</h3>
+                                    <h3 class="profile-username text-center">Farm Details for ${farm.year}</h3>
                                     <ul class="list-group list-group-unbordered">
                                         <li class="list-group-item">
                                             <b>Field ID</b> <a class="pull-right">
-                                                FTYEM-21
+                                                <c:out value="${farm.id}"/>
                                             </a>
                                         </li>
 
                                         <li class="list-group-item">
                                             <b>Farmer</b> <a class="pull-right">
-                                                FTYEM-21
+                                                <c:out value="${farm.farmer}"/>
                                             </a>
                                         </li>
                                         <li class="list-group-item">
                                             <b>Barangay</b> <a class="pull-right">
-                                                80%
+                                                <c:out value="${farm.barangay}"/>
                                             </a>
                                         </li>
                                         <li class="list-group-item">
                                             <b>Municipality</b> <a class="pull-right">
-                                                20%
+                                                <c:out value="${farm.municipality}"/>
                                             </a>
                                         </li>
                                         <li class="list-group-item">
                                             <b>Total Area</b> <a class="pull-right">
-                                                Married</a>
+                                                <c:out value="${farm.totalA}"/></a>
                                         </li>
                                         <li class="list-group-item">
                                             <b>Production(TC)</b> <a class="pull-right">
-                                                13
+                                                <c:out value="${farm.production}"/>
                                             </a>
                                         </li>
                                         <li class="list-group-item">
                                             <b>Harvested Area</b> <a class="pull-right">
-                                                2.5
+                                                <c:out value="${farm.totalHa}"/>
                                             </a>
                                         </li>
 
                                         <li class="list-group-item">
                                             <b>Current Yield(tc/ha)</b> <a class="pull-right">
-                                                13
+                                                <c:out value="${farm.yield}"/>
                                             </a>
                                         </li>
                                         <li class="list-group-item">
                                             <b>Average Yield(avg(tc)/avg(ha))</b> <a class="pull-right">
-                                                13
+                                                <c:out value="${farm.yield}"/>
                                             </a>
                                         </li>
                                     </ul>
-                                    <div class="btn btn-primary pull-right">
+                                    <a href="viewFarmerProfile?name=${farm.farmer}" class="btn btn-primary pull-right">
                                         View Farmer Profile
-                                    </div>                              
+                                    </a>                              
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-4">
+                            <div class="box box-primary">
+                                <div class="box-header">
+                                    <h1 class="box-title">Crop Validation for ${farm.CropVal.year}</h1>
+                                    <div class="box-tools pull-right">
+                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                    </div>
+                                </div>
+                                <div id="cropVal-content-div" class="box-body box-profile">
 
+
+                                    <ul class="list-group list-group-unbordered">
+
+
+                                        <li class="list-group-item">
+                                            <b>Crop Variety</b> <a class="pull-right">
+                                                <c:out value="${farm.CropVal.variety}"/>
+                                            </a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Crop Class</b> <a class="pull-right">
+                                                <c:out value="${farm.CropVal.crop_class}"/>
+                                            </a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Texture</b> <a class="pull-right">
+                                                <c:out value="${farm.CropVal.texture}"/>
+                                            </a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Farming System</b> <a class="pull-right">
+                                                <c:out value="${farm.CropVal.farming_system}"/> </a>
+                                        </li>
+
+                                        <li class="list-group-item">
+                                            <b>Topography</b> <a class="pull-right">
+                                                <c:out value="${farm.CropVal.topography}"/>
+                                            </a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Furrow Distance</b> <a class="pull-right">
+                                                <c:out value="${farm.CropVal.furrow_distance}"/>
+                                            </a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Planting Density</b> <a class="pull-right">
+                                                <c:out value="${farm.CropVal.planting_density}"/>
+                                            </a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Planting Date???</b> <a class="pull-right">
+                                                <c:out value="${farm.CropVal.planting_date}"/>
+                                            </a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Harvest Date</b> <a class="pull-right">
+                                                <c:out value="${farm.CropVal.harvest_date}"/>
+                                            </a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Date Millable</b> <a class="pull-right">
+                                                <c:out value="${farm.CropVal.date_millable}"/>
+                                            </a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Number Millable</b> <a class="pull-right">
+                                                <c:out value="${farm.CropVal.num_millable}"/>
+                                            </a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Average Millable Stool</b> <a class="pull-right">
+                                                <c:out value="${farm.CropVal.avg_millable_stool}"/>
+                                            </a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Brix</b> <a class="pull-right">
+                                                <c:out value="${farm.CropVal.brix}"/>
+                                            </a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Stalk Length</b> <a class="pull-right">
+                                                <c:out value="${farm.CropVal.stalk_length}"/>
+                                            </a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Diameter</b> <a class="pull-right">
+                                                <c:out value="${farm.CropVal.diameter}"/>
+                                            </a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Weight</b> <a class="pull-right">
+                                                <c:out value="${farm.CropVal.weight}"/>
+                                            </a>
+                                        </li>
+                                    </ul>
+
+
+                                </div>
+
+                            </div>
+                        </div>
                         <div class="col-sm-4">
                             <div class="box box-success">
                                 <div class="box-header with-border">
@@ -115,103 +216,37 @@ on barangay selection
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="box box-primary">
-                                <div class="box-body box-profile">
+                        <div class="col-md-12">
+                            <div class="col-md-4">
+                                <div class="box box-primary">
+                                    <div class="box-header">
+                                        <h1 class="box-title">Tiller Info</h1>
+                                        <div class="box-tools pull-right">
+                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="box-body box-profile">
+                                        <ul class="list-group list-group-unbordered">
 
-                                    <h3 class="profile-username text-center">Crop Validation for Year 2015</h3>
-                                    <ul class="list-group list-group-unbordered">
+                                            <li class="list-group-item">
+                                                <b>Rep</b> <a class="pull-right">
+                                                    <c:out value="${farm.tillers.rep}"/>
+                                                </a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <b>Count</b> <a class="pull-right">
+                                                    <c:out value="${farm.tillers.count}"/>
+                                                </a>
+                                            </li>
+                                        </ul>
 
-
-                                        <li class="list-group-item">
-                                            <b>Crop Variety</b> <a class="pull-right">
-                                                FTYEM-21
-                                            </a>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <b>Crop Class</b> <a class="pull-right">
-                                                80%
-                                            </a>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <b>Texture</b> <a class="pull-right">
-                                                20%
-                                            </a>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <b>Farming System</b> <a class="pull-right">
-                                                Married</a>
-                                        </li>
-
-                                        <li class="list-group-item">
-                                            <b>Topography</b> <a class="pull-right">
-                                                2.5
-                                            </a>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <b>Furrow Distance</b> <a class="pull-right">
-                                                13
-                                            </a>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <b>Planting Density</b> <a class="pull-right">
-                                                13
-                                            </a>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <b>Planting Date???</b> <a class="pull-right">
-                                                13
-                                            </a>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <b>Harvest Date</b> <a class="pull-right">
-                                                13
-                                            </a>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <b>Date Millable</b> <a class="pull-right">
-                                                13
-                                            </a>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <b>Number Millable</b> <a class="pull-right">
-                                                13
-                                            </a>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <b>Average Millable Stool</b> <a class="pull-right">
-                                                13
-                                            </a>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <b>Brix</b> <a class="pull-right">
-                                                13
-                                            </a>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <b>Stalk Length</b> <a class="pull-right">
-                                                13
-                                            </a>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <b>Diameter</b> <a class="pull-right">
-                                                13
-                                            </a>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <b>Weight</b> <a class="pull-right">
-                                                13
-                                            </a>
-                                        </li>
-                                    </ul>
-
-                                    <div class="btn btn-primary pull-right">
-                                        More Details
-                                    </div>                              
+                                    </div>
+                                    <!-- /.box-body -->
                                 </div>
+
                             </div>
-                        </div>
-                        <div class="col-lg-12">
+
 
                             <div class="col-md-4">
                                 <div class="box box-primary">
@@ -233,33 +268,6 @@ on barangay selection
                                                     Male
                                                 </a>
                                             </li>
-                                            <li class="list-group-item">
-                                                <b>Education</b> <a class="pull-right">
-                                                    Highschool
-                                                </a>
-                                            </li>
-                                            <li class="list-group-item">
-                                                <b>Civil Status</b> <a class="pull-right">
-                                                    Married</a>
-                                            </li>
-                                            <li class="list-group-item">
-                                                <b>Address</b> <a class="">#3 sugarcane st. brgy regulations</a>
-                                            </li>
-                                            <li class="list-group-item">
-                                                <b>No of Farms</b> <a class="pull-right">5</a>
-                                            </li>
-                                            <li class="list-group-item">
-                                                <b>TC/HA</b> <a class="pull-right">
-                                                    2.3
-                                                </a>
-                                            </li>
-                                            <li class="list-group-item">
-                                                <b>Total HA</b> <a class="pull-right">
-                                                    153
-                                                </a>
-                                            </li>
-
-
                                         </ul>
                                         <div class="btn btn-primary pull-right">
                                             View Profile
@@ -271,48 +279,69 @@ on barangay selection
                             </div>
                             <div class="col-md-4">
                                 <div class="box box-primary">
+                                    <div class="box-header">
+                                        <h1 class="box-title">Soil Analysis</h1>
+                                        <div class="box-tools pull-right">
+                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                        </div>
+                                    </div>
                                     <div class="box-body box-profile">
-
-                                        <h3 class="profile-username text-center">Soil Details for year 2015:</h3>
                                         <ul class="list-group list-group-unbordered">
 
-
-                                            <li class="list-group-item">
-                                                <b>Fertilizer</b> <a class="pull-right">
-                                                    FTYEM-21
-                                                </a>
-                                            </li>
-                                            <li class="list-group-item">
-                                                <b>First Dose</b> <a class="pull-right">
-                                                    80%
-                                                </a>
-                                            </li>
-                                            <li class="list-group-item">
-                                                <b>Second Dose</b> <a class="pull-right">
-                                                    20%
-                                                </a>
-                                            </li>
                                             <li class="list-group-item">
                                                 <b>PH Level</b> <a class="pull-right">
-                                                    Married</a>
+                                                    <c:out value="${farm.soilanalysis.ph_lvl}"/></a>
                                             </li>
 
                                             <li class="list-group-item">
                                                 <b>Organic Matter</b> <a class="pull-right">
-                                                    2.5
+                                                    <c:out value="${farm.soilanalysis.organic_matter}"/>
                                                 </a>
                                             </li>
                                             <li class="list-group-item">
                                                 <b>Phosphorus</b> <a class="pull-right">
-                                                    13
+                                                     <c:out value="${farm.soilanalysis.phosphorus}"/>
                                                 </a>
                                             </li>
 
                                             <li class="list-group-item">
                                                 <b>Potassium</b> <a class="pull-right">
-                                                    13
+                                                 <c:out value="${farm.soilanalysis.potassium}"/>
                                                 </a>
                                             </li>
+                                        </ul>
+                                        <div class="btn btn-primary pull-right">
+                                            View Profile
+                                        </div>   
+                                    </div>
+                                    <!-- /.box-body -->
+                                </div>
+
+                            </div>
+                            <div class="col-md-4">
+                                <div class="box box-primary ">
+                                    <div class="box-body box-profile">
+
+                                        <h3 class="profile-username text-center">Fertilizer Info for ${farm.fertilizer.year}:</h3>
+                                        <ul class="list-group list-group-unbordered">
+
+
+                                            <li class="list-group-item">
+                                                <b>Fertilizer</b> <a class="pull-right">
+                                                    <c:out value="${farm.fertilizer.fertilizer}"/>
+                                                </a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <b>First Dose</b> <a class="pull-right">
+                                                    <c:out value="${farm.fertilizer.first_dose}"/>
+                                                </a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <b>Second Dose</b> <a class="pull-right">
+                                                    <c:out value="${farm.fertilizer.second_dose}"/>
+                                                </a>
+                                            </li>
+
                                         </ul>
                                         <div class="btn btn-primary pull-right">
                                             More Details
@@ -417,9 +446,17 @@ on barangay selection
         <script type="text/javascript" src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="plugins/select2/select2.min.js"></script>
+        <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
 
         <script src="dist/js/app.min.js"></script>
-
+        <script type="text/javascript">
+            $(function () {
+                $('#cropVal-content-div').slimScroll({
+                    height: '420px',
+                    alwaysVisible: true
+                });
+            });
+        </script>
         <script type="text/javascript">
             $(function () {
                 var data = [{id: 0, text: 'enhancement'}, {id: 1, text: 'bug'}, {id: 2, text: 'duplicate'}, {id: 3, text: 'invalid'}, {id: 4, text: 'wontfix'}];
@@ -444,9 +481,7 @@ on barangay selection
                     });
                 });
             });</script>
-        <script type="text/javascript">
 
-        </script>
         <script src="plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
 

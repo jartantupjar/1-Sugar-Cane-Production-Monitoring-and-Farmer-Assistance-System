@@ -126,7 +126,7 @@ public class FarmsDB {
                 farm.setArea(rs.getDouble("area"));
                 farm.setBarangay(rs.getString("barangay"));
                 farm.setMunicipality(rs.getString("municipality"));
-
+               
             }
             rs.close();
             pstmt.close();
@@ -251,7 +251,7 @@ public class FarmsDB {
                  cv.setDate_millable(rs.getDate("date_millable"));
                  cv.setNum_millable(rs.getInt("num_millable"));
                  cv.setAvg_millable_stool(rs.getDouble("avg_millable_stool"));
-                 cv.setBrix(rs.getDouble(rs.getString("brix")));
+                 cv.setBrix(rs.getDouble("brix"));
                  cv.setStalk_length(rs.getDouble("stalk_length"));
                  cv.setDiameter(rs.getDouble("diameter"));
                  cv.setWeight(rs.getDouble("weight"));

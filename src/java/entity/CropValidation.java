@@ -15,7 +15,7 @@ public class CropValidation {
     private int num_millable,year,field_id;
     private String variety,crop_class,texture,farming_system,topography;
     private Double furrow_distance,planting_density,avg_millable_stool,brix,stalk_length,diameter,weight;
-    private Date harvest_date,date_millable;
+    private Date planting_date,harvest_date,date_millable;
 
     /**
      * @return the num_millable
@@ -253,5 +253,19 @@ public class CropValidation {
      */
     public void setField_id(int field_id) {
         this.field_id = field_id;
+    }
+
+    /**
+     * @return the planting_date
+     */
+    public Date getPlanting_date() {
+        return planting_date;
+    }
+
+    /**
+     * @param planting_date the planting_date to set
+     */
+    public void setPlanting_date(Date planting_date) {
+        this.planting_date = planting_date;
     }
 }
