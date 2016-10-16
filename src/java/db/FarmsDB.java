@@ -5,6 +5,7 @@ import entity.CropValidation;
 import entity.Farm;
 import entity.Fertilizer;
 import entity.SoilAnalysis;
+import entity.TagsList;
 import entity.Tillers;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -311,48 +312,92 @@ public class FarmsDB {
        if(cv.getWeight()!=null) taglist.add("weight");
        return taglist;
     }
+      
+      
+      
+      
+      
     public ArrayList<Farm>searchFarmsbyTags(String[] list,int id){
-      ArrayList<String> bfarm,sa,till,fz,cv,tfarmid;
-       bfarm=checkFieldBasicDetails(list);
+      ArrayList<String> bfarm,sa,till,fz,cv;
+ 
+   bfarm=checkFieldBasicDetails(list);
        sa=checkFieldSoilAnalysis(list);
        till= checkFieldTill(list);
         fz=checkFieldFzer(list);
         cv=checkFieldCropVal(list);
-        tfarmid=new ArrayList<>();
-        for(int i=0; i<tfarmid.size();i++){
-            System.out.println(bfarm.get(i)+"pre check");
-            
-        }
-        if(!bfarm.isEmpty()){ bfarm=(getAllBasicDetbyTags(bfarm,id));}
+       
+    
+      
+        if(!bfarm.isEmpty()){ bfarm=(getAllBasicDetbyTags(bfarm,id)); }
        if(!sa.isEmpty()){ sa=(getAllSAbyTags(sa,id));}
          if(!till.isEmpty()){till=(getAllTillbyTags(till,id,2015));}
          if(!fz.isEmpty()){fz=(getAllFzbyTags(fz,id,2015));}
           if(!cv.isEmpty()){cv=(getAllCVbyTags(cv,id,2015));}
+          
+              ArrayList<ArrayList<String>> idlists=new ArrayList<>();   
        if(!bfarm.isEmpty()){
-         for(int i=0; i<bfarm.size();i++){
+           idlists.add(bfarm);
+            for(int i=0; i<bfarm.size();i++){
             System.out.println(bfarm.get(i)+"bfarm post check");
           }  
           }
          if(!sa.isEmpty()){
+               idlists.add(sa);
          for(int i=0; i<sa.size();i++){
-            System.out.println(sa.get(i)+"SA post check");
+             System.out.println(sa.get(i)+"SA post check");
           }  
           }
            if(!till.isEmpty()){
+               idlists.add(till);
          for(int i=0; i<till.size();i++){
             System.out.println(till.get(i)+"TILL post check");
           }  
           }
              if(!fz.isEmpty()){
+                   idlists.add(fz);
          for(int i=0; i<fz.size();i++){
             System.out.println(fz.get(i)+"FERTZ post check");
           }  
           }
              if(!cv.isEmpty()){
+                  idlists.add(cv);
          for(int i=0; i<cv.size();i++){
             System.out.println(cv.get(i)+"CV post check");
           }  
           }
+        
+             System.out.println(idlists.size()+" TOTAL TABLES(Lists) USED");
+             
+             if(!idlists.isEmpty()&&idlists.size()>1){
+                 System.out.println("Entered filtering loop");
+                 for(int i=1;i<idlists.size();i++){
+                   idlists.get(0).retainAll(idlists.get(i));
+                     
+                 }
+                 
+             }
+//                for(int i=0; i<tfarmid.size();i++){
+//                    int nCount=counter;
+//                  for(int b=0; b<tfarmid.size();b++){
+//                      if(tfarmid.get(i).equals(tfarmid.get(b))){
+//                          nCount--;
+//                      }
+//                      if(nCount==0){
+//                          flist.add(tfarmid.get(i));
+//                      }
+//                      
+//                  } 
+//                   
+//                }
+                
+//            }
+                 if(!idlists.isEmpty()){
+                System.out.println("final list w/farm ids:");
+          for (int x=0;x<idlists.get(0).size();x++){
+              System.out.println(idlists.get(0).get(x));
+          }
+          }
+             
           
         return null;
     }
