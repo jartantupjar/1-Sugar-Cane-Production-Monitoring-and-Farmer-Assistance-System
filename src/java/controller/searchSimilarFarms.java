@@ -5,6 +5,7 @@
  */
 package controller;
 
+import db.FarmsDB;
 import db.ProgramsDB;
 import entity.programsKPI;
 import java.io.IOException;
@@ -39,14 +40,15 @@ public class searchSimilarFarms extends BaseServlet {
         PrintWriter out = response.getWriter();
         Enumeration<String> parameterNames = request.getParameterNames();
         String paramName;
-    
+      String id = request.getParameter("id");
         String tag = request.getParameter("tag");
              System.out.println(tag+": this tag m8");
              String[] tags = tag.split(",");
-           for(int i=0; i<tags.length; i++){
-             System.out.println(tags[i]);
-    }
-            
+//           for(int i=0; i<tags.length; i++){
+//             System.out.println(tags[i]);
+//    }
+           FarmsDB farmdb=new FarmsDB();
+          farmdb.searchFarmsbyTags(tags,Integer.parseInt(id));  
        
 
         JSONObject data = new JSONObject();

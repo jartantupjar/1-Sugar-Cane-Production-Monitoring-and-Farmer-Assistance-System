@@ -355,13 +355,13 @@ on barangay selection
                             <div class="col-md-7">
 
                                 <select id="select2" class="select2" multiple="multiple" data-placeholder="Select a Tag" style="width: 100%;">
-                                    <option>Yield</option>
+<!--                                    <option>Yield</option>
                                     <option>Total Size</option>
                                     <option>Variety</option>
                                     <option>Brix</option>
                                     <option>Farming System</option>
                                     <option>Texas</option>
-                                    <option>Washington</option>
+                                    <option>Washington</option>-->
                                 </select>
 
                             </div>
@@ -480,7 +480,7 @@ on barangay selection
                     var test = $("#select2").val();
 
                     $.ajax({
-                        url: 'searchSimilarFarms?tag=' + test + '',
+                        url: 'searchSimilarFarms?tag=' + test + '&id=${id}',
                         type: 'POST',
 //                    dataType: "JSON",
                         success: function (data) {
