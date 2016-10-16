@@ -355,13 +355,13 @@ on barangay selection
                             <div class="col-md-7">
 
                                 <select id="select2" class="select2" multiple="multiple" data-placeholder="Select a Tag" style="width: 100%;">
-<!--                                    <option>Yield</option>
-                                    <option>Total Size</option>
-                                    <option>Variety</option>
-                                    <option>Brix</option>
-                                    <option>Farming System</option>
-                                    <option>Texas</option>
-                                    <option>Washington</option>-->
+                                    <!--                                    <option>Yield</option>
+                                                                        <option>Total Size</option>
+                                                                        <option>Variety</option>
+                                                                        <option>Brix</option>
+                                                                        <option>Farming System</option>
+                                                                        <option>Texas</option>
+                                                                        <option>Washington</option>-->
                                 </select>
 
                             </div>
@@ -377,7 +377,7 @@ on barangay selection
                             <br>
                             <div class="box box-success">
                                 <div class="box-header with-border">
-                                    <h1 class="box-title">Results: (ADD MORE ROWS?)</h1>
+                                    <h1 class="box-title">Results:</h1>
 
                                 </div>
                                 <div class="box-body">
@@ -395,17 +395,7 @@ on barangay selection
 
                                             </tr>
                                         </thead>
-                                        <tfoot>
-                                            <tr>
-                                                <th></th>
-                                                <th>Farmer</th>
-                                                <th>Barangay</th>
-                                                <th>Municipality</th>
-                                                <th>Actual</th>
-                                                <th>Difference</th>
-                                                <th>More Details</th>
-                                            </tr>
-                                        </tfoot>
+                                      
                                     </table>
 
                                 </div>
@@ -465,30 +455,74 @@ on barangay selection
                     type: 'POST',
                     dataType: "JSON",
                     success: function (data) {
-                          $("#select2").select2({
-                    data: data
-
-
-                });
+                        $("#select2").select2({
+                            data: data
+                        });
                     }});
-              
-               //  var data = ['enhancement', 'bug', 'duplicate','invalid', 'wontfix'];                          
+
+                //  var data = ['enhancement', 'bug', 'duplicate','invalid', 'wontfix'];                          
                 // var data = [{text: 'enhancement'}, {text: 'bug'}, {text: 'duplicate'}, {text: 'invalid'}, {text: 'wontfix'}];      
                 // var data = [{id: 0, text: 'enhancement'}, {id: 1, text: 'bug'}, {id: 2, text: 'duplicate'}, {id: 3, text: 'invalid'}, {id: 4, text: 'wontfix'}];
-             
+
                 $("#sButton").on("click", function () {
                     var test = $("#select2").val();
+                    var rows_selected = [];
+                    var table = $('#example').DataTable({
+                          destroy: true,
+                        'ajax': {
+                            'url': 'searchSimilarFarms?tag=' + test + '&id=${id}',
+                            type: 'POST'
+                        },
+                        'columnDefs': [{
+                                'targets': 0,
+                                'searchable': false,
+                                'orderable': false,
+                                'className': 'dt-body-center',
+                                'render': function (data, type, full, meta) {
+                                    return '<input type="checkbox" name="id[]" id="buttonClick" value="'
+                                            + $('<div/>').text(data).html() + '">';
+                                }
+                            }],
+                        'select': {
+                            'style': 'multi'
+                        },
+                        'order': [[1, 'asc']]
+                                //      ,
+                                //       'rowCallback': function(row, data, dataIndex){
+                                //         // Get row ID
+                                //       var rowId = data[0];
+                                //       // alert(rowId);
+                                //         // If row ID is in the list of selected row IDs
+                                //         if($.inArray(rowId, rows_selected) !== -1){
+                                //            $(row).find('input[type="checkbox"]').prop('checked', true);
+                                //            $(row).addClass('selected');
+                                //         }
+                                //      }     
 
-                    $.ajax({
-                        url: 'searchSimilarFarms?tag=' + test + '&id=${id}',
-                        type: 'POST',
-//                    dataType: "JSON",
-                        success: function (data) {
-
-                            alert("it worked!!!!!");
-
-
-                        }
+                    });
+                    $('#frm-example').on('submit', function (e) {
+                        var form = this;
+                        // Iterate over all checkboxes in the table
+                        table.$('input[type="checkbox"]').each(function () {
+                            // If checkbox doesn't exist in DOM
+                            if (!$.contains(document, this)) {
+                                // If checkbox is checked
+                                if (this.checked) {
+                                    // Create a hidden element 
+                                    $(form).append(
+                                            $('<input>')
+                                            .attr('type', 'hidden')
+                                            .attr('name', this.name)
+                                            .val(this.value)
+                                            );
+                                }
+                            }
+                        });
+                    });
+                    $('#example-select-all').on('click', function () {
+                        // Check/uncheck all checkboxes in the table
+                        var rows = table.rows({'search': 'applied'}).nodes();
+                        $('input[type="checkbox"]', rows).prop('checked', this.checked);
                     });
                 });
             });</script>
@@ -497,68 +531,47 @@ on barangay selection
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
 
         <script>
-
-            $(document).ready(function () {
-                var rows_selected = [];
-                var table = $('#example').DataTable({
-                    'ajax': {
-                        'url': 'viewBrgyList'
-                    },
-                    'columnDefs': [{
-                            'targets': 0,
-                            'searchable': false,
-                            'orderable': false,
-                            'className': 'dt-body-center',
-                            'render': function (data, type, full, meta) {
-                                return '<input type="checkbox" name="id[]" id="buttonClick" value="'
-                                        + $('<div/>').text(data).html() + '">';
-                            }
-                        }],
-                    'select': {
-                        'style': 'multi'
-                    },
-                    'order': [[1, 'asc']]
-                            //      ,
-                            //       'rowCallback': function(row, data, dataIndex){
-                            //         // Get row ID
-                            //       var rowId = data[0];
-                            //       // alert(rowId);
-                            //         // If row ID is in the list of selected row IDs
-                            //         if($.inArray(rowId, rows_selected) !== -1){
-                            //            $(row).find('input[type="checkbox"]').prop('checked', true);
-                            //            $(row).addClass('selected');
-                            //         }
-                            //      }     
-
-                });
-                $('#frm-example').on('submit', function (e) {
-                    var form = this;
-                    // Iterate over all checkboxes in the table
-                    table.$('input[type="checkbox"]').each(function () {
-                        // If checkbox doesn't exist in DOM
-                        if (!$.contains(document, this)) {
-                            // If checkbox is checked
-                            if (this.checked) {
-                                // Create a hidden element 
-                                $(form).append(
-                                        $('<input>')
-                                        .attr('type', 'hidden')
-                                        .attr('name', this.name)
-                                        .val(this.value)
-                                        );
-                            }
-                        }
-                    });
-                });
-                $('#example-select-all').on('click', function () {
-                    // Check/uncheck all checkboxes in the table
-                    var rows = table.rows({'search': 'applied'}).nodes();
-                    $('input[type="checkbox"]', rows).prop('checked', this.checked);
-                });
-            });
-
-
-        </script>
+// 
+//            $(document).ready(function () {
+//
+//            });
+//
+//
+//        </script>
+            <script type="text/javascript">//
+                //ORIGINAL SCRIPT 
+//            $(function () {
+//
+//                $.ajax({
+//                    url: 'createTagList?id=${id}',
+//                    type: 'POST',
+//                    dataType: "JSON",
+//                    success: function (data) {
+//                          $("#select2").select2({
+//                    data: data
+//                   });
+//                    }});
+//              
+//               //  var data = ['enhancement', 'bug', 'duplicate','invalid', 'wontfix'];                          
+//                // var data = [{text: 'enhancement'}, {text: 'bug'}, {text: 'duplicate'}, {text: 'invalid'}, {text: 'wontfix'}];      
+//                // var data = [{id: 0, text: 'enhancement'}, {id: 1, text: 'bug'}, {id: 2, text: 'duplicate'}, {id: 3, text: 'invalid'}, {id: 4, text: 'wontfix'}];
+//             
+//                $("#sButton").on("click", function () {
+//                    var test = $("#select2").val();
+//
+//                    $.ajax({
+//                        url: 'searchSimilarFarms?tag=' + test + '&id=${id}',
+//                        type: 'POST',
+////                    dataType: "JSON",
+//                        success: function (data) {
+//
+//                            alert("it worked!!!!!");
+//
+//
+//                        }
+//                    });
+//                });
+//            });</script>
     </body>
 
 </html>

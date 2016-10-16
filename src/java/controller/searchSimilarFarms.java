@@ -17,6 +17,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 /**
@@ -48,12 +49,26 @@ public class searchSimilarFarms extends BaseServlet {
 //             System.out.println(tags[i]);
 //    }
            FarmsDB farmdb=new FarmsDB();
-          farmdb.searchFarmsbyTags(tags,Integer.parseInt(id));  
+         ArrayList<String> idlist= farmdb.searchFarmsbyTags(tags,Integer.parseInt(id));  
        
 
         JSONObject data = new JSONObject();
-     
-        data.put("fff", "ddd");
+        JSONArray list = new JSONArray();
+        if (idlist != null) {
+            for (int i = 0; i < idlist.size(); i++) {
+                ArrayList<String> obj = new ArrayList<>();
+                System.out.println("nope not empty");
+                obj.add(idlist.get(i));
+                obj.add(idlist.get(i));
+                obj.add(idlist.get(i));
+                 obj.add(idlist.get(i));
+                obj.add(idlist.get(i));
+                obj.add(idlist.get(i));
+                obj.add(idlist.get(i));
+                list.add(obj);
+            }
+        }
+        data.put("data", list);
 
         //addprogKPI
         response.setContentType("applications/json");

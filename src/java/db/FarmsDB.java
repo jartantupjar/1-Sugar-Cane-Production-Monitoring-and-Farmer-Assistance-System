@@ -317,7 +317,7 @@ public class FarmsDB {
       
       
       
-    public ArrayList<Farm>searchFarmsbyTags(String[] list,int id){
+    public ArrayList<String>searchFarmsbyTags(String[] list,int id){
       ArrayList<String> bfarm,sa,till,fz,cv;
  
    bfarm=checkFieldBasicDetails(list);
@@ -399,7 +399,7 @@ public class FarmsDB {
           }
              
           
-        return null;
+        return idlists.get(0);
     }
     
     public ArrayList<String> getAllCVbyTags(ArrayList<String> list,int id, int year){
