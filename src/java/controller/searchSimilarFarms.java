@@ -40,8 +40,7 @@ public class searchSimilarFarms extends BaseServlet {
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         PrintWriter out = response.getWriter();
-        Enumeration<String> parameterNames = request.getParameterNames();
-        String paramName;
+    
       String id = request.getParameter("id");
         String tag = request.getParameter("tag");
              System.out.println(tag+": this tag m8");
@@ -58,7 +57,7 @@ public class searchSimilarFarms extends BaseServlet {
         if (idlist != null) {
             for (int i = 0; i < idlist.size(); i++) {
                 ArrayList<String> obj = new ArrayList<>();
-                System.out.println("nope not empty");
+               // System.out.println("nope not empty");
                 obj.add(Integer.toString(farmlist.get(i).getId()));
                 obj.add(farmlist.get(i).getFarmer());
                 obj.add(farmlist.get(i).getBarangay());

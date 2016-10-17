@@ -106,6 +106,22 @@ public class FarmsDB {
         farm.setCropVal(getFieldCropValidation(farm.getId(),2015));
         return farm;
     }
+    
+     public ArrayList<Farm> getAllFieldComp(ArrayList<String> list) {
+         ArrayList<Farm> flist=null;
+    if(list!=null){
+        flist=new ArrayList<>();
+         for(int i=0;i<list.size();i++){
+             Farm farm =getAllFieldDetails(Integer.parseInt(list.get(i)));
+            flist.add(farm);
+        }
+
+    }
+         
+         
+         
+        return flist;
+    }
 
     public Farm getBasicFieldDetails(int fid) {
         // **** TODO : GET (INTEGER)YEAR TO GIVE TO FERTILIZER, TILLERS,CROP VALIDATION AND MONTHLY
@@ -449,12 +465,12 @@ public class FarmsDB {
 //                }
                 
 //            }
-                 if(!idlists.isEmpty()){
-                System.out.println("final list w/farm ids:");
-          for (int x=0;x<idlists.get(0).size();x++){
-              System.out.println(idlists.get(0).get(x));
-          }
-          }
+//                 if(!idlists.isEmpty()){
+//                System.out.println("final list w/farm ids:");
+//          for (int x=0;x<idlists.get(0).size();x++){
+//              System.out.println(idlists.get(0).get(x));
+//          }
+//          }
              
           
         return idlists.get(0);

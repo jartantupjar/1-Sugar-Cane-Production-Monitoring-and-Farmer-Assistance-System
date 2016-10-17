@@ -47,797 +47,1107 @@ comparison page add current vs historical details(past 2yrs)
 
 
                         <div class="col-md-4">
-                            <div class="box box-success">
-                                <div class="box-header">
-                                    <input type="checkbox" style="width: 16; height: 16" class="pull-left">
-                                    <h4 class="text-center"><b>Farm B</b></h4>
+                            
+                            <c:if test="${not empty flist}">
+                                <c:forEach var="flow" items="${flist}">
+                                    <c:if test="${ flow.yield >= farm.yield }">
 
-                                    <div class="box-tools pull-right">
-                                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                                        </button>
-                                    </div>
+                                        <div class="box box-success">
+                                            <div class="box-header">
+                                                <input type="checkbox" style="width: 16; height: 16" class="pull-left">
+                                                <h4 class="text-center"><b><c:out value="${flow.id}"/></b></h4>
 
-                                </div>
-                                <!-- /.box-header -->
-                                <div class="box-body">
-                                    <ul class="nav nav-tabs">
-                                        <li>  </li>
-                                        <li class="active"><a href="#tab_7" data-toggle="tab"><b>Details</b></a></li>
-                                        <li><a href="#tab_8" data-toggle="tab"><b>Recommendations</b></a></li>
-                                        <li><a href="#tab_9" data-toggle="tab"><b>Problems </b></a></li>
-
-                                    </ul>
-
-                                    <div class="tab-content">
-                                        <div class="tab-pane active" id="tab_7">
-                                            <div class="box-body box-profile">
-                                                <ul class="list-group list-group-unbordered">
-
-                                                    <li class="list-group-item">
-                                                        <b>Total Area</b> <b class="pull-right text-green">
-                                                            2.3
-                                                        </b>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>Crop Variety</b> <b class="pull-right text-green">
-                                                            FTYEM-21
-                                                        </b>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>PC</b> <b class="pull-right text-green">
-                                                            80%
-                                                        </b>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>RC</b> <b class="pull-right text-green">
-                                                            20%
-                                                        </b>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>Brix</b> <b class="pull-right text-red">
-                                                            18</b>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>Stalk Length</b> <b class="pull-right text-red">
-                                                            12</b>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>Date Planted</b> <b class="pull-right text-green">
-                                                            04/24/13
-                                                        </b>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>PH</b> <b class="pull-right text-red">
-                                                            5.4
-                                                        </b>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>Farming System</b> <b class="pull-right text-green">
-                                                            Fully Mechanized
-                                                        </b>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>Number of Tillers</b> <b class="pull-right text-red">
-                                                            3
-                                                        </b>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>TC/HA</b> <b class="pull-right text-red">
-                                                            2.8
-                                                        </b>
-                                                    </li>
-                                                </ul>
-                                                <div class="btn btn-primary pull-right">
-                                                    More Details
+                                                <div class="box-tools pull-right">
+                                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                                    </button>
                                                 </div>
+
                                             </div>
-                                        </div>
-                                        <!-- /.tab-pane -->
-                                        <div class="tab-pane" id="tab_8">
-                                            <h3 class="profile-username text-center"></h3>
-                                            <table class="table table-hover">
-                                                <tbody><tr>
-                                                        <th>Recommendation</th>
+                                            <!-- /.box-header -->
+                                            <div class="box-body">
+                                                <ul class="nav nav-tabs">
+                                                    <li>  </li>
+                                                    <li class="active"><a href="#tab_7" data-toggle="tab"><b>Details</b></a></li>
+                                                    <li><a href="#tab_8" data-toggle="tab"><b>Recommendations</b></a></li>
+                                                    <li><a href="#tab_9" data-toggle="tab"><b>Problems </b></a></li>
 
-                                                        <th>more info</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>John Doe</td>
-
-                                                        <td>detailsbtn</td>
-                                                    </tr>
-
-                                                    <tr>
-
-                                                        <td>1.23</td>
-
-
-                                                        <td>detailsbtn</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>John Doe</td>
-
-                                                        <td>detailsbtn</td>
-                                                    </tr>
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <!-- /.tab-pane -->
-                                        <div class="tab-pane" id="tab_9">
-                                            <table class="table table-hover">
-                                                <tbody><tr>
-                                                        <th>Problem</th>
-                                                        <th>More Info</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>John Doe</td>
-
-                                                        <td>detailsbtn</td>
-                                                    </tr>
-
-                                                    <tr>
-
-                                                        <td>1.23</td>
-
-
-                                                        <td>detailsbtn</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>John Doe</td>
-
-                                                        <td>detailsbtn</td>
-                                                    </tr>
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <!-- /.tab-pane -->
-                                    </div>
-                                    <!-- /.tab-content -->
-
-
-                                </div>
-
-                            </div>
-                            <div class="box box-success collapsed-box">
-                                <div class="box-header">
-                                    <input type="checkbox" style="width: 16; height: 16" class="pull-left">
-                                    <h4 class="text-center"><b>Farm D</b></h4>
-
-                                    <div class="box-tools pull-right">
-                                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                                        </button>
-                                    </div>
-
-                                </div>
-                                <!-- /.box-header -->
-                                <div class="box-body">
-                                    <ul class="nav nav-tabs">
-                                        <li>  </li>
-                                        <li class="active"><a href="#tab_7" data-toggle="tab"><b>Details</b></a></li>
-                                        <li><a href="#tab_8" data-toggle="tab"><b>Recommendations</b></a></li>
-                                        <li><a href="#tab_9" data-toggle="tab"><b>Problems </b></a></li>
-
-                                    </ul>
-
-                                    <div class="tab-content">
-                                        <div class="tab-pane active" id="tab_7">
-                                            <div class="box-body box-profile">
-                                                <ul class="list-group list-group-unbordered">
-
-                                                    <li class="list-group-item">
-                                                        <b>Total Area</b> <b class="pull-right text-green">
-                                                            2.3
-                                                        </b>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>Crop Variety</b> <b class="pull-right text-green">
-                                                            FTYEM-21
-                                                        </b>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>PC</b> <b class="pull-right text-green">
-                                                            80%
-                                                        </b>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>RC</b> <b class="pull-right text-green">
-                                                            20%
-                                                        </b>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>Brix</b> <b class="pull-right text-red">
-                                                            18</b>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>Stalk Length</b> <b class="pull-right text-red">
-                                                            12</b>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>Date Planted</b> <b class="pull-right text-green">
-                                                            04/24/13
-                                                        </b>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>PH</b> <b class="pull-right text-red">
-                                                            5.4
-                                                        </b>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>Farming System</b> <b class="pull-right text-green">
-                                                            Fully Mechanized
-                                                        </b>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>Number of Tillers</b> <b class="pull-right text-red">
-                                                            3
-                                                        </b>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>TC/HA</b> <b class="pull-right text-red">
-                                                            2.8
-                                                        </b>
-                                                    </li>
                                                 </ul>
-                                                <div class="btn btn-primary pull-right">
-                                                    More Details
+
+                                                <div class="tab-content">
+                                                    <div class="tab-pane active" id="tab_7">
+                                                        <div class="box-body box-profile">
+                                                            <ul class="list-group list-group-unbordered">
+                                                                <li class="list-group-item">
+                                                                    <b>Farmer</b> 
+                                                                    <c:choose>
+                                                                        <c:when test='${flow.farmer !=farm.farmer}'>
+                                                                            <b class="pull-right text-red"><c:out value="${flow.farmer}"></c:out> </b>
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <b class="pull-right text-green"><c:out value="${flow.farmer}"></c:out>  </b>
+                                                                        </c:otherwise>
+                                                                    </c:choose>
+
+                                                                </li>
+                                                                <li class="list-group-item">
+                                                                    <b>Location</b> <b class="pull-right text-blue">
+                                                                        <c:out value="${flow.barangay}"/> ,  <c:out value="${farm.municipality}"/>
+                                                                    </b>
+                                                                </li>
+                                                                <li class="list-group-item">
+                                                                    <b>Production(TC)</b> 
+                                                                         <c:choose>
+                                                                        <c:when test='${flow.production !=farm.production}'>
+                                                                            <b class="pull-right text-red"><c:out value="${flow.production}"></c:out> </b>
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <b class="pull-right text-green"><c:out value="${flow.production}"></c:out>  </b>
+                                                                        </c:otherwise>
+                                                                    </c:choose>
+                                                                </li>
+                                                                <li class="list-group-item">
+                                                                    <b>Total Area</b> 
+                                                                       <c:choose>
+                                                                        <c:when test='${flow.area !=farm.area}'>
+                                                                            <b class="pull-right text-red"><c:out value="${flow.area}"></c:out> </b>
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <b class="pull-right text-green"><c:out value="${flow.area}"></c:out>  </b>
+                                                                        </c:otherwise>
+                                                                    </c:choose>
+                                                                </li>
+
+                                                                <li class="list-group-item">
+                                                                    <b>Average Yield(tc/ha)</b> 
+                                                                     <c:choose>
+                                                                        <c:when test='${flow.yield !=farm.yield}'>
+                                                                            <b class="pull-right text-red"><c:out value="${flow.yield}"></c:out> </b>
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <b class="pull-right text-green"><c:out value="${flow.yield}"></c:out>  </b>
+                                                                        </c:otherwise>
+                                                                    </c:choose>
+                                                                    
+                                                                </li>
+                                                                <li class="list-group-item">
+                                                                    <b>Crop Variety</b> 
+                                                                    <c:choose>
+                                                                        <c:when test='${flow.cropVal.variety !=farm.cropVal.variety}'>
+                                                                            <b class="pull-right text-red"><c:out value="${flow.cropVal.variety}"></c:out> </b>
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <b class="pull-right text-green"><c:out value="${flow.cropVal.variety}"></c:out>  </b>
+                                                                        </c:otherwise>
+                                                                    </c:choose>
+                                                                </li>
+                                                                <li class="list-group-item">
+                                                                    <b>Crop Class</b> 
+                                                                     <c:choose>
+                                                                        <c:when test='${flow.cropVal.crop_class !=farm.cropVal.crop_class}'>
+                                                                            <b class="pull-right text-red"><c:out value="${flow.cropVal.crop_class}"></c:out> </b>
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <b class="pull-right text-green"><c:out value="${flow.cropVal.crop_class}"></c:out>  </b>
+                                                                        </c:otherwise>
+                                                                    </c:choose>
+                                                                    
+                                                                </li>
+                                                                <li class="list-group-item">
+                                                                    <b>Texture</b> 
+                                                                    <c:choose>
+                                                                        <c:when test='${flow.cropVal.texture !=farm.cropVal.texture}'>
+                                                                            <b class="pull-right text-red"><c:out value="${flow.cropVal.texture}"></c:out> </b>
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <b class="pull-right text-green"><c:out value="${flow.cropVal.texture}"></c:out>  </b>
+                                                                        </c:otherwise>
+                                                                    </c:choose>
+                                                                </li>
+                                                                <li class="list-group-item">
+                                                                    <b>Farming System</b> 
+                                                                    <c:choose>
+                                                                        <c:when test='${flow.cropVal.farming_system !=farm.cropVal.farming_system}'>
+                                                                            <b class="pull-right text-red"><c:out value="${flow.cropVal.farming_system}"></c:out> </b>
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <b class="pull-right text-green"><c:out value="${flow.cropVal.farming_system}"></c:out>  </b>
+                                                                        </c:otherwise>
+                                                                    </c:choose>
+                                                                </li>
+
+                                                                <li class="list-group-item">
+                                                                    <b>Topography</b>
+                                                                     <c:choose>
+                                                                        <c:when test='${flow.cropVal.topography !=farm.cropVal.topography}'>
+                                                                            <b class="pull-right text-red"><c:out value="${flow.cropVal.topography}"></c:out> </b>
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <b class="pull-right text-green"><c:out value="${flow.cropVal.topography}"></c:out>  </b>
+                                                                        </c:otherwise>
+                                                                    </c:choose>
+                                                                </li>
+                                                                <li class="list-group-item">
+                                                                    <b>Furrow Distance</b> 
+                                                                      <c:choose>
+                                                                        <c:when test='${flow.cropVal.furrow_distance !=farm.cropVal.furrow_distance}'>
+                                                                            <b class="pull-right text-red"><c:out value="${flow.cropVal.furrow_distance}"></c:out> </b>
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <b class="pull-right text-green"><c:out value="${flow.cropVal.furrow_distance}"></c:out>  </b>
+                                                                        </c:otherwise>
+                                                                    </c:choose>
+                                                                </li>
+                                                                <li class="list-group-item">
+                                                                    <b>Planting Density</b> 
+                                                                    <c:choose>
+                                                                        <c:when test='${flow.cropVal.planting_density !=farm.cropVal.planting_density}'>
+                                                                            <b class="pull-right text-red"><c:out value="${flow.cropVal.planting_density}"></c:out> </b>
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <b class="pull-right text-green"><c:out value="${flow.cropVal.planting_density}"></c:out>  </b>
+                                                                        </c:otherwise>
+                                                                    </c:choose>
+                                                                </li>
+                                                                <li class="list-group-item">
+                                                                    <b>Planting Date???</b> 
+                                                                    <c:choose>
+                                                                        <c:when test='${flow.cropVal.planting_date !=farm.cropVal.planting_date}'>
+                                                                            <b class="pull-right text-red"><c:out value="${flow.cropVal.planting_date}"></c:out> </b>
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <b class="pull-right text-green"><c:out value="${flow.cropVal.planting_date}"></c:out>  </b>
+                                                                        </c:otherwise>
+                                                                    </c:choose>
+                                                                </li>
+                                                                <li class="list-group-item">
+                                                                    <b>Harvest Date</b> 
+                                                                    <c:choose>
+                                                                        <c:when test='${flow.cropVal.harvest_date !=farm.cropVal.harvest_date}'>
+                                                                            <b class="pull-right text-red"><c:out value="${flow.cropVal.harvest_date}"></c:out> </b>
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <b class="pull-right text-green"><c:out value="${flow.cropVal.harvest_date}"></c:out>  </b>
+                                                                        </c:otherwise>
+                                                                    </c:choose>
+                                                                </li>
+                                                                <li class="list-group-item">
+                                                                    <b>Date Millable</b> 
+                                                                     <c:choose>
+                                                                        <c:when test='${flow.cropVal.date_millable !=farm.cropVal.date_millable}'>
+                                                                            <b class="pull-right text-red"><c:out value="${flow.cropVal.date_millable}"></c:out> </b>
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <b class="pull-right text-green"><c:out value="${flow.cropVal.date_millable}"></c:out>  </b>
+                                                                        </c:otherwise>
+                                                                    </c:choose>
+                                                                </li>
+                                                                <li class="list-group-item">
+                                                                    <b>Number Millable</b> 
+                                                                    <c:choose>
+                                                                        <c:when test='${flow.cropVal.num_millable !=farm.cropVal.num_millable}'>
+                                                                            <b class="pull-right text-red"><c:out value="${flow.cropVal.num_millable}"></c:out> </b>
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <b class="pull-right text-green"><c:out value="${flow.cropVal.num_millable}"></c:out>  </b>
+                                                                        </c:otherwise>
+                                                                    </c:choose>
+                                                                </li>
+                                                                <li class="list-group-item">
+                                                                    <b>Average Millable Stool</b> 
+                                                                     <c:choose>
+                                                                        <c:when test='${flow.cropVal.avg_millable_stool !=farm.cropVal.avg_millable_stool}'>
+                                                                            <b class="pull-right text-red"><c:out value="${flow.cropVal.avg_millable_stool}"></c:out> </b>
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <b class="pull-right text-green"><c:out value="${flow.cropVal.avg_millable_stool}"></c:out>  </b>
+                                                                        </c:otherwise>
+                                                                    </c:choose>
+                                                                </li>
+                                                                <li class="list-group-item">
+                                                                    <b>Brix</b> 
+                                                                    <c:choose>
+                                                                        <c:when test='${flow.cropVal.brix !=farm.cropVal.brix}'>
+                                                                            <b class="pull-right text-red"><c:out value="${flow.cropVal.brix}"></c:out> </b>
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <b class="pull-right text-green"><c:out value="${flow.cropVal.brix}"></c:out>  </b>
+                                                                        </c:otherwise>
+                                                                    </c:choose>
+                                                                </li>
+                                                                <li class="list-group-item">
+                                                                    <b>Stalk Length</b> 
+                                                                     <c:choose>
+                                                                        <c:when test='${flow.cropVal.stalk_length !=farm.cropVal.stalk_length}'>
+                                                                            <b class="pull-right text-red"><c:out value="${flow.cropVal.stalk_length}"></c:out> </b>
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <b class="pull-right text-green"><c:out value="${flow.cropVal.stalk_length}"></c:out>  </b>
+                                                                        </c:otherwise>
+                                                                    </c:choose>
+                                                                </li>
+                                                                <li class="list-group-item">
+                                                                    <b>Diameter</b> 
+                                                                     <c:choose>
+                                                                        <c:when test='${flow.cropVal.diameter !=farm.cropVal.diameter}'>
+                                                                            <b class="pull-right text-red"><c:out value="${flow.cropVal.diameter}"></c:out> </b>
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <b class="pull-right text-green"><c:out value="${flow.cropVal.diameter}"></c:out>  </b>
+                                                                        </c:otherwise>
+                                                                    </c:choose>
+                                                                </li>
+                                                                <li class="list-group-item">
+                                                                    <b>Weight</b> 
+                                                                    <c:choose>
+                                                                        <c:when test='${flow.cropVal.weight !=farm.cropVal.weight}'>
+                                                                            <b class="pull-right text-red"><c:out value="${flow.cropVal.weight}"></c:out> </b>
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <b class="pull-right text-green"><c:out value="${flow.cropVal.weight}"></c:out>  </b>
+                                                                        </c:otherwise>
+                                                                    </c:choose>
+                                                                </li>
+                                                                <li class="list-group-item">
+                                                                    <b>PH Level</b> 
+                                                                         <c:choose>
+                                                                        <c:when test='${flow.soilanalysis.ph_lvl !=farm.soilanalysis.ph_lvl}'>
+                                                                            <b class="pull-right text-red"><c:out value="${flow.soilanalysis.ph_lvl}"></c:out> </b>
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <b class="pull-right text-green"><c:out value="${flow.soilanalysis.ph_lvl}"></c:out>  </b>
+                                                                        </c:otherwise>
+                                                                    </c:choose>
+                                                                </li>
+
+                                                                <li class="list-group-item">
+                                                                    <b>Organic Matter</b> 
+                                                                    <c:choose>
+                                                                        <c:when test='${flow.soilanalysis.organic_matter !=farm.soilanalysis.organic_matter}'>
+                                                                            <b class="pull-right text-red"><c:out value="${flow.soilanalysis.organic_matter}"></c:out> </b>
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <b class="pull-right text-green"><c:out value="${flow.soilanalysis.organic_matter}"></c:out>  </b>
+                                                                        </c:otherwise>
+                                                                    </c:choose>
+                                                                </li>
+                                                                <li class="list-group-item">
+                                                                    <b>Phosphorus</b>
+                                                                     <c:choose>
+                                                                        <c:when test='${flow.soilanalysis.phosphorus !=farm.soilanalysis.phosphorus}'>
+                                                                            <b class="pull-right text-red"><c:out value="${flow.soilanalysis.phosphorus}"></c:out> </b>
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <b class="pull-right text-green"><c:out value="${flow.soilanalysis.phosphorus}"></c:out>  </b>
+                                                                        </c:otherwise>
+                                                                    </c:choose>
+                                                                </li>
+
+                                                                <li class="list-group-item">
+                                                                    <b>Potassium</b> 
+                                                                    <c:choose>
+                                                                        <c:when test='${flow.soilanalysis.potassium !=farm.soilanalysis.potassium}'>
+                                                                            <b class="pull-right text-red"><c:out value="${flow.soilanalysis.potassium}"></c:out> </b>
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <b class="pull-right text-green"><c:out value="${flow.soilanalysis.potassium}"></c:out>  </b>
+                                                                        </c:otherwise>
+                                                                    </c:choose>
+                                                                </li>
+                                                            </ul>
+                                                            <div class="btn btn-primary pull-right">
+                                                                More Details
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- /.tab-pane -->
+                                                    <div class="tab-pane" id="tab_8">
+                                                        <h3 class="profile-username text-center"></h3>
+                                                        <table class="table table-hover">
+                                                            <tbody><tr>
+                                                                    <th>Recommendation</th>
+
+                                                                    <th>more info</th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>John Doe</td>
+
+                                                                    <td>detailsbtn</td>
+                                                                </tr>
+
+                                                                <tr>
+
+                                                                    <td>1.23</td>
+
+
+                                                                    <td>detailsbtn</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>John Doe</td>
+
+                                                                    <td>detailsbtn</td>
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <!-- /.tab-pane -->
+                                                    <div class="tab-pane" id="tab_9">
+                                                        <table class="table table-hover">
+                                                            <tbody><tr>
+                                                                    <th>Problem</th>
+                                                                    <th>More Info</th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>John Doe</td>
+
+                                                                    <td>detailsbtn</td>
+                                                                </tr>
+
+                                                                <tr>
+
+                                                                    <td>1.23</td>
+
+
+                                                                    <td>detailsbtn</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>John Doe</td>
+
+                                                                    <td>detailsbtn</td>
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <!-- /.tab-pane -->
                                                 </div>
+                                                <!-- /.tab-content -->
+
+
                                             </div>
+
                                         </div>
-                                        <!-- /.tab-pane -->
-                                        <div class="tab-pane" id="tab_8">
-                                            <h3 class="profile-username text-center"></h3>
-                                            <table class="table table-hover">
-                                                <tbody><tr>
-                                                        <th>Recommendation</th>
+                                        </c:if>
+                                        </c:forEach>
+                                     </c:if>
+                                        <div class="box box-success collapsed-box">
+                                            <div class="box-header">
+                                                <input type="checkbox" style="width: 16; height: 16" class="pull-left">
+                                                <h4 class="text-center"><b>Farm D</b></h4>
 
-                                                        <th>more info</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>John Doe</td>
+                                                <div class="box-tools pull-right">
+                                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                                    </button>
+                                                </div>
 
-                                                        <td>detailsbtn</td>
-                                                    </tr>
+                                            </div>
+                                            <!-- /.box-header -->
+                                            <div class="box-body">
+                                                <ul class="nav nav-tabs">
+                                                    <li>  </li>
+                                                    <li class="active"><a href="#tab_7" data-toggle="tab"><b>Details</b></a></li>
+                                                    <li><a href="#tab_8" data-toggle="tab"><b>Recommendations</b></a></li>
+                                                    <li><a href="#tab_9" data-toggle="tab"><b>Problems </b></a></li>
 
-                                                    <tr>
-
-                                                        <td>1.23</td>
-
-
-                                                        <td>detailsbtn</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>John Doe</td>
-
-                                                        <td>detailsbtn</td>
-                                                    </tr>
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <!-- /.tab-pane -->
-                                        <div class="tab-pane" id="tab_9">
-                                            <table class="table table-hover">
-                                                <tbody><tr>
-                                                        <th>Problem</th>
-                                                        <th>More Info</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>John Doe</td>
-
-                                                        <td>detailsbtn</td>
-                                                    </tr>
-
-                                                    <tr>
-
-                                                        <td>1.23</td>
-
-
-                                                        <td>detailsbtn</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>John Doe</td>
-
-                                                        <td>detailsbtn</td>
-                                                    </tr>
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <!-- /.tab-pane -->
-                                    </div>
-                                    <!-- /.tab-content -->
-
-
-                                </div>
-
-                            </div>
-                            <!-- nav-tabs-custom -->
-                        </div>
-                        <div class="col-md-4">
-                            <div class="box box-primary">
-                                <div class="box-header">
-                                    <input type="checkbox" style="width: 16; height: 16" class="pull-left">
-                                    <h4 class="text-center"><b>Farm A</b></h4>
-
-                                    <div class="box-tools pull-right">
-                                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                                        </button>
-                                    </div>
-
-                                </div>
-                                <!-- /.box-header -->
-                                <div class="box-body">
-                                    <ul class="nav nav-tabs">
-                                        <li>  </li>
-                                        <li class="active"><a href="#tab_1" data-toggle="tab"><b>Details</b></a></li>
-                                        <li><a href="#tab_2" data-toggle="tab"><b>Recommendations</b></a></li>
-                                        <li><a href="#tab_3" data-toggle="tab"><b>Problems </b></a></li>
-
-                                    </ul>
-
-                                    <div class="tab-content">
-                                        <div class="tab-pane active" id="tab_1">
-                                            <div class="box-body box-profile">
-                                                <ul class="list-group list-group-unbordered">
-
-                                                    <li class="list-group-item">
-                                                        <b>Total Area</b> <b class="pull-right text-blue">
-                                                            2.3
-                                                        </b>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>Crop Variety</b> <b class="pull-right text-blue">
-                                                            FTYEM-21
-                                                        </b>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>PC</b> <b class="pull-right text-blue">
-                                                            80%
-                                                        </b>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>RC</b> <b class="pull-right text-blue">
-                                                            20%
-                                                        </b>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>Brix</b> <b class="pull-right text-yellow">
-                                                            12</b>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>Stalk Length</b> <b class="pull-right text-yellow">
-                                                            8</b>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>Date Planted</b> <b class="pull-right text-yellow">
-                                                            04/24/13
-                                                        </b>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>PH</b> <b class="pull-right text-yellow">
-                                                            4.7
-                                                        </b>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>Farming System</b> <b class="pull-right text-yellow">
-                                                            Fully Mechanized
-                                                        </b>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>Number of Tillers</b> <b class="pull-right text-yellow">
-                                                            2
-                                                        </b>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>TC/HA</b> <b class="pull-right text-yellow">
-                                                            2.5
-                                                        </b>
-                                                    </li>
                                                 </ul>
-                                                <div class="btn btn-primary pull-right">
-                                                    More Details
+
+                                                <div class="tab-content">
+                                                    <div class="tab-pane active" id="tab_7">
+                                                        <div class="box-body box-profile">
+                                                            <ul class="list-group list-group-unbordered">
+
+                                                                <li class="list-group-item">
+                                                                    <b>Total Area</b> <b class="pull-right text-green">
+                                                                        2.3
+                                                                    </b>
+                                                                </li>
+                                                                <li class="list-group-item">
+                                                                    <b>Crop Variety</b> <b class="pull-right text-green">
+                                                                        FTYEM-21
+                                                                    </b>
+                                                                </li>
+                                                                <li class="list-group-item">
+                                                                    <b>PC</b> <b class="pull-right text-green">
+                                                                        80%
+                                                                    </b>
+                                                                </li>
+                                                                <li class="list-group-item">
+                                                                    <b>RC</b> <b class="pull-right text-green">
+                                                                        20%
+                                                                    </b>
+                                                                </li>
+                                                                <li class="list-group-item">
+                                                                    <b>Brix</b> <b class="pull-right text-red">
+                                                                        18</b>
+                                                                </li>
+                                                                <li class="list-group-item">
+                                                                    <b>Stalk Length</b> <b class="pull-right text-red">
+                                                                        12</b>
+                                                                </li>
+                                                                <li class="list-group-item">
+                                                                    <b>Date Planted</b> <b class="pull-right text-green">
+                                                                        04/24/13
+                                                                    </b>
+                                                                </li>
+                                                                <li class="list-group-item">
+                                                                    <b>PH</b> <b class="pull-right text-red">
+                                                                        5.4
+                                                                    </b>
+                                                                </li>
+                                                                <li class="list-group-item">
+                                                                    <b>Farming System</b> <b class="pull-right text-green">
+                                                                        Fully Mechanized
+                                                                    </b>
+                                                                </li>
+                                                                <li class="list-group-item">
+                                                                    <b>Number of Tillers</b> <b class="pull-right text-red">
+                                                                        3
+                                                                    </b>
+                                                                </li>
+                                                                <li class="list-group-item">
+                                                                    <b>TC/HA</b> <b class="pull-right text-red">
+                                                                        2.8
+                                                                    </b>
+                                                                </li>
+                                                            </ul>
+                                                            <div class="btn btn-primary pull-right">
+                                                                More Details
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- /.tab-pane -->
+                                                    <div class="tab-pane" id="tab_8">
+                                                        <h3 class="profile-username text-center"></h3>
+                                                        <table class="table table-hover">
+                                                            <tbody><tr>
+                                                                    <th>Recommendation</th>
+
+                                                                    <th>more info</th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>John Doe</td>
+
+                                                                    <td>detailsbtn</td>
+                                                                </tr>
+
+                                                                <tr>
+
+                                                                    <td>1.23</td>
+
+
+                                                                    <td>detailsbtn</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>John Doe</td>
+
+                                                                    <td>detailsbtn</td>
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <!-- /.tab-pane -->
+                                                    <div class="tab-pane" id="tab_9">
+                                                        <table class="table table-hover">
+                                                            <tbody><tr>
+                                                                    <th>Problem</th>
+                                                                    <th>More Info</th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>John Doe</td>
+
+                                                                    <td>detailsbtn</td>
+                                                                </tr>
+
+                                                                <tr>
+
+                                                                    <td>1.23</td>
+
+
+                                                                    <td>detailsbtn</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>John Doe</td>
+
+                                                                    <td>detailsbtn</td>
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <!-- /.tab-pane -->
                                                 </div>
+                                                <!-- /.tab-content -->
+
+
                                             </div>
+
                                         </div>
-                                        <!-- /.tab-pane -->
-                                        <div class="tab-pane" id="tab_2">
-                                            <h3 class="profile-username text-center"></h3>
-                                            <table class="table table-hover">
-                                                <tbody><tr>
-                                                        <th>Recommendation</th>
+                                        <!-- nav-tabs-custom -->
 
-                                                        <th>more info</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>John Doe</td>
-
-                                                        <td>detailsbtn</td>
-                                                    </tr>
-
-                                                    <tr>
-
-                                                        <td>1.23</td>
-
-
-                                                        <td>detailsbtn</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>John Doe</td>
-
-                                                        <td>detailsbtn</td>
-                                                    </tr>
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <!-- /.tab-pane -->
-                                        <div class="tab-pane" id="tab_3">
-                                            <table class="table table-hover">
-                                                <tbody><tr>
-                                                        <th>Problem</th>
-                                                        <th>More Info</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>John Doe</td>
-
-                                                        <td>detailsbtn</td>
-                                                    </tr>
-
-                                                    <tr>
-
-                                                        <td>1.23</td>
-
-
-                                                        <td>detailsbtn</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>John Doe</td>
-
-                                                        <td>detailsbtn</td>
-                                                    </tr>
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <!-- /.tab-pane -->
-                                    </div>
-                                    <!-- /.tab-content -->
-
-
-                                </div>
-
-                            </div>
-
-                            <!-- nav-tabs-custom -->
-                        </div>
-                        <div class="col-md-4">
-                            <div class="box box-danger">
-                                <div class="box-header">
-                                    <input type="checkbox" style="width: 16; height: 16" class="pull-left">
-                                    <h4 class="text-center"><b>Farm C</b></h4>
-
-                                    <div class="box-tools pull-right">
-                                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                                        </button>
+                                      
                                     </div>
 
-                                </div>
-                                <!-- /.box-header -->
-                                <div class="box-body">
-                                    <ul class="nav nav-tabs">
-                                        <li>  </li>
-                                        <li class="active"><a href="#tab_4" data-toggle="tab"><b>Details</b></a></li>
-                                        <li><a href="#tab_5" data-toggle="tab"><b>Recommendations</b></a></li>
-                                        <li><a href="#tab_6" data-toggle="tab"><b>Problems </b></a></li>
-
-                                    </ul>
-
-                                    <div class="tab-content">
-                                        <div class="tab-pane active" id="tab_4">
-                                            <div class="box-body box-profile">
-                                                <ul class="list-group list-group-unbordered">
-
-                                                    <li class="list-group-item">
-                                                        <b>Total Area</b> <b class="pull-right text-green">
-                                                            2.3
-                                                        </b>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>Crop Variety</b> <b class="pull-right text-green">
-                                                            FTYEM-21
-                                                        </b>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>PC</b> <b class="pull-right text-green">
-                                                            80%
-                                                        </b>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>RC</b> <b class="pull-right text-green">
-                                                            20%
-                                                        </b>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>Brix</b> <b class="pull-right text-red">
-                                                            11</b>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>Stalk Length</b> <b class="pull-right text-red">
-                                                            6</b>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>Date Planted</b> <b class="pull-right text-red">
-                                                            04/11/13
-                                                        </b>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>PH</b> <b class="pull-right text-green">
-                                                            4.7
-                                                        </b>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>Farming System</b> <b class="pull-right text-green">
-                                                            Fully Mechanized
-                                                        </b>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>Number of Tillers</b> <b class="pull-right text-red">
-                                                            1
-                                                        </b>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>TC/HA</b> <b class="pull-right text-red">
-                                                            2.4
-                                                        </b>
-                                                    </li>
-                                                </ul>
-                                                <div class="btn btn-primary pull-right">
-                                                    More Details
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- /.tab-pane -->
-                                        <div class="tab-pane" id="tab_5">
-                                            <h3 class="profile-username text-center"></h3>
-                                            <table class="table table-hover">
-                                                <tbody><tr>
-                                                        <th>Recommendation</th>
-
-                                                        <th>more info</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>John Doe</td>
-
-                                                        <td>detailsbtn</td>
-                                                    </tr>
-
-                                                    <tr>
-
-                                                        <td>1.23</td>
-
-
-                                                        <td>detailsbtn</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>John Doe</td>
-
-                                                        <td>detailsbtn</td>
-                                                    </tr>
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <!-- /.tab-pane -->
-                                        <div class="tab-pane" id="tab_6">
-                                            <table class="table table-hover">
-                                                <tbody><tr>
-                                                        <th>Problem</th>
-                                                        <th>More Info</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>John Doe</td>
-
-                                                        <td>detailsbtn</td>
-                                                    </tr>
-
-                                                    <tr>
-
-                                                        <td>1.23</td>
-
-
-                                                        <td>detailsbtn</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>John Doe</td>
-
-                                                        <td>detailsbtn</td>
-                                                    </tr>
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <!-- /.tab-pane -->
-                                    </div>
-                                    <!-- /.tab-content -->
-
-
-                                </div>
-
-                            </div>
-
-                            <!-- nav-tabs-custom -->
-                        </div>
-
-
-
-
-
-                        <div class="col-md-7 text-center">
-                            <div class="box box-danger">
-                                <div class="box-header">
-                                    <h3 class="box-title">Action Tools</h3>
-                                </div>
-                                <div class="box-body">
-                                    <a class="btn btn-app btn-linkedin">
-                                        <i class="fa fa-edit"></i> Create Survey
-                                    </a>
-                                    <a class="btn btn-app btn-adn">
-                                        <i class="fa fa-bank"></i> Create Recommendation
-                                    </a>
-                                    <a class="btn btn-app bg-green" data-toggle="modal" data-target="#myModal">
-
-                                        <i class="fa fa-bullhorn"></i> Send Recommendation(modal)
-                                    </a>
-                                    <a class="btn btn-app bg-green" href="sendRecommendations.jsp">
-
-                                        <i class="fa fa-bullhorn"></i> Send Recommendation(redirect)
-                                    </a>
-
-                                    <a class="btn btn-app btn-soundcloud" href="determineProblem.jsp">
-
-                                        <i class="fa fa-inbox"></i> Determine Problem
-                                    </a>
-
-
-                                </div>
-                                <!-- /.box-body -->
-                            </div>    
-
-
-                        </div>
-
-
-
-                    </div>
-                </section>
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="myModalLabel">Send Recommendations</h4>
-                            </div>
-                            <div class="modal-body">
-
-                                <div class="row">
                                     <div class="col-md-4">
+                                        <c:if test="${not empty farm}">
+                                            <div class="box box-primary">
+                                                <div class="box-header">
+                                                    <input type="checkbox" style="width: 16; height: 16" class="pull-left">
+                                                    <h4 class="text-center"><b><c:out value="${farm.id}"/></b></h4>
 
+                                                    <div class="box-tools pull-right">
+                                                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                                        </button>
+                                                    </div>
+
+                                                </div>
+                                                <!-- /.box-header -->
+                                                <div class="box-body">
+                                                    <ul class="nav nav-tabs">
+                                                        <li>  </li>
+                                                        <li class="active"><a href="#tab_1" data-toggle="tab"><b>Details</b></a></li>
+                                                        <li><a href="#tab_2" data-toggle="tab"><b>Recommendations</b></a></li>
+                                                        <li><a href="#tab_3" data-toggle="tab"><b>Problems </b></a></li>
+
+                                                    </ul>
+
+                                                    <div class="tab-content">
+                                                        <div class="tab-pane active" id="tab_1">
+                                                            <div class="box-body box-profile">
+                                                                <ul class="list-group list-group-unbordered">
+                                                                    <li class="list-group-item">
+                                                                        <b>Farmer</b> <b class="pull-right text-blue">
+                                                                            <c:out value="${farm.farmer}"/>
+                                                                        </b>
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <b>Location</b> <b class="pull-right text-blue">
+                                                                            <c:out value="${farm.barangay}"/> ,  <c:out value="${farm.municipality}"/>
+                                                                        </b>
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <b>Production(TC)</b> <b class="pull-right text-blue">
+                                                                            <c:out value="${farm.production}"/>
+                                                                        </b>
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <b>Total Area</b> <b class="pull-right text-blue">
+                                                                            <c:out value="${farm.area}"/>
+                                                                        </b>
+                                                                    </li>
+
+                                                                    <li class="list-group-item">
+                                                                        <b>Average Yield(tc/ha)</b> <b class="pull-right text-blue">
+                                                                            <c:out value="${farm.yield}"/>
+                                                                        </b>
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <b>Crop Variety</b> <b class="pull-right text-blue">
+                                                                            <c:out value="${farm.cropVal.variety}"/>
+                                                                        </b>
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <b>Crop Class</b> <b class="pull-right text-blue">
+                                                                            <c:out value="${farm.cropVal.crop_class}"/>
+                                                                        </b>
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <b>Texture</b> <b class="pull-right text-yellow">
+                                                                            <c:out value="${farm.cropVal.texture}"/>
+                                                                        </b>
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <b>Farming System</b> <b class="pull-right">
+                                                                            <c:out value="${farm.cropVal.farming_system}"/> 
+                                                                        </b>
+                                                                    </li>
+
+                                                                    <li class="list-group-item">
+                                                                        <b>Topography</b> <b class="pull-right">
+                                                                            <c:out value="${farm.cropVal.topography}"/>
+                                                                        </b>
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <b>Furrow Distance</b> <b class="pull-right">
+                                                                            <c:out value="${farm.cropVal.furrow_distance}"/>
+                                                                        </b>
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <b>Planting Density</b> <b class="pull-right">
+                                                                            <c:out value="${farm.cropVal.planting_density}"/>
+                                                                        </b>
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <b>Planting Date???</b> <b class="pull-right">
+                                                                            <c:out value="${farm.cropVal.planting_date}"/>
+                                                                        </b>
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <b>Harvest Date</b> <b class="pull-right">
+                                                                            <c:out value="${farm.cropVal.harvest_date}"/>
+                                                                        </b>
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <b>Date Millable</b> <b class="pull-right">
+                                                                            <c:out value="${farm.cropVal.date_millable}"/>
+                                                                        </b>
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <b>Number Millable</b> <b class="pull-right">
+                                                                            <c:out value="${farm.cropVal.num_millable}"/>
+                                                                        </b>
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <b>Average Millable Stool</b> <b class="pull-right">
+                                                                            <c:out value="${farm.cropVal.avg_millable_stool}"/>
+                                                                        </b>
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <b>Brix</b> <b class="pull-right">
+                                                                            <c:out value="${farm.cropVal.brix}"/>
+                                                                        </b>
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <b>Stalk Length</b> <b class="pull-right">
+                                                                            <c:out value="${farm.cropVal.stalk_length}"/>
+                                                                        </b>
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <b>Diameter</b> <b class="pull-right">
+                                                                            <c:out value="${farm.cropVal.diameter}"/>
+                                                                        </b>
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <b>Weight</b> <b class="pull-right">
+                                                                            <c:out value="${farm.cropVal.weight}"/>
+                                                                        </b>
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <b>PH Level</b> <b class="pull-right">
+                                                                            <c:out value="${farm.soilanalysis.ph_lvl}"/></b>
+                                                                    </li>
+
+                                                                    <li class="list-group-item">
+                                                                        <b>Organic Matter</b> <b class="pull-right">
+                                                                            <c:out value="${farm.soilanalysis.organic_matter}"/>
+                                                                        </b>
+                                                                    </li>
+                                                                    <li class="list-group-item">
+                                                                        <b>Phosphorus</b> <b class="pull-right">
+                                                                            <c:out value="${farm.soilanalysis.phosphorus}"/>
+                                                                        </b>
+                                                                    </li>
+
+                                                                    <li class="list-group-item">
+                                                                        <b>Potassium</b> <b class="pull-right">
+                                                                            <c:out value="${farm.soilanalysis.potassium}"/>
+                                                                        </b>
+                                                                    </li>
+                                                                </ul>
+                                                                <div class="btn btn-primary pull-right">
+                                                                    More Details
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- /.tab-pane -->
+                                                        <div class="tab-pane" id="tab_2">
+                                                            <h3 class="profile-username text-center"></h3>
+                                                            <table class="table table-hover">
+                                                                <tbody><tr>
+                                                                        <th>Recommendation</th>
+
+                                                                        <th>more info</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>John Doe</td>
+
+                                                                        <td>detailsbtn</td>
+                                                                    </tr>
+
+                                                                    <tr>
+
+                                                                        <td>1.23</td>
+
+
+                                                                        <td>detailsbtn</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>John Doe</td>
+
+                                                                        <td>detailsbtn</td>
+                                                                    </tr>
+
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <!-- /.tab-pane -->
+                                                        <div class="tab-pane" id="tab_3">
+                                                            <table class="table table-hover">
+                                                                <tbody><tr>
+                                                                        <th>Problem</th>
+                                                                        <th>More Info</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>John Doe</td>
+
+                                                                        <td>detailsbtn</td>
+                                                                    </tr>
+
+                                                                    <tr>
+
+                                                                        <td>1.23</td>
+
+
+                                                                        <td>detailsbtn</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>John Doe</td>
+
+                                                                        <td>detailsbtn</td>
+                                                                    </tr>
+
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <!-- /.tab-pane -->
+                                                    </div>
+                                                    <!-- /.tab-content -->
+
+
+                                                </div>
+
+                                            </div>
+
+
+                                        </c:if>
+                                        <!-- nav-tabs-custom -->
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="box box-danger">
+                                            <div class="box-header">
+                                                <input type="checkbox" style="width: 16; height: 16" class="pull-left">
+                                                <h4 class="text-center"><b>Farm C</b></h4>
+
+                                                <div class="box-tools pull-right">
+                                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                                    </button>
+                                                </div>
+
+                                            </div>
+                                            <!-- /.box-header -->
+                                            <div class="box-body">
+                                                <ul class="nav nav-tabs">
+                                                    <li>  </li>
+                                                    <li class="active"><a href="#tab_4" data-toggle="tab"><b>Details</b></a></li>
+                                                    <li><a href="#tab_5" data-toggle="tab"><b>Recommendations</b></a></li>
+                                                    <li><a href="#tab_6" data-toggle="tab"><b>Problems </b></a></li>
+
+                                                </ul>
+
+                                                <div class="tab-content">
+                                                    <div class="tab-pane active" id="tab_4">
+                                                        <div class="box-body box-profile">
+                                                            <ul class="list-group list-group-unbordered">
+
+                                                                <li class="list-group-item">
+                                                                    <b>Total Area</b> <b class="pull-right text-green">
+                                                                        2.3
+                                                                    </b>
+                                                                </li>
+                                                                <li class="list-group-item">
+                                                                    <b>Crop Variety</b> <b class="pull-right text-green">
+                                                                        FTYEM-21
+                                                                    </b>
+                                                                </li>
+                                                                <li class="list-group-item">
+                                                                    <b>PC</b> <b class="pull-right text-green">
+                                                                        80%
+                                                                    </b>
+                                                                </li>
+                                                                <li class="list-group-item">
+                                                                    <b>RC</b> <b class="pull-right text-green">
+                                                                        20%
+                                                                    </b>
+                                                                </li>
+                                                                <li class="list-group-item">
+                                                                    <b>Brix</b> <b class="pull-right text-red">
+                                                                        11</b>
+                                                                </li>
+                                                                <li class="list-group-item">
+                                                                    <b>Stalk Length</b> <b class="pull-right text-red">
+                                                                        6</b>
+                                                                </li>
+                                                                <li class="list-group-item">
+                                                                    <b>Date Planted</b> <b class="pull-right text-red">
+                                                                        04/11/13
+                                                                    </b>
+                                                                </li>
+                                                                <li class="list-group-item">
+                                                                    <b>PH</b> <b class="pull-right text-green">
+                                                                        4.7
+                                                                    </b>
+                                                                </li>
+                                                                <li class="list-group-item">
+                                                                    <b>Farming System</b> <b class="pull-right text-green">
+                                                                        Fully Mechanized
+                                                                    </b>
+                                                                </li>
+                                                                <li class="list-group-item">
+                                                                    <b>Number of Tillers</b> <b class="pull-right text-red">
+                                                                        1
+                                                                    </b>
+                                                                </li>
+                                                                <li class="list-group-item">
+                                                                    <b>TC/HA</b> <b class="pull-right text-red">
+                                                                        2.4
+                                                                    </b>
+                                                                </li>
+                                                            </ul>
+                                                            <div class="btn btn-primary pull-right">
+                                                                More Details
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- /.tab-pane -->
+                                                    <div class="tab-pane" id="tab_5">
+                                                        <h3 class="profile-username text-center"></h3>
+                                                        <table class="table table-hover">
+                                                            <tbody><tr>
+                                                                    <th>Recommendation</th>
+
+                                                                    <th>more info</th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>John Doe</td>
+
+                                                                    <td>detailsbtn</td>
+                                                                </tr>
+
+                                                                <tr>
+
+                                                                    <td>1.23</td>
+
+
+                                                                    <td>detailsbtn</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>John Doe</td>
+
+                                                                    <td>detailsbtn</td>
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <!-- /.tab-pane -->
+                                                    <div class="tab-pane" id="tab_6">
+                                                        <table class="table table-hover">
+                                                            <tbody><tr>
+                                                                    <th>Problem</th>
+                                                                    <th>More Info</th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>John Doe</td>
+
+                                                                    <td>detailsbtn</td>
+                                                                </tr>
+
+                                                                <tr>
+
+                                                                    <td>1.23</td>
+
+
+                                                                    <td>detailsbtn</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>John Doe</td>
+
+                                                                    <td>detailsbtn</td>
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <!-- /.tab-pane -->
+                                                </div>
+                                                <!-- /.tab-content -->
+
+
+                                            </div>
+
+                                        </div>
+
+                                        <!-- nav-tabs-custom -->
+                                    </div>
+
+
+
+
+
+                                    <div class="col-md-7 text-center">
+                                        <div class="box box-danger">
+                                            <div class="box-header">
+                                                <h3 class="box-title">Action Tools</h3>
+                                            </div>
+                                            <div class="box-body">
+                                                <a class="btn btn-app btn-linkedin">
+                                                    <i class="fa fa-edit"></i> Create Survey
+                                                </a>
+                                                <a class="btn btn-app btn-adn">
+                                                    <i class="fa fa-bank"></i> Create Recommendation
+                                                </a>
+                                                <a class="btn btn-app bg-green" data-toggle="modal" data-target="#myModal">
+
+                                                    <i class="fa fa-bullhorn"></i> Send Recommendation(modal)
+                                                </a>
+                                                <a class="btn btn-app bg-green" href="sendRecommendations.jsp">
+
+                                                    <i class="fa fa-bullhorn"></i> Send Recommendation(redirect)
+                                                </a>
+
+                                                <a class="btn btn-app btn-soundcloud" href="determineProblem.jsp">
+
+                                                    <i class="fa fa-inbox"></i> Determine Problem
+                                                </a>
+
+
+                                            </div>
+                                            <!-- /.box-body -->
+                                        </div>    
 
 
                                     </div>
 
+
+
                                 </div>
-                                <table id="example" class="table  display table-hover pull-right" cellspacing="0" width="100%">
-                                    <thead>
-                                        <tr>
-                                            <th></th>
-                                            <th>Recommendation</th>
-                                            <th>Description</th>
-                                            <th>More Info</th>
+                            </section>
+                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">Send Recommendations</h4>
+                                        </div>
+                                        <div class="modal-body">
 
-                                        </tr>
-                                    </thead>
+                                            <div class="row">
+                                                <div class="col-md-4">
 
-                                </table>
 
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-primary">Send</button>
+
+                                                </div>
+
+                                            </div>
+                                            <table id="example" class="table  display table-hover pull-right" cellspacing="0" width="100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th>Recommendation</th>
+                                                        <th>Description</th>
+                                                        <th>More Info</th>
+
+                                                    </tr>
+                                                </thead>
+
+                                            </table>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                            <button type="button" class="btn btn-primary">Send</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+
+                        <footer class="main-footer">
+
+                            <div class="pull-right hidden-xs">
+                                <b>Version</b> 2.3.3
+                            </div>
+                            <strong>Copyright &copy; 2014-2015 <a href="http://sra.com">Sugar Regulatory Association</a>.</strong>
+                        </footer>
                     </div>
-                </div>
-            </div>
-
-            <footer class="main-footer">
-
-                <div class="pull-right hidden-xs">
-                    <b>Version</b> 2.3.3
-                </div>
-                <strong>Copyright &copy; 2014-2015 <a href="http://sra.com">Sugar Regulatory Association</a>.</strong>
-            </footer>
-        </div>
 
 
-        <script type="text/javascript" src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="plugins/select2/select2.full.min.js"></script>
+                    <script type="text/javascript" src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
+                    <script src="bootstrap/js/bootstrap.min.js"></script>
+                    <script src="plugins/select2/select2.full.min.js"></script>
 
-        <script src="dist/js/app.min.js"></script>
+                    <script src="dist/js/app.min.js"></script>
 
-        <script type="text/javascript">
-            $(function () {
-                $(".select2").select2();
-            });
-        </script>
+                    <script type="text/javascript">
+                        $(function () {
+                            $(".select2").select2();
+                        });
+                    </script>
 
-        <script src="plugins/datatables/jquery.dataTables.min.js"></script>
-        <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+                    <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+                    <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
 
-        <script>
+                    <script>
 
-            $(document).ready(function () {
-                var rows_selected = [];
+                        //            $(document).ready(function () {
+                        //                var rows_selected = [];
+                        //
+                        //                var table = $('#example').DataTable({
+                        //                    'ajax': {
+                        //                        'url': 'viewBrgyList'
+                        //                    },
+                        //                    'columnDefs': [{
+                        //                            'targets': 0,
+                        //                            'searchable': false,
+                        //                            'orderable': false,
+                        //                            'className': 'dt-body-center',
+                        //                            'render': function (data, type, full, meta) {
+                        //                                return '<input type="checkbox" name="id[]" id="buttonClick" value="'
+                        //                                        + $('<div/>').text(data).html() + '">';
+                        //                            }
+                        //                        }],
+                        //                    'select': {
+                        //                        'style': 'multi'
+                        //                    },
+                        //                    'order': [[1, 'asc']]
+                        //                            //      ,
+                        //                            //       'rowCallback': function(row, data, dataIndex){
+                        //                            //         // Get row ID
+                        //                            //       var rowId = data[0];
+                        //                            //       // alert(rowId);
+                        //                            //         // If row ID is in the list of selected row IDs
+                        //                            //         if($.inArray(rowId, rows_selected) !== -1){
+                        //                            //            $(row).find('input[type="checkbox"]').prop('checked', true);
+                        //                            //            $(row).addClass('selected');
+                        //                            //         }
+                        //                            //      }     
+                        //
+                        //                });
+                        //
+                        //                $('#frm-example').on('submit', function (e) {
+                        //                    var form = this;
+                        //
+                        //                    // Iterate over all checkboxes in the table
+                        //                    table.$('input[type="checkbox"]').each(function () {
+                        //                        // If checkbox doesn't exist in DOM
+                        //                        if (!$.contains(document, this)) {
+                        //                            // If checkbox is checked
+                        //                            if (this.checked) {
+                        //                                // Create a hidden element 
+                        //                                $(form).append(
+                        //                                        $('<input>')
+                        //                                        .attr('type', 'hidden')
+                        //                                        .attr('name', this.name)
+                        //                                        .val(this.value)
+                        //                                        );
+                        //                            }
+                        //                        }
+                        //                    });
+                        //                });
+                        //            });
 
-                var table = $('#example').DataTable({
-                    'ajax': {
-                        'url': 'viewBrgyList'
-                    },
-                    'columnDefs': [{
-                            'targets': 0,
-                            'searchable': false,
-                            'orderable': false,
-                            'className': 'dt-body-center',
-                            'render': function (data, type, full, meta) {
-                                return '<input type="checkbox" name="id[]" id="buttonClick" value="'
-                                        + $('<div/>').text(data).html() + '">';
-                            }
-                        }],
-                    'select': {
-                        'style': 'multi'
-                    },
-                    'order': [[1, 'asc']]
-                            //      ,
-                            //       'rowCallback': function(row, data, dataIndex){
-                            //         // Get row ID
-                            //       var rowId = data[0];
-                            //       // alert(rowId);
-                            //         // If row ID is in the list of selected row IDs
-                            //         if($.inArray(rowId, rows_selected) !== -1){
-                            //            $(row).find('input[type="checkbox"]').prop('checked', true);
-                            //            $(row).addClass('selected');
-                            //         }
-                            //      }     
 
-                });
+                    </script>
+                </body>
 
-                $('#frm-example').on('submit', function (e) {
-                    var form = this;
-
-                    // Iterate over all checkboxes in the table
-                    table.$('input[type="checkbox"]').each(function () {
-                        // If checkbox doesn't exist in DOM
-                        if (!$.contains(document, this)) {
-                            // If checkbox is checked
-                            if (this.checked) {
-                                // Create a hidden element 
-                                $(form).append(
-                                        $('<input>')
-                                        .attr('type', 'hidden')
-                                        .attr('name', this.name)
-                                        .val(this.value)
-                                        );
-                            }
-                        }
-                    });
-                });
-            });
-
-
-        </script>
-    </body>
-
-</html>
+            </html>

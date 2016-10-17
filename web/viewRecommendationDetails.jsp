@@ -103,7 +103,7 @@
                         <div class="col-md-6">
                             <div class="box box-solid box-success">
                                 <div class="box-header with-border">
-                                    <h3 class="box-title">Recommendation Details(do aims to prevent func)(TO farm not farmer DB DB DB)(ask bj resend validation)(date updated for each farm??)(char(1) approved?)</h3>
+                                    <h3 class="box-title">Recommendation Details(TO farm not farmer DB DB DB)(ask bj resend validation)</h3>
                                 </div>
                             </div>
                         </div>

@@ -23,8 +23,8 @@ on barangay selection
         <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
 
         <link rel="stylesheet" href="plugins/select2/select2.min.css">
-          <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
-        
+        <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+
 
 
 
@@ -355,15 +355,15 @@ on barangay selection
                             <!--<label class="pull-left">Multiple</label> !-->
                             <div class="col-md-7">
                                 <div class="form-group">
-                                <select id="select2" class="select2" multiple="multiple" data-placeholder="Select a Tag" style="width: 100%;">
-                                    <!--                                    <option>Yield</option>
-                                                                        <option>Total Size</option>
-                                                                        <option>Variety</option>
-                                                                        <option>Brix</option>
-                                                                        <option>Farming System</option>
-                                                                        <option>Texas</option>
-                                                                        <option>Washington</option>-->
-                                </select>
+                                    <select id="select2" class="select2" multiple="multiple" data-placeholder="Select a Tag" style="width: 100%;">
+                                        <!--                                    <option>Yield</option>
+                                                                            <option>Total Size</option>
+                                                                            <option>Variety</option>
+                                                                            <option>Brix</option>
+                                                                            <option>Farming System</option>
+                                                                            <option>Texas</option>
+                                                                            <option>Washington</option>-->
+                                    </select>
                                 </div>
                             </div>
 
@@ -373,51 +373,48 @@ on barangay selection
                             </div>
 
                         </div>
+                        <form id="frm-FarmDiff" action="viewFarmDifferences">
 
-                        <div class="col-sm-12">
-                            <br>
-                            <div class="box box-success">
-                                <div class="box-header with-border">
-                                    <h1 class="box-title">Results:</h1>
 
+                            <div class="col-sm-12">
+                                <br>
+                                <div class="box box-success">
+                                    <div class="box-header with-border">
+                                        <h1 class="box-title">Results:</h1>
+
+                                    </div>
+                                    <div class="box-body">
+
+                                        <table id="example" class="table  display table-hover " cellspacing="0" width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <!--<th><input name="select_all" value="1" id="example-select-all" type="checkbox" /></th>-->
+                                                    <th></th>
+                                                    <th>Farmer</th>
+                                                    <th>Barangay</th>
+                                                    <th>Municipality</th>
+                                                    <th>Actual</th>
+                                                    <th>Difference</th>
+                                                    <th>More Details</th>
+
+                                                </tr>
+                                            </thead>
+
+                                        </table>
+
+                                    </div>
                                 </div>
+                            </div>
+                            <div class="col-md-2 pull-right">
+
+                                <input name="id" type="hidden" value="${id}"/>
                                 <div class="box-body">
-
-                                    <table id="example" class="table  display table-hover " cellspacing="0" width="100%">
-                                        <thead>
-                                            <tr>
-                                                <th><input name="select_all" value="1" id="example-select-all" type="checkbox" /></th>
-                                                <th>Farmer</th>
-                                                <th>Barangay</th>
-                                                <th>Municipality</th>
-                                                <th>Actual</th>
-                                                <th>Difference</th>
-                                                <th>More Details</th>
-
-                                            </tr>
-                                        </thead>
-                                      
-                                    </table>
-
+                                    <button class="btn btn-app btn-linkedin" value="submit" style="width: 100%">
+                                        <i class="fa fa-edit" ></i> Create Comparison
+                                    </button>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-2 pull-right">
-
-
-                            <div class="box-body">
-                                <a class="btn btn-app btn-linkedin" style="width: 100%">
-                                    <i class="fa fa-edit" ></i> Create Comparison
-                                </a>
-
-
-
-                            </div>
-                            <!-- /.box-body -->
-
-
-                        </div>
-
+                        </form>
 
                     </div>
                 </section>
@@ -467,9 +464,11 @@ on barangay selection
 
                 $("#sButton").on("click", function () {
                     var test = $("#select2").val();
-                    var rows_selected = [];
+
+                    //  var rows_selected = [];
+                    var limit = 4;
                     var table = $('#example').DataTable({
-                          destroy: true,
+                        destroy: true,
                         'ajax': {
                             'url': 'searchSimilarFarms?tag=' + test + '&id=${id}',
                             type: 'POST'
@@ -480,48 +479,77 @@ on barangay selection
                                 'orderable': false,
                                 'className': 'dt-body-center',
                                 'render': function (data, type, full, meta) {
-                                    return '<input type="checkbox" name="id[]" id="buttonClick" value="'
+                                    return '<input class="multi-checkbox" type="checkbox" name="fids[]" id="buttonClick" value="'
                                             + $('<div/>').text(data).html() + '">';
                                 }
                             },
-                        {
+                            {
                                 'targets': 5,
+                                'searchable': true,
+                                'orderable': true,
+                                'className': 'dt-body-center',
+                                'render': function (data, type, full, meta) {
+                                    if (data > 0) {
+                                        return '<span class="label label-success">' + data + '</span>';
+                                    } else if (data < 0) {
+                                        return '<span class="label label-warning">' + data + '</span>';
+                                    } else {
+                                        return '<span class="label label-info">' + data + '</span>';
+                                    }
+                                }
+                            },
+                            {
+                                'targets': 6,
                                 'searchable': false,
                                 'orderable': false,
                                 'className': 'dt-body-center',
                                 'render': function (data, type, full, meta) {
-                                    if(data>0){
-                                         return '<span class="label label-success">'+data+'</span>'; 
-                                    }else if(data < 0){
-                                          return '<span class="label label-warning">'+data+'</span>';
-                                    }else{
-                                          return '<span class="label label-primary">'+data+'</span>';
-                                    }
-                                  
-                                            //+ $('<div/>').text(data).html() + '">';
-                                    
-                                   //  return '<a href="viewRecDetails?id=' + data + '" class="btn btn-primary text-center">' + 'more details' + '</a>';
-                            }
+                                    return '<a href="viewFieldDetails?id=' + data + '" class="btn btn-primary text-center">' + 'more details' + '</a>';
+
                                 }
-                            ],
+                            }
+                        ],
                         'select': {
                             'style': 'multi'
                         },
                         'order': [[1, 'asc']]
-                                //      ,
-                                //       'rowCallback': function(row, data, dataIndex){
-                                //         // Get row ID
-                                //       var rowId = data[0];
-                                //       // alert(rowId);
-                                //         // If row ID is in the list of selected row IDs
-                                //         if($.inArray(rowId, rows_selected) !== -1){
-                                //            $(row).find('input[type="checkbox"]').prop('checked', true);
-                                //            $(row).addClass('selected');
-                                //         }
-                                //      }     
+                        ,
+                        'rowCallback': function (row, data, dataIndex) {
+                            // Get row ID
+                            var rowId = data[0];
+                            // alert(rowId);
+                            // If row ID is in the list of selected row IDs
+                            //  alert("notclicked");
+//                                         if($.inArray(rowId, rows_selected) !== -1){
+//                                              
+//                                            $(row).find('input[type="checkbox"]').prop('checked', true);
+//                                            $(row).addClass('selected');
+//                                          
+//                                         }
+                            table.$('input[type="checkbox"]', row).on('change', function (evt) {
+                                console.log("outentered");
+                                var tcounter = 0;
+
+                                table.$('input[type="checkbox"]').each(function () {
+                                    if (this.checked) {
+
+                                        tcounter += 1;
+
+                                    }
+
+                                });
+
+                                if (tcounter > limit) {
+                                    console.log(tcounter);
+                                    console.log("debackdoortho");
+                                    this.checked = false;
+                                }
+                            });
+                        }
 
                     });
-                    $('#frm-example').on('submit', function (e) {
+
+                    $('#frm-FarmDiff').on('submit', function (e) {
                         var form = this;
                         // Iterate over all checkboxes in the table
                         table.$('input[type="checkbox"]').each(function () {
@@ -540,11 +568,19 @@ on barangay selection
                             }
                         });
                     });
-                    $('#example-select-all').on('click', function () {
-                        // Check/uncheck all checkboxes in the table
-                        var rows = table.rows({'search': 'applied'}).nodes();
-                        $('input[type="checkbox"]', rows).prop('checked', this.checked);
-                    });
+
+
+//                    table.$('input[type="checkbox"]').on('click',function (row) {
+//                  //      $(row).find('input[type="checkbox"]').prop('checked', true);
+//                      console.log(limit);
+//                        alert("it entered on change"+limit);
+//        
+//                    });
+//                    $('#example-select-all').on('click', function () {
+//                        // Check/uncheck all checkboxes in the table
+//                        var rows = table.rows({'search': 'applied'}).nodes();
+//                        $('input[type="checkbox"]', rows).prop('checked', this.checked);
+//                    });
                 });
             });</script>
 
@@ -559,8 +595,8 @@ on barangay selection
 //
 //
 //        </script>
-            <script type="text/javascript">//
-                //ORIGINAL SCRIPT 
+        <script type="text/javascript">//
+            //ORIGINAL SCRIPT 
 //            $(function () {
 //
 //                $.ajax({
