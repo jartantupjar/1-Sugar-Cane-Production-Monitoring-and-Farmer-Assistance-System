@@ -267,6 +267,64 @@ public class FarmsDB {
         }
         return null;
     }
+     public ArrayList<Farm> getSearchTableResult(ArrayList<String> ids,int fid) {
+            ArrayList<Farm> list=null;
+            
+            if(ids!=null){
+           list=new ArrayList<>();
+            for(int i=0;i<ids.size();i++){
+             
+               Farm farm=getFarmDet(ids.get(i));
+               Farm sFarmr=getFarmDet(Integer.toString(fid));
+             farm=getYieldDif(farm,sFarmr);
+               System.out.println(farm.getId());
+                list.add(farm);
+            }
+           
+        }
+           return list;
+    }
+     public Farm getYieldDif(Farm farm,Farm sfarm){
+         double f=farm.getYield();
+         double sf=sfarm.getYield();
+         if(f!=0 && sf!=0){
+          
+               farm.setDifYield(Math.round(f-sf));
+          
+         }
+         return farm;
+         
+     }
+        public Farm getFarmDet(String id) {
+            
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select f.id,f.Farmers_name,f.barangay,f.municipality,avg(hp.tons_cane/hp.area) as avgyield from historicalproduction hp join fields f on hp.farmers_name=f.farmers_name where f.id=?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+   
+            pstmt.setInt(1, Integer.parseInt(id));
+ 
+            ResultSet rs = pstmt.executeQuery();
+             Farm f=null;
+ if (rs.next()) {
+                  f=new Farm();
+               f.setId(Integer.parseInt(id));
+               f.setFarmer(rs.getString("Farmers_name"));
+               f.setBarangay(rs.getString("barangay"));
+               f.setMunicipality(rs.getString("municipality"));
+               f.setYield(rs.getDouble("avgyield"));
+             
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            return f;
+        } catch (SQLException ex) {
+            Logger.getLogger(FarmsDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     
       public ArrayList<String> getTags(Farm f) {
         ArrayList<String> taglist=new ArrayList<>();

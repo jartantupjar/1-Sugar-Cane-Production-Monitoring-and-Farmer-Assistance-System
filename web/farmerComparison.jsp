@@ -23,7 +23,8 @@ on barangay selection
         <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
 
         <link rel="stylesheet" href="plugins/select2/select2.min.css">
-
+          <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+        
 
 
 
@@ -353,7 +354,7 @@ on barangay selection
                         <div class="col-md-12">
                             <!--<label class="pull-left">Multiple</label> !-->
                             <div class="col-md-7">
-
+                                <div class="form-group">
                                 <select id="select2" class="select2" multiple="multiple" data-placeholder="Select a Tag" style="width: 100%;">
                                     <!--                                    <option>Yield</option>
                                                                         <option>Total Size</option>
@@ -363,7 +364,7 @@ on barangay selection
                                                                         <option>Texas</option>
                                                                         <option>Washington</option>-->
                                 </select>
-
+                                </div>
                             </div>
 
                             <div class="col-sm-1">
@@ -482,7 +483,27 @@ on barangay selection
                                     return '<input type="checkbox" name="id[]" id="buttonClick" value="'
                                             + $('<div/>').text(data).html() + '">';
                                 }
-                            }],
+                            },
+                        {
+                                'targets': 5,
+                                'searchable': false,
+                                'orderable': false,
+                                'className': 'dt-body-center',
+                                'render': function (data, type, full, meta) {
+                                    if(data>0){
+                                         return '<span class="label label-success">'+data+'</span>'; 
+                                    }else if(data < 0){
+                                          return '<span class="label label-warning">'+data+'</span>';
+                                    }else{
+                                          return '<span class="label label-primary">'+data+'</span>';
+                                    }
+                                  
+                                            //+ $('<div/>').text(data).html() + '">';
+                                    
+                                   //  return '<a href="viewRecDetails?id=' + data + '" class="btn btn-primary text-center">' + 'more details' + '</a>';
+                            }
+                                }
+                            ],
                         'select': {
                             'style': 'multi'
                         },

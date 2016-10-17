@@ -7,6 +7,7 @@ package controller;
 
 import db.FarmsDB;
 import db.ProgramsDB;
+import entity.Farm;
 import entity.programsKPI;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -50,7 +51,7 @@ public class searchSimilarFarms extends BaseServlet {
 //    }
            FarmsDB farmdb=new FarmsDB();
          ArrayList<String> idlist= farmdb.searchFarmsbyTags(tags,Integer.parseInt(id));  
-       
+        ArrayList<Farm> farmlist = farmdb.getSearchTableResult(idlist,Integer.parseInt(id));
 
         JSONObject data = new JSONObject();
         JSONArray list = new JSONArray();
@@ -58,13 +59,13 @@ public class searchSimilarFarms extends BaseServlet {
             for (int i = 0; i < idlist.size(); i++) {
                 ArrayList<String> obj = new ArrayList<>();
                 System.out.println("nope not empty");
-                obj.add(idlist.get(i));
-                obj.add(idlist.get(i));
-                obj.add(idlist.get(i));
-                 obj.add(idlist.get(i));
-                obj.add(idlist.get(i));
-                obj.add(idlist.get(i));
-                obj.add(idlist.get(i));
+                obj.add(Integer.toString(farmlist.get(i).getId()));
+                obj.add(farmlist.get(i).getFarmer());
+                obj.add(farmlist.get(i).getBarangay());
+                 obj.add(farmlist.get(i).getMunicipality());
+                obj.add(Double.toString(farmlist.get(i).getYield()));
+                obj.add(Double.toString(farmlist.get(i).getDifYield()));
+                obj.add(Integer.toString(farmlist.get(i).getId()));
                 list.add(obj);
             }
         }

@@ -20,7 +20,7 @@ public class Farm {
     private Fertilizer fertilizer;
     private Tillers tillers;
     private Date date_updated;
-    private double area,yield,totalHa,production;
+    private double area,yield,totalHa,production,difYield;
     private String management_type,boundaries;
     private double latCenter,lngCenter;
   
@@ -306,6 +306,20 @@ public class Farm {
      */
     public void setCropVal(CropValidation cropVal) {
         this.cropVal = cropVal;
+    }
+
+    /**
+     * @return the difYield
+     */
+    public double getDifYield() {
+        return difYield;
+    }
+
+    /**
+     * @param difYield the difYield to set
+     */
+    public void setDifYield(double difYield) {
+        this.difYield = difYield;
     }
 
 
