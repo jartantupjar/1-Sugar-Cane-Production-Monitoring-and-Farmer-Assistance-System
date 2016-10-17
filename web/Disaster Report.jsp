@@ -28,7 +28,7 @@
 
 
                             <div class="box-body no-padding">
-                                <div class="col-md-10" > 
+                                <div class="col-md-12" > 
                         <div class="box box-info">
                             <div class="box-header with-border">
                                 <h1 class="box-title">Disaster Report</h1>
@@ -42,11 +42,12 @@
                                 <table id="example" class="table table-bordered" >
                                     <thead>
                                         <tr>
+                                            <th>ID</th>
                                             <th>Type</th>
                                             <th>Date</th>
-                                            <th>Location</th>
+                                            <th>Municipality</th>
                                             <th>Recorded Count</th>
-                                            <th>Alert</th>
+                                            <th>Details</th>
                                         </tr>
                                         
                                     </thead>
@@ -75,15 +76,18 @@
         <script>
 
             $(document).ready(function () {
+                var d="1,Bamban";
                 var table = $('#example').DataTable({
                     'ajax': {
-                        'url': 'viewDisasterList'
+                        'url': 'viewDisastersList'
                     },
-                    'columnDefs': [{
-                            'targets': 4,
+                    'columnDefs': [
+                        {
+                            'targets':5,
                         
                             'render': function (data, type, full, meta) {
-                                return '<a class="btn btn-primary btn-xs pull-right" href="sendAlert?id='+ data +'">' +'Send Alert' +'</a>' ;
+                                
+                                return '<a class="btn btn-primary btn-xs pull-right" href="viewspecificAlerts?id='+ d +'">View Details</a>' ;
                             }
                             
                         }]

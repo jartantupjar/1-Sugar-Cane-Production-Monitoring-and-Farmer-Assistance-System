@@ -5,23 +5,21 @@
  */
 package controller;
 
-import db.ProblemsDB;
-import entity.Problems;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Bryll Joey Delfin
  */
-public class viewDisasterList extends HttpServlet {
+public class viewspecificAlerts extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,26 +32,24 @@ public class viewDisasterList extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-        JSONObject data= new JSONObject();
-        ProblemsDB pdb = new ProblemsDB();
-        ArrayList<Problems> probT = new ArrayList<Problems>();
-        probT = pdb.getDisastersList();
-        JSONArray list = new JSONArray();
-        for(int i=0;i<probT.size();i++){
-            ArrayList<String> obj = new ArrayList<String>();
-            obj.add(probT.get(i).getType());
-            obj.add(probT.get(i).getDate_updated().toString());
-            obj.add(probT.get(i).getBarangay());
-            obj.add(probT.get(i).getTotalFarms().toString());        
-            obj.add(probT.get(i).getProb_id().toString());
-            list.add(obj);
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            String line = request.getParameter("id");
+            System.out.println(line+" the line");
+            String[] parameters = line.split(",");
+            String id = parameters[0];
+            int probid = Integer.parseInt(id);
+            String municipality = parameters[1]; 
+            ServletContext context = getServletContext();
+            System.out.println(probid + "id");
+            System.out.println(municipality + " muni");
+                HttpSession session = request.getSession();
+                session.setAttribute("probid", probid);
+                session.setAttribute("municipality", municipality);
+                RequestDispatcher rd = context.getRequestDispatcher("/BrgyAlertDrillDown.jsp");
+                rd.forward(request, response);
         }
-        data.put("data", list);
-        response.setContentType("applications/json");
-        response.setCharacterEncoding("utf-8");
-        response.getWriter().write(data.toString());
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

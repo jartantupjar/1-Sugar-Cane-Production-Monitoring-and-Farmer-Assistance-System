@@ -1,6 +1,6 @@
 <%-- 
-    Document   : Problems
-    Created on : 09 21, 16, 3:14:09 PM
+    Document   : BrgyAlertDrillDown
+    Created on : 10 13, 16, 1:35:54 PM
     Author     : Bryll Joey Delfin
 --%>
 <%@include file="security.jsp" %>
@@ -19,39 +19,44 @@
             <%@include file ="navbar.jsp" %>
             <div class="content-wrapper">
                 <section class="content-header">
-                   
+                    <h1>
+                        Disaster Report
+                        <small>Today's date : </small>
+                    </h1>
                 </section>
                 <section class="content">
 
 
-                    <div class="col-md-12" > 
+                            <div class="box-body no-padding">
+                                <div class="col-md-12" > 
                         <div class="box box-info">
                             <div class="box-header with-border">
-                                <h1 class="box-title">Problems List</h1>
+                                <h1 class="box-title">Disaster Report</h1>
                                 <div class="box-tools pull-right">
                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                     <!-- In box-tools add this button if you intend to use the contacts pane -->
                                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                 </div>
                             </div>
-
                             <div class="box-body">
-                                    <table id="example" class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Problem</th>
-                                                <th>Type</th>
-                                                <th>Status</th>
-                                                <th>Description</th>
-                                                <th>Total Farms Affected</th>
-                                                <th>More Details</th>
+                                <table id="example" class="table table-bordered" >
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Barangay</th>
+                                            <th>Recorded Count</th>
+                                            <th>Percent Affected</th>
+                                            <th>Alert</th>
+                                        </tr>
+                                        
+                                    </thead>
+                                </table>
+                            </div>
 
-                                            </tr>
-                                        </thead>
-                                    </table>
-                                </div>
-
+                        </div>
+                    </div>
+                    
+                            </div>
                         </div>
                     </div>        
                     <br>
@@ -61,6 +66,7 @@
             </div>
 
         </div>
+        
         <script src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="dist/js/app.min.js"></script>
@@ -68,17 +74,16 @@
         <script src="plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
         <script>
-
             $(document).ready(function () {
                 var table = $('#example').DataTable({
                     'ajax': {
-                        'url': 'viewProbList'
+                        'url': 'viewAlertByBarangay'
                     },
                     'columnDefs': [{
-                            'targets': 6,
+                            'targets':4,
                         
                             'render': function (data, type, full, meta) {
-                                return '<a href="viewProbDetails?id=' + data + '" class="btn btn-primary btn-xs">More Details</a>';
+                                return '<a class="btn btn-primary btn-xs pull-right" href="sendAlert?id='+ data +'">' +'Send Alert' +'</a>' ;
                             }
                             
                         }]

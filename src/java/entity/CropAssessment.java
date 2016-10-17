@@ -12,7 +12,7 @@ package entity;
 public class CropAssessment {
     private double prevArea, prevTons_Cane, thisArea, thisTons_Cane, todateArea, todateTonc_Cane;
     private double estiArea, estiTons_Cane, percArea, percTons_Canel;
-
+    private String particulars;
     /**
      * @return the prevArea
      */
@@ -151,6 +151,20 @@ public class CropAssessment {
      */
     public void setPercTons_Canel(double percTons_Canel) {
         this.percTons_Canel = percTons_Canel;
+    }
+
+    /**
+     * @return the particulars
+     */
+    public String getParticulars() {
+        return particulars;
+    }
+
+    /**
+     * @param particulars the particulars to set
+     */
+    public void setParticulars(String particulars) {
+        this.particulars = particulars;
     }
     
 }

@@ -77,20 +77,24 @@
         <servlet-class>controller.createNewRecommendation</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>viewDisasterList</servlet-name>
-        <servlet-class>controller.viewDisasterList</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>sendAlert</servlet-name>
         <servlet-class>controller.sendAlert</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewAlertByBarangay</servlet-name>
+        <servlet-class>controller.viewAlertByBarangay</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewDisastersList</servlet-name>
+        <servlet-class>controller.viewDisastersList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewspecificAlerts</servlet-name>
+        <servlet-class>controller.viewspecificAlerts</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>viewDisasterList</servlet-name>
-        <url-pattern>/viewDisasterList</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>createNewRecommendation</servlet-name>
@@ -167,6 +171,18 @@
     <servlet-mapping>
         <servlet-name>sendAlert</servlet-name>
         <url-pattern>/sendAlert</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewAlertByBarangay</servlet-name>
+        <url-pattern>/viewAlertByBarangay</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewDisastersList</servlet-name>
+        <url-pattern>/viewDisastersList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewspecificAlerts</servlet-name>
+        <url-pattern>/viewspecificAlerts</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

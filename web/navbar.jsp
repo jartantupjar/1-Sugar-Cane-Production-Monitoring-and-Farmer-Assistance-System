@@ -33,8 +33,7 @@
           
               <li class="time-label text-center">
                   <a class="bg-purple text-center">
-                  <c:set var="todayDate" scope="session" value="10 Feb. 2014"/>
-                
+                  
                   <c:out value="${todayDate}"></c:out> 
                   </a>
             </li>
