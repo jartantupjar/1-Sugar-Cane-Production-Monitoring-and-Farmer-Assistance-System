@@ -100,10 +100,16 @@ public class FarmsDB {
         farm = getBasicFieldDetails(fid);
         farm.setYear(2015);
         // farmproductiondetails
+        fixedRecDB fRecDB=new fixedRecDB();
+         
+         ProblemsDB probdb= new ProblemsDB();
+        farm.setRecommendation(fRecDB.viewFarmRecTablebyFarm(fid));
+        farm.setProblems(probdb.getFarmProblemDetbyFarm(fid));
         farm.setSoilanalysis(getFieldSoilAnalysis(farm.getId()));
         farm.setFertilizer(getFieldFertilizers(farm.getId(),2015));
         farm.setTillers(getFieldTillers(farm.getId(),2015));
         farm.setCropVal(getFieldCropValidation(farm.getId(),2015));
+        
         return farm;
     }
     
@@ -124,6 +130,38 @@ public class FarmsDB {
     }
 
     public Farm getBasicFieldDetails(int fid) {
+        // **** TODO : GET (INTEGER)YEAR TO GIVE TO FERTILIZER, TILLERS,CROP VALIDATION AND MONTHLY
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select f.id,f.farmers_name,f.barangay,f.municipality,hp.tons_cane,f.area,avg(hp.tons_cane/hp.area) as tavgyield from historicalproduction hp join fields f on hp.farmers_name=f.farmers_name where f.id=?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, fid);
+            ResultSet rs = pstmt.executeQuery();
+
+            Farm farm = null;
+            if (rs.next()) {
+
+                farm = new Farm();
+                farm.setId(fid);
+                farm.setFarmer(rs.getString("Farmers_name"));
+                farm.setArea(rs.getDouble("area"));
+                farm.setBarangay(rs.getString("barangay"));
+                farm.setMunicipality(rs.getString("municipality"));
+                farm.setProduction(rs.getDouble("tons_cane"));
+                farm.setYield(rs.getDouble("tavgyield"));
+               
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            return farm;
+        } catch (SQLException ex) {
+            Logger.getLogger(FarmsDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+     public Farm getFieldProductionDet(int fid) {
         // **** TODO : GET (INTEGER)YEAR TO GIVE TO FERTILIZER, TILLERS,CROP VALIDATION AND MONTHLY
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();

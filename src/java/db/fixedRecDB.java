@@ -107,6 +107,38 @@ public class fixedRecDB {
         }
         return null;
     }
+    public ArrayList<Recommendation> viewFarmRecTablebyFarm(int id) {
+        try {
+            // put functions here : previous week production, this week production
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select r.id,r.recommendation,r.type from `recommendations-fields` rf  join recommendations r on rf.Recommendations_id=r.id where rf.Fields_id=?;";
+              PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<Recommendation> list = null;
+            Recommendation r;
+            if (rs.next()) {
+                list = new ArrayList<Recommendation>();
+                do {
+
+                    r = new Recommendation();
+                    r.setId(rs.getInt("id"));
+                    r.setRecommendation_name(rs.getString("recommendation"));
+                    r.setType(rs.getString("type"));
+                   list.add(r);
+                } while (rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProblemsDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 
     public Recommendation viewRecDetails(int id) {
         try {
