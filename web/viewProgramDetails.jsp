@@ -217,22 +217,24 @@ current vs then diagram
                                         </div>
 
                                         <div class="box-body">
-
+ <c:if test="${not empty kpis}">
                                             <table class="table table-hover">
                                                 <thead><tr>
                                                         <th style="width: 30%">Performance Indicator</th>
+                                                   
                                                 <input value="${kpis[0].kpi_year}" name="kpi_year" class="form-control hidden" />
-                                            <input value="${kpis[0].tYears}" name="tYears" class="form-control hidden" />
-                                            <c:forEach  var="yrlist" begin="${kpis[0].kpi_year}" end="${kpis[0].kpi_year-1+kpis[0].tYears}">
-                                                <th><c:out value="${yrlist}"/></th>
-                                                <th>Actual</th>
-                                                </c:forEach>
-
+                                                <input value="${kpis[0].tYears}" name="tYears" class="form-control hidden" />
+                                                <c:forEach  var="yrlist" begin="${kpis[0].kpi_year}" end="${kpis[0].kpi_year-1+kpis[0].tYears}">
+                                                    <th><c:out value="${yrlist}"/></th>
+                                                    <th>Actual</th>
+                                                    </c:forEach>
+                                             
 
                                             </tr>
                                             </thead>
+                                                 
                                             <tbody>
-
+                                      
                                                 <c:forEach items="${kpis}" var="kpilist" varStatus="loopCount">
                                                     <tr>
                                                         <td><input class='form-control hidden' name = "kNa${loopCount.count}[]" value='${kpilist.kpi}'/><c:out value="${kpilist.kpi}"/></td>
@@ -243,10 +245,12 @@ current vs then diagram
                                                             </c:forEach>
                                                     </tr>
                                                 </c:forEach>
+                                                   
                                             </tbody>
                                         </table>
                                         <button class="btn btn-success pull-right" style="width: 10%" value="submit" form="kpitable">Update</button>
-                                    </div>
+                                   </c:if>
+                                                  </div>
 
                                 </div>
                             </form>

@@ -27,7 +27,7 @@
                     <div class="col-md-6" > 
                         <div class="box box-info">
                             <div class="box-header with-border">
-                                <h1 class="box-title">Yield of the week (Yesterday's Week)</h1>
+                                <h1 class="box-title">Yield of the week :  ${ca.percArea}</h1>
                                 <div class="box-tools pull-right">
                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -83,8 +83,18 @@
                                             <td>${ca.thisArea}</td>
                                             <td>${ca.todateArea}</td>
                                             <td>
-                                                <div class="progress ">
-                                                    <div class="progress-bar progress-bar-green" style="width:${ca.percArea}%"> ${ca.percArea}%</div>
+                                                <div class="progress-group" >
+                                                    <span class="progress-number">
+                                                        <b>
+                                                            ${ca.percArea}%
+                                                        </b>
+                                                    </span>
+                                                            <div class="progress progress-sm progress-striped-active">
+                                                                <div class="progress-bar progress-bar-primary" style="width : ${ca.percArea}%"></div>
+                                                                </div>
+                                                            </div>
+                                                        </b>
+                                                    </span>
                                                 </div>
                                             </td>
                                         </tr>
@@ -257,7 +267,7 @@
                                                     return this.key;
                                                 } else {
 
-                                                    return '<a style="color:white" href="Recommendations?name=' + this.name + '"   target="_blank">' + this.key + '</div>';
+                                                    return '<a style="color:white" href="viewFarmerProfile?name=' + this.key + '"   target="_blank">' + this.key + '</div>';
 
                                                 }
                                             }

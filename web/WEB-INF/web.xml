@@ -33,6 +33,10 @@
         <servlet-class>controller.viewProbDetails</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>viewPostDetails</servlet-name>
+        <servlet-class>controller.viewPostDetails</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>viewRecList</servlet-name>
         <servlet-class>controller.viewRecList</servlet-class>
     </servlet>
@@ -92,6 +96,38 @@
         <servlet-name>viewspecificAlerts</servlet-name>
         <servlet-class>controller.viewspecificAlerts</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>viewFarmerProfile</servlet-name>
+        <servlet-class>controller.viewFarmerProfile</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewFarmerRecT</servlet-name>
+        <servlet-class>controller.viewFarmerRecT</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewFarmerProbT</servlet-name>
+        <servlet-class>controller.viewFarmerProbT</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewForumList</servlet-name>
+        <servlet-class>controller.viewForumList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewFarmersFieldTable</servlet-name>
+        <servlet-class>controller.viewFarmersFieldTable</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>searchSimilarFarms</servlet-name>
+        <servlet-class>controller.searchSimilarFarms</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewFieldDetails</servlet-name>
+        <servlet-class>controller.viewFieldDetails</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>createTagList</servlet-name>
+        <servlet-class>controller.createTagList</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
@@ -135,6 +171,10 @@
     <servlet-mapping>
         <servlet-name>viewRecDetails</servlet-name>
         <url-pattern>/viewRecDetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewPostDetails</servlet-name>
+        <url-pattern>/viewPostDetails</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>viewFRTable</servlet-name>
@@ -181,8 +221,36 @@
         <url-pattern>/viewDisastersList</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>viewForumList</servlet-name>
+        <url-pattern>/viewForumList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>viewspecificAlerts</servlet-name>
         <url-pattern>/viewspecificAlerts</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewFarmerRecT</servlet-name>
+        <url-pattern>/viewFarmerRecT</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewFarmerProbT</servlet-name>
+        <url-pattern>/viewFarmerProbT</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewFarmersFieldTable</servlet-name>
+        <url-pattern>/viewFarmersFieldTable</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>searchSimilarFarms</servlet-name>
+        <url-pattern>/searchSimilarFarms</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewFieldDetails</servlet-name>
+        <url-pattern>/viewFieldDetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>createTagList</servlet-name>
+        <url-pattern>/createTagList</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -40,8 +41,10 @@ public class viewAlertByBarangay extends HttpServlet {
             JSONObject data= new JSONObject();
         ProblemsDB pdb = new ProblemsDB();
         ArrayList<Problems> probT = new ArrayList<Problems>();
-        int probid = Integer.parseInt(request.getParameter("probid"));
-        String municipality = request.getParameter("municipality");
+        HttpSession session = request.getSession();
+        String num =  session.getAttribute("probid").toString();
+        int probid = Integer.parseInt(num);
+        String municipality = (String) session.getAttribute("municipality");
         probT = pdb.getDisastersListByBarangay(probid,municipality);
         JSONArray list = new JSONArray();
         for(int i=0;i<probT.size();i++){

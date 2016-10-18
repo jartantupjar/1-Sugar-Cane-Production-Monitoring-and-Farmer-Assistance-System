@@ -49,7 +49,7 @@ public class viewDisastersList extends HttpServlet {
             obj.add(probT.get(i).getDate_updated().toString());
             obj.add(probT.get(i).getMunicipality());
             obj.add(probT.get(i).getTotalFarms().toString());   
-            String id = probT.get(i).getProb_id().toString()+"_"+probT.get(i).getMunicipality();
+            String id = probT.get(i).getProb_id().toString()+","+probT.get(i).getMunicipality();
             obj.add(id);
             list.add(obj);
         }

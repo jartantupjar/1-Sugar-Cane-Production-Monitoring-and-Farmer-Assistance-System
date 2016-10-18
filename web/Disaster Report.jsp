@@ -46,8 +46,8 @@
                                             <th>Type</th>
                                             <th>Date</th>
                                             <th>Municipality</th>
-                                            <th>Recorded Count</th>
-                                            <th>Details</th>
+                                            <th style="width: 20%">Recorded Count</th>
+                                            <th style="width: 5%">Details</th>
                                         </tr>
                                         
                                     </thead>
@@ -76,7 +76,6 @@
         <script>
 
             $(document).ready(function () {
-                var d="1,Bamban";
                 var table = $('#example').DataTable({
                     'ajax': {
                         'url': 'viewDisastersList'
@@ -87,7 +86,7 @@
                         
                             'render': function (data, type, full, meta) {
                                 
-                                return '<a class="btn btn-primary btn-xs pull-right" href="viewspecificAlerts?id='+ d +'">View Details</a>' ;
+                                return '<a class="btn btn-primary" href="viewspecificAlerts?id='+ data +'">View Details</a>' ;
                             }
                             
                         }]

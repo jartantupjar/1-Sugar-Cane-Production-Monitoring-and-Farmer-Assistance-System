@@ -1,7 +1,9 @@
 package controller;
 
+import db.FarmerDB;
 import db.fixedRecDB;
 import entity.FarmRecTable;
+import entity.Problems;
 import entity.Recommendation;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,30 +16,29 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-public class viewFRTable extends BaseServlet {
+public class viewFarmerProbT extends BaseServlet {
 
     @Override
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         ServletContext context = getServletContext();
-        fixedRecDB recdb = new fixedRecDB();
+        FarmerDB farmerDB = new FarmerDB();
 
         HttpSession session = request.getSession();
-        Recommendation rec = new Recommendation();
-      
+       // Recommendation rec = new Recommendation();
+      String name=request.getParameter("name");
 
-        ArrayList<FarmRecTable> fct = recdb.viewFarmRecTable(Integer.parseInt(request.getParameter("id")));
+        ArrayList<Problems> rec = farmerDB.viewFarmerProb(name);
         
         JSONObject data = new JSONObject();
         JSONArray list = new JSONArray();
-        if (fct != null) {
-            for (int i = 0; i < fct.size(); i++) {
+        if (rec != null) {
+            for (int i = 0; i < rec.size(); i++) {
                 ArrayList<String> obj = new ArrayList<>();
-                obj.add(fct.get(i).getName());
-                obj.add(fct.get(i).getBrgy());
-                obj.add(fct.get(i).getMunicipality());
-                 obj.add(fct.get(i).getDate_updated().toString());
-                obj.add(fct.get(i).getApproved());
+                obj.add(rec.get(i).getProb_name());
+                obj.add(rec.get(i).getProb_details());
+                obj.add(Integer.toString(rec.get(i).getProb_id()));
+              
                 list.add(obj);
             }
         }

@@ -123,14 +123,17 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                             <c:if test="${not empty problist}">
                                         <c:forEach var="plist" items="${problist}">
                                             
                                             <tr>	
                                                 <td>${plist.prob_name}</td>
                                                 <td>${plist.prob_details}</td>
                                                 <td><a class="btn btn-primary" href="viewProbDetails?id=${plist.prob_id}" >details</a></td>
-                                            </tr
+                                            </tr>
                                             </c:forEach>
+                                            </c:if>
+                                            
                                         </tbody>
                                     </table>
                                 </div>

@@ -5,50 +5,53 @@
  */
 package entity;
 
+import java.sql.Date;
+
 /**
  *
  * @author Bryll Joey Delfin
  */
 public class Farm {
 
-    private String owner;
-    private String farm_name;
-    private String district,barangay;
-    private double area;
-    private String management_type;
-    private String address;
-    private double nitrogen, phosporus, potassium, ph_level;
-    private String boundaries;
-    private double latCenter;
-    private double lngCenter;
+    private int id,year;
+    private String farmer,district,barangay,municipality;
+    private SoilAnalysis soilanalysis;
+    private CropValidation cropVal;
+    private Fertilizer fertilizer;
+    private Tillers tillers;
+    private Date date_updated;
+    private double area,yield,totalHa,production;
+    private String management_type,boundaries;
+    private double latCenter,lngCenter;
+  
     private boolean selected;
 
     /**
-     * @return the owner
+     * @return the id
      */
-    public String getOwner() {
-        return owner;
+    public int getId() {
+        return id;
     }
 
     /**
-     * @param owner the owner to set
+     * @param id the id to set
      */
-    public void setOwner(String owner) {
-        this.owner = owner;
+    public void setId(int id) {
+        this.id = id;
     }
 
     /**
-     * @return the farm_name
+     * @return the farmer
      */
-    public String getFarm_name() {
-        return farm_name;
+    public String getFarmer() {
+        return farmer;
     }
 
     /**
-     * @param farm_name the farm_name to set
+     * @param farmer the farmer to set
      */
-    public void setFarm_name(String farm_name) {
-        this.farm_name = farm_name;
+    public void setFarmer(String farmer) {
+        this.farmer = farmer;
     }
 
     /**
@@ -63,6 +66,20 @@ public class Farm {
      */
     public void setDistrict(String district) {
         this.district = district;
+    }
+
+    /**
+     * @return the barangay
+     */
+    public String getBarangay() {
+        return barangay;
+    }
+
+    /**
+     * @param barangay the barangay to set
+     */
+    public void setBarangay(String barangay) {
+        this.barangay = barangay;
     }
 
     /**
@@ -91,62 +108,6 @@ public class Farm {
      */
     public void setManagement_type(String management_type) {
         this.management_type = management_type;
-    }
-
-    /**
-     * @return the nitrogen
-     */
-    public double getNitrogen() {
-        return nitrogen;
-    }
-
-    /**
-     * @param nitrogen the nitrogen to set
-     */
-    public void setNitrogen(double nitrogen) {
-        this.nitrogen = nitrogen;
-    }
-
-    /**
-     * @return the phosporus
-     */
-    public double getPhosporus() {
-        return phosporus;
-    }
-
-    /**
-     * @param phosporus the phosporus to set
-     */
-    public void setPhosporus(double phosporus) {
-        this.phosporus = phosporus;
-    }
-
-    /**
-     * @return the potassium
-     */
-    public double getPotassium() {
-        return potassium;
-    }
-
-    /**
-     * @param potassium the potassium to set
-     */
-    public void setPotassium(double potassium) {
-        this.potassium = potassium;
-    }
-
-    /**
-     * @return the ph_level
-     */
-    public double getPh_level() {
-        return ph_level;
-    }
-
-    /**
-     * @param ph_level the ph_level to set
-     */
-    public void setPh_level(double ph_level) {
-        this.ph_level = ph_level;
     }
 
     /**
@@ -192,20 +153,6 @@ public class Farm {
     }
 
     /**
-     * @return the address
-     */
-    public String getAddress() {
-        return address;
-    }
-
-    /**
-     * @param address the address to set
-     */
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    /**
      * @return the selected
      */
     public boolean isSelected() {
@@ -220,17 +167,148 @@ public class Farm {
     }
 
     /**
-     * @return the barangay
+     * @return the municipality
      */
-    public String getBarangay() {
-        return barangay;
+    public String getMunicipality() {
+        return municipality;
     }
 
     /**
-     * @param barangay the barangay to set
+     * @param municipality the municipality to set
      */
-    public void setBarangay(String barangay) {
-        this.barangay = barangay;
+    public void setMunicipality(String municipality) {
+        this.municipality = municipality;
     }
+ 
+    /**
+     * @return the yield
+     */
+    public double getYield() {
+        return yield;
+    }
+
+    /**
+     * @param yield the yield to set
+     */
+    public void setYield(double yield) {
+        this.yield = yield;
+    }
+
+
+    /**
+     * @return the totalHa
+     */
+    public double getTotalHa() {
+        return totalHa;
+    }
+
+    /**
+     * @param totalHa the totalHa to set
+     */
+    public void setTotalHa(double totalHa) {
+        this.totalHa = totalHa;
+    }
+
+    /**
+     * @return the date_updated
+     */
+    public Date getDate_updated() {
+        return date_updated;
+    }
+
+    /**
+     * @param date_updated the date_updated to set
+     */
+    public void setDate_updated(Date date_updated) {
+        this.date_updated = date_updated;
+    }
+
+   
+    /**
+     * @return the year
+     */
+    public int getYear() {
+        return year;
+    }
+
+    /**
+     * @param year the year to set
+     */
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    /**
+     * @return the fertilizer
+     */
+    public Fertilizer getFertilizer() {
+        return fertilizer;
+    }
+
+    /**
+     * @param fertilizer the fertilizer to set
+     */
+    public void setFertilizer(Fertilizer fertilizer) {
+        this.fertilizer = fertilizer;
+    }
+
+    /**
+     * @return the tillers
+     */
+    public Tillers getTillers() {
+        return tillers;
+    }
+
+    /**
+     * @param tillers the tillers to set
+     */
+    public void setTillers(Tillers tillers) {
+        this.tillers = tillers;
+    }
+
+    /**
+     * @return the soilanalysis
+     */
+    public SoilAnalysis getSoilanalysis() {
+        return soilanalysis;
+    }
+
+    /**
+     * @param soilanalysis the soilanalysis to set
+     */
+    public void setSoilanalysis(SoilAnalysis soilanalysis) {
+        this.soilanalysis = soilanalysis;
+    }
+
+    /**
+     * @return the production
+     */
+    public double getProduction() {
+        return production;
+    }
+
+    /**
+     * @param production the production to set
+     */
+    public void setProduction(double production) {
+        this.production = production;
+    }
+
+    /**
+     * @return the cropVal
+     */
+    public CropValidation getCropVal() {
+        return cropVal;
+    }
+
+    /**
+     * @param cropVal the cropVal to set
+     */
+    public void setCropVal(CropValidation cropVal) {
+        this.cropVal = cropVal;
+    }
+
+
+
 
 }
