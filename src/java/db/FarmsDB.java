@@ -100,14 +100,68 @@ public class FarmsDB {
         farm = getBasicFieldDetails(fid);
         farm.setYear(2015);
         // farmproductiondetails
+        fixedRecDB fRecDB=new fixedRecDB();
+         
+         ProblemsDB probdb= new ProblemsDB();
+        farm.setRecommendation(fRecDB.viewFarmRecTablebyFarm(fid));
+        farm.setProblems(probdb.getFarmProblemDetbyFarm(fid));
         farm.setSoilanalysis(getFieldSoilAnalysis(farm.getId()));
         farm.setFertilizer(getFieldFertilizers(farm.getId(),2015));
         farm.setTillers(getFieldTillers(farm.getId(),2015));
         farm.setCropVal(getFieldCropValidation(farm.getId(),2015));
+        
         return farm;
+    }
+    
+     public ArrayList<Farm> getAllFieldComp(ArrayList<String> list) {
+         ArrayList<Farm> flist=null;
+    if(list!=null){
+        flist=new ArrayList<>();
+         for(int i=0;i<list.size();i++){
+             Farm farm =getAllFieldDetails(Integer.parseInt(list.get(i)));
+            flist.add(farm);
+        }
+
+    }
+         
+         
+         
+        return flist;
     }
 
     public Farm getBasicFieldDetails(int fid) {
+        // **** TODO : GET (INTEGER)YEAR TO GIVE TO FERTILIZER, TILLERS,CROP VALIDATION AND MONTHLY
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select f.id,f.farmers_name,f.barangay,f.municipality,hp.tons_cane,f.area,avg(hp.tons_cane/hp.area) as tavgyield from historicalproduction hp join fields f on hp.farmers_name=f.farmers_name where f.id=?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, fid);
+            ResultSet rs = pstmt.executeQuery();
+
+            Farm farm = null;
+            if (rs.next()) {
+
+                farm = new Farm();
+                farm.setId(fid);
+                farm.setFarmer(rs.getString("Farmers_name"));
+                farm.setArea(rs.getDouble("area"));
+                farm.setBarangay(rs.getString("barangay"));
+                farm.setMunicipality(rs.getString("municipality"));
+                farm.setProduction(rs.getDouble("tons_cane"));
+                farm.setYield(rs.getDouble("tavgyield"));
+               
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            return farm;
+        } catch (SQLException ex) {
+            Logger.getLogger(FarmsDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+     public Farm getFieldProductionDet(int fid) {
         // **** TODO : GET (INTEGER)YEAR TO GIVE TO FERTILIZER, TILLERS,CROP VALIDATION AND MONTHLY
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
@@ -267,6 +321,64 @@ public class FarmsDB {
         }
         return null;
     }
+     public ArrayList<Farm> getSearchTableResult(ArrayList<String> ids,int fid) {
+            ArrayList<Farm> list=null;
+            
+            if(ids!=null){
+           list=new ArrayList<>();
+            for(int i=0;i<ids.size();i++){
+             
+               Farm farm=getFarmDet(ids.get(i));
+               Farm sFarmr=getFarmDet(Integer.toString(fid));
+             farm=getYieldDif(farm,sFarmr);
+               System.out.println(farm.getId());
+                list.add(farm);
+            }
+           
+        }
+           return list;
+    }
+     public Farm getYieldDif(Farm farm,Farm sfarm){
+         double f=farm.getYield();
+         double sf=sfarm.getYield();
+         if(f!=0 && sf!=0){
+          
+               farm.setDifYield(Math.round(f-sf));
+          
+         }
+         return farm;
+         
+     }
+        public Farm getFarmDet(String id) {
+            
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select f.id,f.Farmers_name,f.barangay,f.municipality,avg(hp.tons_cane/hp.area) as avgyield from historicalproduction hp join fields f on hp.farmers_name=f.farmers_name where f.id=?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+   
+            pstmt.setInt(1, Integer.parseInt(id));
+ 
+            ResultSet rs = pstmt.executeQuery();
+             Farm f=null;
+ if (rs.next()) {
+                  f=new Farm();
+               f.setId(Integer.parseInt(id));
+               f.setFarmer(rs.getString("Farmers_name"));
+               f.setBarangay(rs.getString("barangay"));
+               f.setMunicipality(rs.getString("municipality"));
+               f.setYield(rs.getDouble("avgyield"));
+             
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            return f;
+        } catch (SQLException ex) {
+            Logger.getLogger(FarmsDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     
       public ArrayList<String> getTags(Farm f) {
         ArrayList<String> taglist=new ArrayList<>();
@@ -391,12 +503,12 @@ public class FarmsDB {
 //                }
                 
 //            }
-                 if(!idlists.isEmpty()){
-                System.out.println("final list w/farm ids:");
-          for (int x=0;x<idlists.get(0).size();x++){
-              System.out.println(idlists.get(0).get(x));
-          }
-          }
+//                 if(!idlists.isEmpty()){
+//                System.out.println("final list w/farm ids:");
+//          for (int x=0;x<idlists.get(0).size();x++){
+//              System.out.println(idlists.get(0).get(x));
+//          }
+//          }
              
           
         return idlists.get(0);

@@ -7,6 +7,7 @@ package controller;
 
 import db.FarmsDB;
 import db.ProgramsDB;
+import entity.Farm;
 import entity.programsKPI;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -39,8 +40,7 @@ public class searchSimilarFarms extends BaseServlet {
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         PrintWriter out = response.getWriter();
-        Enumeration<String> parameterNames = request.getParameterNames();
-        String paramName;
+    
       String id = request.getParameter("id");
         String tag = request.getParameter("tag");
              System.out.println(tag+": this tag m8");
@@ -50,21 +50,21 @@ public class searchSimilarFarms extends BaseServlet {
 //    }
            FarmsDB farmdb=new FarmsDB();
          ArrayList<String> idlist= farmdb.searchFarmsbyTags(tags,Integer.parseInt(id));  
-       
+        ArrayList<Farm> farmlist = farmdb.getSearchTableResult(idlist,Integer.parseInt(id));
 
         JSONObject data = new JSONObject();
         JSONArray list = new JSONArray();
         if (idlist != null) {
             for (int i = 0; i < idlist.size(); i++) {
                 ArrayList<String> obj = new ArrayList<>();
-                System.out.println("nope not empty");
-                obj.add(idlist.get(i));
-                obj.add(idlist.get(i));
-                obj.add(idlist.get(i));
-                 obj.add(idlist.get(i));
-                obj.add(idlist.get(i));
-                obj.add(idlist.get(i));
-                obj.add(idlist.get(i));
+               // System.out.println("nope not empty");
+                obj.add(Integer.toString(farmlist.get(i).getId()));
+                obj.add(farmlist.get(i).getFarmer());
+                obj.add(farmlist.get(i).getBarangay());
+                 obj.add(farmlist.get(i).getMunicipality());
+                obj.add(Double.toString(farmlist.get(i).getYield()));
+                obj.add(Double.toString(farmlist.get(i).getDifYield()));
+                obj.add(Integer.toString(farmlist.get(i).getId()));
                 list.add(obj);
             }
         }

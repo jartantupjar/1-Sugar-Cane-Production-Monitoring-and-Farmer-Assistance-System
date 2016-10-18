@@ -6,6 +6,7 @@
 package entity;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  *
@@ -19,8 +20,10 @@ public class Farm {
     private CropValidation cropVal;
     private Fertilizer fertilizer;
     private Tillers tillers;
+    private ArrayList<Recommendation> recommendation;
+    private ArrayList<Problems> problems;
     private Date date_updated;
-    private double area,yield,totalHa,production;
+    private double area,yield,totalHa,production,difYield;
     private String management_type,boundaries;
     private double latCenter,lngCenter;
   
@@ -307,6 +310,50 @@ public class Farm {
     public void setCropVal(CropValidation cropVal) {
         this.cropVal = cropVal;
     }
+
+    /**
+     * @return the difYield
+     */
+    public double getDifYield() {
+        return difYield;
+    }
+
+    /**
+     * @param difYield the difYield to set
+     */
+    public void setDifYield(double difYield) {
+        this.difYield = difYield;
+    }
+
+    /**
+     * @return the recommendation
+     */
+    public ArrayList<Recommendation> getRecommendation() {
+        return recommendation;
+    }
+
+    /**
+     * @param recommendation the recommendation to set
+     */
+    public void setRecommendation(ArrayList<Recommendation> recommendation) {
+        this.recommendation = recommendation;
+    }
+
+    /**
+     * @return the problems
+     */
+    public ArrayList<Problems> getProblems() {
+        return problems;
+    }
+
+    /**
+     * @param problems the problems to set
+     */
+    public void setProblems(ArrayList<Problems> problems) {
+        this.problems = problems;
+    }
+
+ 
 
 
 

@@ -170,6 +170,39 @@ public class ProblemsDB {
         }
         return null;
     }
+      public ArrayList<Problems> getFarmProblemDetbyFarm(int id) {
+        try {
+            // put functions here : previous week production, this week production
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select p.id,p.name,p.type from `Problems-Fields` pf join problems p on p.id=pf.problems_id where pf.Fields_id=?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+         ArrayList<Problems> list=null;
+            if (rs.next()) {
+                            list= new ArrayList<>();
+                do {
+                         Problems p = new Problems();
+                    p.setProb_id(rs.getInt("id"));
+                   p.setProb_name(rs.getString("name"));
+//                    p.setProb_details(rs.getString("description"));
+//                    p.setStatus(rs.getString("status"));
+                    p.setType(rs.getString("type"));
+                   // p.setTotalFarms(rs.getInt("counter"));
+                    list.add(p);
+                } while (rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProblemsDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     public Problems getAlertDetails(int id) {
         try {
             // put functions here : previous week production, this week production
