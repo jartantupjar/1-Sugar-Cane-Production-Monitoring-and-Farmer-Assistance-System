@@ -120,6 +120,14 @@
         <servlet-name>viewSendRec</servlet-name>
         <servlet-class>controller.viewSendRec</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>viewDistCropEstimate</servlet-name>
+        <servlet-class>controller.viewDistCropEstimate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewMuniCropEst</servlet-name>
+        <servlet-class>controller.viewMuniCropEst</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
@@ -239,6 +247,14 @@
     <servlet-mapping>
         <servlet-name>viewSendRec</servlet-name>
         <url-pattern>/viewSendRec</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewDistCropEstimate</servlet-name>
+        <url-pattern>/viewDistCropEstimate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewMuniCropEst</servlet-name>
+        <url-pattern>/viewMuniCropEst</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
