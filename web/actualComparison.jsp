@@ -44,7 +44,7 @@ comparison page add current vs historical details(past 2yrs)
                                 <h3 class="text-center text-red">Low</h3>
                             </div>
                         </div>
-
+<form id="frm-FarmDiff" action="viewSendRec">
 
                         <div class="col-md-4">
 
@@ -54,7 +54,7 @@ comparison page add current vs historical details(past 2yrs)
 
                                         <div class="box box-success">
                                             <div class="box-header">
-                                                <input type="checkbox" style="width: 16; height: 16" class="pull-left">
+                                                <input type="checkbox" style="width: 16; height: 16" value="${flow.id}" name="farmid[]" class="msgCheckbox pull-left">
                                                 <h4 class="text-center"><b><c:out value="${flow.id}"/></b></h4>
 
                                                 <div class="box-tools pull-right">
@@ -436,7 +436,7 @@ comparison page add current vs historical details(past 2yrs)
                             <c:if test="${not empty farm}">
                                 <div class="box box-primary">
                                     <div class="box-header">
-                                        <input type="checkbox" style="width: 16; height: 16" class="pull-left">
+                                       <input type="checkbox" style="width: 16; height: 16" value="${farm.id}" name="farmid[]" class="msgCheckbox pull-left">
                                         <h4 class="text-center"><b><c:out value="${farm.id}"/></b></h4>
 
                                         <div class="box-tools pull-right">
@@ -670,7 +670,7 @@ comparison page add current vs historical details(past 2yrs)
 
                                         <div class="box box-danger">
                                             <div class="box-header">
-                                                <input type="checkbox" style="width: 16; height: 16" class="pull-left">
+                                                <input type="checkbox" style="width: 16; height: 16" value="${flow.id}" name="farmid[]" class="msgCheckbox pull-left">
                                                 <h4 class="text-center"><b><c:out value="${flow.id}"/></b></h4>
 
                                                 <div class="box-tools pull-right">
@@ -1063,14 +1063,9 @@ comparison page add current vs historical details(past 2yrs)
                                     <a class="btn btn-app btn-adn">
                                         <i class="fa fa-bank"></i> Create Recommendation
                                     </a>
-                                    <a class="btn btn-app bg-green" data-toggle="modal" data-target="#myModal">
-
-                                        <i class="fa fa-bullhorn"></i> Send Recommendation(modal)
-                                    </a>
-                                    <a class="btn btn-app bg-green" href="sendRecommendations.jsp">
-
-                                        <i class="fa fa-bullhorn"></i> Send Recommendation(redirect)
-                                    </a>
+                                  <button class="btn btn-app btn-linkedin" id="sButton" value="submit">
+                                        <i class="fa fa-edit" ></i> Send Recommendations
+                                    </button>
 
                                     <a class="btn btn-app btn-soundcloud" href="determineProblem.jsp">
 
@@ -1079,54 +1074,18 @@ comparison page add current vs historical details(past 2yrs)
 
 
                                 </div>
+                            
                                 <!-- /.box-body -->
                             </div>    
 
 
                         </div>
 
-
+    </form>
 
                     </div>
                 </section>
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="myModalLabel">Send Recommendations</h4>
-                            </div>
-                            <div class="modal-body">
-
-                                <div class="row">
-                                    <div class="col-md-4">
-
-
-
-                                    </div>
-
-                                </div>
-                                <table id="example" class="table  display table-hover pull-right" cellspacing="0" width="100%">
-                                    <thead>
-                                        <tr>
-                                            <th></th>
-                                            <th>Recommendation</th>
-                                            <th>Description</th>
-                                            <th>More Info</th>
-
-                                        </tr>
-                                    </thead>
-
-                                </table>
-
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-primary">Send</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
 
             <footer class="main-footer">
@@ -1142,6 +1101,7 @@ comparison page add current vs historical details(past 2yrs)
         <script type="text/javascript" src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="plugins/select2/select2.full.min.js"></script>
+        <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
 
         <script src="dist/js/app.min.js"></script>
 
@@ -1150,7 +1110,36 @@ comparison page add current vs historical details(past 2yrs)
                 $(".select2").select2();
             });
         </script>
+ <script type="text/javascript">
+            $(function () {
+                $('.box-profile').slimScroll({
+                    height: '420px',
+                    alwaysVisible: true
+                });
+            });
+        </script>
+        <script type="text/javascript">
+          $("#sButton").on("click", function () {
+           //var checkedValue = $('.msgCheckbox:checked').val();   
+           
+           var checkedValue = []; 
+var inputElements = document.getElementsByClassName('msgCheckbox');
+for(var i=0; inputElements[i]; ++i){
+      if(inputElements[i].checked){
+           checkedValue.push(inputElements[i].value) ;
+            console.log(checkedValue);
+     
+      }
+      
+}
+for(var b=0; b<checkedValue.length;b++){
+    console.log(checkedValue[b]+"+"+b);
+}
 
+
+          
+          });
+        </script>
         <script src="plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
 

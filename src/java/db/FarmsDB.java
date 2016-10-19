@@ -339,13 +339,23 @@ public class FarmsDB {
            return list;
     }
      public Farm getYieldDif(Farm farm,Farm sfarm){
+          // CHECK IF FORMULA IS RIGHT !~~~ ITS STILL QUESTIONABLE
          double f=farm.getYield();
          double sf=sfarm.getYield();
-         if(f!=0 && sf!=0){
+         
+         // * 100.0 / 100.0
+              
+           
+             //  double roundOff = Math.round((((sf-f)/sf))*100) ;
+      //double roundOff= Math.round(((((sf-f)/sf))*100)*100.0)/100.0;
+      double roundOff= Math.round(((((f-sf)/sf))*100)*100.0)/100.0;
+              // double roundOff = Math.round(((((sf-f)/sf))*100)*100)/100 ;
+             // double roundOff =(double) Math.round(((((sf-f)/sf))*100) * 100) / 100);
+                farm.setDifYield(roundOff);
+         //      Math.round(f,2);
+             //  System.out.println();
           
-               farm.setDifYield(Math.round(f-sf));
-          
-         }
+         
          return farm;
          
      }

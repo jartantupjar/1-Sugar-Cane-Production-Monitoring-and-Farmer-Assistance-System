@@ -116,6 +116,10 @@
         <servlet-name>viewFarmDifferences</servlet-name>
         <servlet-class>controller.viewFarmDifferences</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>viewSendRec</servlet-name>
+        <servlet-class>controller.viewSendRec</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
@@ -231,6 +235,10 @@
     <servlet-mapping>
         <servlet-name>viewFarmDifferences</servlet-name>
         <url-pattern>/viewFarmDifferences</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewSendRec</servlet-name>
+        <url-pattern>/viewSendRec</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
