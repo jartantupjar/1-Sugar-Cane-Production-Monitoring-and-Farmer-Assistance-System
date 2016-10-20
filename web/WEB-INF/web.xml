@@ -128,6 +128,14 @@
         <servlet-name>viewMuniCropEst</servlet-name>
         <servlet-class>controller.viewMuniCropEst</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>viewDiffDistEst</servlet-name>
+        <servlet-class>controller.viewDiffDistEst</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>loadCompChartData</servlet-name>
+        <servlet-class>controller.loadCompChartData</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
@@ -255,6 +263,14 @@
     <servlet-mapping>
         <servlet-name>viewMuniCropEst</servlet-name>
         <url-pattern>/viewMuniCropEst</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewDiffDistEst</servlet-name>
+        <url-pattern>/viewDiffDistEst</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>loadCompChartData</servlet-name>
+        <url-pattern>/loadCompChartData</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

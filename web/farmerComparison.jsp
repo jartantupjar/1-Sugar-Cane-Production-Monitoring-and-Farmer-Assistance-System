@@ -453,9 +453,12 @@ on barangay selection
                     type: 'POST',
                     dataType: "JSON",
                     success: function (data) {
+                        alert(data);
+                  
                         $("#select2").select2({
                             data: data
                         });
+                         
                     }});
 
                 //  var data = ['enhancement', 'bug', 'duplicate','invalid', 'wontfix'];                          

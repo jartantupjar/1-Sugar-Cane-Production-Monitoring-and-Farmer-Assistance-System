@@ -6,6 +6,7 @@
 package entity;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,9 +14,10 @@ import java.sql.Date;
  */
 public class cropEstimate {
     private int year;
-    private double area,actual,forecasted,difference;
+    private double area,actual,forecasted,forecast2,forecast3,difference;
     private String district,municipality, rainfall;
     private Date week_ending;
+    private ArrayList<MonthlyCropEstimate> monthcropest;
 
     /**
      * @return the year
@@ -141,6 +143,48 @@ public class cropEstimate {
      */
     public void setMunicipality(String municipality) {
         this.municipality = municipality;
+    }
+
+    /**
+     * @return the forecast2
+     */
+    public double getForecast2() {
+        return forecast2;
+    }
+
+    /**
+     * @param forecast2 the forecast2 to set
+     */
+    public void setForecast2(double forecast2) {
+        this.forecast2 = forecast2;
+    }
+
+    /**
+     * @return the forecast3
+     */
+    public double getForecast3() {
+        return forecast3;
+    }
+
+    /**
+     * @param forecast3 the forecast3 to set
+     */
+    public void setForecast3(double forecast3) {
+        this.forecast3 = forecast3;
+    }
+
+    /**
+     * @return the monthcropest
+     */
+    public ArrayList<MonthlyCropEstimate> getMonthcropest() {
+        return monthcropest;
+    }
+
+    /**
+     * @param monthcropest the monthcropest to set
+     */
+    public void setMonthcropest(ArrayList<MonthlyCropEstimate> monthcropest) {
+        this.monthcropest = monthcropest;
     }
     
 }
