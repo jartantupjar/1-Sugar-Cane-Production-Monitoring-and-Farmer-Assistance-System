@@ -63,6 +63,8 @@ JSONArray drilldata=new JSONArray();
                     yrlist.add(yrobj);
               JSONObject monthobj = new JSONObject();
             monthobj.put("id", fct.get(i).getYear()+"-"+val); 
+            //added this for the series legend ONLY
+              monthobj.put("name", val); 
             JSONArray months = new JSONArray();  
             for(int d=0;d<fct.get(i).getMonthcropest().size();d++){
                  JSONArray month = new JSONArray(); 

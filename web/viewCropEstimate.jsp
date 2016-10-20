@@ -266,9 +266,14 @@
 
         plotOptions: {
             series: {
-                borderWidth: 0,
+                borderRadius: 5,
+                 pointWidth: 60,
+                pointPadding: 1,
+                groupPadding: 0.1,
+                
                 dataLabels: {
-                    enabled: true
+                    enabled: true,
+                      y: 5
                 }
             }
         },
