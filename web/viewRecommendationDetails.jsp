@@ -103,7 +103,7 @@
                         <div class="col-md-6">
                             <div class="box box-solid box-success">
                                 <div class="box-header with-border">
-                                    <h3 class="box-title">Recommendation Details(TO farm not farmer DB DB DB)(ask bj resend validation)</h3>
+                                    <h3 class="box-title">Recommendation Details(do we resend validation??)(improvement since implementation but how?)</h3>
                                 </div>
                             </div>
                         </div>

@@ -111,12 +111,9 @@
            <li><a href="Problems.jsp"><i class="fa fa-link"></i><span>Problems</span></a></li>
            <li><a href="createNewRecommendation.jsp"><i class="fa fa-link"></i><span>Create Recommendations</span></a></li>
            <li><a href="Calendar.jsp"><i class="fa fa-link"></i><span>Calendar</span> </a></li>
-           <li><a href="farmerComparison.jsp"><i class="fa fa-link"></i><span>Farm Observation</span></a></li>
            <li><a href="viewCropEstimate.jsp"><i class="fa fa-link"></i><span>Crop Estimate (Options)</span></a></li>
            <li><a href="viewPrograms.jsp"><i class="fa fa-link"></i><span>View Programs</span></a></li>
-         
-           <li><a href="viewFarmerProfile.jsp"><i class="fa fa-link"></i><span>Farmer Profile</span></a></li>
-          </ul>
+         </ul>
         </li>   
         <li class="treeview">
           <a href="#">
@@ -129,7 +126,7 @@
            <li><a href="#"><i class="fa fa-link"></i><span>Weather Trends</span> </a></li>
            <li><a href="Problems.jsp"><i class="fa fa-link"></i><span>Problems (Reoccuring)</span></a></li>
            <li><a href="Calendar.jsp"><i class="fa fa-link"></i><span>Calendar</span> </a></li>
-           <li><a href="farmerComparison.jsp"><i class="fa fa-link"></i><span>Farm Observation</span></a></li>
+           <li><a href="#"><i class="fa fa-link"></i><span>Farm Observation</span></a></li>
            <li><a href="viewCropEstimate.jsp"><i class="fa fa-link"></i><span>Crop Estimate</span></a></li>
            <li><a href="viewPrograms.jsp"><i class="fa fa-link"></i><span>View Programs</span></a></li>
           
