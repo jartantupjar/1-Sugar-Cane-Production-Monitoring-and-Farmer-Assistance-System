@@ -35,9 +35,9 @@ public class viewMuniCropEst extends BaseServlet {
 
         HttpSession session = request.getSession();
        
-      
+      int year = Integer.parseInt(request.getParameter("year"));
 
-        ArrayList<cropEstimate> fct = estdb.viewMunicipalityEstimates(2015);
+        ArrayList<cropEstimate> fct = estdb.viewMunicipalityEstimates(year);
         
         JSONObject data = new JSONObject();
         JSONArray list = new JSONArray();

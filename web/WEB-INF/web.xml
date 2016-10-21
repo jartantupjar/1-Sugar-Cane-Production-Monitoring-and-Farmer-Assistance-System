@@ -136,6 +136,10 @@
         <servlet-name>loadCompChartData</servlet-name>
         <servlet-class>controller.loadCompChartData</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>loadCropEstYearList</servlet-name>
+        <servlet-class>controller.loadCropEstYearList</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
@@ -271,6 +275,10 @@
     <servlet-mapping>
         <servlet-name>loadCompChartData</servlet-name>
         <url-pattern>/loadCompChartData</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>loadCropEstYearList</servlet-name>
+        <url-pattern>/loadCropEstYearList</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

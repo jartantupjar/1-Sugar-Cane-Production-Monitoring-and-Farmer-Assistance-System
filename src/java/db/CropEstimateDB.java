@@ -263,5 +263,43 @@ public class CropEstimateDB {
          return fperc;
          
      }
+       public ArrayList<Integer> getDistinctYears(Integer selection) {
+        ArrayList<Integer> taglist=null;
+      if(selection==0){
+         taglist=getAllDistinctYrsCropEst();
+      }
+      else{
+          taglist=getDistinctMunicipalYears();
+      }
+      return taglist;
+       }
+      
+        public ArrayList<Integer> getDistinctMunicipalYears() {
+     try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select Distinct(year) from cropestimatemunicipality;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<Integer> list = null;
+         
+            if (rs.next()) {
+                list = new ArrayList<>();
+                do {
+                   list.add(rs.getInt("year"));
+                   } while (rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(CropEstimateDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null;
+       }
+        
     
 }
