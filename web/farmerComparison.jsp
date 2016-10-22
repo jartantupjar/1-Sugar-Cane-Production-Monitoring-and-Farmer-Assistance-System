@@ -390,6 +390,7 @@ on barangay selection
                                                 <tr>
                                                     <!--<th><input name="select_all" value="1" id="example-select-all" type="checkbox" /></th>-->
                                                     <th></th>
+                                                    <th>Farm ID</th>
                                                     <th>Farmer</th>
                                                     <th>Barangay</th>
                                                     <th>Municipality</th>
@@ -490,7 +491,7 @@ on barangay selection
                                 }
                             },
                             {
-                                'targets': 5,
+                                'targets': 6,
                                 'searchable': true,
                                 'orderable': true,
                                 'className': 'dt-body-center',
@@ -505,7 +506,7 @@ on barangay selection
                                 }
                             },
                             {
-                                'targets': 6,
+                                'targets': 7,
                                 'searchable': false,
                                 'orderable': false,
                                 'className': 'dt-body-center',

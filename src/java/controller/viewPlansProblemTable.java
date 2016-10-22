@@ -27,7 +27,7 @@ public class viewPlansProblemTable extends BaseServlet {
       
         Problems prob = new Problems();
       
-   ArrayList<Problems> bct = probdb.getAllProblems();
+   ArrayList<Problems> bct = probdb.getProblemsList();
         //ArrayList<Problems> bct = probdb.getProblemsWithBrgy();
         
         JSONObject data = new JSONObject();
@@ -38,9 +38,10 @@ public class viewPlansProblemTable extends BaseServlet {
                  obj.add(Integer.toString(bct.get(i).getProb_id()));
                 obj.add(bct.get(i).getProb_name());
                obj.add(bct.get(i).getProb_details());
+                obj.add(bct.get(i).getStatus());
                 obj.add(bct.get(i).getType());
-                obj.add(bct.get(i).getMunicipality());
                 obj.add(Integer.toString(bct.get(i).getTotalFarms()));
+                obj.add(Integer.toString(bct.get(i).gettSolutions()));
                 list.add(obj);
             }
         }

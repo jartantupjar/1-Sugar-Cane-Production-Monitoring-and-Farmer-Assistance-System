@@ -135,6 +135,9 @@
     <servlet>
         <servlet-name>viewWeatherTrends</servlet-name>
         <servlet-class>controller.viewWeatherTrends</servlet-class>
+
+    </servlet>
+    <servlet>
         <servlet-name>viewSendRec</servlet-name>
         <servlet-class>controller.viewSendRec</servlet-class>
     </servlet>
@@ -162,6 +165,10 @@
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
     </servlet-mapping>
+        <servlet-mapping>
+        <servlet-name>viewFarmerProfile</servlet-name>
+        <url-pattern>/viewFarmerProfile</url-pattern>
+        </servlet-mapping>
     <servlet-mapping>
         <servlet-name>createNewRecommendation</servlet-name>
         <url-pattern>/createNewRecommendation</url-pattern>

@@ -83,12 +83,13 @@
                                         <table id="probTable" class="table  dispTable table-hover" cellspacing="0" width="100%">
                                             <thead>
                                                 <tr>
-                                                    <th><input name="select_all" value="1" id="probTable-select-all" type="checkbox" /></th>
+                                                    <th></th>
                                                     <th>Problem</th>
                                                     <th>Description</th>
                                                     <th>Status</th>
                                                     <th>Type</th>
-                                                    <th># brgy</th>
+                                                    <th># Aff. Farms</th>
+                                                    <th># Solutions</th>
                                                 </tr>
                                             </thead>
 
@@ -291,12 +292,12 @@
                 });
 
 
-                $('#probTable-select-all').on('click', function () {
-                    // Check/uncheck all checkboxes in the table
-                    var rows = table1.rows({'search': 'applied'}).nodes();
-                    $('input[type="checkbox"]', rows).prop('checked', this.checked);
-
-                });
+//                $('#probTable-select-all').on('click', function () {
+//                    // Check/uncheck all checkboxes in the table
+//                    var rows = table1.rows({'search': 'applied'}).nodes();
+//                    $('input[type="checkbox"]', rows).prop('checked', this.checked);
+//
+//                });
 
 
             });

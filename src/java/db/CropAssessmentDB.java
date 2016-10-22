@@ -56,7 +56,7 @@ public class CropAssessmentDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT sum(area) as 'previous_area',sum(actual) as 'previous_tc' FROM sra.weeklyestimate where weekofyear(week_ending) < ? and year = ? ;";
+            String query = "SELECT sum(area) as 'previous_area',sum(actual) as 'previous_tc' FROM weeklyestimate where weekofyear(week_ending) < ? and year = ? ;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             weekofyear -- ; 
             pstmt.setInt(1, weekofyear);

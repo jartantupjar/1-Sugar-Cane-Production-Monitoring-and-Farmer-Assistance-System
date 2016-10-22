@@ -23,7 +23,7 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                 <section class="content-header">
 
                     <h1>
-                        Farmer Profile
+                        Farmer Profile(ADD HISTORICAL PRODUCTION CHART(highest recorded,lowest recorded,production),EVEN FOR FARMS?)(Farmer Activity)
                         <small>Optional description</small>
                     </h1>
                 </section>
