@@ -5,24 +5,24 @@
  */
 package controller;
 
-import db.ForumDB;
-import entity.Forum;
+import db.WeatherDB;
+import entity.Weather;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.Month;
 import java.util.ArrayList;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 /**
  *
  * @author Bryll Joey Delfin
  */
-public class viewPostDetails extends HttpServlet {
+public class viewWeatherTrends extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,27 +37,46 @@ public class viewPostDetails extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            Forum item = new Forum();
-            ForumDB fdb = new ForumDB();
-            item.setId(Integer.parseInt(request.getParameter("id")));
-            ArrayList<Forum> comments = new ArrayList<Forum>();
-            Forum post  = new Forum();
-            post = fdb.getForumDetail(item.getId());
-            comments =  fdb.getForumDetails(item.getId());
-           
-            if(post!=null){
-                HttpSession session = request.getSession();
-                session.setAttribute("comments", comments);
-                session.setAttribute("post", post);
-                ServletContext context = getServletContext();
-                RequestDispatcher rd = context.getRequestDispatcher("/Post.jsp");
-                rd.forward(request, response);
+            /* TODO output your page here. You may use following sample code. */
+            WeatherDB wdb = new WeatherDB();
+            Weather w = new Weather();
+            ArrayList<Weather> weatherT = new ArrayList<Weather>();
+            int year = Integer.parseInt(request.getParameter("id"));
+            weatherT = wdb.getWeatherTrends(year);
+            JSONObject months = new JSONObject(); 
+            JSONObject production = new JSONObject(); 
+            JSONObject rainfall = new JSONObject(); 
+        JSONArray list = new JSONArray();
+        JSONArray prod = new JSONArray();
+        JSONArray rain = new JSONArray();
+        if (weatherT != null) {
+            for (int i = 0; i < weatherT.size(); i++) {
+                ArrayList<String> mon = new ArrayList<String>();
+                ArrayList<Double> pro = new ArrayList<Double>();
+                ArrayList<Double> rai = new ArrayList<Double>();
+                Month month = Month.of(Integer.parseInt(weatherT.get(i).getMonths()));
+                mon.add(month.toString());
+                pro.add(weatherT.get(i).getProduction());
+                rai.add(weatherT.get(i).getRainfall());
+                //obj.add(probT.get(i).getValidation());
+                list.add(mon);
+                prod.add(pro);
+                rain.add(rai);
             }
-            else{
-                ServletContext context = getServletContext();
-                RequestDispatcher rd = context.getRequestDispatcher("/Homepage.jsp");
-                rd.forward(request, response);
-            }
+        }
+      months.put("months", list);
+      production.put("prod", prod);
+      rainfall.put("rain", rain);
+          response.setContentType("applications/json");
+        response.setCharacterEncoding("utf-8");
+        response.getWriter().write("[");
+        response.getWriter().write(months.toString());
+        response.getWriter().write(",");
+        response.getWriter().write(production.toString());
+        response.getWriter().write(",");
+        response.getWriter().write(rainfall.toString());
+        response.getWriter().write("]");
+            
         }
     }
 

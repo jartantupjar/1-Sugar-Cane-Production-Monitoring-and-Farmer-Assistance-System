@@ -121,7 +121,7 @@
                             </div> 
 
                             <div class="col-md-2">                   
-                                <p><button class="btn btn-primary" style="width: 100%" value="submit">Create</button></p>
+                                <p><button class="btn btn-primary" style="width: 100%" type="submit"  value="submit">Create</button></p>
                             </div>
                         </form>
                     </div>

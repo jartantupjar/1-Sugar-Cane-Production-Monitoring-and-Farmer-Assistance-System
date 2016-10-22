@@ -203,7 +203,7 @@
                             municipal,
                             barangay,
                             farmer;
-
+                    console.log()
                     for (municipal in data) {
                         if (data.hasOwnProperty(municipal)) {
                             municipalVal = 0;

@@ -132,6 +132,10 @@
         <servlet-name>viewFarmDifferences</servlet-name>
         <servlet-class>controller.viewFarmDifferences</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>viewWeatherTrends</servlet-name>
+        <servlet-class>controller.viewWeatherTrends</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
@@ -259,6 +263,14 @@
     <servlet-mapping>
         <servlet-name>viewFarmDifferences</servlet-name>
         <url-pattern>/viewFarmDifferences</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewFarmerProfile</servlet-name>
+        <url-pattern>/viewFarmerProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewWeatherTrends</servlet-name>
+        <url-pattern>/viewWeatherTrends</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
