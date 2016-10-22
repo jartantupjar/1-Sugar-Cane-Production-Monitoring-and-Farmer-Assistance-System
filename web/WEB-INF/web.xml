@@ -33,6 +33,10 @@
         <servlet-class>controller.viewProbDetails</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>viewPostDetails</servlet-name>
+        <servlet-class>controller.viewPostDetails</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>viewRecList</servlet-name>
         <servlet-class>controller.viewRecList</servlet-class>
     </servlet>
@@ -77,12 +81,20 @@
         <servlet-class>controller.createNewRecommendation</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>viewDisasterList</servlet-name>
-        <servlet-class>controller.viewDisasterList</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>sendAlert</servlet-name>
         <servlet-class>controller.sendAlert</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewAlertByBarangay</servlet-name>
+        <servlet-class>controller.viewAlertByBarangay</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewDisastersList</servlet-name>
+        <servlet-class>controller.viewDisastersList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewspecificAlerts</servlet-name>
+        <servlet-class>controller.viewspecificAlerts</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>viewFarmerProfile</servlet-name>
@@ -95,6 +107,10 @@
     <servlet>
         <servlet-name>viewFarmerProbT</servlet-name>
         <servlet-class>controller.viewFarmerProbT</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewForumList</servlet-name>
+        <servlet-class>controller.viewForumList</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>viewFarmersFieldTable</servlet-name>
@@ -117,6 +133,8 @@
         <servlet-class>controller.viewFarmDifferences</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>viewWeatherTrends</servlet-name>
+        <servlet-class>controller.viewWeatherTrends</servlet-class>
         <servlet-name>viewSendRec</servlet-name>
         <servlet-class>controller.viewSendRec</servlet-class>
     </servlet>
@@ -143,10 +161,6 @@
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>viewDisasterList</servlet-name>
-        <url-pattern>/viewDisasterList</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>createNewRecommendation</servlet-name>
@@ -189,6 +203,10 @@
         <url-pattern>/viewRecDetails</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>viewPostDetails</servlet-name>
+        <url-pattern>/viewPostDetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>viewFRTable</servlet-name>
         <url-pattern>/viewFRTable</url-pattern>
     </servlet-mapping>
@@ -225,8 +243,20 @@
         <url-pattern>/sendAlert</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>viewFarmerProfile</servlet-name>
-        <url-pattern>/viewFarmerProfile</url-pattern>
+        <servlet-name>viewAlertByBarangay</servlet-name>
+        <url-pattern>/viewAlertByBarangay</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewDisastersList</servlet-name>
+        <url-pattern>/viewDisastersList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewForumList</servlet-name>
+        <url-pattern>/viewForumList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewspecificAlerts</servlet-name>
+        <url-pattern>/viewspecificAlerts</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>viewFarmerRecT</servlet-name>

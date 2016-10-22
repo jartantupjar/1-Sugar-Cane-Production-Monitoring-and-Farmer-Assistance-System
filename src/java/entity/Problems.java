@@ -14,7 +14,7 @@ import java.sql.Date;
 public class Problems {
     private Integer prob_id, totalFarms, fields_id;
     private String prob_name, prob_details, barangay,municipality, status,type,impact,farmer,farm,validation;
-    private Double prob_loss;
+    private Double prob_loss, percent_affected;
     private Date date_updated;
 
     /**
@@ -225,5 +225,19 @@ public class Problems {
      */
     public void setFields_id(Integer fields_id) {
         this.fields_id = fields_id;
+    }
+
+    /**
+     * @return the percent_affected
+     */
+    public Double getPercent_affected() {
+        return percent_affected;
+    }
+
+    /**
+     * @param percent_affected the percent_affected to set
+     */
+    public void setPercent_affected(Double percent_affected) {
+        this.percent_affected = percent_affected;
     }
 }

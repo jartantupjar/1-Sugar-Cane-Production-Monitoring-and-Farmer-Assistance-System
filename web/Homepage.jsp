@@ -6,7 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>SRA | Home</title>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-       <link href="plugins/pace2/pace-theme-center-circle.css" rel="stylesheet" />
+       <link href="plugins/pace2/pace-theme-barber-shop.css" rel="stylesheet" />
         
        
         
@@ -27,7 +27,7 @@
                     <div class="col-md-6" > 
                         <div class="box box-info">
                             <div class="box-header with-border">
-                                <h1 class="box-title">Yield of the week (Yesterday's Week)</h1>
+                                <h1 class="box-title">Yield of the week :  ${ca.percArea}</h1>
                                 <div class="box-tools pull-right">
                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -55,7 +55,7 @@
                     <div class="col-md-6" > 
                         <div class="box box-info">
                             <div class="box-header with-border">
-                                <h1 class="box-title">Area Harvested ( Yesterday's Week)</h1>
+                                <h1 class="box-title">Area Harvested : <c:out value="${todayDate}"></c:out> </h1>
                                 <div class="box-tools pull-right">
                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -63,8 +63,8 @@
                             </div>
 
                             <div class="box-body no-padding">
-                                <table class="table table-bordered" >
-                                    <tbody>
+                                <table class="table table-bordered"  >
+                                    <thead>
                                         <tr>
                                             <th>Particulars</th>
                                             <th>Estimated Production</th>
@@ -73,18 +73,32 @@
                                             <th>To Date</th>
                                             <th>Percent Completed</th>	
                                         </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach var="ca" items="${CropAss}">
                                         <tr>	
-                                            <td>Area</td>
-                                            <td>5,000.00</td>
-                                            <td>3,850.00</td>
-                                            <td>350.00</td>
-                                            <td>4,200.00</td>
+                                            <td>${ca.particulars}</td>
+                                            <td>wala pa</td>
+                                            <td>${ca.prevArea}</td>
+                                            <td>${ca.thisArea}</td>
+                                            <td>${ca.todateArea}</td>
                                             <td>
-                                                <div class="progress ">
-                                                    <div class="progress-bar progress-bar-green" style="width: 67%">67%</div>
+                                                <div class="progress-group" >
+                                                    <span class="progress-number">
+                                                        <b>
+                                                            ${ca.percArea}%
+                                                        </b>
+                                                    </span>
+                                                            <div class="progress progress-sm progress-striped-active">
+                                                                <div class="progress-bar progress-bar-primary" style="width : ${ca.percArea}%"></div>
+                                                                </div>
+                                                            </div>
+                                                        </b>
+                                                    </span>
                                                 </div>
                                             </td>
                                         </tr>
+                                        </c:forEach>
                                     </tbody>
                                 </table>
                             </div>
@@ -165,6 +179,11 @@
 
         <script type="text/javascript" src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
   <script src="plugins/pace2/pace.min.js"></script>
+  
+  <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+        
+  
         <script type="text/javascript">
           
     Pace.track(function(){
@@ -184,7 +203,7 @@
                             municipal,
                             barangay,
                             farmer;
-
+                    console.log()
                     for (municipal in data) {
                         if (data.hasOwnProperty(municipal)) {
                             municipalVal = 0;

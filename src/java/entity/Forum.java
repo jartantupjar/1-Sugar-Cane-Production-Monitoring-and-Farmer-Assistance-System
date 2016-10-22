@@ -12,7 +12,7 @@ import java.sql.Date;
  * @author Bryll Joey Delfin
  */
 public class Forum {
-    private String farmer,message,status;
+    private String farmer,message,status,comment_User, comment_message, comment_Date ;
     private Integer id , prob_id, counter;
     private Date date_posted, date_started,date_ended;
 
@@ -140,6 +140,48 @@ public class Forum {
      */
     public void setDate_ended(Date date_ended) {
         this.date_ended = date_ended;
+    }
+
+    /**
+     * @return the comment_User
+     */
+    public String getComment_User() {
+        return comment_User;
+    }
+
+    /**
+     * @param comment_User the comment_User to set
+     */
+    public void setComment_User(String comment_User) {
+        this.comment_User = comment_User;
+    }
+
+    /**
+     * @return the comment_message
+     */
+    public String getComment_message() {
+        return comment_message;
+    }
+
+    /**
+     * @param comment_message the comment_message to set
+     */
+    public void setComment_message(String comment_message) {
+        this.comment_message = comment_message;
+    }
+
+    /**
+     * @return the comment_Date
+     */
+    public String getComment_Date() {
+        return comment_Date;
+    }
+
+    /**
+     * @param comment_Date the comment_Date to set
+     */
+    public void setComment_Date(String comment_Date) {
+        this.comment_Date = comment_Date;
     }
 
   }

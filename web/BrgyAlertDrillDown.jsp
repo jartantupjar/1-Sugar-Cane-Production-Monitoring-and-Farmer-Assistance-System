@@ -1,6 +1,6 @@
 <%-- 
-    Document   : Disaster Report
-    Created on : 10 2, 16, 11:03:40 AM
+    Document   : BrgyAlertDrillDown
+    Created on : 10 13, 16, 1:35:54 PM
     Author     : Bryll Joey Delfin
 --%>
 <%@include file="security.jsp" %>
@@ -42,12 +42,11 @@
                                 <table id="example" class="table table-bordered" >
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
-                                            <th>Type</th>
                                             <th>Date</th>
-                                            <th>Municipality</th>
-                                            <th style="width: 20%">Recorded Count</th>
-                                            <th style="width: 5%">Details</th>
+                                            <th>Barangay</th>
+                                            <th>Recorded Count</th>
+                                            <th>Percent Affected</th>
+                                            <th style="width: 5%">Alert</th>
                                         </tr>
                                         
                                     </thead>
@@ -67,6 +66,7 @@
             </div>
 
         </div>
+        
         <script src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="dist/js/app.min.js"></script>
@@ -74,19 +74,16 @@
         <script src="plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
         <script>
-
             $(document).ready(function () {
                 var table = $('#example').DataTable({
                     'ajax': {
-                        'url': 'viewDisastersList'
+                        'url': 'viewAlertByBarangay'
                     },
-                    'columnDefs': [
-                        {
-                            'targets':5,
+                    'columnDefs': [{
+                            'targets':4,
                         
                             'render': function (data, type, full, meta) {
-                                
-                                return '<a class="btn btn-primary" href="viewspecificAlerts?id='+ data +'">View Details</a>' ;
+                                return '<a class="btn btn-primary" href="sendAlert?id='+ data +'">' +'Send Alert' +'</a>' ;
                             }
                             
                         }]

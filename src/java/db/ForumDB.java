@@ -25,7 +25,7 @@ public class ForumDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT * FROM sra.posts;";
+            String query = "SELECT * FROM posts;";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             ArrayList<Forum> fT = null;
@@ -39,6 +39,7 @@ public class ForumDB {
                     f.setMessage(rs.getString("message"));
                     f.setDate_started(rs.getDate("date_started"));
                     f.setDate_posted(rs.getDate("date_posted"));
+                    f.setStatus(rs.getString("Post_Status_status"));
                     fT.add(f);
                 } while (rs.next());
             }
@@ -52,25 +53,61 @@ public class ForumDB {
         }
         return null;
     }
-    public Forum getForumDetails(Integer id){
+    public ArrayList<Forum> getForumDetails(Integer id){
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT * FROM sra.posts where id = ? ;";
+            String query = "SELECT p.id,p.Farmers_name,p.message,p.date_started,p.date_posted,c.Farmers_name as 'commentor',c.message as 'comments',c.date as 'date_comment' FROM posts p left join comments c on p.id = c.Posts_id where p.id = ? ;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1,id);
             ResultSet rs = pstmt.executeQuery();
-            ArrayList<Forum> fT = null;
+            ArrayList<Forum> fT = new ArrayList<Forum>();
             Forum f = null;
                 if (rs.next()) {
                     f = new Forum();
                     do {
-                        
                         f.setId(rs.getInt("id"));
                         f.setFarmer(rs.getString("Farmers_name"));
                         f.setMessage(rs.getString("message"));
                         f.setDate_started(rs.getDate("date_started"));
                         f.setDate_posted(rs.getDate("date_posted"));
+                        String test = rs.getString("commentor");
+                        if(test!=null){
+                            f.setComment_User(test);
+                            f.setComment_message(rs.getString("comments"));
+                            f.setComment_Date(rs.getString("date_comment"));
+                        }
+                        fT.add(f);
+                    } while (rs.next());
+                }
+                rs.close();
+                pstmt.close();
+                conn.close();            
+            return fT;
+                 }catch (SQLException ex) {
+            Logger.getLogger(ForumDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public Forum getForumDetail(Integer id){
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT p.id,p.Farmers_name,p.message,p.date_started,p.date_posted,c.Farmers_name as 'commentor',c.message as 'comments',c.date as 'date_comment' FROM posts p left join comments c on p.id = c.Posts_id where p.id = ? ;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1,id);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<Forum> fT = new ArrayList<Forum>();
+            Forum f = null;
+                if (rs.next()) {
+                    f = new Forum();
+                    do {
+                        f.setId(rs.getInt("id"));
+                        f.setFarmer(rs.getString("Farmers_name"));
+                        f.setMessage(rs.getString("message"));
+                        f.setDate_started(rs.getDate("date_started"));
+                        f.setDate_posted(rs.getDate("date_posted"));
+                        fT.add(f);
                     } while (rs.next());
                 }
                 rs.close();

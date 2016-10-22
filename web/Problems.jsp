@@ -36,7 +36,7 @@
                             </div>
 
                             <div class="box-body">
-                                    <table id="example" class="table table-bordered" cellspacing="0" width="100%">
+                                    <table id="example" class="table table-bordered">
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
@@ -49,15 +49,6 @@
 
                                             </tr>
                                         </thead>
-                                        <tfoot>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Problem</th>
-                                                <th>Type</th>
-                                                <th>Status</th>
-
-                                            </tr>
-                                        </tfoot>
                                     </table>
                                 </div>
 
@@ -89,7 +80,7 @@
                             'targets': 6,
                         
                             'render': function (data, type, full, meta) {
-                                return '<a href="viewProbDetails?id=' + data + '" class="btn btn-primary btn-xs">'+'more details'+'</a>';
+                                return '<a href="viewProbDetails?id=' + data + '" class="btn btn-primary btn-xs">More Details</a>';
                             }
                             
                         }]

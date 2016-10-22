@@ -31,7 +31,7 @@
                     <div class="col-md-12" > 
                         <div class="box box-info">
                             <div class="box-header with-border">
-                                <h1 class="box-title">Adding Water Works!</h1>
+                                <h1 class="box-title"><c:out value="${post.message}">${post.message}</c:out></h1>
                                 <div class="box-tools pull-right">
                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                     <!-- In box-tools add this button if you intend to use the contacts pane -->
@@ -44,8 +44,8 @@
             <div class="box-header with-border">
               <div class="user-block">
                 <img class="img-circle" src="dist/img/user1-128x128.jpg" alt="User Image">
-                <span class="username"><a href="#">Jonathan Burke Jr.</a></span>
-                <span class="description"> 7:30 PM Today</span>
+                <span class="username"><a href="#">${post.farmer}</a></span>
+                <span class="description">${post.date_posted}</span>
               </div>
               <!-- /.user-block -->
             </div>
@@ -53,57 +53,30 @@
             <div class="box-body">
               <img class="img-responsive pad" src="dist/img/photo2.png" alt="Photo">
 
-              <p>I took this photo this morning. What do you guys think?</p>
+              <p>${post.message}</p>
               <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button>
               <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> Approve </button>
-              <span class="pull-right text-muted">100 have approved your solution - 2 comments</span>
+             
             </div>
             <!-- /.box-body -->
             <div class="box-footer box-comments">
+                <c:forEach var="comments" items="${comments}">
               <div class="box-comment">
                 <!-- User image -->
                 <img class="img-circle img-sm" src="dist/img/user3-128x128.jpg" alt="User Image">
 
                 <div class="comment-text">
                       <span class="username">
-                        Maria Gonzales
+                        ${comments.comment_User}
                         <span class="text-muted pull-right">8:03 PM Today</span>
                       </span><!-- /.username -->
-                  It is a long established fact that a reader will be distracted
-                  by the readable content of a page when looking at its layout.
+                      ${comments.comment_message}
                 </div>
                 <button type="button" class="btn btn-default btn-xs pull-right"><i class="fa fa-share"></i><a href="createNewRecommendation.jsp">Create Recommendation</a></button>
                 <!-- /.comment-text -->
               </div>
-              <!-- /.box-comment -->
-              <div class="box-comment">
-                <!-- User image -->
-                <img class="img-circle img-sm" src="dist/img/user4-128x128.jpg" alt="User Image">
-
-                <div class="comment-text">
-                      <span class="username">
-                        Luna Stark
-                        <span class="text-muted pull-right">8:03 PM Today</span>
-                      </span><!-- /.username -->
-                  It is a long established fact that a reader will be distracted
-                  by the readable content of a page when looking at its layout.
-                </div>
-                <button type="button" class="btn btn-default btn-xs pull-right"><i class="fa fa-share"></i><a href="createNewRecommendation.jsp">Create Recommendation</a></button>
-                <!-- /.comment-text -->
-              </div>
-              <!-- /.box-comment -->
+              </c:forEach>
             </div>
-            <!-- /.box-footer -->
-            <div class="box-footer">
-              <form action="#" method="post">
-                <img class="img-responsive img-circle img-sm" src="dist/img/user4-128x128.jpg" alt="Alt Text">
-                <!-- .img-push is used to add margin to elements next to floating images -->
-                <div class="img-push">
-                  <input type="text" class="form-control input-sm" placeholder="Press enter to post comment">
-                </div>
-              </form>
-            </div>
-            <!-- /.box-footer -->
           </div>
           <!-- /.box -->
         
