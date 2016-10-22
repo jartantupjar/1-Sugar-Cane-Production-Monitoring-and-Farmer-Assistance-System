@@ -378,14 +378,14 @@ on barangay selection
 
                             <div class="col-sm-12">
                                 <br>
-                                <div class="box box-success">
+                                <div class="box box-success hidden" id="sbox">
                                     <div class="box-header with-border">
                                         <h1 class="box-title">Results:</h1>
 
                                     </div>
                                     <div class="box-body">
 
-                                        <table id="example" class="table  display table-hover " cellspacing="0" width="100%">
+                                        <table id="example" class="table  display table-hover" cellspacing="0" width="100%">
                                             <thead>
                                                 <tr>
                                                     <!--<th><input name="select_all" value="1" id="example-select-all" type="checkbox" /></th>-->
@@ -394,7 +394,7 @@ on barangay selection
                                                     <th>Barangay</th>
                                                     <th>Municipality</th>
                                                     <th>Actual</th>
-                                                    <th>Difference</th>
+                                                    <th>Yield % Diff.</th>
                                                     <th>More Details</th>
 
                                                 </tr>
@@ -409,7 +409,7 @@ on barangay selection
 
                                 <input name="id" type="hidden" value="${id}"/>
                                 <div class="box-body">
-                                    <button class="btn btn-app btn-linkedin" value="submit" style="width: 100%">
+                                    <button class="btn btn-app btn-linkedin hidden" id="dbox" value="submit" style="width: 100%">
                                         <i class="fa fa-edit" ></i> Create Comparison
                                     </button>
                                 </div>
@@ -453,9 +453,12 @@ on barangay selection
                     type: 'POST',
                     dataType: "JSON",
                     success: function (data) {
+                        alert(data);
+                  
                         $("#select2").select2({
                             data: data
                         });
+                         
                     }});
 
                 //  var data = ['enhancement', 'bug', 'duplicate','invalid', 'wontfix'];                          
@@ -467,6 +470,9 @@ on barangay selection
 
                     //  var rows_selected = [];
                     var limit = 4;
+                    $('#sbox').removeClass('hidden');
+                    $('#dbox').removeClass('hidden');
+                    
                     var table = $('#example').DataTable({
                         destroy: true,
                         'ajax': {
@@ -490,11 +496,11 @@ on barangay selection
                                 'className': 'dt-body-center',
                                 'render': function (data, type, full, meta) {
                                     if (data > 0) {
-                                        return '<span class="label label-success">' + data + '</span>';
+                                        return '<span class="label label-success">' + data + '%</span>';
                                     } else if (data < 0) {
-                                        return '<span class="label label-warning">' + data + '</span>';
+                                        return '<span class="label label-warning">' + data + '%</span>';
                                     } else {
-                                        return '<span class="label label-info">' + data + '</span>';
+                                        return '<span class="label label-info">' + data + '%</span>';
                                     }
                                 }
                             },

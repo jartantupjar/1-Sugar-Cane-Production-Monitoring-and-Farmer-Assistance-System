@@ -135,6 +135,24 @@
     <servlet>
         <servlet-name>viewWeatherTrends</servlet-name>
         <servlet-class>controller.viewWeatherTrends</servlet-class>
+        <servlet-name>viewSendRec</servlet-name>
+        <servlet-class>controller.viewSendRec</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewDistCropEstimate</servlet-name>
+        <servlet-class>controller.viewDistCropEstimate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewMuniCropEst</servlet-name>
+        <servlet-class>controller.viewMuniCropEst</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewDiffDistEst</servlet-name>
+        <servlet-class>controller.viewDiffDistEst</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>loadCompChartData</servlet-name>
+        <servlet-class>controller.loadCompChartData</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
@@ -265,12 +283,24 @@
         <url-pattern>/viewFarmDifferences</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>viewFarmerProfile</servlet-name>
-        <url-pattern>/viewFarmerProfile</url-pattern>
+        <servlet-name>viewSendRec</servlet-name>
+        <url-pattern>/viewSendRec</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>viewWeatherTrends</servlet-name>
-        <url-pattern>/viewWeatherTrends</url-pattern>
+        <servlet-name>viewDistCropEstimate</servlet-name>
+        <url-pattern>/viewDistCropEstimate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewMuniCropEst</servlet-name>
+        <url-pattern>/viewMuniCropEst</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewDiffDistEst</servlet-name>
+        <url-pattern>/viewDiffDistEst</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>loadCompChartData</servlet-name>
+        <url-pattern>/loadCompChartData</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
