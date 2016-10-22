@@ -56,7 +56,7 @@
                                             </div>
                                             <!-- /.input group -->
                                         </div>
-                                      
+
 
 
                                         <div class="form-group">
@@ -64,13 +64,14 @@
                                             <textarea class="form-control" name="Description" rows="2"  placeholder="Enter ..."></textarea>
                                         </div>
 
+                                        <button  class="btn btn-danger  pull-right"  type="button" id ="addcolumn"><span class = "glyphicon glyphicon-plus"></span>columnz</button>
 
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-md-6" > 
-                                <div class="box box-info">
+                                <div class="box box-info collapsed-box">
                                     <div class="box-header with-border">
                                         <h1 class="box-title">Problems List(change COUNTER to brgy)</h1>
                                         <div class="box-tools pull-right">
@@ -126,6 +127,35 @@
 
                                         <br/>
                                         <button  class="btn btn-danger  pull-right" style="width: 8%"  id ="addRow"><span class = "glyphicon glyphicon-plus"></span> Row</button>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-12" > 
+                                <div class="box box-info">
+                                    <div class="box-header with-border">
+                                        <h1 class="box-title">Key Performance Indicators</h1>
+                                        <div class="box-tools pull-right">
+                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="box-body">
+                                        <table class = "table table-bordered bull" id = "listOfTargets">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 30%">Performance Indicator</th>
+                                                    
+
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>                      
+                                            </tbody>
+                                        </table>
+
+                                        <br/>
+                                        <button  class="btn btn-danger  pull-right" style="width: 8%"  id ="adddRow"><span class = "glyphicon glyphicon-plus"></span> Row</button>
 
                                     </div>
 
@@ -207,7 +237,7 @@
                                     <td><input class='form-control' name = 'y" + rowNum + "[]' value='20000' /></td>\n\
                                     <td id='deleterow'><div class='glyphicon glyphicon-remove'></div></td> \n\
         </tr>");
-       
+
                 rowNum++;
 
                 $("#addRow").on("click", function () {
@@ -218,12 +248,70 @@
                                     <td><input class='form-control'  name = 'y" + rowNum + "[]' required/></td>\n\
                                     <td><input class='form-control' name = 'y" + rowNum + "[]'  /></td>\n\
                                     <td id='deleterow'><div class='glyphicon glyphicon-remove'></div></td> \n\
-        </tr>");alert(rowNum);
+                                     </tr>");
                     rowNum++;
 
                 });
 
             });
+
+
+
+        </script>
+        <script>
+
+            var rowNum = 1;
+
+
+            $('#listOfTargets').ready(function () {
+                $("#listOfTargets").on('click', '#deletedrow', function () {
+                    var $killrow = $(this).parent('tr');
+                    $killrow.addClass("danger");
+                    $killrow.fadeOut(1000, function () {
+                        $(this).remove();
+                    });
+                });
+            });
+            var ival=0;
+            var fval=0;
+            var count=0;
+            $("#addcolumn").on("click", function () {
+                var x = document.getElementById('reservation').value.split('-');
+                var ini = x[0].split('/');
+                var end = x[1].split('/');
+               
+                 ival = ini[2];
+                 fval = end[2];
+                
+                count += fval - ival;
+              
+                for (var b=0; b <= count; b++) {
+                    
+                    $('#listOfTargets tr:last').append("<th>" + (ival*1+b) +"</th>");    
+                }
+                $('#listOfTargets tr:last').append("<th></th>");
+
+
+            });
+             $("#adddRow").on("click", function () {
+                       
+        var rowz="";
+             for (var b=0; b <= count; b++) {
+                    
+                   rowz+="<td><input class='form-control' name = 'y" + rowNum + "[]'  required/></td>";   
+                } 
+                        
+  $('#listOfTargets tbody:last').append("<tr>\n\
+                                  <td><input class='form-control' style='width: 100%' name = 'kpi" + rowNum + "'  required/></td>\n\\n\
+                                        "+rowz+" \n\
+                    //<td id='deletedrow'><div class='glyphicon glyphicon-remove'></div></td> \n\
+        </tr>");
+                alert(rowNum);
+                rowNum++;
+
+            });
+
+
 
 
 
