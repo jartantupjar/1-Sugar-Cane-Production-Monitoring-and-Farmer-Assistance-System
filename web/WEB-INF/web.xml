@@ -135,8 +135,6 @@
     <servlet>
         <servlet-name>viewWeatherTrends</servlet-name>
         <servlet-class>controller.viewWeatherTrends</servlet-class>
-        <servlet-name>viewSendRec</servlet-name>
-        <servlet-class>controller.viewSendRec</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>viewDistCropEstimate</servlet-name>
@@ -217,6 +215,10 @@
     <servlet-mapping>
         <servlet-name>createNewProgram</servlet-name>
         <url-pattern>/createNewProgram</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewWeatherTrends</servlet-name>
+        <url-pattern>/viewWeatherTrends</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>viewProgramsTable</servlet-name>
