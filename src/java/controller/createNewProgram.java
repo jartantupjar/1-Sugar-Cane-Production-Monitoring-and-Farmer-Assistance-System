@@ -81,8 +81,12 @@ public class createNewProgram extends BaseServlet {
         ArrayList<programsKPI> kpis = new ArrayList();
 
         programsKPI pkpi = null;
-        int sYear = 2014;
-        int tYears = 3;
+//        int sYear = 2014;
+//        int tYears = 3;
+        int sYear = Integer.parseInt(request.getParameter("kpi_year").trim());
+      
+        int tYears = Integer.parseInt(request.getParameter("tYears").trim());
+        System.out.println(sYear+"tyrs"+tYears);
 
         int count = 0;
         ArrayList<String> problist = new ArrayList();
@@ -99,15 +103,15 @@ public class createNewProgram extends BaseServlet {
                 }
                 pkpi.setValues(value);
                 kpis.add(pkpi);
-            } else if (paramName.substring(0, 3).equals("kpi")) {
-                System.out.println(paramName.substring(3, 4) + " :counter");
-                count = Integer.parseInt(paramName.substring(3, 4));
+            } else if (paramName.substring(0, 4).equals("kpis")) {
+                System.out.println(paramName.substring(4, 5) + " :counter");
+                count = Integer.parseInt(paramName.substring(4, 5));
                 pkpi = new programsKPI();
                 pkpi.setKpi(request.getParameterValues(paramName)[0]);
                 pkpi.setKpi_year(sYear);
                 pkpi.settYears(tYears);
                 System.out.println(request.getParameterValues(paramName)[0]);
-            } else if (paramName.substring(0, 6).equals("probid")) {
+            } else if (paramName.startsWith("probid")) {
         
                  for (int i = 0; i < request.getParameterValues(paramName).length; i++) {
                     System.out.println(request.getParameterValues(paramName)[i]+"problem id");

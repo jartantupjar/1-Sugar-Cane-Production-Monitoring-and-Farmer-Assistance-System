@@ -217,7 +217,7 @@ current vs then diagram
                                         </div>
 
                                         <div class="box-body">
- <c:if test="${not empty kpis}">
+                <c:if test="${not empty kpis}">
                                             <table class="table table-hover">
                                                 <thead><tr>
                                                         <th style="width: 30%">Performance Indicator</th>
