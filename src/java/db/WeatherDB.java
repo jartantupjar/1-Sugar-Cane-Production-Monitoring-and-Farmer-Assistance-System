@@ -23,7 +23,7 @@ public class WeatherDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT month(week_ending) as 'months', week_ending, year, sum(rainfal) as 'rain', sum(actual) as 'actual' FROM sra.weeklyestimate where year = ? group by month(week_ending) order by week_ending;;";
+            String query = "SELECT monthname(week_ending) as 'months', week_ending, year, sum(rainfal) as 'rain', sum(actual) as 'actual' FROM weeklyestimate where year = ? group by month(week_ending) order by week_ending;;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, year);
             ResultSet rs = pstmt.executeQuery();

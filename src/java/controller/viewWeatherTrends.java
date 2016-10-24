@@ -9,7 +9,6 @@ import db.WeatherDB;
 import entity.Weather;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.Month;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -54,8 +53,7 @@ public class viewWeatherTrends extends HttpServlet {
                 ArrayList<String> mon = new ArrayList<String>();
                 ArrayList<Double> pro = new ArrayList<Double>();
                 ArrayList<Double> rai = new ArrayList<Double>();
-                Month month = Month.of(Integer.parseInt(weatherT.get(i).getMonths()));
-                mon.add(month.toString());
+                mon.add(weatherT.get(i).getMonths());
                 pro.add(weatherT.get(i).getProduction());
                 rai.add(weatherT.get(i).getRainfall());
                 //obj.add(probT.get(i).getValidation());
