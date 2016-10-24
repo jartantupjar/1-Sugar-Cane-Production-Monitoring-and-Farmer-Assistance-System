@@ -25,8 +25,7 @@ public class ProblemsDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT p.id, p.name,p.description,p.status,p.type,count(pf.Fields_id) as counter from problems p join `problems-fields` pf on p.id = pf.Problems_id join fields f on pf.Fields_id = f.id \n" +
-                            "group by p.id, p.type;";
+            String query = "SELECT p.id, p.name,p.description,p.status,p.type,count(pf.Fields_id) as counter,(select count(pp.programs_name)from `programs-problems`pp where pp.problems_id=p.id) as pcounter from problems p join `problems-fields` pf on p.id = pf.Problems_id join fields f on pf.Fields_id = f.id group by p.id;";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             ArrayList<Problems> pT = null;
@@ -41,6 +40,7 @@ public class ProblemsDB {
                     p.setStatus(rs.getString("status"));
                     p.setType(rs.getString("type"));
                     p.setTotalFarms(rs.getInt("counter"));
+                    p.settSolutions(rs.getInt("pcounter"));
                     pT.add(p);
                 } while (rs.next());
             }

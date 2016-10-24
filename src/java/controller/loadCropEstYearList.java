@@ -5,6 +5,7 @@
  */
 package controller;
 
+import db.CropEstimateDB;
 import db.FarmsDB;
 import db.ProgramsDB;
 import entity.Farm;
@@ -25,7 +26,7 @@ import org.json.simple.JSONObject;
  *
  * @author Bryll Joey Delfin
  */
-public class createTagList extends BaseServlet {
+public class loadCropEstYearList extends BaseServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,16 +41,16 @@ public class createTagList extends BaseServlet {
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         PrintWriter out = response.getWriter();
-        FarmsDB farmdb = new FarmsDB();
+        CropEstimateDB cedb = new CropEstimateDB();
 
 
-          int id = Integer.parseInt(request.getParameter("id"));
-        Farm farm2 = farmdb.getAllFieldDetails(id);
-        ArrayList<String> data = farmdb.getTags(farm2);
+          int tag = Integer.parseInt(request.getParameter("tag"));
+      System.out.println(tag);
+        ArrayList<Integer> data = cedb.getDistinctYears(tag);
           JSONArray jarray = new JSONArray();
         for (int i = 0; i < data.size(); i++) {
             jarray.add(data.get(i));
-            System.out.println(data.get(i));
+         
                 
         }
       

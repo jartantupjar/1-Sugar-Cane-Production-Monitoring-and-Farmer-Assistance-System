@@ -12,7 +12,7 @@ import java.sql.Date;
  * @author Bryll Joey Delfin
  */
 public class Problems {
-    private Integer prob_id, totalFarms, fields_id;
+    private Integer prob_id, totalFarms, fields_id,tSolutions;
     private String prob_name, prob_details, barangay,municipality, status,type,impact,farmer,farm,validation;
     private Double prob_loss, percent_affected;
     private Date date_updated;
@@ -239,5 +239,19 @@ public class Problems {
      */
     public void setPercent_affected(Double percent_affected) {
         this.percent_affected = percent_affected;
+    }
+
+    /**
+     * @return the tSolutions
+     */
+    public Integer gettSolutions() {
+        return tSolutions;
+    }
+
+    /**
+     * @param tSolutions the tSolutions to set
+     */
+    public void settSolutions(Integer tSolutions) {
+        this.tSolutions = tSolutions;
     }
 }

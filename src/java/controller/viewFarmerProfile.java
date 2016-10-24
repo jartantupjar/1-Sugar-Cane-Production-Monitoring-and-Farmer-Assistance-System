@@ -27,7 +27,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author ndrs
  */
-public  class viewFarmerProfile extends BaseServlet {
+public class viewFarmerProfile extends BaseServlet {
 
     @Override
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,21 +37,23 @@ public  class viewFarmerProfile extends BaseServlet {
         FarmerDB farmerdb = new FarmerDB();
         HttpSession session = request.getSession();
         Farmer farmer;
-       ////////////////****** TODO CHECK IF NAME IS A FARMR
+        ////////////////****** TODO CHECK IF NAME IS A FARMR
         String name = request.getParameter("name");
-        
+
         System.err.println("TODAYS user " + session.getAttribute("user"));
         System.err.println("TODAYS DATE " + session.getAttribute("todayDate"));
-     
-        farmer = farmerdb.viewFarmerDetails(name);
-    
-        session.setAttribute("farmDet", farmer);
-        session.setAttribute("farm", name);
-
-        RequestDispatcher rd = context.getRequestDispatcher("/viewFarmerProfile.jsp");
-
+        RequestDispatcher rd;
+        if (farmerdb.searchNameInMunicipal(name)) {
+            rd = context.getRequestDispatcher("/viewCropEstimate.jsp");
+        } else if (farmerdb.searchNameInBarangay(name)) {
+            rd = context.getRequestDispatcher("/viewCropEstimate.jsp");
+        } else {
+            farmer = farmerdb.viewFarmerDetails(name);
+            session.setAttribute("farmDet", farmer);
+            session.setAttribute("farm", name);
+            rd = context.getRequestDispatcher("/viewFarmerProfile.jsp");
+        }
         rd.forward(request, response);
-
         response.setCharacterEncoding("utf-8");
 
     }

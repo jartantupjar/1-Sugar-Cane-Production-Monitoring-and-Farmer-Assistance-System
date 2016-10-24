@@ -9,6 +9,12 @@
         <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css"> 
         <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker-bs3.css">
         <link rel="stylesheet" href="plugins/datepicker/datepicker3.css">
+        <link rel="stylesheet" href="plugins/select2/select2.min.css">
+        <!--<link rel="stylesheet" href="plugins/formWiz/custom.css">-->
+        <link rel="stylesheet" href="plugins/formWiz/components.min.css">
+        <link rel="stylesheet" href="plugins/formWiz/plugins.min.css">
+        <!--<link rel="stylesheet" href="plugins/formWiz/prettify.css">-->
+
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
 
@@ -24,116 +30,176 @@
                 </section>
                 <section class="content">
                     <div class="row">
-                        <form id="frm-example" action="createNewProgram">
-                            <div class="col-md-6">
-                                <div class="box box-solid box-success">
-                                    <div class="box-header with-border">
-                                        <h3 class="box-title">Program Details(STATUS-TYPE QUESTION,STEPS,)</h3>
-                                    </div>
-                                    <br>
-                                    <div class="box-body">
+                        <div class="col-md-12">
+                            <div class="box box-info">
+                                <div class="box-body">
+                                    <div class="form" id="rootwizard">
+                                        <form class="form-horizontal" action="createNewProgram" id="submit_form" method="POST" novalidate="novalidate">
+                                            <div class="form-wizard">
+                                                <div class="form-body">
+                                                    <ul class="nav nav-pills nav-justified steps">
+                                                        <li class="active">
+                                                            <a href="#tab1" data-toggle="tab" class="step" aria-expanded="true">
+                                                                <span class="number"> 1 </span>
+                                                                <span class="desc">
+                                                                    <i class="fa fa-check"></i> Program Setup </span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#tab2" data-toggle="tab" class="step">
+                                                                <span class="number"> 2 </span>
+                                                                <span class="desc">
+                                                                    <i class="fa fa-check"></i> Problem Selection </span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#tab3" data-toggle="tab" class="step active">
+                                                                <span class="number"> 3 </span>
+                                                                <span class="desc">
+                                                                    <i class="fa fa-check"></i> Performance Indicators </span>
+                                                            </a>
+                                                        </li>
+                                                        <!--                                                        <li>
+                                                                                                                    <a href="#tab4" data-toggle="tab" class="step">
+                                                                                                                        <span class="number"> 4 </span>
+                                                                                                                        <span class="desc">
+                                                                                                                            <i class="fa fa-check"></i> Confirm </span>
+                                                                                                                    </a>
+                                                                                                                </li>-->
+                                                    </ul>
+                                                    <div id="bar" class="progress">
+                                                        <div class="progress-bar progress-bar-striped progress-bar-aqua active"  aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
 
-                                        <div class="form-group">
-                                            <label for="projectname" class="control-label">Program Name:</label>
-                                            <input type="text" class="form-control" name="projectname" id="projectname" placeholder="Name...">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Type</label>
-                                            <select class="form-control">
-                                                <option>Technology</option>
-                                                <option>Training</option>
-                                                <option>Practices</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Date range:</label>
+                                                    </div>                 
+                                                    <div class="tab-content">
+                                                        <div class="tab-pane active" id="tab1">
+                                                            <h3 class="block">Provide the Program details</h3>
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-3">Program Name
+                                                                    <span class="required" aria-required="true"> * </span>
+                                                                </label>
+                                                                <div class="col-md-4">
+                                                                    <input type="text" class="form-control" name="projectname" id="projectname" placeholder="Name...">
 
-                                            <div class="input-group">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-calendar"></i>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-3">Type
+                                                                    <span class="required" aria-required="true"> * </span>
+                                                                </label>
+                                                                <div class="col-md-4">
+                                                                    <select class="form-control">
+                                                                        <option>Technology</option>
+                                                                        <option>Training</option>
+                                                                        <option>Practices</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-3">Program Duration
+                                                                    <span class="required" aria-required="true"> * </span>
+                                                                </label>
+                                                                <div class="col-md-4">
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-addon">
+                                                                            <i class="fa fa-calendar"></i>
+                                                                        </div>
+                                                                        <input type="text" class="form-control reservation pull-right" name="reservation" id="reservation">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-3">Description
+                                                                    <span class="required" aria-required="true"> * </span>
+                                                                </label>
+                                                                <div class="col-md-4">
+                                                                    <textarea class="form-control" name="Description" rows="2"  placeholder="Enter ..."></textarea>
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-offset-9 col-md-9 pull-right">
+                                                                <a class="btn btn-outline green button-next"> Continue
+                                                                    <i class="fa fa-angle-right"></i>
+                                                                </a>
+
+                                                            </div>
+
+
+                                                        </div>
+                                                        <div class="tab-pane" id="tab2">
+                                                            <h3 class="block">Program is aimed to solve:</h3>
+
+                                                            <table id="probTable" class="table  dispTable table-hover" cellspacing="0" width="100%">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th></th>
+                                                                        <th>Problem</th>
+                                                                        <th>Description</th>
+                                                                        <th>Status</th>
+                                                                        <th>Type</th>
+                                                                        <th># Aff. Farms</th>
+                                                                        <th># Solutions</th>
+                                                                    </tr>
+                                                                </thead>
+
+                                                            </table>
+                                                            <div class="col-md-offset-9 col-md-9 pull-right">
+
+                                                                <a class="btn btn-outline green button-next"> Continue
+                                                                    <i class="fa fa-angle-right"></i>
+                                                                </a>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="tab-pane" id="tab3">
+                                                            <h3 class="block">Input Performance Indicators</h3>
+                                                            <input id="kpi_year" name="kpi_year" class="form-control hidden" />
+                                                            <input id="tYears" name="tYears" class="form-control hidden" />
+                                                            <table class = "table table-bordered bull" id = "listOfTargets">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th style="width: 30%">Performance Indicator</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>                      
+                                                                </tbody>
+
+
+                                                            </table>
+                                                            <div class="col-md-2 pull-right">
+                                                                <button  class="btn btn-danger"  type="button" id ="adddRow"><span class = "glyphicon glyphicon-plus"></span> Row</button>
+                                                            </div>
+                                                            <br/>
+
+
+
+                                                            <div class="col-md-offset-9 col-md-9 pull-right">
+                                                                <a  class="btn default button-previous" >
+                                                                    <i class="fa fa-angle-left"></i> Back </a>
+                                                                <button class="btn green button-submit"  form="submit_form" value="submit">Submit  <i class="fa fa-check"></i></button>
+
+                                                            </div>
+                                                        </div>
+                                                        <!--                                                        <div class="tab-pane" id="tab4">
+                                                                                                                    <div style="float:right">
+                                                                                                                        <input type='button' class='btn button-next' name='next' value='Next' />
+                                                                                                                    </div>
+                                                                                                                    <div style="float:left">
+                                                                                                                        <input type='button' class='btn button-previous' name='previous' value='Previous' />
+                                                                                                                    </div>
+                                                                                                                </div>-->
+                                                    </div>
                                                 </div>
-                                                <input type="text" class="form-control reservation pull-right" name="reservation" id="reservation">
+
                                             </div>
-                                            <!-- /.input group -->
-                                        </div>
-                                      
-
-
-                                        <div class="form-group">
-                                            <label>Description</label>
-                                            <textarea class="form-control" name="Description" rows="2"  placeholder="Enter ..."></textarea>
-                                        </div>
-
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6" > 
-                                <div class="box box-info">
-                                    <div class="box-header with-border">
-                                        <h1 class="box-title">Problems List(change COUNTER to brgy)</h1>
-                                        <div class="box-tools pull-right">
-                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                        </div>
+                                        </form>
                                     </div>
 
-                                    <div class="box-body">
-                                        <table id="probTable" class="table  dispTable table-hover" cellspacing="0" width="100%">
-                                            <thead>
-                                                <tr>
-                                                    <th><input name="select_all" value="1" id="probTable-select-all" type="checkbox" /></th>
-                                                    <th>Problem</th>
-                                                    <th>Description</th>
-                                                    <th>Status</th>
-                                                    <th>Type</th>
-                                                    <th># brgy</th>
-                                                </tr>
-                                            </thead>
 
-                                        </table>
-                                    </div>
-
-                                </div>
-                            </div> 
-
-
-                            <div class="col-md-12" > 
-                                <div class="box box-info">
-                                    <div class="box-header with-border">
-                                        <h1 class="box-title">Key Performance Indicators</h1>
-                                        <div class="box-tools pull-right">
-                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                        </div>
-                                    </div>
-                                    <div class="box-body">
-                                        <table class = "table table-bordered bull" id = "listOfItems">
-                                            <thead>
-                                                <tr>
-                                                    <th style="width: 30%">Performance Indicator</th>
-                                                    <th>2016</th>
-                                                    <th>2017</th>
-                                                    <th>2018</th>
-                                                    <th></th>
-
-                                                </tr>
-                                            </thead>
-                                            <tbody>                      
-                                            </tbody>
-                                        </table>
-
-                                        <br/>
-                                        <button  class="btn btn-danger  pull-right" style="width: 8%"  id ="addRow"><span class = "glyphicon glyphicon-plus"></span> Row</button>
-
-                                    </div>
 
                                 </div>
                             </div>
-                            <div class="col-md-8 pun">                   
-                                <p><button class="btn btn-success btn-block pull-right " style="width: 50%; height: 6%" value="submit">Submit</button></p>
-                            </div>
-                        </form>
+                        </div>
                     </div>
                 </section>
 
@@ -151,7 +217,9 @@
 
         <script type="text/javascript" src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
-
+        <script src="plugins/formWiz/jquery.bootstrap.wizard.js"></script>
+        <script src="plugins/select2/select2.full.min.js"></script>
+        <!--<script src="plugins/formWiz/prettify.js"></script>-->
         <script src="plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
         <script type="text/javascript" src="plugins/datatable/dataTables.checkboxes.min.js"></script>
@@ -161,7 +229,75 @@
         <script src="plugins/daterangepicker/moment.min.js"></script>
         <script src="plugins/daterangepicker/daterangepicker.js"></script>
         <script src="plugins/datepicker/bootstrap-datepicker.js"></script>
+
+
         <script src="dist/js/app.min.js"></script>
+
+        <script>
+
+            $(document).ready(function () {
+
+                var chckr = false;
+
+                $('#rootwizard').bootstrapWizard({
+                    onTabClick: function (tab, navigation, index) {
+                        return false;
+                    },
+                    onTabShow: function (tab, navigation, index) {
+                        if (index === 1 && chckr === false) {
+                            chckr = true;
+                            var x = document.getElementById('reservation').value.split('-');
+                            var ini = x[0].split('/');
+                            var end = x[1].split('/');
+
+                            ival = ini[2];
+                            fval = end[2];
+
+                            count += fval - ival;
+
+                            for (var b = 0; b <= count; b++) {
+
+                                $('#listOfTargets tr:last').append("<th>" + (ival * 1 + b) + "</th>");
+                            }
+                            $('#listOfTargets tr:last').append("<th></th>");
+
+
+//add counter and initial val to form
+                            document.getElementById("kpi_year").value = ival;
+                            document.getElementById("tYears").value = count;
+
+
+                        }
+
+                        var $total = navigation.find('li').length;
+                        var $current = index + 1;
+                        var $percent = ($current / $total) * 100;
+                        $('#rootwizard .progress-bar').css({width: $percent + '%'});
+                    },
+                    'nextSelector': '.button-next', 'previousSelector': '.button-previous'
+                });
+
+
+                $("#adddRow").on("click", function () {
+                    var rowz = "";
+                    for (var b = 0; b <= count; b++) {
+
+                        rowz += "<td><input class='form-control' name = 'y" + rowNum + "[]'  required/></td>";
+                    }
+
+                    $('#listOfTargets tbody:last').append("<tr>\n\
+                                  <td><input class='form-control' style='width: 100%' name = 'kpis" + rowNum + "'  required/></td>\n\\n\
+                                        " + rowz + " \n\
+                    //<td id='deletedrow'><div class='glyphicon glyphicon-remove'></div></td> \n\
+        </tr>");
+
+                    rowNum++;
+
+                });
+
+            });
+
+        </script>
         <script>
             $(function () {
 
@@ -182,13 +318,58 @@
 
             });
         </script>
+        <!--        <script>
+        
+                    var rowNum = 1;
+        
+        
+                    $('#listOfItems').ready(function () {
+                        $("#listOfItems").on('click', '#deleterow', function () {
+                            var $killrow = $(this).parent('tr');
+                            $killrow.addClass("danger");
+                            $killrow.fadeOut(1000, function () {
+                                $(this).remove();
+                            });
+                        });
+                    });
+        
+        
+                    $(document).ready(function () {
+                        $('#listOfItems tbody:last').append("<tr>\n\
+                                              <td><input class='form-control' style='width: 100%' name = 'kpi" + rowNum + "' value='Hectares rehabilitated' required/></td>\n\
+                                            <td><input class='form-control' name = 'y" + rowNum + "[]' value='700' required/></td>\n\
+                                            <td><input class='form-control'  name = 'y" + rowNum + "[]' value='20000' required/></td>\n\
+                                            <td><input class='form-control' name = 'y" + rowNum + "[]' value='20000' /></td>\n\
+                                            <td id='deleterow'><div class='glyphicon glyphicon-remove'></div></td> \n\
+                </tr>");
+        
+                        rowNum++;
+        
+                        $("#addRow").on("click", function () {
+        
+                            $('#listOfItems tbody:last').append("<tr>\n\
+                                          <td><input class='form-control' style='width: 100%' name = 'kpi" + rowNum + "'  required/></td>\n\
+                                            <td><input class='form-control' name = 'y" + rowNum + "[]'  required/></td>\n\
+                                            <td><input class='form-control'  name = 'y" + rowNum + "[]' required/></td>\n\
+                                            <td><input class='form-control' name = 'y" + rowNum + "[]'  /></td>\n\
+                                            <td id='deleterow'><div class='glyphicon glyphicon-remove'></div></td> \n\
+                                             </tr>");
+                            rowNum++;
+        
+                        });
+        
+                    });
+        
+        
+        
+                </script>-->
         <script>
 
             var rowNum = 1;
 
 
-            $('#listOfItems').ready(function () {
-                $("#listOfItems").on('click', '#deleterow', function () {
+            $('#listOfTargets').ready(function () {
+                $("#listOfTargets").on('click', '#deletedrow', function () {
                     var $killrow = $(this).parent('tr');
                     $killrow.addClass("danger");
                     $killrow.fadeOut(1000, function () {
@@ -196,33 +377,35 @@
                     });
                 });
             });
+            var ival = 0;
+            var fval = 0;
+            var count = 0;
+            $("#addcolumn").on("click", function () {
+                var x = document.getElementById('reservation').value.split('-');
+                var ini = x[0].split('/');
+                var end = x[1].split('/');
+
+                ival = ini[2];
+                fval = end[2];
+
+                count += fval - ival;
+
+                for (var b = 0; b <= count; b++) {
+
+                    $('#listOfTargets tr:last').append("<th>" + (ival * 1 + b) + "</th>");
+                }
+                $('#listOfTargets tr:last').append("<th></th>");
 
 
-            $(document).ready(function () {
-                $('#listOfItems tbody:last').append("<tr>\n\
-                                      <td><input class='form-control' style='width: 100%' name = 'kpi" + rowNum + "' value='Hectares rehabilitated' required/></td>\n\
-                                    <td><input class='form-control' name = 'y" + rowNum + "[]' value='700' required/></td>\n\
-                                    <td><input class='form-control'  name = 'y" + rowNum + "[]' value='20000' required/></td>\n\
-                                    <td><input class='form-control' name = 'y" + rowNum + "[]' value='20000' /></td>\n\
-                                    <td id='deleterow'><div class='glyphicon glyphicon-remove'></div></td> \n\
-        </tr>");
-       
-                rowNum++;
+//add counter and initial val to form
+                document.getElementById("kpi_year").value = ival;
+                document.getElementById("tYears").value = count;
 
-                $("#addRow").on("click", function () {
-
-                    $('#listOfItems tbody:last').append("<tr>\n\
-                                  <td><input class='form-control' style='width: 100%' name = 'kpi" + rowNum + "'  required/></td>\n\
-                                    <td><input class='form-control' name = 'y" + rowNum + "[]'  required/></td>\n\
-                                    <td><input class='form-control'  name = 'y" + rowNum + "[]' required/></td>\n\
-                                    <td><input class='form-control' name = 'y" + rowNum + "[]'  /></td>\n\
-                                    <td id='deleterow'><div class='glyphicon glyphicon-remove'></div></td> \n\
-        </tr>");alert(rowNum);
-                    rowNum++;
-
-                });
 
             });
+
+
+
 
 
 
@@ -257,21 +440,7 @@
                     var form = this;
 
                     // Iterate over all checkboxes in the table
-                    table.$('input[type="checkbox"]').each(function () {
-                        // If checkbox doesn't exist in DOM
-                        if (!$.contains(document, this)) {
-                            // If checkbox is checked
-                            if (this.checked) {
-                                // Create a hidden element 
-                                $(form).append(
-                                        $('<input>')
-                                        .attr('type', 'hidden')
-                                        .attr('name', this.name)
-                                        .val(this.value)
-                                        );
-                            }
-                        }
-                    });
+//              
                     table1.$('input[type="checkbox"]').each(function () {
                         // If checkbox doesn't exist in DOM
                         if (!$.contains(document, this)) {
@@ -291,12 +460,12 @@
                 });
 
 
-                $('#probTable-select-all').on('click', function () {
-                    // Check/uncheck all checkboxes in the table
-                    var rows = table1.rows({'search': 'applied'}).nodes();
-                    $('input[type="checkbox"]', rows).prop('checked', this.checked);
-
-                });
+//                $('#probTable-select-all').on('click', function () {
+//                    // Check/uncheck all checkboxes in the table
+//                    var rows = table1.rows({'search': 'applied'}).nodes();
+//                    $('input[type="checkbox"]', rows).prop('checked', this.checked);
+//
+//                });
 
 
             });

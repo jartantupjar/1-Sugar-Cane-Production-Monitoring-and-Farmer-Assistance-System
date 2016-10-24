@@ -43,7 +43,7 @@ public class FarmsDB {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "update farms set district = ?, management_type = ? , address= ?, nitrogen= ?, phosporus= ?, potassium = ?, ph_level= ? "
+            String query = "update farms set district = ?, management_type = ? , address= ?, nitrogen= ?, phosphorus= ?, potassium = ?, ph_level= ? "
                     + "where owner = ? and farm_name = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, farm.getDistrict());
@@ -196,7 +196,7 @@ public class FarmsDB {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select id,ph_level,organic_matter,phosporus,potassium from soilanalysis s where id=?;";
+            String query = "select id,ph_level,organic_matter,phosphorus,potassium from soilanalysis s where id=?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
@@ -206,7 +206,7 @@ public class FarmsDB {
                 sa.setField_id(id);
                 sa.setPh_lvl(rs.getDouble("ph_level"));
                 sa.setOrganic_matter(rs.getDouble("organic_matter"));
-                sa.setPhosphorus(rs.getDouble("phosporus"));
+                sa.setPhosphorus(rs.getDouble("phosphorus"));
                 sa.setPotassium(rs.getDouble("potassium"));
 
             }
@@ -693,7 +693,7 @@ public class FarmsDB {
          for(int i=0;i<list.size();i++){
          if(list.get(i).equalsIgnoreCase("ph lvl"))  values+="ph_level=?" ;
        else if(list.get(i).equalsIgnoreCase("OM")) values+="organic_matter=?" ;
-       else if(list.get(i).equalsIgnoreCase("Phosphorus")) values+="phosporus=?" ;
+       else if(list.get(i).equalsIgnoreCase("Phosphorus")) values+="phosphorus=?" ;
        else if(list.get(i).equalsIgnoreCase("Potassium")) values+="potassium=?" ;
        if(list.size()>0&&i!=list.size()-1) values+=" and ";
         }

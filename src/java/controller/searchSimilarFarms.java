@@ -59,9 +59,10 @@ public class searchSimilarFarms extends BaseServlet {
                 ArrayList<String> obj = new ArrayList<>();
                // System.out.println("nope not empty");
                 obj.add(Integer.toString(farmlist.get(i).getId()));
+                obj.add(Integer.toString(farmlist.get(i).getId()));
                 obj.add(farmlist.get(i).getFarmer());
                 obj.add(farmlist.get(i).getBarangay());
-                 obj.add(farmlist.get(i).getMunicipality());
+                obj.add(farmlist.get(i).getMunicipality());
                 obj.add(Double.toString(farmlist.get(i).getYield()));
                 obj.add(Double.toString(farmlist.get(i).getDifYield()));
                 obj.add(Integer.toString(farmlist.get(i).getId()));

@@ -35,9 +35,9 @@ public class viewDistCropEstimate extends BaseServlet {
 
         HttpSession session = request.getSession();
        
-      
+         int year = Integer.parseInt(request.getParameter("year"));
 
-        ArrayList<cropEstimate> fct = estdb.viewDistrictEstimates(2015);
+        ArrayList<cropEstimate> fct = estdb.viewDistrictEstimates(year);
         
         JSONObject data = new JSONObject();
         JSONArray list = new JSONArray();
