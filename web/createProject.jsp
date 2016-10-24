@@ -6,13 +6,14 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>SRA | Home</title>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-        <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css"> 
+        
         <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker-bs3.css">
         <link rel="stylesheet" href="plugins/datepicker/datepicker3.css">
         <link rel="stylesheet" href="plugins/select2/select2.min.css">
         <!--<link rel="stylesheet" href="plugins/formWiz/custom.css">-->
         <link rel="stylesheet" href="plugins/formWiz/components.min.css">
         <link rel="stylesheet" href="plugins/formWiz/plugins.min.css">
+        <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
         <!--<link rel="stylesheet" href="plugins/formWiz/prettify.css">-->
 
     </head>
