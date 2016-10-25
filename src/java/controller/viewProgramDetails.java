@@ -32,7 +32,7 @@ public class viewProgramDetails extends BaseServlet {
         ArrayList<Problems> probList;
         ArrayList<programsKPI> kpilist;
         String name = request.getParameter("name");
-        ;
+     
         System.err.println("TODAYS user " + session.getAttribute("user"));
         System.err.println("TODAYS DATE " + session.getAttribute("todayDate"));
         Enumeration<String> attrNames = request.getAttributeNames();
@@ -43,8 +43,13 @@ public class viewProgramDetails extends BaseServlet {
         prog = progdb.viewProgDetails(name);
         probList = progdb.viewProgProb(name);
         kpilist = progdb.viewProg1Targets(name);
-        prog.settFarms(42);
-        prog.setProgress(42);
+//        prog.settFarms(42);
+        if(kpilist!=null){
+               prog.setProgress(progdb.viewProgramProgress(kpilist));
+        }else{
+            prog.setProgress(0);
+        }
+     
         session.setAttribute("progdet", prog);
         session.setAttribute("prob", probList);
         session.setAttribute("kpis", kpilist);

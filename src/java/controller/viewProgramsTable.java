@@ -37,11 +37,11 @@ public class viewProgramsTable extends BaseServlet {
                 ArrayList<String> obj = new ArrayList<String>();
 System.out.println(bct.get(i).getProg_name());
                 obj.add(bct.get(i).getProg_name());
-                
-               
-               obj.add(bct.get(i).getDate_created().toString());
+              
+               obj.add(bct.get(i).getDate_created().toString()+"-"+bct.get(i).getDate_end().toString());
                 obj.add(Integer.toString(bct.get(i).gettFarms()));
-                obj.add(Integer.toString(0));
+                   
+                obj.add(Double.toString(bct.get(i).getProgress()));
                 obj.add(bct.get(i).getProg_name());
 
                 list.add(obj);

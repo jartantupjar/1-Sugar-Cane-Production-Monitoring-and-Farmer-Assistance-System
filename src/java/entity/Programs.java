@@ -15,7 +15,8 @@ import java.util.Date;
 public class Programs {
     private String prog_name,type,description;
     private Date date_created, date_initial,date_end;
-    private int tFarms,progress;
+    private int tFarms;
+    private double progress;
     
   private ArrayList<String> probid;
     /**
@@ -133,15 +134,17 @@ public class Programs {
     /**
      * @return the progress
      */
-    public int getProgress() {
+    public double getProgress() {
         return progress;
     }
 
     /**
      * @param progress the progress to set
      */
-    public void setProgress(int progress) {
+    public void setProgress(double progress) {
         this.progress = progress;
     }
+
+
            
 }

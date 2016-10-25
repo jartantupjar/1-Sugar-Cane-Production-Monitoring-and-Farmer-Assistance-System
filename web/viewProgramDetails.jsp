@@ -94,7 +94,7 @@ current vs then diagram
                                                         <div class="progress-group">
 
                                                             <div class="">
-                                                                <div class="progress-bar progress-bar-green" style="width: ${progdet.progress}%">  <c:out value="${progdet.progress}"></c:out></div>
+                                                                <div class="progress-bar progress-bar-striped progress-bar-aqua active" style="width: ${progdet.progress}%">  <c:out value="${progdet.progress}"></c:out></div>
                                                             </div>
                                                         </div> <!-- closer of progress bars -->  
                                                     </td>
@@ -155,10 +155,7 @@ current vs then diagram
                                                     <td><c:out value="${plist.prob_details}"></c:out></td>
                                                     </tr>
                                             </c:forEach>
-                                            <!--> <tr>
-                                                            <td>Overfertilization</td>
-                                                            <td>Requires training farmers about the effects and good practices </td>
-                                                        </tr>  <-->
+                                     
 
                                         </tbody>
 
@@ -248,7 +245,7 @@ current vs then diagram
                                                    
                                             </tbody>
                                         </table>
-                                        <button class="btn btn-success pull-right" style="width: 10%" value="submit" form="kpitable">Update</button>
+                                        <button class="btn btn-info pull-right" style="width: 10%" value="submit" form="kpitable">Update</button>
                                    </c:if>
                                                   </div>
 

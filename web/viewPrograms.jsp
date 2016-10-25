@@ -23,7 +23,7 @@
                 <section class="content">
                     <div class="row">
 
-                        <div class="col-md-10"> 
+                        <div class="col-md-12"> 
                             <div class="box box-info">
                                 <div class="box-header with-border">
                                     <!--   <h1 class="box-title">Brgy List</h1> -->
@@ -86,7 +86,14 @@
                         {
                             'targets': 3,
                             'render': function (data, type, full, meta) {
-                                return '<span class="badge bg-yellow" style="width: 30%">' + data + '%</span>';
+                                if(data>=75){
+                                      return '<span class="badge bg-green" style="width:40%">' + data + '%</span>';
+                                }else if(data>=50){
+                                      return '<span class="badge bg-aqua" style="width:40%">' + data + '%</span>';
+                                }else{
+                                   return '<span class="badge bg-red" style="width:40%">' + data + '%</span>';   
+                                }
+                              
                             }
                         },
                         {

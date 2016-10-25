@@ -284,7 +284,7 @@ public class FarmsDB {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select cs.year,cs.Fields_id,cs.variety,cs.crop_class,cs.texture,cs.farming_system,cs.topography,cs.furrow_distance,cs.planting_density,cs.harvest_date,cs.date_millable,cs.num_millable,cs.avg_millable_stool,cs.brix,cs.stalk_length,cs.diameter,cs.weight from cropvalidationsurveys cs where Fields_id=? and year=?;";
+            String query = "select cs.year,cs.Fields_id,cs.variety,cs.crop_class,cs.texture,cs.farming_system,cs.topography,cs.furrow_distance,cs.planting_density,cs.num_millable,cs.avg_millable_stool,cs.brix,cs.stalk_length,cs.diameter,cs.weight from cropvalidationsurveys cs where Fields_id=? and year=?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, id);
                pstmt.setInt(2, year);
@@ -303,8 +303,8 @@ public class FarmsDB {
                  cv.setTopography(rs.getString("topography"));
                  cv.setFurrow_distance(rs.getDouble("furrow_distance"));
                  cv.setPlanting_density(rs.getDouble("planting_density"));
-                 cv.setHarvest_date(rs.getDate("harvest_date"));
-                 cv.setDate_millable(rs.getDate("date_millable"));
+//                 cv.setHarvest_date(rs.getDate("harvest_date"));
+//                 cv.setDate_millable(rs.getDate("date_millable"));
                  cv.setNum_millable(rs.getInt("num_millable"));
                  cv.setAvg_millable_stool(rs.getDouble("avg_millable_stool"));
                  cv.setBrix(rs.getDouble("brix"));
