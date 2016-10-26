@@ -31,7 +31,7 @@ public class viewProgramDetails extends BaseServlet {
         Programs prog;
         ArrayList<Problems> probList;
         ArrayList<programsKPI> kpilist;
-        String name = request.getParameter("name");
+        String name = request.getParameter("name").trim();
      
         System.err.println("TODAYS user " + session.getAttribute("user"));
         System.err.println("TODAYS DATE " + session.getAttribute("todayDate"));
@@ -39,8 +39,10 @@ public class viewProgramDetails extends BaseServlet {
         while (attrNames.hasMoreElements()) {
             System.out.println(attrNames);
         }
-
+        System.out.println(name);
+//
         prog = progdb.viewProgDetails(name);
+        if(prog==null) System.out.println("is null bruh");
         probList = progdb.viewProgProb(name);
         kpilist = progdb.viewProg1Targets(name);
 //        prog.settFarms(42);

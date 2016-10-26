@@ -92,35 +92,109 @@ public class ProgramsDB {
         cal.setTime(prog.getDate_initial());
         int year = cal.get(Calendar.YEAR);
         // get production method per year (2 instances) 1 pre and 1 post
-        ArrayList<cropEstimate> prce = new ArrayList<>();
-        ArrayList<cropEstimate> poce = new ArrayList<>();
-        cropEstimate test = new cropEstimate();
-        test.setYear(2012);
-        test.setActual(18181);
-        prce.add(test);
-        test = new cropEstimate();
-        test.setYear(2013);
-        test.setActual(15000);
-        prce.add(test);
-        test = new cropEstimate();
-        test.setYear(2014);
-        test.setActual(12159);
-        prce.add(test);
-        test = new cropEstimate();
-        test.setYear(2015);
-        test.setActual(16159);
-        poce.add(test);
-        test = new cropEstimate();
-        test.setYear(2016);
-        test.setActual(18532);
-        poce.add(test);
-
+        ArrayList<cropEstimate> prce = getProgramPreProduction(year,progname);
+        ArrayList<cropEstimate> poce = getProgramPostProduction(year,progname);
         ArrayList<ArrayList<cropEstimate>> list = new ArrayList();
         list.add(prce);
         list.add(poce);
         return list;
     }
+ public ArrayList<cropEstimate> getProgramPreProduction(int year,String progname) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select sum(hp.tons_cane)as production, hp.year\n" +
+"from historicalproduction hp\n" +
+"where hp.Farmers_name in (\n" +
+"						select Farmers_name\n" +
+"                        from fields\n" +
+"                        where id in \n" +
+"								(\n" +
+"                                select Fields_id\n" +
+"                                from `Problems-Fields`\n" +
+"                                where Problems_id in (\n" +
+"													select Problems_id\n" +
+"                                                    from `Programs-Problems`\n" +
+"                                                    where Programs_name = ? \n" +
+"														)\n" +
+"                                )\n" +
+"						) and year <? \n" +
+"group by year;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, progname);
+            pstmt.setInt(2, year);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<cropEstimate> list = null;
 
+            if (rs.next()) {
+                list = new ArrayList<>();
+               
+                do {
+                      cropEstimate ce=new cropEstimate();
+                    ce.setYear(rs.getInt("year"));
+                    ce.setActual(rs.getDouble("production"));
+                    list.add(ce);
+                } while (rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(CropEstimateDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
+ public ArrayList<cropEstimate> getProgramPostProduction(int year,String progname) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select sum(hp.tons_cane)as production, hp.year\n" +
+"from historicalproduction hp\n" +
+"where hp.Farmers_name in (\n" +
+"						select Farmers_name\n" +
+"                        from fields\n" +
+"                        where id in \n" +
+"								(\n" +
+"                                select Fields_id\n" +
+"                                from `Problems-Fields`\n" +
+"                                where Problems_id in (\n" +
+"													select Problems_id\n" +
+"                                                    from `Programs-Problems`\n" +
+"                                                    where Programs_name = ? \n" +
+"														)\n" +
+"                                )\n" +
+"						) and year >=? \n" +
+"group by year;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, progname);
+            pstmt.setInt(2, year);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<cropEstimate> list = null;
+
+            if (rs.next()) {
+                list = new ArrayList<>();
+               
+                do {
+                      cropEstimate ce=new cropEstimate();
+                    ce.setYear(rs.getInt("year"));
+                    ce.setActual(rs.getDouble("production"));
+                    list.add(ce);
+                } while (rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(CropEstimateDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
     public ArrayList<Integer> getAllDistinctYrsHistProd() {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
@@ -287,7 +361,7 @@ public class ProgramsDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select pg.name,pg.date_created,pg.date_initial,pg.date_end,pg.description,pg.status,count(pf.fields_id) as count from programs pg join `programs-problems` pp on pg.name=pp.programs_name join `problems-fields` pf on pp.problems_id=pf.problems_id where name=? group by pg.name;";
+            String query = "select pg.name,pg.date_created,pg.date_initial,pg.date_end,pg.description,pg.status,count(pf.fields_id) as count from programs pg join `programs-problems` pp on pg.name=pp.programs_name join `problems-fields` pf on pp.problems_id=pf.problems_id where pg.name=? group by pg.name;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, prog_name);
             ResultSet rs = pstmt.executeQuery();

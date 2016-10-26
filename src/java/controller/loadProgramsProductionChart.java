@@ -55,22 +55,26 @@ public class loadProgramsProductionChart extends BaseServlet {
                 //search for if it exists in loop
                 category.add(categ.get(i));
                 boolean chck=false;
-                for(int b=0;b<prce.size();b++){
+                if(prce!=null){
+                 for(int b=0;b<prce.size();b++){
                 if(categ.get(i)==prce.get(b).getYear()){
                    bar.add(prce.get(b).getActual());
                    chck=true;
                 }  
                 }
+                   }
                 if(chck==false){
                     bar.add(null);
                 }
                   boolean chck2=false;
+                    if(poce!=null){
                 for(int b=0;b<poce.size();b++){
                 if(categ.get(i)==poce.get(b).getYear()){
                    bar2.add(poce.get(b).getActual());
                    chck2=true;
                 }  
                 }
+                    }
                  if(chck2==false){
                     bar2.add(null);
                 }
