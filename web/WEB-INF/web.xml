@@ -176,6 +176,10 @@
         <servlet-name>loadProgramsProductionChart</servlet-name>
         <servlet-class>controller.loadProgramsProductionChart</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>loadTreeMapYearList</servlet-name>
+        <servlet-class>controller.loadTreeMapYearList</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
@@ -347,6 +351,10 @@
     <servlet-mapping>
         <servlet-name>loadProgramsProductionChart</servlet-name>
         <url-pattern>/loadProgramsProductionChart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>loadTreeMapYearList</servlet-name>
+        <url-pattern>/loadTreeMapYearList</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

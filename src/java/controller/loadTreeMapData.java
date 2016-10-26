@@ -22,7 +22,8 @@ public class loadTreeMapData extends BaseServlet {
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         ProductionDB proddb = new ProductionDB();
-        ArrayList<prodMunicipality> list = proddb.getProdMunicipalforYear(2015);
+           int tag = Integer.parseInt(request.getParameter("tag"));
+        ArrayList<prodMunicipality> list = proddb.getProdMunicipalforYear(tag);
         JSONObject data = new JSONObject();
 
         
@@ -37,33 +38,7 @@ public class loadTreeMapData extends BaseServlet {
             }
             data.put(list1.getMunicipal(), trial);
         }
-//        for (int x = 0; x < 3; x++) {
-//            JSONObject mdata = new JSONObject();
-//
-//            for (int i = 0; i < 3; i++) {
-//                JSONObject trial = new JSONObject();
-//                for (int y = 0; y < 3; y++) {
-//                    trial.put("farm" + y, y + 1);
-//                }
-//                mdata.put("barangay" + i, trial);
-//            }
-//            data.put("municipal" + x, mdata);
-//
-//        }
 
-//             for (int x = 0; x < 3; x++) {
-//                  JSONObject mdata = new JSONObject();
-//                 
-//            for (int i = 0; i < 3; i++) {
-//                JSONObject trial = new JSONObject();
-//                trial.put("farm1", 1);
-//                trial.put("farm2", 2);
-//                trial.put("farm3", 3);
-//                mdata.put("barangay"+i,trial);
-//            }
-//             data.put("municipal"+x, mdata);
-//            
-//             }
   
         response.setContentType("applications/json");
         response.setCharacterEncoding("utf-8");

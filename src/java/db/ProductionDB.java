@@ -26,7 +26,33 @@ import java.util.logging.Logger;
  * @author Bryll Joey Delfin
  */
 public class ProductionDB {
-    
+      public ArrayList<Integer> getDistinctHistProdYrs(int curyr) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select Distinct(year) from historicalproduction where year<=? order by year DESC;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, curyr);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<Integer> list = null;
+
+            if (rs.next()) {
+                list = new ArrayList<>();
+                do {
+                    list.add(rs.getInt("year"));
+                } while (rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(CropEstimateDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
     public  ArrayList<prodMunicipality> getProdMunicipalforYear(int year){
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
@@ -76,7 +102,7 @@ public class ProductionDB {
                 do {
                    ProdBarangay brgy= new ProdBarangay();
                    brgy.setBarangay(rs.getString("barangay"));
-                   //   System.out.println(brgy.getBarangay());
+                  System.out.println(brgy.getBarangay());
                    brgy.setFarmer(getProdFarmerforYear(pm,brgy));
                    list.add(brgy);
                 } while (rs.next());
@@ -110,7 +136,7 @@ public class ProductionDB {
                    Farmer farmer= new Farmer();
                    farmer.setName(rs.getString("farmers_name"));
                     //  System.out.println(farmer.getName());
-                   farmer.setProduction(rs.getDouble("tTons_cane"));
+                   farmer.setProduction(rs.getDouble("tTons_cane")+1);
                    list.add(farmer);
                 } while (rs.next());
             }
