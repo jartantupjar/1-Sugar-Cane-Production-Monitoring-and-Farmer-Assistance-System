@@ -12,8 +12,8 @@ import java.sql.Date;
  * @author Bryll Joey Delfin
  */
 public class Forum {
-    private String farmer,message,status,comment_User, comment_message, comment_Date ;
-    private Integer id , prob_id, counter;
+    private String farmer,message,status,comment_User, comment_message, comment_Date , title, id_and_status;
+    private Integer id , prob_id, counter, recom_id;
     private Date date_posted, date_started,date_ended;
 
     /**
@@ -182,6 +182,48 @@ public class Forum {
      */
     public void setComment_Date(String comment_Date) {
         this.comment_Date = comment_Date;
+    }
+
+    /**
+     * @return the recom_id
+     */
+    public Integer getRecom_id() {
+        return recom_id;
+    }
+
+    /**
+     * @param recom_id the recom_id to set
+     */
+    public void setRecom_id(Integer recom_id) {
+        this.recom_id = recom_id;
+    }
+
+    /**
+     * @return the title
+     */
+    public String getTitle() {
+        return title;
+    }
+
+    /**
+     * @param title the title to set
+     */
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    /**
+     * @return the id_and_status
+     */
+    public String getId_and_status() {
+        return id_and_status;
+    }
+
+    /**
+     * @param id_and_status the id_and_status to set
+     */
+    public void setId_and_status(String id_and_status) {
+        this.id_and_status = id_and_status;
     }
 
   }

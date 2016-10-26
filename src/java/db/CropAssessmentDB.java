@@ -24,9 +24,10 @@ public class CropAssessmentDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT * FROM weeklyestimate where weekofyear(week_ending) = ? and year = ?  ;";
+            String query = "SELECT * FROM weeklyestimate where id = ? and year = ?  ;";
             PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setInt(1, weekofyear);
+            int id = getWeeklyEstimateID(weekofyear, year);
+            pstmt.setInt(1, id);
             pstmt.setInt(2, year);
             ResultSet rs = pstmt.executeQuery();
             ArrayList<CropAssessment> cT = null;
@@ -56,10 +57,10 @@ public class CropAssessmentDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT sum(area) as 'previous_area',sum(actual) as 'previous_tc' FROM weeklyestimate where weekofyear(week_ending) < ? and year = ? ;";
+            String query = "SELECT sum(area) as 'previous_area',sum(actual) as 'previous_tc' FROM weeklyestimate where id < ? and year = ? ;";
             PreparedStatement pstmt = conn.prepareStatement(query);
-            weekofyear -- ; 
-            pstmt.setInt(1, weekofyear);
+            int id = getWeeklyEstimateID(weekofyear, year);
+            pstmt.setInt(1, id);
             pstmt.setInt(2, year);
             ResultSet rs = pstmt.executeQuery();
             ArrayList<CropAssessment> cT = null;
@@ -70,6 +71,62 @@ public class CropAssessmentDB {
                     c = new CropAssessment();
                     c.setPrevTons_Cane(rs.getDouble("previous_tc"));
                     c.setPrevArea(rs.getDouble("previous_area"));
+                    cT.add(c);
+                    
+                } while (rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            
+            return cT;
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(CropAssessmentDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public Integer getWeeklyEstimateID(int weekofyear, int year) {
+        try {
+            // put functions here : previous week production, this week production
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT * FROM weeklyestimate where weekofyear(week_ending) = ? and year = ?  ;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, weekofyear);
+            pstmt.setInt(2, year);
+            ResultSet rs = pstmt.executeQuery();
+            int id = 0;
+            CropAssessment c;
+            if (rs.next()) { 
+                do {
+                    id = rs.getInt("id");
+                } while (rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            
+            return id;
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(CropAssessmentDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public ArrayList<CropAssessment> getEstimatedProduction(int year) {
+        try {
+            // put functions here : previous week production, this week production
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "Select * from weeklyestimate where year = ?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, year);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<CropAssessment> cT = null;
+            CropAssessment c;
+            if (rs.next()) { 
+                 cT = new ArrayList<>();
+                do {
+                    c = new CropAssessment();
                     cT.add(c);
                 } while (rs.next());
             }
@@ -83,4 +140,5 @@ public class CropAssessmentDB {
         }
         return null;
     }
+    
 }

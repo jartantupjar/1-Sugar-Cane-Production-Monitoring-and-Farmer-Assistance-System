@@ -16,8 +16,8 @@
   
   <link rel="stylesheet" href="plugins/fullcalendar/fullcalendar.min.css">
   <link rel="stylesheet" href="plugins/fullcalendar/fullcalendar.print.css" media="print">
-  <link rel="stylesheet" href="bootstrap/css/bootstrap-year-calendar.min.css">
-  <link rel="stylesheet" href="bootstrap/css/bootstrap-year-calendar.css">
+  <link rel="stylesheet" src="bootstrap/css/bootstrap-year-calendar.min.css">
+  <link rel="stylesheet" src="bootstrap/css/bootstrap-year-calendar.css">
   <!-- Theme style -->
 
 

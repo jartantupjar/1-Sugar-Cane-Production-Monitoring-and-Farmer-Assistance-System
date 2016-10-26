@@ -80,7 +80,7 @@
                             'targets': 6,
                         
                             'render': function (data, type, full, meta) {
-                                return '<a href="viewProbDetails?id=' + data + '" class="btn btn-primary btn-xs">More Details</a>';
+                                return '<a href="viewProbDetails?id=' + data + '" class="btn btn-primary">More Details</a>';
                             }
                             
                         }]

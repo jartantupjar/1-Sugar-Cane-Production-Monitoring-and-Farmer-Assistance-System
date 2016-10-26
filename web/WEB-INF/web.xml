@@ -139,7 +139,6 @@
     <servlet>
         <servlet-name>viewWeatherTrends</servlet-name>
         <servlet-class>controller.viewWeatherTrends</servlet-class>
-
     </servlet>
     <servlet>
         <servlet-name>viewSendRec</servlet-name>
@@ -165,14 +164,18 @@
         <servlet-name>loadCropEstYearList</servlet-name>
         <servlet-class>controller.loadCropEstYearList</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ApprovePost</servlet-name>
+        <servlet-class>controller.ApprovePost</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
     </servlet-mapping>
-        <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>viewFarmerProfile</servlet-name>
         <url-pattern>/viewFarmerProfile</url-pattern>
-        </servlet-mapping>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>viewWeatherTrends</servlet-name>
         <url-pattern>/viewWeatherTrends</url-pattern>
@@ -324,6 +327,10 @@
     <servlet-mapping>
         <servlet-name>loadCropEstYearList</servlet-name>
         <url-pattern>/loadCropEstYearList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ApprovePost</servlet-name>
+        <url-pattern>/ApprovePost</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

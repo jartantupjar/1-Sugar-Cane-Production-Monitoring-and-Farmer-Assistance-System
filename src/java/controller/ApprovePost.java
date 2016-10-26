@@ -5,24 +5,18 @@
  */
 package controller;
 
-import db.ForumDB;
-import entity.Forum;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Bryll Joey Delfin
  */
-public class viewPostDetails extends HttpServlet {
+public class ApprovePost extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,33 +31,8 @@ public class viewPostDetails extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            Forum item = new Forum();
-            ForumDB fdb = new ForumDB();
-            String line = request.getParameter("id");
-            String[] list = line.split(",");
-            item.setId(Integer.parseInt(list[0]));
-            ArrayList<Forum> comments = new ArrayList<>();
-            Forum post  = new Forum();
-            post = fdb.getForumDetail(item.getId());
-            comments =  fdb.getCommentDetails(item.getId());
-            for(int i= 0 ; i<comments.size();i++){
-                System.out.println("Farmer : " +comments.get(i).getComment_User() );
-                System.out.println("Message : " + comments.get(i).getComment_message() );
-            }
-            
-            if(post!=null){
-                HttpSession session = request.getSession();
-                session.setAttribute("comments", comments);
-                session.setAttribute("post", post);
-                ServletContext context = getServletContext();
-                RequestDispatcher rd = context.getRequestDispatcher("/Post.jsp");
-                rd.forward(request, response);
-            }
-            else{
-                ServletContext context = getServletContext();
-                RequestDispatcher rd = context.getRequestDispatcher("/Homepage.jsp");
-                rd.forward(request, response);
-            }
+            /* TODO output your page here. You may use following sample code. */
+           
         }
     }
 

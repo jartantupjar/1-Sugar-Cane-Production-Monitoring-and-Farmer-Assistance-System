@@ -49,6 +49,7 @@ public class Login extends HttpServlet {
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(todayDate);
                 int week_of_year = cal.get(Calendar.WEEK_OF_YEAR);
+                System.out.println(week_of_year);
                 int year = cal.get(Calendar.YEAR);
                 DecimalFormat df = new DecimalFormat("#.##");   
                 currT = cadb.getCropAssessmentReportForTheWeek(week_of_year, year);

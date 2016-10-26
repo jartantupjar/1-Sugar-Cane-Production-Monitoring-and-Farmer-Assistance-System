@@ -47,11 +47,28 @@ public class viewForumList extends HttpServlet {
                for(int i = 0; i< fT.size(); i++){
                    ArrayList<String> obj = new ArrayList<String>();
                    
-                   obj.add(fT.get(i).getId().toString());
+                   obj.add(fT.get(i).getTitle());
                    obj.add(fT.get(i).getFarmer());
-                   obj.add(fT.get(i).getId().toString());
+                   
+                   
+                   if(fT.get(i).getStatus().equalsIgnoreCase("Accepted")){
+                       if(fT.get(i).getProb_id()!= null){
+                           Integer counter = fdb.getProblemCounter(fT.get(i).getProb_id());
+                           obj.add(counter.toString());
+                       }
+                       else if(fT.get(i).getRecom_id() != null){
+                         Integer counter = fdb.getRecommendationCounter(fT.get(i).getRecom_id());
+                          obj.add(counter.toString());
+                       }
+                   }
+                   else{
+                      obj.add("N/A");
+                   }
+                   
+                   
                    obj.add(fT.get(i).getStatus());
                    obj.add(fT.get(i).getDate_posted().toString());
+                   obj.add(fT.get(i).getId_and_status());
                    list.add(obj);
                } 
             }

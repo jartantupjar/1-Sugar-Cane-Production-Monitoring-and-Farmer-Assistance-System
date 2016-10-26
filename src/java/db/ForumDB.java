@@ -34,12 +34,17 @@ public class ForumDB {
                  fT = new ArrayList<Forum>();
                 do {
                     f = new Forum();
+                    f.setTitle(rs.getString("title"));
                     f.setId(rs.getInt("id"));
                     f.setFarmer(rs.getString("Farmers_name"));
                     f.setMessage(rs.getString("message"));
                     f.setDate_started(rs.getDate("date_started"));
                     f.setDate_posted(rs.getDate("date_posted"));
-                    f.setStatus(rs.getString("Post_Status_status"));
+                    f.setStatus(rs.getString("status"));
+                    f.setRecom_id(rs.getInt("Recommendations_id"));
+                    f.setProb_id(rs.getInt("Problems_id"));
+                    String line = f.getId()+","+f.getStatus();
+                    f.setId_and_status(line);
                     fT.add(f);
                 } while (rs.next());
             }
@@ -53,7 +58,7 @@ public class ForumDB {
         }
         return null;
     }
-    public ArrayList<Forum> getForumDetails(Integer id){
+    public ArrayList<Forum> getCommentDetails(Integer id){
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
@@ -63,9 +68,9 @@ public class ForumDB {
             ResultSet rs = pstmt.executeQuery();
             ArrayList<Forum> fT = new ArrayList<Forum>();
             Forum f = null;
-                if (rs.next()) {
-                    f = new Forum();
+                if (rs.next()) {   
                     do {
+                        f = new Forum();
                         f.setId(rs.getInt("id"));
                         f.setFarmer(rs.getString("Farmers_name"));
                         f.setMessage(rs.getString("message"));
@@ -77,6 +82,8 @@ public class ForumDB {
                             f.setComment_message(rs.getString("comments"));
                             f.setComment_Date(rs.getString("date_comment"));
                         }
+                        
+                        System.out.println(f.getComment_User()+ " USERS DATABASE");
                         fT.add(f);
                     } while (rs.next());
                 }
@@ -93,20 +100,32 @@ public class ForumDB {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT p.id,p.Farmers_name,p.message,p.date_started,p.date_posted,c.Farmers_name as 'commentor',c.message as 'comments',c.date as 'date_comment' FROM posts p left join comments c on p.id = c.Posts_id where p.id = ? ;";
+            String query = "SELECT p.id,p.Farmers_name,p.message,p.date_started,p.date_posted, p.status, p.Recommendations_id, p.Problems_id ,c.Farmers_name as 'commentor',c.message as 'comments',c.date as 'date_comment' FROM posts p left join comments c on p.id = c.Posts_id where p.id = ? ; ;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1,id);
             ResultSet rs = pstmt.executeQuery();
             ArrayList<Forum> fT = new ArrayList<Forum>();
             Forum f = null;
                 if (rs.next()) {
-                    f = new Forum();
+                    
                     do {
+                        f = new Forum();
                         f.setId(rs.getInt("id"));
                         f.setFarmer(rs.getString("Farmers_name"));
                         f.setMessage(rs.getString("message"));
                         f.setDate_started(rs.getDate("date_started"));
                         f.setDate_posted(rs.getDate("date_posted"));
+                        f.setStatus(rs.getString("status"));
+                        f.setProb_id(rs.getInt("Problems_id"));
+                        f.setRecom_id(rs.getInt("Recommendations_id"));
+                        String test = rs.getString("commentor");
+                        if(test!=null){
+                            f.setComment_User(test);
+                            f.setComment_message(rs.getString("comments"));
+                            f.setComment_Date(rs.getString("date_comment"));
+                        }
+                        String line = f.getId()+","+f.getStatus();
+                        f.setId_and_status(line);
                         fT.add(f);
                     } while (rs.next());
                 }
@@ -118,6 +137,48 @@ public class ForumDB {
             Logger.getLogger(ForumDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    public int getProblemCounter(Integer problem_id){
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT count(pf.Fields_id) as `counter` from posts p join problems pr on p.Problems_id = pr.id join `problems-fields` pf on pr.id = pf.Problems_id where pf.Problems_id = ? ;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1,problem_id);
+            ResultSet rs = pstmt.executeQuery();
+            Integer count = 0;
+                if (rs.next()) {
+                        count += rs.getInt("counter");
+                }
+                rs.close();
+                pstmt.close();
+                conn.close();            
+            return count;
+                 }catch (SQLException ex) {
+            Logger.getLogger(ForumDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+    public int getRecommendationCounter(Integer recom_id){
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "Select count(rf.Fields_id) as `counter` from posts p join recommendations r on p.Recommendations_id = r.id join `recommendations-fields` rf on r.id = rf.Recommendations_id where rf.id = ? ;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1,recom_id);
+            ResultSet rs = pstmt.executeQuery();
+            Integer count = 0;
+                if (rs.next()){ 
+                        count += rs.getInt("counter");    
+                }
+                rs.close();
+                pstmt.close();
+                conn.close();            
+            return count;
+                 }catch (SQLException ex) {
+            Logger.getLogger(ForumDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
     }
 }
 

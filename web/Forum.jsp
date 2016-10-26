@@ -46,6 +46,7 @@
                                             <th>Counter</th>
                                             <th>Status</th>
                                             <th>Date</th>
+                                            <th style="width:5%">Details</th>
                                         </tr>
                                     </thead>
                                 </table>  
@@ -61,6 +62,7 @@
                                             <th>Counter</th>
                                             <th>Status</th>
                                             <th>Date</th>
+                                            <th style="width:5%">Details</th>
                                         </tr>
                                     </thead>
                                 </table>
@@ -76,6 +78,7 @@
                                             <th>Counter</th>
                                             <th>Status</th>
                                             <th>Date</th>
+                                            <th style="width:5%">Details</th>
                                         </tr>
                                     </thead>
                                 </table>
@@ -108,11 +111,11 @@
                     scrollCollapse: true,
                     paging: false,
                     'columnDefs': [{
-                        'targets': 0,
+                        'targets': 5,
                         'searchable': false,
                         'orderable': false,
                         'render': function (data, type, full, meta) {
-                           return '<a href="viewPostDetails?id=' + data + '" class="btn btn-primnary btn-xs">'+data+'</a>';
+                            return '<a href="viewPostDetails?id=' + data + '" class="btn btn-primary">More Details</a>';
                         }
                     }]
                 });

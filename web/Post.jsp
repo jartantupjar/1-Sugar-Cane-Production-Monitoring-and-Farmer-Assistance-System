@@ -16,7 +16,7 @@
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
-            <%@include file ="navbar.jsp" %>
+          *  <%@include file ="navbar.jsp" %>
             <div class="content-wrapper">
                 <section class="content-header">
                     <h1>
@@ -51,12 +51,22 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <img class="img-responsive pad" src="dist/img/photo2.png" alt="Photo">
+              <img class="img-responsive pad" src="dist/img/weeds.jpg" alt="Photo">
 
               <p>${post.message}</p>
-              <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button>
-              <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> Approve </button>
-             
+              <p>${post.id_and_status}</p>
+              <c:if test="${post.status == 'Pending'}">
+                  <form name="approve" id="approve" action="ApprovePost?id="${post.id_and_status}>
+                      <a type="button" class="btn btn-success " id="approve" href="javascript: approvePost()"><i class="fa fa-check"></i> Approve </a>
+                  </form>
+              <form name="approve" action="RejectPost?id=${post.id_and_status}">
+              <a type="button" class="btn btn-danger " id="reject"><i class="fa fa-times"></i> Reject </a>
+              </form>
+              </c:if>
+              <c:if test="${post.prob_id == null && post.recom_id == null}">
+              <button type="button" class="btn btn-warning pull-right " id="problem"><i class="fa fa-warning "></i> Create Problem </button>
+              <button type="button" class="btn btn-primary pull-right "id="recommentaion"><i class="fa fa-gear"></i>Create Recommendation </button>
+              </c:if>
             </div>
             <!-- /.box-body -->
             <div class="box-footer box-comments">
@@ -93,5 +103,12 @@
         <script src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="dist/js/app.min.js"></script>
+        <script type="text/javascript">
+        var approve = document.getElementById("approve");
+        approve.onclick = function(){
+            alert("It worked?");
+             document.forms["approve"].submit();
+        };    
+        </script>
     </body>
 </html>
