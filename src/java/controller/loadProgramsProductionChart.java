@@ -6,6 +6,7 @@
 package controller;
 
 import db.CropEstimateDB;
+import db.ProgramsDB;
 import db.fixedRecDB;
 import entity.FarmRecTable;
 import entity.Recommendation;
@@ -26,50 +27,63 @@ import org.json.simple.JSONObject;
  *
  * @author ndrs
  */
-public class loadEstimatesLineData extends BaseServlet {
+public class loadProgramsProductionChart extends BaseServlet {
 
     @Override
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         ServletContext context = getServletContext();
-        CropEstimateDB estdb = new CropEstimateDB();
+        ProgramsDB estdb = new ProgramsDB();
 
         HttpSession session = request.getSession();
-
-        ArrayList<cropEstimate> fct = estdb.viewAllDiffEstimates();
+             String progname=request.getParameter("name");
+        ArrayList<ArrayList<cropEstimate>> fct = estdb.getProductionChartbyProgram(progname);
+       ArrayList<cropEstimate> prce=fct.get(0);
+       ArrayList<cropEstimate> poce=fct.get(1);
+       ArrayList<Integer> categ=estdb.getAllDistinctYrsHistProd();
         JSONObject data = new JSONObject();
      
       
         JSONArray category = new JSONArray();
         JSONArray bar = new JSONArray();
-        JSONArray est1 = new JSONArray();
-        JSONArray est2 = new JSONArray();
-        JSONArray est3 = new JSONArray();
+        JSONArray bar2 = new JSONArray();
+   
 
         if (fct != null) {
-            for(int i = 0; i < fct.size(); i++){
-                category.add(fct.get(i).getYear());
-                if(fct.get(i).getActual()==0.0){
+            for(int i = 0; i < categ.size(); i++){
+                //assume 2012 for this loop
+                //search for if it exists in loop
+                category.add(categ.get(i));
+                boolean chck=false;
+                for(int b=0;b<prce.size();b++){
+                if(categ.get(i)==prce.get(b).getYear()){
+                   bar.add(prce.get(b).getActual());
+                   chck=true;
+                }  
+                }
+                if(chck==false){
                     bar.add(null);
-                }else{
-                  bar.add(fct.get(i).getActual());  
+                }
+                  boolean chck2=false;
+                for(int b=0;b<poce.size();b++){
+                if(categ.get(i)==poce.get(b).getYear()){
+                   bar2.add(poce.get(b).getActual());
+                   chck2=true;
+                }  
+                }
+                 if(chck2==false){
+                    bar2.add(null);
                 }
                 
-                est1.add(fct.get(i).getForecasted());
-                est2.add(fct.get(i).getForecast2());
-                est3.add(fct.get(i).getForecast3());
             }
-            
-            
-        }
+         }
 
 
         data.put("categ", category);
-        data.put("bard", bar);
-        data.put("estd", est1);
-        data.put("est2d", est2);
-        data.put("est3d", est3);
-        
+        data.put("prce", bar);
+        data.put("poce", bar2);
+    
+        System.out.println(data);
         
         
         response.setContentType("applications/json");

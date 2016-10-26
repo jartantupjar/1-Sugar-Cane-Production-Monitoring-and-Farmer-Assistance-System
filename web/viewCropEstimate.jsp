@@ -33,7 +33,7 @@
                                 <h3>
                                     District: Tarlac
                                 </h3></div>
-                             
+
                             <div class="box box-info">
                                 <div class="box-header with-border">
                                     <h1 class="box-title">Estimations</h1>
@@ -44,7 +44,7 @@
                                 </div>
 
                                 <div class="box-body">
-                                        <div class="box-body" id="container4"></div>
+                                    <div class="box-body" id="container4"></div>
                                     <table id="esttable" class="table display table-hover" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
@@ -57,11 +57,73 @@
 
                                             </tr>
                                         </thead>
-       
+
                                     </table>
-                                        <button type="button" class="btn btn-info pull-right">Gen Forecast</button>
+                                    <button type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#modalforecast">Gen Forecast</button>
                                 </div>
 
+                            </div>
+                            <div class="modal fade" role="dialog" aria-labelledby="myModalLabel" id="modalforecast">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">Generate Year Forecast</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="generateForecast" id="submit_form" method="POST" >
+                                            <div class="col-md-12">
+                                                                <div class="form-group">
+                                                                <label class="control-label">Area Harvested
+                                                                    <span class="required" aria-required="true"> * </span>
+                                                                </label>
+                                                                <div class="">
+                                                                    <input type="text" class="form-control" name="area" id="projectname" placeholder="Name...">
+
+                                                                </div>
+                                                            </div>
+                                            
+                                                        <div class="form-group">
+                                                                <label class="control-label">Year Rainfall
+                                                                    <span class="required" aria-required="true"> * </span>
+                                                                </label>
+                                                                <div class="">
+                                                                    <input type="text" class="form-control" name="rain" id="projectname" placeholder="Name...">
+
+                                                                </div>
+                                                            </div>
+                                                        <div class="form-group">
+                                                                <label class="control-label">Yearly Temperature
+                                                               
+                                                                </label>
+                                                                <div class="">
+                                                                    <input type="text" class="form-control" name="temp" id="projectname" placeholder="Name...">
+
+                                                                </div>
+                                                            </div>
+                                                        <div class="form-group">
+                                                                <label class="control-label">Total Tiller Amount
+                                                                  
+                                                                </label>
+                                                                <div class="">
+                                                                    <input type="text" class="form-control" name="tiller" id="projectname" placeholder="Name...">
+
+                                                                </div>
+                                                            </div>
+                                            
+                                            
+                                            </div>
+                                                </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary" form="submit_form" value="submit">Generate</button>
+                                        </div>
+                                    </div>
+                                    <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
                             </div>
                             <div class="box box-info">
                                 <div class="box-header with-border">
@@ -94,8 +156,9 @@
 
                                             </tr>
                                         </thead>
-                                 
+
                                     </table>
+
                                 </div>
 
                             </div>
@@ -156,7 +219,7 @@
                                                 <th>% Difference</th>
                                             </tr>
                                         </thead>
-                                 </table>
+                                    </table>
 
                                 </div>
 
@@ -214,100 +277,99 @@
         </div>
 
         <script type="text/javascript" src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
-        
-        
+
+
         <script>
             $(function () {
-                     var categ;
-                    var bard;
-                    var estd;
-                    var est2d;
-                    var est3d;
+                var categ;
+                var bard;
+                var estd;
+                var est2d;
+                var est3d;
                 $.ajax({
                     url: 'loadEstimatesLineData',
                     type: 'POST',
                     dataType: "JSON",
                     success: function (data) {
-                     categ=data.categ;
-                     bard=data.bard;
-                     estd=data.estd;
-                     est2d=data.est2d;
-                     est3d=data.est3d;
-    $('#container4').highcharts({
-        chart: {
-            zoomType: 'xy'
-        },
-        title: {
-            text: 'Yearly Estimate Data'
-        },
-        
-        xAxis: [{
-            categories: categ,
-            crosshair: true
-        }],
-        yAxis: [{ // Secondary yAxis
-            title: {
-                text: 'Production',
-                style: {
-                    color: Highcharts.getOptions().colors[0]
-                }
-            },
-            labels: {
-                format: '{value}',
-                style: {
-                    color: Highcharts.getOptions().colors[0]
-                }
-            },
-            opposite: true
-        }],
-        tooltip: {
-            shared: true
-        },
-        legend: {
-            layout: 'vertical',
-            align: 'left',
-            x: 120,
-            verticalAlign: 'top',
-            y: 0,
-            floating: true,
-            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
-        },
-        series: [{
-            name: 'Actual',
-            type: 'spline',
-            data: bard,
-            tooltip: {
-                valueSuffix: ' mm'
-            }
+                        categ = data.categ;
+                        bard = data.bard;
+                        estd = data.estd;
+                        est2d = data.est2d;
+                        est3d = data.est3d;
+                        $('#container4').highcharts({
+                            chart: {
+                                zoomType: 'xy'
+                            },
+                            title: {
+                                text: 'Yearly Estimate Data'
+                            },
+                            xAxis: [{
+                                    categories: categ,
+                                    crosshair: true
+                                }],
+                            yAxis: [{// Secondary yAxis
+                                    title: {
+                                        text: 'Production',
+                                        style: {
+                                            color: Highcharts.getOptions().colors[0]
+                                        }
+                                    },
+                                    labels: {
+                                        format: '{value}',
+                                        style: {
+                                            color: Highcharts.getOptions().colors[0]
+                                        }
+                                    },
+                                    opposite: true
+                                }],
+                            tooltip: {
+                                shared: true
+                            },
+                            legend: {
+                                layout: 'vertical',
+                                align: 'left',
+                                x: 120,
+                                verticalAlign: 'top',
+                                y: 0,
+                                floating: true,
+                                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+                            },
+                            series: [ {
+                                    name: 'Estimate 1',
+                                    type: 'column',
+                                    data: estd,
+                                    tooltip: {
+                                        valueSuffix: '°'
+                                    }
+                                }, {
+                                    name: 'Estimate 2',
+                                    type: 'column',
+                                    data: est2d,
+                                    tooltip: {
+                                        valueSuffix: '°'
+                                    }
+                                }, {
+                                    name: 'Estimate 3',
+                                    type: 'column',
+                                    data: est3d,
+                                    tooltip: {
+                                        valueSuffix: '°'
+                                    }
+                                },{
+                                    name: 'Actual',
+                                    type: 'spline',
+                                    data: bard,
+                                    tooltip: {
+                                        valueSuffix: ' mm'
+                                    }
 
-        }, {
-            name: 'Estimate 1',
-            type: 'column',
-            data: estd,
-            tooltip: {
-                valueSuffix: '°'
-            }
-        },{
-            name: 'Estimate 2',
-            type: 'column',
-            data: est2d,
-            tooltip: {
-                valueSuffix: '°'
-            }
-        },{
-            name: 'Estimate 3',
-            type: 'column',
-            data: est3d,
-            tooltip: {
-                valueSuffix: '°'
-            }
-        }]
-    });
+                                }]
+                        });
                     }
                 });
-});
-            
-            </script>
+            });
+
+        </script>
         <script>
             $(function () {
                 var list;
@@ -364,14 +426,14 @@
                 $('#select3').on('change', function (evt) {
                     var dist = $("#select2").val();
                     var yr = $("#select3").val();
-                      $('#munibox').addClass('hidden');
-                      $('#distbox').addClass('hidden');
+                    $('#munibox').addClass('hidden');
+                    $('#distbox').addClass('hidden');
                     if (dist === '0') {
-                         $('#distbox').removeClass('hidden');
+                        $('#distbox').removeClass('hidden');
                         var table = $('#distable').DataTable({
                             destroy: true,
                             'ajax': {
-                                'url': 'viewDistCropEstimate?year='+ yr +''
+                                'url': 'viewDistCropEstimate?year=' + yr + ''
                             }
                         });
                     } else {
@@ -379,7 +441,7 @@
                         var table2 = $('#munitable').DataTable({
                             destroy: true,
                             'ajax': {
-                                'url': 'viewMuniCropEst?year='+ yr +''
+                                'url': 'viewMuniCropEst?year=' + yr + ''
                             },
                             'columnDefs': [{
                                     'targets': 6,
@@ -423,14 +485,14 @@
                 var table3 = $('#esttable').DataTable({
                     'ajax': {
                         'url': 'viewDiffDistEst'
-                    } ,
-                    "paging":   false,
+                    },
+                    "paging": false,
 //                    "ordering": false,
-                     "info":    false,
-                     "searching": false
+                    "info": false,
+                    "searching": false
                 }
-                        
-                
+
+
                 );
             });
 //
@@ -536,9 +598,9 @@
 
         </script>
 
-        
-        
-        
+
+
+
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="dist/js/app.min.js"></script>
         <script src="plugins/select2/select2.full.min.js"></script>

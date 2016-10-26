@@ -7,6 +7,7 @@ package db;
 
 import entity.Problems;
 import entity.Programs;
+import entity.cropEstimate;
 import entity.programsKPI;
 import java.sql.Connection;
 import java.sql.Date;
@@ -17,6 +18,7 @@ import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -80,6 +82,70 @@ public class ProgramsDB {
         }
         return false;
 
+    }
+
+    public ArrayList<ArrayList<cropEstimate>> getProductionChartbyProgram(String progname) {
+
+        Programs prog = viewProgDetails(progname);
+        // todaydate
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(prog.getDate_initial());
+        int year = cal.get(Calendar.YEAR);
+        // get production method per year (2 instances) 1 pre and 1 post
+        ArrayList<cropEstimate> prce = new ArrayList<>();
+        ArrayList<cropEstimate> poce = new ArrayList<>();
+        cropEstimate test = new cropEstimate();
+        test.setYear(2012);
+        test.setActual(18181);
+        prce.add(test);
+        test = new cropEstimate();
+        test.setYear(2013);
+        test.setActual(15000);
+        prce.add(test);
+        test = new cropEstimate();
+        test.setYear(2014);
+        test.setActual(12159);
+        prce.add(test);
+        test = new cropEstimate();
+        test.setYear(2015);
+        test.setActual(16159);
+        poce.add(test);
+        test = new cropEstimate();
+        test.setYear(2016);
+        test.setActual(18532);
+        poce.add(test);
+
+        ArrayList<ArrayList<cropEstimate>> list = new ArrayList();
+        list.add(prce);
+        list.add(poce);
+        return list;
+    }
+
+    public ArrayList<Integer> getAllDistinctYrsHistProd() {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select Distinct(year) from historicalproduction order by year;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<Integer> list = null;
+
+            if (rs.next()) {
+                list = new ArrayList<>();
+                do {
+                    list.add(rs.getInt("year"));
+                } while (rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(CropEstimateDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
     }
 
     public boolean addKPIs(ArrayList<programsKPI> kpis) {
@@ -188,19 +254,19 @@ public class ProgramsDB {
                         p.setDate_created(StringtoSQLDate("23/06/2015"));
                     } else {
                         p.setDate_created(rs.getDate("date_created"));
-                            }
-                 if (rs.getDate("date_end") == null) {
+                    }
+                    if (rs.getDate("date_end") == null) {
                         p.setDate_end(StringtoSQLDate("23/06/2018"));
                     } else {
-                       p.setDate_end(rs.getDate("date_end"));
-                         }
-                   ArrayList<programsKPI> kpis= viewProg1Targets(p.getProg_name());
-                   if(kpis!=null){
-                     p.setProgress(viewProgramProgress(kpis));    
-                   } else{
-                       p.setProgress(0);
-                   }
-                 
+                        p.setDate_end(rs.getDate("date_end"));
+                    }
+                    ArrayList<programsKPI> kpis = viewProg1Targets(p.getProg_name());
+                    if (kpis != null) {
+                        p.setProgress(viewProgramProgress(kpis));
+                    } else {
+                        p.setProgress(0);
+                    }
+
                     p.settFarms(rs.getInt("count"));
                     list.add(p);
                 } while (rs.next());
@@ -344,35 +410,37 @@ public class ProgramsDB {
 //    }
 
     public Double viewProgramProgress(ArrayList<programsKPI> kpi) {
-        if(kpi!=null){
-            
-       ArrayList<Double> perc = new ArrayList();
-        for (int i = 0; i < kpi.size(); i++) {
-            for (int b = 0; b < kpi.get(i).getValues().size(); b++) {
-                double suma = 0, sum = 0, chkr = 0;
-                sum = kpi.get(i).getValues().get(b);
-                suma = kpi.get(i).getaValues().get(b);
-                chkr = (suma / sum) * 100.0;
-                if (chkr > 100.0) {
-                    chkr = 100.0;
+        if (kpi != null) {
+
+            ArrayList<Double> perc = new ArrayList();
+            for (int i = 0; i < kpi.size(); i++) {
+                for (int b = 0; b < kpi.get(i).getValues().size(); b++) {
+                    double suma = 0, sum = 0, chkr = 0;
+                    sum = kpi.get(i).getValues().get(b);
+                    suma = kpi.get(i).getaValues().get(b);
+                    chkr = (suma / sum) * 100.0;
+                    if (chkr > 100.0) {
+                        chkr = 100.0;
+                    }
+                    perc.add(chkr);
                 }
-                perc.add(chkr);
             }
-        }
 
-        double fin = 0, tavg = 0;
-        for (int i = 0; i < perc.size(); i++) {
-            fin += perc.get(i);
-        }
-        tavg = fin / perc.size();
-        DecimalFormat df = new DecimalFormat(".##");
-        double fnal = Double.parseDouble(df.format(tavg));
-        if (fnal > 100.0) {
-            fnal = 100;
-        }
+            double fin = 0, tavg = 0;
+            for (int i = 0; i < perc.size(); i++) {
+                fin += perc.get(i);
+            }
+            tavg = fin / perc.size();
+            DecimalFormat df = new DecimalFormat(".##");
+            double fnal = Double.parseDouble(df.format(tavg));
+            if (fnal > 100.0) {
+                fnal = 100;
+            }
 
-        return fnal;
-         }else return null;
+            return fnal;
+        } else {
+            return null;
+        }
     }
 
     public ArrayList<programsKPI> viewProg1Targets(String prog_name) {

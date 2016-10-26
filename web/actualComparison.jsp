@@ -354,9 +354,9 @@ comparison page add current vs historical details(past 2yrs)
                                                                     </c:choose>
                                                                 </li>
                                                             </ul>
-                                                            <div class="btn btn-primary pull-right">
-                                                                More Details
-                                                            </div>
+                                                          <a href="viewFieldDetails?id=${flow.id}" class="btn btn-primary pull-right">
+                                                            View Farm Profile
+                                                         </a>     
                                                         </div>
                                                     </div>
                                                     <!-- /.tab-pane -->
@@ -588,9 +588,9 @@ comparison page add current vs historical details(past 2yrs)
                                                             </b>
                                                         </li>
                                                     </ul>
-                                                    <div class="btn btn-primary pull-right">
-                                                        More Details
-                                                    </div>
+                                                   <a href="viewFieldDetails?id=${farm.id}" class="btn btn-primary pull-right">
+                                                            View Farm Profile
+                                                         </a>   
                                                 </div>
                                             </div>
                                             <!-- /.tab-pane -->
@@ -970,9 +970,9 @@ comparison page add current vs historical details(past 2yrs)
                                                                     </c:choose>
                                                                 </li>
                                                             </ul>
-                                                            <div class="btn btn-primary pull-right">
-                                                                More Details
-                                                            </div>
+                                                           <a href="viewFieldDetails?id=${farm.id}" class="btn btn-primary pull-right">
+                                                            View Farm Profile
+                                                         </a>   
                                                         </div>
                                                     </div>
                                                     <!-- /.tab-pane -->

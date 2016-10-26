@@ -168,6 +168,14 @@
         <servlet-name>loadEstimatesLineData</servlet-name>
         <servlet-class>controller.loadEstimatesLineData</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>generateForecast</servlet-name>
+        <servlet-class>controller.generateForecast</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>loadProgramsProductionChart</servlet-name>
+        <servlet-class>controller.loadProgramsProductionChart</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
@@ -331,6 +339,14 @@
     <servlet-mapping>
         <servlet-name>loadEstimatesLineData</servlet-name>
         <url-pattern>/loadEstimatesLineData</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>generateForecast</servlet-name>
+        <url-pattern>/generateForecast</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>loadProgramsProductionChart</servlet-name>
+        <url-pattern>/loadProgramsProductionChart</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
