@@ -129,10 +129,6 @@
         <servlet-class>controller.createTagList</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>viewSendRec</servlet-name>
-        <servlet-class>controller.viewSendRec</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>viewFarmDifferences</servlet-name>
         <servlet-class>controller.viewFarmDifferences</servlet-class>
     </servlet>
@@ -179,6 +175,34 @@
     <servlet>
         <servlet-name>loadTreeMapYearList</servlet-name>
         <servlet-class>controller.loadTreeMapYearList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>loadMunicSumYrsChart</servlet-name>
+        <servlet-class>controller.loadMunicSumYrsChart</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>loadAllBrgysChart</servlet-name>
+        <servlet-class>controller.loadAllBrgysChart</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewBrgyMuniTable</servlet-name>
+        <servlet-class>controller.viewBrgyMuniTable</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewBrgySummary</servlet-name>
+        <servlet-class>controller.viewBrgySummary</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>loadBrgySumYrsChart</servlet-name>
+        <servlet-class>controller.loadBrgySumYrsChart</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>loadAllFarmersChart</servlet-name>
+        <servlet-class>controller.loadAllFarmersChart</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewFarmerBrgyTable</servlet-name>
+        <servlet-class>controller.viewFarmerBrgyTable</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
@@ -317,10 +341,6 @@
         <url-pattern>/viewFarmDifferences</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>viewSendRec</servlet-name>
-        <url-pattern>/viewSendRec</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>viewDistCropEstimate</servlet-name>
         <url-pattern>/viewDistCropEstimate</url-pattern>
     </servlet-mapping>
@@ -355,6 +375,34 @@
     <servlet-mapping>
         <servlet-name>loadTreeMapYearList</servlet-name>
         <url-pattern>/loadTreeMapYearList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>loadMunicSumYrsChart</servlet-name>
+        <url-pattern>/loadMunicSumYrsChart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>loadAllBrgysChart</servlet-name>
+        <url-pattern>/loadAllBrgysChart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewBrgyMuniTable</servlet-name>
+        <url-pattern>/viewBrgyMuniTable</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewBrgySummary</servlet-name>
+        <url-pattern>/viewBrgySummary</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>loadBrgySumYrsChart</servlet-name>
+        <url-pattern>/loadBrgySumYrsChart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>loadAllFarmersChart</servlet-name>
+        <url-pattern>/loadAllFarmersChart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewFarmerBrgyTable</servlet-name>
+        <url-pattern>/viewFarmerBrgyTable</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
