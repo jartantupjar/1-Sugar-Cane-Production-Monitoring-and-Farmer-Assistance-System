@@ -6,6 +6,7 @@
 package db;
 
 import entity.Problems;
+import entity.Recommendation;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,7 +26,7 @@ public class ProblemsDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT p.id, p.name,p.description,p.status,p.type,count(pf.Fields_id) as counter,(select count(pp.programs_name)from `programs-problems`pp where pp.problems_id=p.id) as pcounter from problems p join `problems-fields` pf on p.id = pf.Problems_id join fields f on pf.Fields_id = f.id group by p.id;";
+            String query = "SELECT p.id, p.name,p.description,p.status,p.type,count(pf.Fields_id) as counter,(select count(pp.programs_name)from `programs-problems`pp where pp.problems_id=p.id) as pcounter from problems p  left join `problems-fields` pf on p.id = pf.Problems_id left join fields f on pf.Fields_id = f.id group by p.id ;";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             ArrayList<Problems> pT = null;
@@ -54,34 +55,30 @@ public class ProblemsDB {
         }
         return null;
     }
-    public ArrayList<Problems> getAllProblems() {
+    public ArrayList<Recommendation> getAllSolutions(int prob_id) {
         try {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT p.id, p.name,p.description,p.status,p.type from problems p;";
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-            ArrayList<Problems> pT = null;
-            Problems p;
+            String query = "SELECT * FROM sra.`recommendations-problems` where Problems_id = ?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, prob_id);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<Recommendation> rT = null;
+            Recommendation r;
             if (rs.next()) { 
-                 pT = new ArrayList<Problems>();
+                 rT = new ArrayList<Recommendation>();
                 do {
-                    p = new Problems();
-                    p.setProb_id(rs.getInt("id"));
-                    p.setProb_name(rs.getString("name"));
-                    p.setProb_details(rs.getString("description"));
-                    p.setStatus(rs.getString("status"));
-                    p.setType(rs.getString("type"));
-                    p.setTotalFarms(14);
-                    pT.add(p);
+                    r = new Recommendation();
+                    r.setId(rs.getInt("Recommendations_id"));
+                    rT.add(r);
                 } while (rs.next());
             }
             rs.close();
-            stmt.close();
+            pstmt.close();
             conn.close();
             
-            return pT;
+            return rT;
         } catch (SQLException ex) {
             Logger.getLogger(ProblemsDB.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -93,7 +90,7 @@ public class ProblemsDB {
             int i = 0;
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "Insert into sra.`recommendations-problems` values (?,?);";
+            String query = "Insert into `recommendations-problems` values (?,?);";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, recid);
             pstmt.setInt(2, probid);
@@ -170,7 +167,7 @@ public class ProblemsDB {
         }
         return null;
     }
-      public ArrayList<Problems> getFarmProblemDetbyFarm(int id) {
+    public ArrayList<Problems> getFarmProblemDetbyFarm(int id) {
         try {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
@@ -347,5 +344,55 @@ public class ProblemsDB {
             Logger.getLogger(ProblemsDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    public int addProblem(Problems problems) {
+        try {
+            // put functions here : previous week production, this week production
+            int i = 0;
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "insert into Problems(name, description,type,status,username,date,phase) values(?,?,?,?,?,?,?);";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, problems.getProb_name());
+            pstmt.setString(2, problems.getProb_details());
+            pstmt.setString(3, problems.getType());
+            pstmt.setString(4, problems.getStatus());
+            pstmt.setString(5, problems.getUser_name());
+            pstmt.setDate(6, problems.getDate_created());
+            pstmt.setString(7, problems.getPhase());
+            i = pstmt.executeUpdate();
+            if(i==1){
+                i= getLastProblemsID();
+            }
+            pstmt.close();
+            conn.close();
+            return i;
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(subjectiveRecDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+    public int getLastProblemsID() {
+        try {
+            // put functions here : previous week production, this week production
+            int i = 0;
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT  max(id)as id FROM Problems ;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                do{
+                i = rs.getInt("id");
+                }while(rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            return i;
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(subjectiveRecDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
     }
 }

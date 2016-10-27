@@ -13,9 +13,9 @@ import java.sql.Date;
  */
 public class Problems {
     private Integer prob_id, totalFarms, fields_id,tSolutions;
-    private String prob_name, prob_details, barangay,municipality, status,type,impact,farmer,farm,validation;
+    private String prob_name, prob_details, barangay,municipality, status,type,impact,farmer,farm,validation,phase,user_name;
     private Double prob_loss, percent_affected;
-    private Date date_updated;
+    private Date date_updated ,date_created;
 
     /**
      * @return the prob_id
@@ -253,5 +253,47 @@ public class Problems {
      */
     public void settSolutions(Integer tSolutions) {
         this.tSolutions = tSolutions;
+    }
+
+    /**
+     * @return the phase
+     */
+    public String getPhase() {
+        return phase;
+    }
+
+    /**
+     * @param phase the phase to set
+     */
+    public void setPhase(String phase) {
+        this.phase = phase;
+    }
+
+    /**
+     * @return the date_created
+     */
+    public Date getDate_created() {
+        return date_created;
+    }
+
+    /**
+     * @param date_created the date_created to set
+     */
+    public void setDate_created(Date date_created) {
+        this.date_created = date_created;
+    }
+
+    /**
+     * @return the user_name
+     */
+    public String getUser_name() {
+        return user_name;
+    }
+
+    /**
+     * @param user_name the user_name to set
+     */
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
     }
 }

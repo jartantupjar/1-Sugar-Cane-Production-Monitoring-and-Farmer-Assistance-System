@@ -25,66 +25,70 @@
                 </section>
                 <section class="content">
 
-                            <div class="col-md-4">
-                                <div class="box box-solid box-success">
-                                    <div class="box-header with-border">
-                                        <h3 class="box-title">Problem Details</h3>
-                                    </div>
-                                    <br>
-                                    <div class="box-body">
-                                    <ul class="list-group list-group-unbordered">
+                    <div class="col-md-4">
+                        <div class="box box-solid box-success">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Problem Details</h3>
+                            </div>
+                            <br>
+                            <div class="box-body">
+                                <ul class="list-group list-group-unbordered">
 
 
-                                        <li class="list-group-item">
-                                            <b>Problem Name : </b> <a class="pull-right"><b>
+                                    <li class="list-group-item">
+                                        <b>Problem Name : </b> <a class="pull-right"><b>
                                                 <c:out value="${problem.prob_name}"></c:out>
                                                 </b> </a>
                                         </li>
                                         <li class="list-group-item">
                                             <b>Type</b> <a class="pull-right">
-                                                <c:out value="${problem.type}"></c:out>
+                                            <c:out value="${problem.type}"></c:out>
                                             </a>
                                         </li>
                                         <li class="list-group-item">
                                             <b>Total Farms Affected </b> <a class="pull-right">
-                                                <c:out value="${problem.totalFarms}"></c:out>
+                                            <c:out value="${problem.totalFarms}"></c:out>
                                             </a>
                                         </li>
                                         <li class="list-group-item">
                                             <b>Number of Solutions</b> <a class="pull-right" href="#myModal" data-toggle="modal" data-target="#myModal">
-                                                <c:out value="${problem.totalFarms}"></c:out>
-                                                </a>
+                                            <c:out value="${problem.tSolutions}"></c:out>
+                                            </a>
                                         </li>
                                     </ul>
-                                    </div>
                                 </div>
                             </div>
-                    <!-- Modal -->
-                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                        <div class="modal-dialog modal-lg" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myModalLabel">Send Recommendation</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <table class="table table-bordered" >
-                                    <tbody>
-                                        <tr>
-                                            <th>Solution</th>
-                                            <th>Description</th>
-	
-                                        </tr>
-                                        <tr>	
-                                            <td>Revive me</td>
-                                            <td><button><a href="viewRecommendationDetails.jsp"><b> View Details</b></a></button></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                        </div>
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">Send Recommendation</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <table class="table table-bordered" >
+                                            <tbody>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Solution</th>
+                                                    <th>Description</th>
+                                                </tr>
+
+                                            <c:forEach var="sol" items="${solution}">
+                                                <tr>
+                                                    <td>${sol.id}</td>
+                                                    <td>${sol.recommendation_name}</td>
+                                                    <td><button><a href="viewRecDetails?id=${sol.id}"><b> View Details</b></a></button></td>
+                                                </tr>
+                                            </c:forEach>
+
+                                        </tbody>
+                                    </table>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Send</button>
                                 </div>
                             </div>
                         </div>
@@ -117,7 +121,10 @@
                         </div>
                     </div>        
                     <br>
-
+                    <div class="col-md-3">         
+                        <p><a class="btn btn-primary" style="width: 100%" href="createProject.jsp"><i class="fa fa-file "></i> Create Program</a></p>
+                        <p><a class="btn btn-success" style="width: 100%" href="createNewRecommendation.jsp"><i class="fa fa-gear "></i> Create Recommendation</a></p>
+                    </div>
                 </section>
 
             </div>

@@ -94,7 +94,7 @@ current vs then diagram
                                                         <div class="progress-group">
 
                                                             <div class="">
-                                                                <div class="progress-bar progress-bar-green" style="width: ${progdet.progress}%">  <c:out value="${progdet.progress}"></c:out></div>
+                                                                <div class="progress-bar progress-bar-striped progress-bar-aqua active" style="width: ${progdet.progress}%">  <c:out value="${progdet.progress}"></c:out></div>
                                                             </div>
                                                         </div> <!-- closer of progress bars -->  
                                                     </td>
@@ -155,10 +155,7 @@ current vs then diagram
                                                     <td><c:out value="${plist.prob_details}"></c:out></td>
                                                     </tr>
                                             </c:forEach>
-                                            <!--> <tr>
-                                                            <td>Overfertilization</td>
-                                                            <td>Requires training farmers about the effects and good practices </td>
-                                                        </tr>  <-->
+                                     
 
                                         </tbody>
 
@@ -248,7 +245,7 @@ current vs then diagram
                                                    
                                             </tbody>
                                         </table>
-                                        <button class="btn btn-success pull-right" style="width: 10%" value="submit" form="kpitable">Update</button>
+                                        <button class="btn btn-info pull-right" style="width: 10%" value="submit" form="kpitable">Update</button>
                                    </c:if>
                                                   </div>
 
@@ -283,78 +280,143 @@ current vs then diagram
         <script src="Highcharts/highcharts.js"></script>
         <script src="Highcharts/modules/drilldown.js"></script>
         <script src="Highcharts/modules/exporting.js"></script>
-
+        <script>
+    $(function () {
+        
+                var categ;
+                var prce;
+                var poce;
+                $.ajax({
+                    url: 'loadProgramsProductionChart?name=${progdet.prog_name}',
+                    type: 'POST',
+                    dataType: "JSON",
+                    success: function (data) {  
+                        categ = data.categ;
+                        prce = data.prce;
+                        poce = data.poce;
+                        
+                        
+    $('#container1').highcharts({
+        chart: {
+            type: 'column',
+            spacingBottom: 30
+        },
+        title: {
+            text: 'Program-Production Improvement '
+        },
+        
+        legend: {
+            layout: 'vertical',
+            align: 'left',
+            verticalAlign: 'top',
+            x: 150,
+            y: 100,
+            floating: true,
+            borderWidth: 1,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+        },
+        xAxis: {
+            categories: categ
+        },
+        yAxis: {
+            title: {
+                text: 'Y-Axis'
+            },
+            labels: {
+                formatter: function () {
+                    return this.value;
+                }
+            }
+        },
+        tooltip: {
+            formatter: function () {
+                return '<b>' + this.series.name + '</b><br/>' +
+                    this.x + ': ' + this.y;
+            }
+        },
+        plotOptions: {
+            area: {
+                fillOpacity: 0.5
+            }
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: 'Pre',
+            data: prce
+        }, {
+            name: 'Post',
+            data: poce
+        }]
+    });
+                    }
+});
+    });
+    
+        </script>
 
         <script>
-            $(function () {
-
-                // Create the chart
-                $('#container1').highcharts({
-                    chart: {
-                        type: 'column'
-                    },
-                    title: {
-                        text: 'Basic drilldown'
-                    },
-                    xAxis: {
-                        type: 'category',
-                        categories: [
-                            "2011-12",
-                            "2012-13",
-                            "2013-14",
-                            "2014-15",
-                            "2015-16"
-                        ]
-
-                    },
-                    legend: {
-                        enabled: false
-                    },
-                    plotOptions: {
-                        series: {
-                            borderWidth: 0,
-                            dataLabels: {
-                                enabled: true
-                            }
-                        }
-                    },
-                    drilldown: {
-                        series: [{
-                                name: 'Test Drilldown',
-                                id: 'test',
-                                data: [
-                                    ['data A', 24.13],
-                                    ['data B', 17.2],
-                                    ['data C', 8.11],
-                                    ['data D', 5.33],
-                                    ['data E', 6.34]
-                                ]
-                            }]
-                    },
-                    series: [
-                        {
-                            "name": "Actual Yield",
-                            "data": [
-                                {y: 40351.62, drilldown: 'test'},
-                                51506.83,
-                                68566.23,
-                                80596.9228,
-                                94329.31
-                            ]
-                        },
-                        {
-                            "name": "Estimated Yield",
-                            "data": [
-                                40750.4963,
-                                56205.181,
-                                63776.2866,
-                                74912.5923,
-                                83801.83617
-                            ]
-                        }
-                    ]
-                });
-            });
+//            $(function () {
+//
+//                // Create the chart
+//                $('#container1').highcharts({
+//                    chart: {
+//                        type: 'column'
+//                    },
+//                    title: {
+//                        text: 'Basic drilldown'
+//                    },
+//                    xAxis: {
+//                        type: 'category',
+//                        categories: [
+//                            "2011-12",
+//                            "2012-13",
+//                            "2013-14",
+//                            "2014-15",
+//                            "2015-16"
+//                        ]
+//
+//                    },
+//                    legend: {
+//                        enabled: false
+//                    },
+//                    plotOptions: {
+//                        series: {
+//                            borderWidth: 0,
+//                            dataLabels: {
+//                                enabled: true
+//                            }
+//                        }
+//                    },
+//                    drilldown: {
+//                        series: [{
+//                                name: 'Test Drilldown',
+//                                id: 'test',
+//                                data: [
+//                                    ['data A', 24.13],
+//                                    ['data B', 17.2],
+//                                    ['data C', 8.11],
+//                                    ['data D', 5.33],
+//                                    ['data E', 6.34]
+//                                ]
+//                            }]
+//                    },
+//                    series: [
+//                        {
+//                            "name": "Actual Yield",
+//                            "data": [
+////                                {y: 40351.62, drilldown: 'test'},
+//                                {y: 40351.62},
+//                                51506.83,
+//                                68566.23,
+//                                80596.9228,
+//                                94329.31
+//                            ]
+//                        }
+//                    ]
+//                });
+//            });
         </script>
     </body>
 

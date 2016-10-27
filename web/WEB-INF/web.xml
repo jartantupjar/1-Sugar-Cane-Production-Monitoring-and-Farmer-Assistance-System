@@ -168,6 +168,34 @@
         <servlet-name>ApprovePost</servlet-name>
         <servlet-class>controller.ApprovePost</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>loadEstimatesLineData</servlet-name>
+        <servlet-class>controller.loadEstimatesLineData</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>generateForecast</servlet-name>
+        <servlet-class>controller.generateForecast</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>loadProgramsProductionChart</servlet-name>
+        <servlet-class>controller.loadProgramsProductionChart</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>loadTreeMapYearList</servlet-name>
+        <servlet-class>controller.loadTreeMapYearList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RejectPost</servlet-name>
+        <servlet-class>controller.RejectPost</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewRecTableList</servlet-name>
+        <servlet-class>controller.viewRecTableList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>createNewProblem</servlet-name>
+        <servlet-class>controller.createNewProblem</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
@@ -329,8 +357,36 @@
         <url-pattern>/loadCropEstYearList</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>loadEstimatesLineData</servlet-name>
+        <url-pattern>/loadEstimatesLineData</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>generateForecast</servlet-name>
+        <url-pattern>/generateForecast</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>loadProgramsProductionChart</servlet-name>
+        <url-pattern>/loadProgramsProductionChart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>loadTreeMapYearList</servlet-name>
+        <url-pattern>/loadTreeMapYearList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ApprovePost</servlet-name>
         <url-pattern>/ApprovePost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RejectPost</servlet-name>
+        <url-pattern>/RejectPost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewRecTableList</servlet-name>
+        <url-pattern>/viewRecTableList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>createNewProblem</servlet-name>
+        <url-pattern>/createNewProblem</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

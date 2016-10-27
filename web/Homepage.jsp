@@ -7,7 +7,7 @@
         <title>SRA | Home</title>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
        <link href="plugins/pace2/pace-theme-barber-shop.css" rel="stylesheet" />
-        
+          <link rel="stylesheet" href="plugins/select2/select2.min.css">
        
         
     </head>
@@ -18,8 +18,7 @@
             <div class="content-wrapper">
                 <section class="content-header">
                     <h1>
-                        Today's Date: Date
-                        <small>Week : blank</small>
+                        Today's Date: ${todayDate}
                     </h1>
                 </section>
                 <section class="content">
@@ -39,7 +38,7 @@
                     </div>
 
                     <div class="col-md-12" > 
-                        <div class="box box-info">
+                        <div class="box box-info" style="height:120%">
                             <div class="box-header with-border">
                                 <h1 class="box-title">Yield Tree Map (Annual) </h1>
                                 <div class="box-tools pull-right">
@@ -47,7 +46,18 @@
                                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                 </div>
                             </div>   
-                            <div class="box-body" id="container1" style="height: 120%"></div>
+                              <div class="box-body">
+                            
+                                           <div class="col-md-2 pull-right">
+                                <select class="form-control" style="width:50%" id="select3">
+                                 
+                                </select>
+                                        </div>
+                       
+                                <div id="container1" style="height:90%"></div>
+                                
+                                
+                            </div>
                         </div>
 
                     </div>
@@ -179,16 +189,19 @@
 
         <script type="text/javascript" src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
   <script src="plugins/pace2/pace.min.js"></script>
-  
+     <script src="plugins/select2/select2.full.min.js"></script>
   <script src="plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
-        
+        <script></script>
   
         <script type="text/javascript">
-          
-    Pace.track(function(){
+       $(document).ready(function () {
+           
+           $('#select3').on('change', function (evt) {
+                   var test = $("#select3").val();
+                    Pace.track(function(){
     $.ajax({
-                url: "loadTreeMapData",
+                url: 'loadTreeMapData?tag=' + test + '',
                 type: 'POST',
                 dataType: "JSON",
                 success: function (data) {
@@ -203,7 +216,7 @@
                             municipal,
                             barangay,
                             farmer;
-                    console.log()
+                 
                     for (municipal in data) {
                         if (data.hasOwnProperty(municipal)) {
                             municipalVal = 0;
@@ -251,7 +264,7 @@
                                 layoutAlgorithm: 'squarified',
                                 allowDrillToNode: true,
                                 animationLimit: 1000,
-                                turboThreshold: 5000,
+                                turboThreshold:  10000,
                                 dataLabels: {
                                     enabled: false
                                 },
@@ -286,9 +299,23 @@
 
 
                 }});
-});
+        });
+        });
+             $.ajax({
+                        url: 'loadTreeMapYearList',
+                        type: 'POST',
+                        dataType: "JSON",
+                        success: function (data) {
+                           $("#select3").select2({
+                               minimumResultsForSearch: Infinity,
+                                data: data
+                            }).trigger('change');
+                            var yr = $("#select3").val();
+
+                        }});
 
 
+  });
         </script>
 
         <script type="text/javascript">
@@ -374,11 +401,12 @@
 
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="dist/js/app.min.js"></script>
+     
         <script src="Highcharts/highcharts.js"></script>
         <script src="Highcharts/modules/treemap.js"></script>
         <script src="Highcharts/highcharts-more.js"></script>
         <script src="Highcharts/modules/solid-gauge.js"></script>
-        <script src="Highcharts/modules/exporting.js"></script>
+     
 
     </body>
 

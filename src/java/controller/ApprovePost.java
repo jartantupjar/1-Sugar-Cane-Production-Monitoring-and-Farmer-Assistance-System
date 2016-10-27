@@ -5,12 +5,17 @@
  */
 package controller;
 
+import db.ForumDB;
+import entity.Forum;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -32,7 +37,27 @@ public class ApprovePost extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-           
+            ForumDB fdb = new ForumDB();
+            Forum post = new Forum();
+           String test = request.getParameter("postd");
+            //System.out.println(test +"This is the value");
+            String [] lines = test.split(",");
+            int id = Integer.parseInt(lines[0]);
+            int check = fdb.approvePost(id);
+            System.out.println(check + " This is what i recieved");
+            if(check==1){
+                post = fdb.getForumDetail(id);
+                HttpSession session = request.getSession();
+                ServletContext context = getServletContext();
+                RequestDispatcher rd = context.getRequestDispatcher("/Post.jsp");
+                session.setAttribute("post", post);
+                rd.forward(request, response);
+            }
+            else{
+                ServletContext context = getServletContext();
+                RequestDispatcher rd = context.getRequestDispatcher("/Homepage.jsp");
+                rd.forward(request, response);
+            }
         }
     }
 

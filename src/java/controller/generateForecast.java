@@ -5,20 +5,13 @@
  */
 package controller;
 
-import db.subjectiveRecDB;
-import entity.Problems;
+
+import db.CropEstimateDB;
 import entity.Recommendation;
+import entity.cropEstimate;
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.System.out;
-import java.sql.Date;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -31,7 +24,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Bryll Joey Delfin
  */
-public class createNewRecommendation extends HttpServlet {
+public class generateForecast extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -48,45 +41,26 @@ public class createNewRecommendation extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             /* TODO output your page here. You may use following sample code. */
-            Recommendation r = new Recommendation();
-            subjectiveRecDB recDB = new subjectiveRecDB();
-            r.setRecommendation_name(request.getParameter("recommendation_name"));
-            r.setPhase(request.getParameter("period"));
-            r.setType(request.getParameter("type"));
-//            String dates = request.getParameter("datepicker");
-//            String datee = request.getParameter("dateend");
-            r.setDescription(request.getParameter("description"));
-            r.setConfig(Integer.parseInt(request.getParameter("config")));
-            r.setStatus("Ongoing");
-            int check = recDB.addRecommendation(r);
-             Enumeration<String> parameterNames = request.getParameterNames();
-            String paramName;
-            ArrayList<String> pT = new ArrayList<String>();
-            while (parameterNames.hasMoreElements()) {
-                 paramName = parameterNames.nextElement();
-                 System.out.println(paramName);
-            if (paramName.startsWith("probid")) {
-                for(int i=0;i<request.getParameterValues(paramName).length;i++){
-                     pT.add(request.getParameterValues(paramName)[i]);
-                 System.out.println(request.getParameterValues(paramName)[i]);
-                 //connects recommendation to problem table
-                 int prob_id = Integer.parseInt(request.getParameterValues(paramName)[i]);
-                 int test = recDB.connectRecommendationtoProblem(check,prob_id);
-                }
-
-        }
-            }
-            System.out.println(check);
-            if (check > 0){
+       
+            CropEstimateDB cedb = new CropEstimateDB();
+            cropEstimate ce= new cropEstimate();
+            Double area,rain,tiller,temp;
+        area= Double.parseDouble(request.getParameter("area"));
+        rain= Double.parseDouble(request.getParameter("rain"));
+        temp = Double.parseDouble(request.getParameter("temp"));
+        tiller= Double.parseDouble(request.getParameter("tiller"));
+    
+         boolean check =  cedb.selectEstimates(area, rain, tiller, temp);
+            if (check){
                 
                 ServletContext context = getServletContext();
-                RequestDispatcher rd = context.getRequestDispatcher("/createNewRecommendation.jsp");
+                RequestDispatcher rd = context.getRequestDispatcher("/viewCropEstimate.jsp");
                 HttpSession session = request.getSession();
                 rd.forward(request, response);
             }
             else {
                 ServletContext context = getServletContext();
-                RequestDispatcher rd = context.getRequestDispatcher("/index.jsp");
+                RequestDispatcher rd = context.getRequestDispatcher("/Recommendation.jsp");
                 rd.forward(request, response);
             }     
         }finally {

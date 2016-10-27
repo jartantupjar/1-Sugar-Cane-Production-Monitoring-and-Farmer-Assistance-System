@@ -7,15 +7,18 @@ package db;
 
 import entity.Problems;
 import entity.Programs;
+import entity.cropEstimate;
 import entity.programsKPI;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,6 +27,7 @@ import java.util.logging.Logger;
  * @author ndrs
  */
 public class ProgramsDB {
+
     public Date StringtoSQLDate(String sdate) {
         try {
             java.util.Date endcheck = new SimpleDateFormat("MM/dd/yyyy").parse(sdate);
@@ -32,10 +36,11 @@ public class ProgramsDB {
         } catch (ParseException ex) {
             Logger.getLogger(ProgramsDB.class.getName()).log(Level.SEVERE, null, ex);
         }
-          return null;
+        return null;
 
     }
-      public java.util.Date SQLDatetoUtil(String sdate) {
+
+    public java.util.Date SQLDatetoUtil(String sdate) {
         try {
             java.util.Date endcheck = new SimpleDateFormat("yyyy-MM/dd").parse(sdate);
             java.util.Date modifiedendDate = new java.util.Date(endcheck.getTime());
@@ -43,7 +48,7 @@ public class ProgramsDB {
         } catch (ParseException ex) {
             Logger.getLogger(ProgramsDB.class.getName()).log(Level.SEVERE, null, ex);
         }
-          return null;
+        return null;
 
     }
 
@@ -77,6 +82,144 @@ public class ProgramsDB {
         }
         return false;
 
+    }
+
+    public ArrayList<ArrayList<cropEstimate>> getProductionChartbyProgram(String progname) {
+
+        Programs prog = viewProgDetails(progname);
+        // todaydate
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(prog.getDate_initial());
+        int year = cal.get(Calendar.YEAR);
+        // get production method per year (2 instances) 1 pre and 1 post
+        ArrayList<cropEstimate> prce = getProgramPreProduction(year,progname);
+        ArrayList<cropEstimate> poce = getProgramPostProduction(year,progname);
+        ArrayList<ArrayList<cropEstimate>> list = new ArrayList();
+        list.add(prce);
+        list.add(poce);
+        return list;
+    }
+ public ArrayList<cropEstimate> getProgramPreProduction(int year,String progname) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select sum(hp.tons_cane)as production, hp.year\n" +
+"from historicalproduction hp\n" +
+"where hp.Farmers_name in (\n" +
+"						select Farmers_name\n" +
+"                        from fields\n" +
+"                        where id in \n" +
+"								(\n" +
+"                                select Fields_id\n" +
+"                                from `Problems-Fields`\n" +
+"                                where Problems_id in (\n" +
+"													select Problems_id\n" +
+"                                                    from `Programs-Problems`\n" +
+"                                                    where Programs_name = ? \n" +
+"														)\n" +
+"                                )\n" +
+"						) and year <? \n" +
+"group by year;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, progname);
+            pstmt.setInt(2, year);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<cropEstimate> list = null;
+
+            if (rs.next()) {
+                list = new ArrayList<>();
+               
+                do {
+                      cropEstimate ce=new cropEstimate();
+                    ce.setYear(rs.getInt("year"));
+                    ce.setActual(rs.getDouble("production"));
+                    list.add(ce);
+                } while (rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(CropEstimateDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
+ public ArrayList<cropEstimate> getProgramPostProduction(int year,String progname) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select sum(hp.tons_cane)as production, hp.year\n" +
+"from historicalproduction hp\n" +
+"where hp.Farmers_name in (\n" +
+"						select Farmers_name\n" +
+"                        from fields\n" +
+"                        where id in \n" +
+"								(\n" +
+"                                select Fields_id\n" +
+"                                from `Problems-Fields`\n" +
+"                                where Problems_id in (\n" +
+"													select Problems_id\n" +
+"                                                    from `Programs-Problems`\n" +
+"                                                    where Programs_name = ? \n" +
+"														)\n" +
+"                                )\n" +
+"						) and year >=? \n" +
+"group by year;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, progname);
+            pstmt.setInt(2, year);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<cropEstimate> list = null;
+
+            if (rs.next()) {
+                list = new ArrayList<>();
+               
+                do {
+                      cropEstimate ce=new cropEstimate();
+                    ce.setYear(rs.getInt("year"));
+                    ce.setActual(rs.getDouble("production"));
+                    list.add(ce);
+                } while (rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(CropEstimateDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
+    public ArrayList<Integer> getAllDistinctYrsHistProd() {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select Distinct(year) from historicalproduction order by year;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<Integer> list = null;
+
+            if (rs.next()) {
+                list = new ArrayList<>();
+                do {
+                    list.add(rs.getInt("year"));
+                } while (rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(CropEstimateDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
     }
 
     public boolean addKPIs(ArrayList<programsKPI> kpis) {
@@ -171,7 +314,7 @@ public class ProgramsDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select pg.name,pg.date_created, count(pf.fields_id) as count from programs pg join `programs-problems` pp on pg.name=pp.programs_name join `problems-fields` pf on pp.problems_id=pf.problems_id group by pg.name;";
+            String query = "select pg.name,pg.date_created,pg.date_end, count(pf.fields_id) as count from programs pg join `programs-problems` pp on pg.name=pp.programs_name join `problems-fields` pf on pp.problems_id=pf.problems_id group by pg.name;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             ResultSet rs = pstmt.executeQuery();
             ArrayList<Programs> list = null;
@@ -181,12 +324,23 @@ public class ProgramsDB {
                 do {
                     p = new Programs();
                     p.setProg_name(rs.getString("name"));
-                    if(rs.getDate("date_created")==null){
-                      p.setDate_created(StringtoSQLDate("23/06/2015"));   
-                    }else{
-                           p.setDate_created(  rs.getDate("date_created"));
+                    if (rs.getDate("date_created") == null) {
+                        p.setDate_created(StringtoSQLDate("23/06/2015"));
+                    } else {
+                        p.setDate_created(rs.getDate("date_created"));
                     }
-                 
+                    if (rs.getDate("date_end") == null) {
+                        p.setDate_end(StringtoSQLDate("23/06/2018"));
+                    } else {
+                        p.setDate_end(rs.getDate("date_end"));
+                    }
+                    ArrayList<programsKPI> kpis = viewProg1Targets(p.getProg_name());
+                    if (kpis != null) {
+                        p.setProgress(viewProgramProgress(kpis));
+                    } else {
+                        p.setProgress(0);
+                    }
+
                     p.settFarms(rs.getInt("count"));
                     list.add(p);
                 } while (rs.next());
@@ -207,7 +361,7 @@ public class ProgramsDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select * from programs where name=?;";
+            String query = "select pg.name,pg.date_created,pg.date_initial,pg.date_end,pg.description,pg.status,count(pf.fields_id) as count from programs pg join `programs-problems` pp on pg.name=pp.programs_name join `problems-fields` pf on pp.problems_id=pf.problems_id where pg.name=? group by pg.name;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, prog_name);
             ResultSet rs = pstmt.executeQuery();
@@ -223,7 +377,7 @@ public class ProgramsDB {
                 p.setDescription(rs.getString("description"));
                 p.setType(rs.getString("status"));
                 //p.setProgress(rs.getInt("progress"));
-                // p.settFarms(rs.getInt("count"));
+                p.settFarms(rs.getInt("count"));
 
             }
             rs.close();
@@ -328,6 +482,40 @@ public class ProgramsDB {
 //        }
 //        return null;
 //    }
+
+    public Double viewProgramProgress(ArrayList<programsKPI> kpi) {
+        if (kpi != null) {
+
+            ArrayList<Double> perc = new ArrayList();
+            for (int i = 0; i < kpi.size(); i++) {
+                for (int b = 0; b < kpi.get(i).getValues().size(); b++) {
+                    double suma = 0, sum = 0, chkr = 0;
+                    sum = kpi.get(i).getValues().get(b);
+                    suma = kpi.get(i).getaValues().get(b);
+                    chkr = (suma / sum) * 100.0;
+                    if (chkr > 100.0) {
+                        chkr = 100.0;
+                    }
+                    perc.add(chkr);
+                }
+            }
+
+            double fin = 0, tavg = 0;
+            for (int i = 0; i < perc.size(); i++) {
+                fin += perc.get(i);
+            }
+            tavg = fin / perc.size();
+            DecimalFormat df = new DecimalFormat(".##");
+            double fnal = Double.parseDouble(df.format(tavg));
+            if (fnal > 100.0) {
+                fnal = 100;
+            }
+
+            return fnal;
+        } else {
+            return null;
+        }
+    }
 
     public ArrayList<programsKPI> viewProg1Targets(String prog_name) {
         try {

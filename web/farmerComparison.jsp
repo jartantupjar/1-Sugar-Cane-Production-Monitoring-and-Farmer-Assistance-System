@@ -37,7 +37,7 @@ on barangay selection
                 <section class="content-header">
 
                     <h1>
-                        Farm Observation
+                        Farm Profile
                         <small>Optional description</small>
                     </h1>
                 </section>
@@ -350,19 +350,19 @@ on barangay selection
                                     </div>
                                 </div>
                             </div>
+                         
+
                         </div>
-                        <div class="col-md-12">
-                            <!--<label class="pull-left">Multiple</label> !-->
+                             <div class="col-md-offset-5 col-sm-2 ">
+
+                                <button id="obsrvButton" class="btn btn-info btn-block" type="button" style="height: 6%;">Create New Observation</button>
+                            </div>                      
+                        <div id="observBlock" class="col-md-12 hidden">
+                                <h1> Farm Observation</h1>
                             <div class="col-md-7">
                                 <div class="form-group">
                                     <select id="select2" class="select2" multiple="multiple" data-placeholder="Select a Tag" style="width: 100%;">
-                                        <!--                                    <option>Yield</option>
-                                                                            <option>Total Size</option>
-                                                                            <option>Variety</option>
-                                                                            <option>Brix</option>
-                                                                            <option>Farming System</option>
-                                                                            <option>Texas</option>
-                                                                            <option>Washington</option>-->
+                                  
                                     </select>
                                 </div>
                             </div>
@@ -454,13 +454,19 @@ on barangay selection
                     type: 'POST',
                     dataType: "JSON",
                     success: function (data) {
-                        alert(data);
+//                        alert(data);
                   
                         $("#select2").select2({
                             data: data
                         });
                          
                     }});
+
+                $("#obsrvButton").on("click", function () {
+                      $('#observBlock').removeClass('hidden');
+                      $('#obsrvButton').addClass('hidden');
+                      
+                });
 
                 //  var data = ['enhancement', 'bug', 'duplicate','invalid', 'wontfix'];                          
                 // var data = [{text: 'enhancement'}, {text: 'bug'}, {text: 'duplicate'}, {text: 'invalid'}, {text: 'wontfix'}];      

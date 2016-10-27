@@ -63,6 +63,39 @@ public class fixedRecDB {
         }
         return null;
     }
+    
+    public ArrayList<Recommendation> viewProblemTableList() {
+        try {
+            // put functions here : previous week production, this week production
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT r.id, r.recommendation,count(rf.Recommendations_id) as counter, r.description from recommendations r join `recommendations-fields` rf on r.id = rf.Recommendations_id group by r.id;;";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            ArrayList<Recommendation> list = null;
+            Recommendation r;
+            if (rs.next()) {
+                list = new ArrayList<Recommendation>();
+                do {
+
+                    r = new Recommendation();
+                    r.setId(rs.getInt("id"));
+                    r.setRecommendation_name(rs.getString("recommendation"));
+                    r.setCounter(rs.getInt("counter"));
+                    r.setDescription(rs.getString("description"));
+                    list.add(r);
+                } while (rs.next());
+            }
+            rs.close();
+            stmt.close();
+            conn.close();
+
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProblemsDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 
     public ArrayList<FarmRecTable> viewFarmRecTable(int id) {
         try {

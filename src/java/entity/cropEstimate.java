@@ -14,8 +14,8 @@ import java.util.ArrayList;
  */
 public class cropEstimate {
     private int year;
-    private double area,actual,forecasted,forecast2,forecast3,difference;
-    private String district,municipality, rainfall;
+    private double area,actual,forecasted,forecast2,forecast3,difference,rainfall,tiller,temp;
+    private String district,municipality;
     private Date week_ending;
     private ArrayList<MonthlyCropEstimate> monthcropest;
 
@@ -89,19 +89,7 @@ public class cropEstimate {
         this.district = district;
     }
 
-    /**
-     * @return the rainfall
-     */
-    public String getRainfall() {
-        return rainfall;
-    }
 
-    /**
-     * @param rainfall the rainfall to set
-     */
-    public void setRainfall(String rainfall) {
-        this.rainfall = rainfall;
-    }
 
     /**
      * @return the week_ending
@@ -185,6 +173,48 @@ public class cropEstimate {
      */
     public void setMonthcropest(ArrayList<MonthlyCropEstimate> monthcropest) {
         this.monthcropest = monthcropest;
+    }
+
+    /**
+     * @param rainfall the rainfall to set
+     */
+    public void setRainfall(double rainfall) {
+        this.rainfall = rainfall;
+    }
+
+    /**
+     * @return the rainfall
+     */
+    public double getRainfall() {
+        return rainfall;
+    }
+
+    /**
+     * @return the tiller
+     */
+    public double getTiller() {
+        return tiller;
+    }
+
+    /**
+     * @param tiller the tiller to set
+     */
+    public void setTiller(double tiller) {
+        this.tiller = tiller;
+    }
+
+    /**
+     * @return the temp
+     */
+    public double getTemp() {
+        return temp;
+    }
+
+    /**
+     * @param temp the temp to set
+     */
+    public void setTemp(double temp) {
+        this.temp = temp;
     }
     
 }

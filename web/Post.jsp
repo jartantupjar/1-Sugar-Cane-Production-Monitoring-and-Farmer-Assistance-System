@@ -31,7 +31,7 @@
                     <div class="col-md-12" > 
                         <div class="box box-info">
                             <div class="box-header with-border">
-                                <h1 class="box-title"><c:out value="${post.message}">${post.message}</c:out></h1>
+                                <h1 class="box-title"><c:out value="${post.title}">${post.title}</c:out></h1>
                                 <div class="box-tools pull-right">
                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                     <!-- In box-tools add this button if you intend to use the contacts pane -->
@@ -53,24 +53,37 @@
             <div class="box-body">
               <img class="img-responsive pad" src="dist/img/weeds.jpg" alt="Photo">
 
-              <p>${post.message}</p>
-              <p>${post.id_and_status}</p>
+              <p><b>${post.message}</b></p>
+              <div>
+                  
               <c:if test="${post.status == 'Pending'}">
-                  <form name="approve" id="approve" action="ApprovePost?id="${post.id_and_status}>
-                      <a type="button" class="btn btn-success " id="approve" href="javascript: approvePost()"><i class="fa fa-check"></i> Approve </a>
-                  </form>
-              <form name="approve" action="RejectPost?id=${post.id_and_status}">
-              <a type="button" class="btn btn-danger " id="reject"><i class="fa fa-times"></i> Reject </a>
-              </form>
+                  <div class="col-md-0 pull-left">
+                      <form name="approve"  action="ApprovePost">
+                         <input type="text" value="${post.id_and_status}" name="postd" hidden="true">
+                          <button type="submit" class="btn btn-success pull-right" style="width: 100%" id="b_approve" name="b_approve" value="submit"><i class="fa fa-check"></i> Approve</button>
+                      </form>
+                  </div>
+                          <div class="col-md-1 pull-left">
+                          <form name="reject" action="RejectPost">
+                          <input type="text" value="${post.id_and_status}" name="postd" hidden="true">
+                          <button type="submit" class="btn btn-danger pull-right" style="width: 100%" id="b_approve"  name="b_approve" value="submit"><i class="fa fa-times"></i> Reject</button>
+                      </form>
+                          </div>
               </c:if>
-              <c:if test="${post.prob_id == null && post.recom_id == null}">
-              <button type="button" class="btn btn-warning pull-right " id="problem"><i class="fa fa-warning "></i> Create Problem </button>
-              <button type="button" class="btn btn-primary pull-right "id="recommentaion"><i class="fa fa-gear"></i>Create Recommendation </button>
+                  </div>
+                  <div class="col-md-10 form-group">
+              <c:if test="${post.prob_id == 0 && post.recom_id == 0}">
+                  <a href="createNewProblem.jsp" class="btn btn-warning"><i class="fa fa-warning "></i> Create Problem </a>
+                  <a href="createNewRecommendation.jsp" class="btn btn-primary"><i class="fa fa-gear "></i> Create Recommendation </a>
               </c:if>
+                  </div>
+              
             </div>
             <!-- /.box-body -->
             <div class="box-footer box-comments">
+                <c:set var="com" value="${comments}"></c:set>
                 <c:forEach var="comments" items="${comments}">
+                    <c:if test="${comments.comment_message != null}">
               <div class="box-comment">
                 <!-- User image -->
                 <img class="img-circle img-sm" src="dist/img/user3-128x128.jpg" alt="User Image">
@@ -85,7 +98,9 @@
                 <button type="button" class="btn btn-default btn-xs pull-right"><i class="fa fa-share"></i><a href="createNewRecommendation.jsp">Create Recommendation</a></button>
                 <!-- /.comment-text -->
               </div>
+                </c:if>
               </c:forEach>
+                
             </div>
           </div>
           <!-- /.box -->
@@ -103,12 +118,6 @@
         <script src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="dist/js/app.min.js"></script>
-        <script type="text/javascript">
-        var approve = document.getElementById("approve");
-        approve.onclick = function(){
-            alert("It worked?");
-             document.forms["approve"].submit();
-        };    
-        </script>
+        
     </body>
 </html>

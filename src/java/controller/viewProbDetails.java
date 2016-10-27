@@ -6,7 +6,9 @@
 package controller;
 
 import db.ProblemsDB;
+import db.fixedRecDB;
 import entity.Problems;
+import entity.Recommendation;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -42,15 +44,26 @@ public class viewProbDetails extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             Problems prob = new Problems();
             int i = Integer.parseInt(request.getParameter("id"));
+            fixedRecDB recDB = new fixedRecDB();
             ProblemsDB probDB = new ProblemsDB();
             Problems p = probDB.getProblemsDetails(i);
+            Recommendation r;
+            ArrayList<Recommendation> recomList = probDB.getAllSolutions(p.getProb_id());
             ArrayList<Problems> probList = null;
+            ArrayList<Recommendation> solution = new ArrayList<Recommendation>();
+            for (int j = 0; j < recomList.size(); j++){
+                r = new Recommendation();
+                r = recDB.viewRecDetails(recomList.get(j).getId());
+                solution.add(r);
+            }
             if(p != null){
+                p.settSolutions(recomList.size());
                 probList = new ArrayList<Problems>();
                 probList = probDB.showProblembyFarm(i);
                 HttpSession session = request.getSession();
                 session.setAttribute("problem", p);
                 session.setAttribute("probid", i);
+                session.setAttribute("solution", solution);
                 ServletContext context = getServletContext();
                 RequestDispatcher rd = context.getRequestDispatcher("/viewProblemDetails.jsp");
                 rd.forward(request, response);

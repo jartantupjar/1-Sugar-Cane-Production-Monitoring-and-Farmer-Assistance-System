@@ -12,7 +12,8 @@ import java.sql.Date;
  * @author Bryll Joey Delfin
  */
 public class Recommendation {
-    private int id ;
+    private Integer id , counter;
+    private int config;
     private double trigger_num;
     private String recommendation_name, type, description, status, phase;
    
@@ -131,20 +132,6 @@ public class Recommendation {
     }
 
     /**
-     * @return the id
-     */
-    public int getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    /**
      * @return the trigger_num
      */
     public double getTrigger_num() {
@@ -171,4 +158,48 @@ public class Recommendation {
     public void setTrigger_date(Date trigger_date) {
         this.trigger_date = trigger_date;
     }
+
+    /**
+     * @return the config
+     */
+    public int getConfig() {
+        return config;
+    }
+
+    /**
+     * @param config the config to set
+     */
+    public void setConfig(int config) {
+        this.config = config;
+    }
+
+    /**
+     * @return the id
+     */
+    public Integer getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    /**
+     * @return the counter
+     */
+    public Integer getCounter() {
+        return counter;
+    }
+
+    /**
+     * @param counter the counter to set
+     */
+    public void setCounter(Integer counter) {
+        this.counter = counter;
+    }
+
+    
 }

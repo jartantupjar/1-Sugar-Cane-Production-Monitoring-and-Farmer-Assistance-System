@@ -128,60 +128,7 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                                 <!-- /.box-body -->
                             </div>    
                         </div>
-                        <div class="col-md-12">
-                            <!-- LINE CHART -->
-                            <div class="box box-info">
-                                <div class="box-header with-border">
-                                    <h3 class="box-title">#Farms Details</h3>
-
-                                    <div class="box-tools pull-right">
-                                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                    </div>
-                                </div>
-                                <div class="box-body table-responsive">
-
-                                    <table id="fieldtable" class="table table-hover">
-                                        <thead><tr>
-                                                <th>id</th>
-                                                <th>Barangay</th>
-                                                <th>Municipality</th>
-                                                <th>Date Updated</th>
-                                                <th>Area</th>
-                                                <th>Yield</th>
-                                                <th>% completed</th>
-                                                <th>Cane Variety</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-<!--                                        <tr>
-                                            <td >henry ford</td>
-                                            <td>1.23</td>
-                                            <td>80%</td>
-                                            <td>
-                                                <div class="progress-group">
-
-
-                                                    <span class="progress-number"><b>6 %</b></span>  <div class="progress progress-sm progress-striped active">
-                                                        <div class="progress-bar progress-bar-primary" style="width: 30%"></div>
-                                                    </div>
-                                                </div>  closer of progress bars   
-                                            </td>
-                                            <td>TPEH43</td>
-                                            <td>3%</td>
-                                            <td>77%</td>
-                                            <td>detailsbtn</td>
-                                        </tr>-->
-
-                                   
-                                    </table>
-
-
-                                </div>
-                                <!-- /.box-body -->
-                            </div>
-                        </div>
+                        
                         <div class="col-md-6" > 
                             <div class="box box-info">
                                 <div class="box-header with-border">
@@ -236,7 +183,40 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
 
                         </div>
 
+<div class="col-md-12">
+                            <!-- LINE CHART -->
+                            <div class="box box-info">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">#Farms Details</h3>
 
+                                    <div class="box-tools pull-right">
+                                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                    </div>
+                                </div>
+                                <div class="box-body table-responsive">
+
+                                    <table id="fieldtable" class="table table-hover">
+                                        <thead><tr>
+                                                <th>id</th>
+                                                <th>Barangay</th>
+                                                <th>Municipality</th>
+                                                <th>Date Updated</th>
+                                                <th>Area</th>
+                                                <th>Yield</th>
+                                                <th>% completed</th>
+                                                <th>Cane Variety</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                   </table>
+
+
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
+                        </div>
                     </div>
                 </section>
 

@@ -100,7 +100,7 @@ public class ForumDB {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT p.id,p.Farmers_name,p.message,p.date_started,p.date_posted, p.status, p.Recommendations_id, p.Problems_id ,c.Farmers_name as 'commentor',c.message as 'comments',c.date as 'date_comment' FROM posts p left join comments c on p.id = c.Posts_id where p.id = ? ; ;";
+            String query = "SELECT p.id,p.Farmers_name,p.message,p.date_started,p.date_posted,p.title ,p.status, p.Recommendations_id, p.Problems_id ,c.Farmers_name as 'commentor',c.message as 'comments',c.date as 'date_comment' FROM posts p left join comments c on p.id = c.Posts_id where p.id = ? ; ;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1,id);
             ResultSet rs = pstmt.executeQuery();
@@ -111,6 +111,7 @@ public class ForumDB {
                     do {
                         f = new Forum();
                         f.setId(rs.getInt("id"));
+                        f.setTitle(rs.getString("title"));
                         f.setFarmer(rs.getString("Farmers_name"));
                         f.setMessage(rs.getString("message"));
                         f.setDate_started(rs.getDate("date_started"));
@@ -133,6 +134,40 @@ public class ForumDB {
                 pstmt.close();
                 conn.close();            
             return f;
+                 }catch (SQLException ex) {
+            Logger.getLogger(ForumDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public Integer approvePost(Integer id){
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "update posts set status = 'Accepted' where id = ?  ;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1,id);
+            int check = pstmt.executeUpdate();
+                System.out.println(check + " This is the test");
+                pstmt.close();
+                conn.close();            
+            return check;
+                 }catch (SQLException ex) {
+            Logger.getLogger(ForumDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public Integer rejectPost(Integer id){
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "update posts set status = 'Rejected' where id = ?  ;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1,id);
+            int check = pstmt.executeUpdate();
+                System.out.println(check + " This is the test");
+                pstmt.close();
+                conn.close();            
+            return check;
                  }catch (SQLException ex) {
             Logger.getLogger(ForumDB.class.getName()).log(Level.SEVERE, null, ex);
         }

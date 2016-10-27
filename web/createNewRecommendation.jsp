@@ -61,30 +61,11 @@
                                                 <option>Pest and Disease Control</option>
                                             </select>
                                         </div>
-                                        <div  class="form-group">
-                                            <label class="control-label" for="datepicker" >Date Start:</label>
-                                            <div class="input-group date">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-calendar"></i>
-                                                </div>
-                                                <input type="text" class="form-control pull-right datepicker" name="datepicker" id="datepickerstart">
-                                            </div>
-                                            <!-- /.input group -->
+                                        <div class="form-group">
+                                            <label>Configuration </label>
+                                            <textarea class="form-control" name="config" rows="2" id="config"  placeholder="Enter ..."></textarea>
                                         </div>
-
-
-
-                                        <div  class="form-group">
-                                            <label class="control-label" for="dateend" >Date End:</label>
-                                            <div class="input-group date">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-calendar"></i>
-                                                </div>
-                                                <input type="text" class="form-control pull-right datepicker" name="dateend" id="datepickerend">
-                                            </div>
-                                            <!-- /.input group -->
-                                        </div>
-
+                                        
                                         <div class="form-group">
                                             <label>Description</label>
                                             <textarea class="form-control" name="description" rows="2" id="description"  placeholder="Enter ..."></textarea>
@@ -108,7 +89,7 @@
                                         <table id="probTable" class="table  dispTable table-hover" cellspacing="0" width="100%">
                                             <thead>
                                                 <tr>
-                                                    <th><input name="select_all" value="1" id="probTable-select-all" type="checkbox" /></th>
+                                                    <th></th>
                                                     <th>Problem</th>
                                                     <th>Description</th>
                                                     <th>Total Farms Affected</th>
@@ -120,7 +101,7 @@
                                 </div>
                             </div> 
 
-                            <div class="col-md-2">                   
+                            <div class="col-md-3">                   
                                 <p><button class="btn btn-primary" style="width: 100%" type="submit"  value="submit">Create</button></p>
                             </div>
                         </form>

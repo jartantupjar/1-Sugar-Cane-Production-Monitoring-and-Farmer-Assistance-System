@@ -120,6 +120,7 @@
             <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu" style="display: none;">
+           <li class="active"><a href="Homepage_Board.jsp"><i class="fa fa-link"></i><span>Board Home</span></a></li>
            <li class="active"><a href="#"><i class="fa fa-link"></i><span>Weekly Statistics</span></a></li>
            <li><a href="#"><i class="fa fa-link"></i><span>Pampanga Performance (Summary)</span> </a></li>
            <li><a href="#"><i class="fa fa-link"></i><span>Weather Trends</span> </a></li>
