@@ -39,6 +39,7 @@ public class CropAssessmentDB {
                     c.setThisTons_Cane(rs.getDouble("actual"));
                     c.setEstiTons_Cane(rs.getDouble("forecasted"));
                     c.setThisArea(rs.getDouble("area"));
+                    c.setWeek_ending(rs.getDate("week_ending"));
                     cT.add(c);
                 } while (rs.next());
             }
@@ -47,6 +48,87 @@ public class CropAssessmentDB {
             conn.close();
             
             return cT;
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(CropAssessmentDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public Double getTotalEstimatedTonsCane(int year) {
+        try {
+            // put functions here : previous week production, this week production
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT sum(forecasted) as 'total' FROM weeklyestimate where year = ? ;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, year);
+            ResultSet rs = pstmt.executeQuery();
+            Double tc = 0.00;
+            if (rs.next()) { 
+                    tc = rs.getDouble("total");
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            
+            return tc;
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(CropAssessmentDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0.00;
+    }
+    public Double getTotalEstimatedArea(int year) {
+        try {
+            // put functions here : previous week production, this week production
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT sum(area) as 'total' FROM cropestimatedistrict where year = ? ;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, year);
+            ResultSet rs = pstmt.executeQuery();
+            Double area = 0.00;
+            if (rs.next()) { 
+                    area = rs.getDouble("total");
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            
+            return area;
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(CropAssessmentDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0.00;
+    }
+    public ArrayList<CropAssessment> getRainFall(int weekofyear, int year) {
+        try {
+            // put functions here : previous week production, this week production
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT *  FROM weeklyestimate where year = ? and id between ? and ?";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            int id = getWeeklyEstimateID(weekofyear, year);
+            pstmt.setInt(1, year);
+            pstmt.setInt(2, id);
+            int consid = id+3;
+            pstmt.setInt(3, consid);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<CropAssessment> rainfall = null;
+            CropAssessment rain;
+            if (rs.next()) { 
+                 rainfall = new ArrayList<>();
+                do {
+                    rain = new CropAssessment();
+                    rain.setRainfall(rs.getDouble("rainfal"));
+                    rain.setWeek_ending(rs.getDate("week_ending"));
+                    rainfall.add(rain);
+                    
+                } while (rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            
+            return rainfall;
         } catch (SQLException ex) {
             java.util.logging.Logger.getLogger(CropAssessmentDB.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -1,20 +1,20 @@
 <%@include file="security.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@include file ="navbar.jsp" %>
+
 <html>
     <head>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>SRA | Home</title>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
        <link href="plugins/pace2/pace-theme-barber-shop.css" rel="stylesheet" />
+       <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css"> 
           <link rel="stylesheet" href="plugins/select2/select2.min.css">
        
         
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
-
         <div class="wrapper">
-
+            <%@include file ="navbar.jsp"%>
             <div class="content-wrapper">
                 <section class="content-header">
                     <h1>
@@ -23,19 +23,32 @@
                 </section>
                 <section class="content">
 <div class="row">
-                    <div class="col-md-6" > 
-                        <div class="box box-info">
-                            <div class="box-header with-border">
-                                <h1 class="box-title">Yield of the week :  ${ca.percArea}</h1>
-                                <div class="box-tools pull-right">
-                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                </div>
-                            </div>   
-                            <div class="box-body no-padding" id="container-rpm"></div>
-                        </div>
+    <div class="col-md-12"> 
+        <div class="box box-info">
+            <div class="box-header with-border">
+                <h1 class="box-title">Crop Estimate :</h1>
+                <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                </div>
+            </div>   
+            <div class="box-body">
+                <table id="munitable" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th style="width: 5%">Year</th>
+                            <th>Week Ending</th>
+                            <th>Harvest Area</th>
+                            <th>Actual Production</th>
+                            <th>Estimated Production</th>
+                            <th>% Difference</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
 
-                    </div>
+    </div>
 
                     <div class="col-md-12" > 
                         <div class="box box-info" style="height:120%">
@@ -88,19 +101,19 @@
                                         <c:forEach var="ca" items="${CropAss}">
                                         <tr>	
                                             <td>${ca.particulars}</td>
-                                            <td>wala pa</td>
-                                            <td>${ca.prevArea}</td>
-                                            <td>${ca.thisArea}</td>
-                                            <td>${ca.todateArea}</td>
+                                            <td>${ca.estimated}</td>
+                                            <td>${ca.previous}</td>
+                                            <td>${ca.thisweek}</td>
+                                            <td>${ca.todate}</td>
                                             <td>
                                                 <div class="progress-group" >
                                                     <span class="progress-number">
                                                         <b>
-                                                            ${ca.percArea}%
+                                                            ${ca.percent}%
                                                         </b>
                                                     </span>
                                                             <div class="progress progress-sm progress-striped-active">
-                                                                <div class="progress-bar progress-bar-primary" style="width : ${ca.percArea}%"></div>
+                                                                <div class="progress-bar progress-bar-primary" style="width : ${ca.percent}%"></div>
                                                                 </div>
                                                             </div>
                                                         </b>
@@ -125,16 +138,19 @@
 
                             <div class="box-body no-padding">
                                 <table class="table table-bordered" >
-                                    <tbody>
+                                    <thead>
                                         <tr>
                                             <th>Particulars</th>
                                             <th>Estimated Production</th>	
                                         </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach var="ca" items="${CropAss}">
                                         <tr>	
-                                            <td>Area</td>
-                                            <td>800.00</td>
-
+                                            <td>${ca.particulars}</td>
+                                            <td>${ca.standing}</td>
                                         </tr>
+                                        </c:forEach>
                                     </tbody>
                                 </table>
                             </div>
@@ -153,19 +169,19 @@
                             </div>   
                             <div class="box-body no-padding" id="container1">
                                 <table class="table table-bordered" >
+                                    <thead>
+                                    <c:forEach var="rain" items="${rainfall}">
+                                       
+                                            <th> mm of rain of week ending : ${rain.week_ending}</th>
+                                       
+                                    </c:forEach>
+                                    </thead>
                                     <tbody>
-                                        <tr>
-                                            <th> mm of rain yesterday</th>
-                                            <th> mm of rain today</th>
-                                            <th> mm of rain tomorrow</th>
-                                            <th> mm of rain day after tom</th>
-                                        </tr>
-                                        <tr>
-                                            <td>10%</td>
-                                            <td>10%</td>
-                                            <td>10%</td>
-                                            <td>10%</td>
-                                        </tr>
+                                        <c:forEach var="r" items="${rainfall}">
+                                        
+                                            <td>${r.rainfall} mm</td>
+                                        
+                                        </c:forEach>
                                     </tbody>
                                 </table>
                             </div>
@@ -188,9 +204,11 @@
 
 
         <script type="text/javascript" src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
-  <script src="plugins/pace2/pace.min.js"></script>
-     <script src="plugins/select2/select2.full.min.js"></script>
-  <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <script src="dist/js/app.min.js"></script>
+        <script src="plugins/pace2/pace.min.js"></script>
+        <script src="plugins/select2/select2.full.min.js"></script>
+        <script src="plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
         <script></script>
   
@@ -397,11 +415,21 @@
 
             });
         </script>
+        <script>
+
+            $(document).ready(function () {
+                var table = $('#munitable').DataTable({
+                    'ajax': {
+                        'url': 'viewDistCropEstimate?year=${todayYear}' 
+                    }
+                });
+                $('#munitable').DataTable().search('${Week_ending}').draw();
+            });
 
 
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="dist/js/app.min.js"></script>
-     
+        </script>
+
+
         <script src="Highcharts/highcharts.js"></script>
         <script src="Highcharts/modules/treemap.js"></script>
         <script src="Highcharts/highcharts-more.js"></script>

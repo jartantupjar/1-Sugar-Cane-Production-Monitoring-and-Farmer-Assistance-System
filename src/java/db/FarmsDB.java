@@ -371,8 +371,8 @@ public class FarmsDB {
  
             ResultSet rs = pstmt.executeQuery();
              Farm f=null;
- if (rs.next()) {
-                  f=new Farm();
+               if (rs.next()) {
+               f=new Farm();
                f.setId(Integer.parseInt(id));
                f.setFarmer(rs.getString("Farmers_name"));
                f.setBarangay(rs.getString("barangay"));

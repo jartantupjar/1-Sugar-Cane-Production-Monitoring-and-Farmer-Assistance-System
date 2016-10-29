@@ -41,8 +41,9 @@
                                 <table id="myTable1" class="table table-striped table-bordered" cellspacing="10" width="100%">
                                     <thead>
                                         <tr>
-                                            <th>Title</th>
+                                            <th>Topic</th>
                                             <th>Name</th>
+                                            <th>Problem</th>
                                             <th>Counter</th>
                                             <th>Status</th>
                                             <th>Date</th>
@@ -59,6 +60,7 @@
                                             
                                             <th>Title</th>
                                             <th>Name</th>
+                                            <th>Problem</th>
                                             <th>Counter</th>
                                             <th>Status</th>
                                             <th>Date</th>
@@ -75,6 +77,7 @@
                                             
                                             <th>Title</th>
                                             <th>Name</th>
+                                            <th>Problem</th>
                                             <th>Counter</th>
                                             <th>Status</th>
                                             <th>Date</th>
@@ -111,7 +114,7 @@
                     scrollCollapse: true,
                     paging: false,
                     'columnDefs': [{
-                        'targets': 5,
+                        'targets': 6,
                         'searchable': false,
                         'orderable': false,
                         'render': function (data, type, full, meta) {

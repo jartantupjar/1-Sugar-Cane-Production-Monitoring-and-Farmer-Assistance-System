@@ -117,7 +117,7 @@
                     events: {
                         click: function () {
                             alert('Date : '+ this.x);
-                         location.href = 'oneWeekView.jsp';
+                         location.href = 'RegionWeekView.jsp';
                         }
                     }
                 }
@@ -135,6 +135,28 @@
                  }
 
 });
+        </script>
+        <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+        <script>
+
+            $(document).ready(function () {
+                var table = $('#example').DataTable({
+                    'ajax': {
+                        'url': '#'
+                    },
+                    'columnDefs': [{
+                            'targets': 6,
+                        
+                            'render': function (data, type, full, meta) {
+                                return '<a href="viewProbDetails?id=' + data + '" class="btn btn-primary">More Details</a>';
+                            }
+                            
+                        }]
+                });
+            });
+
+
         </script>
     </body>
 </html>

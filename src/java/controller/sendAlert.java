@@ -9,6 +9,7 @@ import db.ProblemsDB;
 import entity.Problems;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -38,10 +39,22 @@ public class sendAlert extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             
             Problems p = new Problems();
+            Problems p1 = new Problems();
             ProblemsDB pdb = new ProblemsDB();
-            int i = Integer.parseInt(request.getParameter("id"));
+            String line = request.getParameter("id");
+            String[] para = line.split(",");
+            int i = Integer.parseInt(para[0]);
+            String barangay = para[1];
             p = pdb.getAlertDetails(i);
-                HttpSession session = request.getSession();
+            HttpSession session = request.getSession();
+            String muni = (String) session.getAttribute("municipality");
+            System.out.println(muni+ " THIS IS THE MUNI :");
+            ArrayList<Problems> pList = new ArrayList<Problems>();
+            pList = pdb.getSpecificDisastersListByBarangay(i, muni, barangay);
+            if(pList != null){
+                int totalf = pList.get(0).getTotalFields() - pList.get(0).getTotalFarms();
+                p.setTotalFarms(totalf);
+            }
                 session.setAttribute("problem", p);
                 ServletContext context = getServletContext();
                 RequestDispatcher rd = context.getRequestDispatcher("/sendAlert.jsp");

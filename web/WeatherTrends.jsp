@@ -30,6 +30,8 @@
                             <div class="form-group">
                                             <label>Year</label>
                                             <select class="form-control" id="year1">
+                                                <option>2012</option>
+                                                <option>2013</option>
                                                 <option>2014</option>
                                                 <option>2015</option>
                                                 <option>2016</option>
@@ -54,6 +56,8 @@
                             <div class="form-group">
                                             <label>Year</label>
                                             <select class="form-control" id="year2">
+                                                <option>2012</option>
+                                                <option>2013</option>
                                                 <option>2014</option>
                                                 <option>2015</option>
                                                 <option>2016</option>
@@ -94,6 +98,86 @@
             $(function () {    
             var sel = document.getElementById('year1');
             var sv = sel.options[sel.selectedIndex].value;
+            
+            $.ajax({
+                    url: "viewWeatherTrends?id="+${todayYear},
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function(data){
+                        
+                        console.log(data[1].prod);
+                        
+                         $('#container2').highcharts({
+                    chart: {
+                        zoomType: 'xy'
+                    },
+                    title: {
+                        text: 'Annual Rainfall and Production Trends Year : ' + '( ' + ${todayYear} + ' )'
+                    },
+                    xAxis: [{
+                            categories: data[0].months,
+                            crosshair: true
+                        }],
+                    yAxis: [{// Primary yAxis
+                            labels: {
+                                format: '{value} MM',
+                                style: {
+                                    color: Highcharts.getOptions().colors[1]
+                                }
+                            },
+                            title: {
+                                text: 'Rainfall',
+                                style: {
+                                    color: Highcharts.getOptions().colors[1]
+                                }
+                            }
+                        }, {// Secondary yAxis
+                            title: {
+                                text: 'Growth',
+                                style: {
+                                    color: Highcharts.getOptions().colors[0]
+                                }
+                            },
+                            labels: {
+                                format: '{value} TC',
+                                style: {
+                                    color: Highcharts.getOptions().colors[0]
+                                }
+                            },
+                            opposite: true
+                        }],
+                    tooltip: {
+                        shared: true
+                    },
+                    legend: {
+                        layout: 'vertical',
+                        align: 'left',
+                        x: 120,
+                        verticalAlign: 'top',
+                        y: 100,
+                        floating: true,
+                        backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+                    },
+                    series: [{
+                            name: 'Production',
+                            type: 'column',
+                            yAxis: 1,
+                            data: data[1].prod,
+                            tooltip: {
+                                valueSuffix: 'TC'
+                            }
+
+                        }, {
+                            name: 'Rainfall',
+                            type: 'spline',
+                            data: data[2].rain,
+                            tooltip: {
+                                valueSuffix: 'MM'
+                            }
+                        }]
+                });
+                    }
+                });   
             sel.onchange = function(){
                 var sl = sel.options[sel.selectedIndex].value;
                 alert(sl);
@@ -111,7 +195,7 @@
                         zoomType: 'xy'
                     },
                     title: {
-                        text: 'Annual Rainfall and Growth Trends (2015-201)'
+                        text: 'Annual Rainfall and Production Trends Year : ' + '( ' + sv + ' )'
                     },
                     xAxis: [{
                             categories: data[0].months,
@@ -201,7 +285,7 @@
                         zoomType: 'xy'
                     },
                     title: {
-                        text: 'Annual Rainfall and Growth Trends (2015-201)'
+                       text: 'Annual Rainfall and Production Trends Year : ' + '( ' + sv + ' )'
                     },
                     xAxis: [{
                             categories: data[0].months,

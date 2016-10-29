@@ -9,6 +9,7 @@ import db.ProblemsDB;
 import entity.Problems;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -52,11 +53,15 @@ public class viewAlertByBarangay extends HttpServlet {
             obj.add(probT.get(i).getDate_updated().toString());
             obj.add(probT.get(i).getBarangay());
             obj.add(probT.get(i).getTotalFarms().toString());   
-            obj.add(probT.get(i).getPercent_affected().toString());
-            String id = probT.get(i).getProb_id().toString()+"-"+probT.get(i).getBarangay();
+            obj.add(probT.get(i).getTotalFields().toString());
+            DecimalFormat df = new DecimalFormat("#.##");
+            double perc = Double.valueOf(df.format(probT.get(i).getPercent_affected()));
+            obj.add(Double.toString(perc));
+            String id = probT.get(i).getProb_id().toString()+","+probT.get(i).getBarangay();
             obj.add(id);
             list.add(obj);
         }
+        session.setAttribute("municipality", municipality);
         data.put("data", list);
         response.setContentType("applications/json");
         response.setCharacterEncoding("utf-8");

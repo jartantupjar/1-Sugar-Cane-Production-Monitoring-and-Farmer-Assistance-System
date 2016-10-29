@@ -1,6 +1,6 @@
 <%-- 
-    Document   : BrgyAlertDrillDown
-    Created on : 10 13, 16, 1:35:54 PM
+    Document   : CitiesWeekView
+    Created on : 10 28, 16, 7:49:03 AM
     Author     : Bryll Joey Delfin
 --%>
 <%@include file="security.jsp" %>
@@ -12,52 +12,49 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>SRA | Home</title>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-        <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css"> 
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
-            <%@include file ="navbar.jsp" %>
+            <%@include file ="navbar2.jsp" %>
             <div class="content-wrapper">
                 <section class="content-header">
                     <h1>
-                        Disaster Report
-                        <small>Today's date : </small>
+                        Page Header
+                        <small>Optional description</small>
                     </h1>
                 </section>
                 <section class="content">
 
 
-                            <div class="box-body no-padding">
-                                <div class="col-md-12" > 
+
+                    <div class="col-md-12" > 
                         <div class="box box-info">
                             <div class="box-header with-border">
-                                <h1 class="box-title">Disaster Report</h1>
+                                <h1 class="box-title"><b>Weekly Production Statistics Report</b></h1>
                                 <div class="box-tools pull-right">
                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                     <!-- In box-tools add this button if you intend to use the contacts pane -->
                                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                 </div>
                             </div>
-                            <div class="box-body">
-                                <table id="example" class="table table-bordered" >
-                                    <thead>
-                                        <tr>
-                                            <th>Date</th>
-                                            <th>Barangay</th>
-                                            <th>Recorded Count</th>
-                                            <th>Total Fields</th>
-                                            <th>Percent Affected</th>
-                                            <th style="width: 5%">Alert</th>
-                                        </tr>
-                                        
-                                    </thead>
-                                </table>
+
+                            <div class="box-body no-padding">
+                                <table id="example" class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>District</th>
+                                                <th>Estimated Production</th>
+                                                <th>This Week (Area)</th>
+                                                <th>To Date (Area)</th>
+                                                <th>This Week (Tons Cane)</th>
+                                                <th>To Date (Tons Cane)</th>
+                                                <th>This Week (LKG)</th>
+                                                <th>To Date (LKG)</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
                             </div>
 
-                        </div>
-                    </div>
-                    
-                            </div>
                         </div>
                     </div>        
                     <br>
@@ -67,24 +64,23 @@
             </div>
 
         </div>
-        
         <script src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="dist/js/app.min.js"></script>
-        
         <script src="plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
         <script>
+
             $(document).ready(function () {
                 var table = $('#example').DataTable({
                     'ajax': {
-                        'url': 'viewAlertByBarangay'
+                        'url': '#'
                     },
                     'columnDefs': [{
-                            'targets':5,
+                            'targets': 6,
                         
                             'render': function (data, type, full, meta) {
-                                return '<a class="btn btn-primary" href="sendAlert?id='+ data +'">' +'Send Alert' +'</a>' ;
+                                return '<a href="viewProbDetails?id=' + data + '" class="btn btn-primary">More Details</a>';
                             }
                             
                         }]

@@ -32,47 +32,61 @@ public class Login extends HttpServlet {
             oneUser.setUsername(request.getParameter("username"));
             oneUser.setPassword(request.getParameter("password"));
             UsersDB myUserDB = new UsersDB();
-            CropAssessment ca = new CropAssessment();
-            CropAssessment ca2 = new CropAssessment();
+            CropAssessment ca = new CropAssessment(); //for area
+            CropAssessment ca2 = new CropAssessment(); // for tons cane
             CropAssessmentDB cadb = new CropAssessmentDB();
-            ArrayList<CropAssessment> caT = new ArrayList<CropAssessment>();
-            ArrayList<CropAssessment> prevT = new ArrayList<CropAssessment>();
-            ArrayList<CropAssessment> currT = new ArrayList<CropAssessment>();
+            ArrayList<CropAssessment> caT = new ArrayList<CropAssessment>(); //the whole report itself
+            ArrayList<CropAssessment> prevT = new ArrayList<CropAssessment>(); // gets the previous of area and tc
+            ArrayList<CropAssessment> currT = new ArrayList<CropAssessment>(); // gets the current of area and tc
             User successful = myUserDB.authenticate(oneUser);
             if (successful != null) {
                 ServletContext context = getServletContext();
                 RequestDispatcher rd = context.getRequestDispatcher("/Homepage.jsp");
                 HttpSession session = request.getSession();
-                session.setAttribute("user", successful);
-                String sdate = "2015-02-10";
+                session.setAttribute("user", successful); 
+                //start of the crop assessment report
+                String sdate = "2015-02-10"; // date of the login
                 Date todayDate = Date.valueOf(sdate);
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(todayDate);
                 int week_of_year = cal.get(Calendar.WEEK_OF_YEAR);
                 System.out.println(week_of_year);
                 int year = cal.get(Calendar.YEAR);
+                ArrayList<CropAssessment> rain = cadb.getRainFall(week_of_year,year);
                 DecimalFormat df = new DecimalFormat("#.##");   
                 currT = cadb.getCropAssessmentReportForTheWeek(week_of_year, year);
                 prevT = cadb.getPrevCropAssessmentReportForTheWeek(week_of_year, year);
+                double etc = Double.valueOf(df.format(cadb.getTotalEstimatedTonsCane(year)));
+                double eah = Double.valueOf(df.format(cadb.getTotalEstimatedArea(year)));
+                Date week_ending = currT.get(0).getWeek_ending();
                     ca.setParticulars("Area");
-                    ca.setPrevArea(prevT.get(0).getPrevArea());
-                    ca.setThisArea(currT.get(0).getThisArea());
-                    double todate = prevT.get(0).getPrevArea() + currT.get(0).getThisArea();
-                    ca.setTodateArea(todate);
-                    double percent = 0;
-                    percent = Double.valueOf(df.format(prevT.get(0).getPrevArea() / currT.get(0).getThisArea()));
-                    ca.setPercArea(percent);
+                    ca.setEstimated(eah);
+                    ca.setPrevious(prevT.get(0).getPrevArea());
+                    ca.setThisweek(currT.get(0).getThisArea());
+                    double todate = ca.getPrevious() + ca.getThisweek();
+                    ca.setTodate(todate);
+                    double percenta = 0;
+                    double percentb = 0;
+                    percenta = Double.valueOf(df.format((ca.getTodate()/eah)*100));
+                    ca.setPercent(percenta);
+                    ca.setStanding(Double.valueOf(df.format(ca.getEstimated()- ca.getTodate())));
                     caT.add(ca);
                     ca2.setParticulars("Tons Cane");
-                    ca2.setPrevArea(prevT.get(0).getPrevTons_Cane());
-                    ca2.setThisArea(currT.get(0).getThisTons_Cane());
-                    todate = prevT.get(0).getPrevTons_Cane() +currT.get(0).getThisTons_Cane();
-                    ca2.setTodateArea(todate);
-                    percent = Double.valueOf(df.format(prevT.get(0).getPrevTons_Cane()/currT.get(0).getThisTons_Cane()));
-                    ca2.setPercArea(percent);
+                    ca2.setEstimated(etc);
+                    ca2.setPrevious(prevT.get(0).getPrevTons_Cane());
+                    ca2.setThisweek(currT.get(0).getThisTons_Cane());
+                    double todate2 = ca2.getPrevious() +ca2.getThisweek();
+                    ca2.setTodate(todate2);
+                    percentb = Double.valueOf(df.format((ca2.getTodate()/etc)*100));
+                    ca2.setPercent(percentb);
+                    ca2.setStanding(Double.valueOf(df.format(ca2.getEstimated()- ca2.getTodate())));
                     caT.add(ca2);
+                    System.out.println(rain.get(0).getRainfall()+ "RAINFALL");
+                session.setAttribute("Week_ending", week_ending);
                 session.setAttribute("todayDate", todayDate);
                 session.setAttribute("CropAss", caT);
+                session.setAttribute("todayYear", year);
+                session.setAttribute("rainfall", rain);
                 rd.forward(request, response);
             } else {
                 ServletContext context = getServletContext();

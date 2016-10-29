@@ -37,8 +37,16 @@
         <servlet-class>controller.viewPostDetails</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>RejectPost</servlet-name>
+        <servlet-class>controller.RejectPost</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>viewRecList</servlet-name>
         <servlet-class>controller.viewRecList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewRecTableList</servlet-name>
+        <servlet-class>controller.viewRecTableList</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>viewRecDetails</servlet-name>
@@ -59,6 +67,10 @@
     <servlet>
         <servlet-name>createNewProgram</servlet-name>
         <servlet-class>controller.createNewProgram</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>createNewProblem</servlet-name>
+        <servlet-class>controller.createNewProblem</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>viewProgramsTable</servlet-name>
@@ -241,6 +253,10 @@
         <url-pattern>/viewProbList</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>viewRecTableList</servlet-name>
+        <url-pattern>/viewRecTableList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>getACropAssessment</servlet-name>
         <url-pattern>/getACropAssessment</url-pattern>
     </servlet-mapping>
@@ -265,8 +281,20 @@
         <url-pattern>/viewPostDetails</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>ApprovePost</servlet-name>
+        <url-pattern>/ApprovePost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RejectPost</servlet-name>
+        <url-pattern>/RejectPost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>viewFRTable</servlet-name>
         <url-pattern>/viewFRTable</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>createNewProblem</servlet-name>
+        <url-pattern>/createNewProblem</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>viewPlansProblemTable</servlet-name>

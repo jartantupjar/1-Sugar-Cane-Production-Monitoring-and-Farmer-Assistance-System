@@ -26,7 +26,7 @@ public class ProblemsDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT p.id, p.name,p.description,p.status,p.type,count(pf.Fields_id) as counter,(select count(pp.programs_name)from `programs-problems`pp where pp.problems_id=p.id) as pcounter from problems p  left join `problems-fields` pf on p.id = pf.Problems_id left join fields f on pf.Fields_id = f.id group by p.id ;";
+            String query = "SELECT p.id, p.name,p.description,pf.status,p.type,count(pf.Fields_id) as counter,(select count(pp.programs_name)from `programs-problems`pp where pp.problems_id=p.id) as pcounter from problems p  left join `problems-fields` pf on p.id = pf.Problems_id left join fields f on pf.Fields_id = f.id group by p.id ;";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             ArrayList<Problems> pT = null;
@@ -205,7 +205,7 @@ public class ProblemsDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select p.id, p.name, p.description, p.status,p.type, count(pf.Fields_id) as counter from problems p join `problems-fields` pf on p.id = pf.Problems_id where p.id = ?  ;";
+            String query = "select p.id, p.name, p.description, pf.status,p.type, count(pf.Fields_id) as counter from problems p join `problems-fields` pf on p.id = pf.Problems_id where p.id = ?  ;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
@@ -263,6 +263,7 @@ public class ProblemsDB {
         }
         return null;
     }
+    
     public ArrayList<Problems> getDisastersList() {
         try {
             // for the page of disaster alert.... shows all disaster problems (which are not subjective)
@@ -306,7 +307,7 @@ public class ProblemsDB {
             Connection conn = myFactory.getConnection();
             String query = "select t1.id, t1.type, t1.date, t1.municipality,t1.barangay,t1.recorded_count,t2.total_farms, (t1.recorded_count / t2.total_farms) * 100 as 'Percent'\n" +
                             "from\n" +
-                            "(select p.id, p.type, f.municipality, f.barangay, pf.date ,count(pf.Fields_id) as 'recorded_count'\n" +
+                            "(select p.id, p.type, f.municipality, f.barangay, pf.date,count(pf.Fields_id) as 'recorded_count'\n" +
                             "from problems p join `problems-fields` pf on p.id = pf.problems_id  join fields f on pf.Fields_id = f.id\n" +
                             "where p.type != 'Subjective' and f.municipality = ? and p.id = ?\n" +
                             "group by p.id, p.type, f.municipality, f.barangay\n" +
@@ -331,9 +332,56 @@ public class ProblemsDB {
                     p.setBarangay(rs.getString("barangay"));
                     p.setPercent_affected(rs.getDouble("Percent"));
                     p.setTotalFarms(rs.getInt("recorded_count"));
+                    p.setTotalFields(rs.getInt("total_farms"));
                     p.setProb_id(rs.getInt("id"));
                     pT.add(p);
                 } while (rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            
+            return pT;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProblemsDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public ArrayList<Problems> getSpecificDisastersListByBarangay(Integer id, String municipality,String barangay) {
+        try {
+            // for the page of disaster alert.... shows all disaster problems (which are not subjective)
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select t1.id, t1.type, t1.date, t1.municipality,t1.barangay,t1.recorded_count,t2.total_farms, (t1.recorded_count / t2.total_farms) * 100 as 'Percent'\n" +
+                            "from\n" +
+                            "(select p.id, p.type, f.municipality, f.barangay, pf.date,count(pf.Fields_id) as 'recorded_count'\n" +
+                            "from problems p join `problems-fields` pf on p.id = pf.problems_id  join fields f on pf.Fields_id = f.id\n" +
+                            "where p.type != 'Subjective' and f.municipality = ? and p.id = ? \n" +
+                            "group by p.id, p.type, f.municipality, f.barangay\n" +
+                            ") 	t1\n" +
+                            "join\n" +
+                            "(SELECT f2.barangay ,count(f2.id) as 'total_farms', f2.barangay as 'brgy' FROM fields f2 group by f2.barangay) \n" +
+                            "    t2 \n" +
+                            "on t1.barangay = t2.brgy where t1.barangay = ? ;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(2, id);
+            pstmt.setString(1, municipality);
+            pstmt.setString(3, barangay);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<Problems> pT = null;
+            Problems p;
+            if (rs.next()) { 
+                 pT = new ArrayList<Problems>();
+                    p = new Problems();
+                    p.setType(rs.getString("type"));
+                    p.setDate_updated(rs.getDate("date"));
+                    p.setMunicipality(rs.getString("municipality"));
+                    p.setBarangay(rs.getString("barangay"));
+                    p.setPercent_affected(rs.getDouble("Percent"));
+                    p.setTotalFarms(rs.getInt("recorded_count"));
+                    p.setTotalFields(rs.getInt("total_farms"));
+                    p.setProb_id(rs.getInt("id"));
+                    pT.add(p);
             }
             rs.close();
             pstmt.close();

@@ -5,6 +5,8 @@
  */
 package entity;
 
+import java.sql.Date;
+
 /**
  *
  * @author Bryll Joey Delfin
@@ -12,7 +14,9 @@ package entity;
 public class CropAssessment {
     private double prevArea, prevTons_Cane, thisArea, thisTons_Cane, todateArea, todateTonc_Cane;
     private double estiArea, estiTons_Cane, percArea, percTons_Canel;
+    private double estimated,previous,thisweek,todate,percent, standing, rainfall;
     private String particulars;
+    private Date week_ending;
     /**
      * @return the prevArea
      */
@@ -165,6 +169,118 @@ public class CropAssessment {
      */
     public void setParticulars(String particulars) {
         this.particulars = particulars;
+    }
+
+    /**
+     * @return the week_ending
+     */
+    public Date getWeek_ending() {
+        return week_ending;
+    }
+
+    /**
+     * @param week_ending the week_ending to set
+     */
+    public void setWeek_ending(Date week_ending) {
+        this.week_ending = week_ending;
+    }
+
+    /**
+     * @return the estimated
+     */
+    public double getEstimated() {
+        return estimated;
+    }
+
+    /**
+     * @param estimated the estimated to set
+     */
+    public void setEstimated(double estimated) {
+        this.estimated = estimated;
+    }
+
+    /**
+     * @return the previous
+     */
+    public double getPrevious() {
+        return previous;
+    }
+
+    /**
+     * @param previous the previous to set
+     */
+    public void setPrevious(double previous) {
+        this.previous = previous;
+    }
+
+    /**
+     * @return the thisweek
+     */
+    public double getThisweek() {
+        return thisweek;
+    }
+
+    /**
+     * @param thisweek the thisweek to set
+     */
+    public void setThisweek(double thisweek) {
+        this.thisweek = thisweek;
+    }
+
+    /**
+     * @return the todate
+     */
+    public double getTodate() {
+        return todate;
+    }
+
+    /**
+     * @param todate the todate to set
+     */
+    public void setTodate(double todate) {
+        this.todate = todate;
+    }
+
+    /**
+     * @return the percent
+     */
+    public double getPercent() {
+        return percent;
+    }
+
+    /**
+     * @param percent the percent to set
+     */
+    public void setPercent(double percent) {
+        this.percent = percent;
+    }
+
+    /**
+     * @return the standing
+     */
+    public double getStanding() {
+        return standing;
+    }
+
+    /**
+     * @param standing the standing to set
+     */
+    public void setStanding(double standing) {
+        this.standing = standing;
+    }
+
+    /**
+     * @return the rainfall
+     */
+    public double getRainfall() {
+        return rainfall;
+    }
+
+    /**
+     * @param rainfall the rainfall to set
+     */
+    public void setRainfall(double rainfall) {
+        this.rainfall = rainfall;
     }
     
 }

@@ -27,7 +27,7 @@
 
 
 
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                                 <div class="box box-solid box-success">
                                     <div class="box-header with-border">
                                         <h3 class="box-title">Problem Details</h3>
@@ -57,7 +57,7 @@
                                 </div>
                             </div>        
                
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                                 <div class="box box-solid box-success">
                                     <div class="box-header with-border">
                                         <h3 class="box-title">Message Details</h3>
@@ -65,34 +65,14 @@
                                     <br>
                                     <form id="frm-example" action="sendNotifications#">
                                     <div class="box-body">
-                                        <textarea rows="6" cols="80" form="frm-example" name="message" class="pull-left">
-                                            Enter your text here......
-                                        </textarea>
+                                        <textarea style="width: 100%" rows="6" form="frm-group" name="message" class="pull-left" placeholder="Enter your text here ...."></textarea>
                                         <button type="submit" class="btn btn-primary pull-right">Send Alerts</button>
                                     </div>
                                         
                                         </form>
                                 </div>
                             </div>
-                                            <div class="col-md-4">
-                                <div class="box box-solid box-success">
-                                    <div class="box-header with-border">
-                                        <h3 class="box-title">To Who : </h3>
-                                    </div>
-                                    <div class="box-body">
-                                        <table class="table table-hover table-no-bordered">
-                                            <tbody>
-                                                <tr>
-                                    <td>
-                                    <a class=><b><c:out value="${problem.prob_name}">${problem.prob_name}</c:out></b></a>
-                                    </td>
-                                        </tr>
-                                    </tbody>
-                                    </table>
-
-                                    </div>
-                                </div>
-                            </div> 
+                                            
 
                 </section>
 

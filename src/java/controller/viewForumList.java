@@ -7,7 +7,11 @@ package controller;
 
 import com.google.gson.JsonObject;
 import db.ForumDB;
+import db.ProblemsDB;
+import db.fixedRecDB;
 import entity.Forum;
+import entity.Problems;
+import entity.Recommendation;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -39,6 +43,8 @@ public class viewForumList extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             ForumDB fdb = new ForumDB();
+            ProblemsDB pDB = new ProblemsDB();
+            fixedRecDB recDB = new fixedRecDB();
             ArrayList<Forum> fT = new ArrayList<Forum>();
             fT = fdb.getForumsList();
             JSONObject data  = new JSONObject();
@@ -54,10 +60,14 @@ public class viewForumList extends HttpServlet {
                    if(fT.get(i).getStatus().equalsIgnoreCase("Accepted")){
                        if(fT.get(i).getProb_id()!= null){
                            Integer counter = fdb.getProblemCounter(fT.get(i).getProb_id());
+                           Problems prob = pDB.getProblemsDetails(fT.get(i).getProb_id());
+                           obj.add(prob.getProb_name());
                            obj.add(counter.toString());
                        }
                        else if(fT.get(i).getRecom_id() != null){
                          Integer counter = fdb.getRecommendationCounter(fT.get(i).getRecom_id());
+                           Recommendation recom = recDB.viewRecDetails(fT.get(i).getRecom_id());
+                          obj.add(recom.getRecommendation_name());
                           obj.add(counter.toString());
                        }
                    }

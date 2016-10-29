@@ -12,9 +12,10 @@ import java.sql.Date;
  * @author Bryll Joey Delfin
  */
 public class Problems {
-    private Integer prob_id, totalFarms, fields_id,tSolutions;
+    private Integer prob_id, totalFarms, fields_id,tSolutions, totalFields;
     private String prob_name, prob_details, barangay,municipality, status,type,impact,farmer,farm,validation,phase,user_name;
-    private Double prob_loss, percent_affected;
+    private Double prob_loss;
+    private double percent_affected;
     private Date date_updated ,date_created;
 
     /**
@@ -230,16 +231,7 @@ public class Problems {
     /**
      * @return the percent_affected
      */
-    public Double getPercent_affected() {
-        return percent_affected;
-    }
-
-    /**
-     * @param percent_affected the percent_affected to set
-     */
-    public void setPercent_affected(Double percent_affected) {
-        this.percent_affected = percent_affected;
-    }
+    
 
     /**
      * @return the tSolutions
@@ -295,5 +287,33 @@ public class Problems {
      */
     public void setUser_name(String user_name) {
         this.user_name = user_name;
+    }
+
+    /**
+     * @return the percent_affected
+     */
+    public double getPercent_affected() {
+        return percent_affected;
+    }
+
+    /**
+     * @param percent_affected the percent_affected to set
+     */
+    public void setPercent_affected(double percent_affected) {
+        this.percent_affected = percent_affected;
+    }
+
+    /**
+     * @return the totalFields
+     */
+    public Integer getTotalFields() {
+        return totalFields;
+    }
+
+    /**
+     * @param totalFields the totalFields to set
+     */
+    public void setTotalFields(Integer totalFields) {
+        this.totalFields = totalFields;
     }
 }
