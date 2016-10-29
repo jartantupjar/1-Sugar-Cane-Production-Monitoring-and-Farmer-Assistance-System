@@ -1,9 +1,7 @@
 <%@include file="security.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@include file ="navbar.jsp" %>
+
 <%--
-CREATE MUNICPAL SUMMARY
-CREATE BRGY SUMMARY
 ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
 
 
@@ -112,7 +110,6 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                                                 <th>Year</th>
                                                 <th>Total Area</th>
                                                 <th>Production</th>
-<!--                                                <th>Yield</th>-->
                                                 <th>Details</th>
                                         </tr>
                                         </thead>
