@@ -14,7 +14,7 @@
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
-            <%@include file ="navbar.jsp"%>
+     
             <div class="content-wrapper">
                 <section class="content-header">
                     <h1>
