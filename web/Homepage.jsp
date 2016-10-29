@@ -1,6 +1,6 @@
 <%@include file="security.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@include file ="navbar.jsp" %>
+
 <html>
     <head>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
