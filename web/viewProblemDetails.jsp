@@ -109,10 +109,9 @@
                                 <table class="table table-bordered" id="example">
                                     <thead>
                                         <tr>
-                                            <th>Farm</th>
+                                            <th style="width:35%">Farm</th>
                                             <th>Farmer</th>
-                                            <th>Status</th>
-                                            <th>Validation</th>	
+                                            <th>Barangay</th>
                                         </tr>
                                     </thead>
                                 </table>

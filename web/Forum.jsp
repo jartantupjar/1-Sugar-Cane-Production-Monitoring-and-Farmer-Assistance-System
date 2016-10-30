@@ -42,7 +42,6 @@
                                     <thead>
                                         <tr>
                                             <th>Topic</th>
-                                            <th>Name</th>
                                             <th>Problem</th>
                                             <th>Counter</th>
                                             <th>Status</th>
@@ -59,7 +58,6 @@
                                         <tr>
                                             
                                             <th>Title</th>
-                                            <th>Name</th>
                                             <th>Problem</th>
                                             <th>Counter</th>
                                             <th>Status</th>
@@ -76,7 +74,6 @@
                                         <tr>
                                             
                                             <th>Title</th>
-                                            <th>Name</th>
                                             <th>Problem</th>
                                             <th>Counter</th>
                                             <th>Status</th>
@@ -114,7 +111,7 @@
                     scrollCollapse: true,
                     paging: false,
                     'columnDefs': [{
-                        'targets': 6,
+                        'targets': 5,
                         'searchable': false,
                         'orderable': false,
                         'render': function (data, type, full, meta) {

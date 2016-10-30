@@ -60,7 +60,7 @@ public class ProblemsDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT * FROM sra.`recommendations-problems` where Problems_id = ?;";
+            String query = "SELECT * FROM `recommendations-problems` where Problems_id = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, prob_id);
             ResultSet rs = pstmt.executeQuery();
@@ -72,6 +72,8 @@ public class ProblemsDB {
                     r = new Recommendation();
                     r.setId(rs.getInt("Recommendations_id"));
                     rT.add(r);
+                   
+                    
                 } while (rs.next());
             }
             rs.close();
@@ -141,7 +143,7 @@ public class ProblemsDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select p.id, p.name, p.description, p.status,p.type, count(pf.Fields_id) as counter from problems p join `problems-fields` pf on p.id = pf.Problems_id where p.id = ?  ;";
+            String query = "select p.id, p.name, p.description,p.type, count(pf.Fields_id) as counter from problems p join `problems-fields` pf on p.id = pf.Problems_id where p.id = ?  ;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
@@ -152,7 +154,6 @@ public class ProblemsDB {
                     p.setProb_id(rs.getInt("id"));
                     p.setProb_name(rs.getString("name"));
                     p.setProb_details(rs.getString("description"));
-                    p.setStatus(rs.getString("status"));
                     p.setType(rs.getString("type"));
                     p.setTotalFarms(rs.getInt("counter"));
                 } while (rs.next());
@@ -236,7 +237,7 @@ public class ProblemsDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select f.Farmers_name,pf.Fields_id, p.status from problems p join `problems-fields` pf on p.id = pf.Problems_id join `fields` f on pf.Fields_id = f.id where p.id = ?  ;";
+            String query = "select f.Farmers_name,pf.Fields_id,f.barangay from problems p join `problems-fields` pf on p.id = pf.Problems_id join `fields` f on pf.Fields_id = f.id where p.id = ?  ;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
@@ -248,7 +249,8 @@ public class ProblemsDB {
                     p = new Problems();
                     p.setFields_id(rs.getInt("Fields_id"));
                     p.setFarmer(rs.getString("Farmers_name"));
-                    p.setStatus(rs.getString("status"));
+                    p.setBarangay(rs.getString("barangay"));
+                   // p.setStatus(rs.getString("status"));
                     //p.setValidation(rs.getString("validated"));
                     pT.add(p);
                 } while (rs.next());

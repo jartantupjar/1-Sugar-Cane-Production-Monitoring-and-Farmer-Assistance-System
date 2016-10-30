@@ -46,6 +46,13 @@ public class viewPostDetails extends HttpServlet {
             Forum post  = new Forum();
             post = fdb.getForumDetail(item.getId());
             comments =  fdb.getCommentDetails(item.getId());
+            if(post.getProb_id()!= null){
+                post.setName(post.getProblem_name());
+            }else if(post.getRecom_id()!= null){
+                post.setName(post.getRecommendation_name());
+            }else{
+                post.setName("N/A");
+            }
             for(int i= 0 ; i<comments.size();i++){
                 System.out.println("Farmer : " +comments.get(i).getComment_User() );
                 System.out.println("Message : " + comments.get(i).getComment_message() );

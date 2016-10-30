@@ -12,8 +12,8 @@ import java.sql.Date;
  * @author Bryll Joey Delfin
  */
 public class Forum {
-    private String farmer,message,status,comment_User, comment_message, comment_Date , title, id_and_status;
-    private Integer id , prob_id, counter, recom_id;
+    private String farmer,message,status,comment_User, comment_message, comment_Date , title, id_and_status, problem_name,recommendation_name,name;
+    private Integer id , prob_id, counter, recom_id, Fields_id;
     private Date date_posted, date_started,date_ended;
 
     /**
@@ -224,6 +224,62 @@ public class Forum {
      */
     public void setId_and_status(String id_and_status) {
         this.id_and_status = id_and_status;
+    }
+
+    /**
+     * @return the Fields_id
+     */
+    public Integer getFields_id() {
+        return Fields_id;
+    }
+
+    /**
+     * @param Fields_id the Fields_id to set
+     */
+    public void setFields_id(Integer Fields_id) {
+        this.Fields_id = Fields_id;
+    }
+
+    /**
+     * @return the problem_name
+     */
+    public String getProblem_name() {
+        return problem_name;
+    }
+
+    /**
+     * @param problem_name the problem_name to set
+     */
+    public void setProblem_name(String problem_name) {
+        this.problem_name = problem_name;
+    }
+
+    /**
+     * @return the recommendation_name
+     */
+    public String getRecommendation_name() {
+        return recommendation_name;
+    }
+
+    /**
+     * @param recommendation_name the recommendation_name to set
+     */
+    public void setRecommendation_name(String recommendation_name) {
+        this.recommendation_name = recommendation_name;
+    }
+
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
     }
 
   }

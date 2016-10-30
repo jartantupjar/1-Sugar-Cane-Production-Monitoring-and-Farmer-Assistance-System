@@ -57,22 +57,22 @@ public class createNewProblem extends HttpServlet {
             User user = (User) session.getAttribute("user");
             p.setUser_name(user.getUsername());
             int check = pDB.addProblem(p);
-            Enumeration<String> parameterNames = request.getParameterNames();
-            String paramName;
-            ArrayList<String> pT = new ArrayList<String>();
-            while (parameterNames.hasMoreElements()) {
-                paramName = parameterNames.nextElement();
-                System.out.println(paramName);
-                if (paramName.startsWith("probid")) {
-                    for (int i = 0; i < request.getParameterValues(paramName).length; i++) {
-                        pT.add(request.getParameterValues(paramName)[i]);
-                        System.out.println(request.getParameterValues(paramName)[i]);
-                        //connects problem torecommendation table
-                        int recom_id = Integer.parseInt(request.getParameterValues(paramName)[i]);
-                        int test = sDB.connectRecommendationtoProblem(recom_id, check);
-                    }
-                }
-            }
+//            Enumeration<String> parameterNames = request.getParameterNames();
+//            String paramName;
+//            ArrayList<String> pT = new ArrayList<String>();
+//            while (parameterNames.hasMoreElements()) {
+//                paramName = parameterNames.nextElement();
+//                System.out.println(paramName);
+//                if (paramName.startsWith("probid")) {
+//                    for (int i = 0; i < request.getParameterValues(paramName).length; i++) {
+//                        pT.add(request.getParameterValues(paramName)[i]);
+//                        System.out.println(request.getParameterValues(paramName)[i]);
+//                        //connects problem torecommendation table
+//                        int recom_id = Integer.parseInt(request.getParameterValues(paramName)[i]);
+//                        int test = sDB.connectRecommendationtoProblem(recom_id, check);
+//                    }
+//                }
+//            }
             if (check > 0){
                 
                 ServletContext context = getServletContext();

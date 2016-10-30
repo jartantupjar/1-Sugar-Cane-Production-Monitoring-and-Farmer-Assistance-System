@@ -14,7 +14,6 @@
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
-            <%@include file ="navbar.jsp"%>
             <div class="content-wrapper">
                 <section class="content-header">
                     <h1>
@@ -112,6 +111,7 @@
                                                             ${ca.percent}%
                                                         </b>
                                                     </span>
+                                                        <span>
                                                             <div class="progress progress-sm progress-striped-active">
                                                                 <div class="progress-bar progress-bar-primary" style="width : ${ca.percent}%"></div>
                                                                 </div>

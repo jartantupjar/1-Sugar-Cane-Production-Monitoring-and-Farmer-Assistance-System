@@ -51,13 +51,20 @@ public class viewProbDetails extends HttpServlet {
             ArrayList<Recommendation> recomList = probDB.getAllSolutions(p.getProb_id());
             ArrayList<Problems> probList = null;
             ArrayList<Recommendation> solution = new ArrayList<Recommendation>();
+            if(recomList != null){
             for (int j = 0; j < recomList.size(); j++){
                 r = new Recommendation();
                 r = recDB.viewRecDetails(recomList.get(j).getId());
                 solution.add(r);
             }
+            }
             if(p != null){
+                if(recomList != null){
                 p.settSolutions(recomList.size());
+                }
+                else{
+                    p.settSolutions(0);
+                }
                 probList = new ArrayList<Problems>();
                 probList = probDB.showProblembyFarm(i);
                 HttpSession session = request.getSession();

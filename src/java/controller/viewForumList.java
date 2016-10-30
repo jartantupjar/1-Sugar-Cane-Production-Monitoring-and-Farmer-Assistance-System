@@ -54,7 +54,7 @@ public class viewForumList extends HttpServlet {
                    ArrayList<String> obj = new ArrayList<String>();
                    
                    obj.add(fT.get(i).getTitle());
-                   obj.add(fT.get(i).getFarmer());
+                  // obj.add(fT.get(i).getFarmer());
                    
                    
                    if(fT.get(i).getStatus().equalsIgnoreCase("Accepted")){
@@ -73,6 +73,7 @@ public class viewForumList extends HttpServlet {
                    }
                    else{
                       obj.add("N/A");
+                      obj.add("0");
                    }
                    
                    
