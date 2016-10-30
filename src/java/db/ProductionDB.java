@@ -184,7 +184,7 @@ public class ProductionDB {
                 do {
                     ProdBarangay brgy = new ProdBarangay();
                     brgy.setBarangay(rs.getString("barangay"));
-                    System.out.println(brgy.getBarangay());
+//                    System.out.println(brgy.getBarangay());
                     brgy.setFarmer(getProdFarmerforYear(pm, brgy));
                     list.add(brgy);
                 } while (rs.next());

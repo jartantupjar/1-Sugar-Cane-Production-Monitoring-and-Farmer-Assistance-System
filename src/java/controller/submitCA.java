@@ -57,12 +57,12 @@ public class submitCA extends BaseServlet {
     
            
          
-         boolean check=cadb.submitNarrative(cn);
+     
           
           
-            if(check){
+            if(cadb.checkExistingNarrative(cn.getYear(),cn.getWeekending())==false){
              
-               
+               cadb.submitNarrative(cn);
                 ServletContext context = getServletContext();
                 RequestDispatcher rd = context.getRequestDispatcher("/Homepage.jsp");
                

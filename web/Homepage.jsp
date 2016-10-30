@@ -188,8 +188,52 @@
                                 </table>
                             </div>
                         </div>
+                      </div>
+                    <c:if test="${not empty narrative}">
+                    <div class="col-md-6" > 
+                        <div class="box box-info">
+                            <div class="box-header with-border">
+                                <h1 class="box-title">Narrative Report for Week Ending <c:out value="${narrative.weekending}" /> </h1>
+                                <div class="box-tools pull-right">
+                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                </div>
+                            </div>   
+                            <div class="box-body no-padding" id="container1">
+                                <table class="table table-bordered">
+                                            <tbody>
+
+                                                <tr>
+                                                    <th style="width:20%">WEATHER</th>
+                                                    <td><c:out value="${narrative.dweather}" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>PRICE OF SUGAR</th>
+                                                    <td> <c:out value="${narrative.dprice}" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>MILL OPERATION</th>
+                                                    <td> <c:out value="${narrative.dmill}" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>PRICES OF INPUTS</th>
+                                                    <td> <c:out value="${narrative.dinput}" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>OTHERS</th>
+                                                    <td> <c:out value="${narrative.dother}" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>OVERALL ANALYSIS</th>
+                                                    <td><c:out value="${narrative.danalysis}" /></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                            </div>
+                        </div>
 
                     </div>
+                                                </c:if>
 </div>
                 </section>
 

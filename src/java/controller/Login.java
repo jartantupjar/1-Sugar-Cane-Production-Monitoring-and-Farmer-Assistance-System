@@ -4,6 +4,7 @@ package controller;
 import db.CropAssessmentDB;
 import db.UsersDB;
 import entity.CropAssessment;
+import entity.CropNarrative;
 import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -82,6 +83,14 @@ public class Login extends HttpServlet {
                     ca2.setStanding(Double.valueOf(df.format(ca2.getEstimated()- ca2.getTodate())));
                     caT.add(ca2);
                     System.out.println(rain.get(0).getRainfall()+ "RAINFALL");
+                     CropNarrative cn=null;
+                 if(cadb.checkExistingNarrative(year,week_ending)==true){ 
+                     System.out.println("it entered tester");
+                     cn=new CropNarrative();
+           cn=cadb.getAssessmentNarrative(year,week_ending);
+//                  
+                 }
+                session.setAttribute("narrative", cn);
                 session.setAttribute("Week_ending", week_ending);
                 session.setAttribute("todayDate", todayDate);
                 session.setAttribute("CropAss", caT);
