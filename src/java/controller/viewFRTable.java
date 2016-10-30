@@ -33,12 +33,15 @@ public class viewFRTable extends BaseServlet {
         if (fct != null) {
             for (int i = 0; i < fct.size(); i++) {
                 ArrayList<String> obj = new ArrayList<>();
+                obj.add(Integer.toString(fct.get(i).getId()));
                 obj.add(fct.get(i).getName());
                 obj.add(fct.get(i).getBrgy());
                 obj.add(fct.get(i).getMunicipality());
                  obj.add(fct.get(i).getDate_updated().toString());
-                obj.add(fct.get(i).getApproved());
+                obj.add(fct.get(i).getStatus());
+                obj.add(Integer.toString(fct.get(i).getId()));
                 list.add(obj);
+               
             }
         }
       data.put("data", list);

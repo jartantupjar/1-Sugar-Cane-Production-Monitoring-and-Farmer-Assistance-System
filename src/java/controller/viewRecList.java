@@ -47,15 +47,12 @@ public class viewRecList extends HttpServlet {
             obj.add(recList.get(i).getRecommendation_name());
             obj.add(recList.get(i).getType());
             obj.add(recList.get(i).getDescription());
+            obj.add(recList.get(i).getStatus());
             obj.add(recList.get(i).getPhase());
-            obj.add(recList.get(i).getDate_start() + " - " + recList.get(i).getDate_end());
-            if (recList.get(i).getTrigger_date() != null) {
-                obj.add(recList.get(i).getTrigger_date().toString());
-            } else {
-                obj.add(Double.toString(recList.get(i).getTrigger_num()));
-            }
+
             obj.add(Integer.toString(recList.get(i).getId()));
             list.add(obj);
+            System.out.println(recList.get(i).getId());
         }
         }
         data.put("data", list);

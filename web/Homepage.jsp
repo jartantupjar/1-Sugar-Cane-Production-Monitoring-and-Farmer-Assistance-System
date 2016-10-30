@@ -9,8 +9,7 @@
        <link href="plugins/pace2/pace-theme-barber-shop.css" rel="stylesheet" />
        <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css"> 
           <link rel="stylesheet" href="plugins/select2/select2.min.css">
-       
-        
+ 
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
@@ -25,7 +24,7 @@
     <div class="col-md-12"> 
         <div class="box box-info">
             <div class="box-header with-border">
-                <h1 class="box-title">Crop Estimate :</h1>
+                <h1 class="box-title">Crop Estimate</h1>
                 <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -421,9 +420,14 @@
                 var table = $('#munitable').DataTable({
                     'ajax': {
                         'url': 'viewDistCropEstimate?year=${todayYear}' 
-                    }
+                    },
+                      "paging": false,
+                    "ordering": false,
+                    "info": false,
+                    "searching":true
                 });
                 $('#munitable').DataTable().search('${Week_ending}').draw();
+                 $('#munitable_filter').addClass('hidden');
             });
 
 
