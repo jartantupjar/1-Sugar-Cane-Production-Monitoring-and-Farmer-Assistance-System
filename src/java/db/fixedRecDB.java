@@ -43,13 +43,13 @@ public class fixedRecDB {
                     r.setRecommendation_name(rs.getString("recommendation"));
                     r.setType(rs.getString("type"));
                     r.setDescription(rs.getString("description"));
-                    r.setStatus(rs.getString("status"));
-                    r.setDate_create(rs.getDate("date_created"));
-                    r.setDate_start(rs.getDate("date_start"));
-                    r.setDate_end(rs.getDate("date_end"));
+                    r.setStatus(rs.getString("improvement"));
+//                    r.setDate_create(rs.getDate("date_created"));
+//                    r.setDate_start(rs.getDate("date_start"));
+//                    r.setDate_end(rs.getDate("date_end"));
                     r.setPhase(rs.getString("phase"));
-                    r.setTrigger_date(rs.getDate("trigger_date"));
-                    r.setTrigger_num(rs.getDouble("trigger_num"));
+//                    r.setTrigger_date(rs.getDate("trigger_date"));
+//                    r.setTrigger_num(rs.getDouble("trigger_num"));
                     list.add(r);
                 } while (rs.next());
             }
@@ -102,7 +102,7 @@ public class fixedRecDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select * from `recommendations-fields` rf join fields f on rf.fields_id=f.id where rf.recommendations_id=?;";
+            String query = "select id,farmers_name,barangay,municipality,date,status from `recommendations-fields` rf join fields f on rf.fields_id=f.id where rf.recommendations_id=?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
@@ -113,19 +113,14 @@ public class fixedRecDB {
                 do {
 
                     r = new FarmRecTable();
-                    r.setId(rs.getInt("Recommendations_id"));
+                    r.setId(rs.getInt("id"));
                     r.setName(rs.getString("Farmers_name"));
                     r.setBrgy(rs.getString("barangay"));
                     r.setMunicipality(rs.getString("municipality"));
-                    r.setDate_updated(rs.getDate("date_updated"));
+                    r.setDate_updated(rs.getDate("date"));
+                    r.setStatus(rs.getString("status"));
 
-                    if (rs.getString("approved")==null) {
-                     int rand=  (int)(Math.random() * 2);
-                     if(rand==0) r.setApproved("Approved");
-                     else r.setApproved("Not Approved");
-                    } else {
-                        r.setApproved(rs.getString("approved"));
-                    }
+                    
 
                     list.add(r);
                 } while (rs.next());
@@ -178,7 +173,7 @@ public class fixedRecDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select * from recommendations sr where sr.id=? ;";
+            String query = "select * from recommendations sr where sr.id=?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
@@ -189,15 +184,15 @@ public class fixedRecDB {
                 r.setRecommendation_name(rs.getString("recommendation"));
                 r.setType(rs.getString("type"));
                 r.setDescription(rs.getString("description"));
-                r.setStatus(rs.getString("status"));
-                r.setDate_create(rs.getDate("date_created"));
-                r.setDate_start(rs.getDate("date_start"));
-                r.setDate_end(rs.getDate("date_end"));
+                r.setStatus(rs.getString("improvement"));
+//                r.setDate_create(rs.getDate("date_created"));
+//                r.setDate_start(rs.getDate("date_start"));
+//                r.setDate_end(rs.getDate("date_end"));
                 r.setPhase(rs.getString("phase"));
-                r.setTrigger_date(rs.getDate("trigger_date"));
-                r.setTrigger_num(rs.getDouble("trigger_num"));
-
-            }
+                r.setDuration(rs.getInt("duration_days"));
+//                r.setTrigger_date(rs.getDate("trigger_date"));
+//                r.setTrigger_num(rs.getDouble("trigger_num"));
+             }
             rs.close();
             pstmt.close();
             conn.close();

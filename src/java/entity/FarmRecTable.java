@@ -13,7 +13,7 @@ import java.sql.Date;
  */
 public class FarmRecTable {
     private int id;
-    private String name,brgy,municipality, approved;
+    private String name,brgy,municipality, approved,status;
     private Date date_updated; 
 
     /**
@@ -99,5 +99,19 @@ public class FarmRecTable {
      */
     public void setDate_updated(Date date_updated) {
         this.date_updated = date_updated;
+    }
+
+    /**
+     * @return the status
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

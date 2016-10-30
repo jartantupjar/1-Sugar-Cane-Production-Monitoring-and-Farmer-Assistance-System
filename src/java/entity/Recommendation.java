@@ -14,7 +14,7 @@ import java.sql.Date;
 public class Recommendation {
     private Integer id , counter;
     private int config;
-    private double trigger_num;
+    private double trigger_num,duration;
     private String recommendation_name, type, description, status, phase;
    
     private Date date_start, date_create, date_end , trigger_date; 
@@ -199,6 +199,20 @@ public class Recommendation {
      */
     public void setCounter(Integer counter) {
         this.counter = counter;
+    }
+
+    /**
+     * @return the duration
+     */
+    public double getDuration() {
+        return duration;
+    }
+
+    /**
+     * @param duration the duration to set
+     */
+    public void setDuration(double duration) {
+        this.duration = duration;
     }
 
     

@@ -33,7 +33,7 @@
                     <div class="col-md-12" > 
                         <div class="box box-info">
                             <div class="box-header with-border">
-                                <h1 class="box-title">Fixed Recommendations</h1>
+                                <h1 class="box-title">Recommendations</h1>
                                 <div class="box-tools pull-right">
                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                     <!-- In box-tools add this button if you intend to use the contacts pane -->
@@ -48,10 +48,9 @@
                                             <th>Recommendation</th>
                                             <th>Type</th>
                                             <th>Description</th>
+                                            <th>Improvement</th>
                                             <th>Phase</th>
-                                            <th>Period</th>
-                                            <th>Config</th>
-                                            <th></th>
+                                             <th></th>
                                         </tr>
 
                                     </thead>
@@ -81,7 +80,7 @@
                         'url': 'viewRecList'
                     },
                     'columnDefs': [{
-                            'targets': 6,
+                            'targets': 5,
                             'render': function (data, type, full, meta) {
                                 return '<a href="viewRecDetails?id=' + data + '" class="btn btn-primary text-center">' + 'more details' + '</a>';
                             }

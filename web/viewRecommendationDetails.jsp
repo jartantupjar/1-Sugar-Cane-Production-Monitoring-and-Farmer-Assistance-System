@@ -26,73 +26,55 @@
                             <div class="box box-primary">
                                 <div class="box-body box-profile">
 
-                                      <h3 class="profile-username text-center">Recommendation Details:</h3> 
+                                    <h3 class="profile-username text-center"><c:out value="${recdet.recommendation_name}"></c:out></h3> 
                                     <ul class="list-group list-group-unbordered">
 
 
-                                        <li class="list-group-item">
-                                            <b>Recommendation </b>  <p class="pull-right"><b>
+<!--                                        <li class="list-group-item">
+                                            <b>Recommendation </b>  <a class="pull-right">
                                                     <c:out value="${recdet.recommendation_name}"></c:out>
-                                                    </b></p>
-                                            </li>
+                                                    </a>
+                                            </li>-->
                                             <li class="list-group-item">
-                                                <b>Type</b><p class="pull-right"><b>
+                                                <b>Type</b><a class="pull-right">
                                                     <c:out value="${recdet.type}"></c:out>
-                                                    </b> </p>
+                                                   </a>
                                             </li>
                                             <li class="list-group-item">
-                                                <b>Description </b><p class="text-right text-bold">
+                                                <b>Description </b><a class="text-right"><p>
                                                 <c:out value="${recdet.description}"></c:out>
-                                                </p>
+                                                </p></a>
                                             </li>
                                             <li class="list-group-item">
-                                                <b>Phase</b> <p class="pull-right"><b>
+                                                <b>Phase</b> <a class="pull-right">
                                                     <c:out value="${recdet.phase}"></c:out>
 
-                                                    </b> </p>
+                                                   </a>
                                             </li>
                                             <li class="list-group-item">
-                                                <b>Status</b> <p class="pull-right"><b>
+                                                <b>Status</b> <a class="pull-right">
                                                     <c:out value="${recdet.status}"></c:out>
 
-                                                    </b> </p>
+                                                     </a>
                                             </li>
-                                            <li class="list-group-item">
-                                                <b> Date Created</b> <p class="pull-right"><b>
-                                                    <c:out value="${recdet.date_create}"></c:out>
-                                                    </b> </p>
-                                            </li>
+                                        <c:choose>
+                                            <c:when test='${recdet.duration !=null}'>
+                                                <li class="list-group-item">
+                                                    <b class="">Duration(days)</b>  <a class="pull-right"> 
 
-                                            <li class="list-group-item">
-                                                <b>Period</b> <p class="pull-right"><b>
-                                                    <c:out value="${recdet.date_start}"></c:out> - <c:out value="${recdet.date_end}"></c:out>  
+                                                            <c:out value="${recdet.duration}"></c:out> 
 
-                                                    </b> </p>
-                                            </li>
+                                                            </a>
+                                                    </li>
+                                            </c:when>
 
-                                            <li class="list-group-item">
-                                                <b class="text-green">Configuration</b>  <p class="pull-right text-green"> <b>
-                                                    <c:choose>
-                                                        <c:when test='${recdet.trigger_date !=null}'>
-                                                            <c:out value="${recdet.trigger_date}"></c:out> 
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <c:out value="${recdet.trigger_num}"></c:out> 
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </b> </p>
-                                        </li>
-                                      
-                                        <li class="list-group-item text-maroon">
-                                            <b> Helpfulness Counter</b> <p class="pull-right"><b>
-                                                    79
-                                                </b> </p>
-                                        </li>
+                                        </c:choose>
                                         <li class="list-group-item">
-                                            <b>Recorded Effects?</b> <p class="pull-right"><b>
-                                                    None
-                                                </b> </p>
+                                            <b> Helpfulness Counter</b> <a class="pull-right"><b>
+                                                    79
+                                                </b> </a>
                                         </li>
+                                     
 
                                     </ul>
 
@@ -100,19 +82,20 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="box box-solid box-success">
-                                <div class="box-header with-border">
-                                    <h3 class="box-title">Recommendation Details(do we resend validation??)(improvement since implementation but how?)</h3>
+                            <div class="box box-solid box-info">
+                                <div class="box-header">
+                                    <h3 class="box-title">Recommendation Details(improvement since implementation but how?)</h3>
                                 </div>
                             </div>
                         </div>
 
                         <div class="col-md-6">
-                            <div class="box box-solid box-success">
+                            <div class="box box-solid box-info">
                                 <div class="box-header with-border">
-                                    <h3 class="box-title">Aims To Prevent The Following:</h3>
+                                    <h3 class="box-title">Problems being solved: </h3>
                                 </div>
                                 <div class="box-body">
+                                      <c:if test="${not empty problist}">
                                     <table class="table table-bordered" >
                                         <thead>
                                             <tr>
@@ -122,56 +105,29 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                             <c:if test="${not empty problist}">
-                                        <c:forEach var="plist" items="${problist}">
-                                            
-                                            <tr>	
-                                                <td>${plist.prob_name}</td>
-                                                <td>${plist.prob_details}</td>
-                                                <td><a class="btn btn-primary" href="viewProbDetails?id=${plist.prob_id}" >details</a></td>
-                                            </tr>
-                                            </c:forEach>
-                                            </c:if>
-                                            
+                                          
+                                                <c:forEach var="plist" items="${problist}">
+
+                                                    <tr>	
+                                                        <td>${plist.prob_name}</td>
+                                                        <td>${plist.prob_details}</td>
+                                                        <td><a class="btn btn-primary" href="viewProbDetails?id=${plist.prob_id}" >details</a></td>
+                                                    </tr>
+                                                </c:forEach>
+                                          
+
                                         </tbody>
                                     </table>
+                                      </c:if>
                                 </div>
                             </div>
                         </div>
-                        <!-- Modal -->
-                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                            <div class="modal-dialog modal-lg" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="myModalLabel">Problems List</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <table class="table table-bordered" >
-                                            <tbody>
-                                                <tr>
-                                                    <th>Problem</th>
-                                                    <th>Description</th>
-
-                                                </tr>
-                                                <tr>	
-                                                    <td>Pest</td>
-                                                    <td><button><a href="Problems.jsp"><b> View Details</b></a></button></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Send</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                     
+                        
                         <div class="col-md-8" > 
                             <div class="box box-info">
                                 <div class="box-header with-border">
-                                    <h1 class="box-title">Recommendation Details</h1>
+                                    <h1 class="box-title">Recommendation w/ fields</h1>
                                     <div class="box-tools pull-right">
                                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                         <!-- In box-tools add this button if you intend to use the contacts pane -->
@@ -186,8 +142,10 @@
                                                 <th>Farm</th>
                                                 <th>Farmer</th>
                                                 <th>Barangay</th>
+                                                <th>Municipality</th>
                                                 <th>Date</th>
-                                                <th>Validation</th>
+                                                <th>Status</th>
+                                                <th>Details</th>
                                             </tr>
                                         </thead>
                                     </table>
@@ -215,7 +173,16 @@
                 var table = $('#recList1').DataTable({
                     'ajax': {
                         'url': 'viewFRTable?id=${id}'
-                    }
+                    },
+                    'columnDefs': [{
+                            'targets': 6,
+                        
+                            'render': function (data, type, full, meta) {
+                                return '<a href="viewFieldDetails?id=' + data + '" class="btn btn-primary">Details</a>';
+                            }
+                            
+                        }]
+                       
                 });
             });
 

@@ -153,7 +153,7 @@ public class ProductionDB {
                     prodMunicipality municipal = new prodMunicipality();
                     municipal.setYear(year);
                     municipal.setMunicipal(rs.getString("municipality"));
-                    System.out.println(municipal.getMunicipal());
+//                    System.out.println(municipal.getMunicipal());
                     municipal.setBrgy(getProdBarangayforYear(municipal));
                     list.add(municipal);
                 } while (rs.next());
