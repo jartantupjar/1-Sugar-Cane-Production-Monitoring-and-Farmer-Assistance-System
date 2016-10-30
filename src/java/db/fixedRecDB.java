@@ -189,7 +189,7 @@ public class fixedRecDB {
 //                r.setDate_start(rs.getDate("date_start"));
 //                r.setDate_end(rs.getDate("date_end"));
                 r.setPhase(rs.getString("phase"));
-                r.setDuration(rs.getInt("duration_days"));
+//                r.setDuration(rs.getInt("duration_days"));
 //                r.setTrigger_date(rs.getDate("trigger_date"));
 //                r.setTrigger_num(rs.getDouble("trigger_num"));
              }

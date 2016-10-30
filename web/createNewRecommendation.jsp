@@ -62,8 +62,8 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label>Configuration </label>
-                                            <textarea class="form-control" name="config" rows="2" id="config"  placeholder="Enter ..."></textarea>
+                                            <label>Duration </label>
+                                            <input class="form-control" type="number" min="1" max="100" id="config"  placeholder="Enter how many days"></input>
                                         </div>
                                         
                                         <div class="form-group">
@@ -103,6 +103,9 @@
 
                             <div class="col-md-3">                   
                                 <p><button class="btn btn-primary" style="width: 100%" type="submit"  value="submit">Create</button></p>
+                            </div>
+                            <div class="col-md-3">                   
+                                <p><button class="btn btn-success" style="width: 100%" type="submit"  value="submit">Create and Send</button></p>
                             </div>
                         </form>
                     </div>

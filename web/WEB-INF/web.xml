@@ -220,6 +220,10 @@
         <servlet-name>viewFarmerBrgyTable</servlet-name>
         <servlet-class>controller.viewFarmerBrgyTable</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>linkToProblem</servlet-name>
+        <servlet-class>controller.linkToProblem</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
@@ -435,6 +439,10 @@
     <servlet-mapping>
         <servlet-name>viewFarmerBrgyTable</servlet-name>
         <url-pattern>/viewFarmerBrgyTable</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>linkToProblem</servlet-name>
+        <url-pattern>/linkToProblem</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -26,7 +26,7 @@
                 <section class="content">
 
                     <div class="col-md-4">
-                        <div class="box box-solid box-success">
+                        <div class="box box-solid box-primary">
                             <div class="box-header with-border">
                                 <h3 class="box-title">Problem Details</h3>
                             </div>

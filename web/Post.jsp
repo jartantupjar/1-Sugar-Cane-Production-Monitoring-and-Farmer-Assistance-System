@@ -205,6 +205,7 @@
 
         $(document).ready(function () {
             var rows_selected = [];
+            
             var table1 = $('#probTable').DataTable({
                 'ajax': {
                     'url': 'viewProbList'
@@ -223,6 +224,39 @@
                     'style': 'multi'
                 },
                 'order': [[1, 'asc']]
+                ,
+                'rowCallback': function (row, data, dataIndex) {
+                            // Get row ID
+                            var rowId = data[0];
+                            var limit = 1;
+                            // alert(rowId);
+                            // If row ID is in the list of selected row IDs
+                            //  alert("notclicked");
+//                                         if($.inArray(rowId, rows_selected) !== -1){
+//                                              
+//                                            $(row).find('input[type="checkbox"]').prop('checked', true);
+//                                            $(row).addClass('selected');
+//                                          
+//                                         }
+                            table1.$('input[type="checkbox"]', row).on('change', function (evt) {
+                                console.log("outentered");
+                                var tcounter = 0;
+
+                                table1.$('input[type="checkbox"]').each(function () {
+                                    if (this.checked) {
+
+                                        tcounter += 1;
+
+                                    }
+
+                                });
+
+                                if (tcounter > limit) {
+                                    console.log(tcounter);
+                                    this.checked = false;
+                                }
+                            });
+                        }
 
             });
             $('#frm-example').on('submit', function (e) {
