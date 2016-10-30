@@ -9,8 +9,7 @@
        <link href="plugins/pace2/pace-theme-barber-shop.css" rel="stylesheet" />
        <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css"> 
           <link rel="stylesheet" href="plugins/select2/select2.min.css">
- 
-    </head>
+   </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
             <div class="content-wrapper">
@@ -21,6 +20,10 @@
                 </section>
                 <section class="content">
 <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+        <a class="btn btn-info btn-block" href="viewCropAssessment">Create Crop Assessment</a>
+  <br>
+    </div>
     <div class="col-md-12"> 
         <div class="box box-info">
             <div class="box-header with-border">
