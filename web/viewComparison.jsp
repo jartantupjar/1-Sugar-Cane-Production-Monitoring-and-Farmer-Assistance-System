@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="security.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -14,6 +13,11 @@ comparison page add current vs historical details(past 2yrs)
         <title>SRA | Home</title>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+
+        <link rel="stylesheet" href="plugins/select2/select2.min.css">
+
+
+
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
 
@@ -23,63 +27,29 @@ comparison page add current vs historical details(past 2yrs)
                 <section class="content-header">
 
                     <h1>
-                        Project List
+                        Farmer Comparison
                         <small>Optional description</small>
                     </h1>
                 </section>
                 <section class="content">
                     <div class="row">
-                        <div class="col-md-3">
-                            <div class="box box-primary">
-                                <div class="box-body box-profile">
-
-                                    <h3 class="profile-username text-center">Henry</h3>
-
-                                    <p class="text-muted text-center">Jose</p>
-
-                                    <ul class="list-group list-group-unbordered">
-                                        <li class="list-group-item">
-                                            <b>Phone Number</b> <a class="pull-right">0949395893</a>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <b>Gender</b> <a class="pull-right">
-                                                Male
-                                            </a>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <b>Education</b> <a class="pull-right">
-                                                Highschool
-                                            </a>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <b>Civil Status</b> <a class="pull-right">
-                                                Married</a>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <b>Address</b> <a class="">#3 sugarcane st. brgy regulations</a>
-                                        </li>
-                                    </ul>
-
-                                </div>
-                                <!-- /.box-body -->
-                            </div>    
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="box box-success">
-                                <div class="box-header with-border">
-                                    <h1 class="box-title">Farm Site Pic</h1>
-                                </div>
-                                <div class="box-body">
-                                    <img src="dist/img/user2-160x160.jpg" style="height: 450 px ; width: 400 px">
-                                </div>
+                        <div class="col-lg-12">
+                            <div class="col-md-4">
+                                <h3 class="text-center text-green">High</h3>
                             </div>
-
+                            <div class="col-md-4">
+                                <h3 class="text-center text-blue">Current</h3>
+                            </div>
+                            <div class="col-md-4">
+                                <h3 class="text-center text-red">Low</h3>
+                            </div>
                         </div>
-                        <div class="col-md-10">
-                            <!-- LINE CHART -->
+
+
+                        <div class="col-md-12">
                             <div class="box box-info">
                                 <div class="box-header with-border">
-                                    <h3 class="box-title">#Farms Details</h3>
+                                    <h3 class="box-title">#Farmer Details</h3>
 
                                     <div class="box-tools pull-right">
                                         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -87,220 +57,709 @@ comparison page add current vs historical details(past 2yrs)
                                         <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                     </div>
                                 </div>
-                                <div class="box-body table-responsive">
+                                <div class="box-body">
+                                    <ul class="nav nav-tabs">
+                                        <li>  </li>
+                                        <li class="active"><a href=".tab_1" data-toggle="tab"><b>Details</b></a></li>
+                                        <li ><a href="#tab_2" data-toggle="tab"><b>Crop Validation</b></a></li>
+                                        <li ><a href=".tab_3" data-toggle="tab"><b>Soil Analysis</b></a></li>
+                                        <li><a href=".tab_4" data-toggle="tab"><b>Fertilizer</b></a></li>
+                                        <li><a href=".tab_5" data-toggle="tab"><b>Tiller</b></a></li>
+                                        <li><a href=".tab_6" data-toggle="tab"><b>Problems </b></a></li>
+                                        <li><a href=".tab_7" data-toggle="tab"><b>Recommendations</b></a></li>
 
-                                    <table class="table table-hover">
-                                        <tbody><tr>
-                                                <th>Farmer Name</th>
-                                                <th>Yield</th>
-                                                <th>Farm Size</th>
-                                                <th>% completed</th>
-                                                <th>Cane Variety</th>
-                                                <th>%PC</th>
-                                                <th>%RC</th>
-                                                <th>detailsbtn</th>
-                                            </tr>
-                                            <tr>
-                                                <td>John Doe</td>
-                                                <td>1.23</td>
-                                                <td>35%</td>
-                                                <td> 
-                                                    <div class="progress-group">
-                                                        <span class="progress-number"><b>90 %</b></span>
-                                                        <div class="progress sm">
-                                                            <div class="progress-bar progress-bar-green" style="width: 80%"></div>
-                                                        </div>
-                                                    </div> <!-- closer of progress bars -->  
-                                                </td>
-                                                <td>tpeh31</td>
-                                                <td>3%</td>
-                                                <td>77%</td>
-                                                <td>detailsbtn</td>
-                                            </tr>
 
-                                            <tr>
-                                                <td href="">henry ford</td>
-                                                <td>1.23</td>
-                                                <td>80%</td>
-                                                <td>
-                                                    <div class="progress-group">
-                                                        <span class="progress-number"><b>20 %</b></span>
+                                    </ul>
 
-                                                        <div class="progress sm">
-                                                            <div class="progress-bar progress-bar-danger" style="width: 20%"></div>
-                                                        </div>
-                                                    </div> <!-- closer of progress bars -->  
-                                                </td>
-                                                <td>TPEH43</td>
-                                                <td>3%</td>
-                                                <td>77%</td>
-                                                <td>detailsbtn</td>
-                                            </tr>
-                                            <tr>
+                                    <div class="tab-content">
+                                        <div class="tab-pane active tab_1" >
+                                            <table id="fieldtable" class="table table-hover table-responsive">
+                                                <thead><tr>
+                                                        <th>Details</th>
+                                                        <th><c:out value="${farm.id}"/></th>
+                                                            <c:forEach var="flow" items="${flist}">
 
-                                                <td href="">Michael Johnathan</td>
-                                                <td>1.23</td>
-                                                <td>80%</td>
-                                                <td><div class="progress-group">
-                                                        <span class="progress-number"><b>40 %</b></span>
+                                                            <th><c:out value="${flow.id}"/></th>
+                                                            </c:forEach>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th>Farmer</th>
+                                                        <td class="text-blue"><c:out value="${farm.farmer}"></c:out> </td>
 
-                                                        <div class="progress sm">
-                                                            <div class="progress-bar progress-bar-warning" style="width: 40%"></div>
-                                                        </div>
-                                                    </div> <!-- closer of progress bars -->  </td>
-                                                <td>TPEH43</td>
-                                                <td>3%</td>
-                                                <td>77%</td>
-                                                <td>detailsbtn</td>
-                                            </tr>
-                                            <tr>
-                                                <td href="">Danny Frisk</td>
-                                                <td>1.23</td>
-                                                <td>80%</td>
-                                                <td>
-                                                    <div class="progress-group">
-                                                        <span class="progress-number"><b>80 %</b></span>
+                                                        <c:forEach var="flow" items="${flist}">
+                                                            <c:choose>
+                                                                <c:when test='${flow.farmer !=farm.farmer}'>
+                                                                    <td class="text-red"><c:out value="${flow.farmer}"></c:out> </td>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <td class="text-green"><c:out value="${flow.farmer}"></c:out> </td>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </c:forEach>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Location</th>
+                                                        <td class="text-blue"><c:out value="${farm.barangay}"/>,  <c:out value="${farm.municipality}"/></td>
+                                                        <c:forEach var="flow" items="${flist}">
+                                                            <c:choose>
+                                                                <c:when test='${flow.municipality !=farm.municipality and flow.barangay!=farm.barangay}'>
+                                                                    <td class="text-red"><c:out value="${flow.barangay}"/>,  <c:out value="${farm.municipality}"/></td>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <td class="text-green"><c:out value="${flow.barangay}"/>,  <c:out value="${farm.municipality}"/></td>
+                                                                </c:otherwise>
+                                                            </c:choose>
 
-                                                        <div class="progress sm">
-                                                            <div class="progress-bar progress-bar-green" style="width: 80%"></div>
-                                                        </div>
-                                                    </div> <!-- closer of progress bars -->  
-                                                </td>
-                                                <td>TPEH43</td>
-                                                <td>3%</td>
-                                                <td>77%</td>
-                                                <td>detailsbtn</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                                        </c:forEach>
+                                                    </tr>
 
+                                                    <tr>
+                                                        <th>Production</th>
+                                                        <td class="text-blue"><c:out value="${farm.production}"/></td>
+                                                        <c:forEach var="flow" items="${flist}">
+                                                            <c:choose>
+                                                                <c:when test='${flow.production !=farm.production}'>
+                                                                    <td class="text-red"><c:out value="${flow.production}"/></td>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <td class="text-green"><c:out value="${flow.production}"/></td>
+                                                                </c:otherwise>
+                                                            </c:choose>
+
+                                                        </c:forEach>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Total Area</th>
+                                                        <td class="text-blue"><c:out value="${farm.area}"/></td>
+                                                        <c:forEach var="flow" items="${flist}">
+                                                            <c:choose>
+                                                                <c:when test='${flow.area !=farm.area}'>
+                                                                    <td class="text-red"><c:out value="${flow.area}"/></td>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <td class="text-green"><c:out value="${flow.area}"/></td>
+                                                                </c:otherwise>
+                                                            </c:choose>
+
+                                                        </c:forEach>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <th>Current Yield</th>
+                                                        <td class="text-blue"><c:out value="${farm.yield}"/></td>
+                                                        <c:forEach var="flow" items="${flist}">
+                                                            <c:choose>
+                                                                <c:when test='${flow.yield !=farm.yield}'>
+                                                                    <td class="text-red"><c:out value="${flow.yield}"/></td>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <td class="text-green"><c:out value="${flow.yield}"/></td>
+                                                                </c:otherwise>
+                                                            </c:choose>
+
+                                                        </c:forEach>
+                                                    </tr>
+
+
+                                                </tbody>
+
+
+                                            </table>
+
+                                        </div>
+                                        <div class="tab-pane tab_2" id="tab_2">
+                                            <h3 class="profile-username text-center"></h3>
+                                            <table id="fieldtable" class="table table-hover table-responsive">
+                                                <thead><tr>
+                                                        <th>Details</th>
+                                                        <th><c:out value="${farm.id}"/></th>
+                                                            <c:forEach var="flow" items="${flist}">
+
+                                                            <th><c:out value="${flow.id}"/></th>
+                                                            </c:forEach>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th>Crop Variety</th>
+                                                        <td class="text-blue"><c:out value="${farm.cropVal.variety}"></c:out> </td>
+
+                                                        <c:forEach var="flow" items="${flist}">
+                                                            <c:choose>
+                                                                <c:when test='${flow.cropVal.variety !=farm.cropVal.variety}'>
+                                                                    <td class="text-red"><c:out value="${flow.cropVal.variety}"></c:out> </td>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <td class="text-green"><c:out value="${flow.cropVal.variety}"></c:out></td>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </c:forEach>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Crop Class</th>
+                                                        <td class="text-blue"><c:out value="${farm.cropVal.crop_class}"/></td>
+                                                        <c:forEach var="flow" items="${flist}">
+                                                            <c:choose>
+                                                                <c:when test='${flow.cropVal.crop_class !=farm.cropVal.crop_class}'>
+                                                                    <td class="text-red"><c:out value="${flow.cropVal.crop_class}"></c:out> </td>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <td class="text-green"><c:out value="${flow.cropVal.crop_class}"></c:out>  </td>
+                                                                </c:otherwise>
+                                                            </c:choose>
+
+                                                        </c:forEach>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <th>Texture</th>
+                                                        <td class="text-blue"><c:out value="${farm.cropVal.texture}"/></td>
+                                                        <c:forEach var="flow" items="${flist}">
+                                                            <c:choose>
+                                                                <c:when test='${flow.cropVal.texture !=farm.cropVal.texture}'>
+                                                                    <td class=" text-red"><c:out value="${flow.cropVal.texture}"></c:out> </td>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <td class=" text-green"><c:out value="${flow.cropVal.texture}"></c:out>  </td>
+                                                                </c:otherwise>
+                                                            </c:choose>
+
+                                                        </c:forEach>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Farming System</th>
+                                                        <td class="text-blue"><c:out value="${farm.cropVal.farming_system}"/></td>
+                                                        <c:forEach var="flow" items="${flist}">
+                                                            <c:choose>
+                                                                <c:when test='${flow.cropVal.farming_system !=farm.cropVal.farming_system}'>
+                                                                    <td class=" text-red"><c:out value="${flow.cropVal.farming_system}"></c:out> </td>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <td class="text-green"><c:out value="${flow.cropVal.farming_system}"></c:out>  </td>
+                                                                </c:otherwise>
+                                                            </c:choose>
+
+                                                        </c:forEach>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <th>Topography</th>
+                                                        <td class="text-blue"><c:out value="${farm.cropVal.topography}"/></td>
+                                                        <c:forEach var="flow" items="${flist}">
+                                                            <c:choose>
+                                                                <c:when test='${flow.cropVal.topography !=farm.cropVal.topography}'>
+                                                                    <td class="text-red"><c:out value="${flow.cropVal.topography}"></c:out> </td>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <td class="text-green"><c:out value="${flow.cropVal.topography}"></c:out>  </td>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </c:forEach>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Furrow Distance</th>
+                                                        <td class="text-blue"><c:out value="${farm.cropVal.furrow_distance}"/></td>
+                                                        <c:forEach var="flow" items="${flist}">
+                                                            <c:choose>
+                                                                <c:when test='${flow.cropVal.furrow_distance !=farm.cropVal.furrow_distance}'>
+                                                                    <td class="text-red"><c:out value="${flow.cropVal.furrow_distance}"></c:out> </td>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <td class="text-green"><c:out value="${flow.cropVal.furrow_distance}"></c:out>  </td>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </c:forEach>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Planting Density</th>
+                                                        <td class="text-blue"><c:out value="${farm.cropVal.planting_density}"/></td>
+                                                        <c:forEach var="flow" items="${flist}">
+                                                            <c:choose>
+                                                                <c:when test='${flow.cropVal.planting_density !=farm.cropVal.planting_density}'>
+                                                                    <td class="text-red"><c:out value="${flow.cropVal.planting_density}"></c:out> </td>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <td class="text-green"><c:out value="${flow.cropVal.planting_density}"></c:out>  </td>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </c:forEach>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Number Millable</th>
+                                                        <td class="text-blue"><c:out value="${farm.cropVal.num_millable}"/></td>
+                                                        <c:forEach var="flow" items="${flist}">
+                                                            <c:choose>
+                                                                <c:when test='${flow.cropVal.num_millable !=farm.cropVal.num_millable}'>
+                                                                    <td class="text-red"><c:out value="${flow.cropVal.num_millable}"></c:out> </td>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <td class="text-green"><c:out value="${flow.cropVal.num_millable}"></c:out>  </td>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </c:forEach>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Average Millable</th>
+                                                        <td class="text-blue"><c:out value="${farm.cropVal.avg_millable_stool}"/></td>
+                                                        <c:forEach var="flow" items="${flist}">
+                                                            <c:choose>
+                                                                <c:when test='${flow.cropVal.avg_millable_stool !=farm.cropVal.avg_millable_stool}'>
+                                                                    <td class="text-red"><c:out value="${flow.cropVal.avg_millable_stool}"></c:out> </td>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <td class=" text-green"><c:out value="${flow.cropVal.avg_millable_stool}"></c:out>  </td>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </c:forEach>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Brix</th>
+                                                        <td class="text-blue"><c:out value="${farm.cropVal.brix}"/></td>
+                                                        <c:forEach var="flow" items="${flist}">
+                                                            <c:choose>
+                                                                <c:when test='${flow.cropVal.brix !=farm.cropVal.brix}'>
+                                                                    <td class="text-red"><c:out value="${flow.cropVal.brix}"></c:out> </td>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <td class="text-green"><c:out value="${flow.cropVal.brix}"></c:out>  </td>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </c:forEach>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Stalk Length</th>
+                                                        <td class="text-blue"><c:out value="${farm.cropVal.stalk_length}"/></td>
+                                                        <c:forEach var="flow" items="${flist}">
+                                                            <c:choose>
+                                                                <c:when test='${flow.cropVal.stalk_length !=farm.cropVal.stalk_length}'>
+                                                                    <td class="text-red"><c:out value="${flow.cropVal.stalk_length}"></c:out> </td>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <td class=" text-green"><c:out value="${flow.cropVal.stalk_length}"></c:out>  </td>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </c:forEach>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Diameter</th>
+                                                        <td class="text-blue"><c:out value="${farm.cropVal.diameter}"/></td>
+                                                        <c:forEach var="flow" items="${flist}">
+                                                            <c:choose>
+                                                                <c:when test='${flow.cropVal.diameter !=farm.cropVal.diameter}'>
+                                                                    <td class=" text-red"><c:out value="${flow.cropVal.diameter}"></c:out> </td>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <td class=" text-green"><c:out value="${flow.cropVal.diameter}"></c:out>  </td>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </c:forEach>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Weight</th>
+                                                        <td class="text-blue"><c:out value="${farm.cropVal.weight}"/></td>
+                                                        <c:forEach var="flow" items="${flist}">
+                                                            <c:choose>
+                                                                <c:when test='${flow.cropVal.weight !=farm.cropVal.weight}'>
+                                                                    <td class="text-red"><c:out value="${flow.cropVal.weight}"></c:out> </td>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <td class="text-green"><c:out value="${flow.cropVal.weight}"></c:out>  </td>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </c:forEach>
+                                                    </tr>
+
+
+                                                </tbody>
+
+
+                                            </table>
+                                        </div>
+                                        <div class="tab-pane tab_3" id="tab_8">
+                                            <h3 class="profile-username text-center"></h3>
+                                            <table id="fieldtable" class="table table-hover table-responsive">
+                                                <thead><tr>
+                                                        <th>Details</th>
+                                                        <th><c:out value="${farm.id}"/></th>
+                                                            <c:forEach var="flow" items="${flist}">
+
+                                                            <th><c:out value="${flow.id}"/></th>
+                                                            </c:forEach>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th>PH Level</th>
+                                                        <td class="text-blue"><c:out value="${farm.soilanalysis.ph_lvl}"></c:out> </td>
+
+                                                        <c:forEach var="flow" items="${flist}">
+                                                            <c:choose>
+                                                                <c:when test='${flow.soilanalysis.ph_lvl !=farm.soilanalysis.ph_lvl}'>
+                                                                    <td class="text-red"><c:out value="${flow.soilanalysis.ph_lvl}"></c:out> </td>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <td class="text-green"><c:out value="${flow.soilanalysis.ph_lvl}"></c:out></td>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </c:forEach>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Organic Matter</th>
+                                                        <td class="text-blue"><c:out value="${farm.soilanalysis.organic_matter}"/></td>
+                                                        <c:forEach var="flow" items="${flist}">
+                                                            <c:choose>
+                                                                <c:when test='${flow.soilanalysis.organic_matter !=farm.soilanalysis.organic_matter}'>
+                                                                    <td class="text-red"><c:out value="${flow.soilanalysis.organic_matter}"></c:out> </td>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <td class="text-green"><c:out value="${flow.soilanalysis.organic_matter}"></c:out>  </td>
+                                                                </c:otherwise>
+                                                            </c:choose>
+
+                                                        </c:forEach>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <th>Phosphorus</th>
+                                                        <td class="text-blue"><c:out value="${farm.soilanalysis.phosphorus}"/></td>
+                                                        <c:forEach var="flow" items="${flist}">
+                                                            <c:choose>
+                                                                <c:when test='${flow.soilanalysis.phosphorus !=farm.soilanalysis.phosphorus}'>
+                                                                    <td class=" text-red"><c:out value="${flow.soilanalysis.ph_lvl}"></c:out> </td>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <td class=" text-green"><c:out value="${flow.soilanalysis.phosphorus}"></c:out>  </td>
+                                                                </c:otherwise>
+                                                            </c:choose>
+
+                                                        </c:forEach>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Potassium</th>
+                                                        <td class="text-blue"><c:out value="${farm.soilanalysis.potassium}"/></td>
+                                                        <c:forEach var="flow" items="${flist}">
+                                                            <c:choose>
+                                                                <c:when test='${flow.soilanalysis.potassium !=farm.soilanalysis.potassium}'>
+                                                                    <td class=" text-red"><c:out value="${flow.soilanalysis.potassium}"></c:out> </td>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <td class="text-green"><c:out value="${flow.soilanalysis.potassium}"></c:out>  </td>
+                                                                </c:otherwise>
+                                                            </c:choose>
+
+                                                        </c:forEach>
+                                                    </tr>
+
+
+
+
+                                                </tbody>
+
+
+                                            </table>
+                                        </div>
+                                        <div class="tab-pane tab_4" id="tab_8">
+                                            <h3 class="profile-username text-center"></h3>
+                                            <table id="fieldtable" class="table table-hover table-responsive">
+                                                <thead><tr>
+                                                        <th>Details</th>
+                                                        <th><c:out value="${farm.id}"/></th>
+                                                            <c:forEach var="flow" items="${flist}">
+
+                                                            <th><c:out value="${flow.id}"/></th>
+                                                            </c:forEach>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th>Fertilizer</th>
+                                                        <td class="text-blue"><c:out value="${farm.fertilizer.fertilizer}"></c:out> </td>
+
+                                                        <c:forEach var="flow" items="${flist}">
+                                                            <c:choose>
+                                                                <c:when test='${flow.fertilizer.fertilizer !=farm.fertilizer.fertilizer}'>
+                                                                    <td class="text-red"><c:out value="${flow.fertilizer.fertilizer}"></c:out> </td>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <td class="text-green"><c:out value="${flow.fertilizer.fertilizer}"></c:out></td>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </c:forEach>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>First Dose</th>
+                                                        <td class="text-blue"><c:out value="${farm.fertilizer.first_dose}"></c:out> </td>
+
+                                                        <c:forEach var="flow" items="${flist}">
+                                                            <c:choose>
+                                                                <c:when test='${flow.fertilizer.first_dose !=farm.fertilizer.first_dose}'>
+                                                                    <td class="text-red"><c:out value="${flow.fertilizer.first_dose}"></c:out> </td>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <td class="text-green"><c:out value="${flow.fertilizer.first_dose}"></c:out></td>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </c:forEach>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Second Dose</th>
+                                                        <td class="text-blue"><c:out value="${farm.fertilizer.second_dose}"></c:out> </td>
+
+                                                        <c:forEach var="flow" items="${flist}">
+                                                            <c:choose>
+                                                                <c:when test='${flow.fertilizer.second_dose !=farm.fertilizer.second_dose}'>
+                                                                    <td class="text-red"><c:out value="${flow.fertilizer.second_dose}"></c:out> </td>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <td class="text-green"><c:out value="${flow.fertilizer.second_dose}"></c:out></td>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </c:forEach>
+                                                    </tr>
+                                                </tbody>
+
+
+                                            </table>
+                                        </div>
+                                        <div class="tab-pane tab_5" id="tab_8">
+                                            <h3 class="profile-username text-center"></h3>
+                                            <table id="fieldtable" class="table table-hover table-responsive">
+                                                <thead><tr>
+                                                        <th>Details</th>
+                                                        <th><c:out value="${farm.id}"/></th>
+                                                            <c:forEach var="flow" items="${flist}">
+
+                                                            <th><c:out value="${flow.id}"/></th>
+                                                            </c:forEach>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th>Repetition</th>
+                                                        <td class="text-blue"><c:out value="${farm.tillers.rep}"></c:out> </td>
+
+                                                        <c:forEach var="flow" items="${flist}">
+                                                            <c:choose>
+                                                                <c:when test='${flow.tillers.rep !=farm.tillers.rep}'>
+                                                                    <td class="text-red"><c:out value="${flow.tillers.rep}"></c:out> </td>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <td class="text-green"><c:out value="${flow.tillers.rep}"></c:out></td>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </c:forEach>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Count</th>
+                                                        <td class="text-blue"><c:out value="${farm.tillers.count}"></c:out> </td>
+
+                                                        <c:forEach var="flow" items="${flist}">
+                                                            <c:choose>
+                                                                <c:when test='${flow.tillers.count !=farm.tillers.count}'>
+                                                                    <td class="text-red"><c:out value="${flow.tillers.count}"></c:out> </td>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <td class="text-green"><c:out value="${flow.tillers.count}"></c:out></td>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </c:forEach>
+                                                    </tr>
+
+                                                </tbody>
+
+
+                                            </table>
+                                        </div>
+                                    </div>
 
                                 </div>
                                 <!-- /.box-body -->
                             </div>
+
                         </div>
-                        <div class="col-md-6" > 
-                            <div class="box box-info collapsed-box">
-                                <div class="box-header with-border">
-                                    <h1 class="box-title">Problems List</h1>
-                                    <div class="box-tools pull-right">
-                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                    </div>
-                                </div>
 
-                                <div class="box-body">
-                                    <table id="probTable" class="table  dispTable table-hover" cellspacing="0" width="100%">
-                                        <thead>
+                        <div class="col-md-offset-9 col-md-4">
+                             <div class="box box-info">
+                            <div class="box-body ">
+                                <table id="selecttable" class="table table-hover table-bordered table-responsive">
+                                    <tbody>
+                                        <tr>   <td><input type="checkbox" style="width: 16; height: 16" value="${farm.id}" name="farmid[]" class="msgCheckbox pull-left"></td>
+                                            <td>Farm : ${farm.id} </td> 
+                                        </tr>
+                                        <c:forEach var="flow" items="${flist}">
                                             <tr>
-                                                <th><input name="select_all" value="1" id="probTable-select-all" type="checkbox" /></th>
-                                                <th>Problem</th>
-                                                <th>Description</th>
+                                                <td><input type="checkbox" style="width: 16; height: 16" value="${flow.id}" name="farmid[]" class="msgCheckbox pull-left"></td>
+                                                <td>Farm : ${flow.id} </td> 
                                             </tr>
-                                        </thead>
-                                        <tfoot>
-                                            <tr>
-                                                <th></th>
-                                                <th>Problem</th>
-                                                <th>Description</th>
+                                        </c:forEach> 
+                                    </tbody>
+                                 </table>
 
-                                            </tr>
-                                        </tfoot>
-                                    </table>
-                                </div>
+                        
+                        </div>
+                    </div>
+                    </div>
 
+
+
+
+
+
+                    <div class="col-md-7 text-center">
+                        <div class="box box-danger">
+                            <div class="box-header">
+                                <h3 class="box-title">Action Tools</h3>
                             </div>
-                        </div> 
-                        <div class="col-md-6"> 
-                            <div class="box box-info collapsed-box" >
-                                <div class="box-header with-border">
-                                    <h1 class="box-title">Rec & Proj List</h1>
-                                    <div class="box-tools pull-right " >
-                                        <button class="btn btn-box-tool"  data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                    </div>
-                                </div>
+                            <div class="box-body">
+                                <a class="btn btn-app btn-linkedin">
+                                    <i class="fa fa-edit"></i> Create Survey
+                                </a>
+                                <a class="btn btn-app btn-adn">
+                                    <i class="fa fa-bank"></i> Create Recommendation
+                                </a>
+                                <button class="btn btn-app btn-linkedin" id="sButton" value="submit">
+                                    <i class="fa fa-edit" ></i> Send Recommendations
+                                </button>
 
-                                <div class="box-body">
-                                    <table id="example" class="table  display table-hover" cellspacing="0" width="100%">
-                                        <thead>
-                                            <tr>
-                                                <th>Farm Name</th>
-                                                <th>Farm Name</th>
-                                                <th>Owner</th>
-                                                <th>Barangay</th>
+                                <a class="btn btn-app btn-soundcloud" href="determineProblem.jsp">
 
-                                            </tr>
-                                        </thead>
-                                        <tfoot>
-                                            <tr>
-                                                <th></th>
-                                                <th>Farm Name</th>
-                                                <th>Owner</th>
-                                                <th>Barangay</th>
+                                    <i class="fa fa-inbox"></i> Determine Problem
+                                </a>
 
-                                            </tr>
-                                        </tfoot>
-                                    </table>
-                                </div>
 
                             </div>
 
-                        </div>
+                            <!-- /.box-body -->
+                        </div>    
 
 
                     </div>
-                </section>
 
-            </div>
 
-            <footer class="main-footer">
 
-                <div class="pull-right hidden-xs">
-                    <b>Version</b> 2.3.3
                 </div>
-                <strong>Copyright &copy; 2014-2015 <a href="http://sra.com">Sugar Regulatory Association</a>.</strong>
-            </footer>
+            </section>
+
         </div>
 
+        <footer class="main-footer">
 
-        <script type="text/javascript" src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="dist/js/app.min.js"></script>
+            <div class="pull-right hidden-xs">
+                <b>Version</b> 2.3.3
+            </div>
+            <strong>Copyright &copy; 2014-2015 <a href="http://sra.com">Sugar Regulatory Association</a>.</strong>
+        </footer>
+    </div>
 
-        <script src="plugins/datatables/jquery.dataTables.min.js"></script>
-        <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
 
-        <script>
+    <script type="text/javascript" src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="plugins/select2/select2.full.min.js"></script>
+    <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
 
-            $(document).ready(function () {
-                var table = $('#example').DataTable({
-                    'ajax': {
-                        'url': 'viewBrgyList'
-                    },
-                    'columnDefs': [{
-                            'targets': 0,
-                            'render': function (data, type, full, meta) {
-                                return '<a href="' + data + '">' + data + '</a>';
-                            }
-                        }]
-                });
+    <script src="dist/js/app.min.js"></script>
 
-                var table1 = $('#probTable').DataTable({
-                    'ajax': {
-                        'url': 'viewBrgyList'
-                    },
-                    'columnDefs': [{
-                            'targets': 0,
-                            'render': function (data, type, full, meta) {
-                                return '<a href="' + data + '">' + data + '</a>';
-                            }
-                        }]
-                });
+    <script type="text/javascript">
+        $(function () {
+            $(".select2").select2();
+        });
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $('.box-profile').slimScroll({
+                height: '420px',
+                alwaysVisible: true
             });
+        });
+    </script>
+    <script type="text/javascript">
+        $("#sButton").on("click", function () {
+            //var checkedValue = $('.msgCheckbox:checked').val();   
+
+            var checkedValue = [];
+            var inputElements = document.getElementsByClassName('msgCheckbox');
+            for (var i = 0; inputElements[i]; ++i) {
+                if (inputElements[i].checked) {
+                    checkedValue.push(inputElements[i].value);
+                    console.log(checkedValue);
+
+                }
+
+            }
+            for (var b = 0; b < checkedValue.length; b++) {
+                console.log(checkedValue[b] + "+" + b);
+            }
 
 
-        </script>
-    </body>
+
+        });
+    </script>
+    <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+
+    <script>
+
+        //            $(document).ready(function () {
+        //                var rows_selected = [];
+        //
+        //                var table = $('#example').DataTable({
+        //                    'ajax': {
+        //                        'url': 'viewBrgyList'
+        //                    },
+        //                    'columnDefs': [{
+        //                            'targets': 0,
+        //                            'searchable': false,
+        //                            'orderable': false,
+        //                            'className': 'dt-body-center',
+        //                            'render': function (data, type, full, meta) {
+        //                                return '<input type="checkbox" name="id[]" id="buttonClick" value="'
+        //                                        + $('<div/>').text(data).html() + '">';
+        //                            }
+        //                        }],
+        //                    'select': {
+        //                        'style': 'multi'
+        //                    },
+        //                    'order': [[1, 'asc']]
+        //                            //      ,
+        //                            //       'rowCallback': function(row, data, dataIndex){
+        //                            //         // Get row ID
+        //                            //       var rowId = data[0];
+        //                            //       // alert(rowId);
+        //                            //         // If row ID is in the list of selected row IDs
+        //                            //         if($.inArray(rowId, rows_selected) !== -1){
+        //                            //            $(row).find('input[type="checkbox"]').prop('checked', true);
+        //                            //            $(row).addClass('selected');
+        //                            //         }
+        //                            //      }     
+        //
+        //                });
+        //
+        //                $('#frm-example').on('submit', function (e) {
+        //                    var form = this;
+        //
+        //                    // Iterate over all checkboxes in the table
+        //                    table.$('input[type="checkbox"]').each(function () {
+        //                        // If checkbox doesn't exist in DOM
+        //                        if (!$.contains(document, this)) {
+        //                            // If checkbox is checked
+        //                            if (this.checked) {
+        //                                // Create a hidden element 
+        //                                $(form).append(
+        //                                        $('<input>')
+        //                                        .attr('type', 'hidden')
+        //                                        .attr('name', this.name)
+        //                                        .val(this.value)
+        //                                        );
+        //                            }
+        //                        }
+        //                    });
+        //                });
+        //            });
+
+
+    </script>
+</body>
 
 </html>
