@@ -249,6 +249,11 @@
         <url-pattern>/Login</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>viewSendRec</servlet-name>
+        <url-pattern>/viewSendRec</url-pattern>
+    </servlet-mapping>
+   
+    <servlet-mapping>
         <servlet-name>Logout</servlet-name>
         <url-pattern>/Logout</url-pattern>
     </servlet-mapping>

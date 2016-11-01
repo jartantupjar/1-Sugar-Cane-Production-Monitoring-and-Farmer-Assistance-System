@@ -10,6 +10,8 @@ import db.fixedRecDB;
 import entity.Farm;
 import entity.Problems;
 import entity.Recommendation;
+import entity.compProblems;
+import entity.compRecommendation;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -61,9 +63,16 @@ public class viewFarmDifferences extends BaseServlet {
           }
           ArrayList<Farm> list=farmdb.getAllFieldComp(fids);
          Farm farm=farmdb.getAllFieldDetails(Integer.parseInt(id));
-         farmdb.getSimilarRecommendations(farm,list);
+         ArrayList<Farm> dalist= new ArrayList<>();
+         ArrayList<Farm> dalist2= new ArrayList<>();
+              dalist.addAll(list);
+              dalist2.addAll(list);
+        ArrayList<compRecommendation>comprec= farmdb.getSimilarRecommendations(farm,dalist);
+        ArrayList<compProblems>compProb= farmdb.getSimilarProblems(farm,dalist2);
          session.setAttribute("flist",list);
          session.setAttribute("farm",farm);
+         session.setAttribute("comprec",comprec);
+         session.setAttribute("comprob",compProb);
          
          
             RequestDispatcher rd = context.getRequestDispatcher("/viewComparison.jsp");

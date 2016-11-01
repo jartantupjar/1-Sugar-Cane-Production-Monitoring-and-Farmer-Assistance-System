@@ -33,17 +33,7 @@ comparison page add current vs historical details(past 2yrs)
                 </section>
                 <section class="content">
                     <div class="row">
-                        <div class="col-lg-12">
-                            <div class="col-md-4">
-                                <h3 class="text-center text-green">High</h3>
-                            </div>
-                            <div class="col-md-4">
-                                <h3 class="text-center text-blue">Current</h3>
-                            </div>
-                            <div class="col-md-4">
-                                <h3 class="text-center text-red">Low</h3>
-                            </div>
-                        </div>
+                        
 
 
                         <div class="col-md-12">
@@ -572,6 +562,92 @@ comparison page add current vs historical details(past 2yrs)
 
                                             </table>
                                         </div>
+                                        <div class="tab-pane tab_6" id="tab_8">
+                                            <h3 class="profile-username text-center"></h3>
+                                            <table id="fieldtable" class="table table-hover table-responsive">
+                                                <thead><tr>
+                                                        <th>Problem</th>
+                                                        <th><c:out value="${farm.id}"/></th>
+                                                            <c:forEach var="flow" items="${flist}">
+
+                                                            <th><c:out value="${flow.id}"/></th>
+                                                            </c:forEach>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <c:if test="${not empty comprob}">
+                                                    <c:forEach var="flow" items="${comprob}" >
+                                                        <tr>
+                                                        <th><c:out value="${flow.prob_name}"/></th>
+                                                        
+                                                            <c:forEach var="fly" items="${flow.farms}">
+                                                         
+                                                              <c:choose>
+                                                                <c:when test='${fly!=null}'>
+                                                                    <td class="text-green"><i class="fa fa-check fa-2x" aria-hidden="true"></i></td>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                      <td class="text-red"><i class="fa fa-close fa-2x" aria-hidden="true"></i></td>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                                      
+                                                          
+                                                        </c:forEach>
+                                                         
+                                                        </tr>
+                                                    </c:forEach>
+                                                    </c:if>
+                                                    
+                                                    
+
+                                                </tbody>
+
+
+                                            </table>
+                                        </div>
+                                        <div class="tab-pane tab_7" id="tab_8">
+                                            <h3 class="profile-username text-center"></h3>
+                                            <table id="fieldtable" class="table table-hover table-responsive">
+                                                <thead><tr>
+                                                        <th>Recommendation</th>
+                                                        <th><c:out value="${farm.id}"/></th>
+                                                            <c:forEach var="flow" items="${flist}">
+
+                                                            <th><c:out value="${flow.id}"/></th>
+                                                            </c:forEach>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <c:if test="${not empty comprec}">
+                                                    <c:forEach var="flow" items="${comprec}" >
+                                                        <tr>
+                                                        <th class="pull-left"><c:out value="${flow.recommendation_name}"/></th>
+                                                        
+                                                            <c:forEach var="fly" items="${flow.farms}">
+                                                         
+                                                              <c:choose>
+                                                                <c:when test='${fly!=null}'>
+                                                                    <td class="text-green"><i class="fa fa-check fa-2x" aria-hidden="true"></i></td>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                      <td class="text-red"><i class="fa fa-close fa-2x" aria-hidden="true"></i></td>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                                      
+                                                          
+                                                        </c:forEach>
+                                                         
+                                                        </tr>
+                                                    </c:forEach>
+                                                    
+                                                    </c:if>
+                                                    
+
+                                                </tbody>
+
+
+                                            </table>
+                                        </div>
                                     </div>
 
                                 </div>
@@ -579,7 +655,7 @@ comparison page add current vs historical details(past 2yrs)
                             </div>
 
                         </div>
-
+                    <form id="frm-FarmDiff" action="viewSendRec">
                         <div class="col-md-offset-9 col-md-4">
                              <div class="box box-info">
                             <div class="box-body ">
@@ -637,7 +713,7 @@ comparison page add current vs historical details(past 2yrs)
 
                     </div>
 
-
+</form>
 
                 </div>
             </section>

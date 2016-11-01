@@ -4,10 +4,12 @@ package db;
 import entity.CropValidation;
 import entity.Farm;
 import entity.Fertilizer;
+import entity.Problems;
 import entity.Recommendation;
 import entity.SoilAnalysis;
 import entity.TagsList;
 import entity.Tillers;
+import entity.compProblems;
 import entity.compRecommendation;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -1039,7 +1041,9 @@ public class FarmsDB {
         return chcklist;
     }
 
-    public ArrayList<compRecommendation> getSimilarRecommendations(Farm farm, ArrayList<Farm> list) {
+    public ArrayList<compRecommendation> getSimilarRecommendations(Farm farm, ArrayList<Farm> dalist) {
+        ArrayList<Farm> list= new ArrayList<>();
+                list=dalist;
         ArrayList<Recommendation> farmRec = new ArrayList<Recommendation>();
        
            if (!farmRec.isEmpty()) {
@@ -1082,10 +1086,12 @@ public class FarmsDB {
         }
 
          if (!reclist.isEmpty()) {
-             list.add(farm);
+             list.add(0, farm);
             for (int i = 0; i < reclist.size(); i++) {
           ArrayList<Integer> fieldz= new ArrayList<>();
-              for(int c=0; c<list.size();c++){
+          boolean chrk=false;   
+          for(int c=0; c<list.size();c++){
+                 
                  ArrayList<Recommendation> rec = new ArrayList<Recommendation>();
                  rec = list.get(c).getRecommendation();
                  if(rec!=null){
@@ -1094,11 +1100,16 @@ public class FarmsDB {
                  if(rec.get(b).getId().equals(reclist.get(i).getId())){
                      System.out.println(list.get(c).getId());
                      fieldz.add(list.get(c).getId());
+                     chrk=true;
                     
                  } 
               }
                }
                  }
+                 if(chrk==false){
+                     fieldz.add(null);
+                 }
+                 chrk=false;
             }
                reclist.get(i).setFarms(fieldz);
                }
@@ -1107,6 +1118,94 @@ public class FarmsDB {
           System.out.println("***loop starts here***");
             for (int i = 0; i < reclist.size(); i++) {
                 System.out.println(reclist.get(i).getRecommendation_name() + ":post rec name");
+                for(int b=0; b<reclist.get(i).getFarms().size();b++){
+                    System.out.println(reclist.get(i).getFarms().get(b)+"farm");
+                    
+                }
+            }
+        }
+        
+        
+        return reclist;
+    
+    }
+    public ArrayList<compProblems> getSimilarProblems(Farm farm, ArrayList<Farm> dalist) {
+        ArrayList<Farm> list= new ArrayList<>();
+                list=dalist;
+        ArrayList<Problems> farmRec = new ArrayList<Problems>();
+       
+           if (!farmRec.isEmpty()) {
+                    farmRec.addAll(farm.getProblems());
+                }
+        
+         ArrayList<compProblems> reclist = new ArrayList<>();
+
+        for (int i = 0; i < list.size(); i++) {
+            ArrayList<Problems> rec = new ArrayList<Problems>();
+            rec = list.get(i).getProblems();
+
+            if (rec != null) {
+//          System.out.println(rec.size());
+                if (!rec.isEmpty()) {
+                    farmRec.addAll(list.get(i).getProblems());
+                }
+            }
+        }
+
+         
+        if (!farmRec.isEmpty()) {
+             for(int i=0;i<farmRec.size();i++){
+        for(int j=i+1;j<farmRec.size();j++){
+            if(farmRec.get(i).getProb_id().equals(farmRec.get(j).getProb_id())){
+                farmRec.remove(j);
+                j--;
+            }
+        }
+             }
+            }
+          if (!farmRec.isEmpty()) {
+       for (int i = 0; i < farmRec.size(); i++) {
+                compProblems cr=new compProblems();
+           cr.setProb_id(farmRec.get(i).getProb_id());
+           cr.setProb_name(farmRec.get(i).getProb_name());
+           cr.setType(farmRec.get(i).getType());
+             reclist.add(cr);
+            }
+        }
+
+         if (!reclist.isEmpty()) {
+             list.add(0, farm);
+            for (int i = 0; i < reclist.size(); i++) {
+          ArrayList<Integer> fieldz= new ArrayList<>();
+          boolean chrk=false;   
+          for(int c=0; c<list.size();c++){
+                 
+                 ArrayList<Problems> rec = new ArrayList<Problems>();
+                 rec = list.get(c).getProblems();
+                 if(rec!=null){
+                 if (!rec.isEmpty()) {
+                  for(int b=0; b<rec.size();b++){
+                 if(rec.get(b).getProb_id().equals(reclist.get(i).getProb_id())){
+                     System.out.println(list.get(c).getId());
+                     fieldz.add(list.get(c).getId());
+                     chrk=true;
+                    
+                 } 
+              }
+               }
+                 }
+                 if(chrk==false){
+                     fieldz.add(null);
+                 }
+                 chrk=false;
+            }
+               reclist.get(i).setFarms(fieldz);
+               }
+        }
+                if (!reclist.isEmpty()) {
+          System.out.println("***loop starts here***");
+            for (int i = 0; i < reclist.size(); i++) {
+                System.out.println(reclist.get(i).getProb_name()+ ":post prob name");
                 for(int b=0; b<reclist.get(i).getFarms().size();b++){
                     System.out.println(reclist.get(i).getFarms().get(b)+"farm");
                     
