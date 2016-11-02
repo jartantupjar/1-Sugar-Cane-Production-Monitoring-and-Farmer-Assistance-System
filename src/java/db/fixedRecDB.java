@@ -102,7 +102,7 @@ public class fixedRecDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select id,farmers_name,barangay,municipality,date,status from `recommendations-fields` rf join fields f on rf.fields_id=f.id where rf.recommendations_id=?;";
+            String query = "select id,farmers_name,barangay,municipality,date,status,duration_days from `recommendations-fields` rf join fields f on rf.fields_id=f.id where rf.recommendations_id=?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
@@ -119,6 +119,7 @@ public class fixedRecDB {
                     r.setMunicipality(rs.getString("municipality"));
                     r.setDate_updated(rs.getDate("date"));
                     r.setStatus(rs.getString("status"));
+                    r.setDuration_days(rs.getInt("duration_days"));
 
                     
 
@@ -189,7 +190,7 @@ public class fixedRecDB {
 //                r.setDate_start(rs.getDate("date_start"));
 //                r.setDate_end(rs.getDate("date_end"));
                 r.setPhase(rs.getString("phase"));
-                r.setDuration(rs.getInt("duration_days"));
+//                r.setDuration(rs.getInt("duration_days"));
 //                r.setTrigger_date(rs.getDate("trigger_date"));
 //                r.setTrigger_num(rs.getDouble("trigger_num"));
              }

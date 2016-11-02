@@ -145,6 +145,7 @@
                                                 <th>Municipality</th>
                                                 <th>Date</th>
                                                 <th>Status</th>
+                                                <th>Duration(days)</th>
                                                 <th>Details</th>
                                             </tr>
                                         </thead>
@@ -175,7 +176,7 @@
                         'url': 'viewFRTable?id=${id}'
                     },
                     'columnDefs': [{
-                            'targets': 6,
+                            'targets': 7,
                         
                             'render': function (data, type, full, meta) {
                                 return '<a href="viewFieldDetails?id=' + data + '" class="btn btn-primary">Details</a>';

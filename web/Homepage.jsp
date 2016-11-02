@@ -233,6 +233,10 @@
                         </div>
 
                     </div>
+         <div class="col-md-4 col-md-offset-9">
+        <button class="btn btn-danger" id="pCA">Print Crop Assessment</button>
+  <br>
+    </div>       
                                                 </c:if>
 </div>
                 </section>
@@ -476,7 +480,18 @@
                 $('#munitable').DataTable().search('${Week_ending}').draw();
                  $('#munitable_filter').addClass('hidden');
             });
+            
+   $("#pCA").on("click", function () {
+                     $.ajax({
+                        url: 'printCA?cropyear=${todayYear}&weekending=${Week_ending}',
+                        type: 'POST',
+                        dataType: "JSON",
+                        success: function (data) {
+                          alert("printed");
 
+                        }});
+                      
+                });
 
         </script>
 
