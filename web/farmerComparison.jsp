@@ -409,6 +409,7 @@ on barangay selection
                             <div class="col-md-2 pull-right">
 
                                 <input name="id" type="hidden" value="${id}"/>
+                                <input id="taglist" name="taglist" type="hidden" />
                                 <div class="box-body">
                                     <button class="btn btn-app btn-linkedin hidden" id="dbox" value="submit" style="width: 100%">
                                         <i class="fa fa-edit" ></i> Create Comparison
@@ -448,7 +449,7 @@ on barangay selection
         </script>
         <script type="text/javascript">
             $(function () {
-
+var test;
                 $.ajax({
                     url: 'createTagList?id=${id}',
                     type: 'POST',
@@ -473,8 +474,8 @@ on barangay selection
                 // var data = [{id: 0, text: 'enhancement'}, {id: 1, text: 'bug'}, {id: 2, text: 'duplicate'}, {id: 3, text: 'invalid'}, {id: 4, text: 'wontfix'}];
 
                 $("#sButton").on("click", function () {
-                    var test = $("#select2").val();
-
+                   test = $("#select2").val();
+                     document.getElementById("taglist").value=test;
                     //  var rows_selected = [];
                     var limit = 4;
                     $('#sbox').removeClass('hidden');

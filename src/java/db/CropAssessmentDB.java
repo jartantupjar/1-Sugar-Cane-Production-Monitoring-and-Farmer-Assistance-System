@@ -21,6 +21,31 @@ import java.util.logging.Logger;
  * @author Bryll Joey Delfin
  */
 public class CropAssessmentDB {
+      public boolean checkExistingNarrative(int cyear,Date weekending) {
+        try {
+            // put functions here : previous week production, this week production
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select * from cropassessment where year=? and district=? AND week_ending=? order by year,district,week_ending";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, cyear);
+            pstmt.setString(2, "TARLAC");
+            pstmt.setDate(3,weekending);
+            ResultSet rs = pstmt.executeQuery();
+           
+            if (rs.next()) { 
+             return true;    
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            
+          
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(CropAssessmentDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
     public boolean submitNarrative(CropNarrative cn){
          try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
@@ -45,6 +70,40 @@ public class CropAssessmentDB {
         }
         return false;
         
+    }
+       public CropNarrative getAssessmentNarrative(int year,Date weekending) {
+        try {
+            // put functions here : previous week production, this week production
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select * from cropassessment where year=? and district=? AND week_ending=? order by year,district,week_ending;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, year);
+            pstmt.setString(2, "TARLAC");
+            pstmt.setDate(3, weekending);
+            ResultSet rs = pstmt.executeQuery();
+          CropNarrative cn=null;
+            if (rs.next()) { 
+               cn = new CropNarrative();
+                        cn.setYear(year);
+                        cn.setWeekending(weekending);
+                        cn.setDweather(rs.getString("weather"));
+                        cn.setDprice(rs.getString("prices_of_sugar"));
+                        cn.setDmill(rs.getString("mill_operation"));
+                        cn.setDinput(rs.getString("prices_of_inputs"));
+                        cn.setDother(rs.getString("others"));
+                        cn.setDanalysis(rs.getString("overall_analysis"));
+                   
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            
+            return cn;
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(CropAssessmentDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
     
     public ArrayList<CropAssessment> getCropAssessmentReportForTheWeek(int weekofyear, int year) {
