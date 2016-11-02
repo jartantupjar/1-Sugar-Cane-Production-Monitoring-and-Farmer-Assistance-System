@@ -6,6 +6,7 @@
 package db;
 
 import entity.CropAssessment;
+import entity.CropNarrative;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -13,12 +14,39 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Bryll Joey Delfin
  */
 public class CropAssessmentDB {
+    public boolean submitNarrative(CropNarrative cn){
+         try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "insert into cropassessment(year,district,week_ending,weather,prices_of_sugar,mill_operation,prices_of_inputs,others,overall_analysis) values (?,?,?,?,?,?,?,?,?)";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, cn.getYear());
+            pstmt.setString(2,"TARLAC");
+            pstmt.setDate(3, cn.getWeekending());
+            pstmt.setString(4,cn.getDweather());
+            pstmt.setString(5,cn.getDprice());
+            pstmt.setString(6,cn.getDmill());
+            pstmt.setString(7,cn.getDinput());
+            pstmt.setString(8,cn.getDother());
+            pstmt.setString(9,cn.getDanalysis());
+            int i = pstmt.executeUpdate();
+            pstmt.close();
+            conn.close();
+            return i == 1;
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(CropAssessmentDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+        
+    }
+    
     public ArrayList<CropAssessment> getCropAssessmentReportForTheWeek(int weekofyear, int year) {
         try {
             // put functions here : previous week production, this week production

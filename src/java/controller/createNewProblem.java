@@ -5,15 +5,21 @@
  */
 package controller;
 
+import db.ForumDB;
 import db.ProblemsDB;
 import db.subjectiveRecDB;
+import entity.Forum;
 import entity.Problems;
 import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -44,18 +50,27 @@ public class createNewProblem extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             Problems p = new Problems();
             ProblemsDB pDB = new ProblemsDB();
+            ForumDB fdb = new ForumDB();
             subjectiveRecDB sDB = new subjectiveRecDB();
-            p.setProb_name(request.getParameter("problem_name"));
+            int fields_id = Integer.parseInt(request.getParameter("fields"));
+            String title = request.getParameter("title");
+            String lined = request.getParameter("date");
+            Date pdate = Date.valueOf(lined);
+            System.out.println(pdate + " BEFORE !!!!");
+            try{
+            java.util.Date date = new SimpleDateFormat("MM/dd/yyyy").parse(lined);
+            pdate = new java.sql.Date(date.getTime());
+            } catch (ParseException ex) {
+            Logger.getLogger(createNewProgram.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+            p.setProb_name(request.getParameter("prob_name"));
             p.setProb_details(request.getParameter("description"));
-            p.setType(request.getParameter("type"));
+            //p.setType(request.getParameter("type"));
             p.setPhase(request.getParameter("period"));
             p.setStatus("Active");
-            Date d = new Date(System.currentTimeMillis());
-            System.out.println("The Date is :" + d);
-            p.setDate_created(d);
             HttpSession session = request.getSession();
-            User user = (User) session.getAttribute("user");
-            p.setUser_name(user.getUsername());
+            java.sql.Date dateparam = (Date) session.getAttribute("todayDate");
+            p.setDate_created(dateparam);
             int check = pDB.addProblem(p);
 //            Enumeration<String> parameterNames = request.getParameterNames();
 //            String paramName;
@@ -74,9 +89,10 @@ public class createNewProblem extends HttpServlet {
 //                }
 //            }
             if (check > 0){
-                
+                fdb.updatePostProblems(title, fields_id, check);
+                pDB.linktoProblems(fields_id, check, dateparam, p.getStatus());
                 ServletContext context = getServletContext();
-                RequestDispatcher rd = context.getRequestDispatcher("/createNewRecommendation.jsp");
+                RequestDispatcher rd = context.getRequestDispatcher("/Forum.jsp");
                 rd.forward(request, response);
             }
             else {

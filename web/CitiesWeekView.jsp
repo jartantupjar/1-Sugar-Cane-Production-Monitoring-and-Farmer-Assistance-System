@@ -39,19 +39,27 @@
                             </div>
 
                             <div class="box-body no-padding">
-                                <table id="example" class="table table-bordered">
+                                <table  class="table table-bordered">
                                         <thead>
                                             <tr>
                                                 <th>District</th>
                                                 <th>Estimated Production</th>
                                                 <th>This Week (Area)</th>
-                                                <th>To Date (Area)</th>
                                                 <th>This Week (Tons Cane)</th>
-                                                <th>To Date (Tons Cane)</th>
                                                 <th>This Week (LKG)</th>
-                                                <th>To Date (LKG)</th>
                                             </tr>
                                         </thead>
+                                        <tbody>
+                                            <c:forEach var="prod" items="${crop}">
+                                            <tr>
+                                                <td>${prod.district}</td>
+                                                <td>${prod.estimated}</td>
+                                                <td>${prod.area}</td>
+                                                <td>${prod.tc}</td>
+                                                <td>${prod.lkg}</td>
+                                            </tr>
+                                            </c:forEach>
+                                        </tbody>
                                     </table>
                             </div>
 

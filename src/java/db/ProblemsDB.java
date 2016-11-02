@@ -8,6 +8,7 @@ package db;
 import entity.Problems;
 import entity.Recommendation;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -96,6 +97,27 @@ public class ProblemsDB {
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, recid);
             pstmt.setInt(2, probid);
+            i = pstmt.executeUpdate();
+            pstmt.close();
+            conn.close();
+            return i;
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(subjectiveRecDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+    public int linktoProblems(Integer field_id, Integer probid, Date date, String status) {
+        try {
+            // put functions here : previous week production, this week production
+            int i = 0;
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "insert into `problems-fields`(Problems_id,Fields_id,date,status) values(?,?,?,?);";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, probid);
+            pstmt.setInt(2, field_id);
+            pstmt.setDate(3, date);
+            pstmt.setString(4, status);
             i = pstmt.executeUpdate();
             pstmt.close();
             conn.close();
@@ -401,15 +423,13 @@ public class ProblemsDB {
             int i = 0;
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "insert into Problems(name, description,type,status,username,date,phase) values(?,?,?,?,?,?,?);";
+            String query = "insert into Problems(name, description,type,date,phase) values(?,?,?,?,?);";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, problems.getProb_name());
             pstmt.setString(2, problems.getProb_details());
-            pstmt.setString(3, problems.getType());
-            pstmt.setString(4, problems.getStatus());
-            pstmt.setString(5, problems.getUser_name());
-            pstmt.setDate(6, problems.getDate_created());
-            pstmt.setString(7, problems.getPhase());
+            pstmt.setString(3, "Subjective");
+            pstmt.setDate(4, problems.getDate_created());
+            pstmt.setString(5, problems.getPhase());
             i = pstmt.executeUpdate();
             if(i==1){
                 i= getLastProblemsID();

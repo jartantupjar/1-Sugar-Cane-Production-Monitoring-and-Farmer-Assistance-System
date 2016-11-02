@@ -28,7 +28,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label>Type</label>
-                            <select class="form-control" id="year1">
+                            <select class="form-control" id="particulars">
                                 <option>TC</option>
                                 <option>HA</option>
                                 <option>LKG</option>
@@ -93,9 +93,23 @@
         <script src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="dist/js/app.min.js"></script>
+        <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
         <script src="Highcharts/highcharts.js"></script>
+        <script src="Highcharts/modules/exporting.js"></script>
+        
         <script>
-            $('#container').highcharts({
+            $(function(){
+            var sel = document.getElementById("particulars");
+            var sv = sel.options[sel.selectedIndex].value;
+            alert(sv);
+            $.ajax({
+                url: "viewWeeklyProducedReport?id="+sv,
+                tye: "POST",
+                dateType: "JSON",
+                success: function(data){ 
+                  console.log(data);  
+                  $('#container').highcharts({
     
     tooltip: {
         pointFormat: "Value: {point.y:,.1f} TC"
@@ -117,7 +131,7 @@
                     events: {
                         click: function () {
                             alert('Date : '+ this.x);
-                         location.href = 'RegionWeekView.jsp';
+                         location.href = 'viewWeeklyProducedReportByWeek?id='+this.x+'&type='+sv;
                         }
                     }
                 }
@@ -125,8 +139,8 @@
         },
 
     series: [{
-        data: [1029.9, 1071.5, 1106.4, 1129.2, 1144.0, 1176.0, 1135.6, 1148.5, 1216.4, 1194.1, 1095.6, 1054.4],
-        pointStart: Date.UTC(2015,1,10),
+        data: data.prod,
+        pointStart: Date.UTC(${todayYear},${todayMonth},${todayDay}),
         pointInterval: 168 * 36e5
     }]
                ,
@@ -134,16 +148,35 @@
                text: 'Weekly Produced Report'
                  }
 
+}); 
+                }
+            });
+            
+//            sel.onchange = function(){
+//                var sl = sel.options[sel.selectedIndex].value;
+//                alert(sl);
+//                $.ajax({
+//                url: "viewWeeklyProducedReport?id="+sv,
+//                tye: "POST",
+//                dateType: "JSON",
+//                success: function(data){
+//                    
+//                } 
+//               });
+//           };
+                     
+//// end of the ajax 
+//                }
+//            });
+//            };    
 });
         </script>
-        <script src="plugins/datatables/jquery.dataTables.min.js"></script>
-        <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
         <script>
 
             $(document).ready(function () {
                 var table = $('#example').DataTable({
                     'ajax': {
-                        'url': '#'
+                        'url': '#'+
                     },
                     'columnDefs': [{
                             'targets': 6,
@@ -158,5 +191,6 @@
 
 
         </script>
+        
     </body>
 </html>

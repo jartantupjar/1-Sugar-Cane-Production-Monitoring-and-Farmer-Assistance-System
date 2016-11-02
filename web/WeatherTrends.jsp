@@ -75,7 +75,7 @@
                                 </div>
                                 <div class="box-body no-padding" id="container1"></div>
                             </div>
-                            <button class="pull-right"><a href="setRecommendationFromWeatherTrends.jsp"><b>Set Recommendation</b></a>
+                            <button class="pull-right"><a href="viewWeatherRecommendations"><b>Set Weather Recommendation</b></a>
                                         
                                     </button> 
                         </div>

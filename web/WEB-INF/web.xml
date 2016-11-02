@@ -209,6 +209,10 @@
         <servlet-class>controller.viewBrgySummary</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>viewCropAssessment</servlet-name>
+        <servlet-class>controller.viewCropAssessment</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>loadBrgySumYrsChart</servlet-name>
         <servlet-class>controller.loadBrgySumYrsChart</servlet-class>
     </servlet>
@@ -223,6 +227,38 @@
     <servlet>
         <servlet-name>linkToProblem</servlet-name>
         <servlet-class>controller.linkToProblem</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LinkToRecommendation</servlet-name>
+        <servlet-class>controller.LinkToRecommendation</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewWeatherRecommendations</servlet-name>
+        <servlet-class>controller.viewWeatherRecommendations</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewRec4Forum</servlet-name>
+        <servlet-class>controller.viewRec4Forum</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewWeeklyProducedReport</servlet-name>
+        <servlet-class>controller.viewWeeklyProducedReport</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewWeeklyProducedReportByWeek</servlet-name>
+        <servlet-class>controller.viewWeeklyProducedReportByWeek</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewWeeklyProducedReportByRegion</servlet-name>
+        <servlet-class>controller.viewWeeklyProducedReportByRegion</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewWeeklyProducedReportByRegionT</servlet-name>
+        <servlet-class>controller.viewWeeklyProducedReportByRegionT</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CitiesProdDetails</servlet-name>
+        <servlet-class>controller.CitiesProdDetails</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
@@ -271,6 +307,10 @@
     <servlet-mapping>
         <servlet-name>viewProbDetails</servlet-name>
         <url-pattern>/viewProbDetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewCropAssessment</servlet-name>
+        <url-pattern>/viewCropAssessment</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>viewRecList</servlet-name>
@@ -443,6 +483,38 @@
     <servlet-mapping>
         <servlet-name>linkToProblem</servlet-name>
         <url-pattern>/linkToProblem</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LinkToRecommendation</servlet-name>
+        <url-pattern>/LinkToRecommendation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewWeatherRecommendations</servlet-name>
+        <url-pattern>/viewWeatherRecommendations</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewRec4Forum</servlet-name>
+        <url-pattern>/viewRec4Forum</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewWeeklyProducedReport</servlet-name>
+        <url-pattern>/viewWeeklyProducedReport</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewWeeklyProducedReportByWeek</servlet-name>
+        <url-pattern>/viewWeeklyProducedReportByWeek</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewWeeklyProducedReportByRegion</servlet-name>
+        <url-pattern>/viewWeeklyProducedReportByRegion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewWeeklyProducedReportByRegionT</servlet-name>
+        <url-pattern>/viewWeeklyProducedReportByRegionT</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CitiesProdDetails</servlet-name>
+        <url-pattern>/CitiesProdDetails</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

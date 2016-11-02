@@ -28,7 +28,7 @@ public class viewRecDetails extends BaseServlet {
          ArrayList<Problems> plist = new ArrayList<Problems>();
         int id= Integer.parseInt(request.getParameter("id"));
         rec = recdb.viewRecDetails(id);
-  plist = recdb.viewProbRecTable(id);
+        plist = recdb.viewProbRecTable(id);
       //  ArrayList<FarmRecTable> fct = recdb.viewFarmRecTable(id);
         
 //        JSONObject data = new JSONObject();

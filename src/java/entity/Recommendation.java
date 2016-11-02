@@ -15,7 +15,7 @@ public class Recommendation {
     private Integer id , counter;
     private int config;
     private double trigger_num,duration;
-    private String recommendation_name, type, description, status, phase;
+    private String recommendation_name, type, description, status, phase, improvement;
    
     private Date date_start, date_create, date_end , trigger_date; 
 
@@ -213,6 +213,20 @@ public class Recommendation {
      */
     public void setDuration(double duration) {
         this.duration = duration;
+    }
+
+    /**
+     * @return the improvement
+     */
+    public String getImprovement() {
+        return improvement;
+    }
+
+    /**
+     * @param improvement the improvement to set
+     */
+    public void setImprovement(String improvement) {
+        this.improvement = improvement;
     }
 
     

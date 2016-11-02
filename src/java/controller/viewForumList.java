@@ -52,26 +52,28 @@ public class viewForumList extends HttpServlet {
             if(fT != null){
                for(int i = 0; i< fT.size(); i++){
                    ArrayList<String> obj = new ArrayList<String>();
-                   
+                   System.out.println(fT.get(i).getRecom_id()+ "XD");
                    obj.add(fT.get(i).getTitle());
                   // obj.add(fT.get(i).getFarmer());
                    
                    
                    if(fT.get(i).getStatus().equalsIgnoreCase("Accepted")){
-                       if(fT.get(i).getProb_id()!= null){
+                       if(fT.get(i).getProb_id()!= 0){
                            Integer counter = fdb.getProblemCounter(fT.get(i).getProb_id());
                            Problems prob = pDB.getProblemsDetails(fT.get(i).getProb_id());
+                           System.out.println(fT.get(i).getProb_id()+ "LoL");
                            obj.add(prob.getProb_name());
                            obj.add(counter.toString());
                        }
-                       else if(fT.get(i).getRecom_id() != null){
+                       else if(fT.get(i).getRecom_id() != 0){
                          Integer counter = fdb.getRecommendationCounter(fT.get(i).getRecom_id());
                            Recommendation recom = recDB.viewRecDetails(fT.get(i).getRecom_id());
+                           System.out.println(fT.get(i).getRecom_id()+ "XD");
                           obj.add(recom.getRecommendation_name());
                           obj.add(counter.toString());
                        }
                    }
-                   else{
+                   else {
                       obj.add("N/A");
                       obj.add("0");
                    }

@@ -5,6 +5,7 @@
  */
 package controller;
 
+import db.ForumDB;
 import db.subjectiveRecDB;
 import entity.Problems;
 import entity.Recommendation;
@@ -50,38 +51,65 @@ public class createNewRecommendation extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             Recommendation r = new Recommendation();
             subjectiveRecDB recDB = new subjectiveRecDB();
-            r.setRecommendation_name(request.getParameter("recommendation_name"));
+            ForumDB fdb = new ForumDB();
+            int fields_id = Integer.parseInt(request.getParameter("fields"));
+            String title = request.getParameter("title");
+            String lined = request.getParameter("date");
+            int duration = Integer.parseInt(request.getParameter("duration"));
+            
+            HttpSession session = request.getSession();
+            java.sql.Date dateparam = (Date) session.getAttribute("todayDate");
+            
+            Date rdate = Date.valueOf(lined);
+            System.out.println(rdate + " BEFORE !!!!");
+            try{
+            java.util.Date date = new SimpleDateFormat("MM/dd/yyyy").parse(lined);
+            rdate = new java.sql.Date(date.getTime());
+            } catch (ParseException ex) {
+            Logger.getLogger(createNewProgram.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+            r.setRecommendation_name(request.getParameter("rec_id"));
             r.setPhase(request.getParameter("period"));
             r.setType(request.getParameter("type"));
 //            String dates = request.getParameter("datepicker");
 //            String datee = request.getParameter("dateend");
             r.setDescription(request.getParameter("description"));
-            r.setConfig(Integer.parseInt(request.getParameter("config")));
-            r.setStatus("Ongoing");
+            //  r.setConfig(Integer.parseInt(request.getParameter("config")));
             int check = recDB.addRecommendation(r);
-             Enumeration<String> parameterNames = request.getParameterNames();
+            int check2 = 0;
+            int check3 = 0;
+            Enumeration<String> parameterNames = request.getParameterNames();
             String paramName;
             ArrayList<String> pT = new ArrayList<String>();
             while (parameterNames.hasMoreElements()) {
                  paramName = parameterNames.nextElement();
-                 System.out.println(paramName);
-            if (paramName.startsWith("probid")) {
+                 System.out.println(paramName + "parameter");
+            if (paramName.startsWith("probTable1")) {
                 for(int i=0;i<request.getParameterValues(paramName).length;i++){
                      pT.add(request.getParameterValues(paramName)[i]);
                  System.out.println(request.getParameterValues(paramName)[i]);
                  //connects recommendation to problem table
-                 int prob_id = Integer.parseInt(request.getParameterValues(paramName)[i]);
-                 //int test = recDB.connectRecommendationtoProblem(check,prob_id);
+                 int probid = Integer.parseInt(request.getParameterValues(paramName)[i]);
+                 if(probid == 0){
+                 r.setImprovement("Y");
+                 check3 = recDB.linkToRecoms(fields_id, check, dateparam, "Active", duration);
                 }
-
-        }
+                 else{
+                  r.setImprovement("N");
+                  check2 = recDB.connectRecommendationtoProblem(check,probid);
+                  check3 = recDB.linkToRecoms(fields_id, check, dateparam, "Active", duration);
+                 }
+                    }
+                }
             }
-            System.out.println(check);
-            if (check > 0){
-                
+            
+            System.out.println(check +"add is done");
+            System.out.println(check2 +"recom to problem is done");
+            System.out.println(check3 +"link to recom is done");
+            if (check > 0 && check3 >0){
+                fdb.updatePostRecommendations(title, fields_id, check);
                 ServletContext context = getServletContext();
-                RequestDispatcher rd = context.getRequestDispatcher("/createNewRecommendation.jsp");
-                HttpSession session = request.getSession();
+                RequestDispatcher rd = context.getRequestDispatcher("/Forum.jsp");
                 rd.forward(request, response);
             }
             else {

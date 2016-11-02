@@ -45,6 +45,8 @@ public class viewPostDetails extends HttpServlet {
             ArrayList<Forum> comments = new ArrayList<>();
             Forum post  = new Forum();
             post = fdb.getForumDetail(item.getId());
+            int fid = post.getFields_id();
+            System.out.println(fid + " FID IS THIS");
             comments =  fdb.getCommentDetails(item.getId());
             if(post.getProb_id()!= null){
                 post.setName(post.getProblem_name());
@@ -62,6 +64,7 @@ public class viewPostDetails extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("comments", comments);
                 session.setAttribute("post", post);
+                session.setAttribute("fid", fid);
                 ServletContext context = getServletContext();
                 RequestDispatcher rd = context.getRequestDispatcher("/Post.jsp");
                 rd.forward(request, response);

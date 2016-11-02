@@ -195,6 +195,44 @@ public class ForumDB {
         }
         return null;
     }
+    public Integer updatePostProblems(String title,Integer fields_id, Integer prob_id){
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "update posts set Problems_id = ? where title = ? and Fields_id = ? and status = 'Accepted'  ;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, prob_id);
+            pstmt.setString(2,title);
+            pstmt.setInt(3, fields_id);
+            int check = pstmt.executeUpdate();
+                System.out.println(check + " This is the test");
+                pstmt.close();
+                conn.close();            
+            return check;
+                 }catch (SQLException ex) {
+            Logger.getLogger(ForumDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public Integer updatePostRecommendations(String title,Integer fields_id, Integer recom_id){
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "update posts set Recommendations_id = ? where title = ? and Fields_id = ? and status = 'Accepted'  ;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, recom_id);
+            pstmt.setString(2,title);
+            pstmt.setInt(3, fields_id);
+            int check = pstmt.executeUpdate();
+                System.out.println(check + " UPDATING POST DONE");
+                pstmt.close();
+                conn.close();            
+            return check;
+                 }catch (SQLException ex) {
+            Logger.getLogger(ForumDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     public int getProblemCounter(Integer problem_id){
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
@@ -220,7 +258,7 @@ public class ForumDB {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "Select count(rf.Fields_id) as `counter` from posts p join recommendations r on p.Recommendations_id = r.id join `recommendations-fields` rf on r.id = rf.Recommendations_id where rf.id = ? ;";
+            String query = "Select count(rf.Fields_id) as `counter` from posts p join recommendations r on p.Recommendations_id = r.id join `recommendations-fields` rf on r.id = rf.Recommendations_id where rf.Recommendations_id = ? ;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1,recom_id);
             ResultSet rs = pstmt.executeQuery();
@@ -266,7 +304,7 @@ public class ForumDB {
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1,prob_id);
             ResultSet rs = pstmt.executeQuery();
-            String prob = "";
+            String prob = "Error";
                 if (rs.next()){ 
                    prob = rs.getString("name");
                 }

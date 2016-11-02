@@ -12,7 +12,7 @@ import java.sql.Date;
  * @author Bryll Joey Delfin
  */
 public class Forum {
-    private String farmer,message,status,comment_User, comment_message, comment_Date , title, id_and_status, problem_name,recommendation_name,name;
+    private String farmer,message,status,comment_User, comment_message, comment_Date , title, id_and_status, problem_name,recommendation_name,name , fid;
     private Integer id , prob_id, counter, recom_id, Fields_id;
     private Date date_posted, date_started,date_ended;
 
@@ -280,6 +280,20 @@ public class Forum {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * @return the fid
+     */
+    public String getFid() {
+        return fid;
+    }
+
+    /**
+     * @param fid the fid to set
+     */
+    public void setFid(String fid) {
+        this.fid = fid;
     }
 
   }

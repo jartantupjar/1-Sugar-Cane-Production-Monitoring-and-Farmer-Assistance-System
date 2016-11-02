@@ -52,6 +52,8 @@ public class Login extends HttpServlet {
                 int week_of_year = cal.get(Calendar.WEEK_OF_YEAR);
                 System.out.println(week_of_year);
                 int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
                 ArrayList<CropAssessment> rain = cadb.getRainFall(week_of_year,year);
                 DecimalFormat df = new DecimalFormat("#.##");   
                 currT = cadb.getCropAssessmentReportForTheWeek(week_of_year, year);
@@ -86,7 +88,10 @@ public class Login extends HttpServlet {
                 session.setAttribute("todayDate", todayDate);
                 session.setAttribute("CropAss", caT);
                 session.setAttribute("todayYear", year);
+                session.setAttribute("todayMonth", month);
+                session.setAttribute("todayDay", day);
                 session.setAttribute("rainfall", rain);
+                session.setAttribute("weekOfYear", week_of_year);
                 rd.forward(request, response);
             } else {
                 ServletContext context = getServletContext();

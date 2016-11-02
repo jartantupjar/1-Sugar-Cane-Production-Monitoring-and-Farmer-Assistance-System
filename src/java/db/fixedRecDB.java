@@ -10,6 +10,7 @@ import entity.Problems;
 import entity.Recommendation;
 import static java.lang.Math.random;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -30,6 +31,67 @@ public class fixedRecDB {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "select * from recommendations;";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            ArrayList<Recommendation> list = null;
+            Recommendation r;
+            if (rs.next()) {
+                list = new ArrayList<Recommendation>();
+                do {
+
+                    r = new Recommendation();
+                    r.setId(rs.getInt("id"));
+                    r.setRecommendation_name(rs.getString("recommendation"));
+                    r.setType(rs.getString("type"));
+                    r.setDescription(rs.getString("description"));
+                    r.setStatus(rs.getString("improvement"));
+//                    r.setDate_create(rs.getDate("date_created"));
+//                    r.setDate_start(rs.getDate("date_start"));
+//                    r.setDate_end(rs.getDate("date_end"));
+                    r.setPhase(rs.getString("phase"));
+//                    r.setTrigger_date(rs.getDate("trigger_date"));
+//                    r.setTrigger_num(rs.getDouble("trigger_num"));
+                    list.add(r);
+                } while (rs.next());
+            }
+            rs.close();
+            stmt.close();
+            conn.close();
+
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProblemsDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public int linktoRecommendation(Integer field_id, Integer recomid, Date date, String status) {
+        try {
+            // put functions here : previous week production, this week production
+            int i = 0;
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "insert into `recommendations-fields`(Recommendations_id,Fields_id,status,date) values(?,?,?,?);";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, recomid);
+            pstmt.setInt(2, field_id);
+            pstmt.setDate(4, date);
+            pstmt.setString(3, status);
+            i = pstmt.executeUpdate();
+            System.out.println(i + "LINKING DONE");
+            pstmt.close();
+            conn.close();
+            return i;
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(subjectiveRecDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+    public ArrayList<Recommendation> viewWeatherRecList() {
+        try {
+            // put functions here : previous week production, this week production
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select * from recommendations where type = 'Weather' ;";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             ArrayList<Recommendation> list = null;
@@ -173,7 +235,7 @@ public class fixedRecDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select * from recommendations sr where sr.id=?;";
+            String query = "select * from recommendations  where id = ? ;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
