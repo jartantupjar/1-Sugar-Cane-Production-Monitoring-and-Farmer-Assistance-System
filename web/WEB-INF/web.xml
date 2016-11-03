@@ -272,6 +272,10 @@
         <servlet-name>viewOnGoingProjects</servlet-name>
         <servlet-class>controller.viewOnGoingProjects</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>printCA</servlet-name>
+        <servlet-class>controller.printCA</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
@@ -543,6 +547,10 @@
     <servlet-mapping>
         <servlet-name>viewOnGoingProjects</servlet-name>
         <url-pattern>/viewOnGoingProjects</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>printCA</servlet-name>
+        <url-pattern>/printCA</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

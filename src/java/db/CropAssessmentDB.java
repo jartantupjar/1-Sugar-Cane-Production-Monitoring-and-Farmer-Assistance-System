@@ -7,14 +7,24 @@ package db;
 
 import entity.CropAssessment;
 import entity.CropNarrative;
+import java.io.File;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -309,5 +319,49 @@ public class CropAssessmentDB {
         }
         return null;
     }
+    public boolean printCA(int year,String district,String weekending) {
+     try{
+       DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+              //load report location
+                //   FileInputStream fis = new FileInputStream("C:\\Users\\ndrs\\Documents\\NetBeansProjects\\devappFirst\\src\\java\\reports\\PurchaseOrder.jrxml");
+              //    BufferedInputStream bufferedInputStream = new BufferedInputStream(fis);              
+                    //set parameters
+                         Map map = new HashMap();
+                    map.put("year", year);        
+                    map.put("district", district);        
+                    map.put("week_ending", weekending);        
+                    //compile report
+           //   JasperReport jasperReport = JasperCompileManager.compileReport(bufferedInputStream);
+               String pathing=  CropAssessment.class.getClassLoader().toString();
+               System.out.println(pathing);
+                           File file = new File("cropassessmenttest.jrxml");
+        String path = file.getAbsolutePath();
+        
+        String only_path = path;
+        System.out.println(only_path);
+     JasperReport jasperReport = JasperCompileManager.compileReport
+        ("C:\\Users\\ndrs\\Documents\\NetBeansProjects\\Reality\\src\\java\\reports\\cropassessmenttest.jrxml");
+     
+     JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, map, conn);
+           
+                  System.out.println("it printed the file");
+     JasperExportManager.exportReportToPdfFile
+        (jasperPrint, "C:\\Users\\ndrs\\Documents\\NetBeansProjects\\Reality\\CropAssess"+district+weekending+".pdf");
+
+                    //view report to UI
+     
+     JasperViewer jv = new JasperViewer( jasperPrint,false);
+//                jv.viewReport( jasperPrint, false );
+                        JasperViewer.viewReport(jasperPrint, false); 
+                        
+                        return true;
+                    
+     } catch (JRException ex) {
+            Logger.getLogger(CropAssessmentDB.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+   return false;
+
+ }
     
 }

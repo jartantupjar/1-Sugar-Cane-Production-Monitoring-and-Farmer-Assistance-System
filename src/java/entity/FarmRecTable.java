@@ -12,7 +12,7 @@ import java.sql.Date;
  * @author ndrs
  */
 public class FarmRecTable {
-    private int id;
+    private int id,duration_days;
     private String name,brgy,municipality, approved,status;
     private Date date_updated; 
 
@@ -113,5 +113,19 @@ public class FarmRecTable {
      */
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    /**
+     * @return the duration_days
+     */
+    public int getDuration_days() {
+        return duration_days;
+    }
+
+    /**
+     * @param duration_days the duration_days to set
+     */
+    public void setDuration_days(int duration_days) {
+        this.duration_days = duration_days;
     }
 }

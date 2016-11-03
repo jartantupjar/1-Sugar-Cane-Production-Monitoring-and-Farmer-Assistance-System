@@ -164,7 +164,7 @@ public class fixedRecDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select id,farmers_name,barangay,municipality,date,status from `recommendations-fields` rf join fields f on rf.fields_id=f.id where rf.recommendations_id=?;";
+            String query = "select id,farmers_name,barangay,municipality,date,status,duration_days from `recommendations-fields` rf join fields f on rf.fields_id=f.id where rf.recommendations_id=?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
@@ -181,6 +181,7 @@ public class fixedRecDB {
                     r.setMunicipality(rs.getString("municipality"));
                     r.setDate_updated(rs.getDate("date"));
                     r.setStatus(rs.getString("status"));
+                    r.setDuration_days(rs.getInt("duration_days"));
 
                     
 
