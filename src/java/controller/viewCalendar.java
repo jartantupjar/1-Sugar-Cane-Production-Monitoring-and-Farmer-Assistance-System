@@ -5,29 +5,23 @@
  */
 package controller;
 
-import db.CropBoardDB;
-import entity.CropBoard;
+import db.CalendarDB;
+import entity.Calendar;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 /**
  *
  * @author Bryll Joey Delfin
  */
-public class CitiesProdDetails extends HttpServlet {
+public class viewCalendar extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,33 +37,31 @@ public class CitiesProdDetails extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            CropBoard cb = new CropBoard();
-            CropBoardDB cdb = new CropBoardDB();
-            ArrayList<CropBoard> cT = new ArrayList<CropBoard>();
-            String line = request.getParameter("id");
-            String[] param = line.split(",");
-            Date cdate = Date.valueOf(param[1]);
-            System.out.println(cdate + " BEFORE !!!!");
-            try{
-            java.util.Date date = new SimpleDateFormat("MM/dd/yyyy").parse(param[1]);
-            cdate = new java.sql.Date(date.getTime());
-            } catch (ParseException ex) {
-            Logger.getLogger(createNewProgram.class.getName()).log(Level.SEVERE, null, ex);
+            Calendar c = new Calendar();
+            CalendarDB cdb = new CalendarDB();
+            ArrayList<Calendar> cT = new ArrayList<Calendar>();
+            cT = cdb.getCaledarInputs();
+            JSONArray calendar = new JSONArray();
+            JSONObject cal = new JSONObject();
+            JSONObject phase = new JSONObject();
+            JSONObject days = new JSONObject();
+            JSONArray clist = new JSONArray();
+            JSONArray plist = new JSONArray();
+            if(cT != null){
+                for(int i=0;i<cT.size();i++){
+                    days = new JSONObject();
+                    days.put("id", i);
+                    days.put("name", cT.get(i).getPhase());
+                    days.put("startDate", cT.get(i).getStarting().getTime());
+                    days.put("endDate", cT.get(i).getEnding().getTime());
+                    calendar.add(days);
+                }
             }
-            cT = cdb.getWeeklyProducedReportByRegionDetails(param[0],cdate);
-            if(cT!=null){
-                HttpSession session = request.getSession();
-                ServletContext context = getServletContext();
-                RequestDispatcher rd = context.getRequestDispatcher("/CitiesWeekView.jsp");
-                session.setAttribute("todayDate", cdate);
-                session.setAttribute("crop", cT);
-                rd.forward(request, response);  
-            }
-            else{
-                ServletContext context = getServletContext();
-                RequestDispatcher rd = context.getRequestDispatcher("/index.jsp");
-                rd.forward(request, response);
-            }
+            System.out.println(calendar);
+            //cal.put("calendar", calendar);
+            response.setContentType("applications/json");
+            response.setCharacterEncoding("utf-8");
+            response.getWriter().write(calendar.toString());
         }
     }
 

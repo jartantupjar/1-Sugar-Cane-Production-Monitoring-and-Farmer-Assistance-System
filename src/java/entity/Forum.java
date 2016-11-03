@@ -6,13 +6,15 @@
 package entity;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  *
  * @author Bryll Joey Delfin
  */
 public class Forum {
-    private String farmer,message,status,comment_User, comment_message, comment_Date , title, id_and_status, problem_name,recommendation_name,name , fid;
+    private String farmer,message,status,comment_User, comment_message, comment_Date , title, id_and_status, problem_name,recommendation_name,name , fid, img_url;
+    private ArrayList<String> image;
     private Integer id , prob_id, counter, recom_id, Fields_id;
     private Date date_posted, date_started,date_ended;
 
@@ -294,6 +296,34 @@ public class Forum {
      */
     public void setFid(String fid) {
         this.fid = fid;
+    }
+
+    /**
+     * @return the img_url
+     */
+    public String getImg_url() {
+        return img_url;
+    }
+
+    /**
+     * @param img_url the img_url to set
+     */
+    public void setImg_url(String img_url) {
+        this.img_url = img_url;
+    }
+
+    /**
+     * @return the image
+     */
+    public ArrayList<String> getImage() {
+        return image;
+    }
+
+    /**
+     * @param image the image to set
+     */
+    public void setImage(ArrayList<String> image) {
+        this.image = image;
     }
 
   }

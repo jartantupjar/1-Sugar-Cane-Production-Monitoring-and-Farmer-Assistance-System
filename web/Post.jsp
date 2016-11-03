@@ -55,7 +55,10 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <img class="img-responsive pad" src="dist/img/weeds.jpg" alt="Photo">
+                <c:forEach var="bj" items="${post.image}">
+                    <img class="img-rounded " src="${bj}" alt="Photo" style="width:40%">
+                </c:forEach>
+              
 
               <p><b>${post.message}</b></p>
               <div>
@@ -93,8 +96,8 @@
                     <c:if test="${comments.comment_message != null}">
               <div class="box-comment">
                 <!-- User image -->
-                <img class="img-circle img-sm" src="dist/img/user3-128x128.jpg" alt="User Image">
-
+                <img class="img-circle img-sm" src="dist/img/user1-128x128.jpg">
+                
                 <div class="comment-text">
                       <span class="username">
                         ${comments.comment_User}

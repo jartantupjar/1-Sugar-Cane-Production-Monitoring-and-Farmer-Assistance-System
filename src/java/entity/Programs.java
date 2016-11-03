@@ -13,7 +13,7 @@ import java.util.Date;
  * @author ndrs
  */
 public class Programs {
-    private String prog_name,type,description;
+    private String prog_name,type,description,district;
     private Date date_created, date_initial,date_end;
     private int tFarms;
     private double progress;
@@ -143,6 +143,20 @@ public class Programs {
      */
     public void setProgress(double progress) {
         this.progress = progress;
+    }
+
+    /**
+     * @return the district
+     */
+    public String getDistrict() {
+        return district;
+    }
+
+    /**
+     * @param district the district to set
+     */
+    public void setDistrict(String district) {
+        this.district = district;
     }
 
 

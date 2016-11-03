@@ -19,8 +19,8 @@
             <div class="content-wrapper">
                 <section class="content-header">
                     <h1>
-                        Page Header
-                        <small>Optional description</small>
+                        Weekly Production Statistics Report
+                        <small>${todayDate}</small>
                     </h1>
                 </section>
                 <section class="content">
@@ -30,7 +30,7 @@
                     <div class="col-md-12" > 
                         <div class="box box-info">
                             <div class="box-header with-border">
-                                <h1 class="box-title"><b>Weekly Production Statistics Report</b></h1>
+                                <h1 class="box-title"><b>Weekly Production Statistics Report : ${todayDate}</b></h1>
                                 <div class="box-tools pull-right">
                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                     <!-- In box-tools add this button if you intend to use the contacts pane -->

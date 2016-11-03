@@ -43,6 +43,7 @@ public class viewPostDetails extends HttpServlet {
             String[] list = line.split(",");
             item.setId(Integer.parseInt(list[0]));
             ArrayList<Forum> comments = new ArrayList<>();
+            ArrayList<String> images = new ArrayList<>();
             Forum post  = new Forum();
             post = fdb.getForumDetail(item.getId());
             int fid = post.getFields_id();
@@ -59,7 +60,9 @@ public class viewPostDetails extends HttpServlet {
                 System.out.println("Farmer : " +comments.get(i).getComment_User() );
                 System.out.println("Message : " + comments.get(i).getComment_message() );
             }
-            
+            for(int i= 0 ; i<post.getImage().size();i++){
+                System.out.println(post.getImage().get(i)+ " YEAH BITCH");
+            }
             if(post!=null){
                 HttpSession session = request.getSession();
                 session.setAttribute("comments", comments);

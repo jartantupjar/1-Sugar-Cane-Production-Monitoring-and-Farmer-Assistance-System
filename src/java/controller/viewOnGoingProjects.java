@@ -5,29 +5,23 @@
  */
 package controller;
 
-import db.CropBoardDB;
-import entity.CropBoard;
+import db.ProgramsDB;
+import entity.Programs;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 /**
  *
  * @author Bryll Joey Delfin
  */
-public class CitiesProdDetails extends HttpServlet {
+public class viewOnGoingProjects extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,33 +37,28 @@ public class CitiesProdDetails extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            CropBoard cb = new CropBoard();
-            CropBoardDB cdb = new CropBoardDB();
-            ArrayList<CropBoard> cT = new ArrayList<CropBoard>();
-            String line = request.getParameter("id");
-            String[] param = line.split(",");
-            Date cdate = Date.valueOf(param[1]);
-            System.out.println(cdate + " BEFORE !!!!");
-            try{
-            java.util.Date date = new SimpleDateFormat("MM/dd/yyyy").parse(param[1]);
-            cdate = new java.sql.Date(date.getTime());
-            } catch (ParseException ex) {
-            Logger.getLogger(createNewProgram.class.getName()).log(Level.SEVERE, null, ex);
+            ProgramsDB pdb = new ProgramsDB();
+            ArrayList<Programs> pT = new ArrayList<Programs>();
+            pT = pdb.getOngoingProjects();
+            JSONObject data = new JSONObject();
+            JSONArray list = new JSONArray();
+            if(pT != null)
+            {
+                for(int i=0;i<pT.size();i++){
+                    ArrayList<String> obj = new ArrayList<String>();
+                    obj.add(pT.get(i).getProg_name());
+                    obj.add(pT.get(i).getDate_initial().toString());
+                    obj.add(pT.get(i).getDate_end().toString());
+                    obj.add(pT.get(i).getDescription());
+                    obj.add(pT.get(i).getDistrict());
+                    obj.add(pT.get(i).getProg_name());
+                    list.add(obj);
+                }
             }
-            cT = cdb.getWeeklyProducedReportByRegionDetails(param[0],cdate);
-            if(cT!=null){
-                HttpSession session = request.getSession();
-                ServletContext context = getServletContext();
-                RequestDispatcher rd = context.getRequestDispatcher("/CitiesWeekView.jsp");
-                session.setAttribute("todayDate", cdate);
-                session.setAttribute("crop", cT);
-                rd.forward(request, response);  
-            }
-            else{
-                ServletContext context = getServletContext();
-                RequestDispatcher rd = context.getRequestDispatcher("/index.jsp");
-                rd.forward(request, response);
-            }
+            data.put("data", list);
+            response.setContentType("applications/json");
+            response.setCharacterEncoding("utf-8");
+            response.getWriter().write(data.toString());
         }
     }
 

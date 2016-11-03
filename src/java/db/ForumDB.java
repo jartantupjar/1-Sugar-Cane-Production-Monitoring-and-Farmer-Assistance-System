@@ -25,7 +25,7 @@ public class ForumDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT * FROM posts;";
+            String query = "SELECT * FROM posts p;";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             ArrayList<Forum> fT = null;
@@ -112,15 +112,14 @@ public class ForumDB {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT p.id,p.Fields_id,p.message,p.date_started,p.date_posted,p.title ,p.status, p.Recommendations_id, p.Problems_id ,c.Farmers_name as 'commentor',c.message as 'comments',c.date as 'date_comment' FROM posts p left join comments c on p.id = c.Posts_id where p.id = ? ; ;";
+            String query = "SELECT p.id,p.Fields_id,p.message,p.date_started,p.date_posted,p.title ,p.status, p.Recommendations_id, p.Problems_id  from posts p  where p.id = ?  ;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1,id);
             ResultSet rs = pstmt.executeQuery();
             ArrayList<Forum> fT = new ArrayList<Forum>();
+            ArrayList<String> images = new ArrayList<String>();
             Forum f = null;
                 if (rs.next()) {
-                    
-                    do {
                         f = new Forum();
                         f.setId(rs.getInt("id"));
                         f.setTitle(rs.getString("title"));
@@ -141,21 +140,45 @@ public class ForumDB {
                             String recom_name = getRecommendationName(f.getRecom_id());
                             f.setRecommendation_name(recom_name);
                         }
-                        String test = rs.getString("commentor");
-                        if(test!=null){
-                            f.setComment_User(test);
-                            f.setComment_message(rs.getString("comments"));
-                            f.setComment_Date(rs.getString("date_comment"));
-                        }
                         String line = f.getId()+","+f.getStatus();
                         f.setId_and_status(line);
+                        System.out.println(id+ " ID POST  ID");
+                        f.setImage(getImages(id));
                         fT.add(f);
-                    } while (rs.next());
                 }
                 rs.close();
                 pstmt.close();
                 conn.close();            
             return f;
+                 }catch (SQLException ex) {
+            Logger.getLogger(ForumDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public ArrayList<String> getImages(int post_id){
+        try {
+            System.out.println("entered images method");
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select * from mediafile where Posts_id = ?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1,post_id);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<Forum> fT = new ArrayList<Forum>();
+            ArrayList<String> images = new ArrayList<String>();
+                if (rs.next()) {
+                    do{
+                    String r= rs.getString("img_url");
+                    String x=r.replace("\\", "/");
+                    System.out.println(x);
+                 images.add(x);
+                    }while(rs.next());
+                }
+                rs.close();
+                pstmt.close();
+                conn.close();    
+                 System.out.println("ending images method"+images.size());
+            return images;
                  }catch (SQLException ex) {
             Logger.getLogger(ForumDB.class.getName()).log(Level.SEVERE, null, ex);
         }

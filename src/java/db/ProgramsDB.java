@@ -221,6 +221,39 @@ public class ProgramsDB {
 
         return null;
     }
+    public ArrayList<Programs> getOngoingProjects() {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select * from programs where status = 'Active';";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<Programs> list = null;
+            Programs p ;
+            if (rs.next()) {
+                list = new ArrayList<>();
+                do {
+                    p = new Programs();
+                    p.setProg_name(rs.getString("name"));
+                    p.setDate_initial(rs.getDate("date_initial"));
+                    p.setDate_created(rs.getDate("date_created"));
+                    p.setDate_end(rs.getDate("date_end"));
+                    p.setDescription(rs.getString("description"));
+                    p.setDistrict(rs.getString("district"));
+                    list.add(p);
+                } while (rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(CropEstimateDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
 
     public boolean addKPIs(ArrayList<programsKPI> kpis) {
         try {

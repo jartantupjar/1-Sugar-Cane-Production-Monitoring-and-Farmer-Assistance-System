@@ -59,7 +59,7 @@
                         </div>
                     </div>        
                     <br>
-                    <div class="col-md-10" > 
+                    <div class="col-md-12" > 
                         <div class="box box-info">
                             <div class="box-header with-border">
                                 <h1 class="box-title">Ongoing Programs List</h1>
@@ -74,11 +74,11 @@
                                 <table id="example" class="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th>Project ID</th>
-                                                <th>Project Title</th>
-                                                <th>District</th>
-                                                <th>Date</th>
+                                                <th>Project Name</th>
+                                                <th style="width: 15%">Date Started</th>
+                                                <th style="width: 15%">Date Ended</th>
                                                 <th>Description</th>
+                                                <th>Details</th>
                                             </tr>
                                         </thead>
                                     </table>
@@ -152,18 +152,59 @@
                 }
             });
             
-//            sel.onchange = function(){
-//                var sl = sel.options[sel.selectedIndex].value;
-//                alert(sl);
-//                $.ajax({
-//                url: "viewWeeklyProducedReport?id="+sv,
-//                tye: "POST",
-//                dateType: "JSON",
-//                success: function(data){
-//                    
-//                } 
-//               });
-//           };
+            
+            sel.onchange = function(){
+                var sl = sel.options[sel.selectedIndex].value;
+                alert(sl);
+                $.ajax({
+                url: "viewWeeklyProducedReport?id="+sl,
+                tye: "POST",
+                dateType: "JSON",
+                success: function(data){ 
+                  console.log(data);  
+                  $('#container').highcharts({
+    
+    tooltip: {
+        pointFormat: "Value: {point.y:,.1f} TC"
+    },
+    
+    xAxis: {
+        type: 'datetime',
+        labels: {
+            format: '{value:%Y-%m-%d}',
+            rotation: 45,
+            align: 'left'   
+        }
+    },
+
+        plotOptions: {
+            series: {
+                cursor: 'pointer',
+                point: {
+                    events: {
+                        click: function () {
+                            alert('Date : '+ this.x);
+                         location.href = 'viewWeeklyProducedReportByWeek?id='+this.x+'&type='+sv;
+                        }
+                    }
+                }
+            }
+        },
+
+    series: [{
+        data: data.prod,
+        pointStart: Date.UTC(${todayYear},${todayMonth},${todayDay}),
+        pointInterval: 168 * 36e5
+    }]
+               ,
+                title: {
+               text: 'Weekly Produced Report'
+                 }
+
+}); 
+                }
+            });
+           };
                      
 //// end of the ajax 
 //                }
@@ -176,10 +217,10 @@
             $(document).ready(function () {
                 var table = $('#example').DataTable({
                     'ajax': {
-                        'url': '#'+
+                        'url': 'viewOnGoingProjects'
                     },
                     'columnDefs': [{
-                            'targets': 6,
+                            'targets': 4,
                         
                             'render': function (data, type, full, meta) {
                                 return '<a href="viewProbDetails?id=' + data + '" class="btn btn-primary">More Details</a>';

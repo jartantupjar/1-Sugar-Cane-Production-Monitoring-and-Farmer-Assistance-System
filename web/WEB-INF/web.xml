@@ -25,6 +25,10 @@
         <servlet-class>controller.getACropAssessment</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>viewCalendar</servlet-name>
+        <servlet-class>controller.viewCalendar</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>getRecomList</servlet-name>
         <servlet-class>controller.getRecomList</servlet-class>
     </servlet>
@@ -185,6 +189,10 @@
         <servlet-class>controller.generateForecast</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>submitCA</servlet-name>
+        <servlet-class>controller.submitCA</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>loadProgramsProductionChart</servlet-name>
         <servlet-class>controller.loadProgramsProductionChart</servlet-class>
     </servlet>
@@ -260,6 +268,10 @@
         <servlet-name>CitiesProdDetails</servlet-name>
         <servlet-class>controller.CitiesProdDetails</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>viewOnGoingProjects</servlet-name>
+        <servlet-class>controller.viewOnGoingProjects</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
@@ -267,6 +279,14 @@
     <servlet-mapping>
         <servlet-name>viewFarmerProfile</servlet-name>
         <url-pattern>/viewFarmerProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>submitCA</servlet-name>
+        <url-pattern>/submitCA</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewCalendar</servlet-name>
+        <url-pattern>/viewCalendar</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>viewWeatherTrends</servlet-name>
@@ -284,7 +304,6 @@
         <servlet-name>viewSendRec</servlet-name>
         <url-pattern>/viewSendRec</url-pattern>
     </servlet-mapping>
-   
     <servlet-mapping>
         <servlet-name>Logout</servlet-name>
         <url-pattern>/Logout</url-pattern>
@@ -520,6 +539,10 @@
     <servlet-mapping>
         <servlet-name>CitiesProdDetails</servlet-name>
         <url-pattern>/CitiesProdDetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewOnGoingProjects</servlet-name>
+        <url-pattern>/viewOnGoingProjects</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
