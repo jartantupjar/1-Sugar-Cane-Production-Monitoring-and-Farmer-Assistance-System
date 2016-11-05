@@ -119,7 +119,7 @@ current vs then diagram
                                     </h3></div>
                                 <div class="box box-info collapsed-box">
                                     <div class="box-header with-border">
-                                        <h1 class="box-title">Observational Improvement (include color code for bar graph)</h1>
+                                        <h1 class="box-title">Observational Improvement</h1>
                                         <div class="box-tools pull-right">
                                             <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                             <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -163,41 +163,7 @@ current vs then diagram
 
                             </div>
                         </div> 
-                        <div class="col-md-9"> 
-                            <div class="box box-info collapsed-box" >
-                                <div class="box-header with-border">
-                                    <h1 class="box-title">Barangay Progress</h1>
-                                    <div class="box-tools pull-right " >
-                                        <button class="btn btn-box-tool"  data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                    </div>
-                                </div>
-
-                                <div class="box-body">
-                                    <table id="example" class="table  display table-hover" cellspacing="0" width="100%">
-                                        <thead>
-                                            <tr>
-                                                <th>Barangay</th>
-                                                <th>Problem 1</th>
-                                                <th>Problem 2</th>
-
-
-                                            </tr>
-                                        </thead>
-                                        <tfoot>
-                                            <tr>
-                                                <th>Barangay</th>
-                                                <th>Problem 1</th>
-                                                <th>Problem 2</th>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
-                                    <button class="btn btn-success pull-right" style="width: 10%" value="submit">Update</button>
-                                </div>
-
-                            </div>
-
-                        </div>
+                        
 
 
 
@@ -308,8 +274,8 @@ current vs then diagram
             layout: 'vertical',
             align: 'left',
             verticalAlign: 'top',
-            x: 150,
-            y: 100,
+            x: 500,
+            y: 30,
             floating: true,
             borderWidth: 1,
             backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
@@ -345,7 +311,7 @@ current vs then diagram
             name: 'Pre',
             data: prce
         }, {
-            name: 'Post',
+            name: 'On-Going',
             data: poce
         }]
     });

@@ -69,11 +69,7 @@
                                             </c:when>
 
                                         </c:choose>
-                                        <li class="list-group-item">
-                                            <b> Helpfulness Counter</b> <a class="pull-right"><b>
-                                                    79
-                                                </b> </a>
-                                        </li>
+                                       
                                      
 
                                     </ul>
