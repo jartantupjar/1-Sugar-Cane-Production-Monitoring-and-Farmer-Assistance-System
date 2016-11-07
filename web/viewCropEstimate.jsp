@@ -120,7 +120,7 @@
                                         </div>
                                         <button type="submit" class="btn btn-primary cGen pull-right" form="submit_form" value="submit">Generate</button>
                                         <button type="button" class="btn btn-default cGen pull-right" id="cGen">Close</button>
-                                          </form>
+                                    </form>
 
                                 </div>
 

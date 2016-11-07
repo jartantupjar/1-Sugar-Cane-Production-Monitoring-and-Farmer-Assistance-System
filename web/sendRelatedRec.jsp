@@ -23,7 +23,7 @@
                     <div class="row">
                         
 
-                            
+                            <form action="sendRelatedRec" id="submit_form" method="POST">
                             <div class="col-md-6" > 
                                 <div class="box box-info">
                                     <div class="box-header">
@@ -41,7 +41,7 @@
                                                 <c:if test="${not empty flist}">
                                                     <c:forEach var="farmer" items="${flist}">
                                                         <tr>
-                                                            <td><c:out value="${farmer}"/></td>
+                                                            <td><input class="form-control hidden" name="farmz[]" value="${farmer}"><c:out value="${farmer}"/></td>
                                                         </tr>
                                                         </c:forEach>
                                                 </c:if>
@@ -54,6 +54,7 @@
                                         </div>
 
                                     </div>
+                        
                                     <div class="col-md-12" > 
                                         <div class="box box-info">
                                             <div class="box-header">
@@ -88,7 +89,7 @@
                                     <div class="col-md-2 text-center pull-right">                   
                                         <p><button class="btn btn-primary btn-block" style="width: 100%" value="submit">Send</button></p>
                                     </div>
-                              
+                            </form>  
                             </div>
                         </section>
                     </div>
