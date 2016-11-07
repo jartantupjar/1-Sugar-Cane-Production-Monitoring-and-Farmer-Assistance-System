@@ -111,26 +111,8 @@ current vs then diagram
                                     <!-- /.box-body -->
                                 </div>
                             </div>
-                            <div class="col-md-7" > 
-                                <div>   
-                                    <h3>
-                                        DISTRICT/BARANGAY :
-
-                                    </h3></div>
-                                <div class="box box-info collapsed-box">
-                                    <div class="box-header with-border">
-                                        <h1 class="box-title">Observational Improvement</h1>
-                                        <div class="box-tools pull-right">
-                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                        </div>
-                                    </div>   
-                                    <div class="box-body" id="container1"> </div>
-                                </div>
-
-                            </div>
-                            <div class="col-md-6" > 
-                                <div class="box box-info collapsed-box">
+                                                             <div class="col-md-6" > 
+                                <div class="box box-info">
                                     <div class="box-header with-border">
                                         <h1 class="box-title">Problems List</h1>
                                         <div class="box-tools pull-right">
@@ -162,7 +144,26 @@ current vs then diagram
                                 </div>
 
                             </div>
-                        </div> 
+                        </div>
+                            <div class="col-md-12" > 
+                                <div>   
+                                    <h3>
+                                        DISTRICT/BARANGAY :
+
+                                    </h3></div>
+                                <div class="box box-info">
+                                    <div class="box-header with-border">
+                                        <h1 class="box-title">Observational Improvement</h1>
+                                        <div class="box-tools pull-right">
+                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                        </div>
+                                    </div>   
+                                    <div class="box-body" id="container1"> </div>
+                                </div>
+
+                            </div>
+                            
                         
 
 
@@ -189,6 +190,7 @@ current vs then diagram
                                                 <c:forEach  var="yrlist" begin="${kpis[0].kpi_year}" end="${kpis[0].kpi_year-1+kpis[0].tYears}">
                                                     <th><c:out value="${yrlist}"/></th>
                                                     <th>Actual</th>
+                                                    <th class="hidden editz">Add</th>
                                                     </c:forEach>
                                              
 
@@ -203,15 +205,17 @@ current vs then diagram
                                                             <c:forEach items="${kpilist.values}" var="yearloop" varStatus="aCountr">
 
                                                             <td><c:out value="${yearloop}" /></td>
-                                                            <td><input class='form-control' name = "y${loopCount.count}[]" value='${kpilist.aValues[aCountr.index]}' /></td>
+                                                            <td><c:out value="${kpilist.aValues[aCountr.index]}" /></td>
+                                                            <td class="hidden editz"><input class='form-control' type="number" name = "y${loopCount.count}[]" value="0" /></td>
                                                             </c:forEach>
                                                     </tr>
                                                 </c:forEach>
                                                    
                                             </tbody>
                                         </table>
-                                        <button class="btn btn-info pull-right" style="width: 10%" value="submit" form="kpitable">Update</button>
-                                   </c:if>
+                                       <button class="btn btn-info pull-right" id="uButton" style="width: 10%" value="submit" form="kpitable">Update</button>
+                                        <button class="btn btn-danger pull-right" id="eButton" style="width: 10%" type="button">Edit</button>
+               </c:if>
                                                   </div>
 
                                 </div>
@@ -274,8 +278,8 @@ current vs then diagram
             layout: 'vertical',
             align: 'left',
             verticalAlign: 'top',
-            x: 500,
-            y: 30,
+            x: 100,
+            y: 0,
             floating: true,
             borderWidth: 1,
             backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
@@ -320,68 +324,21 @@ current vs then diagram
     });
     
         </script>
-
         <script>
-//            $(function () {
-//
-//                // Create the chart
-//                $('#container1').highcharts({
-//                    chart: {
-//                        type: 'column'
-//                    },
-//                    title: {
-//                        text: 'Basic drilldown'
-//                    },
-//                    xAxis: {
-//                        type: 'category',
-//                        categories: [
-//                            "2011-12",
-//                            "2012-13",
-//                            "2013-14",
-//                            "2014-15",
-//                            "2015-16"
-//                        ]
-//
-//                    },
-//                    legend: {
-//                        enabled: false
-//                    },
-//                    plotOptions: {
-//                        series: {
-//                            borderWidth: 0,
-//                            dataLabels: {
-//                                enabled: true
-//                            }
-//                        }
-//                    },
-//                    drilldown: {
-//                        series: [{
-//                                name: 'Test Drilldown',
-//                                id: 'test',
-//                                data: [
-//                                    ['data A', 24.13],
-//                                    ['data B', 17.2],
-//                                    ['data C', 8.11],
-//                                    ['data D', 5.33],
-//                                    ['data E', 6.34]
-//                                ]
-//                            }]
-//                    },
-//                    series: [
-//                        {
-//                            "name": "Actual Yield",
-//                            "data": [
-////                                {y: 40351.62, drilldown: 'test'},
-//                                {y: 40351.62},
-//                                51506.83,
-//                                68566.23,
-//                                80596.9228,
-//                                94329.31
-//                            ]
-//                        }
-//                    ]
-//                });
-//            });
+     $(function () {
+      $("#eButton").on("click", function () {
+                      $('.editz').removeClass('hidden');
+                      $('#eButton').addClass('hidden');
+                      
+                });
+      $("#uButton").on("click", function () {
+                      $('#eButton').removeClass('hidden');
+                      $('.editz').addClass('hidden');
+                      
+                });
+                
+    });
+
         </script>
     </body>
 

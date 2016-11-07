@@ -232,6 +232,10 @@
         <servlet-name>printCA</servlet-name>
         <servlet-class>controller.printCA</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>viewSelectedRecommendations</servlet-name>
+        <servlet-class>controller.viewSelectedRecommendations</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
@@ -463,6 +467,10 @@
     <servlet-mapping>
         <servlet-name>printCA</servlet-name>
         <url-pattern>/printCA</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewSelectedRecommendations</servlet-name>
+        <url-pattern>/viewSelectedRecommendations</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

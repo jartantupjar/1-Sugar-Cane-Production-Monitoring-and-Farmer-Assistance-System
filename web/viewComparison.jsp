@@ -35,12 +35,12 @@ comparison page add current vs historical details(past 2yrs)
                     <div class="row">
 
 
-<div class="pull-right col-md-2">
-                           <div class="box box-info">
-                                       <div class="box-header" style="height:4%">
+                        <div class="pull-right col-md-2">
+                            <div class="box box-info">
+                                <div class="box-header" style="height:4%">
                                     <h5 class="box-title">Legend:</h5>
-</div>
-                                    <div class="box-body ">
+                                </div>
+                                <div class="box-body ">
                                     <table class="table table-hover table-bordered">
                                         <tbody>
                                             <tr><td>
@@ -61,7 +61,7 @@ comparison page add current vs historical details(past 2yrs)
 
                                         </tbody>
                                     </table>
-                              </div>
+                                </div>
                             </div>
 
                         </div>
@@ -685,7 +685,7 @@ comparison page add current vs historical details(past 2yrs)
 
                         </div>
 
-                        
+
                         <form id="frm-FarmDiff" action="viewSendRec">
                             <div class="col-md-offset-9 col-md-4">
                                 <div class="box box-info">
@@ -720,22 +720,20 @@ comparison page add current vs historical details(past 2yrs)
                                         <h3 class="box-title">Action Tools</h3>
                                     </div>
                                     <div class="box-body">
-                                        <a class="btn btn-app btn-linkedin">
-                                            <i class="fa fa-edit"></i> Create Survey
-                                        </a>
-                                        <a class="btn btn-app btn-adn">
-                                            <i class="fa fa-bank"></i> Create Recommendation
-                                        </a>
-                                        <button class="btn btn-app btn-linkedin" id="sButton" value="submit">
+
+                                        <button class="btn btn-app btn-linkedin atools" name="atools" id="crec" value="crec">
+                                            <i class="fa fa-edit" ></i> Create Recommendations
+                                        </button>
+                                        <button class="btn btn-app btn-linkedin atools" name="atools" id="srec" value="srec">
                                             <i class="fa fa-edit" ></i> Send Recommendations
                                         </button>
-
-                                        <a class="btn btn-app btn-soundcloud" href="determineProblem.jsp">
-
-                                            <i class="fa fa-inbox"></i> Determine Problem
-                                        </a>
-
-
+                                        <button class="btn btn-app btn-linkedin atools" name="atools" id="sorec" value="sorec">
+                                            <i class="fa fa-edit" ></i> Send Other Recommendations
+                                        </button>
+                                        <button class="btn btn-app btn-linkedin atools" name="atools" id="dprob" value="dprob">
+                                            <i class="fa fa-edit" ></i> Determine Problem
+                                        </button>
+                         
                                     </div>
 
                                     <!-- /.box-body -->
@@ -782,7 +780,7 @@ comparison page add current vs historical details(past 2yrs)
             });
         </script>
         <script type="text/javascript">
-            $("#sButton").on("click", function () {
+            $(".atools").on("click", function () {
                 //var checkedValue = $('.msgCheckbox:checked').val();   
 
                 var checkedValue = [];

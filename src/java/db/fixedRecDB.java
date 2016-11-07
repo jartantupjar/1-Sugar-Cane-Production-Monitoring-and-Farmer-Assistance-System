@@ -141,7 +141,7 @@ public class fixedRecDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select r.id,r.recommendation,r.type from `recommendations-fields` rf  join recommendations r on rf.Recommendations_id=r.id where rf.Fields_id=?;";
+            String query = "select r.id,r.recommendation,r.type,r.description from `recommendations-fields` rf  join recommendations r on rf.Recommendations_id=r.id where rf.Fields_id=?;";
               PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
@@ -155,6 +155,7 @@ public class fixedRecDB {
                     r.setId(rs.getInt("id"));
                     r.setRecommendation_name(rs.getString("recommendation"));
                     r.setType(rs.getString("type"));
+                    r.setDescription(rs.getString("description"));
                    list.add(r);
                 } while (rs.next());
             }

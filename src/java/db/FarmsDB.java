@@ -1081,6 +1081,7 @@ public class FarmsDB {
            cr.setId(farmRec.get(i).getId());
            cr.setRecommendation_name(farmRec.get(i).getRecommendation_name());
            cr.setType(farmRec.get(i).getType());
+           cr.setDescription(farmRec.get(i).getDescription());
              reclist.add(cr);
             }
         }
@@ -1129,6 +1130,7 @@ public class FarmsDB {
         return reclist;
     
     }
+    
     public ArrayList<compProblems> getSimilarProblems(Farm farm, ArrayList<Farm> dalist) {
         ArrayList<Farm> list= new ArrayList<>();
                 list=dalist;
