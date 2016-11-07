@@ -276,6 +276,10 @@
         <servlet-name>printCA</servlet-name>
         <servlet-class>controller.printCA</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>editDates</servlet-name>
+        <servlet-class>controller.editDates</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
@@ -551,6 +555,10 @@
     <servlet-mapping>
         <servlet-name>printCA</servlet-name>
         <url-pattern>/printCA</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>editDates</servlet-name>
+        <url-pattern>/editDates</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

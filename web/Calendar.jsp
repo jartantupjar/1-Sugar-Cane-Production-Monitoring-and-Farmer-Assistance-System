@@ -35,6 +35,7 @@
                     </h1>
                 </section>
                 <section class="content">
+                    <form name="editdates" action="editDates">
                     <div class="col-md-3">
           <div class="box box-solid">
             <div class="box-header with-border">
@@ -59,7 +60,7 @@
                                 <div class="box-tools pull-right">
                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                     <!-- In box-tools add this button if you intend to use the contacts pane -->
-                                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>  </button>
                                 </div>
                             </div>
 
@@ -68,44 +69,82 @@
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
-                                                <input type="text" class="form-control pull-right datepicker" name="datepicker" id="datepickerstart">
+                                                <input type="text" class="form-control pull-right datepicker" name="pstart" id="datepickerstart">
+                                            </div> <br>
+                                            <label> Planting Phase End:</label> 
+                                            <div class="input-group date">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                                <input type="text" class="form-control pull-right datepicker" name="pend" id="datepickerstart1">
                                             </div> <br>
                                 <label> Germination Phase:</label> <div class="input-group date">
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
-                                                <input type="text" class="form-control pull-right datepicker" name="datepicker" id="datepickerstart">
+                                                <input type="text" class="form-control pull-right datepicker" name="gstart" id="datepickerstart">
+                                            </div> <br>
+                                            <label> Germination Phase End:</label> <div class="input-group date">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                                <input type="text" class="form-control pull-right datepicker" name="gend" id="datepickerstart">
                                             </div> <br>
                                 <label> Milling Phase:</label> <div class="input-group date">
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
-                                                <input type="text" class="form-control pull-right datepicker" name="datepicker" id="datepickerstart">
+                                                <input type="text" class="form-control pull-right datepicker" name="mstart" id="datepickerstart">
                                             </div>  <br>
+                                            <label> Milling Phase End:</label> <div class="input-group date">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                                <input type="text" class="form-control pull-right datepicker" name="mend" id="datepickerstart">
+                                            </div> <br>
                                 <label> Tillering Phase:</label> <div class="input-group date">
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
-                                                <input type="text" class="form-control pull-right datepicker" name="datepicker" id="datepickerstart">
+                                                <input type="text" class="form-control pull-right datepicker" name="tstart" id="datepickerstart">
                                             </div>  <br>
+                                            <label> Tillering Phase End:</label> <div class="input-group date">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                                <input type="text" class="form-control pull-right datepicker" name="tend" id="datepickerstart">
+                                            </div> <br>
                                 <label>Stalk Elongation Phase:</label> <div class="input-group date">
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
-                                                <input type="text" class="form-control pull-right datepicker" name="datepicker" id="datepickerstart">
+                                                <input type="text" class="form-control pull-right datepicker" name="sstart" id="datepickerstart">
                                             </div>  <br>
+                                            <label> Stalk Elongation Phase End:</label> <div class="input-group date">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                                <input type="text" class="form-control pull-right datepicker" name="send" id="datepickerstart">
+                                            </div> <br>
                                 <label> Yield Formation Phase:</label> <div class="input-group date">
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
-                                                <input type="text" class="form-control pull-right datepicker" name="datepicker" id="datepickerstart">
+                                                <input type="text" class="form-control pull-right datepicker" name="ystart" id="datepickerstart">
                                             </div>  <br>
+                                            <label> Yield Formation Phase End:</label> <div class="input-group date">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                                <input type="text" class="form-control pull-right datepicker" name="yend" id="datepickerstart">
+                                            </div> <br>
                                 </div>
                             </div>
-              <a class="btn btn-app btn-linkedin btn-lg pull-right">
+          <button class="btn btn-app btn-linkedin btn-lg pull-right" type="submit">
                                             <i class="fa fa-edit"></i> Edit dates
-                                        </a>
+                                        </button>
             </div>
+                    </form>
                         <div class="col-md-9" > 
                             <div class="box box-info">
                                 <div class="box-header with-border">

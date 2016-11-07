@@ -81,8 +81,8 @@
                 
               <c:if test="${post.prob_id == 0 && post.recom_id == 0}">
                   <div class=" col-md-2 pull-right">
-                  <a class="btn btn-success" style="width: 100%" id="lr"><i class="fa fa-chain"></i>  Link to a recommendation</a>
-                  <a class="btn btn-warning" style="width:100%" id="lp"><i class="fa fa-times-circle"></i>  Link to a problem</a>
+                  <a class="btn btn-success" style="width: 100%" id="lr"><i class="fa fa-chain"></i>  Tag to a recommendation</a>
+                  <a class="btn btn-warning" style="width:100%" id="lp"><i class="fa fa-times-circle"></i>  Tag to a problem</a>
                   <a style="width:100%" class="btn btn-danger" id="cp"><i class="fa fa-warning "></i>  Create New Problem </a>
                   <a style="width: 100%" class="btn btn-primary" id="cr"><i class="fa fa-gear "></i>  Create New Recommendation </a>
                   </div>
