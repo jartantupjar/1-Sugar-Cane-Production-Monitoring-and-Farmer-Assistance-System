@@ -63,8 +63,9 @@ public class sendRelatedRec extends BaseServlet {
             }
 
         }
+    String message= request.getParameter("description");
         fixedRecDB recdb=new fixedRecDB();
-        recdb.sendRecommendations(farmz, recz);
+        recdb.sendRecommendations(message,farmz, recz);
         
            RequestDispatcher rd = context.getRequestDispatcher("/viewCropEstimate.jsp");
 

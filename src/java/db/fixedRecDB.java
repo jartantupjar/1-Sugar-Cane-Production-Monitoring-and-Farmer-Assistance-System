@@ -239,13 +239,13 @@ public class fixedRecDB {
         }
         return null;
     }
-    public void sendRecommendations(ArrayList<String>farm,ArrayList<String>rec){
+    public void sendRecommendations(String message,ArrayList<String>farm,ArrayList<String>rec){
         for(int i=0; i<farm.size();i++){
             for(int b=0;b<rec.size();b++){
             if(checkExistingRec(farm.get(i),rec.get(b))==false){
                 System.out.println("entered send rec if");
                inputRecommendation(farm.get(i),rec.get(b));
-               inputRecNotif(farm.get(i),rec.get(b));
+               inputRecNotif(message,farm.get(i),rec.get(b));
                
             }
         }
@@ -284,7 +284,7 @@ public class fixedRecDB {
         return true;
     
     }
-    public boolean inputRecNotif(String farm,String rec){
+    public boolean inputRecNotif(String message,String farm,String rec){
          try {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
@@ -301,7 +301,7 @@ public class fixedRecDB {
             pstmt.setString(1, "N");
             pstmt.setString(2, "N");
             pstmt.setString(3, farm);
-            pstmt.setString(4, "message");
+            pstmt.setString(4, message);
             pstmt.setString(5, "2015-06-11");
             pstmt.setString(6,rec);
             pstmt.setString(7, farm);

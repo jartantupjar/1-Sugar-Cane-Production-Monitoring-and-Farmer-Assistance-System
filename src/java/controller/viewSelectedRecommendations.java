@@ -57,6 +57,7 @@ public class viewSelectedRecommendations extends BaseServlet {
         JSONObject data = new JSONObject();
         JSONArray dalist = new JSONArray();
         if (fct != null) {
+            if (!fct.isEmpty()) {
             for (int i = 0; i < fct.size(); i++) {
                 ArrayList<String> obj = new ArrayList<>();
                 obj.add(Integer.toString(fct.get(i).getId()));
@@ -65,7 +66,7 @@ public class viewSelectedRecommendations extends BaseServlet {
                 obj.add(fct.get(i).getDescription());
                  obj.add(Integer.toString(fct.get(i).getId()));
                 dalist.add(obj);
-               
+            }
             }
         }
       data.put("data", dalist);

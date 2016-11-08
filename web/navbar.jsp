@@ -61,7 +61,9 @@
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                    <form action="Login" method="Post">
+                  <input class="btn btn-default btn-flat" type="submit" value="Logout">
+                  </form>
                 </div>
               </li>
             </ul>

@@ -28,6 +28,31 @@ import java.util.logging.Logger;
  */
 public class ProductionDB {
 
+     public String getDistrictProductionAvg(int curyr,String district) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select ROUND(avg(actual),2) as avg from weeklyestimate where year=? and district=?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, curyr);
+            pstmt.setString(2, district);
+            ResultSet rs = pstmt.executeQuery();
+          String production=null;
+
+            if (rs.next()) {
+             production=rs.getString("avg");
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+
+            return production;
+        } catch (SQLException ex) {
+            Logger.getLogger(CropEstimateDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
     public ArrayList<Integer> getDistinctHistProdYrs(int curyr) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
@@ -264,11 +289,30 @@ public class ProductionDB {
     public ArrayList<municipalSummary> viewMunicipalSummaryDet(String muni) {
         ArrayList<municipalSummary> mslist = new ArrayList<>();
         ArrayList<Integer> categ = getDistinctHistProdYrsASC(2015);
+        
         for (int i = 0; i < categ.size(); i++) {
             mslist.add(viewMunicipalSummarybyYear(muni,categ.get(i)));
+            String district="TARLAC";
+        String average = getDistrictProductionAvg(categ.get(i),district);
         }
         return mslist;
 
+    }
+    public ArrayList<String> viewDistrictAvgProdSummary() {
+           ArrayList<String> mslist = new ArrayList<>();
+        ArrayList<Integer> categ = getDistinctHistProdYrsASC(2015);
+        
+        for (int i = 0; i < categ.size(); i++) {
+        String district="TARLAC";
+        String average = getDistrictProductionAvg(categ.get(i),district);
+       if(average==null){
+             mslist.add("0"); 
+       }else{
+            mslist.add(average); 
+       }
+     
+        }
+        return mslist;
     }
     public ArrayList<brgySummary> viewBrgySummaryDet(String brgy) {
         ArrayList<brgySummary> mslist = new ArrayList<>();

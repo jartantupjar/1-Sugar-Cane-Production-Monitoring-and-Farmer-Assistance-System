@@ -153,7 +153,7 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
 
             $(document).ready(function () {
 var categ;
- var bar;
+ var bar,line;
                 $.ajax({
                     url: 'loadMunicSumYrsChart?name=${munidet.municipality}',
                     type: 'POST',
@@ -161,6 +161,7 @@ var categ;
                     success: function (data) {
                         categ=data.categ;
                        bar=data.bar;
+                       line=data.line;
                     // Create the chart
                     
                     
@@ -186,7 +187,7 @@ var categ;
             }
         },
            legend: {
-              enabled: false
+              enabled: true
                },
         
         tooltip: {
@@ -196,6 +197,10 @@ var categ;
             column: {
                 pointPadding: 0.2,
                 borderWidth: 0
+            }, line: {
+               marker: {
+            enabled: false
+        }
             }
                        
         },
@@ -203,13 +208,18 @@ var categ;
             name: 'Year',
             data: bar
 
+        },{
+            name: 'District Avg',
+            data: line,
+            type:'line'
+
         }]
     });
 });
                 }
             });
 var categ2;
- var bar2;
+ var bar2,prodline;
  var curyr;
     $.ajax({
                     url: 'loadAllBrgysChart?name=${munidet.municipality}',
@@ -219,6 +229,7 @@ var categ2;
                         categ2=data.categ;
                        bar2=data.bar;
                        curyr=data.curyr;
+                       prodline=data.avgprod;
                     // Create the chart
                     
                     
@@ -246,7 +257,7 @@ var categ2;
             }
         },
            legend: {
-              enabled: false
+              enabled: true
                },
         
         tooltip: {
@@ -256,11 +267,22 @@ var categ2;
             column: {
                 pointPadding: 0.2,
                 borderWidth: 0
-            }
+            },
+            line: {
+        marker: {
+            enabled: false
+        }
+    }
         },
         series: [{
             name: 'Brgys',
+            type: 'column',
             data: bar2
+
+        },{
+            name: 'Dist Yearly Avg',
+            type: 'line',
+            data: prodline
 
         }]
     });
