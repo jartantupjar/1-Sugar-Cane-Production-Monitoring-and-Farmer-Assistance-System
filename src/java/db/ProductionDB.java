@@ -53,6 +53,61 @@ public class ProductionDB {
 
         return null;
     }
+     public String getDistrictProductionAvgTest3(int curyr,String muni,String district) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select round(avg(t1.tc),2) as avg\n" +
+"from (\n" +
+"select fd.barangay, f.name , sum(hp.tons_cane) as'tc'\n" +
+"from historicalproduction hp join farmers f on hp.farmers_name = f.name right join fields fd on f.name = fd.farmers_name\n" +
+"where year = ? and fd.district= ?\n" +
+"group by fd.barangay, f.name) t1";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, curyr);
+            pstmt.setString(2, district);
+            ResultSet rs = pstmt.executeQuery();
+          String production=null;
+
+            if (rs.next()) {
+             production=rs.getString("avg");
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+
+            return production;
+        } catch (SQLException ex) {
+            Logger.getLogger(CropEstimateDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
+     public String getDistrictProductionAvgTest2(int curyr,String district) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select ROUND(avg(actual),2) as avg from weeklyestimate where year<2016 and district=?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+//            pstmt.setInt(1, curyr);
+            pstmt.setString(1, district);
+            ResultSet rs = pstmt.executeQuery();
+          String production=null;
+
+            if (rs.next()) {
+             production=rs.getString("avg");
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+
+            return production;
+        } catch (SQLException ex) {
+            Logger.getLogger(CropEstimateDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
     public ArrayList<Integer> getDistinctHistProdYrs(int curyr) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
@@ -293,7 +348,8 @@ public class ProductionDB {
         for (int i = 0; i < categ.size(); i++) {
             mslist.add(viewMunicipalSummarybyYear(muni,categ.get(i)));
             String district="TARLAC";
-        String average = getDistrictProductionAvg(categ.get(i),district);
+//        String average = getDistrictProductionAvg(categ.get(i),district);
+//        String average = getDistrictProductionAvg(categ.get(i),district);
         }
         return mslist;
 
@@ -304,7 +360,7 @@ public class ProductionDB {
         
         for (int i = 0; i < categ.size(); i++) {
         String district="TARLAC";
-        String average = getDistrictProductionAvg(categ.get(i),district);
+        String average = getDistrictProductionAvgTest2(categ.get(i),district);
        if(average==null){
              mslist.add("0"); 
        }else{
@@ -452,13 +508,13 @@ public class ProductionDB {
 "where hp.Farmers_name in (\n" +
 "						select Farmers_name\n" +
 "                        from fields f\n" +
-"                        where f.barangay=?\n" +
+"                        where f.barangay=? and f.municipality=?\n" +
 "						) and year=? \n" +
 "group by year;";
                PreparedStatement pstmt = conn.prepareStatement(query);
-//          pstmt.setString(1, muni);
+          pstmt.setString(2, muni);
           pstmt.setString(1, brgy);
-          pstmt.setInt(2, year);
+          pstmt.setInt(3, year);
                ResultSet rs = pstmt.executeQuery();
             brgySummary ms = new brgySummary();
             ms.setBarangay(brgy);
@@ -493,6 +549,33 @@ public class ProductionDB {
                PreparedStatement pstmt = conn.prepareStatement(query);
           pstmt.setString(1, muni);
           pstmt.setInt(2, year);
+               ResultSet rs = pstmt.executeQuery();
+            municipalSummary ms = new municipalSummary();
+            ms.setMunicipality(muni);
+            if (rs.next()) {
+//                ms = new municipalSummary();
+                ms.setActual(rs.getDouble("production"));
+                ms.setYear(rs.getInt("year"));
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            return ms;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductionDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+             }
+    public municipalSummary viewMunicipalSummarybyYearTest2(String muni,int year) {
+        try {
+            // put functions here : previous week production, this week production
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select tons_cane as production, year from cropestimatemunicipality where year=? and municipality=?;";
+               PreparedStatement pstmt = conn.prepareStatement(query);
+               pstmt.setInt(1, year);
+               pstmt.setString(2, muni);
+         
                ResultSet rs = pstmt.executeQuery();
             municipalSummary ms = new municipalSummary();
             ms.setMunicipality(muni);

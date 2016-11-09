@@ -45,7 +45,8 @@ public class loadAllBrgysChart extends BaseServlet {
            int year=2015;
         ArrayList<brgySummary> fct = pdb.viewBarangayMuniSummary(year,mname);
         String district="TARLAC";
-        String average = pdb.getDistrictProductionAvg(year,district);
+//        String average = pdb.getDistrictProductionAvg(year,district);
+        String average = pdb.getDistrictProductionAvgTest3(year,mname,district);
         JSONObject data = new JSONObject();
      
       System.out.println(average);

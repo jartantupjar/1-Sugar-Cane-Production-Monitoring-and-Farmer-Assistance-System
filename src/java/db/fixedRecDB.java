@@ -328,7 +328,7 @@ public class fixedRecDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select * from `recommendations-fields` where recommendations_id=? and Fields_id=?;";
+            String query = "select * from `recommendations-fields` where recommendations_id=? and Fields_id=? and status='active' or 'verifying';";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, rec);
             pstmt.setString(2, farm);

@@ -15,63 +15,15 @@
                 <section class="content-header">
 
                     <h1>
-                        Send Recommendations
+                        Send Other Recommendations
                         <small>***Subjective***</small>
                     </h1>
                 </section>
                 <section class="content">
                     <div class="row">
-                        <form id="frm-example" action="CreateNewProject">
-
-                            <div class="col-md-6">
-                                <div class="box box-solid box-success">
-                                    <div class="box-header with-border">
-                                        <h3 class="box-title">Additional Details</h3>
-                                    </div>
-                                    <br>
-                                    <div class="box-body">
-
-                                        <div class="form-group">
-                                            <label>Period:</label>
-                                            <select class="form-control">
-                                                <option>Planting</option>
-                                                <option>Maturing</option>
-                                                <option>Harvesting</option>
-                                            </select>
-                                        </div>
-
-                                        <div  class="form-group">
-                                            <label class="control-label" for="datepicker" >Date Start:</label>
-                                            <div class="input-group date">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-calendar"></i>
-                                                </div>
-                                                <input type="text" class="form-control pull-right datepicker" name="datepicker" id="datepickerstart">
-                                            </div>
-                                            <!-- /.input group -->
-                                        </div>
 
 
-
-                                        <div  class="form-group">
-                                            <label class="control-label" for="dateend" >Date End:</label>
-                                            <div class="input-group date">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-calendar"></i>
-                                                </div>
-                                                <input type="text" class="form-control pull-right datepicker" name="dateend" id="datepickerend">
-                                            </div>
-                                            <!-- /.input group -->
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>Description, Additional Message and Reason</label>
-                                            <textarea class="form-control" name="Description" rows="2"  placeholder="Enter ..."></textarea>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
+                        <form action="sendRelatedRec" id="submit_form" method="POST">
                             <div class="col-md-6" > 
                                 <div class="box box-info">
                                     <div class="box-header">
@@ -89,145 +41,178 @@
                                                 <c:if test="${not empty flist}">
                                                     <c:forEach var="farmer" items="${flist}">
                                                         <tr>
-                                                            <td><c:out value="${farmer}"/></td>
+                                                            <td><input class="form-control hidden" name="farmz[]" value="${farmer}"><c:out value="${farmer}"/></td>
                                                         </tr>
-                                                        </c:forEach>
+                                                    </c:forEach>
                                                 </c:if>
-                                                    </tbody>
-                                                </table>
+                                            </tbody>
+                                        </table>
 
-
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                    <div class="col-md-6" > 
-                                        <div class="box box-info">
-                                            <div class="box-header">
-                                                <h1 class="box-title">Select Recommendations: </h1>
-
-                                            </div>
-
-                                            <div class="box-body ">
-
-                                                <table id="example" class="table  display table-hover pull-right" cellspacing="0" width="100%">
-                                                    <thead>
-                                                        <tr>
-                                                            <th></th>
-                                                            <th>Recommendation</th>
-                                                            <th>Description</th>
-                                                            <th>More Info</th>
-
-                                                        </tr>
-                                                    </thead>
-
-                                                </table>
-
-
-                                            </div>
-
-                                        </div>
 
                                     </div>
 
+                                </div>
 
-                                    <div class="col-md-2 text-center pull-right">                   
-                                        <p><button class="btn btn-primary btn-block" style="width: 100%" value="submit">Send</button></p>
-                                    </div>
-                                </form>
                             </div>
-                        </section>
+                           <div class="col-md-6 pull-right">
+                                <div class="box box-info" id="genform">
+                                <div class="box-header with-border">
+                                    <h1 class="box-title">Additional Message</h1>
+                                    <div class="box-tools pull-right">
+                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                    </div>
+                                </div>
+
+                                <div class="box-body">
+
+
+
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3">Message
+
+                                        </label>
+                                        <div class="col-md-9">
+                                            <textarea class="form-control" name="description" rows="3" >This recommendation is based on my observed comparison</textarea>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                               </div>
+                            <div class="col-md-12" > 
+                                
+                                <div class="box box-info">
+                                    <div class="box-header">
+                                        <h1 class="box-title">Select Recommendations: </h1>
+
+                                    </div>
+
+                                    <div class="box-body ">
+
+                                        <table id="example" class="table  display table-hover pull-right" cellspacing="0" width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>Recommendation</th>
+                                                    <th>Type</th>
+                                                    <th>Description</th>
+                                                    <th>More Info</th>
+
+                                                </tr>
+                                            </thead>
+
+                                        </table>
+
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-md-2 text-center pull-right">                   
+                                <p><button class="btn btn-primary btn-block" style="width: 100%" value="submit">Send</button></p>
+                            </div>
+                        </form>  
                     </div>
-
-
-                </div>
-
-                <footer class="main-footer">
-
-                    <div class="pull-right hidden-xs">
-                        <b>Version</b> 2.3.3
-                    </div>
-                    <strong>Copyright &copy; 2014-2015 <a href="http://sra.com">Sugar Regulatory Association</a>.</strong>
-                </footer>
+                </section>
             </div>
 
 
-            <script type="text/javascript" src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
-            <script src="bootstrap/js/bootstrap.min.js"></script>
-            <script src="dist/js/app.min.js"></script>
-            <script src="Highcharts/highcharts.js"></script>
-            <script src="plugins/datatables/jquery.dataTables.min.js"></script>
-            <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
-            <script type="text/javascript" src="plugins/datatable/dataTables.checkboxes.min.js"></script>
-            <script src="plugins/datepicker/bootstrap-datepicker.js"></script>
-            <script>
-                $(function () {
-                    $('.datepicker').datepicker({
-                        autoclose: true
-                    });
-                });</script>
-            <script>
+        </div>
 
-                $(document).ready(function () {
-                    var rows_selected = [];
+        <footer class="main-footer">
 
-                    var table = $('#example').DataTable({
-                        'ajax': {
-                            'url': 'viewBrgyList'
-                        },
-                        'columnDefs': [{
-                                'targets': 0,
-                                'searchable': false,
-                                'orderable': false,
-                                'className': 'dt-body-center',
-                                'render': function (data, type, full, meta) {
-                                    return '<input type="checkbox" name="id[]" id="buttonClick" value="'
-                                            + $('<div/>').text(data).html() + '">';
-                                }
-                            }],
-                        'select': {
-                            'style': 'multi'
-                        },
-                        'order': [[1, 'asc']]
-                                //      ,
-                                //       'rowCallback': function(row, data, dataIndex){
-                                //         // Get row ID
-                                //       var rowId = data[0];
-                                //       // alert(rowId);
-                                //         // If row ID is in the list of selected row IDs
-                                //         if($.inArray(rowId, rows_selected) !== -1){
-                                //            $(row).find('input[type="checkbox"]').prop('checked', true);
-                                //            $(row).addClass('selected');
-                                //         }
-                                //      }     
+            <div class="pull-right hidden-xs">
+                <b>Version</b> 2.3.3
+            </div>
+            <strong>Copyright &copy; 2014-2015 <a href="http://sra.com">Sugar Regulatory Association</a>.</strong>
+        </footer>
+    </div>
 
-                    });
 
-                    $('#frm-example').on('submit', function (e) {
-                        var form = this;
+    <script type="text/javascript" src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="dist/js/app.min.js"></script>
+    <script src="Highcharts/highcharts.js"></script>
+    <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript" src="plugins/datatable/dataTables.checkboxes.min.js"></script>
+    <script src="plugins/datepicker/bootstrap-datepicker.js"></script>
+    <script>
+        $(function () {
+            $('.datepicker').datepicker({
+                autoclose: true
+            });
+        });</script>
+    <script>
 
-                        // Iterate over all checkboxes in the table
-                        table.$('input[type="checkbox"]').each(function () {
-                            // If checkbox doesn't exist in DOM
-                            if (!$.contains(document, this)) {
-                                // If checkbox is checked
-                                if (this.checked) {
-                                    // Create a hidden element 
-                                    $(form).append(
-                                            $('<input>')
-                                            .attr('type', 'hidden')
-                                            .attr('name', this.name)
-                                            .val(this.value)
-                                            );
-                                }
-                            }
-                        });
-                    });
+        $(document).ready(function () {
+            var rows_selected = [];
+
+            var table = $('#example').DataTable({
+                'ajax': {
+                    'url': 'viewOtherRecommendations'
+                },
+                'columnDefs': [{
+                        'targets': 0,
+                        'searchable': false,
+                        'orderable': false,
+                        'className': 'dt-body-center',
+                        'render': function (data, type, full, meta) {
+                            return '<input type="checkbox" name="id[]" id="buttonClick" value="'
+                                    + $('<div/>').text(data).html() + '">';
+                        }
+                    }, {
+                        'targets': 4,
+                        'render': function (data, type, full, meta) {
+                            return '<a href="viewRecDetails?id=' + data + '" class="btn btn-primary text-center">' + 'more details' + '</a>';
+                        }
+                    }],
+                'select': {
+                    'style': 'multi'
+                },
+                'order': [[1, 'asc']]
+                        //      ,
+                        //       'rowCallback': function(row, data, dataIndex){
+                        //         // Get row ID
+                        //       var rowId = data[0];
+                        //       // alert(rowId);
+                        //         // If row ID is in the list of selected row IDs
+                        //         if($.inArray(rowId, rows_selected) !== -1){
+                        //            $(row).find('input[type="checkbox"]').prop('checked', true);
+                        //            $(row).addClass('selected');
+                        //         }
+                        //      }     
+
+            });
+
+            $('#frm-example').on('submit', function (e) {
+                var form = this;
+
+                // Iterate over all checkboxes in the table
+                table.$('input[type="checkbox"]').each(function () {
+                    // If checkbox doesn't exist in DOM
+                    if (!$.contains(document, this)) {
+                        // If checkbox is checked
+                        if (this.checked) {
+                            // Create a hidden element 
+                            $(form).append(
+                                    $('<input>')
+                                    .attr('type', 'hidden')
+                                    .attr('name', this.name)
+                                    .val(this.value)
+                                    );
+                        }
+                    }
                 });
+            });
+        });
 
 
-            </script>
-        </body>
+    </script>
+</body>
 
-    </html>
+</html>
