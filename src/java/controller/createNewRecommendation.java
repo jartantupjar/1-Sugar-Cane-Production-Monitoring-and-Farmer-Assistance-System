@@ -52,6 +52,7 @@ public class createNewRecommendation extends HttpServlet {
             Recommendation r = new Recommendation();
             subjectiveRecDB recDB = new subjectiveRecDB();
             ForumDB fdb = new ForumDB();
+            int notif = 0;
             int fields_id = Integer.parseInt(request.getParameter("fields"));
             String title = request.getParameter("title");
             String lined = request.getParameter("date");
@@ -108,6 +109,7 @@ public class createNewRecommendation extends HttpServlet {
             System.out.println(check3 +"link to recom is done");
             if (check > 0 && check3 >0){
                 fdb.updatePostRecommendations(title, fields_id, check);
+                notif = fdb.addRecommendationNotification(fields_id, "Retake mo na thesis", rdate, check, fields_id);
                 ServletContext context = getServletContext();
                 RequestDispatcher rd = context.getRequestDispatcher("/Forum.jsp");
                 rd.forward(request, response);

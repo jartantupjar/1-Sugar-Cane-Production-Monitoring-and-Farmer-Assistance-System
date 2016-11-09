@@ -33,9 +33,38 @@ comparison page add current vs historical details(past 2yrs)
                 </section>
                 <section class="content">
                     <div class="row">
-                        
 
 
+                        <div class="pull-right col-md-2">
+                            <div class="box box-info">
+                                <div class="box-header" style="height:4%">
+                                    <h5 class="box-title">Legend:</h5>
+                                </div>
+                                <div class="box-body ">
+                                    <table class="table table-hover table-bordered">
+                                        <tbody>
+                                            <tr><td>
+                                                    <button type="button" class="btn btn-primary btn-flat"></button>
+                                                </td>
+                                                <td>Selected Farm</td> 
+                                            </tr>
+                                            <tr><td>
+                                                    <button type="button" class="btn btn-success btn-flat"></button>
+                                                </td>
+                                                <td>Similar</td> 
+                                            </tr>
+                                            <tr><td>
+                                                    <button type="button" class="btn btn-danger btn-flat"></button>
+                                                </td>
+                                                <td>Different</td> 
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
                         <div class="col-md-12">
                             <div class="box box-info">
                                 <div class="box-header with-border">
@@ -576,29 +605,29 @@ comparison page add current vs historical details(past 2yrs)
                                                 </thead>
                                                 <tbody>
                                                     <c:if test="${not empty comprob}">
-                                                    <c:forEach var="flow" items="${comprob}" >
-                                                        <tr>
-                                                        <th><c:out value="${flow.prob_name}"/></th>
-                                                        
-                                                            <c:forEach var="fly" items="${flow.farms}">
-                                                         
-                                                              <c:choose>
-                                                                <c:when test='${fly!=null}'>
-                                                                    <td class="text-green"><i class="fa fa-check fa-2x" aria-hidden="true"></i></td>
-                                                                </c:when>
-                                                                <c:otherwise>
-                                                                      <td class="text-red"><i class="fa fa-close fa-2x" aria-hidden="true"></i></td>
-                                                                </c:otherwise>
-                                                            </c:choose>
-                                                                      
-                                                          
+                                                        <c:forEach var="flow" items="${comprob}" >
+                                                            <tr>
+                                                                <th><c:out value="${flow.prob_name}"/></th>
+
+                                                                <c:forEach var="fly" items="${flow.farms}">
+
+                                                                    <c:choose>
+                                                                        <c:when test='${fly!=null}'>
+                                                                            <td class="text-green"><i class="fa fa-check fa-2x" aria-hidden="true"></i></td>
+                                                                            </c:when>
+                                                                            <c:otherwise>
+                                                                            <td class="text-red"><i class="fa fa-close fa-2x" aria-hidden="true"></i></td>
+                                                                            </c:otherwise>
+                                                                        </c:choose>
+
+
+                                                                </c:forEach>
+
+                                                            </tr>
                                                         </c:forEach>
-                                                         
-                                                        </tr>
-                                                    </c:forEach>
                                                     </c:if>
-                                                    
-                                                    
+
+
 
                                                 </tbody>
 
@@ -619,29 +648,29 @@ comparison page add current vs historical details(past 2yrs)
                                                 </thead>
                                                 <tbody>
                                                     <c:if test="${not empty comprec}">
-                                                    <c:forEach var="flow" items="${comprec}" >
-                                                        <tr>
-                                                        <th class="pull-left"><c:out value="${flow.recommendation_name}"/></th>
-                                                        
-                                                            <c:forEach var="fly" items="${flow.farms}">
-                                                         
-                                                              <c:choose>
-                                                                <c:when test='${fly!=null}'>
-                                                                    <td class="text-green"><i class="fa fa-check fa-2x" aria-hidden="true"></i></td>
-                                                                </c:when>
-                                                                <c:otherwise>
-                                                                      <td class="text-red"><i class="fa fa-close fa-2x" aria-hidden="true"></i></td>
-                                                                </c:otherwise>
-                                                            </c:choose>
-                                                                      
-                                                          
+                                                        <c:forEach var="flow" items="${comprec}" >
+                                                            <tr>
+                                                                <th class="pull-left"><c:out value="${flow.recommendation_name}"/></th>
+
+                                                                <c:forEach var="fly" items="${flow.farms}">
+
+                                                                    <c:choose>
+                                                                        <c:when test='${fly!=null}'>
+                                                                            <td class="text-green"><i class="fa fa-check fa-2x" aria-hidden="true"></i></td>
+                                                                            </c:when>
+                                                                            <c:otherwise>
+                                                                            <td class="text-red"><i class="fa fa-close fa-2x" aria-hidden="true"></i></td>
+                                                                            </c:otherwise>
+                                                                        </c:choose>
+
+
+                                                                </c:forEach>
+
+                                                            </tr>
                                                         </c:forEach>
-                                                         
-                                                        </tr>
-                                                    </c:forEach>
-                                                    
+
                                                     </c:if>
-                                                    
+
 
                                                 </tbody>
 
@@ -655,187 +684,187 @@ comparison page add current vs historical details(past 2yrs)
                             </div>
 
                         </div>
-                    <form id="frm-FarmDiff" action="viewSendRec">
-                        <div class="col-md-offset-9 col-md-4">
-                             <div class="box box-info">
-                            <div class="box-body ">
-                                <table id="selecttable" class="table table-hover table-bordered table-responsive">
-                                    <tbody>
-                                        <tr>   <td><input type="checkbox" style="width: 16; height: 16" value="${farm.id}" name="farmid[]" class="msgCheckbox pull-left"></td>
-                                            <td>Farm : ${farm.id} </td> 
-                                        </tr>
-                                        <c:forEach var="flow" items="${flist}">
-                                            <tr>
-                                                <td><input type="checkbox" style="width: 16; height: 16" value="${flow.id}" name="farmid[]" class="msgCheckbox pull-left"></td>
-                                                <td>Farm : ${flow.id} </td> 
-                                            </tr>
-                                        </c:forEach> 
-                                    </tbody>
-                                 </table>
-
-                        
-                        </div>
-                    </div>
-                    </div>
 
 
+                        <form id="frm-FarmDiff" action="viewSendRec">
+                            <div class="col-md-offset-9 col-md-4">
+                                <div class="box box-info">
+                                    <div class="box-body ">
+                                        <table id="selecttable" class="table table-hover table-bordered table-responsive">
+                                            <tbody>
+                                                <tr>   <td><input type="checkbox" style="width: 16; height: 16" value="${farm.id}" name="farmid[]" class="msgCheckbox pull-left"></td>
+                                                    <td>Farm : ${farm.id} </td> 
+                                                </tr>
+                                                <c:forEach var="flow" items="${flist}">
+                                                    <tr>
+                                                        <td><input type="checkbox" style="width: 16; height: 16" value="${flow.id}" name="farmid[]" class="msgCheckbox pull-left"></td>
+                                                        <td>Farm : ${flow.id} </td> 
+                                                    </tr>
+                                                </c:forEach> 
+                                            </tbody>
+                                        </table>
 
 
-
-
-                    <div class="col-md-7 text-center">
-                        <div class="box box-danger">
-                            <div class="box-header">
-                                <h3 class="box-title">Action Tools</h3>
-                            </div>
-                            <div class="box-body">
-                                <a class="btn btn-app btn-linkedin">
-                                    <i class="fa fa-edit"></i> Create Survey
-                                </a>
-                                <a class="btn btn-app btn-adn">
-                                    <i class="fa fa-bank"></i> Create Recommendation
-                                </a>
-                                <button class="btn btn-app btn-linkedin" id="sButton" value="submit">
-                                    <i class="fa fa-edit" ></i> Send Recommendations
-                                </button>
-
-                                <a class="btn btn-app btn-soundcloud" href="determineProblem.jsp">
-
-                                    <i class="fa fa-inbox"></i> Determine Problem
-                                </a>
-
-
+                                    </div>
+                                </div>
                             </div>
 
-                            <!-- /.box-body -->
-                        </div>    
 
+
+
+
+
+                            <div class="col-md-7 text-center">
+                                <div class="box box-danger">
+                                    <div class="box-header">
+                                        <h3 class="box-title">Action Tools</h3>
+                                    </div>
+                                    <div class="box-body">
+
+                                        <button class="btn btn-app btn-linkedin atools" name="atools" id="crec" value="crec">
+                                            <i class="fa fa-edit" ></i> Create Recommendations
+                                        </button>
+                                        <button class="btn btn-app btn-linkedin atools" name="atools" id="srec" value="srec">
+                                            <i class="fa fa-edit" ></i> Send Recommendations
+                                        </button>
+                                        <button class="btn btn-app btn-linkedin atools" name="atools" id="sorec" value="sorec">
+                                            <i class="fa fa-edit" ></i> Send Other Recommendations
+                                        </button>
+                                        <button class="btn btn-app btn-linkedin atools" name="atools" id="dprob" value="dprob">
+                                            <i class="fa fa-edit" ></i> Determine Problem
+                                        </button>
+                         
+                                    </div>
+
+                                    <!-- /.box-body -->
+                                </div>    
+
+
+                            </div>
+
+                        </form>
 
                     </div>
+                </section>
 
-</form>
+            </div>
 
+            <footer class="main-footer">
+
+                <div class="pull-right hidden-xs">
+                    <b>Version</b> 2.3.3
                 </div>
-            </section>
-
+                <strong>Copyright &copy; 2014-2015 <a href="http://sra.com">Sugar Regulatory Association</a>.</strong>
+            </footer>
         </div>
 
-        <footer class="main-footer">
 
-            <div class="pull-right hidden-xs">
-                <b>Version</b> 2.3.3
-            </div>
-            <strong>Copyright &copy; 2014-2015 <a href="http://sra.com">Sugar Regulatory Association</a>.</strong>
-        </footer>
-    </div>
+        <script type="text/javascript" src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <script src="plugins/select2/select2.full.min.js"></script>
+        <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
 
+        <script src="dist/js/app.min.js"></script>
 
-    <script type="text/javascript" src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-    <script src="plugins/select2/select2.full.min.js"></script>
-    <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
-
-    <script src="dist/js/app.min.js"></script>
-
-    <script type="text/javascript">
-        $(function () {
-            $(".select2").select2();
-        });
-    </script>
-    <script type="text/javascript">
-        $(function () {
-            $('.box-profile').slimScroll({
-                height: '420px',
-                alwaysVisible: true
+        <script type="text/javascript">
+            $(function () {
+                $(".select2").select2();
             });
-        });
-    </script>
-    <script type="text/javascript">
-        $("#sButton").on("click", function () {
-            //var checkedValue = $('.msgCheckbox:checked').val();   
+        </script>
+        <script type="text/javascript">
+            $(function () {
+                $('.box-profile').slimScroll({
+                    height: '420px',
+                    alwaysVisible: true
+                });
+            });
+        </script>
+        <script type="text/javascript">
+            $(".atools").on("click", function () {
+                //var checkedValue = $('.msgCheckbox:checked').val();   
 
-            var checkedValue = [];
-            var inputElements = document.getElementsByClassName('msgCheckbox');
-            for (var i = 0; inputElements[i]; ++i) {
-                if (inputElements[i].checked) {
-                    checkedValue.push(inputElements[i].value);
-                    console.log(checkedValue);
+                var checkedValue = [];
+                var inputElements = document.getElementsByClassName('msgCheckbox');
+                for (var i = 0; inputElements[i]; ++i) {
+                    if (inputElements[i].checked) {
+                        checkedValue.push(inputElements[i].value);
+                        console.log(checkedValue);
+
+                    }
 
                 }
-
-            }
-            for (var b = 0; b < checkedValue.length; b++) {
-                console.log(checkedValue[b] + "+" + b);
-            }
+                for (var b = 0; b < checkedValue.length; b++) {
+                    console.log(checkedValue[b] + "+" + b);
+                }
 
 
 
-        });
-    </script>
-    <script src="plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+            });
+        </script>
+        <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
 
-    <script>
+        <script>
 
-        //            $(document).ready(function () {
-        //                var rows_selected = [];
-        //
-        //                var table = $('#example').DataTable({
-        //                    'ajax': {
-        //                        'url': 'viewBrgyList'
-        //                    },
-        //                    'columnDefs': [{
-        //                            'targets': 0,
-        //                            'searchable': false,
-        //                            'orderable': false,
-        //                            'className': 'dt-body-center',
-        //                            'render': function (data, type, full, meta) {
-        //                                return '<input type="checkbox" name="id[]" id="buttonClick" value="'
-        //                                        + $('<div/>').text(data).html() + '">';
-        //                            }
-        //                        }],
-        //                    'select': {
-        //                        'style': 'multi'
-        //                    },
-        //                    'order': [[1, 'asc']]
-        //                            //      ,
-        //                            //       'rowCallback': function(row, data, dataIndex){
-        //                            //         // Get row ID
-        //                            //       var rowId = data[0];
-        //                            //       // alert(rowId);
-        //                            //         // If row ID is in the list of selected row IDs
-        //                            //         if($.inArray(rowId, rows_selected) !== -1){
-        //                            //            $(row).find('input[type="checkbox"]').prop('checked', true);
-        //                            //            $(row).addClass('selected');
-        //                            //         }
-        //                            //      }     
-        //
-        //                });
-        //
-        //                $('#frm-example').on('submit', function (e) {
-        //                    var form = this;
-        //
-        //                    // Iterate over all checkboxes in the table
-        //                    table.$('input[type="checkbox"]').each(function () {
-        //                        // If checkbox doesn't exist in DOM
-        //                        if (!$.contains(document, this)) {
-        //                            // If checkbox is checked
-        //                            if (this.checked) {
-        //                                // Create a hidden element 
-        //                                $(form).append(
-        //                                        $('<input>')
-        //                                        .attr('type', 'hidden')
-        //                                        .attr('name', this.name)
-        //                                        .val(this.value)
-        //                                        );
-        //                            }
-        //                        }
-        //                    });
-        //                });
-        //            });
+            //            $(document).ready(function () {
+            //                var rows_selected = [];
+            //
+            //                var table = $('#example').DataTable({
+            //                    'ajax': {
+            //                        'url': 'viewBrgyList'
+            //                    },
+            //                    'columnDefs': [{
+            //                            'targets': 0,
+            //                            'searchable': false,
+            //                            'orderable': false,
+            //                            'className': 'dt-body-center',
+            //                            'render': function (data, type, full, meta) {
+            //                                return '<input type="checkbox" name="id[]" id="buttonClick" value="'
+            //                                        + $('<div/>').text(data).html() + '">';
+            //                            }
+            //                        }],
+            //                    'select': {
+            //                        'style': 'multi'
+            //                    },
+            //                    'order': [[1, 'asc']]
+            //                            //      ,
+            //                            //       'rowCallback': function(row, data, dataIndex){
+            //                            //         // Get row ID
+            //                            //       var rowId = data[0];
+            //                            //       // alert(rowId);
+            //                            //         // If row ID is in the list of selected row IDs
+            //                            //         if($.inArray(rowId, rows_selected) !== -1){
+            //                            //            $(row).find('input[type="checkbox"]').prop('checked', true);
+            //                            //            $(row).addClass('selected');
+            //                            //         }
+            //                            //      }     
+            //
+            //                });
+            //
+            //                $('#frm-example').on('submit', function (e) {
+            //                    var form = this;
+            //
+            //                    // Iterate over all checkboxes in the table
+            //                    table.$('input[type="checkbox"]').each(function () {
+            //                        // If checkbox doesn't exist in DOM
+            //                        if (!$.contains(document, this)) {
+            //                            // If checkbox is checked
+            //                            if (this.checked) {
+            //                                // Create a hidden element 
+            //                                $(form).append(
+            //                                        $('<input>')
+            //                                        .attr('type', 'hidden')
+            //                                        .attr('name', this.name)
+            //                                        .val(this.value)
+            //                                        );
+            //                            }
+            //                        }
+            //                    });
+            //                });
+            //            });
 
 
-    </script>
-</body>
+        </script>
+    </body>
 
 </html>

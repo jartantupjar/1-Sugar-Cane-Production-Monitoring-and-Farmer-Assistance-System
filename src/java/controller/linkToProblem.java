@@ -52,13 +52,13 @@ public class linkToProblem extends HttpServlet {
             String lined = request.getParameter("date");
             Date pdate = Date.valueOf(lined);
             System.out.println(pdate + " BEFORE !!!!");
-            try{
-            java.util.Date date = new SimpleDateFormat("MM/dd/yyyy").parse(lined);
-            pdate = new java.sql.Date(date.getTime());
+            try {
+                java.util.Date date = new SimpleDateFormat("yyyy/MM/dd").parse(lined);
+                pdate = new java.sql.Date(date.getTime());
             } catch (ParseException ex) {
-            Logger.getLogger(createNewProgram.class.getName()).log(Level.SEVERE, null, ex);
-            }   
-            System.out.println(pdate+ "AFTER !!!!");
+                Logger.getLogger(createNewProgram.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            System.out.println(pdate + "AFTER !!!!");
             int test = 0;
             int test2 = 0;
             int prob_id = 0;
@@ -73,26 +73,26 @@ public class linkToProblem extends HttpServlet {
                         pT.add(request.getParameterValues(paramName)[i]);
                         System.out.println(request.getParameterValues(paramName)[i]);
                         //connects recommendation to problem table
-                         prob_id = Integer.parseInt(request.getParameterValues(paramName)[i]);
+                        prob_id = Integer.parseInt(request.getParameterValues(paramName)[i]);
                         //int test = recDB.connectRecommendationtoProblem(check,prob_id);
-                         test2 = fdb.updatePostProblems(title, fields_id,prob_id);
+                        test2 = fdb.updatePostProblems(title, fields_id, prob_id);
                     }
 
-                    test = pdb.linktoProblems(fields_id, prob_id, pdate, "Active");
                 }
             }
-           if (test > 0 && test2 >0){
-                
+            test = pdb.linktoProblems(fields_id, prob_id, pdate, "Verifying");
+            fdb.addRecommendationProblem(fields_id, "You been linked to this problem", pdate, prob_id);
+            if (test > 0 && test2 > 0) {
+
                 ServletContext context = getServletContext();
                 RequestDispatcher rd = context.getRequestDispatcher("/Forum.jsp");
                 HttpSession session = request.getSession();
                 rd.forward(request, response);
-            }
-            else {
+            } else {
                 ServletContext context = getServletContext();
                 RequestDispatcher rd = context.getRequestDispatcher("/index.jsp");
                 rd.forward(request, response);
-            } 
+            }
         }
     }
 

@@ -5,6 +5,9 @@
  */
 package controller;
 
+import db.FarmsDB;
+import entity.Farm;
+import entity.compRecommendation;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -44,16 +47,30 @@ public class viewSendRec extends HttpServlet {
             if (paramName.startsWith("farmid")) {
                 for(int i=0;i<request.getParameterValues(paramName).length;i++){
                      list.add(request.getParameterValues(paramName)[i]);
-                 System.out.println(request.getParameterValues(paramName)[i]);
+                 System.out.println(request.getParameterValues(paramName)[i]+ " LOOOOOOOL");
                 }
 
         }
             }
+            String values=request.getParameter("atools");
+            
             HttpSession session = request.getSession();
+              ServletContext context = getServletContext();
+            RequestDispatcher rd = null;
+            if(values.equals("crec")){
+                  rd = context.getRequestDispatcher("/createNewRecommendation.jsp");
+            }else if(values.equals("srec")){
+              rd = context.getRequestDispatcher("/sendRelatedRec.jsp");
+            }else if(values.equals("sorec")){
+                rd = context.getRequestDispatcher("/sendRecommendations.jsp");
+            }else{
+                rd = context.getRequestDispatcher("/determineProblem.jsp"); 
+            }
+            
             session.setAttribute("flist",list);
                 
-                ServletContext context = getServletContext();
-                RequestDispatcher rd = context.getRequestDispatcher("/sendRecommendations.jsp");
+              
+                
             
                 rd.forward(request, response);
             

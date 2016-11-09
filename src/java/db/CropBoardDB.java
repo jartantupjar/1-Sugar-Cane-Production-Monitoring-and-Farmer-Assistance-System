@@ -25,7 +25,57 @@ public class CropBoardDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT *, weekofyear(week_ending), sum(area) as total_area, sum(actual) as total_actual, sum(lkg)as total_lkg FROM sra.dashboarddata where year = ? and year(week_ending) = ? and weekofyear(week_ending) > ?  \n" +
+            String query = "SELECT *, weekofyear(week_ending), round(sum(area),2) as total_area, round(sum(actual),2) as total_actual, round(sum(lkg),2) as total_lkg FROM sra.dashboarddata where year = ? and year(week_ending) = ? and weekofyear(week_ending) > ? \n" +
+"group by weekofyear(week_ending) order by week_ending;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, year);
+            pstmt.setInt(2, year);
+            pstmt.setInt(3, weekofyear);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<CropBoard> cT = null;
+            CropBoard c;
+            if (rs.next()) { 
+                 cT = new ArrayList<CropBoard>();
+                do {
+                    c = new CropBoard();
+                    c.setArea(rs.getDouble("total_area"));
+                    c.setTc(rs.getDouble("total_actual"));
+                    c.setLkg(rs.getDouble("total_lkg"));
+                    c.setId(rs.getInt("id"));
+                    c.setDistrict("district");
+                    c.setWeek_ending(rs.getDate("week_ending"));
+                    if(type.equalsIgnoreCase("TC")){
+                    c.setProduction(c.getTc());
+                    }
+                    else if(type.equalsIgnoreCase("HA")){
+                    c.setProduction(c.getArea());
+                    }
+                    else if(type.equalsIgnoreCase("LKG")){
+                    c.setProduction(c.getLkg());
+                    }
+                    else{
+                        System.out.println("TYPE : " + type);    
+                    }
+                    System.out.println("CROPDB IS DONE");
+                    cT.add(c);
+                    } while (rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            
+            return cT;
+        } catch (SQLException ex) {
+            Logger.getLogger(CropBoardDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public ArrayList<CropBoard> getWeeklyAverageProducedReport(String type, Integer year, Integer weekofyear) {
+        try {
+            // put functions here : previous week production, this week production
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT *, weekofyear(week_ending), round(avg(area),2) as total_area, round(avg(actual),2) as total_actual, round(avg(lkg),2)as total_lkg FROM sra.dashboarddata where year = ? and year(week_ending) = ? and weekofyear(week_ending) > ? \n" +
 "group by weekofyear(week_ending) order by week_ending;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, year);

@@ -280,6 +280,22 @@
         <servlet-name>editDates</servlet-name>
         <servlet-class>controller.editDates</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>viewSelectedRecommendations</servlet-name>
+        <servlet-class>controller.viewSelectedRecommendations</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>sendAlertToFarmers</servlet-name>
+        <servlet-class>controller.sendAlertToFarmers</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewSelectedProblems</servlet-name>
+        <servlet-class>controller.viewSelectedProblems</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>determineFarmProblems</servlet-name>
+        <servlet-class>controller.determineFarmProblems</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
@@ -559,6 +575,22 @@
     <servlet-mapping>
         <servlet-name>editDates</servlet-name>
         <url-pattern>/editDates</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewSelectedRecommendations</servlet-name>
+        <url-pattern>/viewSelectedRecommendations</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>sendAlertToFarmers</servlet-name>
+        <url-pattern>/sendAlertToFarmers</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewSelectedProblems</servlet-name>
+        <url-pattern>/viewSelectedProblems</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>determineFarmProblems</servlet-name>
+        <url-pattern>/determineFarmProblems</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

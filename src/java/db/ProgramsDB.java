@@ -312,6 +312,34 @@ public class ProgramsDB {
         return false;
 
     }
+    public boolean addMoreKPIs(ArrayList<programsKPI> kpis) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "UPDATE kpis SET actual=actual+? WHERE year=? and Programs_name=? and name=?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            for (int i = 0; i < kpis.size(); i++) {
+
+                int sYear = kpis.get(i).getKpi_year();
+                for (int a = 0; a < kpis.get(i).getaValues().size(); a++) {
+                    pstmt.setDouble(1, kpis.get(i).getaValues().get(a));
+                    pstmt.setInt(2, sYear + a);
+                    pstmt.setString(3, kpis.get(0).getProgram_name());
+                    pstmt.setString(4, kpis.get(i).getKpi());
+                    pstmt.addBatch();
+                }
+
+            }
+            pstmt.executeBatch();
+            pstmt.close();
+            conn.close();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(UsersDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+
+    }
 
     public boolean addProgProb(ArrayList<String> probids, String prog_name) {
         try {

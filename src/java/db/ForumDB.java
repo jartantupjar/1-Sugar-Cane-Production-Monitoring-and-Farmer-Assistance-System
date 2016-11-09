@@ -7,6 +7,7 @@ package db;
 
 import entity.Forum;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -48,11 +49,17 @@ public class ForumDB {
                             String recom_name = getRecommendationName(f.getRecom_id());
                             f.setRecommendation_name(recom_name);
                         }
+                    else{
+                        f.setRecommendation_name("N/A");
+                    }
                     f.setProb_id(rs.getInt("Problems_id"));
                     if(f.getProb_id() != null){
                             String prob_name = getProblemName(f.getProb_id());
                             f.setProblem_name(prob_name);
                         }
+                    else{
+                            f.setProblem_name("N/A");
+                    }
                     String line = f.getId()+","+f.getStatus();
                     f.setId_and_status(line);
                     fT.add(f);
@@ -222,7 +229,7 @@ public class ForumDB {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "update posts set Problems_id = ? where title = ? and Fields_id = ? and status = 'Accepted'  ;";
+            String query = "update posts set Problems_id = ? where title = ? and Fields_id = ? ;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, prob_id);
             pstmt.setString(2,title);
@@ -241,7 +248,7 @@ public class ForumDB {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "update posts set Recommendations_id = ? where title = ? and Fields_id = ? and status = 'Accepted'  ;";
+            String query = "update posts set Recommendations_id = ? where title = ? and Fields_id = ?  ;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, recom_id);
             pstmt.setString(2,title);
@@ -360,6 +367,76 @@ public class ForumDB {
             Logger.getLogger(ForumDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    public Integer addRecommendationNotification(Integer fields_id,String message,Date date, Integer rec_id, Integer rec_field_id){
+        int check=0;
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "INSERT INTO notifications(disaster,received,Fields_id,message,date,Recommendations_id,Recommendations_Fields_id) values(?,?,?,?,?,?,?); ";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, "N");
+            pstmt.setString(2, "N");
+            pstmt.setInt(3, fields_id);
+            pstmt.setString(4,message);
+            pstmt.setDate(5, date);
+            pstmt.setInt(6, rec_id);
+            pstmt.setInt(7, rec_field_id);
+            check  = pstmt.executeUpdate();
+                
+                pstmt.close();
+                conn.close();            
+            return check;
+                 }catch (SQLException ex) {
+            Logger.getLogger(ForumDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+    public Integer addRecommendationProblem(Integer fields_id,String message,Date date, Integer prob_id){
+        int check=0;
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "INSERT INTO notifications(disaster,received,Fields_id,message,date,`Problems-Fields_id`) values(?,?,?,?,?,?); ";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, "N");
+            pstmt.setString(2, "N");
+            pstmt.setInt(3, fields_id);
+            pstmt.setString(4,message);
+            pstmt.setDate(5, date);
+            pstmt.setInt(6, prob_id);
+            check  = pstmt.executeUpdate();
+                
+                pstmt.close();
+                conn.close();            
+            return check;
+                 }catch (SQLException ex) {
+            Logger.getLogger(ForumDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+    public Integer addAlertNotification(Integer fields_id,String message,Date date, Integer disaster_id){
+        int check=0;
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "INSERT INTO notifications(disaster,received,Fields_id,message,date,DisasterAlerts_id) values(?,?,?,?,?,?); ";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, "Y");
+            pstmt.setString(2, "N");
+            pstmt.setInt(3, fields_id);
+            pstmt.setString(4,message);
+            pstmt.setDate(5, date);
+            pstmt.setInt(6, disaster_id);
+            check  = pstmt.executeUpdate();
+                
+                pstmt.close();
+                conn.close();            
+            return check;
+                 }catch (SQLException ex) {
+            Logger.getLogger(ForumDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
     }
 }
 

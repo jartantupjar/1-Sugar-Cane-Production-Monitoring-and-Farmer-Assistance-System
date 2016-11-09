@@ -50,19 +50,7 @@
                 <c:if test="${post.prob_id != null }">
                 <span class="username">Problem: ${post.name}</span>
                 </c:if>
-              </div>
-              <!-- /.user-block -->
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-                <c:forEach var="bj" items="${post.image}">
-                    <img class="img-rounded " src="${bj}" alt="Photo" style="width:40%">
-                </c:forEach>
-              
-
-              <p><b>${post.message}</b></p>
-              <div>
-                  
+                <div>
               <c:if test="${post.status == 'Pending'}">
                   <div class="col-md-2 pull-left">
                       <form name="approve"  action="ApprovePost">
@@ -78,16 +66,31 @@
                           </div>
               </c:if>
                   </div>
+              </div>
+              <!-- /.user-block -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <c:forEach var="bj" items="${post.image}">
+                    <img class="img-rounded " src="${bj}" alt="Photo" style="width:40%">
+                </c:forEach>
+              
+
+              <p><b>${post.message}</b></p>
+              
                 
               <c:if test="${post.prob_id == 0 && post.recom_id == 0}">
-                  <div class=" col-md-2 pull-right">
-                  <a class="btn btn-success" style="width: 100%" id="lr"><i class="fa fa-chain"></i>  Tag to a recommendation</a>
-                  <a class="btn btn-warning" style="width:100%" id="lp"><i class="fa fa-times-circle"></i>  Tag to a problem</a>
-                  <a style="width:100%" class="btn btn-danger" id="cp"><i class="fa fa-warning "></i>  Create New Problem </a>
-                  <a style="width: 100%" class="btn btn-primary" id="cr"><i class="fa fa-gear "></i>  Create New Recommendation </a>
-                  </div>
+                  <c:if test="${post.status == 'Accepted'}">
+                  
+                  <a style="width: 25%" class="btn btn-danger" id="cp"><i class="fa fa-warning "></i>  Create New Problem </a>
+                  <a style="width: 25%" class="btn btn-primary" id="cr"><i class="fa fa-gear "></i>  Create New Recommendation </a>
+                  </c:if>
+              <c:if test="${post.status == 'Rejected'}">
+                  <a class="btn btn-success" style="width: 25%" id="lr"><i class="fa fa-chain"></i>  Send Recommendation</a>
+                  <a class="btn btn-warning" style="width: 25%" id="lp"><i class="fa fa-times-circle"></i>Send Problem</a>
               </c:if>
-              
+                  
+              </c:if>
             </div>
             <!-- /.box-body -->
             <div class="box-footer box-comments">
@@ -110,6 +113,19 @@
               </div>
                 </c:if>
               </c:forEach>
+                <div class="box-comment">
+                    <img class="img-circle img-sm" src="res/sra-logo.png">
+                    <div class="comment-text">
+                        <form id="frm-example" action="saveComment">
+                        <span class="username">
+                           MDO
+                            <span class="text-muted pull-right">${todayDate}</span>
+                        </span>
+                         <p> <textarea type="text" name="msg" id="msg" class="form-control" placeholder="Comment Here ...." style="width: 100%"></textarea> </p>
+                         <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                    </form>
+                    </div>
+                </div>
                 
             </div>
           </div>

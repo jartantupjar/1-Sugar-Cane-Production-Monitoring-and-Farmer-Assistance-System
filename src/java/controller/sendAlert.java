@@ -56,6 +56,8 @@ public class sendAlert extends HttpServlet {
                 p.setTotalFarms(totalf);
             }
                 session.setAttribute("problem", p);
+                session.setAttribute("muni", muni);
+                session.setAttribute("barangay", barangay);
                 ServletContext context = getServletContext();
                 RequestDispatcher rd = context.getRequestDispatcher("/sendAlert.jsp");
                 rd.forward(request, response);

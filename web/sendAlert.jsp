@@ -63,9 +63,10 @@
                                         <h3 class="box-title">Message Details</h3>
                                     </div>
                                     <br>
-                                    <form id="frm-example" action="sendNotifications#">
+                                    <form id="frm-example" action="sendAlertToFarmers">
                                     <div class="box-body">
-                                        <textarea style="width: 100%" rows="6" form="frm-group" name="message" class="pull-left" placeholder="Enter your text here ...."></textarea>
+                                        
+                                        <textarea style="width: 100%" rows="6"  name="message" class="pull-left" placeholder="Enter your text here ...."></textarea>
                                         <button type="submit" class="btn btn-primary pull-right">Send Alerts</button>
                                     </div>
                                         

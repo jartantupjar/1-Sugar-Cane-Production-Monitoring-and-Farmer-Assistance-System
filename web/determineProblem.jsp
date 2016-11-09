@@ -25,7 +25,7 @@
                 </section>
                 <section class="content">
                     <div class="row">
-                        <form id="frm-example">
+                        <form id="frm-example" action="determineFarmProblems">
 
                             <div class="col-md-6">
                                 <div class="box box-solid box-success">
@@ -36,43 +36,9 @@
                                     <div class="box-body">
                                         
                                         <div class="form-group">
-                                            <label>Title</label>
-                                            <p> <input type="text" class="form-control" placeholder="Title of Problem" style="width: 100%"> </p>
+                                            <label>Message</label>
+                                            <p> <textarea type="text" name="msg" id="msg" class="form-control" placeholder="Title of Problem" style="width: 100%"></textarea> </p>
                                         </div>
-
-                                        <div class="form-group">
-                                            <label>Type:</label>
-                                            <select class="form-control">
-                                                <option>Pest</option>
-                                                <option>Practices</option>
-                                                <option>Irrigation</option>
-                                            </select>
-                                        </div>
-                                    
-                                        <div  class="form-group">
-                                            <label class="control-label" for="datepicker" >Date Start:</label>
-                                            <div class="input-group date">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-calendar"></i>
-                                                </div>
-                                                <input type="text" class="form-control pull-right datepicker" name="datepicker" id="datepickerstart">
-                                            </div>
-                                            <!-- /.input group -->
-                                        </div>
-
-
-
-                                        <div  class="form-group">
-                                            <label class="control-label" for="dateend" >Date End:</label>
-                                            <div class="input-group date">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-calendar"></i>
-                                                </div>
-                                                <input type="text" class="form-control pull-right datepicker" name="dateend" id="datepickerend">
-                                            </div>
-                                            <!-- /.input group -->
-                                        </div>
-
                                     </div>
 
                                 </div>
@@ -91,24 +57,14 @@
 
 
                                                 </tr>
-                                                <tr>
-                                                    <td>John Doe</td>
-
-                                                </tr>
-
-                                                <tr>
-                                                    <td href="">henry ford</td>
-
-                                                </tr>
-                                                <tr>
-
-                                                    <td href="">Michael Johnathan</td>
-
-                                                </tr>
-                                                <tr>
-                                                    <td href="ff">Danny Frisk</td>
-
-                                                </tr>
+                                                <c:if test="${not empty flist}">
+                                                
+                                                    <c:forEach var="farmer" items="${flist}">
+                                                        <tr>
+                                                            <td><c:out value="${farmer}"/></td>
+                                                        </tr>
+                                                        </c:forEach>
+                                                </c:if>
                                             </tbody>
                                         </table>
 
@@ -131,9 +87,9 @@
                                             <thead>
                                                 <tr>
                                                     <th></th>
-                                                    <th>Recommendation</th>
+                                                    <th>Problem</th>
+                                                    <th>Type</th>
                                                     <th>Description</th>
-                                                    <th>More Info</th>
 
                                                 </tr>
                                             </thead>
@@ -148,8 +104,9 @@
                             </div>
 
 
-                            <div class="col-md-2 text-center pull-right">                   
-                                <p><button class="btn btn-primary btn-block" style="width: 100%" value="submit">Submit</button></p>
+                            <div class="col-md-2 text-center pull-right">
+                                 <select style="display: none" name="flist" id="flist"><option>${flist}</option></select>
+                                <p><button class="btn btn-primary btn-block" type="submit" style="width: 100%" value="submit">Submit</button></p>
                             </div>
                         </form>
                     </div>
@@ -180,7 +137,7 @@
 
             var table = $('#example').DataTable({
                 'ajax': {
-                    'url': 'viewProbList'
+                    'url': 'viewSelectedProblems?farmid=${flist}'
                 },
                 'columnDefs': [{
                         'targets': 0,
@@ -188,7 +145,7 @@
                         'orderable': false,
                         'className': 'dt-body-center',
                         'render': function (data, type, full, meta) {
-                            return '<input type="checkbox" name="id[]" id="buttonClick" value="'
+                            return '<input type="checkbox" name="probid[]" id="buttonClick" value="'
                                     + $('<div/>').text(data).html() + '">';
                         }
                     }],

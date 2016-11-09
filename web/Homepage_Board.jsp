@@ -29,9 +29,9 @@
                         <div class="form-group">
                             <label>Type</label>
                             <select class="form-control" id="particulars">
-                                <option>TC</option>
-                                <option>HA</option>
                                 <option>LKG</option>
+                                <option>TC</option>
+                                <option>HA</option> 
                             </select>
                         </div>
                         
@@ -107,12 +107,20 @@
                 url: "viewWeeklyProducedReport?id="+sv,
                 tye: "POST",
                 dateType: "JSON",
-                success: function(data){ 
-                  console.log(data);  
+                success: function(data){
+                    if (sv == 'TC'){
+                        var ti = 'Tons Cane';
+                    }
+                    else if(sv == 'HA'){
+                        var ti = 'Area Harvested';
+                    }
+                    else if(sv == 'LKG'){
+                        var ti = '50 kilograms';
+                    }
                   $('#container').highcharts({
     
     tooltip: {
-        pointFormat: "Value: {point.y:,.1f} TC"
+        pointFormat: "Value: {point.y:,.1f}  (" +ti+")"
     },
     
     xAxis: {
@@ -136,10 +144,17 @@
                     }
                 }
             }
+            
         },
 
     series: [{
+        name: ti,
         data: data.prod,
+        pointStart: Date.UTC(${todayYear},${todayMonth},${todayDay}),
+        pointInterval: 168 * 36e5
+    },{
+        name: "Average" +ti,
+        data: data.average,
         pointStart: Date.UTC(${todayYear},${todayMonth},${todayDay}),
         pointInterval: 168 * 36e5
     }]

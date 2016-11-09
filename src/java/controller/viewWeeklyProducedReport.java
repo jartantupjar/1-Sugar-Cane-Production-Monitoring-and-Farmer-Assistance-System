@@ -47,19 +47,26 @@ public class viewWeeklyProducedReport extends HttpServlet {
             System.out.println(todayYear +"what now ?");
             System.out.println(weekOfYear +"what then ?");
             ArrayList<CropBoard> cT = new ArrayList<CropBoard>();
+            ArrayList<CropBoard> avgT = new ArrayList<CropBoard>();
             cT = cdb.getWeeklyProducedReport(type, todayYear, weekOfYear);
+            avgT= cdb.getWeeklyAverageProducedReport(type, todayYear, weekOfYear);
             JSONObject production =  new JSONObject();
             JSONArray prod = new JSONArray();   
+            JSONArray avg = new JSONArray();
             if(cT != null){
                 for(int i = 0; i<cT.size();i++){
                 ArrayList<Double> d = new ArrayList<Double>();
+                ArrayList<Double> a = new ArrayList<Double>();
                 d.add(cT.get(i).getProduction());
+                a.add(avgT.get(i).getProduction());
                 prod.add(d);
+                avg.add(a);
                 }
             }
             session.setAttribute("todayYear", todayYear);
             session.setAttribute("weekOfYear", weekOfYear);
             production.put("prod", prod);
+            production.put("average", avg);
             response.setContentType("applications/json");
             response.setCharacterEncoding("utf-8");
             response.getWriter().write(production.toString());

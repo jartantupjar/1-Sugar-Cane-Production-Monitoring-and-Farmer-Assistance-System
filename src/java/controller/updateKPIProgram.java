@@ -96,7 +96,8 @@ public class updateKPIProgram extends BaseServlet {
             }
         }
 
-        boolean test = progdb.updateKPIs(kpis);
+//        boolean test = progdb.updateKPIs(kpis);
+        boolean test = progdb.addMoreKPIs(kpis);
    
 
         //addprogKPI

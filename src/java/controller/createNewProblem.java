@@ -91,6 +91,7 @@ public class createNewProblem extends HttpServlet {
             if (check > 0){
                 fdb.updatePostProblems(title, fields_id, check);
                 pDB.linktoProblems(fields_id, check, dateparam, p.getStatus());
+                fdb.addRecommendationProblem(fields_id, p.getProb_details(), pdate, check);
                 ServletContext context = getServletContext();
                 RequestDispatcher rd = context.getRequestDispatcher("/Forum.jsp");
                 rd.forward(request, response);

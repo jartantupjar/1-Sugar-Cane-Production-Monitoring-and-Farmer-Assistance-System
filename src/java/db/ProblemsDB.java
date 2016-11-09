@@ -109,7 +109,7 @@ public class ProblemsDB {
     public int linktoProblems(Integer field_id, Integer probid, Date date, String status) {
         try {
             // put functions here : previous week production, this week production
-            int i = 0;
+            int id = getNextProblemsFieldsID();
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "insert into `problems-fields`(Problems_id,Fields_id,date,status) values(?,?,?,?);";
@@ -118,10 +118,10 @@ public class ProblemsDB {
             pstmt.setInt(2, field_id);
             pstmt.setDate(3, date);
             pstmt.setString(4, status);
-            i = pstmt.executeUpdate();
+            pstmt.executeUpdate();
             pstmt.close();
             conn.close();
-            return i;
+            return id;
         } catch (SQLException ex) {
             java.util.logging.Logger.getLogger(subjectiveRecDB.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -259,7 +259,7 @@ public class ProblemsDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select f.Farmers_name,pf.Fields_id,f.barangay from problems p join `problems-fields` pf on p.id = pf.Problems_id join `fields` f on pf.Fields_id = f.id where p.id = ?  ;";
+            String query = "select f.Farmers_name,pf.Fields_id,f.barangay, round(pf.damage,2) as 'damage' from problems p join `problems-fields` pf on p.id = pf.Problems_id join `fields` f on pf.Fields_id = f.id where p.id = ?  ;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
@@ -272,6 +272,7 @@ public class ProblemsDB {
                     p.setFields_id(rs.getInt("Fields_id"));
                     p.setFarmer(rs.getString("Farmers_name"));
                     p.setBarangay(rs.getString("barangay"));
+                    p.setProb_loss(rs.getDouble("damage"));
                    // p.setStatus(rs.getString("status"));
                     //p.setValidation(rs.getString("validated"));
                     pT.add(p);
@@ -442,6 +443,33 @@ public class ProblemsDB {
         }
         return 0;
     }
+    public int addAlertToFarmers(int prob_id,String message,Date pdate, String barangay, String district, String municipality) {
+        try {
+            // put functions here : previous week production, this week production
+            int i = 0;
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "insert into DisasterAlerts(Problems_id,message,date,barangay,district,municipality) values(?,?,?,?,?,?);";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, prob_id);
+            pstmt.setString(2, message);
+            pstmt.setDate(3, pdate);
+            pstmt.setString(4, barangay);
+            pstmt.setString(5, district);
+            pstmt.setString(6, municipality);
+            i = pstmt.executeUpdate();
+            if(i==1){
+                i= getLastAlertsID();
+                System.out.println(i +" ADDING IS DONE ");
+            }
+            pstmt.close();
+            conn.close();
+            return i;
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(subjectiveRecDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
     public int getLastProblemsID() {
         try {
             // put functions here : previous week production, this week production
@@ -464,5 +492,115 @@ public class ProblemsDB {
             java.util.logging.Logger.getLogger(subjectiveRecDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         return 0;
+    }public int getLastAlertsID() {
+        try {
+            // put functions here : previous week production, this week production
+            int i = 0;
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT  max(id)as id FROM DisasterAlerts ;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                do{
+                i = rs.getInt("id");
+                }while(rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            return i;
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(subjectiveRecDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+    public int getNextProblemsFieldsID() {
+        try {
+            // put functions here : previous week production, this week production
+            int i = 0;
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select auto_increment from information_schema.tables where table_schema = 'SRA' and table_name = 'Problems-Fields';";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                do{
+                i = rs.getInt("auto_increment");
+                }while(rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            return i;
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(subjectiveRecDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+    public int checkProblemFieldsId(int prob_id, int fields_id) {
+        try {
+            // put functions here : previous week production, this week production
+            int i = 0;
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select id from `problem-fields` where Problems_id = ? and Fields_id = ? ;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, prob_id);
+            pstmt.setInt(2, fields_id);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                i = rs.getInt("id");
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            return i;
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(subjectiveRecDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+    public Integer updateProblemsFields(Integer fields_id, Integer prob_id, String status){
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "update posts set status = ? where Problems_id = ? and Fields_id = ?  ;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(2, prob_id);
+            pstmt.setInt(3,fields_id);
+            pstmt.setString(1, status);
+            int check = pstmt.executeUpdate();
+                System.out.println(check + " This is the test");
+                pstmt.close();
+                conn.close();            
+            return check;
+                 }catch (SQLException ex) {
+            Logger.getLogger(ProblemsDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public String getDistrict(String barangay, String municipality) {
+        try {
+            // put functions here : previous week production, this week production
+            String i = null;
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select district from `ref-barangays` where barangay = ? and municipality = ? ;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, barangay);
+            pstmt.setString(2, municipality);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                i = rs.getString("district");
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            return i;
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(subjectiveRecDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }

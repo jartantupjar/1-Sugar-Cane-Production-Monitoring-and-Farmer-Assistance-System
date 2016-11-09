@@ -33,12 +33,7 @@ public class Login extends HttpServlet {
             oneUser.setUsername(request.getParameter("username"));
             oneUser.setPassword(request.getParameter("password"));
             UsersDB myUserDB = new UsersDB();
-            CropAssessment ca = new CropAssessment(); //for area
-            CropAssessment ca2 = new CropAssessment(); // for tons cane
             CropAssessmentDB cadb = new CropAssessmentDB();
-            ArrayList<CropAssessment> caT = new ArrayList<CropAssessment>(); //the whole report itself
-            ArrayList<CropAssessment> prevT = new ArrayList<CropAssessment>(); // gets the previous of area and tc
-            ArrayList<CropAssessment> currT = new ArrayList<CropAssessment>(); // gets the current of area and tc
             User successful = myUserDB.authenticate(oneUser);
             if (successful != null) {
                 ServletContext context = getServletContext();
@@ -46,7 +41,7 @@ public class Login extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", successful); 
                 //start of the crop assessment report
-                String sdate = "2015-02-10"; // date of the login
+                String sdate = "2015-02-10"; // date of the login-- change this to the parameter date
                 Date todayDate = Date.valueOf(sdate);
                 Calendar cal = Calendar.getInstance();
                 cal.setTime(todayDate);
@@ -56,40 +51,15 @@ public class Login extends HttpServlet {
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
                 ArrayList<CropAssessment> rain = cadb.getRainFall(week_of_year,year);
-                DecimalFormat df = new DecimalFormat("#.##");   
-                currT = cadb.getCropAssessmentReportForTheWeek(week_of_year, year);
-                prevT = cadb.getPrevCropAssessmentReportForTheWeek(week_of_year, year);
-                double etc = Double.valueOf(df.format(cadb.getTotalEstimatedTonsCane(year)));
-                double eah = Double.valueOf(df.format(cadb.getTotalEstimatedArea(year)));
-                Date week_ending = currT.get(0).getWeek_ending();
-                    ca.setParticulars("Area");
-                    ca.setEstimated(eah);
-                    ca.setPrevious(prevT.get(0).getPrevArea());
-                    ca.setThisweek(currT.get(0).getThisArea());
-                    double todate = ca.getPrevious() + ca.getThisweek();
-                    ca.setTodate(todate);
-                    double percenta = 0;
-                    double percentb = 0;
-                    percenta = Double.valueOf(df.format((ca.getTodate()/eah)*100));
-                    ca.setPercent(percenta);
-                    ca.setStanding(Double.valueOf(df.format(ca.getEstimated()- ca.getTodate())));
-                    caT.add(ca);
-                    ca2.setParticulars("Tons Cane");
-                    ca2.setEstimated(etc);
-                    ca2.setPrevious(prevT.get(0).getPrevTons_Cane());
-                    ca2.setThisweek(currT.get(0).getThisTons_Cane());
-                    double todate2 = ca2.getPrevious() +ca2.getThisweek();
-                    ca2.setTodate(todate2);
-                    percentb = Double.valueOf(df.format((ca2.getTodate()/etc)*100));
-                    ca2.setPercent(percentb);
-                    ca2.setStanding(Double.valueOf(df.format(ca2.getEstimated()- ca2.getTodate())));
-                    caT.add(ca2);
-                    System.out.println(rain.get(0).getRainfall()+ "RAINFALL");
-                     CropNarrative cn=null;
-                 if(cadb.checkExistingNarrative(year,week_ending)==true){ 
-                     System.out.println("it entered tester");
-                     cn=new CropNarrative();
-           cn=cadb.getAssessmentNarrative(year,week_ending);
+                ArrayList<CropAssessment> caT = new ArrayList<CropAssessment>();
+                caT  = cadb.getCropAssesmentRajversion(week_of_year, year);
+                Date week_ending = caT.get(0).getWeek_ending();
+                System.out.println(week_ending + " IS THIS WAHT YOUR LOOKING FOR ?");
+                CropNarrative cn=null;
+                if(cadb.checkExistingNarrative(year,week_ending)==true){ 
+                System.out.println("it entered tester");
+                cn=new CropNarrative();
+                cn=cadb.getAssessmentNarrative(year,week_ending);
 //                  
                  }
                 session.setAttribute("narrative", cn);
