@@ -45,24 +45,29 @@ public class loadAllFarmersChart extends BaseServlet {
            String mname= request.getParameter("name");
            int year=2015;
         ArrayList<Farmer> fct = pdb.viewFarmerBrgySummary(year,mname);
+                String district="TARLAC";
+//        String average = pdb.getDistrictProductionAvg(year,district);
+        String average = pdb.getDistrictProductionAvgTest3(year,mname,district);
         JSONObject data = new JSONObject();
      
       
         JSONArray category = new JSONArray();
         JSONArray bar = new JSONArray();
+         JSONArray avgProd = new JSONArray();
     
         if (fct != null) {
              for(int i = 0; i < fct.size(); i++){
 //                   System.out.println(fct.get(i).getName()+"fahmr");
                 category.add(fct.get(i).getName());
-              
                 bar.add(fct.get(i).getProduction());
-                
+                avgProd.add(Double.parseDouble(average));
              }
          }
        data.put("categ", category);
        data.put("bar", bar);
+       data.put("avgprod", avgProd);
       data.put("curyr", year);
+   
         System.out.println(data);
         
         

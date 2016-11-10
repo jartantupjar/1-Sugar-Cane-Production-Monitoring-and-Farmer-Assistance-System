@@ -148,7 +148,7 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
 
             $(document).ready(function () {
 var categ;
- var bar;
+ var bar,line;
                 $.ajax({
                     url: 'loadBrgySumYrsChart?name=${brgydet.barangay}',
                     type: 'POST',
@@ -156,6 +156,7 @@ var categ;
                     success: function (data) {
                         categ=data.categ;
                        bar=data.bar;
+                        line=data.line;
                     // Create the chart
                     
                     
@@ -191,12 +192,21 @@ var categ;
             column: {
                 pointPadding: 0.2,
                 borderWidth: 0
+            }, line: {
+               marker: {
+            enabled: false
+        }
             }
                        
         },
         series: [{
             name: 'Year',
             data: bar
+
+        },{
+            name: 'District Avg',
+            data: line,
+            type:'line'
 
         }]
     });
@@ -206,6 +216,7 @@ var categ;
 var categ2;
  var bar2;
  var curyr;
+ var avgprod;
     $.ajax({
                     url: 'loadAllFarmersChart?name=${brgydet.barangay}',
                     type: 'POST',
@@ -214,6 +225,7 @@ var categ2;
                         categ2=data.categ;
                        bar2=data.bar;
                        curyr=data.curyr;
+                       avgprod=data.avgprod;
                     // Create the chart
                     console.log(bar);
                     console.log(categ);
@@ -247,6 +259,11 @@ var categ2;
        
         },
         plotOptions: {
+            line: {
+                 marker: {
+            enabled: false
+        }
+            },
             column: {
                 pointPadding: 0.2,
                 borderWidth: 0
@@ -255,6 +272,11 @@ var categ2;
         series: [{
             name: 'Brgys',
             data: bar2
+
+        },{
+            name: 'District Year Avg',
+            data: avgprod,
+            type:'line'
 
         }]
     });
