@@ -30,9 +30,9 @@
                         <div class="form-group">
                             <label>Type</label>
                             <select class="form-control" id="particulars">
+                                <option>LKG</option>
                                 <option>TC</option>
                                 <option>HA</option>
-                                <option>LKG</option>
                             </select>
                         </div>
                         
@@ -100,7 +100,7 @@
         <script src="plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
         
-        <script>
+<!--        <script>
             $(function () {
                 var sel = document.getElementById("particulars");
             var sv = sel.options[sel.selectedIndex].value;
@@ -113,7 +113,7 @@
                   console.log(data.categories);  
     $('#container').highcharts({
         chart: {
-            type: 'column'
+            zoomType 'column'
         },
         title: {
             text:  'Production for the Week: '+ ${datepick}
@@ -122,6 +122,34 @@
             categories: data.categories,
             crosshair: true
         },
+                    yAxis: [{// Primary yAxis
+                            labels: {
+                                format: '{value} MM',
+                                style: {
+                                    color: Highcharts.getOptions().colors[1]
+                                }
+                            },
+                            title: {
+                                text: 'Rainfall',
+                                style: {
+                                    color: Highcharts.getOptions().colors[1]
+                                }
+                            }
+                        }, {// Secondary yAxis
+                            title: {
+                                text: 'Growth',
+                                style: {
+                                    color: Highcharts.getOptions().colors[0]
+                                }
+                            },
+                            labels: {
+                                format: '{value} TC',
+                                style: {
+                                    color: Highcharts.getOptions().colors[0]
+                                }
+                            },
+                            opposite: true
+                        }],
         tooltip: {
             headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
             pointFormat: '<tr><td style="color:{series.color};padding:0"></td>' +
@@ -182,6 +210,192 @@
     } });
             };
 });
+        </script>-->
+        <script type="text/javascript">
+            $(function () {    
+            var sel = document.getElementById('particulars');
+            var sv = sel.options[sel.selectedIndex].value;
+            if (sv === 'TC'){
+                        var ti = 'Tons Cane';
+                    }
+                    else if(sv === 'HA'){
+                        var ti = 'Area Harvested';
+                    }
+                    else if(sv === 'LKG'){
+                        var ti = '50 kilograms';
+                    }   
+            $.ajax({
+                    url: "viewWeeklyProducedReportByRegion?id="+sv,
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function(data){
+                        
+                        console.log(data.prod);
+                        console.log(data.categories);
+                        
+                         $('#container').highcharts({
+                    chart: {
+                        zoomType: 'xy'
+                    },
+                    title: {
+                        text: 'Production for the Week: '+ ${datepick}
+                    },
+                    xAxis: [{
+                            categories: data.categories,
+                            crosshair: true
+                        }],
+                    yAxis: [{// Primary yAxis
+                            labels: {
+                                format: '{value} Avg'+ti,
+                                style: {
+                                    color: Highcharts.getOptions().colors[1]
+                                }
+                            },
+                            title: {
+                                text: 'Average '+ti,
+                                style: {
+                                    color: Highcharts.getOptions().colors[1]
+                                }
+                            }
+                        }, {// Secondary yAxis
+                            title: {
+                                text: ti,
+                                style: {
+                                    color: Highcharts.getOptions().colors[0]
+                                }
+                            },
+                            labels: {
+                                format: '{value}'+ti,
+                                style: {
+                                    color: Highcharts.getOptions().colors[0]
+                                }
+                            },
+                            opposite: true
+                        }],
+                    tooltip: {
+                        shared: true
+                    },
+                    legend: {
+                        layout: 'vertical',
+                        align: 'left',
+                        x: 120,
+                        verticalAlign: 'top',
+                        y: 100,
+                        floating: true,
+                        backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+                    },
+                    series: [{
+                            name: ti,
+                            type: 'column',
+                            yAxis: 1,
+                            data: data.prod,
+                            tooltip: {
+                                valueSuffix: ' '+sv
+                            }
+
+                        }, {
+                            name: 'Average '+ti,
+                            type: 'spline',
+                            data: data.avg,
+                            tooltip: {
+                                valueSuffix: ' '+sv
+                            }
+                        }]
+                });
+                    }
+                });   
+            sel.onchange = function(){
+                var sl = sel.options[sel.selectedIndex].value;
+                alert(sl);
+                
+               
+              $.ajax({
+                    url: "viewWeeklyProducedReportByRegion?id="+sl,
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function(data){
+                        if (sl === 'TC'){
+                        var tis = 'Tons Cane';
+                    }
+                    else if(sl === 'HA'){
+                        var tis = 'Area Harvested';
+                    }
+                    else if(sl === 'LKG'){
+                        var tis = '50 kilograms';
+                    } 
+                         $('#container').highcharts({
+                    chart: {
+                        zoomType: 'xy'
+                    },
+                    title: {
+                        text: 'Production for the Week: '+ ${datepick}
+                    },
+                    xAxis: [{
+                            categories: data.categories,
+                            crosshair: true
+                        }],
+                    yAxis: [{// Primary yAxis
+                            labels: {
+                                format: '{value} Avg '+tis,
+                                style: {
+                                    color: Highcharts.getOptions().colors[1]
+                                }
+                            },
+                            title: {
+                                text: 'Average '+tis,
+                                style: {
+                                    color: Highcharts.getOptions().colors[1]
+                                }
+                            }
+                        }, {// Secondary yAxis
+                            title: {
+                                text: tis,
+                                style: {
+                                    color: Highcharts.getOptions().colors[0]
+                                }
+                            },
+                            labels: {
+                                format: '{value}'+tis,
+                                style: {
+                                    color: Highcharts.getOptions().colors[0]
+                                }
+                            },
+                            opposite: true
+                        }],
+                    tooltip: {
+                        shared: true
+                    },
+                    legend: {
+                        layout: 'vertical',
+                        align: 'left',
+                        x: 120,
+                        verticalAlign: 'top',
+                        y: 100,
+                        floating: true,
+                        backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+                    },
+                    series: [{
+                            name: tis,
+                            type: 'column',
+                            yAxis: 1,
+                            data: data.prod,
+                            tooltip: {
+                                valueSuffix: ' '+sv
+                            }
+
+                        }, {
+                            name: 'Average '+ti,
+                            type: 'spline',
+                            data: data.avg,
+                            tooltip: {
+                                valueSuffix: ' '+sv
+                            }
+                        }]
+                });
+                    }
+                }); 
+             };       
+            });
         </script>
         <script>
             $(document).ready(function () {

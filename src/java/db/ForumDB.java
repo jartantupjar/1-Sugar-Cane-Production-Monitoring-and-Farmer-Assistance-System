@@ -79,7 +79,7 @@ public class ForumDB {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT p.id,p.message,p.date_started, p.Fields_id ,p.date_posted,c.Farmers_name as 'commentor',c.message as 'comments',c.date as 'date_comment' FROM posts p left join comments c on p.id = c.Posts_id where p.id = ? ;";
+            String query = "SELECT p.id,p.message,p.date_started, p.Fields_id ,p.date_posted,c.Farmers_name as 'commentor',c.Users_username as 'commentormdo',c.message as 'comments',c.date as 'date_comment' FROM posts p left join comments c on p.id = c.Posts_id where p.id = ? ;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1,id);
             ResultSet rs = pstmt.executeQuery();
@@ -96,8 +96,14 @@ public class ForumDB {
                         f.setDate_started(rs.getDate("date_started"));
                         f.setDate_posted(rs.getDate("date_posted"));
                         String test = rs.getString("commentor");
+                        String test2 = rs.getString("commentormdo");
                         if(test!=null){
                             f.setComment_User(test);
+                            f.setComment_message(rs.getString("comments"));
+                            f.setComment_Date(rs.getString("date_comment"));
+                        }
+                        else if (test2!=null){
+                            f.setComment_User(test2+ " (MDO)");
                             f.setComment_message(rs.getString("comments"));
                             f.setComment_Date(rs.getString("date_comment"));
                         }
@@ -367,6 +373,71 @@ public class ForumDB {
             Logger.getLogger(ForumDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    public Integer addComments(Integer post_id,String message,Date date_commented, String username){
+        int check=0;
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "INSERT INTO comments(Posts_id,message,recommended,date,Users_username) values(?,?,?,?,?)";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, post_id);
+            pstmt.setString(2, message);
+            pstmt.setString(3, "N");
+            pstmt.setDate(4, date_commented);
+            pstmt.setString(5, username);
+            check  = pstmt.executeUpdate();
+            if(check!=0){
+                check = getLastCommentsId();
+            }
+                pstmt.close();
+                conn.close();            
+            return check;
+                 }catch (SQLException ex) {
+            Logger.getLogger(ForumDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+    public Integer addCommentsUsers(Integer comments_id,String username){
+        int check=0;
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "INSERT INTO commentscoreuser values(?,?)";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(2, comments_id);
+            pstmt.setString(1, username);
+            check  = pstmt.executeUpdate();
+                pstmt.close();
+                conn.close();            
+            return check;
+                 }catch (SQLException ex) {
+            Logger.getLogger(ForumDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+    public int getLastCommentsId() {
+        try {
+            // put functions here : previous week production, this week production
+            int i = 0;
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT  max(id)as id FROM comments ;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                do{
+                i = rs.getInt("id");
+                }while(rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            return i;
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(subjectiveRecDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
     }
     public Integer addRecommendationNotification(Integer fields_id,String message,Date date, Integer rec_id, Integer rec_field_id){
         int check=0;

@@ -301,4 +301,115 @@ public class fixedRecDB {
         }
         return null;
     }
+    public void sendRecommendations(String message,ArrayList<String>farm,ArrayList<String>rec){
+        for(int i=0; i<farm.size();i++){
+            for(int b=0;b<rec.size();b++){
+            if(checkExistingRec(farm.get(i),rec.get(b))==false){
+                System.out.println("entered send rec if");
+               inputRecommendation(farm.get(i),rec.get(b));
+               inputRecNotif(message,farm.get(i),rec.get(b));
+               
+            }
+        }
+            }
+        System.out.println("finshed sending recommendation");
+    }
+    public boolean inputRecommendation(String farm,String rec){
+         try {
+            // put functions here : previous week production, this week production
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "insert into `recommendations-fields` (Recommendations_id,Fields_id,status,date) values (?,?,?,?)";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, rec);
+            pstmt.setString(2, farm);
+            pstmt.setString(3, "Verifying");
+            pstmt.setString(4, "2015-06-11");
+            
+            
+           int chek = pstmt.executeUpdate();
+        
+            System.out.println("ran aims to prev");
+            boolean chkr=false;
+            if (chek>0) {
+              chkr=true;
+               
+            }
+           
+            pstmt.close();
+            conn.close();
+
+            return chkr;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProblemsDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return true;
+    
+    }
+    public boolean inputRecNotif(String message,String farm,String rec){
+         try {
+            // put functions here : previous week production, this week production
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+             String query1 = "update `recommendations-fields` set status = 'Verifying' where Fields_id = ? and recommendations_id=?;";
+            PreparedStatement pstmt1 = conn.prepareStatement(query1);
+            pstmt1.setString(1, farm);
+            pstmt1.setString(2,rec);
+           
+            pstmt1.executeUpdate();
+            
+            String query = "insert into notifications(disaster, received, Fields_id, message ,date, Recommendations_id, Recommendations_Fields_id) values (?, ?, ?, ?, ?, ?, ?);";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, "N");
+            pstmt.setString(2, "N");
+            pstmt.setString(3, farm);
+            pstmt.setString(4, message);
+            pstmt.setString(5, "2015-06-11");
+            pstmt.setString(6,rec);
+            pstmt.setString(7, farm);
+            int chck= pstmt.executeUpdate();
+   
+            boolean chkr=false;
+            if (chck>0) {
+              chkr=true;
+               
+            }
+          
+            pstmt.close();
+            conn.close();
+
+            return chkr;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProblemsDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return true;
+    
+    }
+     public boolean checkExistingRec(String farm,String rec) {
+        try {
+            // put functions here : previous week production, this week production
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select * from `recommendations-fields` where recommendations_id=? and Fields_id=? and status='active' or 'verifying';";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, rec);
+            pstmt.setString(2, farm);
+            ResultSet rs = pstmt.executeQuery();
+        
+            System.out.println("ran aims to prev");
+            boolean chkr=false;
+            if (rs.next()) {
+              chkr=true;
+               
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+
+            return chkr;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProblemsDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return true;
+    }
 }

@@ -18,7 +18,7 @@
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
-           
+
             <div class="content-wrapper">
                 <section class="content-header">
                     <h1>
@@ -28,7 +28,7 @@
                 </section>
                 <section class="content">
                     <div class="row">
-                        <div class="col-md-10"> 
+                        <div class="col-md-12"> 
                             <div>   
                                 <h3>
                                     District: Tarlac
@@ -50,6 +50,9 @@
                                             <tr>
                                                 <th>Year</th>
                                                 <th>Area</th>
+                                                <th>Rainfall</th>
+                                                <th>Tiller Count</th>
+                                                <th>Avg Temp</th>
                                                 <th>Actual</th>
                                                 <th>Estimation 1</th>
                                                 <th>Estimation 2</th>
@@ -59,72 +62,70 @@
                                         </thead>
 
                                     </table>
-                                    <button type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#modalforecast">Gen Forecast</button>
+                                    <button type="button" class="btn btn-info pull-right" id="showform" >Gen Forecast</button>
                                 </div>
 
                             </div>
-                            <div class="modal fade" role="dialog" aria-labelledby="myModalLabel" id="modalforecast">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">×</span></button>
-                                            <h4 class="modal-title" id="myModalLabel">Generate Year Forecast</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form action="generateForecast" id="submit_form" method="POST" >
-                                            <div class="col-md-12">
-                                                                <div class="form-group">
-                                                                <label class="control-label">Area Harvested
-                                                                    <span class="required" aria-required="true"> * </span>
-                                                                </label>
-                                                                <div class="">
-                                                                    <input type="text" class="form-control" name="area" id="projectname" placeholder="Name...">
 
-                                                                </div>
-                                                            </div>
-                                            
-                                                        <div class="form-group">
-                                                                <label class="control-label">Year Rainfall
-                                                                    <span class="required" aria-required="true"> * </span>
-                                                                </label>
-                                                                <div class="">
-                                                                    <input type="text" class="form-control" name="rain" id="projectname" placeholder="Name...">
 
-                                                                </div>
-                                                            </div>
-                                                        <div class="form-group">
-                                                                <label class="control-label">Yearly Temperature
-                                                               
-                                                                </label>
-                                                                <div class="">
-                                                                    <input type="text" class="form-control" name="temp" id="projectname" placeholder="Name...">
-
-                                                                </div>
-                                                            </div>
-                                                        <div class="form-group">
-                                                                <label class="control-label">Total Tiller Amount
-                                                                  
-                                                                </label>
-                                                                <div class="">
-                                                                    <input type="text" class="form-control" name="tiller" id="projectname" placeholder="Name...">
-
-                                                                </div>
-                                                            </div>
-                                            
-                                            
-                                            </div>
-                                                </form>
-                                        </div>
-                                        <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary" form="submit_form" value="submit">Generate</button>
-                                        </div>
+                            <div class="box box-info hidden" id="genform">
+                                <div class="box-header with-border">
+                                    <h1 class="box-title">Generate Forecast</h1>
+                                    <div class="box-tools pull-right">
+                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                     </div>
-                                    <!-- /.modal-content -->
                                 </div>
-                                <!-- /.modal-dialog -->
+
+                                <div class="box-body">
+                                    <form action="generateForecast" id="submit_form" method="POST" >
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Area Harvested
+                                                    <span class="required" aria-required="true"> * </span>
+                                                </label>
+                                                <div class="">
+                                                    <input type="text" class="form-control" name="area" id="projectname" placeholder="Name...">
+
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="control-label">Year Rainfall
+                                                    <span class="required" aria-required="true"> * </span>
+                                                </label>
+                                                <div class="">
+                                                    <input type="text" class="form-control" name="rain" id="projectname" placeholder="Name...">
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label">Yearly Temperature
+
+                                                </label>
+                                                <div class="">
+                                                    <input type="text" class="form-control" name="temp" id="projectname" placeholder="Name...">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label">Total Tiller Amount
+                                                </label>
+                                                <div class="">
+                                                    <input type="text" class="form-control" name="tiller" id="projectname" placeholder="Name...">
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <button type="submit" class="btn btn-primary cGen pull-right" form="submit_form" value="submit">Generate</button>
+                                        <button type="button" class="btn btn-default cGen pull-right" id="cGen">Close</button>
+                                    </form>
+
+                                </div>
+
                             </div>
+
                             <div class="box box-info">
                                 <div class="box-header with-border">
 
@@ -135,35 +136,6 @@
                                 </div>   
                                 <div class="box-body" id="container2"></div>
                             </div>
-                            <div class="box box-info collapsed-box">
-                                <div class="box-header with-border">
-                                    <h1 class="box-title">Estimations</h1>
-                                    <div class="box-tools pull-right">
-                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                    </div>
-                                </div>
-
-                                <div class="box-body">
-                                    <table id="quartestable" class="table display table-hover" cellspacing="0" width="100%">
-                                        <thead>
-                                            <tr>
-                                                <th>Estimation 1</th>
-                                                <th>Estimation 2</th>
-                                                <th>Estimation 3</th>
-                                                <th>Actual</th>
-                                                <th>Date/Quarter</th>
-
-                                            </tr>
-                                        </thead>
-
-                                    </table>
-
-                                </div>
-
-                            </div>
-
-
 
                         </div>
                         <div>
@@ -334,7 +306,7 @@
                                 floating: true,
                                 backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
                             },
-                            series: [ {
+                            series: [{
                                     name: 'Estimate 1',
                                     type: 'column',
                                     data: estd,
@@ -355,7 +327,7 @@
                                     tooltip: {
                                         valueSuffix: '°'
                                     }
-                                },{
+                                }, {
                                     name: 'Actual',
                                     type: 'spline',
                                     data: bard,
@@ -472,6 +444,14 @@
                             var yr = $("#select3").val();
 
                         }});
+                });
+                $("#showform").on("click", function () {
+                    $('#genform').removeClass('hidden');
+                    $('#showform').addClass('hidden');
+                });
+                $(".cGen").on("click", function () {
+                    $('#showform').removeClass('hidden');
+                    $('#genform').addClass('hidden');
                 });
 
 

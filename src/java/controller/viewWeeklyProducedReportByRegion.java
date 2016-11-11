@@ -45,23 +45,30 @@ public class viewWeeklyProducedReportByRegion extends HttpServlet {
             int todayYear = (int) session.getAttribute("todayYear");
             int weekOfYear = (int) session.getAttribute("weekOfYear");
             ArrayList<CropBoard> cT = new ArrayList<CropBoard>();
+            ArrayList<CropBoard> aT = new ArrayList<CropBoard>();
             cT = cdb.getWeeklyProducedReportByRegion(type, todayYear, weekOfYear);
+            aT = cdb.getWeeklyAverageProducedReport(type, todayYear, weekOfYear);
             JSONObject production = new JSONObject();
             JSONArray listp = new JSONArray();
             JSONArray listc = new JSONArray();
+            JSONArray lista = new JSONArray();
             if(cT != null){
                 for(int i =0; i<cT.size();i++){
                     ArrayList<String> c = new ArrayList<String>();
                     ArrayList<Double> p = new ArrayList<Double>();
+                    ArrayList<Double> a = new ArrayList<Double>();
                     c.add(cT.get(i).getDistrict());
                     System.out.println(cT.get(i).getDistrict()+ "TESTTTT");;
                     p.add(cT.get(i).getProduction());
+                    a.add(aT.get(i).getProduction());
                     listp.add(p);
                     listc.add(c);
+                    lista.add(a);
                 }
             }
             production.put("categories", listc);
             production.put("prod", listp);
+            production.put("avg", lista);
             session.setAttribute("todayYear", todayYear);
             session.setAttribute("weekOfYear", weekOfYear);
         response.setContentType("applications/json");

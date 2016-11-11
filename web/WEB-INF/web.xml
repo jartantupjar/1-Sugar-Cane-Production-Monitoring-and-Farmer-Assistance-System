@@ -296,6 +296,18 @@
         <servlet-name>determineFarmProblems</servlet-name>
         <servlet-class>controller.determineFarmProblems</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>sendRelatedRec</servlet-name>
+        <servlet-class>controller.sendRelatedRec</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewOtherRecommendations</servlet-name>
+        <servlet-class>controller.viewOtherRecommendations</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>saveComment</servlet-name>
+        <servlet-class>controller.saveComment</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
@@ -589,8 +601,20 @@
         <url-pattern>/viewSelectedProblems</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>sendRelatedRec</servlet-name>
+        <url-pattern>/sendRelatedRec</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>determineFarmProblems</servlet-name>
         <url-pattern>/determineFarmProblems</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewOtherRecommendations</servlet-name>
+        <url-pattern>/viewOtherRecommendations</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>saveComment</servlet-name>
+        <url-pattern>/saveComment</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

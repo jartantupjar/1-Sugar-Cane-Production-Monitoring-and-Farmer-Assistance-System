@@ -104,7 +104,7 @@
                 <div class="comment-text">
                       <span class="username">
                         ${comments.comment_User}
-                        <span class="text-muted pull-right">8:03 PM Today</span>
+                        <span class="text-muted pull-right">${comments.comment_Date}</span>
                       </span><!-- /.username -->
                       ${comments.comment_message}
                 </div>
@@ -113,19 +113,23 @@
               </div>
                 </c:if>
               </c:forEach>
+                <c:if test="${post.status == 'Accepted'}">
                 <div class="box-comment">
                     <img class="img-circle img-sm" src="res/sra-logo.png">
                     <div class="comment-text">
                         <form id="frm-example" action="saveComment">
                         <span class="username">
-                           MDO
+                           ${user.name}
                             <span class="text-muted pull-right">${todayDate}</span>
                         </span>
+                            <input type="text" name="user" hidden="true" value="${user.username}">
+                            <input type="text" name="id" hidden="true" value="${post.id}">
                          <p> <textarea type="text" name="msg" id="msg" class="form-control" placeholder="Comment Here ...." style="width: 100%"></textarea> </p>
                          <button type="submit" class="btn btn-sm btn-primary">Submit</button>
                     </form>
                     </div>
                 </div>
+                </c:if>
                 
             </div>
           </div>

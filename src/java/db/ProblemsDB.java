@@ -492,7 +492,8 @@ public class ProblemsDB {
             java.util.logging.Logger.getLogger(subjectiveRecDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         return 0;
-    }public int getLastAlertsID() {
+    }
+    public int getLastAlertsID() {
         try {
             // put functions here : previous week production, this week production
             int i = 0;

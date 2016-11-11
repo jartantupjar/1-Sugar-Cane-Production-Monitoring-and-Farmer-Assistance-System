@@ -19,41 +19,17 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-public class viewSelectedRecommendations extends BaseServlet {
+public class viewOtherRecommendations extends BaseServlet {
     
 
     @Override
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        ServletContext context = getServletContext();
-        fixedRecDB recdb = new fixedRecDB();
-
-        HttpSession session = request.getSession();
-        Recommendation rec = new Recommendation();
         
-   Enumeration<String> parameterNames = request.getParameterNames();
-            String paramName;
-            ArrayList<String> list = new ArrayList<String>();
-
-            String[] values = request.getParameterValues("farmid");
-           values[0]=values[0].replace("[","");
-           values[0]=values[0].replace("]","");
-            String[] innerArray=values[0].split(",");
-
-             for(int i=0; i<values.length;i++){
-                   System.out.println(values[i]+"dist checkr");
-            }
-            
-             
-              for(int i=0; i<innerArray.length;i++){
-                   System.out.println(innerArray[i]+"dick checkr");
-                   list.add(innerArray[i].trim());
-            }
-        
-            FarmsDB farmdb= new FarmsDB();
-            ArrayList<Farm> flist=farmdb.getAllFieldComp(list);
-            Farm emptyfarm= new Farm();
-            ArrayList<compRecommendation>fct= farmdb.getSimilarRecommendations(emptyfarm,flist);
+         fixedRecDB frb = new fixedRecDB();
+            ArrayList<Recommendation> fct = new ArrayList<Recommendation>();
+           
+             fct = frb.viewRecList();
         JSONObject data = new JSONObject();
         JSONArray dalist = new JSONArray();
         if (fct != null) {

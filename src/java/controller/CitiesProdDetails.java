@@ -50,12 +50,14 @@ public class CitiesProdDetails extends HttpServlet {
             String[] param = line.split(",");
             Date cdate = Date.valueOf(param[1]);
             System.out.println(cdate + " BEFORE !!!!");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
             try{
-            java.util.Date date = new SimpleDateFormat("MM/dd/yyyy").parse(param[1]);
+            java.util.Date date = sdf.parse(param[1]);
             cdate = new java.sql.Date(date.getTime());
             } catch (ParseException ex) {
             Logger.getLogger(createNewProgram.class.getName()).log(Level.SEVERE, null, ex);
             }
+            System.out.println(cdate +" AFTER ");
             cT = cdb.getWeeklyProducedReportByRegionDetails(param[0],cdate);
             if(cT!=null){
                 HttpSession session = request.getSession();
