@@ -508,13 +508,13 @@ public class ProductionDB {
 "where hp.Farmers_name in (\n" +
 "						select Farmers_name\n" +
 "                        from fields f\n" +
-"                        where f.barangay=? and f.municipality=?\n" +
+"                        where f.barangay=?\n" +
 "						) and year=? \n" +
 "group by year;";
                PreparedStatement pstmt = conn.prepareStatement(query);
-          pstmt.setString(2, muni);
+//          pstmt.setString(2, muni);
           pstmt.setString(1, brgy);
-          pstmt.setInt(3, year);
+          pstmt.setInt(2, year);
                ResultSet rs = pstmt.executeQuery();
             brgySummary ms = new brgySummary();
             ms.setBarangay(brgy);

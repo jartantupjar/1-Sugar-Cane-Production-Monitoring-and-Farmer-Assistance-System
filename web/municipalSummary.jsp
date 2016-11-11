@@ -298,7 +298,7 @@ var categ2;
                         {
                             'targets': 5,
                             'render': function (data, type, full, meta) {
-                                return '<a href="viewBrgySummary?name=' + data + '" class="btn btn-primary text-center">' + 'more details' + '</a>';
+                                return '<a href="viewBrgySummary?name=' + data + '&bname=${munidet.municipality}" class="btn btn-primary text-center">' + 'more details' + '</a>';
                             }
                         }
 

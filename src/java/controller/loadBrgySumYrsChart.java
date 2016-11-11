@@ -40,18 +40,20 @@ public class loadBrgySumYrsChart extends BaseServlet {
         HttpSession session = request.getSession();
            String bname= request.getParameter("name");
         ArrayList<brgySummary> fct = pdb.viewBrgySummaryDet(bname);
+        ArrayList<String> avgprod= pdb.viewDistrictAvgProdSummary();
         JSONObject data = new JSONObject();
      
       
         JSONArray category = new JSONArray();
         JSONArray bar = new JSONArray();
+         JSONArray line = new JSONArray();
     
         if (fct != null) {
               
             for(int i = 0; i < fct.size(); i++){
                 category.add(Integer.toString(fct.get(i).getYear()));
                 bar.add(fct.get(i).getActual());
-                
+                 line.add(Double.parseDouble(avgprod.get(i)));
              }
             
             
@@ -60,8 +62,8 @@ public class loadBrgySumYrsChart extends BaseServlet {
 
        data.put("categ", category);
        data.put("bar", bar);
-     
-        System.out.println(data);
+     data.put("line", line);
+      
         
         
         response.setContentType("applications/json");

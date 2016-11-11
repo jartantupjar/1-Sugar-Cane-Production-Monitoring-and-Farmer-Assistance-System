@@ -42,6 +42,8 @@ public class viewBrgySummary extends BaseServlet {
         brgySummary brgy;
         ////////////////****** TODO CHECK IF NAME IS A FARMR
         String name = request.getParameter("name");
+        String mname = request.getParameter("bname");
+        System.out.println(mname+"municipalityname");
 
 //        System.err.println("TODAYS user " + session.getAttribute("user"));
 //        System.err.println("TODAYS DATE " + session.getAttribute("todayDate"));
@@ -49,6 +51,7 @@ public class viewBrgySummary extends BaseServlet {
         if (farmerdb.searchNameInBarangay(name)) {
               brgy = prodb.viewBrgyBasicDet(name);
                session.setAttribute("brgydet", brgy);
+               session.setAttribute("mname", mname);
             rd = context.getRequestDispatcher("/brgySummary.jsp");
         }
         rd.forward(request, response);
