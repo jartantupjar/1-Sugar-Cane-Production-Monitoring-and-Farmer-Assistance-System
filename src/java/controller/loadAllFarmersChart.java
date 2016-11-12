@@ -47,7 +47,19 @@ public class loadAllFarmersChart extends BaseServlet {
         ArrayList<Farmer> fct = pdb.viewFarmerBrgySummary(year,mname);
                 String district="TARLAC";
 //        String average = pdb.getDistrictProductionAvg(year,district);
-        String average = pdb.getDistrictProductionAvgTest3(year,mname,district);
+                
+             String type= request.getParameter("type");
+             String average=null;
+                if(type.equalsIgnoreCase("area")){
+                  average= pdb.getFarmersAreaAvgTest1(year,mname,district);  
+                }else{
+                   average = pdb.getDistrictProductionAvgTest4(year,mname,district);   
+                }
+       
+        
+        
+        
+        
         JSONObject data = new JSONObject();
      
       
@@ -59,7 +71,12 @@ public class loadAllFarmersChart extends BaseServlet {
              for(int i = 0; i < fct.size(); i++){
 //                   System.out.println(fct.get(i).getName()+"fahmr");
                 category.add(fct.get(i).getName());
-                bar.add(fct.get(i).getProduction());
+                if(type.equalsIgnoreCase("Area")){
+                      bar.add(fct.get(i).getTotalArea());
+                }else{
+                     bar.add(fct.get(i).getProduction()); 
+                }
+              
                 avgProd.add(Double.parseDouble(average));
              }
          }

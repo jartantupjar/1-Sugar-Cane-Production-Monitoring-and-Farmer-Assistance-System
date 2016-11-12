@@ -61,14 +61,20 @@
                                 </div>
                             </div>   
                               <div class="box-body">
-                            
-                                           <div class="col-md-2 pull-right">
-                                <select class="form-control" style="width:50%" id="select3">
-                                 
+                            <div class="col-md-2 pull-right">
+                                <select class="form-control treeselect" style="width:50%" id="select3">
+                                   
                                 </select>
                                         </div>
-                       
-                                <div id="container1" style="height:90%"></div>
+                                           <div class="col-md-2 pull-right">
+                                <select class="form-control treeselect" style="width:70%" id="select6">
+                                  <option selected="selected">Tons Cane</option>
+                                  <option>Area</option>
+                                </select>
+                              
+                                        </div>
+                                           
+                        <div id="container1" style="height:90%"></div>
                                 
                                 
                             </div>
@@ -265,11 +271,12 @@
         <script type="text/javascript">
        $(document).ready(function () {
            
-           $('#select3').on('change', function (evt) {
+           $('.treeselect').on('change', function (evt) {
                    var test = $("#select3").val();
+                   var type = $("#select6").val();
                     Pace.track(function(){
     $.ajax({
-                url: 'loadTreeMapData?tag=' + test + '',
+                url: 'loadTreeMapData?tag=' + test +'&type='+type+'',
                 type: 'POST',
                 dataType: "JSON",
                 success: function (data) {
@@ -287,7 +294,7 @@
                  
                     for (municipal in data) {
                         if (data.hasOwnProperty(municipal)) {
-                            municipalVal = 0;
+                            municipalVal = 0.0;
                             municipalP = {
                                 id: 'id_' + municipalI,
                                 name: municipal,
@@ -311,7 +318,7 @@
                                                 id: barangayP.id + '_' + farmerI,
                                                 name: farmer,
                                                 parent: barangayP.id,
-                                                value: Math.round(+data[municipal][barangay][farmer])
+                                                value: +data[municipal][barangay][farmer]
                                             };
                                             municipalVal += farmerP.value;
                                             points.push(farmerP);
@@ -321,7 +328,7 @@
                                     barangayI = barangayI + 1;
                                 }
                             }
-                            municipalP.value = Math.round(municipalVal);
+                            municipalP.value = municipalVal;
                             points.push(municipalP);
                             municipalI = municipalI + 1;
                         }
@@ -369,6 +376,11 @@
                 }});
         });
         });
+        
+          $("#select6").select2({
+                               minimumResultsForSearch: Infinity
+                            });
+                            
              $.ajax({
                         url: 'loadTreeMapYearList',
                         type: 'POST',
@@ -381,6 +393,8 @@
                             var yr = $("#select3").val();
 
                         }});
+                    
+                    
 
 
   });

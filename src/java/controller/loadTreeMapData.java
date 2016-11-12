@@ -23,6 +23,7 @@ public class loadTreeMapData extends BaseServlet {
 
         ProductionDB proddb = new ProductionDB();
            int tag = Integer.parseInt(request.getParameter("tag"));
+           String type = request.getParameter("type");
         ArrayList<prodMunicipality> list = proddb.getProdMunicipalforYear(tag);
         JSONObject data = new JSONObject();
 
@@ -32,7 +33,20 @@ public class loadTreeMapData extends BaseServlet {
             for (int i = 0; i < list1.getBrgy().size(); i++) {
                 JSONObject farm = new JSONObject();
                 for (int y = 0; y < list1.getBrgy().get(i).getFarmer().size(); y++) {
-                    farm.put(list1.getBrgy().get(i).getFarmer().get(y).getName(), list1.getBrgy().get(i).getFarmer().get(y).getProduction());
+                 Double prod=list1.getBrgy().get(i).getFarmer().get(y).getProduction();
+                   Double area= list1.getBrgy().get(i).getFarmer().get(y).getTotalArea();
+//                   Double yield=prod/area;
+                   if(type.equalsIgnoreCase("area")){
+                      
+                         farm.put(list1.getBrgy().get(i).getFarmer().get(y).getName(), area);
+                   }else{
+                        farm.put(list1.getBrgy().get(i).getFarmer().get(y).getName(), prod);
+                   }
+                   
+                    
+//                    farm.put(list1.getBrgy().get(i).getFarmer().get(y).getName(), area);
+//                    farm.put(list1.getBrgy().get(i).getFarmer().get(y).getName(), yield);
+                    
                 }
                 trial.put(list1.getBrgy().get(i).getBarangay(), farm);
             }

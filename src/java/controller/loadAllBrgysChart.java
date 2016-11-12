@@ -46,17 +46,36 @@ public class loadAllBrgysChart extends BaseServlet {
         ArrayList<brgySummary> fct = pdb.viewBarangayMuniSummary(year,mname);
         String district="TARLAC";
 //        String average = pdb.getDistrictProductionAvg(year,district);
-        String average = pdb.getDistrictProductionAvgTest3(year,mname,district);
+          String type= request.getParameter("type");
+           String average=null;
+      if(type.equalsIgnoreCase("area")){
+             average= pdb.getDistrictAreaAvgTest1(year,mname,district);  
+         }else{
+             average= pdb.getDistrictProductionAvgTest3(year,mname,district);  
+         }
+        
+       
         JSONObject data = new JSONObject();
      
-      System.out.println(average);
+    
         JSONArray category = new JSONArray();
         JSONArray bar = new JSONArray();
      JSONArray avgProd = new JSONArray();
+     
+     
+      
+     
+   
+     
         if (fct != null) {
-             for(int i = 0; i < fct.size(); i++){
+            for(int i = 0; i < fct.size(); i++){
                 category.add(fct.get(i).getBarangay());
-                bar.add(fct.get(i).getActual());
+               
+                 if(type.equalsIgnoreCase("area")){
+                 bar.add(fct.get(i).getArea());
+            }else{
+                  bar.add(fct.get(i).getActual());    
+                 }
                 avgProd.add(Double.parseDouble(average));
              }
          }
