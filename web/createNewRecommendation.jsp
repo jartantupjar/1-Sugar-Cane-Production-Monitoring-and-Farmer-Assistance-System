@@ -61,9 +61,11 @@
                                                 <option>Pest and Disease Control</option>
                                             </select>
                                         </div>
-                                        <div class="form-group">
+                                        <a style="width: 35%" class="btn btn-github" id="ap"><i class="fa fa-warning "></i> Aims to solve a problem </a>
+                                        <a style="width: 35%" class="btn btn-instagram" id="ai"><i class="fa fa-gear "></i>  Aims to improve </a>
+                                        <div class="form-group hidden" id="duration">
                                             <label>Duration </label>
-                                            <input class="form-control" type="number" min="1" max="100" id="config"  placeholder="Enter how many days"></input>
+                                            <input class="form-control" type="number" min="1" max="100" id="config" name="config" placeholder="Enter how many days"></input>
                                         </div>
                                         
                                         <div class="form-group">
@@ -75,8 +77,8 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6" > 
-                                <div class="box box-info">
+                            <div class="col-md-6"> 
+                                <div class="box box-info hidden" id="plist">
                                     <div class="box-header with-border">
                                         <h1 class="box-title">Problems List <small>Optional</small></h1>
                                         <div class="box-tools pull-right">
@@ -86,7 +88,7 @@
                                     </div>
 
                                     <div class="box-body">
-                                        <table id="probTable" class="table  dispTable table-hover" cellspacing="0" width="100%">
+                                        <table id="probTable1" class="table  dispTable table-hover" cellspacing="0" width="100%">
                                             <thead>
                                                 <tr>
                                                     <th></th>
@@ -101,11 +103,8 @@
                                 </div>
                             </div> 
 
-                            <div class="col-md-3">                   
-                                <p><button class="btn btn-primary" style="width: 100%" type="submit"  value="submit">Create</button></p>
-                            </div>
-                            <div class="col-md-3">                   
-                                <p><button class="btn btn-success" style="width: 100%" type="submit"  value="submit">Create and Send</button></p>
+                            <div class="col-md-10">                   
+                                <p><button class="btn btn-primary" style="width: 35%" type="submit"  value="submit">Create</button></p>
                             </div>
                         </form>
                     </div>
@@ -134,6 +133,18 @@
     <script type="text/javascript" src="plugins/datatable/dataTables.checkboxes.min.js"></script>
     <script src="plugins/datepicker/bootstrap-datepicker.js"></script>
     <script>
+            $(function(){
+             $("#ap").on("click",function(){
+                $('#plist').removeClass('hidden');
+                $('#duration').addClass('hidden');
+             });
+             $("#ai").on("click",function(){
+                $('#duration').removeClass('hidden');
+                $('#plist').addClass('hidden');
+             });
+            });
+        </script>
+    <script>
         $(function () {
             $('.datepicker').datepicker({
                 autoclose: true
@@ -143,7 +154,7 @@
 
         $(document).ready(function () {
             var rows_selected = [];
-            var table1 = $('#probTable').DataTable({
+            var table1 = $('#probTable1').DataTable({
                 'ajax': {
                     'url': 'viewProbList'
                 },

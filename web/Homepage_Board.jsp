@@ -177,26 +177,33 @@
             
             sel.onchange = function(){
                 var sl = sel.options[sel.selectedIndex].value;
-                $.ajax({
+               $.ajax({
                 url: "viewWeeklyProducedReport?id="+sl,
                 tye: "POST",
                 dateType: "JSON",
-                success: function(data){ 
-                  $('#container').highcharts({
-    
-    tooltip: {
-        pointFormat: "Value: {point.y:,.1f} TC"
-    },
-    
-    xAxis: {
-        type: 'datetime',
-        labels: {
-            format: '{value:%Y-%m-%d}',
-            rotation: 45,
-            align: 'left'   
-        }
-    },
-
+                success: function(data){
+                    if (sv === 'TC'){
+                        var ti = 'Tons Cane';
+                    }
+                    else if(sv === 'HA'){
+                        var ti = 'Area Harvested';
+                    }
+                    else if(sv === 'LKG'){
+                        var ti = '50 kilograms';
+                    }   
+                  $(function () {
+    Highcharts.chart('container', {
+        title: {
+            text: 'Monthly Average Temperature',
+            x: -20 //center
+        },
+        subtitle: {
+            text: 'Source: WorldClimate.com',
+            x: -20
+        },
+        xAxis: {
+            categories: data.dates
+        },
         plotOptions: {
             series: {
                 cursor: 'pointer',
@@ -208,19 +215,37 @@
                     }
                 }
             }
+            
+        }
+        ,
+        yAxis: {
+            title: {
+                text: 'Temperature (°C)'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
         },
-
-    series: [{
-        data: data.prod,
-        pointStart: Date.UTC(${todayYear},${todayMonth},${todayDay}),
-        pointInterval: 168 * 36e5
-    }]
-               ,
-                title: {
-               text: 'Weekly Produced Report'
-                 }
-
-}); 
+        tooltip: {
+            valueSuffix: '°C'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [{
+            name: 'Total',
+            data: data.prod
+        }, {
+            name: 'Average',
+            data: data.average
+        }]
+    });
+});
                 }
             });
            };
@@ -236,7 +261,7 @@
             $(document).ready(function () {
                 var table = $('#example').DataTable({
                     'ajax': {
-                        'url': 'viewOnGoingProjects'
+                        'url': 'viewOngoingProjectsBoard'
                     },
                     'columnDefs': [{
                             'targets': 4,

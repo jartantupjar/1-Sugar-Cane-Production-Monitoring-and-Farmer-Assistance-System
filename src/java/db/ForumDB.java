@@ -125,7 +125,7 @@ public class ForumDB {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT p.id,p.Fields_id,p.message,p.date_started,p.date_posted,p.title ,p.status, p.Recommendations_id, p.Problems_id  from posts p  where p.id = ?  ;";
+            String query = "SELECT p.id,p.Fields_id,p.message,p.date_started,p.date_posted,p.title ,p.status, p.Recommendations_id, p.Problems_id,p.phase  from posts p  where p.id = ?  ;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1,id);
             ResultSet rs = pstmt.executeQuery();
@@ -144,6 +144,7 @@ public class ForumDB {
                         f.setDate_posted(rs.getDate("date_posted"));
                         f.setStatus(rs.getString("status"));
                         f.setProb_id(rs.getInt("Problems_id"));
+                        f.setPhase(rs.getString("phase"));
                         if(f.getProb_id() != null){
                             String prob_name = getProblemName(f.getProb_id());
                             f.setProblem_name(prob_name);

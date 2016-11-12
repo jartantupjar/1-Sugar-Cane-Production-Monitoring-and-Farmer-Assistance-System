@@ -37,12 +37,12 @@
                 <section class="content">
                     <form name="editdates" action="editDates">
                     <div class="col-md-3">
-          <div class="box box-solid">
+<!--          <div class="box box-solid">
             <div class="box-header with-border">
               <h4 class="box-title">Legends</h4>
             </div>
             <div class="box-body">
-              <!-- the events -->
+               the events 
               <div id="external-events">
                 <div class="external-event bg-green">Milling</div>
                 <div class="external-event bg-yellow">Harvesting</div>
@@ -51,8 +51,8 @@
                 <div class="external-event bg-red">Typhoon</div>
               </div>
             </div>
-            <!-- /.box-body -->
-          </div>
+             /.box-body 
+          </div>-->
           <!-- /. box -->
           <div class="box box-danger">
                             <div class="box-header with-border">

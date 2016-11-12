@@ -66,7 +66,7 @@
                                     <form id="frm-example" action="sendAlertToFarmers">
                                     <div class="box-body">
                                         
-                                        <textarea style="width: 100%" rows="6"  name="message" class="pull-left" placeholder="Enter your text here ...."></textarea>
+                                        <textarea style="width: 100%" rows="6"  name="message" class="pull-left" placeholder="The MDO has alerted you to be aware that a disaster is happening near your barangay"></textarea>
                                         <button type="submit" class="btn btn-primary pull-right">Send Alerts</button>
                                     </div>
                                         

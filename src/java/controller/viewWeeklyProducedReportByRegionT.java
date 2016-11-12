@@ -9,6 +9,7 @@ import db.CropBoardDB;
 import entity.CropBoard;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -41,10 +42,13 @@ public class viewWeeklyProducedReportByRegionT extends HttpServlet {
             CropBoard cropB = new CropBoard();
             CropBoardDB cdb = new CropBoardDB();
             HttpSession session = request.getSession();
-            int todayYear = (int) session.getAttribute("todayYear");
-            int weekOfYear = (int) session.getAttribute("weekOfYear");
+            int yp = (int) session.getAttribute("yearpicked");
+            int todayYear = (int) session.getAttribute("todayYear"); 
+            int weekOfYear = (int) session.getAttribute("WOF");
+            Date cdate = (Date) session.getAttribute("datepick");
+            System.out.println(todayYear +"TANGINA"+weekOfYear + " TAE NAMN");
             ArrayList<CropBoard> cT = new ArrayList<CropBoard>();
-            cT = cdb.getWeeklyProducedReportByRegionT(todayYear, weekOfYear);
+            cT = cdb.getWeeklyProducedReportByRegionT(todayYear,yp, weekOfYear);
             JSONObject data = new JSONObject();
             JSONArray prod = new JSONArray();
             if(cT != null){
@@ -54,13 +58,9 @@ public class viewWeeklyProducedReportByRegionT extends HttpServlet {
                     list.add(cT.get(i).getArea().toString());
                     list.add(cT.get(i).getTc().toString());
                     list.add(cT.get(i).getLkg().toString());
-                    String id = cT.get(i).getDistrict()+","+cT.get(i).getWeek_ending().toString();
+                    String id = cT.get(i).getDistrict()+","+cdate.toString();
                     list.add(id);
-                    System.out.println(cT.get(i).getDistrict() + " FINAL TEST");
-                    System.out.println(cT.get(i).getArea().toString() + " FINAL TEST");
-                    System.out.println(cT.get(i).getTc().toString() + " FINAL TEST");
-                    System.out.println(cT.get(i).getLkg().toString() + " FINAL TEST");
-                    System.out.println(id + " FINAL TEST");
+                    System.out.println(id + " FINAL TESTTTTTTTTTTTTTTTTTTTTTTTTT");
                     prod.add(list);
                 }
             }

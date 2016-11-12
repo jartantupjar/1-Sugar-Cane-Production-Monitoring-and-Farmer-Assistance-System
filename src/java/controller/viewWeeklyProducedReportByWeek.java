@@ -13,6 +13,7 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -57,11 +58,17 @@ public class viewWeeklyProducedReportByWeek extends HttpServlet {
             ArrayList<CropBoard> cT = new ArrayList<CropBoard>();
             cT = cdb.getWeeklyProducedReport(type, todayYear, date.toString());
             java.sql.Date cdate = cT.get(i).getWeek_ending();
-            System.out.println(cdate+" Date passed");
             ArrayList<CropBoard> cTr = new ArrayList<CropBoard>();
             cTr = cdb.getWeeklyProducedReportByRegion(type, todayYear, weekOfYear);
             if(cTr != null){
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(cdate);
+                int yearpicked = cal.get(Calendar.YEAR);
+                int woyp = cal.get(Calendar.WEEK_OF_YEAR);
+                woyp--;
                 session.setAttribute("datepick", cdate);
+                session.setAttribute("yearpicked", yearpicked);
+                session.setAttribute("WOF", woyp);
                 ServletContext context = getServletContext();
                 RequestDispatcher rd = context.getRequestDispatcher("/RegionWeekView.jsp");
                 rd.forward(request, response);

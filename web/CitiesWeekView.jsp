@@ -52,7 +52,7 @@
                                         <tbody>
                                             <c:forEach var="prod" items="${crop}">
                                             <tr>
-                                                <td>${prod.district}</td>
+                                                <td><a href="Homepage.jsp">${prod.district}</a></td>
                                                 <td>${prod.estimated}</td>
                                                 <td>${prod.area}</td>
                                                 <td>${prod.tc}</td>

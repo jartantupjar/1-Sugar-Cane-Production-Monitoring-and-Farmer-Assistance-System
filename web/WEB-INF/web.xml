@@ -312,6 +312,10 @@
         <servlet-name>MDOHomepage</servlet-name>
         <servlet-class>controller.MDOHomepage</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>viewOngoingProjectsBoard</servlet-name>
+        <servlet-class>controller.viewOngoingProjectsBoard</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
@@ -623,6 +627,10 @@
     <servlet-mapping>
         <servlet-name>MDOHomepage</servlet-name>
         <url-pattern>/MDOHomepage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewOngoingProjectsBoard</servlet-name>
+        <url-pattern>/viewOngoingProjectsBoard</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

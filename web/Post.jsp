@@ -47,7 +47,7 @@
                 <span class="username"><a href="#">${post.farmer}</a></span>
                 <span class="description">${post.date_posted}</span>
                 <br>
-                <c:if test="${post.prob_id != null }">
+                <c:if test="${post.prob_id != ""}">
                 <span class="username">Problem: ${post.name}</span>
                 </c:if>
                 <div>
@@ -86,8 +86,8 @@
                   <a style="width: 25%" class="btn btn-primary" id="cr"><i class="fa fa-gear "></i>  Create New Recommendation </a>
                   </c:if>
               <c:if test="${post.status == 'Rejected'}">
-                  <a class="btn btn-success" style="width: 25%" id="lr"><i class="fa fa-chain"></i>  Send Recommendation</a>
-                  <a class="btn btn-warning" style="width: 25%" id="lp"><i class="fa fa-times-circle"></i>Send Problem</a>
+                  <a class="btn btn-success" style="width: 25%" id="lr"><i class="fa fa-chain"></i>  Refer to a Recommendation</a>
+                  <a class="btn btn-warning" style="width: 25%" id="lp"><i class="fa fa-times-circle"></i>Refer to a Problem</a>
               </c:if>
                   
               </c:if>
@@ -145,7 +145,7 @@
                     <div class="col-md-12"  > 
                                 <div class="box box-info hidden" id="linkp">
                                     <div class="box-header with-border">
-                                        <h1 class="box-title">Problems List <small>Optional</small></h1>
+                                        <h1 class="box-title">Refer to this Problem <small>Optional</small></h1>
                                         <div class="box-tools pull-right">
                                             <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                             <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -345,6 +345,8 @@
                 </section>
 
             </div>
+                        
+                     
 
         </div>
         <script src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
@@ -358,19 +360,28 @@
              $("#lp").on("click",function(){
                 $('#linkp').removeClass('hidden');
                 $('#savep').removeClass('hidden');
+                $('#linkr').addClass('hidden');
+                $('#saver').addClass('hidden');
              });
              $("#lr").on("click",function(){
                 $('#linkr').removeClass('hidden'); 
                 $('#saver').removeClass('hidden');
+                $('#linkp').addClass('hidden');
+                $('#savep').addClass('hidden');
              });
              $("#cp").on("click",function(){
                 $('#prob').removeClass('hidden'); 
                 $('#createp').removeClass('hidden');
+                $('#rec').addClass('hidden');
+                $('#creater').addClass('hidden');
+                $('#pts').addClass('hidden');
              });
              $("#cr").on("click",function(){
                 $('#rec').removeClass('hidden'); 
                 $('#creater').removeClass('hidden');
                 $('#pts').removeClass('hidden');
+                 $('#prob').addClass('hidden');
+                $('#createp').addClass('hidden');
              });
             });
         </script>
@@ -432,6 +443,7 @@
                         }
 
             });
+            $('#probTable').DataTable().search('${post.phase}').draw();
             $('#frm-example').on('submit', function (e) {
                 var form = this;
 
@@ -573,6 +585,8 @@
                         }
 
             });
+            $('#recomTable').DataTable().search('${post.phase}').draw();
+              
             $('#frm-example').on('submit', function (e) {
                 var form = this;
 
@@ -600,6 +614,7 @@
                 var rows = table1.rows({'search': 'applied'}).nodes();
                 $('input[type="checkbox"]', rows).prop('checked', this.checked);
             });
+             
         });
     </script>
     </body>

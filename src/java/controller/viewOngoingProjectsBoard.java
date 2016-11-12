@@ -5,25 +5,25 @@
  */
 package controller;
 
-import db.ForumDB;
-import db.ProblemsDB;
-import entity.Problems;
+import db.ProgramsDB;
+import entity.Programs;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 /**
  *
  * @author Bryll Joey Delfin
  */
-public class sendAlertToFarmers extends HttpServlet {
+public class viewOngoingProjectsBoard extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,34 +39,31 @@ public class sendAlertToFarmers extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+            ProgramsDB pdb = new ProgramsDB();
+            ArrayList<Programs> pT = new ArrayList<Programs>();
             HttpSession session = request.getSession();
-            ProblemsDB pdb = new ProblemsDB();
-            ForumDB fdb = new ForumDB();
-            String muni = (String) session.getAttribute("muni");
-            String barangay = (String) session.getAttribute("barangay");
-            String district = pdb.getDistrict(barangay, muni);
-            String msg = request.getParameter("message");
-            if(msg.equalsIgnoreCase("")){
-                msg = "The MDO has alerted you to be aware that a disaster is happening near your barangay";
+            Date currDate;
+            currDate = (Date) session.getAttribute("todayDate");
+            pT = pdb.getOngoingProjectsBoard(currDate);
+            JSONObject data = new JSONObject();
+            JSONArray list = new JSONArray();
+            if(pT != null)
+            {
+                for(int i=0;i<pT.size();i++){
+                    ArrayList<String> obj = new ArrayList<String>();
+                    obj.add(pT.get(i).getProg_name());
+                    obj.add(pT.get(i).getDate_initial().toString());
+                    obj.add(pT.get(i).getDate_end().toString());
+                    obj.add(pT.get(i).getDescription());
+                    obj.add(pT.get(i).getDistrict());
+                    obj.add(pT.get(i).getProg_name());
+                    list.add(obj);
+                }
             }
-            System.out.println(msg + " dafuq ?");
-            Problems p = (Problems) session.getAttribute("problem");
-            Date pdate = (Date) session.getAttribute("todayDate");
-            int check = 0;
-            int test = 0;
-            if(p !=null){
-               check =  pdb.addAlertToFarmers(p.getProb_id(), msg, pdate, barangay, district, muni);
-            }
-            if(check>0){
-                ServletContext context = getServletContext();
-                RequestDispatcher rd = context.getRequestDispatcher("/Disaster Report.jsp");
-                rd.forward(request, response);
-            }
-            else{
-                ServletContext context = getServletContext();
-                RequestDispatcher rd = context.getRequestDispatcher("/index.jsp");
-                rd.forward(request, response);
-            }
+            data.put("data", list);
+            response.setContentType("applications/json");
+            response.setCharacterEncoding("utf-8");
+            response.getWriter().write(data.toString());
         }
     }
 

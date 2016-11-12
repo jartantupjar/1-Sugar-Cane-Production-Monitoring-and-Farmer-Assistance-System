@@ -53,73 +53,108 @@ public class createNewRecommendation extends HttpServlet {
             subjectiveRecDB recDB = new subjectiveRecDB();
             ForumDB fdb = new ForumDB();
             int notif = 0;
-            int fields_id = Integer.parseInt(request.getParameter("fields"));
+            int duration = 0;
+            int pass = 0;
+            String f = request.getParameter("fields");
+            int fields_id = 0;
+            if (f != null) {
+                fields_id = Integer.parseInt(request.getParameter("fields"));
+            } else {
+                fields_id = 0;
+            }
             String title = request.getParameter("title");
-            String lined = request.getParameter("date");
-            int duration = Integer.parseInt(request.getParameter("duration"));
-            
+            String dur = request.getParameter("config");
+            if (dur.equalsIgnoreCase("")) {
+                duration = 0;
+            } else {
+                duration = Integer.parseInt(dur);
+            }
             HttpSession session = request.getSession();
             java.sql.Date dateparam = (Date) session.getAttribute("todayDate");
-            
-            Date rdate = Date.valueOf(lined);
-            System.out.println(rdate + " BEFORE !!!!");
-            try{
-            java.util.Date date = new SimpleDateFormat("MM/dd/yyyy").parse(lined);
-            rdate = new java.sql.Date(date.getTime());
-            } catch (ParseException ex) {
-            Logger.getLogger(createNewProgram.class.getName()).log(Level.SEVERE, null, ex);
-            } 
-            r.setRecommendation_name(request.getParameter("rec_id"));
+            System.out.println(dateparam + "DATEPARAM");
+            String name = request.getParameter("rec_id");
+            if(name == null){
+            name  = request.getParameter("recommendation_name");
+            }
+            r.setRecommendation_name(name);
             r.setPhase(request.getParameter("period"));
             r.setType(request.getParameter("type"));
 //            String dates = request.getParameter("datepicker");
 //            String datee = request.getParameter("dateend");
             r.setDescription(request.getParameter("description"));
             //  r.setConfig(Integer.parseInt(request.getParameter("config")));
-            int check = recDB.addRecommendation(r);
             int check2 = 0;
             int check3 = 0;
             Enumeration<String> parameterNames = request.getParameterNames();
             String paramName;
             ArrayList<String> pT = new ArrayList<String>();
-            while (parameterNames.hasMoreElements()) {
-                 paramName = parameterNames.nextElement();
-                 System.out.println(paramName + "parameter");
-            if (paramName.startsWith("probTable1")) {
-                for(int i=0;i<request.getParameterValues(paramName).length;i++){
-                     pT.add(request.getParameterValues(paramName)[i]);
-                 System.out.println(request.getParameterValues(paramName)[i]);
-                 //connects recommendation to problem table
-                 int probid = Integer.parseInt(request.getParameterValues(paramName)[i]);
-                 if(probid == 0){
-                 r.setImprovement("Y");
-                 check3 = recDB.linkToRecoms(fields_id, check, dateparam, "Active", duration);
+            if (fields_id != 0) {
+                while (parameterNames.hasMoreElements()) {
+                    paramName = parameterNames.nextElement();
+                    System.out.println(paramName + "parameter");
+                    if (paramName.startsWith("probTable1")) {
+                        for (int i = 0; i < request.getParameterValues(paramName).length; i++) {
+                            pT.add(request.getParameterValues(paramName)[i]);
+                            System.out.println(request.getParameterValues(paramName)[i]);
+                            //connects recommendation to problem table
+                            int probid = Integer.parseInt(request.getParameterValues(paramName)[i]);
+                            if (probid == 0) {
+                                r.setImprovement("Y");
+                                int check = recDB.addRecommendation(r);
+                                pass = check;
+                                check3 = recDB.linkToRecoms(fields_id, check, dateparam, "Active", duration);
+                            } else {
+                                r.setImprovement("N");
+                                int check = recDB.addRecommendation(r);
+                                pass = check;
+                                check2 = recDB.connectRecommendationtoProblem(check, probid);
+                                check3 = recDB.linkToRecoms(fields_id, check, dateparam, "Active", duration);
+                            }
+                        }
+                    }
                 }
-                 else{
-                  r.setImprovement("N");
-                  check2 = recDB.connectRecommendationtoProblem(check,probid);
-                  check3 = recDB.linkToRecoms(fields_id, check, dateparam, "Active", duration);
-                 }
+            } else{ 
+                if (duration > 0) {
+                    r.setImprovement("Y");
+                  pass =  recDB.addRecommendation(r);
+            } else {
+                while (parameterNames.hasMoreElements()) {
+                    paramName = parameterNames.nextElement();
+                    System.out.println(paramName + "parameter");
+                    if (paramName.startsWith("probTable1")) {
+                        for (int i = 0; i < request.getParameterValues(paramName).length; i++) {
+                            pT.add(request.getParameterValues(paramName)[i]);
+                            System.out.println(request.getParameterValues(paramName)[i]);
+                            //connects recommendation to problem table
+                            int probid = Integer.parseInt(request.getParameterValues(paramName)[i]);
+                            r.setImprovement("N");
+                            int check = recDB.addRecommendation(r);
+                            pass = check;
+                            check2 = recDB.connectRecommendationtoProblem(check, probid);
+                        }
                     }
                 }
             }
-            
-            System.out.println(check +"add is done");
-            System.out.println(check2 +"recom to problem is done");
-            System.out.println(check3 +"link to recom is done");
-            if (check > 0 && check3 >0){
-                fdb.updatePostRecommendations(title, fields_id, check);
-                notif = fdb.addRecommendationNotification(fields_id, "Retake mo na thesis", rdate, check, fields_id);
-                ServletContext context = getServletContext();
+            }
+            if (pass > 0 || check3 > 0) {
+                if (fields_id != 0) {
+                    fdb.updatePostRecommendations(title, fields_id, pass);
+                    notif = fdb.addRecommendationNotification(fields_id, "The MDO have suggested for you to do this recommendation", dateparam, pass, fields_id);
+                    ServletContext context = getServletContext();
                 RequestDispatcher rd = context.getRequestDispatcher("/Forum.jsp");
                 rd.forward(request, response);
-            }
-            else {
+                }
+                else{
+                ServletContext context = getServletContext();
+                RequestDispatcher rd = context.getRequestDispatcher("/createNewRecommendation.jsp");
+                rd.forward(request, response);
+                }
+            } else {
                 ServletContext context = getServletContext();
                 RequestDispatcher rd = context.getRequestDispatcher("/index.jsp");
                 rd.forward(request, response);
-            }     
-        }finally {
+            }
+        } finally {
             out.close();
         }
     }

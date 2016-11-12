@@ -26,7 +26,7 @@ public class CropBoardDB {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "SELECT *, week_ending,year, weekofyear(week_ending), round(sum(area),2) as total_area, round(sum(actual),2) as total_actual, round(sum(lkg),2)as total_lkg FROM dashboarddata where year = ? and week_ending < ? \n" +
-"group by week_ending order by week_ending;";
+"group by weekofyear(week_ending) order by week_ending;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, year);
             pstmt.setString(2, date);
@@ -75,7 +75,7 @@ public class CropBoardDB {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "SELECT *, week_ending,year, weekofyear(week_ending), round(avg(area),2) as total_area, round(avg(actual),2) as total_actual, round(avg(lkg),2)as total_lkg FROM dashboarddata where year = ? and week_ending < ? \n" +
-"group by week_ending order by week_ending;";
+"group by weekofyear(week_ending) order by week_ending;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, year);
             pstmt.setString(2, date);
@@ -169,7 +169,7 @@ public class CropBoardDB {
         }
         return null;
     }
-    public ArrayList<CropBoard> getWeeklyProducedReportByRegionT(Integer year, Integer weekofyear) {
+    public ArrayList<CropBoard> getWeeklyProducedReportByRegionT(Integer year,Integer yearpicked, Integer weekofyear) {
         try {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
@@ -178,7 +178,7 @@ public class CropBoardDB {
 "group by weekofyear(week_ending), rd.region order by week_ending; ";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, year);
-            pstmt.setInt(2, year);
+            pstmt.setInt(2, yearpicked);
             pstmt.setInt(3, weekofyear);
             ResultSet rs = pstmt.executeQuery();
             ArrayList<CropBoard> cT = null;

@@ -10,6 +10,7 @@ import entity.CropBoard;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -52,6 +53,14 @@ public class viewWeeklyProducedReport extends HttpServlet {
             ArrayList<CropBoard> avgT = new ArrayList<CropBoard>();
             cT = cdb.getWeeklyProducedReport(type, todayYear, date.toString());
             avgT= cdb.getWeeklyAverageProducedReport(type, todayYear, date.toString());
+            double sum =0;
+            double totala =0;
+            int div = avgT.size();
+            for(int i=0; i<avgT.size();i++){
+                 sum += avgT.get(i).getProduction();
+            }
+            totala = sum/div;
+            double avga = Math.round(totala*100.0)/100.0;
             JSONObject production =  new JSONObject();
             JSONArray prod = new JSONArray();   
             JSONArray avg = new JSONArray();
@@ -62,7 +71,7 @@ public class viewWeeklyProducedReport extends HttpServlet {
                 ArrayList<Double> a = new ArrayList<Double>();
                 ArrayList<String> dat = new ArrayList<String>();
                 d.add(cT.get(i).getProduction());
-                a.add(avgT.get(i).getProduction());
+                a.add(avga);
                 dat.add(cT.get(i).getWeek_ending().toString());
                 prod.add(d);
                 avg.add(a);

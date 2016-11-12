@@ -25,7 +25,7 @@
                     </h1>
                 </section>
                 <section class="content">
-
+                    <div class="row">   
 
                             <div class="box-body no-padding">
                                 <div class="col-md-12" > 
@@ -58,10 +58,23 @@
                     </div>
                     
                             </div>
+                    <div class="col-md-3 pull-right">
+                        <div class="form-group">
+                            <label>Options</label>
+                            <select class="form-control" id="particulars">
+                                <option>By Type</option>
+                                <option>By Region</option>
+                                <option>By Municipality</option> 
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-warning" style="width: 100%"><a href="CitiesWeekView.jsp">Print Report</a></button>
+                        </div>
+                    </div>
+                    </div>
                         </div>
                     </div>        
                     <br>
-
                 </section>
 
             </div>

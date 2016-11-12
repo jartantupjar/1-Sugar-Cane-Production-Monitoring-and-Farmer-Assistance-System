@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * @author Bryll Joey Delfin
  */
 public class Forum {
-    private String farmer,message,status,comment_User, comment_message, comment_Date , title, id_and_status, problem_name,recommendation_name,name , fid, img_url;
+    private String farmer,message,status,comment_User, comment_message, comment_Date , title, id_and_status, problem_name,recommendation_name,name , fid, img_url, phase;
     private ArrayList<String> image;
     private Integer id , prob_id, counter, recom_id, Fields_id;
     private Date date_posted, date_started,date_ended;
@@ -324,6 +324,20 @@ public class Forum {
      */
     public void setImage(ArrayList<String> image) {
         this.image = image;
+    }
+
+    /**
+     * @return the phase
+     */
+    public String getPhase() {
+        return phase;
+    }
+
+    /**
+     * @param phase the phase to set
+     */
+    public void setPhase(String phase) {
+        this.phase = phase;
     }
 
   }

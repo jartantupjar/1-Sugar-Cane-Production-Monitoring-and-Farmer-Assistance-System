@@ -20,8 +20,8 @@
             <div class="content-wrapper">
                 <section class="content-header">
                     <h1>
-                        Page Header
-                        <small>Optional description</small>
+                        ${datepick} Production
+                        <small>By Region</small>
                     </h1>
                 </section>
                 <section class="content">
@@ -280,7 +280,7 @@
                         align: 'left',
                         x: 120,
                         verticalAlign: 'top',
-                        y: 100,
+                        y: 90,
                         floating: true,
                         backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
                     },
@@ -369,7 +369,7 @@
                         align: 'left',
                         x: 120,
                         verticalAlign: 'top',
-                        y: 100,
+                        y: 90,
                         floating: true,
                         backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
                     },
@@ -379,15 +379,15 @@
                             yAxis: 1,
                             data: data.prod,
                             tooltip: {
-                                valueSuffix: ' '+sv
+                                valueSuffix: ' '+sl
                             }
 
                         }, {
-                            name: 'Average '+ti,
+                            name: 'Average '+tis,
                             type: 'spline',
                             data: data.avg,
                             tooltip: {
-                                valueSuffix: ' '+sv
+                                valueSuffix: ' '+sl
                             }
                         }]
                 });

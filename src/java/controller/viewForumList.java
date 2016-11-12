@@ -47,48 +47,50 @@ public class viewForumList extends HttpServlet {
             fixedRecDB recDB = new fixedRecDB();
             ArrayList<Forum> fT = new ArrayList<Forum>();
             fT = fdb.getForumsList();
-            JSONObject data  = new JSONObject();
-            JSONArray list  = new JSONArray();
-            if(fT != null){
-               for(int i = 0; i< fT.size(); i++){
-                   ArrayList<String> obj = new ArrayList<String>();
-                   System.out.println(fT.get(i).getRecom_id()+ "XD");
-                   obj.add(fT.get(i).getTitle());
-                  // obj.add(fT.get(i).getFarmer());
-                   
-                   
-                   if(fT.get(i).getStatus().equalsIgnoreCase("Accepted")){
-                       if(fT.get(i).getProb_id()!= 0){
-                           Integer counter = fdb.getProblemCounter(fT.get(i).getProb_id());
-                           Problems prob = pDB.getProblemsDetails(fT.get(i).getProb_id());
-                           System.out.println(fT.get(i).getProb_id()+ "LoL");
-                           obj.add(prob.getProb_name());
-                           obj.add(counter.toString());
-                       }
-                       else if(fT.get(i).getRecom_id() != 0){
-                         Integer counter = fdb.getRecommendationCounter(fT.get(i).getRecom_id());
-                           Recommendation recom = recDB.viewRecDetails(fT.get(i).getRecom_id());
-                           System.out.println(fT.get(i).getRecom_id()+ "XD");
-                          obj.add(recom.getRecommendation_name());
-                          obj.add(counter.toString());
-                       }
-                   }
-                   else {
-                      obj.add("N/A");
-                      obj.add("0");
-                   }
-                   
-                   
-                   obj.add(fT.get(i).getStatus());
-                   obj.add(fT.get(i).getDate_posted().toString());
-                   obj.add(fT.get(i).getId_and_status());
-                   list.add(obj);
-               } 
+            JSONObject data = new JSONObject();
+            JSONArray list = new JSONArray();
+            if (fT != null) {
+                for (int i = 0; i < fT.size(); i++) {
+                    ArrayList<String> obj = new ArrayList<String>();
+                    System.out.println(fT.get(i).getRecom_id() + "XD RECOM");
+                    obj.add(fT.get(i).getTitle());
+                    // obj.add(fT.get(i).getFarmer());
+
+                    if (fT.get(i).getStatus().equalsIgnoreCase("Accepted")||fT.get(i).getStatus().equalsIgnoreCase("Rejected")) {
+                        if (fT.get(i).getProb_id() != 0) {
+                            Integer counter = fdb.getProblemCounter(fT.get(i).getProb_id());
+                            Problems prob = pDB.getProblemsDetails(fT.get(i).getProb_id());
+                            System.out.println(fT.get(i).getProb_id() + "LoL");
+                            obj.add("N/A");
+                            obj.add("0");
+                            obj.add(prob.getProb_name());
+                            obj.add(counter.toString());
+                        } else if (fT.get(i).getRecom_id() != 0) {
+                            Integer counter = fdb.getRecommendationCounter(fT.get(i).getRecom_id());
+                            Recommendation recom = recDB.viewRecDetails(fT.get(i).getRecom_id());
+                            System.out.println(fT.get(i).getRecom_id() + "XD");
+                            obj.add(recom.getRecommendation_name());
+                            obj.add(counter.toString());
+                            obj.add("N/A");
+                            obj.add("0");
+                        }
+                    } else {
+                        obj.add("N/A");
+                        obj.add("0");
+                        obj.add("N/A");
+                        obj.add("0");
+                    }
+
+                    obj.add(fT.get(i).getStatus());
+                    obj.add(fT.get(i).getDate_posted().toString());
+                    obj.add(fT.get(i).getId_and_status());
+                    list.add(obj);
+                }
             }
             data.put("data", list);
-          response.setContentType("applications/json");
-        response.setCharacterEncoding("utf-8");
-        response.getWriter().write(data.toString());
+            response.setContentType("applications/json");
+            response.setCharacterEncoding("utf-8");
+            response.getWriter().write(data.toString());
         }
     }
 
