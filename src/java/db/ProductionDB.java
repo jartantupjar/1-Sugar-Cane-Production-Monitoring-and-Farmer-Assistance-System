@@ -53,6 +53,54 @@ public class ProductionDB {
 
         return null;
     }
+     public String getDistrictAreaAvgTest1(int curyr,String muni,String district) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select IFNULL(avg(t1.tarea),0) as avg from(select sum(area) as tarea from fields f where f.district=? group by f.barangay)t1;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, district);
+            ResultSet rs = pstmt.executeQuery();
+          String production=null;
+
+            if (rs.next()) {
+             production=rs.getString("avg");
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+
+            return production;
+        } catch (SQLException ex) {
+            Logger.getLogger(CropEstimateDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
+     public String getFarmersAreaAvgTest1(int curyr,String muni,String district) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select IFNULL(avg(f.area),0) as avg from fields f where f.district=?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, district);
+            ResultSet rs = pstmt.executeQuery();
+          String production=null;
+
+            if (rs.next()) {
+             production=rs.getString("avg");
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+
+            return production;
+        } catch (SQLException ex) {
+            Logger.getLogger(CropEstimateDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
      public String getDistrictProductionAvgTest3(int curyr,String muni,String district) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
@@ -63,6 +111,33 @@ public class ProductionDB {
 "from historicalproduction hp join farmers f on hp.farmers_name = f.name right join fields fd on f.name = fd.farmers_name\n" +
 "where year = ? and fd.district= ?\n" +
 "group by fd.barangay, f.name) t1";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, curyr);
+            pstmt.setString(2, district);
+            ResultSet rs = pstmt.executeQuery();
+          String production=null;
+
+            if (rs.next()) {
+             production=rs.getString("avg");
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+
+            return production;
+        } catch (SQLException ex) {
+            Logger.getLogger(CropEstimateDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
+     public String getDistrictProductionAvgTest4(int curyr,String muni,String district) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select round(avg(hp.tons_cane),2) as avg\n" +
+"from historicalproduction hp join farmers f on hp.farmers_name = f.name right join fields fd on f.name = fd.farmers_name\n" +
+"where year = ? and fd.district= ?";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, curyr);
             pstmt.setString(2, district);
@@ -300,6 +375,7 @@ public class ProductionDB {
                     farmer.setName(rs.getString("farmers_name"));
                     //  System.out.println(farmer.getName());
                     farmer.setProduction(rs.getDouble("tTons_cane") + 1);
+                    farmer.setTotalArea(getFarmerTotalArea(pm,pb,farmer.getName()));
                     list.add(farmer);
                 } while (rs.next());
             }
@@ -307,6 +383,34 @@ public class ProductionDB {
             pstmt.close();
             conn.close();
             return list;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductionDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+
+    }
+    public Double getFarmerTotalArea(prodMunicipality pm, ProdBarangay pb,String farmer) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            //   String query= "select sum(p.tons_cane) as tTons_cane ,p.farmers_name from historicalproduction p join fields f on p.Farmers_name=f.Farmers_name where p.year=? and f.municipality=? and f.barangay=? group by f.Farmers_name;";
+            String query = "select IFNULL(sum(area),1) as tarea from fields f where f.municipality=? and f.barangay=? and f.farmers_name=?;";
+
+            PreparedStatement pstmt = conn.prepareStatement(query);
+          
+            pstmt.setString(1, pm.getMunicipal());
+            pstmt.setString(2, pb.getBarangay());
+             pstmt.setString(3, farmer);
+            ResultSet rs = pstmt.executeQuery();
+           Double tarea=null;
+            if (rs.next()) {
+               tarea=rs.getDouble("tarea");
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            return tarea;
 
         } catch (SQLException ex) {
             Logger.getLogger(ProductionDB.class.getName()).log(Level.SEVERE, null, ex);
@@ -394,7 +498,7 @@ public class ProductionDB {
         for (int i = 0; i < farmers.size(); i++) {
 //            System.out.println(farmers.get(i)+"hoopa");
             Farmer farm=new Farmer();
-           farm=viewFarmerSummarybyYear(farmers.get(i),year);
+           farm=viewFarmerSummarybyYear(brgy,farmers.get(i),year);
             mslist.add(farm);
         }
         return mslist;
@@ -405,7 +509,7 @@ public class ProductionDB {
       ArrayList<String> farmers = getDistinctFarmerForBrgy(brgy);
       for(int i=0; i<farmers.size();i++){
           Farmer nbs=viewOtherFarmerBasicDet(farmers.get(i));
-          Farmer pbs= viewFarmerSummarybyYear(farmers.get(i),curyear);
+          Farmer pbs= viewFarmerSummarybyYear(brgy,farmers.get(i),curyear);
            nbs.setProduction(pbs.getProduction());
            nbs.setYear(pbs.getYear());
            Double yield=pbs.getProduction()/nbs.getTotalArea();
@@ -434,7 +538,7 @@ public class ProductionDB {
     }
 
  
-    public Farmer viewFarmerSummarybyYear(String farmer,int year) {
+    public Farmer viewFarmerSummarybyYear(String brgy,String farmer,int year) {
         try {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
@@ -453,6 +557,7 @@ public class ProductionDB {
 //                System.out.println(farmer+"fahmr");
                 ms.setProduction(rs.getDouble("production"));
                 ms.setYear(rs.getString("year"));
+                ms.setTotalArea(viewAreaFarmerSummarybyYear(brgy,farmer,year));
             }
             rs.close();
             pstmt.close();
@@ -523,11 +628,73 @@ public class ProductionDB {
 //                ms.setBarangay(brgy);
                 ms.setActual(rs.getDouble("production"));
                 ms.setYear(rs.getInt("year"));
+               ms.setArea(viewAreaBrgySummarybyYear(brgy,muni,year));
             }
             rs.close();
             pstmt.close();
             conn.close();
             return ms;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductionDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+             }
+    public Double viewAreaBrgySummarybyYear(String brgy,String muni,int year) {
+        try {
+            // put functions here : previous week production, this week production
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select IFNULL(sum(area), 0) as tarea from fields f where f.municipality=? and f.barangay=?;";
+               PreparedStatement pstmt = conn.prepareStatement(query);
+//          pstmt.setString(2, muni);
+          pstmt.setString(1, muni);
+          pstmt.setString(2, brgy);
+//          pstmt.setInt(2, year);
+      
+               ResultSet rs = pstmt.executeQuery();
+          Double area=null;
+         
+            if (rs.next()) {
+//                ms = 
+//                ms.setBarangay(brgy);
+                area=rs.getDouble("tarea");
+               
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            return area;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductionDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+             }
+    public Double viewAreaFarmerSummarybyYear(String brgy,String farmer,int year) {
+        try {
+            // put functions here : previous week production, this week production
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select IFNULL(sum(area), 0) as tarea from fields f where f.barangay=? and f.farmers_name=?;";
+               PreparedStatement pstmt = conn.prepareStatement(query);
+//          pstmt.setString(2, muni);
+         
+          pstmt.setString(1, brgy);
+          pstmt.setString(2, farmer);
+//          pstmt.setInt(2, year);
+      
+               ResultSet rs = pstmt.executeQuery();
+          Double area=null;
+         
+            if (rs.next()) {
+//                ms = 
+//                ms.setBarangay(brgy);
+                area=rs.getDouble("tarea");
+               
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            return area;
         } catch (SQLException ex) {
             Logger.getLogger(ProductionDB.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -14,6 +14,7 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
         <title>SRA | Home</title>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+                 <link rel="stylesheet" href="plugins/select2/select2.min.css">
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
 
@@ -84,12 +85,17 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                                     </div>
                                 </div>
 
-                                <div class="box-body" id="container3"></div>
-
-
-
-
-                            </div>
+                                <div class="box-body">
+                                       <div class="col-md-2 pull-right">
+                                <select class="form-control" style="width:70%" id="select2">
+                                  <option selected="selected">Tons Cane</option>
+                                  <option>Area</option>
+                                </select>
+                              
+                                        </div>
+                                    <div id="container3"></div>
+                                    </div>
+                     </div>
 
                         </div>
 
@@ -143,7 +149,7 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
         <script type="text/javascript" src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="dist/js/app.min.js"></script>
-
+        <script src="plugins/select2/select2.full.min.js"></script>
         <script src="plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
            <script src="Highcharts/highcharts.js"></script>
@@ -221,8 +227,12 @@ var categ;
 var categ2;
  var bar2,prodline;
  var curyr;
+ 
+      $('#select2').on('change', function (evt) {
+                   var type = $("#select2").val();
+                 
     $.ajax({
-                    url: 'loadAllBrgysChart?name=${munidet.municipality}',
+                    url: 'loadAllBrgysChart?name=${munidet.municipality}&type='+type+'',
                     type: 'POST',
                     dataType: "JSON",
                     success: function (data) {
@@ -230,6 +240,7 @@ var categ2;
                        bar2=data.bar;
                        curyr=data.curyr;
                        prodline=data.avgprod;
+                      
                     // Create the chart
                     
                     
@@ -242,7 +253,7 @@ var categ2;
             zoomType: 'x'
         },
         title: {
-            text: 'Distributed Production for '+curyr+ '' 
+            text: 'Distributed '+type+' for '+curyr+ '' 
         },
        
         xAxis: {
@@ -253,7 +264,7 @@ var categ2;
         yAxis: {
             min: 0,
             title: {
-                text: 'Tons Cane (tc)'
+                text: type
             }
         },
            legend: {
@@ -289,6 +300,10 @@ var categ2;
 });
                 }
             });
+            });
+            $("#select2").select2({
+                               minimumResultsForSearch: Infinity
+                            }).trigger('change');
             
                var table = $('#fieldtable').DataTable({
                     'ajax': {
