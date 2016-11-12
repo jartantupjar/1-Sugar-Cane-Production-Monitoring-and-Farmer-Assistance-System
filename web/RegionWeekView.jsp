@@ -306,7 +306,6 @@
                 });   
             sel.onchange = function(){
                 var sl = sel.options[sel.selectedIndex].value;
-                alert(sl);
                 
                
               $.ajax({

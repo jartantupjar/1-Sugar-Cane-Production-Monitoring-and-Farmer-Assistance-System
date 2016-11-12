@@ -49,12 +49,18 @@ public class viewWeeklyProducedReportByWeek extends HttpServlet {
             HttpSession session = request.getSession();
             int todayYear = (int) session.getAttribute("todayYear");
             int weekOfYear = (int) session.getAttribute("weekOfYear");
-            long date = Long.parseLong(request.getParameter("id"));
-            java.sql.Date cdate = new Date(date);
-            System.out.println(cdate+" Date passed");
+            String id = request.getParameter("id");
+            int i = Integer.parseInt(id);
+            Date date = (Date) session.getAttribute("todayDate");
+            System.out.println(todayYear +"what now ?");
+            System.out.println(weekOfYear +"what then ?");
             ArrayList<CropBoard> cT = new ArrayList<CropBoard>();
-            cT = cdb.getWeeklyProducedReportByRegion(type, todayYear, weekOfYear);
-            if(cT != null){
+            cT = cdb.getWeeklyProducedReport(type, todayYear, date.toString());
+            java.sql.Date cdate = cT.get(i).getWeek_ending();
+            System.out.println(cdate+" Date passed");
+            ArrayList<CropBoard> cTr = new ArrayList<CropBoard>();
+            cTr = cdb.getWeeklyProducedReportByRegion(type, todayYear, weekOfYear);
+            if(cTr != null){
                 session.setAttribute("datepick", cdate);
                 ServletContext context = getServletContext();
                 RequestDispatcher rd = context.getRequestDispatcher("/RegionWeekView.jsp");

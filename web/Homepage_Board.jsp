@@ -102,81 +102,86 @@
             $(function(){
             var sel = document.getElementById("particulars");
             var sv = sel.options[sel.selectedIndex].value;
-            alert(sv);
             $.ajax({
                 url: "viewWeeklyProducedReport?id="+sv,
                 tye: "POST",
                 dateType: "JSON",
                 success: function(data){
-                    if (sv == 'TC'){
+                    if (sv === 'TC'){
                         var ti = 'Tons Cane';
                     }
-                    else if(sv == 'HA'){
+                    else if(sv === 'HA'){
                         var ti = 'Area Harvested';
                     }
-                    else if(sv == 'LKG'){
+                    else if(sv === 'LKG'){
                         var ti = '50 kilograms';
-                    }
-                  $('#container').highcharts({
-    
-    tooltip: {
-        pointFormat: "Value: {point.y:,.1f}  (" +ti+")"
-    },
-    
-    xAxis: {
-        type: 'datetime',
-        labels: {
-            format: '{value:%Y-%m-%d}',
-            rotation: 45,
-            align: 'left'   
-        }
-    },
-
+                    }   
+                  $(function () {
+    Highcharts.chart('container', {
+        title: {
+            text: 'Monthly Average Temperature',
+            x: -20 //center
+        },
+        subtitle: {
+            text: 'Source: WorldClimate.com',
+            x: -20
+        },
+        xAxis: {
+            categories: data.dates
+        },
         plotOptions: {
             series: {
                 cursor: 'pointer',
                 point: {
                     events: {
                         click: function () {
-                            alert('Date : '+ this.x);
                          location.href = 'viewWeeklyProducedReportByWeek?id='+this.x+'&type='+sv;
                         }
                     }
                 }
             }
             
+        }
+        ,
+        yAxis: {
+            title: {
+                text: 'Temperature (°C)'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
         },
-
-    series: [{
-        name: ti,
-        data: data.prod,
-        pointStart: Date.UTC(${todayYear},${todayMonth},${todayDay}),
-        pointInterval: 168 * 36e5
-    },{
-        name: "Average" +ti,
-        data: data.average,
-        pointStart: Date.UTC(${todayYear},${todayMonth},${todayDay}),
-        pointInterval: 168 * 36e5
-    }]
-               ,
-                title: {
-               text: 'Weekly Produced Report'
-                 }
-
-}); 
+        tooltip: {
+            valueSuffix: '°C'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [{
+            name: 'Total',
+            data: data.prod
+        }, {
+            name: 'Average',
+            data: data.average
+        }]
+    });
+});
                 }
             });
             
             
             sel.onchange = function(){
                 var sl = sel.options[sel.selectedIndex].value;
-                alert(sl);
                 $.ajax({
                 url: "viewWeeklyProducedReport?id="+sl,
                 tye: "POST",
                 dateType: "JSON",
                 success: function(data){ 
-                  console.log(data);  
                   $('#container').highcharts({
     
     tooltip: {
@@ -198,7 +203,6 @@
                 point: {
                     events: {
                         click: function () {
-                            alert('Date : '+ this.x);
                          location.href = 'viewWeeklyProducedReportByWeek?id='+this.x+'&type='+sv;
                         }
                     }

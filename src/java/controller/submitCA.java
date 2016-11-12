@@ -64,7 +64,8 @@ public class submitCA extends BaseServlet {
              
                cadb.submitNarrative(cn);
                 ServletContext context = getServletContext();
-                RequestDispatcher rd = context.getRequestDispatcher("/Homepage.jsp");
+//                RequestDispatcher rd = context.getRequestDispatcher("/Homepage.jsp");
+                RequestDispatcher rd = context.getRequestDispatcher("/MDOHomepage.java");
                
                 rd.forward(request, response);
             }

@@ -20,17 +20,16 @@ import java.util.logging.Logger;
  * @author Bryll Joey Delfin
  */
 public class CropBoardDB {
-    public ArrayList<CropBoard> getWeeklyProducedReport(String type, Integer year, Integer weekofyear) {
+    public ArrayList<CropBoard> getWeeklyProducedReport(String type, Integer year, String date) {
         try {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT *, weekofyear(week_ending), round(sum(area),2) as total_area, round(sum(actual),2) as total_actual, round(sum(lkg),2) as total_lkg FROM sra.dashboarddata where year = ? and year(week_ending) = ? and weekofyear(week_ending) > ? \n" +
-"group by weekofyear(week_ending) order by week_ending;";
+            String query = "SELECT *, week_ending,year, weekofyear(week_ending), round(sum(area),2) as total_area, round(sum(actual),2) as total_actual, round(sum(lkg),2)as total_lkg FROM dashboarddata where year = ? and week_ending < ? \n" +
+"group by week_ending order by week_ending;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, year);
-            pstmt.setInt(2, year);
-            pstmt.setInt(3, weekofyear);
+            pstmt.setString(2, date);
             ResultSet rs = pstmt.executeQuery();
             ArrayList<CropBoard> cT = null;
             CropBoard c;
@@ -70,17 +69,16 @@ public class CropBoardDB {
         }
         return null;
     }
-    public ArrayList<CropBoard> getWeeklyAverageProducedReport(String type, Integer year, Integer weekofyear) {
+    public ArrayList<CropBoard> getWeeklyAverageProducedReport(String type, Integer year, String date) {
         try {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT *, weekofyear(week_ending), round(avg(area),2) as total_area, round(avg(actual),2) as total_actual, round(avg(lkg),2)as total_lkg FROM sra.dashboarddata where year = ? and year(week_ending) = ? and weekofyear(week_ending) > ? \n" +
-"group by weekofyear(week_ending) order by week_ending;";
+            String query = "SELECT *, week_ending,year, weekofyear(week_ending), round(avg(area),2) as total_area, round(avg(actual),2) as total_actual, round(avg(lkg),2)as total_lkg FROM dashboarddata where year = ? and week_ending < ? \n" +
+"group by week_ending order by week_ending;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, year);
-            pstmt.setInt(2, year);
-            pstmt.setInt(3, weekofyear);
+            pstmt.setString(2, date);
             ResultSet rs = pstmt.executeQuery();
             ArrayList<CropBoard> cT = null;
             CropBoard c;
@@ -120,6 +118,7 @@ public class CropBoardDB {
         }
         return null;
     }
+    
     public ArrayList<CropBoard> getWeeklyProducedReportByRegion(String type, Integer year, Integer weekofyear) {
         try {
             // put functions here : previous week production, this week production

@@ -1,6 +1,5 @@
 package controller;
 
-
 import db.CropAssessmentDB;
 import db.UsersDB;
 import entity.CropAssessment;
@@ -36,10 +35,9 @@ public class Login extends HttpServlet {
             CropAssessmentDB cadb = new CropAssessmentDB();
             User successful = myUserDB.authenticate(oneUser);
             if (successful != null) {
+
                 ServletContext context = getServletContext();
-                RequestDispatcher rd = context.getRequestDispatcher("/Homepage.jsp");
                 HttpSession session = request.getSession();
-                session.setAttribute("user", successful); 
                 //start of the crop assessment report
                 String sdate = "2015-02-10"; // date of the login-- change this to the parameter date
                 Date todayDate = Date.valueOf(sdate);
@@ -50,27 +48,42 @@ public class Login extends HttpServlet {
                 int year = cal.get(Calendar.YEAR);
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
-                ArrayList<CropAssessment> rain = cadb.getRainFall(week_of_year,year);
+
                 ArrayList<CropAssessment> caT = new ArrayList<CropAssessment>();
-                caT  = cadb.getCropAssesmentRajversion(week_of_year, year);
+                caT = cadb.getCropAssesmentRajversion(week_of_year, year);
                 Date week_ending = caT.get(0).getWeek_ending();
-                System.out.println(week_ending + " IS THIS WAHT YOUR LOOKING FOR ?");
-                CropNarrative cn=null;
-                if(cadb.checkExistingNarrative(year,week_ending)==true){ 
-                System.out.println("it entered tester");
-                cn=new CropNarrative();
-                cn=cadb.getAssessmentNarrative(year,week_ending);
-//                  
-                 }
-                session.setAttribute("narrative", cn);
+
                 session.setAttribute("Week_ending", week_ending);
                 session.setAttribute("todayDate", todayDate);
-                session.setAttribute("CropAss", caT);
                 session.setAttribute("todayYear", year);
                 session.setAttribute("todayMonth", month);
                 session.setAttribute("todayDay", day);
-                session.setAttribute("rainfall", rain);
                 session.setAttribute("weekOfYear", week_of_year);
+                RequestDispatcher rd = null;
+                if (successful.getGroup().equalsIgnoreCase("MDO")) {
+
+                    rd = context.getRequestDispatcher("/Homepage.jsp");
+                    CropNarrative cn = null;
+
+                    ArrayList<CropAssessment> rain = cadb.getRainFall(week_of_year, year);
+
+                    if (cadb.checkExistingNarrative(year, week_ending) == true) {
+                        System.out.println("it entered tester");
+                        cn = new CropNarrative();
+                        cn = cadb.getAssessmentNarrative(year, week_ending);
+
+//                  
+                    }
+                    session.setAttribute("rainfall", rain);
+                    session.setAttribute("narrative", cn);
+                    session.setAttribute("CropAss", caT);
+
+                } else if (successful.getGroup().equalsIgnoreCase("Board")) {
+                    rd = context.getRequestDispatcher("/Homepage_Board.jsp");
+
+                }
+
+                session.setAttribute("user", successful);
                 rd.forward(request, response);
             } else {
                 ServletContext context = getServletContext();

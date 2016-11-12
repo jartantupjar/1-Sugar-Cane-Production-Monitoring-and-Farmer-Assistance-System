@@ -9,6 +9,7 @@ import db.CropBoardDB;
 import entity.CropBoard;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -44,14 +45,23 @@ public class viewWeeklyProducedReportByRegion extends HttpServlet {
             HttpSession session = request.getSession();
             int todayYear = (int) session.getAttribute("todayYear");
             int weekOfYear = (int) session.getAttribute("weekOfYear");
+            Date date = (Date) session.getAttribute("todayDate");
+            Date datep = (Date) session.getAttribute("datepick");
+            System.out.println(datep+ "GOOCHOCO");
+            double avge = 0;
             ArrayList<CropBoard> cT = new ArrayList<CropBoard>();
             ArrayList<CropBoard> aT = new ArrayList<CropBoard>();
             cT = cdb.getWeeklyProducedReportByRegion(type, todayYear, weekOfYear);
-            aT = cdb.getWeeklyAverageProducedReport(type, todayYear, weekOfYear);
+            aT = cdb.getWeeklyAverageProducedReport(type, todayYear, date.toString());
             JSONObject production = new JSONObject();
             JSONArray listp = new JSONArray();
             JSONArray listc = new JSONArray();
             JSONArray lista = new JSONArray();
+            for(int i=0;i<aT.size();i++){
+                if(aT.get(i).getWeek_ending().toString().equalsIgnoreCase(datep.toString())){
+                    avge = aT.get(i).getProduction();
+                    }
+            }
             if(cT != null){
                 for(int i =0; i<cT.size();i++){
                     ArrayList<String> c = new ArrayList<String>();
@@ -60,7 +70,7 @@ public class viewWeeklyProducedReportByRegion extends HttpServlet {
                     c.add(cT.get(i).getDistrict());
                     System.out.println(cT.get(i).getDistrict()+ "TESTTTT");;
                     p.add(cT.get(i).getProduction());
-                    a.add(aT.get(i).getProduction());
+                    a.add(avge);
                     listp.add(p);
                     listc.add(c);
                     lista.add(a);

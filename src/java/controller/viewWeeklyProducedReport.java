@@ -9,6 +9,7 @@ import db.CropBoardDB;
 import entity.CropBoard;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -44,29 +45,35 @@ public class viewWeeklyProducedReport extends HttpServlet {
             HttpSession session = request.getSession();
             int todayYear = (int) session.getAttribute("todayYear");
             int weekOfYear = (int) session.getAttribute("weekOfYear");
+            Date date = (Date) session.getAttribute("todayDate");
             System.out.println(todayYear +"what now ?");
             System.out.println(weekOfYear +"what then ?");
             ArrayList<CropBoard> cT = new ArrayList<CropBoard>();
             ArrayList<CropBoard> avgT = new ArrayList<CropBoard>();
-            cT = cdb.getWeeklyProducedReport(type, todayYear, weekOfYear);
-            avgT= cdb.getWeeklyAverageProducedReport(type, todayYear, weekOfYear);
+            cT = cdb.getWeeklyProducedReport(type, todayYear, date.toString());
+            avgT= cdb.getWeeklyAverageProducedReport(type, todayYear, date.toString());
             JSONObject production =  new JSONObject();
             JSONArray prod = new JSONArray();   
             JSONArray avg = new JSONArray();
+            JSONArray dates = new JSONArray();
             if(cT != null){
                 for(int i = 0; i<cT.size();i++){
                 ArrayList<Double> d = new ArrayList<Double>();
                 ArrayList<Double> a = new ArrayList<Double>();
+                ArrayList<String> dat = new ArrayList<String>();
                 d.add(cT.get(i).getProduction());
                 a.add(avgT.get(i).getProduction());
+                dat.add(cT.get(i).getWeek_ending().toString());
                 prod.add(d);
                 avg.add(a);
+                dates.add(dat);
                 }
             }
             session.setAttribute("todayYear", todayYear);
             session.setAttribute("weekOfYear", weekOfYear);
             production.put("prod", prod);
             production.put("average", avg);
+            production.put("dates", dates);
             response.setContentType("applications/json");
             response.setCharacterEncoding("utf-8");
             response.getWriter().write(production.toString());

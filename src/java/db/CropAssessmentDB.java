@@ -388,12 +388,12 @@ public class CropAssessmentDB {
 
             String only_path = path;
             System.out.println(only_path);
-            JasperReport jasperReport = JasperCompileManager.compileReport("C:\\Users\\ndrs\\Documents\\NetBeansProjects\\Reality\\src\\java\\reports\\cropassessmenttest.jrxml");
+            JasperReport jasperReport = JasperCompileManager.compileReport("C:\\Users\\Bryll Joey Delfin\\Documents\\NetBeansProjects\\Reality\\src\\java\\reports\\cropassessmenttest.jrxml");
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, map, conn);
 
             System.out.println("it printed the file");
-            JasperExportManager.exportReportToPdfFile(jasperPrint, "C:\\Users\\ndrs\\Documents\\NetBeansProjects\\Reality\\CropAssess" + district + weekending + ".pdf");
+            JasperExportManager.exportReportToPdfFile(jasperPrint, "C:\\Users\\Bryll Joey Delfin\\Documents\\NetBeansProjects\\Reality\\CropAssess" + district + weekending + ".pdf");
 
             //view report to UI
             JasperViewer jv = new JasperViewer(jasperPrint, false);

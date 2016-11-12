@@ -308,6 +308,10 @@
         <servlet-name>saveComment</servlet-name>
         <servlet-class>controller.saveComment</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MDOHomepage</servlet-name>
+        <servlet-class>controller.MDOHomepage</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
@@ -615,6 +619,10 @@
     <servlet-mapping>
         <servlet-name>saveComment</servlet-name>
         <url-pattern>/saveComment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MDOHomepage</servlet-name>
+        <url-pattern>/MDOHomepage</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
