@@ -53,6 +53,8 @@ public class loadTreeMapData extends BaseServlet {
                    if(type.equalsIgnoreCase("area")){
                       
                          farm.put(list1.getBrgy().get(i).getFarmer().get(y).getName(), area);
+                   }else if(type.equalsIgnoreCase("yield")){
+                       farm.put(list1.getBrgy().get(i).getFarmer().get(y).getName(), prod/area);
                    }else{
                         farm.put(list1.getBrgy().get(i).getFarmer().get(y).getName(), prod);
                    }

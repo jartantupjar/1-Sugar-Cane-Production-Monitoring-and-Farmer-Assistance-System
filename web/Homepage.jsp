@@ -70,6 +70,7 @@
                                 <select class="form-control treeselect" style="width:70%" id="select6">
                                   <option selected="selected">Tons Cane</option>
                                   <option>Area</option>
+                                  <option>Yield</option>
                                 </select>
                               
                                         </div>
