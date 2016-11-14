@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
   <!-- iCheck -->
   <link rel="stylesheet" href="plugins/iCheck/square/blue.css">
+    <link rel="stylesheet" href="plugins/datepicker/datepicker3.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -35,8 +36,21 @@
     <p class="login-box-msg">Sign in to start your session</p>
 
     <form action="Login" method="post">
+        <div class="form-group">
+
+
+                <div class="input-group date">
+                  <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                  </div>
+                  <input type="text" name="currentdate" class="form-control pull-right" id="datepicker">
+                </div>
+                <!-- /.input group -->
+              </div>
+     
+        
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="Username" name="username">
+        <input type="text"  class="form-control" placeholder="Username" name="username">
       </div>
       <div class="form-group has-feedback">
         <input type="password" class="form-control" placeholder="Password" name="password">
@@ -62,11 +76,27 @@
 <!-- /.login-box -->
 
 <!-- jQuery 2.2.0 -->
-<script src="../../plugins/jQuery/jQuery-2.2.0.min.js"></script>
+<script src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
 <!-- Bootstrap 3.3.6 -->
-<script src="../../bootstrap/js/bootstrap.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
 <!-- iCheck -->
-<script src="../../plugins/iCheck/icheck.min.js"></script>
+<script src="plugins/iCheck/icheck.min.js"></script>
+ <script src="plugins/input-mask/jquery.inputmask.js"></script>
+        <script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+        <script src="plugins/input-mask/jquery.inputmask.extensions.js"></script>
+         <script src="plugins/datepicker/bootstrap-datepicker.js"></script>
+  <script>
+            $(function () {
+
+ 
+   var currentDate='02/02/2015';
+     $("#datepicker").datepicker("setDate", currentDate);
+       $('#datepicker').datepicker({
+                    autoclose: true
+                });
+              
+            });
+        </script>
 <script>
   $(function () {
     $('input').iCheck({

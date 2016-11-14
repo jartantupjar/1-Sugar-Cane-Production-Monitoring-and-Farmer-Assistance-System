@@ -12,9 +12,9 @@ import java.sql.Date;
  * @author Bryll Joey Delfin
  */
 public class Calendar {
-    private int syear,sday,smonth,eyear,eday,emonth, year;
+    private int syear,sday,smonth,eyear,eday,emonth, year,eweek;
     private String phase, district;
-    private Date starting, ending;
+    private Date starting, ending,todayDate;
 
     /**
      * @return the syear
@@ -168,6 +168,34 @@ public class Calendar {
      */
     public void setEnding(Date ending) {
         this.ending = ending;
+    }
+
+    /**
+     * @return the todayDate
+     */
+    public Date getTodayDate() {
+        return todayDate;
+    }
+
+    /**
+     * @param todayDate the todayDate to set
+     */
+    public void setTodayDate(Date todayDate) {
+        this.todayDate = todayDate;
+    }
+
+    /**
+     * @return the eweek
+     */
+    public int getEweek() {
+        return eweek;
+    }
+
+    /**
+     * @param eweek the eweek to set
+     */
+    public void setEweek(int eweek) {
+        this.eweek = eweek;
     }
     
             }

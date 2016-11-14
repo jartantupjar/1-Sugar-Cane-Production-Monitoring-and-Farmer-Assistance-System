@@ -5,6 +5,7 @@
  */
 package db;
 
+import entity.Calendar;
 import entity.Problems;
 import entity.Recommendation;
 import java.sql.Connection;
@@ -192,12 +193,16 @@ public class ProblemsDB {
     }
     public ArrayList<Problems> getFarmProblemDetbyFarm(int id) {
         try {
+              CalendarDB caldb= new CalendarDB();
+   ArrayList<Calendar> calist= caldb.getCurrentYearDetails();
+   Date todayDate=calist.get(0).getTodayDate();
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select p.id,p.name,p.type from `Problems-Fields` pf join problems p on p.id=pf.problems_id where pf.Fields_id=?;";
+            String query = "select p.id,p.name,p.type from `Problems-Fields` pf join problems p on p.id=pf.problems_id where pf.Fields_id=? and pf.date<=?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, id);
+            pstmt.setDate(2, todayDate);
             ResultSet rs = pstmt.executeQuery();
          ArrayList<Problems> list=null;
             if (rs.next()) {

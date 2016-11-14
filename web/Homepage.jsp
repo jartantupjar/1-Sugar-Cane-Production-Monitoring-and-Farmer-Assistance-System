@@ -82,6 +82,7 @@
 
                     </div>
                     <br>
+                    <c:if test="${not empty CropAss}">
                     <div class="col-md-6" > 
                         <div class="box box-info">
                             <div class="box-header with-border">
@@ -165,6 +166,7 @@
 
                         </div>
                     </div> 
+                                </c:if>
                     <br>
                     <div class="col-md-6" > 
                         <div class="box box-info">

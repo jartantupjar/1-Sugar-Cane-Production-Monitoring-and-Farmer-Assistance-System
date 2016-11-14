@@ -1,6 +1,7 @@
 //reality
 package db;
 
+import entity.Calendar;
 import entity.CropValidation;
 import entity.Farm;
 import entity.Fertilizer;
@@ -98,22 +99,27 @@ public class FarmsDB {
         }
         return null;
     }
-
+//crop validation will only show for the current year so that means it will be empty for 2016 and not show the 2015
     public Farm getAllFieldDetails(int fid) {
-
+  CalendarDB caldb= new CalendarDB();
+   ArrayList<Calendar> calist= caldb.getCurrentYearDetails();
+   int cropyr=calist.get(0).getYear();
         Farm farm = null;
         farm = getBasicFieldDetails(fid);
-        farm.setYear(2015);
+        farm.setYear(cropyr);
         // farmproductiondetails
         fixedRecDB fRecDB = new fixedRecDB();
 
         ProblemsDB probdb = new ProblemsDB();
+        //added date
         farm.setRecommendation(fRecDB.viewFarmRecTablebyFarm(fid));
+        //added date
         farm.setProblems(probdb.getFarmProblemDetbyFarm(fid));
+        
         farm.setSoilanalysis(getFieldSoilAnalysis(farm.getId()));
-        farm.setFertilizer(getFieldFertilizers(farm.getId(), 2015));
-        farm.setTillers(getFieldTillers(farm.getId(), 2015));
-        farm.setCropVal(getFieldCropValidation(farm.getId(), 2015));
+        farm.setFertilizer(getFieldFertilizers(farm.getId(), cropyr));
+        farm.setTillers(getFieldTillers(farm.getId(), cropyr));
+        farm.setCropVal(getFieldCropValidation(farm.getId(), cropyr));
 
         return farm;
     }
@@ -282,13 +288,14 @@ public class FarmsDB {
         }
         return null;
     }
-
+// i need validation to see if the p
     public CropValidation getFieldCropValidation(int id, int year) {
         //TODO YEAR
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select cs.year,cs.Fields_id,cs.variety,cs.crop_class,cs.texture,cs.farming_system,cs.topography,cs.furrow_distance,cs.planting_density,cs.num_millable,cs.avg_millable_stool,cs.brix,cs.stalk_length,cs.diameter,cs.weight from cropvalidationsurveys cs where Fields_id=? and year=?;";
+//            String query = "select cs.year,cs.Fields_id,cs.variety,cs.crop_class,cs.texture,cs.farming_system,cs.topography,cs.furrow_distance,cs.planting_density,cs.num_millable,cs.avg_millable_stool,cs.brix,cs.stalk_length,cs.diameter,cs.weight from cropvalidationsurveys cs where Fields_id=? and year=?;";
+            String query = "select cs.year,cs.Fields_id,cs.variety,cs.crop_class,cs.texture,cs.farming_system,cs.topography,cs.furrow_distance,cs.planting_density,cs.num_millable,cs.avg_millable_stool,cs.brix,cs.stalk_length,cs.diameter,cs.weight from cropvalidationsurveys cs where Fields_id=? and year<=? order by cs.year DESC;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, id);
             pstmt.setInt(2, year);
@@ -433,15 +440,18 @@ public class FarmsDB {
         }
         //TILLER      
         Tillers till = f.getTillers();
+        if(till!=null){
         if (till.getRep() != 0) {
             taglist.add("Rep");
         }
         if (till.getCount() != 0) {
             taglist.add("Count");
         }
+        }
         //FERTILIZER
         Fertilizer fz = f.getFertilizer();
-        if (fz.getFertilizer() != null) {
+        if(fz!=null){
+          if (fz.getFertilizer() != null) {
             taglist.add("Fertilizer");
         }
         if (fz.getFirst_dose() != null) {
@@ -450,8 +460,10 @@ public class FarmsDB {
         if (fz.getSecond_dose() != null) {
             taglist.add("second dose");
         }
+         }
         //CROP VAL
         CropValidation cv = f.getCropVal();
+         if(cv!=null){
         if (cv.getVariety() != null) {
             taglist.add("variety");
         }
@@ -500,9 +512,10 @@ public class FarmsDB {
         if (cv.getWeight() != null) {
             taglist.add("weight");
         }
+         }
         return taglist;
     }
-
+//added date
     public ArrayList<String> searchFarmsbyTags(String[] list, int id) {
         ArrayList<String> bfarm, sa, till, fz, cv;
 
@@ -511,6 +524,9 @@ public class FarmsDB {
         till = checkFieldTill(list);
         fz = checkFieldFzer(list);
         cv = checkFieldCropVal(list);
+        CalendarDB caldb= new CalendarDB();
+   ArrayList<Calendar> calist= caldb.getCurrentYearDetails();
+   int cropyr=calist.get(0).getYear();
 
         if (!bfarm.isEmpty()) {
             bfarm = (getAllBasicDetbyTags(bfarm, id));
@@ -519,13 +535,13 @@ public class FarmsDB {
             sa = (getAllSAbyTags(sa, id));
         }
         if (!till.isEmpty()) {
-            till = (getAllTillbyTags(till, id, 2015));
+            till = (getAllTillbyTags(till, id, cropyr));
         }
         if (!fz.isEmpty()) {
-            fz = (getAllFzbyTags(fz, id, 2015));
+            fz = (getAllFzbyTags(fz, id, cropyr));
         }
         if (!cv.isEmpty()) {
-            cv = (getAllCVbyTags(cv, id, 2015));
+            cv = (getAllCVbyTags(cv, id, cropyr));
         }
 
         ArrayList<ArrayList<String>> idlists = new ArrayList<>();
@@ -642,7 +658,7 @@ public class FarmsDB {
 
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select Fields_id from cropvalidationsurveys where " + values + "and year=2015;";
+            String query = "select Fields_id from cropvalidationsurveys where " + values + "and year<=? group by Fields_id order by year DESC;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             System.out.println(query);
             int c = 0;
@@ -681,9 +697,10 @@ public class FarmsDB {
                     pstmt.setDouble(c = c + 1, cv.getWeight());
                 }
             }
+             pstmt.setInt(c =c + 1, year);
 
             ResultSet rs = pstmt.executeQuery();
-            ArrayList<String> fids = new ArrayList<>();;
+            ArrayList<String> fids = new ArrayList<>();
             if (rs.next()) {
                 fids = new ArrayList<>();
                 do {
@@ -724,7 +741,7 @@ public class FarmsDB {
 
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select Fields_id from fertilizers where " + values + "and year=2015;";
+            String query = "select Fields_id from fertilizers where " + values + "and year=?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             int c = 0;
             for (int i = 0; i < list.size(); i++) {
@@ -736,9 +753,10 @@ public class FarmsDB {
                     pstmt.setDouble(c = c + 1, fz.getSecond_dose());
                 }
             }
+            pstmt.setInt(c =c + 1, year);
 
             ResultSet rs = pstmt.executeQuery();
-            ArrayList<String> fids = new ArrayList<>();;
+            ArrayList<String> fids = new ArrayList<>();
             if (rs.next()) {
                 fids = new ArrayList<>();
                 do {
@@ -777,7 +795,7 @@ public class FarmsDB {
 
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select Fields_id from tillers where " + values + "and year=2015 group by Fields_id";
+            String query = "select Fields_id from tillers where " + values + "and year=? group by Fields_id";
             PreparedStatement pstmt = conn.prepareStatement(query);
             int c = 0;
             for (int i = 0; i < list.size(); i++) {
@@ -787,6 +805,7 @@ public class FarmsDB {
                     pstmt.setDouble(c = c + 1, till.getCount());
                 }
             }
+            pstmt.setInt(c =c + 1, year);
 
             ResultSet rs = pstmt.executeQuery();
             ArrayList<String> fids = new ArrayList<>();;

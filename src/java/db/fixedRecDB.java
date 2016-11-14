@@ -5,6 +5,7 @@
  */
 package db;
 
+import entity.Calendar;
 import entity.FarmRecTable;
 import entity.Problems;
 import entity.Recommendation;
@@ -161,12 +162,16 @@ public class fixedRecDB {
 
     public ArrayList<FarmRecTable> viewFarmRecTable(int id) {
         try {
+            CalendarDB caldb= new CalendarDB();
+            ArrayList<Calendar> calist= caldb.getCurrentYearDetails();
+            Date todayDate=calist.get(0).getTodayDate();
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select id,farmers_name,barangay,municipality,date,status,duration_days from `recommendations-fields` rf join fields f on rf.fields_id=f.id where rf.recommendations_id=?;";
+            String query = "select id,farmers_name,barangay,municipality,date,status,duration_days from `recommendations-fields` rf join fields f on rf.fields_id=f.id where rf.recommendations_id=?  and rf.date<=?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, id);
+            pstmt.setDate(2,todayDate);
             ResultSet rs = pstmt.executeQuery();
             ArrayList<FarmRecTable> list = null;
             FarmRecTable r;
@@ -200,12 +205,16 @@ public class fixedRecDB {
     }
     public ArrayList<Recommendation> viewFarmRecTablebyFarm(int id) {
         try {
+               CalendarDB caldb= new CalendarDB();
+   ArrayList<Calendar> calist= caldb.getCurrentYearDetails();
+   Date todayDate=calist.get(0).getTodayDate();
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select r.id,r.recommendation,r.type,r.description from `recommendations-fields` rf  join recommendations r on rf.Recommendations_id=r.id where rf.Fields_id=?;";
+            String query = "select r.id,r.recommendation,r.type,r.description from `recommendations-fields` rf  join recommendations r on rf.Recommendations_id=r.id where rf.Fields_id=? and rf.date<=?;";
               PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, id);
+            pstmt.setDate(2, todayDate);
             ResultSet rs = pstmt.executeQuery();
             ArrayList<Recommendation> list = null;
             Recommendation r;
