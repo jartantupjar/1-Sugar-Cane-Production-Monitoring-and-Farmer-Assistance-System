@@ -1,7 +1,9 @@
 package controller;
 
+import db.CalendarDB;
 import db.ProductionDB;
 import db.fixedRecDB;
+import entity.Calendar;
 import entity.FarmRecTable;
 import entity.Recommendation;
 import entity.prodMunicipality;
@@ -24,7 +26,19 @@ public class loadTreeMapData extends BaseServlet {
         ProductionDB proddb = new ProductionDB();
            int tag = Integer.parseInt(request.getParameter("tag"));
            String type = request.getParameter("type");
-        ArrayList<prodMunicipality> list = proddb.getProdMunicipalforYear(tag);
+           CalendarDB caldb= new CalendarDB();
+    ArrayList<prodMunicipality> list=null;
+           if(tag>2016){
+            if(caldb.checkifMilling()){
+                System.out.println("entered 2017 milling check");
+                list= proddb.getCurrProdMunicipalforYear(tag);
+            }else{
+                list= proddb.getProdMunicipalforYear(tag-1);
+            }   
+           }else{
+          list= proddb.getProdMunicipalforYear(tag);
+           }
+       
         JSONObject data = new JSONObject();
 
         

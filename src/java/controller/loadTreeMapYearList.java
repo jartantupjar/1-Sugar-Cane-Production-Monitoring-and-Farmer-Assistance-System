@@ -50,13 +50,22 @@ public class loadTreeMapYearList extends BaseServlet {
    ArrayList<Calendar> calist= caldb.getCurrentYearDetails();
    int cropyr=calist.get(0).getYear();
    ArrayList<Integer> data = prodb.getDistinctHistProdYrs(cropyr);
+   ArrayList<Integer> data2 = prodb.getDistinctProdYrs(cropyr);
           JSONArray jarray = new JSONArray();
-        for (int i = 0; i < data.size(); i++) {
+        
+           if(data2!=null){
+        for (int i = 0; i < data2.size(); i++) {
+            jarray.add(data2.get(i));
+          }
+          }
+          if(data!=null){
+          for (int i = 0; i < data.size(); i++) {
             jarray.add(data.get(i));
          
                 
         }
-      
+         }
+         
     
         //addprogKPI
         response.setContentType("applications/json");
