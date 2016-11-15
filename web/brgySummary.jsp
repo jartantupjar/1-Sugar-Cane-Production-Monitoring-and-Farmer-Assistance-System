@@ -91,6 +91,7 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                                 <select class="form-control" style="width:70%" id="select2">
                                   <option selected="selected">Tons Cane</option>
                                   <option>Area</option>
+                                  <option>Yield</option>
                                 </select>
                                           </div>
 <div  id="container3"></div>

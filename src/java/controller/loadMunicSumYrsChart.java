@@ -39,6 +39,7 @@ public class loadMunicSumYrsChart extends BaseServlet {
         HttpSession session = request.getSession();
            String mname= request.getParameter("name");
         ArrayList<municipalSummary> fct = pdb.viewMunicipalSummaryDet(mname);
+        ArrayList<municipalSummary> curlist = pdb.viewCurrMunicipalSummaryDet(mname);
        ArrayList<String> avgprod= pdb.viewDistrictAvgProdSummary();
         JSONObject data = new JSONObject();
      
@@ -54,6 +55,17 @@ public class loadMunicSumYrsChart extends BaseServlet {
                 bar.add(fct.get(i).getActual());
                 System.out.println(avgprod.get(i));
                 line.add(Double.parseDouble(avgprod.get(i)));
+                
+             }
+            
+            
+        }
+        if (curlist != null) {
+              
+            for(int i = 0; i < curlist.size(); i++){
+                category.add(Integer.toString(curlist.get(i).getYear()));
+                bar.add(curlist.get(i).getActual());
+            line.add(Double.parseDouble(avgprod.get(0)));
                 
              }
             
