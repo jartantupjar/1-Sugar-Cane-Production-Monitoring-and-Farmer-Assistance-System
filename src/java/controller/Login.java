@@ -55,6 +55,7 @@ public class Login extends HttpServlet {
 
                 session.setAttribute("Week_ending", week_ending);
                 session.setAttribute("todayDate", todayDate);
+                session.setAttribute("todaysDate", todayDate);
                 session.setAttribute("todayYear", year);
                 session.setAttribute("todayMonth", month);
                 session.setAttribute("todayDay", day);

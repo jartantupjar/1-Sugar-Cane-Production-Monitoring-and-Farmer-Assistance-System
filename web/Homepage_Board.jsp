@@ -24,6 +24,7 @@
                     </h1>
                 </section>
                 <section class="content">
+                    <div class="row">
 
                     <div class="col-md-3">
                         <div class="form-group">
@@ -78,6 +79,7 @@
                                                 <th style="width: 15%">Date Started</th>
                                                 <th style="width: 15%">Date Ended</th>
                                                 <th>Description</th>
+                                                <th>District</th>
                                                 <th>Details</th>
                                             </tr>
                                         </thead>
@@ -85,9 +87,16 @@
                             </div>
                         </div>
                     </div> 
+                    </div>
                 </section>
-
             </div>
+            
+            <footer class="main-footer">
+                <div class="pull-right hidden-xs">
+                    <b>Version</b> 2.3.3
+                </div>
+                <strong>Copyright &copy; 2014-2015 <a href="http://sra.com">Sugar Regulatory Association</a>.</strong>
+            </footer>
 
         </div>
         <script src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
@@ -264,10 +273,10 @@
                         'url': 'viewOngoingProjectsBoard'
                     },
                     'columnDefs': [{
-                            'targets': 4,
+                            'targets': 5,
                         
                             'render': function (data, type, full, meta) {
-                                return '<a href="viewProbDetails?id=' + data + '" class="btn btn-primary">More Details</a>';
+                                return '<a href="viewProgramDetails?name=' + data + '" class="btn btn-primary">More Details</a>';
                             }
                             
                         }]

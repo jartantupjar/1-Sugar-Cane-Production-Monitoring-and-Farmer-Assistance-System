@@ -46,8 +46,7 @@ public class viewWeeklyProducedReport extends HttpServlet {
             HttpSession session = request.getSession();
             int todayYear = (int) session.getAttribute("todayYear");
             int weekOfYear = (int) session.getAttribute("weekOfYear");
-            Date date = (Date) session.getAttribute("todayDate");
-            System.out.println(todayYear +"what now ?");
+            Date date = (Date) session.getAttribute("todaysDate");
             System.out.println(weekOfYear +"what then ?");
             ArrayList<CropBoard> cT = new ArrayList<CropBoard>();
             ArrayList<CropBoard> avgT = new ArrayList<CropBoard>();
@@ -58,6 +57,7 @@ public class viewWeeklyProducedReport extends HttpServlet {
             int div = avgT.size();
             for(int i=0; i<avgT.size();i++){
                  sum += avgT.get(i).getProduction();
+                 System.out.println(avgT.get(i).getArea()+ " MALI KA GOCHIOCO" + avgT.get(i).getWeek_ending());
             }
             totala = sum/div;
             double avga = Math.round(totala*100.0)/100.0;

@@ -48,25 +48,37 @@ public class viewWeeklyProducedReportByWeek extends HttpServlet {
             CropBoard cropB = new CropBoard();
             CropBoardDB cdb = new CropBoardDB();
             HttpSession session = request.getSession();
-            int todayYear = (int) session.getAttribute("todayYear");
+            int todayYear = (int) session.getAttribute("todayYear"); // remember to use the method that gets crop year here
+            
             int weekOfYear = (int) session.getAttribute("weekOfYear");
             String id = request.getParameter("id");
             int i = Integer.parseInt(id);
-            Date date = (Date) session.getAttribute("todayDate");
+            
+            Date date = (Date) session.getAttribute("todaysDate");
             System.out.println(todayYear +"what now ?");
             System.out.println(weekOfYear +"what then ?");
+            System.out.println(type +"what then ?");
+            System.out.println(date +"what then ?");
             ArrayList<CropBoard> cT = new ArrayList<CropBoard>();
             cT = cdb.getWeeklyProducedReport(type, todayYear, date.toString());
             java.sql.Date cdate = cT.get(i).getWeek_ending();
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(cdate);
+            int yearpicked = cal.get(Calendar.YEAR);
+            int woyp = cdb.getWeekOfYear(cdate.toString());
+            System.out.println(cdate+"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
+            System.out.println(yearpicked+"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
+            System.out.println(todayYear+"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
+            System.out.println(woyp+"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
             ArrayList<CropBoard> cTr = new ArrayList<CropBoard>();
-            cTr = cdb.getWeeklyProducedReportByRegion(type, todayYear, weekOfYear);
+            cTr = cdb.getWeeklyProducedReportByRegion(type,todayYear,cdate.toString(), woyp);
             if(cTr != null){
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(cdate);
-                int yearpicked = cal.get(Calendar.YEAR);
-                int woyp = cal.get(Calendar.WEEK_OF_YEAR);
-                woyp--;
+//                Calendar cal = Calendar.getInstance();
+//                cal.setTime(cdate);
+//                int yearpicked = cal.get(Calendar.YEAR);
+                
                 session.setAttribute("datepick", cdate);
+                session.setAttribute("todayYear", todayYear);
                 session.setAttribute("yearpicked", yearpicked);
                 session.setAttribute("WOF", woyp);
                 ServletContext context = getServletContext();

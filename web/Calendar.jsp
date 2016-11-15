@@ -26,34 +26,32 @@
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
-          
             <div class="content-wrapper">
                 <section class="content-header">
                     <h1>
-                        Page Header
+                        Calendar
                         <small>Optional description</small>
                     </h1>
                 </section>
                 <section class="content">
+                    <div class="row">
                     <form name="editdates" action="editDates">
                     <div class="col-md-3">
-<!--          <div class="box box-solid">
+          <div class="box box-solid">
             <div class="box-header with-border">
               <h4 class="box-title">Legends</h4>
             </div>
             <div class="box-body">
-               the events 
               <div id="external-events">
-                <div class="external-event bg-green">Milling</div>
-                <div class="external-event bg-yellow">Harvesting</div>
-                <div class="external-event bg-aqua">Rainfall</div>
-                <div class="external-event bg-light-blue">Watering</div>
-                <div class="external-event bg-red">Typhoon</div>
+                  <div class="external-event" style="background-color: #8B4513; color: white"> Planting</div>
+                <div class="external-event bg-green">Germination</div>
+                <div class="external-event bg-blue">Milling</div>
+                <div class="external-event bg-purple">Tillering</div>
+                <div class="external-event bg-red">Stalk Elongation</div>
+                <div class="external-event bg-orange">Yield Formation</div>
               </div>
             </div>
-             /.box-body 
-          </div>-->
-          <!-- /. box -->
+          </div>
           <div class="box box-danger">
                             <div class="box-header with-border">
                                 <h1 class="box-title">Dates</h1>
@@ -191,6 +189,7 @@
                         </div>
                     </div>        
                     <br>
+                    </div>
                 </section>
 
             </div>

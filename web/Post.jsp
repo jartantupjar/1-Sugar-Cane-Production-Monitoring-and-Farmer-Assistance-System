@@ -16,7 +16,7 @@
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
-          
+
             <div class="content-wrapper">
                 <section class="content-header">
                     <h1>
@@ -25,124 +25,124 @@
                     </h1>
                 </section>
                 <section class="content">
+                    <div class="row">
 
 
+                        <div class="col-md-12" > 
+                            <div class="box box-info">
+                                <div class="box-header with-border">
+                                    <h1 class="box-title"><c:out value="${post.title}">${post.title}</c:out></h1> 
+                                        <div class="box-tools pull-right">
+                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                            <!-- In box-tools add this button if you intend to use the contacts pane -->
+                                            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                        </div>
+                                    </div>
 
-                    <div class="col-md-12" > 
-                        <div class="box box-info">
-                            <div class="box-header with-border">
-                                <h1 class="box-title"><c:out value="${post.title}">${post.title}</c:out></h1> 
-                                <div class="box-tools pull-right">
-                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                    <!-- In box-tools add this button if you intend to use the contacts pane -->
-                                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                    <!-- Box Comment -->
+                                    <div class="box box-widget">
+                                        <div class="box-header with-border">
+                                            <div class="user-block">
+                                                <img class="img-circle" src="dist/img/user1-128x128.jpg" alt="User Image">
+                                                <span class="username"><a href="#">${post.farmer}</a></span>
+                                            <span class="description">${post.date_posted}</span>
+                                            <br>
+                                            <c:if test="${post.prob_id != ""}">
+                                                <span class="username">Problem: ${post.name}</span>
+                                            </c:if>
+                                            <div>
+                                                <c:if test="${post.status == 'Pending'}">
+                                                    <div class="col-md-2 pull-left">
+                                                        <form name="approve"  action="ApprovePost">
+                                                            <input type="text" value="${post.id_and_status}" name="postd" hidden="true">
+                                                            <button type="submit" class="btn btn-success pull-right" style="width: 100%" id="b_approve" name="b_approve" value="submit"><i class="fa fa-check"></i> Approve</button>
+                                                        </form>
+                                                    </div>
+                                                    <div class="col-md-2 pull-left">
+                                                        <form name="reject" action="RejectPost">
+                                                            <input type="text" value="${post.id_and_status}" name="postd" hidden="true">
+                                                            <button type="submit" class="btn btn-danger pull-right" style="width: 100%" id="b_approve"  name="b_approve" value="submit"><i class="fa fa-times"></i> Reject</button>
+                                                        </form>
+                                                    </div>
+                                                </c:if>
+                                            </div>
+                                        </div>
+                                        <!-- /.user-block -->
+                                    </div>
+                                    <!-- /.box-header -->
+                                    <div class="box-body">
+                                        <c:forEach var="bj" items="${post.image}">
+                                            <img class="img-rounded " src="${bj}" alt="Photo" style="width:40%">
+                                        </c:forEach>
+
+
+                                        <p><b>${post.message}</b></p>
+
+
+                                        <c:if test="${post.prob_id == 0 && post.recom_id == 0}">
+                                            <c:if test="${post.status == 'Accepted'}">
+
+                                                <a style="width: 25%" class="btn btn-danger" id="cp"><i class="fa fa-warning "></i>  Create New Problem </a>
+                                                <a style="width: 25%" class="btn btn-primary" id="cr"><i class="fa fa-gear "></i>  Create New Recommendation </a>
+                                            </c:if>
+                                            <c:if test="${post.status == 'Rejected'}">
+                                                <a class="btn btn-success" style="width: 25%" id="lr"><i class="fa fa-chain"></i>  Refer to a Recommendation</a>
+                                                <a class="btn btn-warning" style="width: 25%" id="lp"><i class="fa fa-times-circle"></i>Refer to a Problem</a>
+                                            </c:if>
+
+                                        </c:if>
+                                    </div>
+                                    <!-- /.box-body -->
+                                    <div class="box-footer box-comments">
+                                        <c:set var="com" value="${comments}"></c:set>
+                                        <c:forEach var="comments" items="${comments}">
+                                            <c:if test="${comments.comment_message != null}">
+                                                <div class="box-comment">
+                                                    <!-- User image -->
+                                                    <img class="img-circle img-sm" src="dist/img/user1-128x128.jpg">
+
+                                                    <div class="comment-text">
+                                                        <span class="username">
+                                                            ${comments.comment_User}
+                                                            <span class="text-muted pull-right">${comments.comment_Date}</span>
+                                                        </span><!-- /.username -->
+                                                        ${comments.comment_message}
+                                                    </div>
+                                                    <button type="button" class="btn btn-default btn-xs pull-right"><i class="fa fa-share"></i><a href="createNewRecommendation.jsp">Create Recommendation</a></button>
+                                                    <!-- /.comment-text -->
+                                                </div>
+                                            </c:if>
+                                        </c:forEach>
+                                        <c:if test="${post.status == 'Accepted'}">
+                                            <div class="box-comment">
+                                                <img class="img-circle img-sm" src="res/sra-logo.png">
+                                                <div class="comment-text">
+                                                    <form id="frm-example" action="saveComment">
+                                                        <span class="username">
+                                                            ${user.name}
+                                                            <span class="text-muted pull-right">${todayDate}</span>
+                                                        </span>
+                                                        <input type="text" name="user" hidden="true" value="${user.username}">
+                                                        <input type="text" name="id" hidden="true" value="${post.id}">
+                                                        <p> <textarea type="text" name="msg" id="msg" class="form-control" placeholder="Comment Here ...." style="width: 100%"></textarea> </p>
+                                                        <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </c:if>
+
+                                    </div>
                                 </div>
+                                <!-- /.box -->
+
+
                             </div>
 
-          <!-- Box Comment -->
-          <div class="box box-widget">
-            <div class="box-header with-border">
-              <div class="user-block">
-                <img class="img-circle" src="dist/img/user1-128x128.jpg" alt="User Image">
-                <span class="username"><a href="#">${post.farmer}</a></span>
-                <span class="description">${post.date_posted}</span>
-                <br>
-                <c:if test="${post.prob_id != ""}">
-                <span class="username">Problem: ${post.name}</span>
-                </c:if>
-                <div>
-              <c:if test="${post.status == 'Pending'}">
-                  <div class="col-md-2 pull-left">
-                      <form name="approve"  action="ApprovePost">
-                         <input type="text" value="${post.id_and_status}" name="postd" hidden="true">
-                          <button type="submit" class="btn btn-success pull-right" style="width: 100%" id="b_approve" name="b_approve" value="submit"><i class="fa fa-check"></i> Approve</button>
-                      </form>
-                  </div>
-                          <div class="col-md-2 pull-left">
-                          <form name="reject" action="RejectPost">
-                          <input type="text" value="${post.id_and_status}" name="postd" hidden="true">
-                          <button type="submit" class="btn btn-danger pull-right" style="width: 100%" id="b_approve"  name="b_approve" value="submit"><i class="fa fa-times"></i> Reject</button>
-                      </form>
-                          </div>
-              </c:if>
-                  </div>
-              </div>
-              <!-- /.user-block -->
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-                <c:forEach var="bj" items="${post.image}">
-                    <img class="img-rounded " src="${bj}" alt="Photo" style="width:40%">
-                </c:forEach>
-              
+                        </div>        
+                        <br>
 
-              <p><b>${post.message}</b></p>
-              
-                
-              <c:if test="${post.prob_id == 0 && post.recom_id == 0}">
-                  <c:if test="${post.status == 'Accepted'}">
-                  
-                  <a style="width: 25%" class="btn btn-danger" id="cp"><i class="fa fa-warning "></i>  Create New Problem </a>
-                  <a style="width: 25%" class="btn btn-primary" id="cr"><i class="fa fa-gear "></i>  Create New Recommendation </a>
-                  </c:if>
-              <c:if test="${post.status == 'Rejected'}">
-                  <a class="btn btn-success" style="width: 25%" id="lr"><i class="fa fa-chain"></i>  Refer to a Recommendation</a>
-                  <a class="btn btn-warning" style="width: 25%" id="lp"><i class="fa fa-times-circle"></i>Refer to a Problem</a>
-              </c:if>
-                  
-              </c:if>
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer box-comments">
-                <c:set var="com" value="${comments}"></c:set>
-                <c:forEach var="comments" items="${comments}">
-                    <c:if test="${comments.comment_message != null}">
-              <div class="box-comment">
-                <!-- User image -->
-                <img class="img-circle img-sm" src="dist/img/user1-128x128.jpg">
-                
-                <div class="comment-text">
-                      <span class="username">
-                        ${comments.comment_User}
-                        <span class="text-muted pull-right">${comments.comment_Date}</span>
-                      </span><!-- /.username -->
-                      ${comments.comment_message}
-                </div>
-                <button type="button" class="btn btn-default btn-xs pull-right"><i class="fa fa-share"></i><a href="createNewRecommendation.jsp">Create Recommendation</a></button>
-                <!-- /.comment-text -->
-              </div>
-                </c:if>
-              </c:forEach>
-                <c:if test="${post.status == 'Accepted'}">
-                <div class="box-comment">
-                    <img class="img-circle img-sm" src="res/sra-logo.png">
-                    <div class="comment-text">
-                        <form id="frm-example" action="saveComment">
-                        <span class="username">
-                           ${user.name}
-                            <span class="text-muted pull-right">${todayDate}</span>
-                        </span>
-                            <input type="text" name="user" hidden="true" value="${user.username}">
-                            <input type="text" name="id" hidden="true" value="${post.id}">
-                         <p> <textarea type="text" name="msg" id="msg" class="form-control" placeholder="Comment Here ...." style="width: 100%"></textarea> </p>
-                         <button type="submit" class="btn btn-sm btn-primary">Submit</button>
-                    </form>
-                    </div>
-                </div>
-                </c:if>
-                
-            </div>
-          </div>
-          <!-- /.box -->
-        
-
-                        </div>
-                
-                    </div>        
-                    <br>
-                    
-                    <form id="frm-example" action="linkToProblem">
-                    <div class="col-md-12"  > 
+                        <form id="frm-example" action="linkToProblem">
+                            <div class="col-md-12"  > 
                                 <div class="box box-info hidden" id="linkp">
                                     <div class="box-header with-border">
                                         <h1 class="box-title">Refer to this Problem <small>Optional</small></h1>
@@ -165,33 +165,33 @@
                                         </table>
                                     </div>
                                 </div>
-                        
+
                             </div>
-                        <div class="col-md-3">
-                            <input type="text"  name="fields"  hidden="true" value="${fid}">
-                        <input type="text"  name="date" hidden="true" value="${post.date_posted}">
-                        <input type="text"  name="title" hidden="true" value="${post.title}">
-                        </div>
- 
-                        <div class="col-md-3"> 
-                                <p><button class="btn btn-primary hidden" id="savep" style="width: 100%" type="submit"  value="submit">Save and Link</button></p>
-                            </div>
-                        
-                    </form>
-                    <form id="frm-example2" action="LinkToRecommendation">
-                    <div class="col-md-10"> 
-                        <div class="box box-info hidden" id="linkr">
-                            <div class="box-header with-border">
-                                <h1 class="box-title">Link to a recommendation</h1>
-                                <div class="box-tools pull-right">
-                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                    <!-- In box-tools add this button if you intend to use the contacts pane -->
-                                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                </div>
+                            <div class="col-md-3">
+                                <input type="text"  name="fields"  hidden="true" value="${fid}">
+                                <input type="text"  name="date" hidden="true" value="${post.date_posted}">
+                                <input type="text"  name="title" hidden="true" value="${post.title}">
                             </div>
 
-                            <div class="box-body">
-                                <table id="recomTable" class="table  dispTable table-hover" cellspacing="0" width="100%">
+                            <div class="col-md-3"> 
+                                <p><button class="btn btn-primary hidden" id="savep" style="width: 100%" type="submit"  value="submit">Save and Link</button></p>
+                            </div>
+
+                        </form>
+                        <form id="frm-example2" action="LinkToRecommendation">
+                            <div class="col-md-10"> 
+                                <div class="box box-info hidden" id="linkr">
+                                    <div class="box-header with-border">
+                                        <h1 class="box-title">Link to a recommendation</h1>
+                                        <div class="box-tools pull-right">
+                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                            <!-- In box-tools add this button if you intend to use the contacts pane -->
+                                            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                        </div>
+                                    </div>
+
+                                    <div class="box-body">
+                                        <table id="recomTable" class="table  dispTable table-hover" cellspacing="0" width="100%">
                                             <thead>
                                                 <tr>
                                                     <th></th>
@@ -202,35 +202,35 @@
                                                 </tr>
                                             </thead>
                                         </table>
-                            </div>
+                                    </div>
 
-                        </div>
-                    </div>
-                        <div class="col-md-3">
-                            <input type="text"  name="fields"  hidden="true" value="${fid}">
-                        <input type="text"  name="date" hidden="true" value="${post.date_posted}">
-                        <input type="text"  name="title" hidden="true" value="${post.title}">
-                        </div>
-                        <div class="col-md-3">      
-                                <p><button class="btn btn-primary hidden" id="saver" style="width: 100%" type="submit"  value="submit">Save and Link</button></p>
-                            </div>
-                    </form>
-                        <form id="frm-example3" action="createNewProblem">
-                    <div class="col-md-10"> 
-                        <div class="box box-info hidden" id="prob">
-                            <div class="box-header with-border">
-                                <h1 class="box-title">Create a New Problem</h1>
-                                <div class="box-tools pull-right">
-                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                    <!-- In box-tools add this button if you intend to use the contacts pane -->
-                                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                 </div>
                             </div>
+                            <div class="col-md-3">
+                                <input type="text"  name="fields"  hidden="true" value="${fid}">
+                                <input type="text"  name="date" hidden="true" value="${post.date_posted}">
+                                <input type="text"  name="title" hidden="true" value="${post.title}">
+                            </div>
+                            <div class="col-md-3">      
+                                <p><button class="btn btn-primary hidden" id="saver" style="width: 100%" type="submit"  value="submit">Save and Link</button></p>
+                            </div>
+                        </form>
+                        <form id="frm-example3" action="createNewProblem">
+                            <div class="col-md-10"> 
+                                <div class="box box-info hidden" id="prob">
+                                    <div class="box-header with-border">
+                                        <h1 class="box-title">Create a New Problem</h1>
+                                        <div class="box-tools pull-right">
+                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                            <!-- In box-tools add this button if you intend to use the contacts pane -->
+                                            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                        </div>
+                                    </div>
 
-                            <div class="box-body form-group">
-                                <label>Name</label>
-                                <input class="form-control" type="text"  name="prob_name" >
-                                <div class="form-group">
+                                    <div class="box-body form-group">
+                                        <label>Name</label>
+                                        <input class="form-control" type="text"  name="prob_name" >
+                                        <div class="form-group">
                                             <label>Period:</label>
                                             <select class="form-control" name="period">
                                                 <option>Germination</option>
@@ -242,37 +242,37 @@
                                                 <option>Planting</option>
                                             </select>
                                         </div>
-                                <label>Description</label>
-                                <input class="form-control" type="text"  name="description" >
-                            </div>
+                                        <label>Description</label>
+                                        <input class="form-control" type="text"  name="description" >
+                                    </div>
 
-                        </div>
-                    </div>
-                        <div class="col-md-3">      
+                                </div>
+                            </div>
+                            <div class="col-md-3">      
                                 <p><button class="btn btn-primary hidden" id="createp" style="width: 100%" type="submit"  value="submit">Create</button></p>
                             </div>
                             <div class="col-md-3">
-                            <input type="text"  name="fields"  hidden="true" value="${fid}">
-                        <input type="text"  name="date" hidden="true" value="${post.date_posted}">
-                        <input type="text"  name="title" hidden="true" value="${post.title}">
-                        </div>
-                    </form>
-                        <form id="frm-example4" action="createNewRecommendation">
-                    <div class="col-md-10"> 
-                        <div class="box box-info hidden" id="rec">
-                            <div class="box-header with-border">
-                                <h1 class="box-title">Create a New Recommendation</h1>
-                                <div class="box-tools pull-right">
-                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                    <!-- In box-tools add this button if you intend to use the contacts pane -->
-                                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                </div>
+                                <input type="text"  name="fields"  hidden="true" value="${fid}">
+                                <input type="text"  name="date" hidden="true" value="${post.date_posted}">
+                                <input type="text"  name="title" hidden="true" value="${post.title}">
                             </div>
+                        </form>
+                        <form id="frm-example4" action="createNewRecommendation">
+                            <div class="col-md-10"> 
+                                <div class="box box-info hidden" id="rec">
+                                    <div class="box-header with-border">
+                                        <h1 class="box-title">Create a New Recommendation</h1>
+                                        <div class="box-tools pull-right">
+                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                            <!-- In box-tools add this button if you intend to use the contacts pane -->
+                                            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                        </div>
+                                    </div>
 
-                            <div class="box-body form-group">
-                                <label>Name</label>
-                                <input class="form-control" type="text"  name="rec_id" >
-                                <div class="form-group">
+                                    <div class="box-body form-group">
+                                        <label>Name</label>
+                                        <input class="form-control" type="text"  name="rec_id" >
+                                        <div class="form-group">
                                             <label>Period:</label>
                                             <select class="form-control" name="period">
                                                 <option>Germination</option>
@@ -298,56 +298,58 @@
                                                 <option>Pest and Disease Control</option>
                                             </select>
                                         </div>
-                                <label>Duration</label>
-                                <input class="form-control" type="number"  name="duration" min="1" max="100" >
-                                <label>Description</label>
-                                <input class="form-control" type="text"  name="description" >
-                            </div>
-                        </div>
-                    </div>
-                        <div class="col-md-12" > 
-                        <div class="box box-info hidden" id="pts">
-                            <div class="box-header with-border">
-                                <h1 class="box-title">Problems</h1>
-                                <div class="box-tools pull-right">
-                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                    <!-- In box-tools add this button if you intend to use the contacts pane -->
-                                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                        <label>Duration</label>
+                                        <input class="form-control" type="number"  name="duration" min="1" max="100" >
+                                        <label>Description</label>
+                                        <input class="form-control" type="text"  name="description" >
+                                    </div>
                                 </div>
                             </div>
+                            <div class="col-md-12" > 
+                                <div class="box box-info hidden" id="pts">
+                                    <div class="box-header with-border">
+                                        <h1 class="box-title">Problems</h1>
+                                        <div class="box-tools pull-right">
+                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                            <!-- In box-tools add this button if you intend to use the contacts pane -->
+                                            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                        </div>
+                                    </div>
 
-                            <div class="box-body">
-                                <table id="probTable1" class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Problem</th>
-                                                <th>Type</th>
-                                                <th>Status</th>
-                                                <th>Description</th>
-                                            </tr>
-                                        </thead>
-                                    </table>
-                            </div>
+                                    <div class="box-body">
+                                        <table id="probTable1" class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Problem</th>
+                                                    <th>Type</th>
+                                                    <th>Status</th>
+                                                    <th>Description</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
 
-                        </div>
-                    </div> 
-                        <div class="col-md-3">      
+                                </div>
+                            </div> 
+                            <div class="col-md-3">      
                                 <p><button class="btn btn-primary hidden" id="creater" style="width: 100%" type="submit"  value="submit">Create</button></p>
                             </div>
                             <div class="col-md-3">
-                            <input type="text"  name="fields"  hidden="true" value="${fid}">
-                        <input type="text"  name="date" hidden="true" value="${post.date_posted}">
-                        <input type="text"  name="title" hidden="true" value="${post.title}">
-                        </div>
-                    </form>
-
+                                <input type="text"  name="fields"  hidden="true" value="${fid}">
+                                <input type="text"  name="date" hidden="true" value="${post.date_posted}">
+                                <input type="text"  name="title" hidden="true" value="${post.title}">
+                            </div>
+                        </form>
+                    </div>
                 </section>
-
             </div>
-                        
-                     
-
+            <footer class="main-footer">
+                <div class="pull-right hidden-xs">
+                    <b>Version</b> 2.3.3
+                </div>
+                <strong>Copyright &copy; 2014-2015 <a href="http://sra.com">Sugar Regulatory Association</a>.</strong>
+            </footer>
         </div>
         <script src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -356,266 +358,266 @@
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
         <script type="text/javascript" src="plugins/datatable/dataTables.checkboxes.min.js"></script>
         <script>
-            $(function(){
-             $("#lp").on("click",function(){
-                $('#linkp').removeClass('hidden');
-                $('#savep').removeClass('hidden');
-                $('#linkr').addClass('hidden');
-                $('#saver').addClass('hidden');
-             });
-             $("#lr").on("click",function(){
-                $('#linkr').removeClass('hidden'); 
-                $('#saver').removeClass('hidden');
-                $('#linkp').addClass('hidden');
-                $('#savep').addClass('hidden');
-             });
-             $("#cp").on("click",function(){
-                $('#prob').removeClass('hidden'); 
-                $('#createp').removeClass('hidden');
-                $('#rec').addClass('hidden');
-                $('#creater').addClass('hidden');
-                $('#pts').addClass('hidden');
-             });
-             $("#cr").on("click",function(){
-                $('#rec').removeClass('hidden'); 
-                $('#creater').removeClass('hidden');
-                $('#pts').removeClass('hidden');
-                 $('#prob').addClass('hidden');
-                $('#createp').addClass('hidden');
-             });
+            $(function () {
+                $("#lp").on("click", function () {
+                    $('#linkp').removeClass('hidden');
+                    $('#savep').removeClass('hidden');
+                    $('#linkr').addClass('hidden');
+                    $('#saver').addClass('hidden');
+                });
+                $("#lr").on("click", function () {
+                    $('#linkr').removeClass('hidden');
+                    $('#saver').removeClass('hidden');
+                    $('#linkp').addClass('hidden');
+                    $('#savep').addClass('hidden');
+                });
+                $("#cp").on("click", function () {
+                    $('#prob').removeClass('hidden');
+                    $('#createp').removeClass('hidden');
+                    $('#rec').addClass('hidden');
+                    $('#creater').addClass('hidden');
+                    $('#pts').addClass('hidden');
+                });
+                $("#cr").on("click", function () {
+                    $('#rec').removeClass('hidden');
+                    $('#creater').removeClass('hidden');
+                    $('#pts').removeClass('hidden');
+                    $('#prob').addClass('hidden');
+                    $('#createp').addClass('hidden');
+                });
             });
         </script>
         <script>
 
-        $(document).ready(function () {
-            var rows_selected = [];
-            
-            var table1 = $('#probTable').DataTable({
-                'ajax': {
-                    'url': 'viewProbList'
-                },
-                'columnDefs': [{
-                        'targets': 0,
-                        'searchable': false,
-                        'orderable': false,
-                        'className': 'dt-body-center',
-                        'render': function (data, type, full, meta) {
-                            return '<input type="checkbox" name="probid[]"  value="'
-                                    + $('<div/>').text(data).html() + '">';
-                        }
-                    }],
-                'select': {
-                    'style': 'multi'
-                },
-                'order': [[1, 'asc']]
-                ,
-                'rowCallback': function (row, data, dataIndex) {
-                            // Get row ID
-                            var rowId = data[0];
-                            var limit = 1;
-                            // alert(rowId);
-                            // If row ID is in the list of selected row IDs
-                            //  alert("notclicked");
+            $(document).ready(function () {
+                var rows_selected = [];
+
+                var table1 = $('#probTable').DataTable({
+                    'ajax': {
+                        'url': 'viewProbList'
+                    },
+                    'columnDefs': [{
+                            'targets': 0,
+                            'searchable': false,
+                            'orderable': false,
+                            'className': 'dt-body-center',
+                            'render': function (data, type, full, meta) {
+                                return '<input type="checkbox" name="probid[]"  value="'
+                                        + $('<div/>').text(data).html() + '">';
+                            }
+                        }],
+                    'select': {
+                        'style': 'multi'
+                    },
+                    'order': [[1, 'asc']]
+                    ,
+                    'rowCallback': function (row, data, dataIndex) {
+                        // Get row ID
+                        var rowId = data[0];
+                        var limit = 1;
+                        // alert(rowId);
+                        // If row ID is in the list of selected row IDs
+                        //  alert("notclicked");
 //                                         if($.inArray(rowId, rows_selected) !== -1){
 //                                              
 //                                            $(row).find('input[type="checkbox"]').prop('checked', true);
 //                                            $(row).addClass('selected');
 //                                          
 //                                         }
-                            table1.$('input[type="checkbox"]', row).on('change', function (evt) {
-                                console.log("outentered");
-                                var tcounter = 0;
+                        table1.$('input[type="checkbox"]', row).on('change', function (evt) {
+                            console.log("outentered");
+                            var tcounter = 0;
 
-                                table1.$('input[type="checkbox"]').each(function () {
-                                    if (this.checked) {
+                            table1.$('input[type="checkbox"]').each(function () {
+                                if (this.checked) {
 
-                                        tcounter += 1;
+                                    tcounter += 1;
 
-                                    }
-
-                                });
-
-                                if (tcounter > limit) {
-                                    console.log(tcounter);
-                                    this.checked = false;
                                 }
+
                             });
-                        }
 
-            });
-            $('#probTable').DataTable().search('${post.phase}').draw();
-            $('#frm-example').on('submit', function (e) {
-                var form = this;
-
-                table1.$('input[type="checkbox"]').each(function () {
-                    // If checkbox doesn't exist in DOM
-                    if (!$.contains(document, this)) {
-                        // If checkbox is checked
-                        if (this.checked) {
-                            // Create a hidden element 
-                            $(form).append(
-                                    $('<input>')
-                                    .attr('type', 'hidden')
-                                    .attr('name', this.name)
-                                    .val(this.value)
-                                    );
-                        }
+                            if (tcounter > limit) {
+                                console.log(tcounter);
+                                this.checked = false;
+                            }
+                        });
                     }
+
+                });
+                $('#probTable').DataTable().search('${post.phase}').draw();
+                $('#frm-example').on('submit', function (e) {
+                    var form = this;
+
+                    table1.$('input[type="checkbox"]').each(function () {
+                        // If checkbox doesn't exist in DOM
+                        if (!$.contains(document, this)) {
+                            // If checkbox is checked
+                            if (this.checked) {
+                                // Create a hidden element 
+                                $(form).append(
+                                        $('<input>')
+                                        .attr('type', 'hidden')
+                                        .attr('name', this.name)
+                                        .val(this.value)
+                                        );
+                            }
+                        }
+                    });
+
                 });
 
-            });
-            
 
-            $('#probTable-select-all').on('click', function () {
-                // Check/uncheck all checkboxes in the table
-                var rows = table1.rows({'search': 'applied'}).nodes();
-                $('input[type="checkbox"]', rows).prop('checked', this.checked);
+                $('#probTable-select-all').on('click', function () {
+                    // Check/uncheck all checkboxes in the table
+                    var rows = table1.rows({'search': 'applied'}).nodes();
+                    $('input[type="checkbox"]', rows).prop('checked', this.checked);
+                });
             });
-        });
-    </script>
-    <script>
+        </script>
+        <script>
 
-        $(document).ready(function () {
-            var rows_selected = [];
-            
-            var table1 = $('#probTable1').DataTable({
-                'ajax': {
-                    'url': 'viewProbList'
-                },
-                'columnDefs': [{
-                        'targets': 0,
-                        'searchable': false,
-                        'orderable': false,
-                        'className': 'dt-body-center',
-                        'render': function (data, type, full, meta) {
-                            return '<input type="checkbox" name="probid1[]"  value="'
-                                    + $('<div/>').text(data).html() + '">';
+            $(document).ready(function () {
+                var rows_selected = [];
+
+                var table1 = $('#probTable1').DataTable({
+                    'ajax': {
+                        'url': 'viewProbList'
+                    },
+                    'columnDefs': [{
+                            'targets': 0,
+                            'searchable': false,
+                            'orderable': false,
+                            'className': 'dt-body-center',
+                            'render': function (data, type, full, meta) {
+                                return '<input type="checkbox" name="probid1[]"  value="'
+                                        + $('<div/>').text(data).html() + '">';
+                            }
+                        }],
+                    'select': {
+                        'style': 'multi'
+                    },
+                    'order': [[1, 'asc']]
+
+                });
+                $('#frm-example').on('submit', function (e) {
+                    var form = this;
+
+                    table1.$('input[type="checkbox"]').each(function () {
+                        // If checkbox doesn't exist in DOM
+                        if (!$.contains(document, this)) {
+                            // If checkbox is checked
+                            if (this.checked) {
+                                // Create a hidden element 
+                                $(form).append(
+                                        $('<input>')
+                                        .attr('type', 'hidden')
+                                        .attr('name', this.name)
+                                        .val(this.value)
+                                        );
+                            }
                         }
-                    }],
-                'select': {
-                    'style': 'multi'
-                },
-                'order': [[1, 'asc']]
+                    });
 
-            });
-            $('#frm-example').on('submit', function (e) {
-                var form = this;
-
-                table1.$('input[type="checkbox"]').each(function () {
-                    // If checkbox doesn't exist in DOM
-                    if (!$.contains(document, this)) {
-                        // If checkbox is checked
-                        if (this.checked) {
-                            // Create a hidden element 
-                            $(form).append(
-                                    $('<input>')
-                                    .attr('type', 'hidden')
-                                    .attr('name', this.name)
-                                    .val(this.value)
-                                    );
-                        }
-                    }
                 });
 
+
+                $('#probTable-select-all').on('click', function () {
+                    // Check/uncheck all checkboxes in the table
+                    var rows = table1.rows({'search': 'applied'}).nodes();
+                    $('input[type="checkbox"]', rows).prop('checked', this.checked);
+                });
             });
-            
+        </script>
+        <script>
 
-            $('#probTable-select-all').on('click', function () {
-                // Check/uncheck all checkboxes in the table
-                var rows = table1.rows({'search': 'applied'}).nodes();
-                $('input[type="checkbox"]', rows).prop('checked', this.checked);
-            });
-        });
-    </script>
-    <script>
+            $(document).ready(function () {
+                var rows_selected = [];
 
-        $(document).ready(function () {
-            var rows_selected = [];
-            
-            var table1 = $('#recomTable').DataTable({
-                'ajax': {
-                    'url': 'viewRec4Forum'
-                },
-                'columnDefs': [{
-                        'targets': 0,
-                        'searchable': false,
-                        'orderable': false,
-                        'className': 'dt-body-center',
-                        'render': function (data, type, full, meta) {
-                            return '<input type="checkbox" name="recid[]"  value="'
-                                    + $('<div/>').text(data).html() + '">';
-                        }
-                    }],
-                'select': {
-                    'style': 'multi'
-                },
-                'order': [[2, 'asc']]
-                ,
-                'rowCallback': function (row, data, dataIndex) {
-                            // Get row ID
-                            var rowId = data[0];
-                            var limit = 1;
-                            // alert(rowId);
-                            // If row ID is in the list of selected row IDs
-                            //  alert("notclicked");
-//                                         if($.inArray(rowId, rows_selected) !== -1){
-//                                              
-//                                            $(row).find('input[type="checkbox"]').prop('checked', true);
-//                                            $(row).addClass('selected');
-//                                          
-//                                         }
-                            table1.$('input[type="checkbox"]', row).on('change', function (evt) {
-                                console.log("outentered");
-                                var tcounter = 0;
+                var table1 = $('#recomTable').DataTable({
+                    'ajax': {
+                        'url': 'viewRec4Forum'
+                    },
+                    'columnDefs': [{
+                            'targets': 0,
+                            'searchable': false,
+                            'orderable': false,
+                            'className': 'dt-body-center',
+                            'render': function (data, type, full, meta) {
+                                return '<input type="checkbox" name="recid[]"  value="'
+                                        + $('<div/>').text(data).html() + '">';
+                            }
+                        }],
+                    'select': {
+                        'style': 'multi'
+                    },
+                    'order': [[2, 'asc']]
+                    ,
+                    'rowCallback': function (row, data, dataIndex) {
+                        // Get row ID
+                        var rowId = data[0];
+                        var limit = 1;
+                        // alert(rowId);
+                        // If row ID is in the list of selected row IDs
+                        //  alert("notclicked");
+    //                                         if($.inArray(rowId, rows_selected) !== -1){
+    //                                              
+    //                                            $(row).find('input[type="checkbox"]').prop('checked', true);
+    //                                            $(row).addClass('selected');
+    //                                          
+    //                                         }
+                        table1.$('input[type="checkbox"]', row).on('change', function (evt) {
+                            console.log("outentered");
+                            var tcounter = 0;
 
-                                table1.$('input[type="checkbox"]').each(function () {
-                                    if (this.checked) {
+                            table1.$('input[type="checkbox"]').each(function () {
+                                if (this.checked) {
 
-                                        tcounter += 1;
+                                    tcounter += 1;
 
-                                    }
-
-                                });
-
-                                if (tcounter > limit) {
-                                    console.log(tcounter);
-                                    this.checked = false;
                                 }
+
                             });
-                        }
 
-            });
-            $('#recomTable').DataTable().search('${post.phase}').draw();
-              
-            $('#frm-example').on('submit', function (e) {
-                var form = this;
-
-                table1.$('input[type="checkbox"]').each(function () {
-                    // If checkbox doesn't exist in DOM
-                    if (!$.contains(document, this)) {
-                        // If checkbox is checked
-                        if (this.checked) {
-                            // Create a hidden element 
-                            $(form).append(
-                                    $('<input>')
-                                    .attr('type', 'hidden')
-                                    .attr('name', this.name)
-                                    .val(this.value)
-                                    );
-                        }
+                            if (tcounter > limit) {
+                                console.log(tcounter);
+                                this.checked = false;
+                            }
+                        });
                     }
+
+                });
+                $('#recomTable').DataTable().search('${post.phase}').draw();
+
+                $('#frm-example').on('submit', function (e) {
+                    var form = this;
+
+                    table1.$('input[type="checkbox"]').each(function () {
+                        // If checkbox doesn't exist in DOM
+                        if (!$.contains(document, this)) {
+                            // If checkbox is checked
+                            if (this.checked) {
+                                // Create a hidden element 
+                                $(form).append(
+                                        $('<input>')
+                                        .attr('type', 'hidden')
+                                        .attr('name', this.name)
+                                        .val(this.value)
+                                        );
+                            }
+                        }
+                    });
+
+                });
+
+
+                $('#probTable-select-all').on('click', function () {
+                    // Check/uncheck all checkboxes in the table
+                    var rows = table1.rows({'search': 'applied'}).nodes();
+                    $('input[type="checkbox"]', rows).prop('checked', this.checked);
                 });
 
             });
-            
-
-            $('#probTable-select-all').on('click', function () {
-                // Check/uncheck all checkboxes in the table
-                var rows = table1.rows({'search': 'applied'}).nodes();
-                $('input[type="checkbox"]', rows).prop('checked', this.checked);
-            });
-             
-        });
-    </script>
+        </script>
     </body>
 </html>

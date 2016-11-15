@@ -52,6 +52,24 @@ public class viewCalendar extends HttpServlet {
                     days = new JSONObject();
                     days.put("id", i);
                     days.put("name", cT.get(i).getPhase());
+                    if(cT.get(i).getPhase().equalsIgnoreCase("Planting")){
+                      days.put("color", "SaddleBrown");  
+                    }
+                    else if(cT.get(i).getPhase().equalsIgnoreCase("Germination")){
+                      days.put("color", "green");  
+                    }
+                    else if(cT.get(i).getPhase().equalsIgnoreCase("Milling")){
+                      days.put("color", "blue");  
+                    }
+                    else if(cT.get(i).getPhase().equalsIgnoreCase("Tillering")){
+                      days.put("color", "purple");  
+                    }
+                    else if(cT.get(i).getPhase().equalsIgnoreCase("Stalk Elongation")){
+                      days.put("color", "red");  
+                    }else {
+                      days.put("color", "orange");    
+                    }
+                    
                     days.put("startDate", cT.get(i).getStarting().getTime());
                     days.put("endDate", cT.get(i).getEnding().getTime());
                     calendar.add(days);

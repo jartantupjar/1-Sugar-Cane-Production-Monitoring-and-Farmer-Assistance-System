@@ -24,10 +24,8 @@
                     </h1>
                 </section>
                 <section class="content">
-
-
-
-                    <div class="col-md-6" > 
+                    <div class="row">   
+                    <div class="col-md-8" > 
                         <div class="box box-info">
                             <div class="box-header with-border">
                                 <h1 class="box-title">Weather Report</h1>
@@ -42,7 +40,7 @@
                             </div>
                         </div>
                     </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                         <div class="box box-info">
                             <div class="box-header with-border">
                                 <h1 class="box-title">Typhoon Level by Region</h1>
@@ -61,9 +59,10 @@
                     
 
                    </div>
-
+            
                 </section>
-            </div>
+                </div>
+            
             <footer class="main-footer">
                 <div class="pull-right hidden-xs">
                     <b>Version</b> 2.3.3

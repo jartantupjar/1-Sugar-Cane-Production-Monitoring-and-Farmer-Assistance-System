@@ -48,7 +48,7 @@ public class viewWeeklyProducedReportByRegionT extends HttpServlet {
             Date cdate = (Date) session.getAttribute("datepick");
             System.out.println(todayYear +"TANGINA"+weekOfYear + " TAE NAMN");
             ArrayList<CropBoard> cT = new ArrayList<CropBoard>();
-            cT = cdb.getWeeklyProducedReportByRegionT(todayYear,yp, weekOfYear);
+            cT = cdb.getWeeklyProducedReportByRegionT(todayYear,cdate.toString(),weekOfYear);
             JSONObject data = new JSONObject();
             JSONArray prod = new JSONArray();
             if(cT != null){
@@ -60,7 +60,6 @@ public class viewWeeklyProducedReportByRegionT extends HttpServlet {
                     list.add(cT.get(i).getLkg().toString());
                     String id = cT.get(i).getDistrict()+","+cdate.toString();
                     list.add(id);
-                    System.out.println(id + " FINAL TESTTTTTTTTTTTTTTTTTTTTTTTTT");
                     prod.add(list);
                 }
             }

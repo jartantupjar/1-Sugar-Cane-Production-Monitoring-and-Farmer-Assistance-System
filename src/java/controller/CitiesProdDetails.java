@@ -13,6 +13,7 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -42,7 +43,7 @@ public class CitiesProdDetails extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+            /* TODO output your page here. You may use following sample code. */    
             CropBoard cb = new CropBoard();
             CropBoardDB cdb = new CropBoardDB();
             ArrayList<CropBoard> cT = new ArrayList<CropBoard>();
@@ -50,6 +51,8 @@ public class CitiesProdDetails extends HttpServlet {
             String[] param = line.split(",");
             Date cdate = Date.valueOf(param[1]);
             System.out.println(cdate + " BEFORE !!!!");
+            HttpSession session = request.getSession();
+            int year = (int) session.getAttribute("todayYear");
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
             try{
             java.util.Date date = sdf.parse(param[1]);
@@ -58,9 +61,11 @@ public class CitiesProdDetails extends HttpServlet {
             Logger.getLogger(createNewProgram.class.getName()).log(Level.SEVERE, null, ex);
             }
             System.out.println(cdate +" AFTER ");
-            cT = cdb.getWeeklyProducedReportByRegionDetails(param[0],cdate);
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(cdate);
+            int wof = cdb.getWeekOfYear(cdate.toString());
+            cT = cdb.getWeeklyProducedReportByRegionDetails(year,cdate.toString(),param[0],wof);
             if(cT!=null){
-                HttpSession session = request.getSession();
                 ServletContext context = getServletContext();
                 RequestDispatcher rd = context.getRequestDispatcher("/CitiesWeekView.jsp");
                 session.setAttribute("todayDate", cdate);

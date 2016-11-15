@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -35,7 +36,7 @@ public class viewWeeklyProducedReportByRegion extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException {  
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -44,14 +45,17 @@ public class viewWeeklyProducedReportByRegion extends HttpServlet {
             CropBoardDB cdb = new CropBoardDB();
             HttpSession session = request.getSession();
             int todayYear = (int) session.getAttribute("todayYear");
-            int weekOfYear = (int) session.getAttribute("weekOfYear");
             Date date = (Date) session.getAttribute("todayDate");
             Date datep = (Date) session.getAttribute("datepick");
             System.out.println(datep+ "GOOCHOCO");
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(datep);
+            int weekOfYear = cdb.getWeekOfYear(datep.toString());
+            System.out.println(weekOfYear+"MUCHOCO"); 
             double avge = 0;
             ArrayList<CropBoard> cT = new ArrayList<CropBoard>();
             ArrayList<CropBoard> aT = new ArrayList<CropBoard>();
-            cT = cdb.getWeeklyProducedReportByRegion(type, todayYear, weekOfYear);
+            cT = cdb.getWeeklyProducedReportByRegion(type, todayYear,datep.toString(), weekOfYear);
             aT = cdb.getWeeklyAverageProducedReport(type, todayYear, date.toString());
             JSONObject production = new JSONObject();
             JSONArray listp = new JSONArray();
@@ -79,8 +83,8 @@ public class viewWeeklyProducedReportByRegion extends HttpServlet {
             production.put("categories", listc);
             production.put("prod", listp);
             production.put("avg", lista);
-            session.setAttribute("todayYear", todayYear);
-            session.setAttribute("weekOfYear", weekOfYear);
+//            session.setAttribute("avgyear", todayYear);
+//            session.setAttribute("weekOfYear", weekOfYear);
         response.setContentType("applications/json");
         response.setCharacterEncoding("utf-8");
         response.getWriter().write(production.toString());

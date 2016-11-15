@@ -23,7 +23,6 @@
                 <section class="content">
                     <div class="row">
                         <form id="frm-example" action="createNewRecommendation">
-
                             <div class="col-md-6">
                                 <div class="box box-solid box-success">
                                     <div class="box-header with-border">
@@ -103,7 +102,7 @@
                                 </div>
                             </div> 
 
-                            <div class="col-md-10">                   
+                            <div class="col-md-10 hidden" id="createBut">                   
                                 <p><button class="btn btn-primary" style="width: 35%" type="submit"  value="submit">Create</button></p>
                             </div>
                         </form>
@@ -112,7 +111,7 @@
             </div>
 
 
-        </div>
+        
 
         <footer class="main-footer">
 
@@ -122,7 +121,6 @@
             <strong>Copyright &copy; 2014-2015 <a href="http://sra.com">Sugar Regulatory Association</a>.</strong>
         </footer>
     </div>
-
 
     <script type="text/javascript" src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -136,10 +134,12 @@
             $(function(){
              $("#ap").on("click",function(){
                 $('#plist').removeClass('hidden');
+                $('#createBut').removeClass('hidden');
                 $('#duration').addClass('hidden');
              });
              $("#ai").on("click",function(){
                 $('#duration').removeClass('hidden');
+                $('#createBut').removeClass('hidden');
                 $('#plist').addClass('hidden');
              });
             });
