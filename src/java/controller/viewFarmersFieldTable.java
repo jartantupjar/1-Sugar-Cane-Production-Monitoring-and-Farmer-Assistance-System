@@ -64,13 +64,20 @@ public class viewFarmersFieldTable extends BaseServlet {
                 obj.add(farms.get(i).getBarangay());
                 obj.add(farms.get(i).getMunicipality());
 //                 obj.add("2015-11-12");
-                DecimalFormat df = new DecimalFormat(".##");
+                DecimalFormat df = new DecimalFormat("#.##");
                 obj.add(Double.toString(farms.get(i).getArea()));
                 obj.add(df.format(farms.get(i).getProduction()));
                 obj.add(Double.toString(farms.get(i).getTotalHa()));
-               
-                Double yield=farms.get(i).getProduction()/farms.get(i).getTotalHa();
-                 
+                   Double yield;
+                if(farms.get(i).getProduction()!=0 && farms.get(i).getTotalHa()!=0){
+                    yield= farms.get(i).getProduction()/farms.get(i).getTotalHa();
+                   }else{
+                       yield=0.0;
+                   }
+             
+                 if(farms.get(i).getDifYield()==0){
+                     farms.get(i).setDifYield(0);
+                 }
                
                 System.out.println(yield+"da yield");
                 obj.add(df.format(yield));
