@@ -199,7 +199,7 @@ public class ProblemsDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select p.id,p.name,p.type from `Problems-Fields` pf join problems p on p.id=pf.problems_id where pf.Fields_id=? and pf.date<=?;";
+            String query = "select p.id,p.name,p.type,p.description,pf.status from `Problems-Fields` pf join problems p on p.id=pf.problems_id where pf.Fields_id=? and pf.date<=?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, id);
             pstmt.setDate(2, todayDate);
@@ -211,8 +211,8 @@ public class ProblemsDB {
                          Problems p = new Problems();
                     p.setProb_id(rs.getInt("id"));
                    p.setProb_name(rs.getString("name"));
-//                    p.setProb_details(rs.getString("description"));
-//                    p.setStatus(rs.getString("status"));
+                    p.setProb_details(rs.getString("description"));
+                    p.setStatus(rs.getString("status"));
                     p.setType(rs.getString("type"));
                    // p.setTotalFarms(rs.getInt("counter"));
                     list.add(p);

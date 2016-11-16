@@ -91,7 +91,7 @@ on barangay selection
                                                 <c:out value="${farm.yield}"/>
                                             </a>
                                         </li>
-                                     
+
                                     </ul>
                                     <a href="viewFarmerProfile?name=${farm.farmer}" class="btn btn-primary pull-right">
                                         View Farmer Profile
@@ -148,7 +148,7 @@ on barangay selection
                                                 <c:out value="${farm.cropVal.planting_density}"/>
                                             </a>
                                         </li>
-                                       
+
                                         <li class="list-group-item">
                                             <b>Number Millable</b> <a class="pull-right">
                                                 <c:out value="${farm.cropVal.num_millable}"/>
@@ -200,39 +200,8 @@ on barangay selection
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <div class="col-md-4">
-                                <div class="box box-primary">
-                                    <div class="box-header">
-                                        <h1 class="box-title">Tiller Info for <c:out value="${farm.tillers.year}"/></h1>
-                                        <div class="box-tools pull-right">
-                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                        </div>
-                                    </div>
-                                    <div class="box-body box-profile">
-                                        <ul class="list-group list-group-unbordered">
-
-                                            <li class="list-group-item">
-                                                <b>Rep</b> <a class="pull-right">
-                                                    <c:out value="${farm.tillers.rep}"/>
-                                                </a>
-                                            </li>
-                                            <li class="list-group-item">
-                                                <b>Count</b> <a class="pull-right">
-                                                    <c:out value="${farm.tillers.count}"/>
-                                                </a>
-                                            </li>
-                                        </ul>
-
-                                    </div>
-                                    <!-- /.box-body -->
-                                </div>
-
-                            </div>
-
-
                             
-                            <div class="col-md-4">
+                        <div class="col-md-4">
                                 <div class="box box-primary">
                                     <div class="box-header">
                                         <h1 class="box-title">Soil Analysis</h1>
@@ -265,54 +234,169 @@ on barangay selection
                                                 </a>
                                             </li>
                                         </ul>
-                                        
+
                                     </div>
                                     <!-- /.box-body -->
                                 </div>
 
                             </div>
+                           
                             <div class="col-md-4">
                                 <div class="box box-primary ">
-                                    <div class="box-body box-profile">
+                                    <div class="box-body">
+ <h3 class="profile-username text-center">Fertilizer Info for ${farm.fertilizer.year}:</h3>
+                                        <table id="recTable" class="table  display table-hover" cellspacing="0" width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Fertilizer</th>
+                                                    <th>First Dose</th>
+                                                    <th>Second Dose</th>
+                                                   
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <c:if test="${not empty farm.fertlist}">
+                                                    <c:forEach items="${farm.fertlist}" var="fertz">
+                                                        <tr>
+                                                            <td><c:out value="${fertz.fertilizer}"/></td>
+                                                            <td><c:out value="${fertz.first_dose}"/></td>
+                                                            <td><c:out value="${fertz.second_dose}"/></td>  
+                                                        </tr>
+                                                    </c:forEach>
 
-                                        <h3 class="profile-username text-center">Fertilizer Info for ${farm.fertilizer.year}:</h3>
-                                        <ul class="list-group list-group-unbordered">
 
+                                                </c:if>
+                                            </tbody>
 
-                                            <li class="list-group-item">
-                                                <b>Fertilizer</b> <a class="pull-right">
-                                                    <c:out value="${farm.fertilizer.fertilizer}"/>
-                                                </a>
-                                            </li>
-                                            <li class="list-group-item">
-                                                <b>First Dose</b> <a class="pull-right">
-                                                    <c:out value="${farm.fertilizer.first_dose}"/>
-                                                </a>
-                                            </li>
-                                            <li class="list-group-item">
-                                                <b>Second Dose</b> <a class="pull-right">
-                                                    <c:out value="${farm.fertilizer.second_dose}"/>
-                                                </a>
-                                            </li>
-
-                                        </ul>
-                                                                   
+                                        </table>                    
                                     </div>
                                 </div>
                             </div>
-                         
+                            <div class="col-md-4">
+                                <div class="box box-primary ">
+                                    <div class="box-body">
+ <h3 class="profile-username text-center">Tiller Info for ${farm.tillers.year}:</h3>
+                                        <table id="recTable" class="table  display table-hover" cellspacing="0" width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>rep</th>
+                                                    <th>count</th>
+                                                   
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <c:if test="${not empty farm.tillist}">
+                                                    <c:forEach items="${farm.tillist}" var="til">
+                                                        <tr>
+                                                            <td><c:out value="${til.rep}"/></td>
+                                                            <td><c:out value="${til.count}"/></td>
+                                                        </tr>
+                                                    </c:forEach>
 
+
+                                                </c:if>
+                                            </tbody>
+
+                                        </table>                    
+                                    </div>
+                                </div>
+                            </div>
+ </div>
+                                        <div class="col-md-12">
+                                            <div class="col-md-6" > 
+                            <div class="box box-info">
+                                <div class="box-header with-border">
+                                    <h1 class="box-title">Problems List</h1>
+                                    <div class="box-tools pull-right">
+                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                    </div>
+                                </div>
+
+                                <div class="box-body">
+                                    <table id="probTable" class="table  dispTable table-hover" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                 <th>Problem</th>
+                                                 <th>Status</th>
+                                                 <th>Type</th>
+                                                <th>Description</th>
+                                                 <th></th>
+                                            </tr>
+                                        </thead>
+                                         <tbody>
+                                                <c:if test="${not empty farm.problems}">
+                                                    <c:forEach items="${farm.problems}" var="prob">
+                                                        <tr>
+                                                            <td><c:out value="${prob.prob_name}"/></td>
+                                                            <td><c:out value="${prob.status}"/></td>
+                                                            <td><c:out value="${prob.type}"/></td>
+                                                            <td><c:out value="${prob.prob_details}"/></td>
+                                                            <td><a class="btn btn-primary" href="viewProbDetails?id=${prob.prob_id}">details</a></td>
+                                                        </tr>
+                                                    </c:forEach>
+
+
+                                                </c:if>
+                                            </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
                         </div>
-                             <div class="col-md-offset-5 col-sm-2 ">
+                                            <div class="col-md-6" > 
+                            <div class="box box-info">
+                                <div class="box-header with-border">
+                                    <h1 class="box-title">Recommendations List</h1>
+                                    <div class="box-tools pull-right">
+                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                    </div>
+                                </div>
 
-                                <button id="obsrvButton" class="btn btn-info btn-block" type="button" style="height: 6%;">Create New Observation</button>
-                            </div>                      
+                                <div class="box-body">
+                                    <table class="table  dispTable table-hover" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                 <th>Recommendation</th>
+                                                 <th>Status</th>
+                                                 <th>Type</th>
+                                                <th>Description</th>
+                                                 <th></th>
+                                            </tr>
+                                        </thead>
+                                         <tbody>
+                                                <c:if test="${not empty farm.recommendation}">
+                                                    <c:forEach items="${farm.recommendation}" var="rec">
+                                                        <tr>
+                                                            <td><c:out value="${rec.recommendation_name}"/></td>
+                                                            <td><c:out value="${rec.status}"/></td>
+                                                            <td><c:out value="${rec.type}"/></td>
+                                                            <td><c:out value="${rec.description}"/></td>
+                                                            <td><a class="btn btn-primary" href="viewRecDetails?id=${rec.id}">details</a></td>
+                                                            
+                                                        </tr>
+                                                    </c:forEach>
+
+
+                                                </c:if>
+                                            </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                                            </div>
+                        <div class="col-md-offset-5 col-sm-2 ">
+
+                            <button id="obsrvButton" class="btn btn-info btn-block" type="button" style="height: 6%;">Create New Observation</button>
+                        </div>                      
                         <div id="observBlock" class="col-md-12 hidden">
-                                <h1> Farm Observation</h1>
+                            <h1> Farm Observation</h1>
                             <div class="col-md-7">
                                 <div class="form-group">
                                     <select id="select2" class="select2" multiple="multiple" data-placeholder="Select a Tag" style="width: 100%;">
-                                  
+
                                     </select>
                                 </div>
                             </div>
@@ -399,24 +483,24 @@ on barangay selection
         </script>
         <script type="text/javascript">
             $(function () {
-var test;
+                var test;
                 $.ajax({
                     url: 'createTagList?id=${id}',
                     type: 'POST',
                     dataType: "JSON",
                     success: function (data) {
 //                        alert(data);
-                  
+
                         $("#select2").select2({
                             data: data
                         });
-                         
+
                     }});
 
                 $("#obsrvButton").on("click", function () {
-                      $('#observBlock').removeClass('hidden');
-                      $('#obsrvButton').addClass('hidden');
-                      
+                    $('#observBlock').removeClass('hidden');
+                    $('#obsrvButton').addClass('hidden');
+
                 });
 
                 //  var data = ['enhancement', 'bug', 'duplicate','invalid', 'wontfix'];                          
@@ -424,13 +508,13 @@ var test;
                 // var data = [{id: 0, text: 'enhancement'}, {id: 1, text: 'bug'}, {id: 2, text: 'duplicate'}, {id: 3, text: 'invalid'}, {id: 4, text: 'wontfix'}];
 
                 $("#sButton").on("click", function () {
-                   test = $("#select2").val();
-                     document.getElementById("taglist").value=test;
+                    test = $("#select2").val();
+                    document.getElementById("taglist").value = test;
                     //  var rows_selected = [];
                     var limit = 4;
                     $('#sbox').removeClass('hidden');
                     $('#dbox').removeClass('hidden');
-                    
+
                     var table = $('#example').DataTable({
                         destroy: true,
                         'ajax': {
