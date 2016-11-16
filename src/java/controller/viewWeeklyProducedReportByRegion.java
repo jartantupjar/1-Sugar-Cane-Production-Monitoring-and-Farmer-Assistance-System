@@ -5,6 +5,7 @@
  */
 package controller;
 
+import db.CalendarDB;
 import db.CropBoardDB;
 import entity.CropBoard;
 import java.io.IOException;
@@ -44,35 +45,42 @@ public class viewWeeklyProducedReportByRegion extends HttpServlet {
             CropBoard cropB = new CropBoard();
             CropBoardDB cdb = new CropBoardDB();
             HttpSession session = request.getSession();
-            int todayYear = (int) session.getAttribute("todayYear");
-            Date date = (Date) session.getAttribute("todayDate");
+            CalendarDB caldb = new CalendarDB();
+            ArrayList<entity.Calendar> calist = caldb.getCurrentYearDetails();
+            Date date = calist.get(0).getTodayDate();
+            int todayYear = calist.get(0).getYear();
             Date datep = (Date) session.getAttribute("datepick");
-            System.out.println(datep+ "GOOCHOCO");
             Calendar cal = Calendar.getInstance();
             cal.setTime(datep);
-            int weekOfYear = cdb.getWeekOfYear(datep.toString());
-            System.out.println(weekOfYear+"MUCHOCO"); 
+            int weekOfYear = 0;
+            if(todayYear <= 2016){
+             weekOfYear = cdb.getWeekOfYear(datep.toString());
+            }
+            else{ weekOfYear = cdb.getWeekOfYear(date.toString());}
             double avge = 0;
             ArrayList<CropBoard> cT = new ArrayList<CropBoard>();
             ArrayList<CropBoard> aT = new ArrayList<CropBoard>();
-            cT = cdb.getWeeklyProducedReportByRegion(type, todayYear,datep.toString(), weekOfYear);
-            aT = cdb.getWeeklyAverageProducedReport(type, todayYear, date.toString());
             JSONObject production = new JSONObject();
+            if(calist.get(0).getYear() <= 2016){                // START OF HISTORICAL 
+                cT = cdb.getWeeklyProducedReportByRegion(type, todayYear,datep.toString(), weekOfYear);
+            aT = cdb.getWeeklyAverageProducedReportDetails(type, todayYear, datep.toString());
+            
             JSONArray listp = new JSONArray();
             JSONArray listc = new JSONArray();
             JSONArray lista = new JSONArray();
             for(int i=0;i<aT.size();i++){
                 if(aT.get(i).getWeek_ending().toString().equalsIgnoreCase(datep.toString())){
                     avge = aT.get(i).getProduction();
+                    System.out.println(aT.get(i).getArea()+"area");
                     }
             }
+            
             if(cT != null){
                 for(int i =0; i<cT.size();i++){
                     ArrayList<String> c = new ArrayList<String>();
                     ArrayList<Double> p = new ArrayList<Double>();
                     ArrayList<Double> a = new ArrayList<Double>();
                     c.add(cT.get(i).getDistrict());
-                    System.out.println(cT.get(i).getDistrict()+ "TESTTTT");;
                     p.add(cT.get(i).getProduction());
                     a.add(avge);
                     listp.add(p);
@@ -83,6 +91,39 @@ public class viewWeeklyProducedReportByRegion extends HttpServlet {
             production.put("categories", listc);
             production.put("prod", listp);
             production.put("avg", lista);
+            }
+            else{  // START OF CURRENT
+            aT = cdb.getCurrentWeeklyProducedReport(type, todayYear, date.toString());
+            double sum = 0;
+            double totala = 0;
+            int div = aT.size();
+            for (int i = 0; i < aT.size(); i++) {
+                sum += aT.get(i).getProduction();
+            }
+            totala = sum / div;
+            double avga = Math.round(totala * 100.0) / 100.0;
+            cT = cdb.getCurrentWeeklyProducedReportByRegion(type, todayYear,date.toString(), weekOfYear);
+                System.out.println(datep +"DATE"+todayYear);
+            JSONArray listp = new JSONArray();
+            JSONArray listc = new JSONArray();
+            JSONArray lista = new JSONArray();
+            if(cT != null){
+                for(int i =0; i<cT.size();i++){
+                    ArrayList<String> c = new ArrayList<String>();
+                    ArrayList<Double> p = new ArrayList<Double>();
+                    ArrayList<Double> a = new ArrayList<Double>();
+                    c.add(cT.get(i).getDistrict());
+                    p.add(cT.get(i).getProduction());
+                    a.add(avga);
+                    listp.add(p);
+                    listc.add(c);
+                    lista.add(a);
+                }
+            }
+            production.put("categories", listc);
+            production.put("prod", listp);
+            production.put("avg", lista);
+            }
 //            session.setAttribute("avgyear", todayYear);
 //            session.setAttribute("weekOfYear", weekOfYear);
         response.setContentType("applications/json");

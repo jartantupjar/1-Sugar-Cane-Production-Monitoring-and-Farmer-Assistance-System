@@ -5,7 +5,9 @@
  */
 package controller;
 
+import db.CalendarDB;
 import db.CropBoardDB;
+import entity.Calendar;
 import entity.CropBoard;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -44,38 +46,42 @@ public class viewWeeklyProducedReport extends HttpServlet {
             CropBoard cropB = new CropBoard();
             CropBoardDB cdb = new CropBoardDB();
             HttpSession session = request.getSession();
-            int todayYear = (int) session.getAttribute("todayYear");
-            int weekOfYear = (int) session.getAttribute("weekOfYear");
-            Date date = (Date) session.getAttribute("todaysDate");
-            System.out.println(weekOfYear +"what then ?");
+            CalendarDB caldb = new CalendarDB();
+            ArrayList<Calendar> calist = caldb.getCurrentYearDetails();
+            Date date = calist.get(0).getTodayDate();
+            int todayYear = calist.get(0).getYear();
+            java.util.Calendar cal = java.util.Calendar.getInstance();
+            cal.setTime(date);
+            int weekOfYear = cal.get(java.util.Calendar.WEEK_OF_YEAR);
+            System.out.println(weekOfYear + "what then ?");
+            JSONObject production = new JSONObject();
+            if(calist.get(0).getYear() <= 2016){ // this is historical
             ArrayList<CropBoard> cT = new ArrayList<CropBoard>();
             ArrayList<CropBoard> avgT = new ArrayList<CropBoard>();
             cT = cdb.getWeeklyProducedReport(type, todayYear, date.toString());
-            avgT= cdb.getWeeklyAverageProducedReport(type, todayYear, date.toString());
-            double sum =0;
-            double totala =0;
+            avgT = cdb.getWeeklyAverageProducedReport(type, todayYear, date.toString());
+            double sum = 0;
+            double totala = 0;
             int div = avgT.size();
-            for(int i=0; i<avgT.size();i++){
-                 sum += avgT.get(i).getProduction();
-                 System.out.println(avgT.get(i).getArea()+ " MALI KA GOCHIOCO" + avgT.get(i).getWeek_ending());
+            for (int i = 0; i < avgT.size(); i++) {
+                sum += avgT.get(i).getProduction();
             }
-            totala = sum/div;
-            double avga = Math.round(totala*100.0)/100.0;
-            JSONObject production =  new JSONObject();
-            JSONArray prod = new JSONArray();   
+            totala = sum / div;
+            double avga = Math.round(totala * 100.0) / 100.0;
+            JSONArray prod = new JSONArray();
             JSONArray avg = new JSONArray();
             JSONArray dates = new JSONArray();
-            if(cT != null){
-                for(int i = 0; i<cT.size();i++){
-                ArrayList<Double> d = new ArrayList<Double>();
-                ArrayList<Double> a = new ArrayList<Double>();
-                ArrayList<String> dat = new ArrayList<String>();
-                d.add(cT.get(i).getProduction());
-                a.add(avga);
-                dat.add(cT.get(i).getWeek_ending().toString());
-                prod.add(d);
-                avg.add(a);
-                dates.add(dat);
+            if (cT != null) {
+                for (int i = 0; i < cT.size(); i++) {
+                    ArrayList<Double> d = new ArrayList<Double>();
+                    ArrayList<Double> a = new ArrayList<Double>();
+                    ArrayList<String> dat = new ArrayList<String>();
+                    d.add(cT.get(i).getProduction());
+                    a.add(avga);
+                    dat.add(cT.get(i).getWeek_ending().toString());
+                    prod.add(d);
+                    avg.add(a);
+                    dates.add(dat);
                 }
             }
             session.setAttribute("todayYear", todayYear);
@@ -83,6 +89,40 @@ public class viewWeeklyProducedReport extends HttpServlet {
             production.put("prod", prod);
             production.put("average", avg);
             production.put("dates", dates);
+            }
+            else{ // this is current 
+            ArrayList<CropBoard> cT = new ArrayList<CropBoard>();
+            cT = cdb.getCurrentWeeklyProducedReport(type, todayYear, date.toString());
+            double sum = 0;
+            double totala = 0;
+            int div = cT.size();
+            for (int i = 0; i < cT.size(); i++) {
+                sum += cT.get(i).getProduction();
+            }
+            totala = sum / div;
+            double avga = Math.round(totala * 100.0) / 100.0;
+            JSONArray prod = new JSONArray();
+            JSONArray avg = new JSONArray();
+            JSONArray dates = new JSONArray();
+            if (cT != null) {
+                for (int i = 0; i < cT.size(); i++) {
+                    ArrayList<Double> d = new ArrayList<Double>();
+                    ArrayList<Double> a = new ArrayList<Double>();
+                    ArrayList<String> dat = new ArrayList<String>();
+                    d.add(cT.get(i).getProduction());
+                    a.add(avga);
+                    dat.add(cT.get(i).getWeek_ending().toString());
+                    prod.add(d);
+                    avg.add(a);
+                    dates.add(dat);
+                }
+            }
+            session.setAttribute("todayYear", todayYear);
+            session.setAttribute("weekOfYear", weekOfYear);
+            production.put("prod", prod);
+            production.put("average", avg);
+            production.put("dates", dates);
+            }
             response.setContentType("applications/json");
             response.setCharacterEncoding("utf-8");
             response.getWriter().write(production.toString());

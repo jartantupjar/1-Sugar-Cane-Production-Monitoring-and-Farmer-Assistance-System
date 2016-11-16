@@ -24,6 +24,50 @@ import java.util.logging.Logger;
  * @author Bryll Joey Delfin
  */
 public class CalendarDB {
+
+    public boolean insertCurrentDate(Date curdate, int cropyr) {
+        try {
+            // put functions here : previous week production, this week production
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query1="truncate configuration;";
+           PreparedStatement pstmt= conn.prepareStatement(query1);
+            pstmt.executeUpdate();
+            pstmt.close();
+            String query = "insert configuration values(?,?);";
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setDate(1, curdate);
+            stmt.setInt(2, cropyr);
+            stmt.executeUpdate();
+
+            stmt.close();
+            conn.close();
+
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(CalendarDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+public void processNewTodayDate(Date todayDate){
+    Calendar cal=getInitialCurrentYearDetails(todayDate);
+    insertCurrentDate(todayDate,cal.getYear());   
+}
+public Calendar getCalendarTypes(Date todayDate){
+     java.util.Calendar cal = java.util.Calendar.getInstance();
+                cal.setTime(todayDate);
+                CropBoardDB cdb = new CropBoardDB();
+                int week_of_year = cdb.getWeekOfYear(todayDate.toString());
+                int year = cal.get(java.util.Calendar.YEAR);
+                int month = cal.get(java.util.Calendar.MONTH);
+                int day = cal.get(java.util.Calendar.DAY_OF_MONTH);
+                Calendar calen= new Calendar();
+                calen.setEday(day);
+                calen.setEmonth(month);
+                calen.setEyear(year);
+                calen.setEweek(week_of_year);
+                return calen;
+}
     public ArrayList<Calendar> getCaledarInputs() {
         try {
             // put functions here : previous week production, this week production
@@ -34,8 +78,8 @@ public class CalendarDB {
             ResultSet rs = stmt.executeQuery(query);
             ArrayList<Calendar> fT = null;
             Calendar f;
-            if (rs.next()) { 
-                 fT = new ArrayList<Calendar>();
+            if (rs.next()) {
+                fT = new ArrayList<Calendar>();
                 do {
                     f = new Calendar();
                     f.setDistrict(rs.getString("district"));
@@ -49,23 +93,115 @@ public class CalendarDB {
             rs.close();
             stmt.close();
             conn.close();
-            
+
             return fT;
         } catch (SQLException ex) {
             Logger.getLogger(CalendarDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
-    public Date convertStringtoSQLDate(String lined){
-        Date pdate = null ;
-            try{
+
+    public ArrayList<Calendar> getCurrentYearDetails() {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select cc.year,cc.district,cc.phase,c.current_date from crop_calendar cc join configuration c where c.`current_date` between cc.date_starting and cc.date_ending;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<Calendar> list = null;
+
+            if (rs.next()) {
+                list = new ArrayList<>();
+                do {
+                    Calendar cal = new Calendar();
+                    cal.setYear(rs.getInt("year"));
+                    cal.setDistrict(rs.getString("district"));
+                    cal.setPhase(rs.getString("phase"));
+                    cal.setTodayDate(rs.getDate("current_date"));
+                    list.add(cal);
+                } while (rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            return list;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CropEstimateDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
+
+    //THIS METHOD IS ONLY FOR LOGIN ***DO NOT USE
+
+    public Calendar getInitialCurrentYearDetails(Date todayDate) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT cc.year,cc.district,cc.phase from crop_calendar cc where ? between cc.date_starting and cc.date_ending;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setDate(1, todayDate);
+            ResultSet rs = pstmt.executeQuery();
+            Calendar cal=null;
+            if (rs.next()) {
+           
+         
+                  cal  = new Calendar();
+                    cal.setYear(rs.getInt("year"));
+                   cal.setDistrict(rs.getString("district"));
+                    cal.setPhase(rs.getString("phase"));
+           
+            }
+
+            rs.close();
+            pstmt.close();
+            conn.close();
+            return cal;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CropEstimateDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
+    public boolean checkifMilling() {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select cc.year,cc.district,cc.phase,c.current_date from crop_calendar cc join configuration c where cc.phase='Milling' and c.`current_date` between cc.date_starting and cc.date_ending;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            ResultSet rs = pstmt.executeQuery();
+            Calendar cal=null;
+            boolean chckr=false;
+            if (rs.next()) {
+        chckr=true;
+           
+            }
+
+            rs.close();
+            pstmt.close();
+            conn.close();
+            return chckr;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CropEstimateDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false;
+    }
+
+    public Date convertStringtoSQLDate(String lined) {
+        Date pdate = null;
+        try {
             java.util.Date date = new SimpleDateFormat("MM/dd/yyyy").parse(lined);
             pdate = new java.sql.Date(date.getTime());
-            } catch (ParseException ex) {
+        } catch (ParseException ex) {
             Logger.getLogger(CalendarDB.class.getName()).log(Level.SEVERE, null, ex);
-            } 
-     return pdate;   
+        }
+        return pdate;
     }
+
     public int addPhasesDates(Calendar cal, int year, String district) {
         try {
             // put functions here : previous week production, this week production
@@ -74,11 +210,11 @@ public class CalendarDB {
             Connection conn = myFactory.getConnection();
             String query = "Insert into crop_calendar(year,district,phase,date_starting,date_ending) values (?,?,?,?,?);";
             PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setInt(1,year);
-            pstmt.setString(2,district);
+            pstmt.setInt(1, year);
+            pstmt.setString(2, district);
             pstmt.setString(3, cal.getPhase());
             pstmt.setDate(4, cal.getStarting());
-            pstmt.setDate(5,cal.getEnding());
+            pstmt.setDate(5, cal.getEnding());
             i = pstmt.executeUpdate();
             pstmt.close();
             conn.close();

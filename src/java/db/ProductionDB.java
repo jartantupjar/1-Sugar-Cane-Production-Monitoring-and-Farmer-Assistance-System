@@ -5,6 +5,7 @@
  */
 package db;
 
+import entity.Calendar;
 import entity.CropAssessment;
 import entity.Farmer;
 import entity.ProdBarangay;
@@ -14,6 +15,7 @@ import entity.brgySummary;
 import entity.municipalSummary;
 import entity.prodMunicipality;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -183,6 +185,34 @@ public class ProductionDB {
 
         return null;
     }
+    public ArrayList<Integer> getDistinctProdYrs(int curyr) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select Distinct(year) from production where year<=? order by year DESC;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, curyr);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<Integer> list = null;
+
+            if (rs.next()) {
+                list = new ArrayList<>();
+                do {
+                    list.add(rs.getInt("year"));
+                } while (rs.next());
+            }
+            
+            rs.close();
+            pstmt.close();
+            conn.close();
+
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(CropEstimateDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
     public ArrayList<Integer> getDistinctHistProdYrs(int curyr) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
@@ -199,6 +229,7 @@ public class ProductionDB {
                     list.add(rs.getInt("year"));
                 } while (rs.next());
             }
+            
             rs.close();
             pstmt.close();
             conn.close();
@@ -324,6 +355,44 @@ public class ProductionDB {
         return null;
 
     }
+    public ArrayList<prodMunicipality> getCurrProdMunicipalforYear(int year) {
+        try {
+            CalendarDB caldb= new CalendarDB();
+   ArrayList<Calendar> calist= caldb.getCurrentYearDetails();
+   Date todayDate =calist.get(0).getTodayDate();
+   
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select distinct f.municipality from production p join fields f on p.fields_id=f.id where year=? and date<=?;";
+
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, year);
+            pstmt.setDate(2, todayDate);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<prodMunicipality> list = new ArrayList<>();
+            if (rs.next()) {
+
+                do {
+                    prodMunicipality municipal = new prodMunicipality();
+                    municipal.setYear(year);
+                    municipal.setMunicipal(rs.getString("municipality"));
+                    System.out.println(municipal.getMunicipal()+"THE MUNI");
+//                    System.out.println(municipal.getMunicipal());
+                    municipal.setBrgy(getCurrProdBarangayforYear(municipal,todayDate));
+                    list.add(municipal);
+                } while (rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            return list;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductionDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+
+    }
 
     public ArrayList<ProdBarangay> getProdBarangayforYear(prodMunicipality pm) {
         try {
@@ -341,6 +410,39 @@ public class ProductionDB {
                     brgy.setBarangay(rs.getString("barangay"));
 //                    System.out.println(brgy.getBarangay());
                     brgy.setFarmer(getProdFarmerforYear(pm, brgy));
+                    list.add(brgy);
+                } while (rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            return list;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductionDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+
+    }
+    public ArrayList<ProdBarangay> getCurrProdBarangayforYear(prodMunicipality pm,Date todayDate) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select distinct f.barangay from production p join fields f on p.fields_id=f.id where f.municipality=? and year=? and date<=?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+           
+            pstmt.setString(1, pm.getMunicipal());
+             pstmt.setInt(2, pm.getYear());
+            pstmt.setDate(3, todayDate);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<ProdBarangay> list = new ArrayList<>();
+            if (rs.next()) {
+                do {
+                    ProdBarangay brgy = new ProdBarangay();
+                    brgy.setBarangay(rs.getString("barangay"));
+                    System.out.println(brgy.getBarangay()+"THE BRGY");
+//                    System.out.println(brgy.getBarangay());
+                    brgy.setFarmer(getCurrProdFarmerforYear(pm, brgy,todayDate));
                     list.add(brgy);
                 } while (rs.next());
             }
@@ -390,12 +492,49 @@ public class ProductionDB {
         return null;
 
     }
+    public ArrayList<Farmer> getCurrProdFarmerforYear(prodMunicipality pm, ProdBarangay pb,Date todayDate) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            //   String query= "select sum(p.tons_cane) as tTons_cane ,p.farmers_name from historicalproduction p join fields f on p.Farmers_name=f.Farmers_name where p.year=? and f.municipality=? and f.barangay=? group by f.Farmers_name;";
+            String query = "select sum(p.tons_cane) as tTons_cane ,f.farmers_name from production p join fields f on p.fields_id=f.id where f.municipality=? and f.barangay=? and year=? and date<=? group by f.farmers_name;";
+
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            
+            pstmt.setString(1, pm.getMunicipal());
+            pstmt.setString(2, pb.getBarangay());
+            pstmt.setInt(3, pm.getYear());
+            pstmt.setDate(4, todayDate);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<Farmer> list = new ArrayList<>();
+            if (rs.next()) {
+                do {
+                    Farmer farmer = new Farmer();
+                    farmer.setName(rs.getString("farmers_name"));
+                    System.out.println(farmer.getName()+"THE FNAME");
+                    //  System.out.println(farmer.getName());
+                    farmer.setProduction(rs.getDouble("tTons_cane") + .01);
+                    farmer.setTotalArea(getCurrFarmerHarvestArea(pm,pb,farmer.getName(),todayDate));
+                    list.add(farmer);
+                } while (rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            return list;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductionDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+
+    }
     public Double getFarmerTotalArea(prodMunicipality pm, ProdBarangay pb,String farmer) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             //   String query= "select sum(p.tons_cane) as tTons_cane ,p.farmers_name from historicalproduction p join fields f on p.Farmers_name=f.Farmers_name where p.year=? and f.municipality=? and f.barangay=? group by f.Farmers_name;";
-            String query = "select IFNULL(sum(area),1) as tarea from fields f where f.municipality=? and f.barangay=? and f.farmers_name=?;";
+            String query = "select IFNULL(sum(area),0) as tarea from fields f where f.municipality=? and f.barangay=? and f.farmers_name=?;";
 
             PreparedStatement pstmt = conn.prepareStatement(query);
           
@@ -406,6 +545,36 @@ public class ProductionDB {
            Double tarea=null;
             if (rs.next()) {
                tarea=rs.getDouble("tarea");
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            return tarea;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductionDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+
+    }
+    public Double getCurrFarmerHarvestArea(prodMunicipality pm, ProdBarangay pb,String farmer,Date todayDate) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            //   String query= "select sum(p.tons_cane) as tTons_cane ,p.farmers_name from historicalproduction p join fields f on p.Farmers_name=f.Farmers_name where p.year=? and f.municipality=? and f.barangay=? group by f.Farmers_name;";
+            String query = "select ifnull(sum(p.area_harvested),0) as tHA ,f.farmers_name from production p join fields f on p.fields_id=f.id where f.municipality=? and f.barangay=? and f.farmers_name=? and year=? and date<=? group by f.farmers_name;";
+
+            PreparedStatement pstmt = conn.prepareStatement(query);
+          
+            pstmt.setString(1, pm.getMunicipal());
+            pstmt.setString(2, pb.getBarangay());
+             pstmt.setString(3, farmer);
+             pstmt.setInt(4, pm.getYear());
+             pstmt.setDate(5, todayDate);
+            ResultSet rs = pstmt.executeQuery();
+           Double tarea=null;
+            if (rs.next()) {
+               tarea=rs.getDouble("tHA");
             }
             rs.close();
             pstmt.close();

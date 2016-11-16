@@ -1,7 +1,9 @@
 package controller;
 
+import db.CalendarDB;
 import db.CropAssessmentDB;
 import db.UsersDB;
+import entity.Calendar;
 import entity.CropAssessment;
 import entity.CropNarrative;
 import entity.User;
@@ -9,8 +11,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
+//import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -19,12 +25,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+ // THIS IS THE CODE TO GET TODAYS' DIFFERENT DETAILS (JUST COPY PASTE IT 
+                //TO THE METHODS AND AVOID USING THIS IN SERVLETS AS TO LESSEN ERRORS
+                //AND MAKE THINGS MORE READABLE)               
+                //CalendarDB caldb= new CalendarDB();
+                //ArrayList<Calendar> calist= caldb.getCurrentYearDetails();
+                //int cropyr=calist.get(0).getYear();
+
 
 @WebServlet(name = "Login", urlPatterns = {"/Login"})
 public class Login extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
@@ -35,55 +48,70 @@ public class Login extends HttpServlet {
             CropAssessmentDB cadb = new CropAssessmentDB();
             User successful = myUserDB.authenticate(oneUser);
             if (successful != null) {
-
-                ServletContext context = getServletContext();
+               ServletContext context = getServletContext();
                 HttpSession session = request.getSession();
+                
+              
+                String sdate = request.getParameter("currentdate");
+//                String sdate = "2015-02-10"; // date of the login-- change this to the parameter date
+//                Date todayDate = Date.valueOf(sdate);
+                java.util.Date inicheck = new SimpleDateFormat("MM/dd/yyyy").parse(sdate);
+                Date todayDate = new java.sql.Date(inicheck.getTime());
+                CalendarDB caldb = new CalendarDB();
+
+                caldb.processNewTodayDate(todayDate);//this is to set todaydate to db
+                Calendar cal = caldb.getCalendarTypes(todayDate);//weekofyear//month//day
+                ArrayList<Calendar> calist = caldb.getCurrentYearDetails();//gets the phases/today/crop yr
+                Integer cropyear = calist.get(0).getYear();
+                
                 //start of the crop assessment report
-                String sdate = "2015-02-10"; // date of the login-- change this to the parameter date
-                Date todayDate = Date.valueOf(sdate);
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(todayDate);
-                int week_of_year = cal.get(Calendar.WEEK_OF_YEAR);
-                System.out.println(week_of_year);
-                int year = cal.get(Calendar.YEAR);
-                int month = cal.get(Calendar.MONTH);
-                int day = cal.get(Calendar.DAY_OF_MONTH);
+                ArrayList<CropAssessment> caT=null;
+                 Date week_ending =null;
+                 boolean milling = false;
+                if(caldb.checkifMilling()){//checks if today is milling period
+                    caT  = new ArrayList<CropAssessment>();
+                    System.out.println(cal.getEweek()+"EWEEK");
+                caT = cadb.getCropAssesmentRajversion(cal.getEweek(), cropyear);
+                week_ending=caT.get(0).getWeek_ending();
+                }
+               
 
-                ArrayList<CropAssessment> caT = new ArrayList<CropAssessment>();
-                caT = cadb.getCropAssesmentRajversion(week_of_year, year);
-                Date week_ending = caT.get(0).getWeek_ending();
-
-                session.setAttribute("Week_ending", week_ending);
-                session.setAttribute("todayDate", todayDate);
-                session.setAttribute("todaysDate", todayDate);
-                session.setAttribute("todayYear", year);
-                session.setAttribute("todayMonth", month);
-                session.setAttribute("todayDay", day);
-                session.setAttribute("weekOfYear", week_of_year);
                 RequestDispatcher rd = null;
                 if (successful.getGroup().equalsIgnoreCase("MDO")) {
-
+//START OF MDO
                     rd = context.getRequestDispatcher("/Homepage.jsp");
                     CropNarrative cn = null;
+                    ArrayList<CropAssessment> rain = cadb.getRainFall(cal.getEweek(), cropyear);
 
-                    ArrayList<CropAssessment> rain = cadb.getRainFall(week_of_year, year);
-
-                    if (cadb.checkExistingNarrative(year, week_ending) == true) {
-                        System.out.println("it entered tester");
+                    if (cadb.checkExistingNarrative(cropyear, week_ending) == true) {
+//                        System.out.println("it entered tester");
                         cn = new CropNarrative();
-                        cn = cadb.getAssessmentNarrative(year, week_ending);
-
-//                  
+                        cn = cadb.getAssessmentNarrative(cropyear, week_ending);
                     }
                     session.setAttribute("rainfall", rain);
                     session.setAttribute("narrative", cn);
                     session.setAttribute("CropAss", caT);
-
+//END OF MDO
                 } else if (successful.getGroup().equalsIgnoreCase("Board")) {
-                    rd = context.getRequestDispatcher("/Homepage_Board.jsp");
-
+                    if(caldb.checkifMilling()){
+                        milling = true;
+                        session.setAttribute("todayYear", cropyear);
+                        rd = context.getRequestDispatcher("/Homepage_Board.jsp");
+                    }
+                    else{
+                        rd = context.getRequestDispatcher("/viewCropEstimate.jsp");
+                    }
+                    session.setAttribute("milling", milling);
+//END OF BOARD
                 }
-
+                session.setAttribute("Week_ending", week_ending);
+                session.setAttribute("todayDate", todayDate);
+                session.setAttribute("todaysDate", todayDate);
+                session.setAttribute("todayYear", cropyear);
+                session.setAttribute("todayPhases", calist);
+                session.setAttribute("todayMonth", cal.getEmonth());
+                session.setAttribute("todayDay", cal.getEday());
+                session.setAttribute("weekOfYear", cal.getEweek());
                 session.setAttribute("user", successful);
                 rd.forward(request, response);
             } else {
@@ -96,19 +124,14 @@ public class Login extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -122,7 +145,11 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

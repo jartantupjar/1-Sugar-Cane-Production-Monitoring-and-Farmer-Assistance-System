@@ -5,7 +5,9 @@
  */
 package controller;
 
+import db.CalendarDB;
 import db.ProgramsDB;
+import entity.Calendar;
 import entity.Programs;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -42,8 +44,10 @@ public class viewOngoingProjectsBoard extends HttpServlet {
             ProgramsDB pdb = new ProgramsDB();
             ArrayList<Programs> pT = new ArrayList<Programs>();
             HttpSession session = request.getSession();
-            Date currDate;
-            currDate = (Date) session.getAttribute("todayDate");
+            CalendarDB caldb = new CalendarDB();
+            ArrayList<Calendar> calist = caldb.getCurrentYearDetails();
+            Date currDate = calist.get(0).getTodayDate();
+            System.out.println(currDate+"CURR");
             pT = pdb.getOngoingProjectsBoard(currDate);
             JSONObject data = new JSONObject();
             JSONArray list = new JSONArray();
@@ -51,6 +55,7 @@ public class viewOngoingProjectsBoard extends HttpServlet {
             {
                 for(int i=0;i<pT.size();i++){
                     ArrayList<String> obj = new ArrayList<String>();
+                    System.out.println(pT.get(i).getProg_name()+"PROGRAM");
                     obj.add(pT.get(i).getProg_name());
                     obj.add(pT.get(i).getDate_initial().toString());
                     obj.add(pT.get(i).getDate_end().toString());

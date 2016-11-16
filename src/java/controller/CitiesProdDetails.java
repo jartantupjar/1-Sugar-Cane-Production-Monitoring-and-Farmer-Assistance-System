@@ -5,6 +5,7 @@
  */
 package controller;
 
+import db.CalendarDB;
 import db.CropBoardDB;
 import entity.CropBoard;
 import java.io.IOException;
@@ -52,7 +53,9 @@ public class CitiesProdDetails extends HttpServlet {
             Date cdate = Date.valueOf(param[1]);
             System.out.println(cdate + " BEFORE !!!!");
             HttpSession session = request.getSession();
-            int year = (int) session.getAttribute("todayYear");
+            CalendarDB caldb = new CalendarDB();
+            ArrayList<entity.Calendar> calist = caldb.getCurrentYearDetails();
+            int year = calist.get(0).getYear();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
             try{
             java.util.Date date = sdf.parse(param[1]);
@@ -64,6 +67,7 @@ public class CitiesProdDetails extends HttpServlet {
             Calendar cal = Calendar.getInstance();
             cal.setTime(cdate);
             int wof = cdb.getWeekOfYear(cdate.toString());
+            if(year <= 2016){
             cT = cdb.getWeeklyProducedReportByRegionDetails(year,cdate.toString(),param[0],wof);
             if(cT!=null){
                 ServletContext context = getServletContext();
@@ -76,6 +80,22 @@ public class CitiesProdDetails extends HttpServlet {
                 ServletContext context = getServletContext();
                 RequestDispatcher rd = context.getRequestDispatcher("/index.jsp");
                 rd.forward(request, response);
+            }
+            }
+            else{
+                cT = cdb.getCurrentWeeklyProducedReportByRegionDetails(year,cdate.toString(),param[0],wof);
+            if(cT!=null){
+                ServletContext context = getServletContext();
+                RequestDispatcher rd = context.getRequestDispatcher("/CitiesWeekView.jsp");
+                session.setAttribute("todayDate", cdate);
+                session.setAttribute("crop", cT);
+                rd.forward(request, response);  
+            }
+            else{
+                ServletContext context = getServletContext();
+                RequestDispatcher rd = context.getRequestDispatcher("/index.jsp");
+                rd.forward(request, response);
+            }
             }
         }
     }

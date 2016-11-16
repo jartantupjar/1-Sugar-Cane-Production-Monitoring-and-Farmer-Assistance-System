@@ -1,8 +1,10 @@
 package controller;
 
+import db.CalendarDB;
 import db.FarmsDB;
 import db.ProgramsDB;
 import db.fixedRecDB;
+import entity.Calendar;
 import entity.Farm;
 import entity.FarmRecTable;
 import entity.Problems;
@@ -34,10 +36,14 @@ public class viewFieldDetails extends BaseServlet {
         Farm farm;
         
          System.err.println("TODAYS user " + session.getAttribute("user"));
-        System.err.println("TODAYS DATE " + session.getAttribute("todayDate"));
+     
      
         int id = Integer.parseInt(request.getParameter("id"));
-         
+//            CalendarDB caldb= new CalendarDB();
+//   ArrayList<Calendar> calist= caldb.getCurrentYearDetails();
+//   int cropyr=calist.get(0).getYear();
+        
+        //added date
           farm=farmsdb.getAllFieldDetails(id);
     
       

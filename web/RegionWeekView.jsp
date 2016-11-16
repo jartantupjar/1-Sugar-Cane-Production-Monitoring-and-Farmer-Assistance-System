@@ -292,7 +292,6 @@
                     series: [{
                             name: ti,
                             type: 'column',
-                            yAxis: 1,
                             data: data.prod,
                             tooltip: {
                                 valueSuffix: ' '+sv
@@ -381,7 +380,6 @@
                     series: [{
                             name: tis,
                             type: 'column',
-                            yAxis: 1,
                             data: data.prod,
                             tooltip: {
                                 valueSuffix: ' '+sl

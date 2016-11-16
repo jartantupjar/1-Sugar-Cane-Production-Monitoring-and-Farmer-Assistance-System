@@ -30,13 +30,29 @@
          
             <!-- timeline time label -->
         
-          
-              <li class="time-label text-center">
-                  <a class="bg-purple text-center">
-                  
+          <li class="time-label text-center">
+                  <a class="user-menu text-center">
+                  Today is 
                   <c:out value="${todayDate}"></c:out> 
                   </a>
             </li>
+             
+                  <c:if test="${not empty todayPhases}">
+                      <c:forEach items="${todayPhases}" var="phase" varStatus="loop" >
+                         
+                           <li class="time-label text-center">
+                              
+                        <a class="user-menu text-center">
+                              <c:if test="${loop.index>0}">and </c:if>
+                  <c:out value="${phase.phase}"></c:out> 
+                  Period of Crop Year <c:out value="${phase.year}"></c:out> 
+                  </a>   
+                   </li>
+                        </c:forEach>
+                  </c:if> 
+                 
+           
+              
          
             <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -61,7 +77,9 @@
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                    <form action="Login" method="Post">
+                  <input class="btn btn-default btn-flat" type="submit" value="Logout">
+                  </form>
                 </div>
               </li>
             </ul>

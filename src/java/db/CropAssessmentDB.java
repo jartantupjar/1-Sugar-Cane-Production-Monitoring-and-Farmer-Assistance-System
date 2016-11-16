@@ -162,11 +162,25 @@ public class CropAssessmentDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
+            PreparedStatement pstmt = null;
             String query = "SELECT * FROM weeklyestimate where id = ? and year = ?  ;";
-            PreparedStatement pstmt = conn.prepareStatement(query);
-            int id = getWeeklyEstimateID(weekofyear, year);
-            pstmt.setInt(1, id);
-            pstmt.setInt(2, year);
+            
+            String query2 = "select date as week_ending,weekofyear(date), round(sum(area_harvested),2) as area, round(sum(tons_cane),2) as actual, sum(lkg)\n"
+                    + "from production\n"
+                    + "where year = ? and weekofyear(date) = ? \n"
+                    + "group by weekofyear(date)\n"
+                    + "order by date;";
+            if (year <= 2016) {
+                pstmt = conn.prepareStatement(query);
+                int id = getWeeklyEstimateID(weekofyear, year);
+                pstmt.setInt(1, id);
+                pstmt.setInt(2, year);
+            } else {
+                pstmt = conn.prepareStatement(query2);
+                pstmt.setInt(1, year);
+                pstmt.setInt(2, weekofyear);
+            }
+
             ResultSet rs = pstmt.executeQuery();
             ArrayList<CropAssessment> cT = null;
             CropAssessment c;
@@ -175,7 +189,7 @@ public class CropAssessmentDB {
                 do {
                     c = new CropAssessment();
                     c.setThisTons_Cane(rs.getDouble("actual"));
-                    c.setEstiTons_Cane(rs.getDouble("forecasted"));
+//                    c.setEstiTons_Cane(rs.getDouble("forecasted"));
                     c.setThisArea(rs.getDouble("area"));
                     c.setWeek_ending(rs.getDate("week_ending"));
                     cT.add(c);
@@ -198,7 +212,15 @@ public class CropAssessmentDB {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "SELECT sum(forecasted) as 'total' FROM weeklyestimate where year = ? ;";
-            PreparedStatement pstmt = conn.prepareStatement(query);
+            String query2 = "SELECT sum(tons_cane) as 'total' FROM production where year = ? ;";
+            PreparedStatement pstmt = null;
+            if (year<=2016){
+               pstmt = conn.prepareStatement(query);  
+            }
+            else
+            {
+                pstmt = conn.prepareStatement(query2);  
+            }
             pstmt.setInt(1, year);
             ResultSet rs = pstmt.executeQuery();
             Double tc = 0.00;
@@ -221,8 +243,16 @@ public class CropAssessmentDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
+            PreparedStatement pstmt = null;
             String query = "SELECT sum(area) as 'total' FROM cropestimatedistrict where year = ? ;";
-            PreparedStatement pstmt = conn.prepareStatement(query);
+            String query2 = "SELECT sum(area_harvested) as 'total' FROM production where year = ? ;";
+            if(year<=2016){
+              pstmt = conn.prepareStatement(query);  
+            }
+            else{
+              pstmt = conn.prepareStatement(query2);
+            }
+            
             pstmt.setInt(1, year);
             ResultSet rs = pstmt.executeQuery();
             Double area = 0.00;
@@ -281,11 +311,24 @@ public class CropAssessmentDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
+            PreparedStatement pstmt = null;
             String query = "SELECT sum(area) as 'previous_area',sum(actual) as 'previous_tc' FROM weeklyestimate where id < ? and year = ? ;";
-            PreparedStatement pstmt = conn.prepareStatement(query);
+
+            String query2 = "select  round(sum(area_harvested),2) 'previous_area' , round(sum(tons_cane),2) as 'previous_tc', sum(lkg)\n"
+                    + "from production\n"
+                    + "where year = ? and weekofyear(date) < ?\n"
+                    + "order by date;";
+            if(year <= 2016){
+            pstmt = conn.prepareStatement(query);
             int id = getWeeklyEstimateID(weekofyear, year);
             pstmt.setInt(1, id);
             pstmt.setInt(2, year);
+            }
+            else{
+            pstmt = conn.prepareStatement(query2);
+            pstmt.setInt(1, year);
+            pstmt.setInt(2, weekofyear);
+            }
             ResultSet rs = pstmt.executeQuery();
             ArrayList<CropAssessment> cT = null;
             CropAssessment c;

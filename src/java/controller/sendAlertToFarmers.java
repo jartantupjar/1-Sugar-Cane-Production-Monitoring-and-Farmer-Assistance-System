@@ -5,12 +5,15 @@
  */
 package controller;
 
+import db.CalendarDB;
 import db.ForumDB;
 import db.ProblemsDB;
+import entity.Calendar;
 import entity.Problems;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -46,23 +49,24 @@ public class sendAlertToFarmers extends HttpServlet {
             String barangay = (String) session.getAttribute("barangay");
             String district = pdb.getDistrict(barangay, muni);
             String msg = request.getParameter("message");
-            if(msg.equalsIgnoreCase("")){
+            if (msg.equalsIgnoreCase("")) {
                 msg = "The MDO has alerted you to be aware that a disaster is happening near your barangay";
             }
             System.out.println(msg + " dafuq ?");
             Problems p = (Problems) session.getAttribute("problem");
-            Date pdate = (Date) session.getAttribute("todayDate");
+            CalendarDB caldb = new CalendarDB();
+            ArrayList<Calendar> calist = caldb.getCurrentYearDetails();
+            Date pdate = calist.get(0).getTodayDate();
             int check = 0;
             int test = 0;
-            if(p !=null){
-               check =  pdb.addAlertToFarmers(p.getProb_id(), msg, pdate, barangay, district, muni);
+            if (p != null) {
+                check = pdb.addAlertToFarmers(p.getProb_id(), msg, pdate, barangay, district, muni);
             }
-            if(check>0){
+            if (check > 0) {
                 ServletContext context = getServletContext();
                 RequestDispatcher rd = context.getRequestDispatcher("/Disaster Report.jsp");
                 rd.forward(request, response);
-            }
-            else{
+            } else {
                 ServletContext context = getServletContext();
                 RequestDispatcher rd = context.getRequestDispatcher("/index.jsp");
                 rd.forward(request, response);

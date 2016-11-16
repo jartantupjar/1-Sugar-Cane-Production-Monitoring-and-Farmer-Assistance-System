@@ -70,6 +70,7 @@
                                 <select class="form-control treeselect" style="width:70%" id="select6">
                                   <option selected="selected">Tons Cane</option>
                                   <option>Area</option>
+                                  <option>Yield</option>
                                 </select>
                               
                                         </div>
@@ -82,7 +83,8 @@
 
                     </div>
                     <br>
-                    <div class="col-md-6" > 
+                    <c:if test="${not empty CropAss}">
+                    <div class="col-md-10" > 
                         <div class="box box-info">
                             <div class="box-header with-border">
                                 <h1 class="box-title">Area Harvested : <c:out value="${todayDate}"></c:out> </h1>
@@ -137,7 +139,7 @@
                         </div>
                         <div class="box box-info">
                             <div class="box-header with-border">
-                                <h1 class="box-title">Standing Crop (Yesterday's Week)</h1>
+                                <h1 class="box-title">Standing Crop</h1>
                                 <div class="box-tools pull-right">
                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -165,7 +167,9 @@
 
                         </div>
                     </div> 
+                                </c:if>
                     <br>
+                    <c:if test="${todayYear <= 2016}">
                     <div class="col-md-6" > 
                         <div class="box box-info">
                             <div class="box-header with-border">
@@ -195,6 +199,7 @@
                             </div>
                         </div>
                       </div>
+                    </c:if>
                     <c:if test="${not empty narrative}">
                     <div class="col-md-6" > 
                         <div class="box box-info">
@@ -400,85 +405,7 @@
   });
         </script>
 
-        <script type="text/javascript">
-            $(function () {  //gauge code
-
-                var gaugeOptions = {
-                    chart: {
-                        type: 'solidgauge'
-                    },
-                    title: null,
-                    pane: {
-                        center: ['50%', '85%'],
-                        size: '140%',
-                        startAngle: -90,
-                        endAngle: 90,
-                        background: {
-                            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || '#EEE',
-                            innerRadius: '60%',
-                            outerRadius: '100%',
-                            shape: 'arc'
-                        }
-                    },
-                    tooltip: {
-                        enabled: false
-                    },
-                    // the value axis
-                    yAxis: {
-                        stops: [
-                            [0.1, '#DF5353'], // red
-                            [0.5, '#DDDF0D'], // yellow
-                            [0.9, '#55BF3B'] // green 
-                        ],
-                        lineWidth: 0,
-                        minorTickInterval: null,
-                        tickAmount: 2,
-                        title: {
-                            y: -70
-                        },
-                        labels: {
-                            y: 16
-                        }
-                    },
-                    plotOptions: {
-                        solidgauge: {
-                            dataLabels: {
-                                y: 5,
-                                borderWidth: 0,
-                                useHTML: true
-                            }
-                        }
-                    }
-                };
-
-
-
-                // The RPM gauge
-                $('#container-rpm').highcharts(Highcharts.merge(gaugeOptions, {
-                    yAxis: {
-                        min: 0,
-                        max: 100,
-                        title: {
-                            text: 'TC/HA'
-                        }
-                    },
-                    series: [{
-                            name: 'TC/HA',
-                            data: [10],
-                            dataLabels: {
-                                format: '<div style="text-align:center"><span style="font-size:25px;color:' +
-                                        ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black') + '">{y:.1f}  </span><br/>' +
-                                        '<span style="font-size:12px;color:silver">*Production</span></div>'
-                            },
-                            tooltip: {
-                                valueSuffix: ' TonsCane/AreaHarvested'
-                            }
-                        }]
-
-                }));
-
-            });
-        </script>
+        
         <script>
 
             $(document).ready(function () {
