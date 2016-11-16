@@ -68,7 +68,8 @@ public class createNewRecommendation extends HttpServlet {
             System.out.println(fields_id);
             String title = request.getParameter("title");
             String dur = request.getParameter("config");
-            if (dur.equalsIgnoreCase("")) {
+            System.out.println(dur+"DUR TAKEN");
+            if (dur == null || dur.equalsIgnoreCase("")) {
                 duration = 0;
             } else {
                 duration = Integer.parseInt(dur);
@@ -105,7 +106,8 @@ public class createNewRecommendation extends HttpServlet {
                             System.out.println(request.getParameterValues(paramName)[i]);
                             //connects recommendation to problem table
                             int probid = Integer.parseInt(request.getParameterValues(paramName)[i]);
-                            if (probid == 0) {
+                            System.out.println(probid+"when i am out of options left");
+                            if (duration > 0) {
                                 r.setImprovement("Y");
                                 int check = recDB.addRecommendation(r);
                                 pass = check;

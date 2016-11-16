@@ -64,7 +64,7 @@
                                         <a style="width: 35%" class="btn btn-instagram" id="ai"><i class="fa fa-gear "></i>  Aims to improve </a>
                                         <div class="form-group hidden" id="duration">
                                             <label>Duration </label>
-                                            <input class="form-control" type="number" min="1" max="100" id="config" name="config" placeholder="Enter how many days"></input>
+                                            <input class="form-control" type="number" min="1" max="100"  name="config" placeholder="Enter how many days"></input>
                                         </div>
                                         
                                         <div class="form-group">

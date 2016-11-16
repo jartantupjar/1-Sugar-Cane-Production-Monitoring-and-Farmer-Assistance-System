@@ -12,7 +12,7 @@ import java.sql.Date;
  * @author Bryll Joey Delfin
  */
 public class Calendar {
-    private int syear,sday,smonth,eyear,eday,emonth, year,eweek;
+    private int syear,sday,smonth,eyear,eday,emonth, year,eweek, duration, recom_id;
     private String phase, district;
     private Date starting, ending,todayDate;
 
@@ -196,6 +196,34 @@ public class Calendar {
      */
     public void setEweek(int eweek) {
         this.eweek = eweek;
+    }
+
+    /**
+     * @return the duration
+     */
+    public int getDuration() {
+        return duration;
+    }
+
+    /**
+     * @param duration the duration to set
+     */
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    /**
+     * @return the recom_id
+     */
+    public int getRecom_id() {
+        return recom_id;
+    }
+
+    /**
+     * @param recom_id the recom_id to set
+     */
+    public void setRecom_id(int recom_id) {
+        this.recom_id = recom_id;
     }
     
             }

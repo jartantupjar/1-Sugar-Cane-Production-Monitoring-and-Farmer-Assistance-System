@@ -132,6 +132,88 @@ public Calendar getCalendarTypes(Date todayDate){
 
         return null;
     }
+    
+    public ArrayList<Calendar> getPhases(int cyear) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT * FROM crop_calendar where year = ?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, cyear);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<Calendar> list = null;
+
+            if (rs.next()) {
+                list = new ArrayList<>();
+                do {
+                    Calendar cal = new Calendar();
+                    cal.setYear(rs.getInt("year"));
+                    cal.setDistrict(rs.getString("district"));
+                    cal.setPhase(rs.getString("phase"));
+                    cal.setStarting(rs.getDate("date_starting"));
+                    cal.setEnding(rs.getDate("date_ending"));
+                    list.add(cal);
+                } while (rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            return list;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CropEstimateDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
+    
+    public ArrayList<Integer> getRecommendationsByPhase(String phase) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT * FROM recommendations where improvement = 'Y' and phase = ? ;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, phase);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<Integer> list = null;
+
+            if (rs.next()) {
+                list = new ArrayList<Integer>();
+                do {
+                    Calendar cal = new Calendar();
+                    cal.setRecom_id(rs.getInt("id"));
+                    list.add(cal.getRecom_id());
+                } while (rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            return list;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CropEstimateDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
+    
+    public Integer updateDurationByPhases(Calendar id){
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "update `recommendations-fields` set duration_days = ? where status = 'Active' and Recommendations_id = ?  ;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, id.getDuration());
+            pstmt.setInt(2, id.getRecom_id());
+            int check = pstmt.executeUpdate();
+                pstmt.close();
+                conn.close();            
+            return check;
+                 }catch (SQLException ex) {
+            Logger.getLogger(CalendarDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 
     //THIS METHOD IS ONLY FOR LOGIN ***DO NOT USE
 

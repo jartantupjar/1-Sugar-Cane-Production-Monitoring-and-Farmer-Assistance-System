@@ -160,32 +160,37 @@
                         </div>
                         <div class="box box-info">
                             <div class="box-header with-border">
-                                <h1 class="box-title">Recommendations</h1>
+                                <h1 class="box-title">Improvements Duration</h1>
                                 <div class="box-tools pull-right">
                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                     <!-- In box-tools add this button if you intend to use the contacts pane -->
                                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                 </div>
                             </div>
-
+                            <form id="frm-example" action="updateDurationByPhases">
                             <div class="box-body no-padding">
                                  <table class="table table-bordered" >
                                     <tbody>
                                         <tr>
-                                            <th>Recommendation</th>
-                                            <th>Description</th>
+                                            <th>Phase</th>
+                                            <th>Starting</th>
+                                            <th>Ending</th>
                                             <th>Config</th>
-                                            <th>Period/Phase</th>
                                         </tr>
+                                        <c:forEach var="ph" items="${phase}">
                                         <tr>	
-                                            <td>Recommended furrow distance</td>
-                                            <td>Farmers are recommended to have 1.5 meters of furrow distance</td>
-                                            <td> <input type="text" value="1.5 meters"</td>
-                                            <td>Planting Phase</td>
+                                            <td>${ph.phase}</td>
+                                            <td>${ph.starting}</td>
+                                            <td>${ph.ending}</td>
+                                            <td style="width: 35%"> <input style="width: 100%" type="number" name="duration${ph.phase}" min="1" max="100" placeholder="Enter the duration for improvment"></td>
+                                            
                                         </tr>
+                                        </c:forEach>
                                     </tbody>
                                 </table>
                             </div>
+                                <input type="submit" class="btn btn-success pull-right" value="Submit Duration">
+                            </form>
                         </div>
                     </div>        
                     <br>

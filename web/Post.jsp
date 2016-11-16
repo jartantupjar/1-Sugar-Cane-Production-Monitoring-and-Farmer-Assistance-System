@@ -299,7 +299,7 @@
                                             </select>
                                         </div>
                                         <label>Duration</label>
-                                        <input class="form-control" type="number"  name="duration" min="1" max="100" >
+                                        <input class="form-control" type="number"  name="config" min="1" max="100" >
                                         <label>Description</label>
                                         <input class="form-control" type="text"  name="description" >
                                     </div>

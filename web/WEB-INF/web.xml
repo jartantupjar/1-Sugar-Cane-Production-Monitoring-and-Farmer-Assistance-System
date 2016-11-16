@@ -320,6 +320,14 @@
         <servlet-name>viewTestEstimates</servlet-name>
         <servlet-class>controller.viewTestEstimates</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>viewPhasesDates</servlet-name>
+        <servlet-class>controller.viewPhasesDates</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>updateDurationByPhases</servlet-name>
+        <servlet-class>controller.updateDurationByPhases</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
@@ -639,6 +647,14 @@
     <servlet-mapping>
         <servlet-name>viewTestEstimates</servlet-name>
         <url-pattern>/viewTestEstimates</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewPhasesDates</servlet-name>
+        <url-pattern>/viewPhasesDates</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateDurationByPhases</servlet-name>
+        <url-pattern>/updateDurationByPhases</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
