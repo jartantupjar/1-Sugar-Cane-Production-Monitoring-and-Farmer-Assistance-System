@@ -1,7 +1,9 @@
 package controller;
 
+import db.CalendarDB;
 import db.ProductionDB;
 import db.fixedRecDB;
+import entity.Calendar;
 import entity.FarmRecTable;
 import entity.Recommendation;
 import entity.brgySummary;
@@ -27,8 +29,26 @@ public class viewBrgyMuniTable extends BaseServlet {
         HttpSession session = request.getSession();
     ProductionDB prodb= new ProductionDB();
       String muni= request.getParameter("name");
-
-        ArrayList<brgySummary> fct = prodb.viewBrgyMuniTable(muni,2015);
+      ArrayList<brgySummary> fct=null;
+      
+        CalendarDB caldb= new CalendarDB();
+   ArrayList<Calendar> calist= caldb.getCurrentYearDetails();
+   int cropyr=calist.get(0).getYear();
+   
+if(cropyr>2016){
+      if(caldb.checkifMilling()){
+          System.out.println("brgymunitable- its milling");
+           fct = prodb.viewCurrBrgyMuniTable(muni,cropyr);
+      }else{
+           ArrayList<Integer>histyrs= prodb.getDistinctHistProdYrs(cropyr);
+         fct = prodb.viewBrgyMuniTable(muni,histyrs.get(0));    
+      }
+      
+}else{
+   fct = prodb.viewBrgyMuniTable(muni,cropyr);
+}
+        
+        
         
         JSONObject data = new JSONObject();
         JSONArray list = new JSONArray();

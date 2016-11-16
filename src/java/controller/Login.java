@@ -48,21 +48,24 @@ public class Login extends HttpServlet {
             CropAssessmentDB cadb = new CropAssessmentDB();
             User successful = myUserDB.authenticate(oneUser);
             if (successful != null) {
-               ServletContext context = getServletContext();
+                 ServletContext context = getServletContext();
                 HttpSession session = request.getSession();
                 
               
                 String sdate = request.getParameter("currentdate");
-//                String sdate = "2015-02-10"; // date of the login-- change this to the parameter date
-//                Date todayDate = Date.valueOf(sdate);
+
+                
                 java.util.Date inicheck = new SimpleDateFormat("MM/dd/yyyy").parse(sdate);
                 Date todayDate = new java.sql.Date(inicheck.getTime());
                 CalendarDB caldb = new CalendarDB();
 
-                caldb.processNewTodayDate(todayDate);//this is to set todaydate to db
+                if(caldb.checkifvalidDate(todayDate)){
+                    
+                  caldb.processNewTodayDate(todayDate);//this is to set todaydate to db
                 Calendar cal = caldb.getCalendarTypes(todayDate);//weekofyear//month//day
                 ArrayList<Calendar> calist = caldb.getCurrentYearDetails();//gets the phases/today/crop yr
                 Integer cropyear = calist.get(0).getYear();
+              
                 
                 //start of the crop assessment report
                 ArrayList<CropAssessment> caT=null;
@@ -71,7 +74,8 @@ public class Login extends HttpServlet {
                 if(caldb.checkifMilling()){//checks if today is milling period
                     caT  = new ArrayList<CropAssessment>();
                     System.out.println(cal.getEweek()+"EWEEK");
-                caT = cadb.getCropAssesmentRajversion(cal.getEweek(), cropyear);
+                    System.out.println(calist.get(0).getTodayDate()+"TODAYDATE");
+                caT = cadb.getCropAssesmentRajversion(cal.getEweek(), cropyear, calist.get(0).getTodayDate().toString());
                 week_ending=caT.get(0).getWeek_ending();
                 }
                
@@ -114,6 +118,11 @@ public class Login extends HttpServlet {
                 session.setAttribute("weekOfYear", cal.getEweek());
                 session.setAttribute("user", successful);
                 rd.forward(request, response);
+            }else{
+                   
+                RequestDispatcher rd = context.getRequestDispatcher("/index.jsp");
+                rd.forward(request, response);
+                }
             } else {
                 ServletContext context = getServletContext();
                 RequestDispatcher rd = context.getRequestDispatcher("/index.jsp");

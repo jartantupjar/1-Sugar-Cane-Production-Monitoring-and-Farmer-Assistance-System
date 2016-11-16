@@ -33,12 +33,12 @@ import net.sf.jasperreports.view.JasperViewer;
  */
 public class CropAssessmentDB {
 
-    public ArrayList<CropAssessment> getCropAssesmentRajversion(Integer week_of_year, Integer year) {
+    public ArrayList<CropAssessment> getCropAssesmentRajversion(Integer week_of_year, Integer year, String tdate) {
         ArrayList<CropAssessment> cT = new ArrayList<CropAssessment>();
         ArrayList<CropAssessment> currT = new ArrayList<CropAssessment>();
         ArrayList<CropAssessment> prevT = new ArrayList<CropAssessment>();
-        currT = getCropAssessmentReportForTheWeek(week_of_year, year);
-        prevT = getPrevCropAssessmentReportForTheWeek(week_of_year, year);
+        currT = getCropAssessmentReportForTheWeek(week_of_year, year, tdate);
+        prevT = getPrevCropAssessmentReportForTheWeek(week_of_year, year, tdate);
         CropAssessment ca = new CropAssessment();
         CropAssessment ca2 = new CropAssessment();
         DecimalFormat df = new DecimalFormat("#.##");
@@ -157,7 +157,7 @@ public class CropAssessmentDB {
         return null;
     }
 
-    public ArrayList<CropAssessment> getCropAssessmentReportForTheWeek(int weekofyear, int year) {
+    public ArrayList<CropAssessment> getCropAssessmentReportForTheWeek(int weekofyear, int year ,String tdate) {
         try {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
@@ -165,11 +165,11 @@ public class CropAssessmentDB {
             PreparedStatement pstmt = null;
             String query = "SELECT * FROM weeklyestimate where id = ? and year = ?  ;";
             
-            String query2 = "select date as week_ending,weekofyear(date), round(sum(area_harvested),2) as area, round(sum(tons_cane),2) as actual, sum(lkg)\n"
-                    + "from production\n"
-                    + "where year = ? and weekofyear(date) = ? \n"
-                    + "group by weekofyear(date)\n"
-                    + "order by date;";
+            String query2 = "select date as week_ending,weekofyear(date), round(sum(area_harvested),2) as area, round(sum(tons_cane),2) as actual, sum(lkg)\n" +
+"                    from production\n" +
+"                    where year = ? and date<= ? and weekofyear(date) = ?\n" +
+"                    group by weekofyear(date)\n" +
+"                    order by date;";
             if (year <= 2016) {
                 pstmt = conn.prepareStatement(query);
                 int id = getWeeklyEstimateID(weekofyear, year);
@@ -178,7 +178,8 @@ public class CropAssessmentDB {
             } else {
                 pstmt = conn.prepareStatement(query2);
                 pstmt.setInt(1, year);
-                pstmt.setInt(2, weekofyear);
+                pstmt.setInt(3, weekofyear);
+                pstmt.setString(2, tdate);
             }
 
             ResultSet rs = pstmt.executeQuery();
@@ -306,7 +307,7 @@ public class CropAssessmentDB {
         return null;
     }
 
-    public ArrayList<CropAssessment> getPrevCropAssessmentReportForTheWeek(int weekofyear, int year) {
+    public ArrayList<CropAssessment> getPrevCropAssessmentReportForTheWeek(int weekofyear, int year, String tdate) {
         try {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
@@ -314,10 +315,11 @@ public class CropAssessmentDB {
             PreparedStatement pstmt = null;
             String query = "SELECT sum(area) as 'previous_area',sum(actual) as 'previous_tc' FROM weeklyestimate where id < ? and year = ? ;";
 
-            String query2 = "select  round(sum(area_harvested),2) 'previous_area' , round(sum(tons_cane),2) as 'previous_tc', sum(lkg)\n"
-                    + "from production\n"
-                    + "where year = ? and weekofyear(date) < ?\n"
-                    + "order by date;";
+            String query2 = "select date as week_ending,weekofyear(date), round(sum(area_harvested),2) as previous_area, round(sum(tons_cane),2) as previous_tc, sum(lkg)\n" +
+"                    from production\n" +
+"                    where year = ? and date<= ? and weekofyear(date) < ?\n" +
+"                    group by weekofyear(date)\n" +
+"                    order by date;";
             if(year <= 2016){
             pstmt = conn.prepareStatement(query);
             int id = getWeeklyEstimateID(weekofyear, year);
@@ -327,7 +329,8 @@ public class CropAssessmentDB {
             else{
             pstmt = conn.prepareStatement(query2);
             pstmt.setInt(1, year);
-            pstmt.setInt(2, weekofyear);
+            pstmt.setInt(3, weekofyear);
+            pstmt.setString(2, tdate);
             }
             ResultSet rs = pstmt.executeQuery();
             ArrayList<CropAssessment> cT = null;
@@ -336,8 +339,8 @@ public class CropAssessmentDB {
                 cT = new ArrayList<>();
                 do {
                     c = new CropAssessment();
-                    c.setPrevTons_Cane(rs.getDouble("previous_tc"));
-                    c.setPrevArea(rs.getDouble("previous_area"));
+                    c.setPrevTons_Cane(rs.getDouble("previous_area"));
+                    c.setPrevArea(rs.getDouble("previous_tc"));
                     cT.add(c);
 
                 } while (rs.next());

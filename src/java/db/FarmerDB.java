@@ -5,10 +5,12 @@
  */
 package db;
 
+import entity.Calendar;
 import entity.Farmer;
 import entity.Problems;
 import entity.Recommendation;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -89,12 +91,19 @@ public class FarmerDB {
        public Farmer viewHistProdDetails(Farmer f) {
         
          try {
+             
+               ProductionDB prodb=new ProductionDB();
+             CalendarDB caldb= new CalendarDB();
+            ArrayList<Calendar> calist= caldb.getCurrentYearDetails();
+            int cropyr=calist.get(0).getYear();
+            
              // put functions here : previous week production, this week production
              DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
              Connection conn = myFactory.getConnection();
-             String query = "select sum(tons_cane) as totProd,avg(tons_cane) as avgProd,sum(area) as tarea,avg(area) as avgarea,avg(tons_cane)/avg(area) as avgyield,avg(tons_cane/area) as tavgyield,count(DISTINCT year) as tyears from historicalproduction where Farmers_name=? ;";
+             String query = "select sum(tons_cane) as totProd,avg(tons_cane) as avgProd,sum(area) as tarea,avg(area) as avgarea,avg(tons_cane)/avg(area) as avgyield,avg(tons_cane/area) as tavgyield,count(DISTINCT year) as tyears from historicalproduction where Farmers_name=? and year<=? ;";
              PreparedStatement pstmt = conn.prepareStatement(query);
              pstmt.setString(1, f.getName());
+             pstmt.setInt(2, cropyr);
              ResultSet rs = pstmt.executeQuery();
              
              if (rs.next()) {

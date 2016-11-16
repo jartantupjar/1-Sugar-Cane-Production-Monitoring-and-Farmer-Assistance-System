@@ -12,7 +12,7 @@ package entity;
 public class Farmer {
     private int id,tfarms, tYears ;
     private String name,phone,year;
-    private Double production,totalProd,avgProd,totalArea,avgArea,curYield,avgYield,tavgYield,tYield;    
+    private Double production,totalProd,avgProd,totalArea,avgArea,curYield,avgYield,tavgYield,tYield,curHA,curProd;    
 
     /**
      * @return the id
@@ -223,5 +223,33 @@ public class Farmer {
      */
     public void settYield(Double tYield) {
         this.tYield = tYield;
+    }
+
+    /**
+     * @return the curHA
+     */
+    public Double getCurHA() {
+        return curHA;
+    }
+
+    /**
+     * @param curHA the curHA to set
+     */
+    public void setCurHA(Double curHA) {
+        this.curHA = curHA;
+    }
+
+    /**
+     * @return the curProd
+     */
+    public Double getCurProd() {
+        return curProd;
+    }
+
+    /**
+     * @param curProd the curProd to set
+     */
+    public void setCurProd(Double curProd) {
+        this.curProd = curProd;
     }
 }

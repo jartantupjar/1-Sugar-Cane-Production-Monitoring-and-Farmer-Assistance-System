@@ -4,6 +4,7 @@ package db;
 import entity.Calendar;
 import entity.CropValidation;
 import entity.Farm;
+import entity.Farmer;
 import entity.Fertilizer;
 import entity.Problems;
 import entity.Recommendation;
@@ -13,6 +14,7 @@ import entity.Tillers;
 import entity.compProblems;
 import entity.compRecommendation;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -67,7 +69,7 @@ public class FarmsDB {
         return false;
     }
 
-    public ArrayList<Farm> getFarmerFieldsTable(String fname) {
+    public ArrayList<Farm> getFarmerFieldsTable(String fname,int cropyr) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
@@ -77,13 +79,62 @@ public class FarmsDB {
             ResultSet rs = pstmt.executeQuery();
             ArrayList<Farm> farms = null;
             Farm farm;
-            if (rs.next()) {
+            
+            ProductionDB prodb=new ProductionDB();
+             Farmer farmer = prodb.viewFarmerSummarybyYearTest(fname, fname, cropyr);
+            
+           
+             if (rs.next()) {
                 farms = new ArrayList<Farm>();
                 do {
                     farm = new Farm();
                     farm.setId(rs.getInt("id"));
                     farm.setFarmer(fname);
+                    farm.setProduction(farmer.getProduction());
+                    farm.setTotalHa( farmer.getTotalArea());
                     farm.setArea(rs.getDouble("area"));
+                    farm.setDifYield((farm.getArea()/farm.getArea())*100);
+                    farm.setBarangay(rs.getString("barangay"));
+                    farm.setMunicipality(rs.getString("municipality"));
+                    farms.add(farm);
+
+                } while (rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            return farms;
+        } catch (SQLException ex) {
+            Logger.getLogger(FarmsDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public ArrayList<Farm> getCurrFarmerFieldsTable(String fname,int cropyr,Date todayDate) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select id,Farmers_name,barangay,municipality,area from fields where farmers_name=?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, fname);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<Farm> farms = null;
+            Farm farm;
+            
+            
+           ProductionDB prodb=new ProductionDB();
+             if (rs.next()) {
+                farms = new ArrayList<Farm>();
+                do {
+                    farm = new Farm();
+                    farm.setId(rs.getInt("id"));
+                    farm.setFarmer(fname);
+                    
+                       Farmer farmer = new Farmer(); 
+                    farmer=prodb.viewFieldSummarybyYear(farm.getId(),cropyr,todayDate);
+                    farm.setProduction(farmer.getProduction());
+                    farm.setTotalHa(farmer.getTotalArea());
+                    farm.setArea(rs.getDouble("area"));
+                    farm.setDifYield((farm.getTotalHa()/farm.getArea())*100);
                     farm.setBarangay(rs.getString("barangay"));
                     farm.setMunicipality(rs.getString("municipality"));
                     farms.add(farm);
@@ -115,7 +166,7 @@ public class FarmsDB {
         farm.setRecommendation(fRecDB.viewFarmRecTablebyFarm(fid));
         //added date
         farm.setProblems(probdb.getFarmProblemDetbyFarm(fid));
-        
+   
         farm.setSoilanalysis(getFieldSoilAnalysis(farm.getId()));
         farm.setFertilizer(getFieldFertilizers(farm.getId(), cropyr));
         farm.setTillers(getFieldTillers(farm.getId(), cropyr));
@@ -235,7 +286,7 @@ public class FarmsDB {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select year,Fields_id,fertilizer,first_dose,second_dose from fertilizers where  Fields_id=? and year=?;";
+            String query = "select year,Fields_id,fertilizer,first_dose,second_dose from fertilizers where  Fields_id=? and year<=? order by year DESC;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, id);
             pstmt.setInt(2, year);
@@ -265,7 +316,7 @@ public class FarmsDB {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select year,Fields_id,rep,count from tillers where Fields_id=? and year=?;";
+            String query = "select year,Fields_id,rep,count from tillers where Fields_id=? and year<=? order by year DESC;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, id);
             pstmt.setInt(2, year);

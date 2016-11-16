@@ -54,8 +54,8 @@ public class viewCropAssessment extends BaseServlet {
                 int year = cal.get(Calendar.YEAR);
                 ArrayList<CropAssessment> rain = cadb.getRainFall(week_of_year,year);
                 DecimalFormat df = new DecimalFormat("#.##");   
-                currT = cadb.getCropAssessmentReportForTheWeek(week_of_year, year);
-                prevT = cadb.getPrevCropAssessmentReportForTheWeek(week_of_year, year);
+                currT = cadb.getCropAssessmentReportForTheWeek(week_of_year, year, todayDate.toString());
+                prevT = cadb.getPrevCropAssessmentReportForTheWeek(week_of_year, year, todayDate.toString());
                 double etc = Double.valueOf(df.format(cadb.getTotalEstimatedTonsCane(year)));
                 double eah = Double.valueOf(df.format(cadb.getTotalEstimatedArea(year)));
                 Date week_ending = currT.get(0).getWeek_ending();

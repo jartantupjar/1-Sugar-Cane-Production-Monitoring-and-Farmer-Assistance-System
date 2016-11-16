@@ -56,6 +56,7 @@ public class CitiesProdDetails extends HttpServlet {
             CalendarDB caldb = new CalendarDB();
             ArrayList<entity.Calendar> calist = caldb.getCurrentYearDetails();
             int year = calist.get(0).getYear();
+            Date tdate = calist.get(0).getTodayDate();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
             try{
             java.util.Date date = sdf.parse(param[1]);
@@ -83,7 +84,8 @@ public class CitiesProdDetails extends HttpServlet {
             }
             }
             else{
-                cT = cdb.getCurrentWeeklyProducedReportByRegionDetails(year,cdate.toString(),param[0],wof);
+                
+                cT = cdb.getCurrentWeeklyProducedReportByRegionDetails(year,tdate.toString(),param[0],wof);
             if(cT!=null){
                 ServletContext context = getServletContext();
                 RequestDispatcher rd = context.getRequestDispatcher("/CitiesWeekView.jsp");

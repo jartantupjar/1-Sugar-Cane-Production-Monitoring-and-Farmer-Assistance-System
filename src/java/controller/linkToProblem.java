@@ -75,11 +75,12 @@ public class linkToProblem extends HttpServlet {
                         //connects recommendation to problem table
                         prob_id = Integer.parseInt(request.getParameterValues(paramName)[i]);
                         //int test = recDB.connectRecommendationtoProblem(check,prob_id);
-                        test2 = fdb.updatePostProblems(title, fields_id, prob_id);
+                        
                     }
 
                 }
             }
+            test2 = fdb.updatePostProblems(title, fields_id, prob_id);
             test = pdb.linktoProblems(fields_id, prob_id, pdate, "Verifying");
             fdb.addRecommendationProblem(fields_id, "You been linked to this problem", pdate, prob_id);
             if (test > 0 && test2 > 0) {

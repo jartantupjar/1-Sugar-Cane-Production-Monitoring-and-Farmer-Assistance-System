@@ -47,7 +47,7 @@
                                                 <span class="username"><a href="#">${post.farmer}</a></span>
                                             <span class="description">${post.date_posted}</span>
                                             <br>
-                                            <c:if test="${post.prob_id != ""}">
+                                            <c:if test="${not empty post.prob_id }">
                                                 <span class="username">Problem: ${post.name}</span>
                                             </c:if>
                                             <div>

@@ -33,7 +33,8 @@ public class loadTreeMapData extends BaseServlet {
                 System.out.println("entered 2017 milling check");
                 list= proddb.getCurrProdMunicipalforYear(tag);
             }else{
-                list= proddb.getProdMunicipalforYear(tag-1);
+                 ArrayList<Integer>histyrs= proddb.getDistinctHistProdYrs(tag);
+                list= proddb.getProdMunicipalforYear(histyrs.get(0));
             }   
            }else{
           list= proddb.getProdMunicipalforYear(tag);

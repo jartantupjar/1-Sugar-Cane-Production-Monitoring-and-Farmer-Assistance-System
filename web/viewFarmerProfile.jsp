@@ -22,7 +22,7 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                 <section class="content-header">
 
                     <h1>
-                        Farmer Profile(ADD HISTORICAL PRODUCTION CHART(highest recorded,lowest recorded,production),EVEN FOR FARMS?)(Farmer Activity)
+                        Farmer Profile(Farmer Activity)
                         <small>Optional description</small>
                     </h1>
                 </section>
@@ -65,21 +65,7 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                                 <!-- /.box-body -->
                             </div>    
                         </div>
-                        <div class="col-sm-4">
-                            <div class="box box-success">
-                                <div class="box-header with-border">
-                                    <h1 class="box-title">Farm Site Pic</h1>
-
-                                </div>
-                                <div class="box-body">
-
-
-                                    <img src="dist/img/user2-160x160.jpg" alt="crop" width="370" height="400">
-
-                                </div>
-                            </div>
-
-                        </div>
+                    
                         <div class="col-md-4">
                             <div class="box box-primary">
                                 <div class="box-body box-profile">
@@ -91,32 +77,26 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                                     <ul class="list-group list-group-unbordered">
 
                                         <li class="list-group-item">
-                                            <b>Current Production</b> <a class="pull-right"></a>
+                                            <b>Current Production</b> <a class="pull-right"><c:out value="${farmDet.curProd}"/> </a>
                                         </li>
                                         <li class="list-group-item">
-                                            <b>Current Area Harvested</b> <a class="pull-right"></a>
+                                            <b>Current Area Harvested</b> <a class="pull-right"><c:out value="${farmDet.curHA}"/> </a>
                                         </li>
                                         <li class="list-group-item">
-                                            <b>Current Yield</b> <a class="pull-right"></a>
+                                            <b>Current Yield</b>  <a class="pull-right"><c:out value="${farmDet.curYield}"/></a>
                                         </li>
-                                        <li class="list-group-item">
+<!--                                        <li class="list-group-item">
                                             <b>Total Production</b> <a class="pull-right"><c:out value="${farmDet.totalProd}"/> </a>
                                         </li>
+                                        
                                         <li class="list-group-item">
-                                            <b>Total Area Harvested</b> <a class="pull-right"><c:out value="${farmDet.totalArea}"/> </a>
+                                            <b>Total Average Production</b> <a class="pull-right"><c:out value="${farmDet.avgProd}"/> </a>
                                         </li>
                                         <li class="list-group-item">
-                                            <b>Average Production</b> <a class="pull-right"><c:out value="${farmDet.avgProd}"/> </a>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <b>Average Area Harvested</b> <a class="pull-right">
-                                                <c:out value="${farmDet.avgArea}"/> 
+                                            <b>Total Average Area Harvested</b> <a class="pull-right">
+                                               <%--<c:out value="${farmDet.avgArea}"/>--%> 
                                             </a>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <b>Average Yield(avg(TC)/avg(HA))</b> <a class="pull-right"><c:out value="${farmDet.avgYield}"/> 
-                                            </a>
-                                        </li>
+                                        </li>-->
                                         <li class="list-group-item">
                                             <b>Total Average Yield (avg(TC/HA))</b> <a class="pull-right"><c:out value="${farmDet.tavgYield}"/> 
                                             </a>
@@ -201,11 +181,13 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                                                 <th>id</th>
                                                 <th>Barangay</th>
                                                 <th>Municipality</th>
-                                                <th>Date Updated</th>
-                                                <th>Area</th>
+                                                <th>Total Area</th>
+                                                <th>Tons Cane</th>
+                                                <th>Harvested Area</th>
+                                                
                                                 <th>Yield</th>
                                                 <th>% completed</th>
-                                                <th>Cane Variety</th>
+                                               
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -246,7 +228,7 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                         'url': 'viewFarmersFieldTable?name=${farm}'
                     },
                     'columnDefs': [{
-                            'targets': 6,
+                            'targets': 7,
                             'render': function (data, type, full, meta) {
                                     return   '<div class="progress-group"> <span class="progress-number"><b>' + data + ' </b></span>  <div class="progress progress-sm progress-striped active"><div class="progress-bar progress-bar-primary" style="width: ' + data + '%"></div></div> </div>';
                                

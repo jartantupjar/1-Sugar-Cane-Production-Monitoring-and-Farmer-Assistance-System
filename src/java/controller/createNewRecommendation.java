@@ -5,8 +5,11 @@
  */
 package controller;
 
+import db.CalendarDB;
+import db.CropAssessmentDB;
 import db.ForumDB;
 import db.subjectiveRecDB;
+import entity.Calendar;
 import entity.Problems;
 import entity.Recommendation;
 import java.io.IOException;
@@ -62,6 +65,7 @@ public class createNewRecommendation extends HttpServlet {
             } else {
                 fields_id = 0;
             }
+            System.out.println(fields_id);
             String title = request.getParameter("title");
             String dur = request.getParameter("config");
             if (dur.equalsIgnoreCase("")) {
@@ -70,8 +74,11 @@ public class createNewRecommendation extends HttpServlet {
                 duration = Integer.parseInt(dur);
             }
             HttpSession session = request.getSession();
-            java.sql.Date dateparam = (Date) session.getAttribute("todayDate");
-            System.out.println(dateparam + "DATEPARAM");
+            CalendarDB caldb = new CalendarDB();
+            ArrayList<Calendar> calist = caldb.getCurrentYearDetails();//gets the phases/today/crop yr
+            Integer cropyear = calist.get(0).getYear();
+            Date dateparam = calist.get(0).getTodayDate();
+            System.out.println(dateparam + "DATEPARAM"+duration+"duration");
             String name = request.getParameter("rec_id");
             if(name == null){
             name  = request.getParameter("recommendation_name");
@@ -121,15 +128,17 @@ public class createNewRecommendation extends HttpServlet {
                 while (parameterNames.hasMoreElements()) {
                     paramName = parameterNames.nextElement();
                     System.out.println(paramName + "parameter");
-                    if (paramName.startsWith("probTable1")) {
+                    if (paramName.startsWith("probid")) {
                         for (int i = 0; i < request.getParameterValues(paramName).length; i++) {
                             pT.add(request.getParameterValues(paramName)[i]);
                             System.out.println(request.getParameterValues(paramName)[i]);
                             //connects recommendation to problem table
                             int probid = Integer.parseInt(request.getParameterValues(paramName)[i]);
+                            System.out.println(probid+"PROBID");
                             r.setImprovement("N");
                             int check = recDB.addRecommendation(r);
                             pass = check;
+                            System.out.println(check+"checker");
                             check2 = recDB.connectRecommendationtoProblem(check, probid);
                         }
                     }
