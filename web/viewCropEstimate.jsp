@@ -66,6 +66,7 @@
                                 </div>
 
                             </div>
+                            
 
 
                             <div class="box box-info hidden" id="genform">
@@ -125,7 +126,36 @@
                                 </div>
 
                             </div>
+                            <div class="box box-info">
+                                <div class="box-header with-border">
+                                    <h1 class="box-title">Forecast Simulations</h1>
+                                    <div class="box-tools pull-right">
+                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                    </div>
+                                </div>
 
+                                <div class="box-body">
+
+                                    <table id="testTable" class="table display table-hover" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>Area</th>
+                                                <th>Rainfall</th>
+                                                <th>Tiller Count</th>
+                                                <th>Avg Temp</th>
+                                                <th>Actual</th>
+                                                <th>Estimation 1</th>
+                                                <th>Estimation 2</th>
+                                                <th>Estimation 3</th>
+                                            </tr>
+                                        </thead>
+
+                                    </table>
+
+                                </div>
+
+                            </div>
                             <div class="box box-info">
                                 <div class="box-header with-border">
 
@@ -307,7 +337,7 @@
                                 backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
                             },
                             series: [{
-                                    name: 'Estimate 1',
+                                    name: 'Estimate 1'+ '<input type="checkbox" name="E1">',
                                     type: 'column',
                                     data: estd,
                                     tooltip: {
@@ -470,10 +500,16 @@
 //                    "ordering": false,
                     "info": false,
                     "searching": false
-                }
-
-
-                );
+                });
+                var table4 = $('#testTable').DataTable({
+                    'ajax': {
+                        'url': 'viewTestEstimates'
+                    },
+                    "paging": false,
+//                    "ordering": false,
+                    "info": false,
+                    "searching": false
+                });
             });
 //
 

@@ -316,6 +316,10 @@
         <servlet-name>viewOngoingProjectsBoard</servlet-name>
         <servlet-class>controller.viewOngoingProjectsBoard</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>viewTestEstimates</servlet-name>
+        <servlet-class>controller.viewTestEstimates</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
@@ -631,6 +635,10 @@
     <servlet-mapping>
         <servlet-name>viewOngoingProjectsBoard</servlet-name>
         <url-pattern>/viewOngoingProjectsBoard</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewTestEstimates</servlet-name>
+        <url-pattern>/viewTestEstimates</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

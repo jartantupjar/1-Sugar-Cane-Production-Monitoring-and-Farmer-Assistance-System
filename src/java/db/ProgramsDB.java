@@ -292,7 +292,7 @@ public class ProgramsDB {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "insert into kpis (year,Programs_name,name,value) values (?,?,?,?)";
+            String query = "insert into kpis (year,Programs_name,name,value,actual) values (?,?,?,?,0)";
             PreparedStatement pstmt = conn.prepareStatement(query);
             for (int i = 0; i < kpis.size(); i++) {
 
@@ -302,6 +302,7 @@ public class ProgramsDB {
                     pstmt.setString(2, kpis.get(0).getProgram_name());
                     pstmt.setString(3, kpis.get(i).getKpi());
                     pstmt.setDouble(4, kpis.get(i).getValues().get(a));
+                   
                     pstmt.addBatch();
                 }
 
@@ -352,7 +353,6 @@ public class ProgramsDB {
             String query = "UPDATE kpis SET actual=actual+? WHERE year=? and Programs_name=? and name=?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             for (int i = 0; i < kpis.size(); i++) {
-
                 int sYear = kpis.get(i).getKpi_year();
                 for (int a = 0; a < kpis.get(i).getaValues().size(); a++) {
                     pstmt.setDouble(1, kpis.get(i).getaValues().get(a));

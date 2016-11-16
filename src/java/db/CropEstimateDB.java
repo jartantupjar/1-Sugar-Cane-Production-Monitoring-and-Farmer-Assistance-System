@@ -47,7 +47,8 @@ public class CropEstimateDB {
         fce.setTemp(temp);
         fce.setTiller(tiller);
         
-        inputEstimates(fce);
+//        inputEstimates(fce);
+        inputTestEstimates(fce);
 
    //method to input forecasts to db
         return true;
@@ -68,6 +69,34 @@ public boolean inputEstimates(cropEstimate ce){
             pstmt.setDouble(7, ce.getForecasted());
             pstmt.setDouble(8, ce.getForecast2());
             pstmt.setDouble(9, ce.getForecast3());
+            int isSuccess = pstmt.executeUpdate();
+
+            pstmt.close();
+            conn.close();
+
+            return isSuccess == 1;
+        } catch (SQLException ex) {
+            Logger.getLogger(UsersDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+
+ 
+}
+public boolean inputTestEstimates(cropEstimate ce){
+      try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "INSERT INTO cropestimatetests (district,area,rainfall,avg_temperature,tiller_count,forecast1, forecast2, forecast3) VALUES (?,?,?,?,?,?,?,?);";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+
+            pstmt.setString(1, "TARLAC");
+            pstmt.setDouble(2, ce.getArea());
+            pstmt.setDouble(3, ce.getRainfall());
+            pstmt.setDouble(4, ce.getTemp());
+            pstmt.setDouble(5, ce.getTiller());
+            pstmt.setDouble(6, ce.getForecasted());
+            pstmt.setDouble(7, ce.getForecast2());
+            pstmt.setDouble(8, ce.getForecast3());
             int isSuccess = pstmt.executeUpdate();
 
             pstmt.close();
@@ -229,6 +258,48 @@ public boolean inputEstimates(cropEstimate ce){
                     double estim = rs.getDouble("forecasted1");
                     double estim2 = rs.getDouble("forecasted2");
                     double estim3 = rs.getDouble("forecasted3");
+                    ce.setActual(actual);
+                    ce.setForecasted(estim);
+                    ce.setForecast2(estim2);
+                    ce.setForecast3(estim3);
+                    //    ce.setDifference(getYieldDif(actual,estim));
+                    list.add(ce);
+                } while (rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProblemsDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public ArrayList<cropEstimate> viewTestEstimates() {
+        try {
+            // put functions here : previous week production, this week production
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select area,rainfall,tiller_count,avg_temperature,actual_tons_cane,forecast1,forecast2,forecast3 from cropestimatetests;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+  
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<cropEstimate> list = null;
+            cropEstimate ce;
+            if (rs.next()) {
+                list = new ArrayList<>();
+                do {
+
+                    ce = new cropEstimate();
+                  ce.setArea(rs.getDouble("area"));
+                    ce.setRainfall(rs.getDouble("rainfall"));
+                    ce.setTiller(rs.getDouble("tiller_count"));
+                    ce.setTemp(rs.getDouble("avg_temperature"));
+                    double actual = rs.getDouble("actual_tons_cane");
+                    double estim = rs.getDouble("forecast1");
+                    double estim2 = rs.getDouble("forecast2");
+                    double estim3 = rs.getDouble("forecast3");
                     ce.setActual(actual);
                     ce.setForecasted(estim);
                     ce.setForecast2(estim2);

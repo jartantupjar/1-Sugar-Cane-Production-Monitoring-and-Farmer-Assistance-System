@@ -75,11 +75,16 @@ public class viewFieldDetails extends BaseServlet {
          farm=farmsdb.getAllFieldDetails(id);
           farmer  = prodb.viewFarmerSummarybyYearTest(null,farm.getFarmer(),cropyr);
         }
-       DecimalFormat df = new DecimalFormat(".##");
+       DecimalFormat df = new DecimalFormat("#.##");
        
                    farm.setProduction(Double.parseDouble(df.format(farmer.getProduction())));
                    farm.setTotalHa(farmer.getTotalArea());
-                   farm.setYield(Double.parseDouble(df.format(farmer.getProduction()/farmer.getTotalArea())));
+                   if(farm.getProduction()!=0 && farm.getTotalHa()!=0){
+                      farm.setYield(Double.parseDouble(df.format(farmer.getProduction()/farmer.getTotalArea()))); 
+                   }else{
+                       farm.setYield(0); 
+                   }
+                   
      
        
         session.setAttribute("farm", farm);

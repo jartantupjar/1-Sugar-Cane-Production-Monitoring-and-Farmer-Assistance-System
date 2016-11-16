@@ -44,13 +44,28 @@ public class generateForecast extends HttpServlet {
        
             CropEstimateDB cedb = new CropEstimateDB();
             cropEstimate ce= new cropEstimate();
-            Double area,rain,tiller,temp;
-        area= Double.parseDouble(request.getParameter("area"));
-        rain= Double.parseDouble(request.getParameter("rain"));
-        temp = Double.parseDouble(request.getParameter("temp"));
-        tiller= Double.parseDouble(request.getParameter("tiller"));
-    
-         boolean check =  cedb.selectEstimates(area, rain, tiller, temp);
+            Double area=null,rain=null,tiller=null,temp=null;
+            String area1=null,rain1=null,tiller1=null,temp1=null;
+       
+        area1=request.getParameter("area");
+        rain1=request.getParameter("rain");
+        temp1=request.getParameter("temp");
+        tiller1= request.getParameter("tiller");
+        if(!area1.isEmpty()){
+             area= Double.parseDouble(area1);
+            }
+        if(!rain1.isEmpty()){
+             rain= Double.parseDouble(rain1);
+            }
+        if(!temp1.isEmpty()){
+             temp= Double.parseDouble(temp1);
+            }
+        if(!tiller1.isEmpty()){
+             tiller= Double.parseDouble(tiller1);
+            }
+        
+        
+        boolean check =  cedb.selectEstimates(area, rain, tiller, temp);
             if (check){
                 
                 ServletContext context = getServletContext();
