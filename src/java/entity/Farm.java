@@ -21,6 +21,8 @@ public class Farm {
     private Fertilizer fertilizer;
     private Tillers tillers;
     private ArrayList<Recommendation> recommendation;
+    private ArrayList<Fertilizer> fertlist;
+    private ArrayList<Tillers> tillist;
     private ArrayList<Problems> problems;
     private Date date_updated;
     private double area,yield,totalHa,production,difYield;
@@ -351,6 +353,34 @@ public class Farm {
      */
     public void setProblems(ArrayList<Problems> problems) {
         this.problems = problems;
+    }
+
+    /**
+     * @return the fertlist
+     */
+    public ArrayList<Fertilizer> getFertlist() {
+        return fertlist;
+    }
+
+    /**
+     * @param fertlist the fertlist to set
+     */
+    public void setFertlist(ArrayList<Fertilizer> fertlist) {
+        this.fertlist = fertlist;
+    }
+
+    /**
+     * @return the tillist
+     */
+    public ArrayList<Tillers> getTillist() {
+        return tillist;
+    }
+
+    /**
+     * @param tillist the tillist to set
+     */
+    public void setTillist(ArrayList<Tillers> tillist) {
+        this.tillist = tillist;
     }
 
  

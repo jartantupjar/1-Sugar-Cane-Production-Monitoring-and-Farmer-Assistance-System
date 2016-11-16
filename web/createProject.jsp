@@ -43,14 +43,14 @@
                                                             <a href="#tab1" data-toggle="tab" class="step" aria-expanded="true">
                                                                 <span class="number"> 1 </span>
                                                                 <span class="desc">
-                                                                    <i class="fa fa-check"></i> Program Setup </span>
+                                                                    <i class="fa fa-check"></i>Problem Selection </span>
                                                             </a>
                                                         </li>
                                                         <li>
                                                             <a href="#tab2" data-toggle="tab" class="step">
                                                                 <span class="number"> 2 </span>
                                                                 <span class="desc">
-                                                                    <i class="fa fa-check"></i> Problem Selection </span>
+                                                                    <i class="fa fa-check"></i> Program Setup </span>
                                                             </a>
                                                         </li>
                                                         <li>
@@ -74,7 +74,34 @@
                                                     </div>                 
                                                     <div class="tab-content">
                                                         <div class="tab-pane active" id="tab1">
-                                                            <h3 class="block">Provide the Program details</h3>
+                                                            <h3 class="block">Program is aimed to solve:</h3>
+
+                                                            <table id="probTable" class="table  dispTable table-hover" cellspacing="0" width="100%">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th></th>
+                                                                        <th>Problem</th>
+                                                                        <th>Description</th>
+                                                                        <th>Status</th>
+                                                                        <th>Type</th>
+                                                                        <th># Aff. Farms</th>
+                                                                        <th># Solutions</th>
+                                                                    </tr>
+                                                                </thead>
+
+                                                            </table>
+                                                           
+                                                            <div class="col-md-offset-9 col-md-9 pull-right">
+                                                                <a class="btn btn-outline green button-next"> Continue
+                                                                    <i class="fa fa-angle-right"></i>
+                                                                </a>
+
+                                                            </div>
+
+
+                                                        </div>
+                                                        <div class="tab-pane" id="tab2">
+                                                             <h3 class="block">Provide the Program details</h3>
                                                             <div class="form-group">
                                                                 <label class="control-label col-md-3">Program Name
                                                                     <span class="required" aria-required="true"> * </span>
@@ -118,32 +145,6 @@
 
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-offset-9 col-md-9 pull-right">
-                                                                <a class="btn btn-outline green button-next"> Continue
-                                                                    <i class="fa fa-angle-right"></i>
-                                                                </a>
-
-                                                            </div>
-
-
-                                                        </div>
-                                                        <div class="tab-pane" id="tab2">
-                                                            <h3 class="block">Program is aimed to solve:</h3>
-
-                                                            <table id="probTable" class="table  dispTable table-hover" cellspacing="0" width="100%">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th></th>
-                                                                        <th>Problem</th>
-                                                                        <th>Description</th>
-                                                                        <th>Status</th>
-                                                                        <th>Type</th>
-                                                                        <th># Aff. Farms</th>
-                                                                        <th># Solutions</th>
-                                                                    </tr>
-                                                                </thead>
-
-                                                            </table>
                                                             <div class="col-md-offset-9 col-md-9 pull-right">
 
                                                                 <a class="btn btn-outline green button-next"> Continue
@@ -245,7 +246,7 @@
                         return false;
                     },
                     onTabShow: function (tab, navigation, index) {
-                        if (index === 1 && chckr === false) {
+                        if (index === 2 && chckr === false) {
                             chckr = true;
                             var x = document.getElementById('reservation').value.split('-');
                             var ini = x[0].split('/');

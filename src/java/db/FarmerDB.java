@@ -131,7 +131,7 @@ public class FarmerDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select p.id,p.name,p.description from fields f join `Problems-Fields` pf on f.id=pf.Problems_id join problems p on p.id=pf.problems_id where f.Farmers_name=?  group by p.id;";
+            String query = "select p.id,p.name,p.description  from `problems-fields`pf JOIN fields f on pf.fields_id=f.id join problems p on p.id=pf.problems_id where f.farmers_name=? group by pf.problems_id;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1,fname);
             ResultSet rs = pstmt.executeQuery();

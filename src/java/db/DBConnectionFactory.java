@@ -1,3 +1,5 @@
+//reality
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -13,7 +15,7 @@ import java.sql.Connection;
 public abstract class DBConnectionFactory {
         String url = "jdbc:mysql://localhost/SRA";
         String username="root";
-        String password="delfin";
+        String password="Jartan.Tupjar1";
 
     public static DBConnectionFactory getInstance(){
         return new DBConnectionFactoryImpl();
