@@ -2,16 +2,20 @@ package controller;
 
 import db.CalendarDB;
 import db.FarmsDB;
+import db.ProductionDB;
 import db.ProgramsDB;
 import db.fixedRecDB;
 import entity.Calendar;
 import entity.Farm;
 import entity.FarmRecTable;
+import entity.Farmer;
 import entity.Problems;
 import entity.Programs;
 import entity.Recommendation;
 import entity.programsKPI;
 import java.io.IOException;
+import java.sql.Date;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import javax.servlet.RequestDispatcher;
@@ -33,7 +37,9 @@ public class viewFieldDetails extends BaseServlet {
         ProgramsDB progdb = new ProgramsDB();
         HttpSession session = request.getSession();
         FarmsDB farmsdb=new FarmsDB();
-        Farm farm;
+        FarmsDB farmdb = new FarmsDB();
+        ProductionDB prodb=new ProductionDB();
+     
         
          System.err.println("TODAYS user " + session.getAttribute("user"));
      
@@ -44,9 +50,38 @@ public class viewFieldDetails extends BaseServlet {
 //   int cropyr=calist.get(0).getYear();
         
         //added date
-          farm=farmsdb.getAllFieldDetails(id);
-    
-      
+        
+            Farm farm;
+            Farmer farmer;
+             CalendarDB caldb= new CalendarDB();
+            ArrayList<Calendar> calist= caldb.getCurrentYearDetails();
+            int cropyr=calist.get(0).getYear();
+            Date todayDate=calist.get(0).getTodayDate();
+            
+            farm=farmsdb.getAllFieldDetails(id);
+       if(cropyr>2016){
+            if(caldb.checkifMilling()){
+                  
+                 farmer  = prodb.viewFieldSummarybyYear(id,cropyr,todayDate);
+                   
+            }else{
+                  
+                   ArrayList<Integer>histyrs= prodb.getDistinctHistProdYrs(cropyr);
+                    farmer  = prodb.viewFarmerSummarybyYearTest(null,farm.getFarmer(),histyrs.get(0));
+                    
+                    
+            }
+        }else{
+         farm=farmsdb.getAllFieldDetails(id);
+          farmer  = prodb.viewFarmerSummarybyYearTest(null,farm.getFarmer(),cropyr);
+        }
+       DecimalFormat df = new DecimalFormat(".##");
+       
+                   farm.setProduction(Double.parseDouble(df.format(farmer.getProduction())));
+                   farm.setTotalHa(farmer.getTotalArea());
+                   farm.setYield(Double.parseDouble(df.format(farmer.getProduction()/farmer.getTotalArea())));
+     
+       
         session.setAttribute("farm", farm);
           session.setAttribute("id", id);
 

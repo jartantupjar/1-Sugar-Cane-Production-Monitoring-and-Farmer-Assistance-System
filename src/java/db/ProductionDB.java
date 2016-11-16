@@ -1062,6 +1062,37 @@ public class ProductionDB {
         }
         return null;
     }
+    public Farmer viewCurrFarmerSummarybyYear(String farmer, int year,Date todayDate) {
+        try {
+            // put functions here : previous week production, this week production
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT ifnull(sum(p.tons_cane),0) as production, ifnull(sum(p.area_harvested),0) as area,p.year from production p join fields f on p.fields_id=f.id where f.farmers_name=? and year=? and date<=?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+//          pstmt.setString(1, muni);
+       
+            pstmt.setString(1, farmer);
+            pstmt.setInt(2, year);
+            pstmt.setDate(3, todayDate);
+            ResultSet rs = pstmt.executeQuery();
+            Farmer ms = new Farmer();
+            ms.setName(farmer);
+            if (rs.next()) {
+
+                ms.setProduction(rs.getDouble("production"));
+                   ms.setTotalArea(rs.getDouble("area"));
+                ms.setYear(rs.getString("year"));
+             
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            return ms;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductionDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     public Farmer viewFieldSummarybyYear(int farm, int year,Date todayDate) {
         try {
             // put functions here : previous week production, this week production

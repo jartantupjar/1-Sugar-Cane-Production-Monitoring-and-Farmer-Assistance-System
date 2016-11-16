@@ -91,11 +91,7 @@ on barangay selection
                                                 <c:out value="${farm.yield}"/>
                                             </a>
                                         </li>
-                                        <li class="list-group-item">
-                                            <b>Average Yield(avg(tc)/avg(ha))</b> <a class="pull-right">
-                                                <c:out value="${farm.yield}"/>
-                                            </a>
-                                        </li>
+                                     
                                     </ul>
                                     <a href="viewFarmerProfile?name=${farm.farmer}" class="btn btn-primary pull-right">
                                         View Farmer Profile
@@ -152,21 +148,7 @@ on barangay selection
                                                 <c:out value="${farm.cropVal.planting_density}"/>
                                             </a>
                                         </li>
-                                        <li class="list-group-item">
-                                            <b>Planting Date???</b> <a class="pull-right">
-                                                <c:out value="${farm.cropVal.planting_date}"/>
-                                            </a>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <b>Harvest Date</b> <a class="pull-right">
-                                                <c:out value="${farm.cropVal.harvest_date}"/>
-                                            </a>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <b>Date Millable</b> <a class="pull-right">
-                                                <c:out value="${farm.cropVal.date_millable}"/>
-                                            </a>
-                                        </li>
+                                       
                                         <li class="list-group-item">
                                             <b>Number Millable</b> <a class="pull-right">
                                                 <c:out value="${farm.cropVal.num_millable}"/>
@@ -221,7 +203,7 @@ on barangay selection
                             <div class="col-md-4">
                                 <div class="box box-primary">
                                     <div class="box-header">
-                                        <h1 class="box-title">Tiller Info</h1>
+                                        <h1 class="box-title">Tiller Info for <c:out value="${farm.tillers.year}"/></h1>
                                         <div class="box-tools pull-right">
                                             <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                             <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -249,35 +231,7 @@ on barangay selection
                             </div>
 
 
-                            <div class="col-md-4">
-                                <div class="box box-primary">
-                                    <div class="box-header">
-                                        <h1 class="box-title">Crop Monitoring for January 2015</h1>
-                                        <div class="box-tools pull-right">
-                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                        </div>
-                                    </div>
-                                    <div class="box-body box-profile">
-                                        <ul class="list-group list-group-unbordered">
-
-                                            <li class="list-group-item">
-                                                <b>Phone Number</b> <a class="pull-right">0949395893</a>
-                                            </li>
-                                            <li class="list-group-item">
-                                                <b>Gender</b> <a class="pull-right">
-                                                    Male
-                                                </a>
-                                            </li>
-                                        </ul>
-                                        <div class="btn btn-primary pull-right">
-                                            View Profile
-                                        </div>   
-                                    </div>
-                                    <!-- /.box-body -->
-                                </div>
-
-                            </div>
+                            
                             <div class="col-md-4">
                                 <div class="box box-primary">
                                     <div class="box-header">
@@ -311,9 +265,7 @@ on barangay selection
                                                 </a>
                                             </li>
                                         </ul>
-                                        <div class="btn btn-primary pull-right">
-                                            View Profile
-                                        </div>   
+                                        
                                     </div>
                                     <!-- /.box-body -->
                                 </div>
@@ -344,9 +296,7 @@ on barangay selection
                                             </li>
 
                                         </ul>
-                                        <div class="btn btn-primary pull-right">
-                                            More Details
-                                        </div>                              
+                                                                   
                                     </div>
                                 </div>
                             </div>

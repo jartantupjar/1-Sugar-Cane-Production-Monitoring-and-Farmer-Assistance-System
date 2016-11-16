@@ -166,7 +166,7 @@ public class FarmsDB {
         farm.setRecommendation(fRecDB.viewFarmRecTablebyFarm(fid));
         //added date
         farm.setProblems(probdb.getFarmProblemDetbyFarm(fid));
-        
+   
         farm.setSoilanalysis(getFieldSoilAnalysis(farm.getId()));
         farm.setFertilizer(getFieldFertilizers(farm.getId(), cropyr));
         farm.setTillers(getFieldTillers(farm.getId(), cropyr));
@@ -286,7 +286,7 @@ public class FarmsDB {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select year,Fields_id,fertilizer,first_dose,second_dose from fertilizers where  Fields_id=? and year=?;";
+            String query = "select year,Fields_id,fertilizer,first_dose,second_dose from fertilizers where  Fields_id=? and year<=? order by year DESC;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, id);
             pstmt.setInt(2, year);
@@ -316,7 +316,7 @@ public class FarmsDB {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select year,Fields_id,rep,count from tillers where Fields_id=? and year=?;";
+            String query = "select year,Fields_id,rep,count from tillers where Fields_id=? and year<=? order by year DESC;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, id);
             pstmt.setInt(2, year);
