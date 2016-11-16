@@ -5,6 +5,7 @@
  */
 package db;
 
+import entity.Calendar;
 import entity.MonthlyCropEstimate;
 import entity.cropEstimate;
 import java.sql.Connection;
@@ -233,11 +234,16 @@ public boolean inputTestEstimates(cropEstimate ce){
 
     public ArrayList<cropEstimate> viewAllDiffEstimates() {
         try {
+            ProductionDB prodb=new ProductionDB();
+             CalendarDB caldb= new CalendarDB();
+            ArrayList<Calendar> calist= caldb.getCurrentYearDetails();
+            int cropyr=calist.get(0).getYear();
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select year,district,area,rainfall,tiller_count,avg_temperature,actual_tons_cane,forecasted1,forecasted2,forecasted3 from cropestimatedistrict;";
+            String query = "select year,district,area,rainfall,tiller_count,avg_temperature,actual_tons_cane,forecasted1,forecasted2,forecasted3 from cropestimatedistrict where year<=?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, cropyr);
             ResultSet rs = pstmt.executeQuery();
             ArrayList<cropEstimate> list = null;
             cropEstimate ce;
@@ -409,11 +415,16 @@ public boolean inputTestEstimates(cropEstimate ce){
     }
 
     ArrayList<Integer> getAllDistinctYrsCropEst() {
+         CalendarDB caldb= new CalendarDB();
+            ArrayList<Calendar> calist= caldb.getCurrentYearDetails();
+            int cropyr=calist.get(0).getYear();
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select Distinct(year) from weeklyestimate;";
+            
+            String query = "select Distinct(year) from weeklyestimate where year<=?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, cropyr);
             ResultSet rs = pstmt.executeQuery();
             ArrayList<Integer> list = null;
 

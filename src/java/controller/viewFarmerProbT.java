@@ -27,9 +27,9 @@ public class viewFarmerProbT extends BaseServlet {
         HttpSession session = request.getSession();
        // Recommendation rec = new Recommendation();
       String name=request.getParameter("name");
-
+System.out.println(name+"farmers name");
         ArrayList<Problems> rec = farmerDB.viewFarmerProb(name);
-        
+//        System.out.println(rec.get(0).getProb_name()+"PROB 0 name");
         JSONObject data = new JSONObject();
         JSONArray list = new JSONArray();
         if (rec != null) {

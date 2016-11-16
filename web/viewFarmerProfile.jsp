@@ -107,7 +107,7 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                                 <!-- /.box-body -->
                             </div>    
                         </div>
-                        
+                        <div class="col-md-12">
                         <div class="col-md-6" > 
                             <div class="box box-info">
                                 <div class="box-header with-border">
@@ -122,7 +122,6 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                                     <table id="probTable" class="table  dispTable table-hover" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
-                                                <th><input name="select_all" value="1" id="probTable-select-all" type="checkbox" /></th>
                                                 <th>Problem</th>
                                                 <th>Description</th>
                                                 <th></th>
@@ -161,7 +160,7 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                             </div>
 
                         </div>
-
+</div>
 <div class="col-md-12">
                             <!-- LINE CHART -->
                             <div class="box box-info">
