@@ -48,7 +48,6 @@
                 </table>
             </div>
         </div>
-
     </div>
 
                     <div class="col-md-12" > 
@@ -84,7 +83,7 @@
                     </div>
                     <br>
                     <c:if test="${not empty CropAss}">
-                    <div class="col-md-6" > 
+                    <div class="col-md-10" > 
                         <div class="box box-info">
                             <div class="box-header with-border">
                                 <h1 class="box-title">Area Harvested : <c:out value="${todayDate}"></c:out> </h1>
@@ -139,7 +138,7 @@
                         </div>
                         <div class="box box-info">
                             <div class="box-header with-border">
-                                <h1 class="box-title">Standing Crop (Yesterday's Week)</h1>
+                                <h1 class="box-title">Standing Crop</h1>
                                 <div class="box-tools pull-right">
                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -169,6 +168,7 @@
                     </div> 
                                 </c:if>
                     <br>
+                    <c:if test="${todayYear <= 2016}">
                     <div class="col-md-6" > 
                         <div class="box box-info">
                             <div class="box-header with-border">
@@ -198,6 +198,7 @@
                             </div>
                         </div>
                       </div>
+                    </c:if>
                     <c:if test="${not empty narrative}">
                     <div class="col-md-6" > 
                         <div class="box box-info">

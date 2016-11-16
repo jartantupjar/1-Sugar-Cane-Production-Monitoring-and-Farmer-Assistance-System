@@ -5,6 +5,7 @@
  */
 package controller;
 
+import db.CalendarDB;
 import db.CropBoardDB;
 import entity.CropBoard;
 import java.io.IOException;
@@ -48,25 +49,29 @@ public class viewWeeklyProducedReportByWeek extends HttpServlet {
             CropBoard cropB = new CropBoard();
             CropBoardDB cdb = new CropBoardDB();
             HttpSession session = request.getSession();
-            int todayYear = (int) session.getAttribute("todayYear");
-            int weekOfYear = (int) session.getAttribute("weekOfYear");
+            CalendarDB caldb = new CalendarDB();
+            ArrayList<entity.Calendar> calist = caldb.getCurrentYearDetails();
+            Date date = calist.get(0).getTodayDate();
+            int todayYear = calist.get(0).getYear();
             String id = request.getParameter("id");
             int i = Integer.parseInt(id);
-            Date date = (Date) session.getAttribute("todayDate");
-            System.out.println(todayYear +"what now ?");
-            System.out.println(weekOfYear +"what then ?");
-            ArrayList<CropBoard> cT = new ArrayList<CropBoard>();
+            if(todayYear <= 2016){
+                ArrayList<CropBoard> cT = new ArrayList<CropBoard>();
             cT = cdb.getWeeklyProducedReport(type, todayYear, date.toString());
             java.sql.Date cdate = cT.get(i).getWeek_ending();
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(cdate);
+            int yearpicked = cal.get(Calendar.YEAR);
+            int woyp = cdb.getWeekOfYear(cdate.toString());
             ArrayList<CropBoard> cTr = new ArrayList<CropBoard>();
-            cTr = cdb.getWeeklyProducedReportByRegion(type, todayYear, weekOfYear);
+            cTr = cdb.getWeeklyProducedReportByRegion(type,todayYear,cdate.toString(), woyp);
             if(cTr != null){
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(cdate);
-                int yearpicked = cal.get(Calendar.YEAR);
-                int woyp = cal.get(Calendar.WEEK_OF_YEAR);
-                woyp--;
+//                Calendar cal = Calendar.getInstance();
+//                cal.setTime(cdate);
+//                int yearpicked = cal.get(Calendar.YEAR);
+                
                 session.setAttribute("datepick", cdate);
+                session.setAttribute("todayYear", todayYear);
                 session.setAttribute("yearpicked", yearpicked);
                 session.setAttribute("WOF", woyp);
                 ServletContext context = getServletContext();
@@ -77,6 +82,36 @@ public class viewWeeklyProducedReportByWeek extends HttpServlet {
                 ServletContext context = getServletContext();
                 RequestDispatcher rd = context.getRequestDispatcher("/index.jsp");
                 rd.forward(request, response);
+            }
+            }
+            else {
+                ArrayList<CropBoard> cT = new ArrayList<CropBoard>();
+            cT = cdb.getCurrentWeeklyProducedReport(type, todayYear, date.toString());
+            java.sql.Date cdate = cT.get(i).getWeek_ending();
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(cdate);
+            int yearpicked = cal.get(Calendar.YEAR);
+            int woyp = cdb.getWeekOfYear(cdate.toString());
+            ArrayList<CropBoard> cTr = new ArrayList<CropBoard>();
+            cTr = cdb.getCurrentWeeklyProducedReportByRegion(type,todayYear,cdate.toString(), woyp);
+            if(cTr != null){
+//                Calendar cal = Calendar.getInstance();
+//                cal.setTime(cdate);
+//                int yearpicked = cal.get(Calendar.YEAR);
+                
+                session.setAttribute("datepick", cdate);
+                session.setAttribute("todayYear", todayYear);
+                session.setAttribute("yearpicked", yearpicked);
+                session.setAttribute("WOF", woyp);
+                ServletContext context = getServletContext();
+                RequestDispatcher rd = context.getRequestDispatcher("/RegionWeekView.jsp");
+                rd.forward(request, response);
+            }
+            else {
+                ServletContext context = getServletContext();
+                RequestDispatcher rd = context.getRequestDispatcher("/index.jsp");
+                rd.forward(request, response);
+            }
             }
             }
             

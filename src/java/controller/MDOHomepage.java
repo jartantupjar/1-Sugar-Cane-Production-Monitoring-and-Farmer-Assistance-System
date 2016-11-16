@@ -46,12 +46,15 @@ public class MDOHomepage extends BaseServlet {
                 Calendar cal = caldb.getCalendarTypes(todayDate);//weekofyear//month//day
               
                   //start of the crop assessment report
-                ArrayList<CropAssessment> caT=null;
+  ArrayList<CropAssessment> caT=null;
                  Date week_ending =null;
+                 boolean milling = false;
                 if(caldb.checkifMilling()){//checks if today is milling period
-//                    caT  = new ArrayList<CropAssessment>();
-//                caT = cadb.getCropAssesmentRajversion(cal.getEweek(), cropyear);
-//                week_ending=caT.get(0).getWeek_ending();
+                    caT  = new ArrayList<CropAssessment>();
+                    System.out.println(cal.getEweek()+"EWEEK");
+                    
+                caT = cadb.getCropAssesmentRajversion(cal.getEweek(), cropyear, calist.get(0).getTodayDate().toString());
+                week_ending=caT.get(0).getWeek_ending();
                 }
                     CropNarrative cn = null;
                     ArrayList<CropAssessment> rain = cadb.getRainFall(cal.getEweek(), cropyear);

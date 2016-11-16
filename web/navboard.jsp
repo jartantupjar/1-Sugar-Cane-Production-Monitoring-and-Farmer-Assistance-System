@@ -30,13 +30,29 @@
          
             <!-- timeline time label -->
         
-          
-              <li class="time-label text-center">
-                  <a class="bg-purple text-center">
-                  
+          <li class="time-label text-center">
+                  <a class="user-menu text-center">
+                  Today is 
                   <c:out value="${todayDate}"></c:out> 
                   </a>
             </li>
+             
+                  <c:if test="${not empty todayPhases}">
+                      <c:forEach items="${todayPhases}" var="phase" varStatus="loop" >
+                         
+                           <li class="time-label text-center">
+                              
+                        <a class="user-menu text-center">
+                              <c:if test="${loop.index>0}">and </c:if>
+                  <c:out value="${phase.phase}"></c:out> 
+                  Period of Crop Year <c:out value="${phase.year}"></c:out> 
+                  </a>   
+                   </li>
+                        </c:forEach>
+                  </c:if> 
+                 
+           
+              
          
             <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -114,7 +130,7 @@
           <li><a href="createProject.jsp"><i class="fa fa-link"></i><span>Create Plans and Programs</span></a></li>
           <li><a href="#"><i class="fa fa-share"></i><span>District Performance (Summary)</span><i class="fa fa-angle-left pull-right"></i></a>
            <ul class="treeview-menu" style="display: none;">
-               <li><a href="Homepage.jsp"> <i class="fa fa-link"></i><span>Tarlac</span></a></li>
+               <li><a href="MDOHomepage"> <i class="fa fa-link"></i><span>Tarlac</span></a></li>
                <li><a href="#"> <i class="fa fa-link"></i><span>Pampanga</span></a></li>
                <li><a href="#"> <i class="fa fa-link"></i><span>Caramsuco</span></a></li>
            </ul>

@@ -67,13 +67,16 @@ public class Login extends HttpServlet {
                 Integer cropyear = calist.get(0).getYear();
               
                 
-                  //start of the crop assessment report
+                //start of the crop assessment report
                 ArrayList<CropAssessment> caT=null;
                  Date week_ending =null;
+                 boolean milling = false;
                 if(caldb.checkifMilling()){//checks if today is milling period
-//                    caT  = new ArrayList<CropAssessment>();
-//                caT = cadb.getCropAssesmentRajversion(cal.getEweek(), cropyear);
-//                week_ending=caT.get(0).getWeek_ending();
+                    caT  = new ArrayList<CropAssessment>();
+                    System.out.println(cal.getEweek()+"EWEEK");
+                    System.out.println(calist.get(0).getTodayDate()+"TODAYDATE");
+                caT = cadb.getCropAssesmentRajversion(cal.getEweek(), cropyear, calist.get(0).getTodayDate().toString());
+                week_ending=caT.get(0).getWeek_ending();
                 }
                
 
@@ -94,7 +97,15 @@ public class Login extends HttpServlet {
                     session.setAttribute("CropAss", caT);
 //END OF MDO
                 } else if (successful.getGroup().equalsIgnoreCase("Board")) {
-                    rd = context.getRequestDispatcher("/Homepage_Board.jsp");
+                    if(caldb.checkifMilling()){
+                        milling = true;
+                        session.setAttribute("todayYear", cropyear);
+                        rd = context.getRequestDispatcher("/Homepage_Board.jsp");
+                    }
+                    else{
+                        rd = context.getRequestDispatcher("/viewCropEstimate.jsp");
+                    }
+                    session.setAttribute("milling", milling);
 //END OF BOARD
                 }
                 session.setAttribute("Week_ending", week_ending);
@@ -105,7 +116,6 @@ public class Login extends HttpServlet {
                 session.setAttribute("todayMonth", cal.getEmonth());
                 session.setAttribute("todayDay", cal.getEday());
                 session.setAttribute("weekOfYear", cal.getEweek());
-
                 session.setAttribute("user", successful);
                 rd.forward(request, response);
             }else{

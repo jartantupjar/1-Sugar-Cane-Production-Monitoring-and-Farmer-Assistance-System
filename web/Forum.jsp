@@ -16,7 +16,7 @@
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
-            
+
             <div class="content-wrapper">
                 <section class="content-header">
                     <h1>
@@ -24,80 +24,87 @@
                     </h1>
                 </section>
                 <section class="content">
-                    <div class="col-md-12">
-                        <div class="box">
-                        <div class="box-header">
-                        </div>
-                        <div class="box-body">
-                        <ul class="nav nav-tabs">
-                            <li>  </li>
-                            <li class="active"><a href="#tab_7" data-toggle="tab"><b>All</b></a></li>
-                            <li><a href="#tab_8" data-toggle="tab"><b>Accepted</b></a></li>
-                            <li><a href="#tab_9" data-toggle="tab"><b>Pending</b></a></li>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="box">
+                                <div class="box-header">
+                                </div>
+                                <div class="box-body">
+                                    <ul class="nav nav-tabs">
+                                        <li>  </li>
+                                        <li class="active"><a href="#tab_7" data-toggle="tab"><b>All</b></a></li>
+                                        <li><a href="#tab_8" data-toggle="tab"><b>Accepted</b></a></li>
+                                        <li><a href="#tab_9" data-toggle="tab"><b>Pending</b></a></li>
 
-                        </ul>
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="tab_7">
-                                <table id="myTable1" class="table table-striped table-bordered" cellspacing="10" width="100%">
-                                    <thead>
-                                        <tr>
-                                            <th>Topic</th>
-                                            <th>Recommendation</th>
-                                            <th>Counter</th>
-                                            <th>Problem</th>
-                                            <th>Counter</th>
-                                            <th>Status</th>
-                                            <th>Date</th>
-                                            <th style="width:5%">Details</th>
-                                        </tr>
-                                    </thead>
-                                </table>  
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="tab_7">
+                                            <table id="myTable1" class="table table-striped table-bordered" cellspacing="10" width="100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Topic</th>
+                                                        <th>Recommendation</th>
+                                                        <th>Counter</th>
+                                                        <th>Problem</th>
+                                                        <th>Counter</th>
+                                                        <th>Status</th>
+                                                        <th>Date</th>
+                                                        <th style="width:5%">Details</th>
+                                                    </tr>
+                                                </thead>
+                                            </table>  
+                                        </div>
+                                        <!-- /.tab-pane -->
+                                        <div class="tab-pane" id="tab_8">
+                                            <table id="myTable2" class="table table-striped table-bordered" cellspacing="10" width="100%">
+                                                <thead>
+                                                    <tr>
+
+                                                        <th>Topic</th>
+                                                        <th>Recommendation</th>
+                                                        <th>Counter</th>
+                                                        <th>Problem</th>
+                                                        <th>Counter</th>
+                                                        <th>Status</th>
+                                                        <th>Date</th>
+                                                        <th style="width:5%">Details</th>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                        </div>
+                                        <!-- /.tab-pane -->
+                                        <div class="tab-pane" id="tab_9">
+                                            <table id="myTable3" class="table table-striped table-bordered" cellspacing="10" width="100%">
+                                                <thead>
+                                                    <tr>
+
+                                                        <th>Topic</th>
+                                                        <th>Recommendation</th>
+                                                        <th>Counter</th>
+                                                        <th>Problem</th>
+                                                        <th>Counter</th>
+                                                        <th>Status</th>
+                                                        <th>Date</th>
+                                                        <th style="width:5%">Details</th>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                        </div>
+                                        <!-- /.tab-pane -->
+                                    </div>
+                                </div>
                             </div>
-                            <!-- /.tab-pane -->
-                            <div class="tab-pane" id="tab_8">
-                                <table id="myTable2" class="table table-striped table-bordered" cellspacing="10" width="100%">
-                                    <thead>
-                                        <tr>
-                                            
-                                            <th>Topic</th>
-                                            <th>Recommendation</th>
-                                            <th>Counter</th>
-                                            <th>Problem</th>
-                                            <th>Counter</th>
-                                            <th>Status</th>
-                                            <th>Date</th>
-                                            <th style="width:5%">Details</th>
-                                        </tr>
-                                    </thead>
-                                </table>
-                            </div>
-                            <!-- /.tab-pane -->
-                            <div class="tab-pane" id="tab_9">
-                                <table id="myTable3" class="table table-striped table-bordered" cellspacing="10" width="100%">
-                                    <thead>
-                                        <tr>
-                                            
-                                            <th>Topic</th>
-                                            <th>Recommendation</th>
-                                            <th>Counter</th>
-                                            <th>Problem</th>
-                                            <th>Counter</th>
-                                            <th>Status</th>
-                                            <th>Date</th>
-                                            <th style="width:5%">Details</th>
-                                        </tr>
-                                    </thead>
-                                </table>
-                            </div>
-                            <!-- /.tab-pane -->
-                        </div>
-                        </div>
                         </div>
                     </div>
                 </section>
-
             </div>
+            <footer class="main-footer">
 
+                <div class="pull-right hidden-xs">
+                    <b>Version</b> 2.3.3
+                </div>
+                <strong>Copyright &copy; 2014-2015 <a href="http://sra.com">Sugar Regulatory Association</a>.</strong>
+            </footer>
         </div>
         <script src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -111,19 +118,19 @@
                     $.fn.dataTable.tables({visible: false, api: true}).columns.adjust();
                 });
                 $('table.table').DataTable({
-                    'ajax' : {'url': 'viewForumList'
-                            },
+                    'ajax': {'url': 'viewForumList'
+                    },
                     scrollY: 200,
                     scrollCollapse: true,
                     paging: false,
                     'columnDefs': [{
-                        'targets': 7,
-                        'searchable': false,
-                        'orderable': false,
-                        'render': function (data, type, full, meta) {
-                            return '<a href="viewPostDetails?id=' + data + '" class="btn btn-primary">More Details</a>';
-                        }
-                    }]
+                            'targets': 7,
+                            'searchable': false,
+                            'orderable': false,
+                            'render': function (data, type, full, meta) {
+                                return '<a href="viewPostDetails?id=' + data + '" class="btn btn-primary">More Details</a>';
+                            }
+                        }]
                 });
 
                 // Apply a search to the second table for the demo

@@ -111,9 +111,13 @@
                         </form>
                     </div>
                 </section>
-
             </div>
-
+            <footer class="main-footer">
+                <div class="pull-right hidden-xs">
+                    <b>Version</b> 2.3.3
+                </div>
+                <strong>Copyright &copy; 2014-2015 <a href="http://sra.com">Sugar Regulatory Association</a>.</strong>
+            </footer>                    
         </div>
         <script src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>

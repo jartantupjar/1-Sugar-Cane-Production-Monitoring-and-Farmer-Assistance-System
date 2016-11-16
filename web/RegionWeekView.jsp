@@ -25,7 +25,7 @@
                     </h1>
                 </section>
                 <section class="content">
-                    
+                    <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
                             <label>Type</label>
@@ -58,7 +58,7 @@
                     <div class="col-md-10"> 
                         <div class="box box-info">
                             <div class="box-header with-border">
-                                <h1 class="box-title">Why </h1>
+                                <h1 class="box-title">Production by week : ${datepick} (full view)</h1>
                                 <div class="box-tools pull-right">
                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                     <!-- In box-tools add this button if you intend to use the contacts pane -->
@@ -86,11 +86,16 @@
                             <button class="btn btn-warning" style="width: 100%"><a href="CitiesWeekView.jsp">Print Report</a></button>
                         </div>
                     </div>
-
+                    </div>
                 </section>
 
             </div>
-
+<footer class="main-footer">
+                <div class="pull-right hidden-xs">
+                    <b>Version</b> 2.3.3
+                </div>
+                <strong>Copyright &copy; 2014-2015 <a href="http://sra.com">Sugar Regulatory Association</a>.</strong>
+            </footer>
         </div>
         <script src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -287,7 +292,6 @@
                     series: [{
                             name: ti,
                             type: 'column',
-                            yAxis: 1,
                             data: data.prod,
                             tooltip: {
                                 valueSuffix: ' '+sv
@@ -376,7 +380,6 @@
                     series: [{
                             name: tis,
                             type: 'column',
-                            yAxis: 1,
                             data: data.prod,
                             tooltip: {
                                 valueSuffix: ' '+sl

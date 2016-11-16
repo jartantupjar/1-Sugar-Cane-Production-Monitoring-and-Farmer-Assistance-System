@@ -56,7 +56,8 @@ public void processNewTodayDate(Date todayDate){
 public Calendar getCalendarTypes(Date todayDate){
      java.util.Calendar cal = java.util.Calendar.getInstance();
                 cal.setTime(todayDate);
-                int week_of_year = cal.get(java.util.Calendar.WEEK_OF_YEAR);
+                CropBoardDB cdb = new CropBoardDB();
+                int week_of_year = cdb.getWeekOfYear(todayDate.toString());
                 int year = cal.get(java.util.Calendar.YEAR);
                 int month = cal.get(java.util.Calendar.MONTH);
                 int day = cal.get(java.util.Calendar.DAY_OF_MONTH);

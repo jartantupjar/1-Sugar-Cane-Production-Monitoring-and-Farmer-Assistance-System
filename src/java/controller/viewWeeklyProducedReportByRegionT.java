@@ -5,6 +5,7 @@
  */
 package controller;
 
+import db.CalendarDB;
 import db.CropBoardDB;
 import entity.CropBoard;
 import java.io.IOException;
@@ -42,14 +43,18 @@ public class viewWeeklyProducedReportByRegionT extends HttpServlet {
             CropBoard cropB = new CropBoard();
             CropBoardDB cdb = new CropBoardDB();
             HttpSession session = request.getSession();
+            CalendarDB caldb = new CalendarDB();
+            ArrayList<entity.Calendar> calist = caldb.getCurrentYearDetails();
+            Date date = calist.get(0).getTodayDate();
             int yp = (int) session.getAttribute("yearpicked");
             int todayYear = (int) session.getAttribute("todayYear"); 
             int weekOfYear = (int) session.getAttribute("WOF");
             Date cdate = (Date) session.getAttribute("datepick");
             System.out.println(todayYear +"TANGINA"+weekOfYear + " TAE NAMN");
             ArrayList<CropBoard> cT = new ArrayList<CropBoard>();
-            cT = cdb.getWeeklyProducedReportByRegionT(todayYear,yp, weekOfYear);
             JSONObject data = new JSONObject();
+            if(todayYear <= 2016){
+                cT = cdb.getWeeklyProducedReportByRegionT(todayYear,cdate.toString(),weekOfYear);
             JSONArray prod = new JSONArray();
             if(cT != null){
                 for(int i=0;i<cT.size();i++){
@@ -60,13 +65,33 @@ public class viewWeeklyProducedReportByRegionT extends HttpServlet {
                     list.add(cT.get(i).getLkg().toString());
                     String id = cT.get(i).getDistrict()+","+cdate.toString();
                     list.add(id);
-                    System.out.println(id + " FINAL TESTTTTTTTTTTTTTTTTTTTTTTTTT");
                     prod.add(list);
                 }
             }
             data.put("data", prod);
             session.setAttribute("todayYear", todayYear);
             session.setAttribute("weekOfYear", weekOfYear);
+            }
+            else {
+                cT = cdb.getCurrentWeeklyProducedReportByRegion("HA",todayYear,date.toString(),weekOfYear);
+            JSONArray prod = new JSONArray();
+            if(cT != null){
+                for(int i=0;i<cT.size();i++){
+                    ArrayList<String> list = new ArrayList<String>();
+                    list.add(cT.get(i).getDistrict());
+                    list.add(cT.get(i).getArea().toString());
+                    list.add(cT.get(i).getTc().toString());
+                    list.add(cT.get(i).getLkg().toString());
+                    String id = cT.get(i).getDistrict()+","+cdate.toString();
+                    list.add(id);
+                    prod.add(list);
+                }
+            }
+            data.put("data", prod);
+            session.setAttribute("todayYear", todayYear);
+            session.setAttribute("weekOfYear", weekOfYear);
+            }
+            
         response.setContentType("applications/json");
         response.setCharacterEncoding("utf-8");
         response.getWriter().write(data.toString());
