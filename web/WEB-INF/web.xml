@@ -328,6 +328,14 @@
         <servlet-name>updateDurationByPhases</servlet-name>
         <servlet-class>controller.updateDurationByPhases</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>changeSelectedForecastforYear</servlet-name>
+        <servlet-class>controller.changeSelectedForecastforYear</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewCropEstimate</servlet-name>
+        <servlet-class>controller.viewCropEstimate</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
@@ -655,6 +663,14 @@
     <servlet-mapping>
         <servlet-name>updateDurationByPhases</servlet-name>
         <url-pattern>/updateDurationByPhases</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>changeSelectedForecastforYear</servlet-name>
+        <url-pattern>/changeSelectedForecastforYear</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewCropEstimate</servlet-name>
+        <url-pattern>/viewCropEstimate</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

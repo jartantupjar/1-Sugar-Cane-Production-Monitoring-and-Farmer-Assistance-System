@@ -125,7 +125,7 @@
            <li><a href="#"><i class="fa fa-link"></i><span>Pampanga Performance(Summary)</span> </a></li>
            <li><a href="Problems.jsp"><i class="fa fa-link"></i><span>Problems (Reoccuring)</span></a></li>
            <li><a href="Calendar.jsp"><i class="fa fa-link"></i><span>Calendar</span> </a></li>
-           <li><a href="viewCropEstimate.jsp"><i class="fa fa-link"></i><span>Crop Estimate</span></a></li>
+           <li><a href="viewCropEstimate"><i class="fa fa-link"></i><span>Crop Estimate</span></a></li>
            <li><a href="viewPrograms.jsp"><i class="fa fa-link"></i><span>View Programs</span></a></li>
           <li><a href="createProject.jsp"><i class="fa fa-link"></i><span>Create Plans and Programs</span></a></li>
           <li><a href="#"><i class="fa fa-share"></i><span>District Performance (Summary)</span><i class="fa fa-angle-left pull-right"></i></a>

@@ -123,7 +123,7 @@
            <li><a href="Problems.jsp"><i class="fa fa-link"></i><span>Problems</span></a></li>
            <li><a href="createNewRecommendation.jsp"><i class="fa fa-link"></i><span>Create Recommendations</span></a></li>
            <li><a href="viewPhasesDates"><i class="fa fa-link"></i><span>Calendar</span> </a></li>
-           <li><a href="viewCropEstimate.jsp"><i class="fa fa-link"></i><span>Crop Estimate (Options)</span></a></li>
+           <li><a href="viewCropEstimate"><i class="fa fa-link"></i><span>Crop Estimate (Options)</span></a></li>
            <li><a href="viewPrograms.jsp"><i class="fa fa-link"></i><span>View Programs</span></a></li>
          
         

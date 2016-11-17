@@ -13,11 +13,12 @@ import java.util.ArrayList;
  * @author ndrs
  */
 public class cropEstimate {
-    private int year;
+    private int year,selection;
     private double area,actual,forecasted,forecast2,forecast3,difference,rainfall,tiller,temp;
     private String district,municipality;
     private Date week_ending;
     private ArrayList<MonthlyCropEstimate> monthcropest;
+    
 
     /**
      * @return the year
@@ -215,6 +216,20 @@ public class cropEstimate {
      */
     public void setTemp(double temp) {
         this.temp = temp;
+    }
+
+    /**
+     * @return the selection
+     */
+    public int getSelection() {
+        return selection;
+    }
+
+    /**
+     * @param selection the selection to set
+     */
+    public void setSelection(int selection) {
+        this.selection = selection;
     }
     
 }

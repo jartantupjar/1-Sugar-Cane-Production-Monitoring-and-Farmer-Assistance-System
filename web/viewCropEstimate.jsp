@@ -12,7 +12,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>SRA | Home</title>
-        <meta content="width=device-width, i/nitial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+       
         <link rel="stylesheet" href="plugins/select2/select2.min.css">
         <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
     </head>
@@ -57,10 +57,43 @@
                                                 <th>Estimation 1</th>
                                                 <th>Estimation 2</th>
                                                 <th>Estimation 3</th>
+                                                <th>Selection</th>
 
                                             </tr>
                                         </thead>
-
+                                        <tbody>
+                                        <c:if test="${not empty est}">
+                                            <c:forEach items="${est}" var="estims">
+                                                <tr>
+                                                <td><c:out value="${estims.year}"/></td>
+                                                <td><c:out value="${estims.area}"/></td>
+                                                <td><c:out value="${estims.rainfall}"/></td>
+                                                <td><c:out value="${estims.tiller}"/></td>
+                                                <td><c:out value="${estims.temp}"/></td>
+                                                <td><c:out value="${estims.actual}"/></td>
+                                                <td><c:out value="${estims.forecasted}"/></td>
+                                                <td><c:out value="${estims.forecast2}"/></td>
+                                                <td><c:out value="${estims.forecast3}"/></td>
+                                                <td>
+                                                    <select name="status" class="form-control selectforc" style="width: 100%;">
+                                                        <c:forEach begin="1" end="3" var="i">
+                                                            <c:choose>
+                                                                <c:when test="${i eq estims.selection}">
+                                                                      <option value="${estims.year},${i}" selected="selected">Estimation ${i}</option>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <option value="${estims.year},${i}">Estimation ${i}</option>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </c:forEach>
+                                                      </select>
+                                                    
+                                                    
+                                                </td>
+                                        </tr>        
+                                            </c:forEach>
+                                        </c:if>
+                                                </tbody>
                                     </table>
                                     <button type="button" class="btn btn-info pull-right" id="showform" >Gen Forecast</button>
                                 </div>
@@ -144,7 +177,6 @@
                                                 <th>Rainfall</th>
                                                 <th>Tiller Count</th>
                                                 <th>Avg Temp</th>
-                                                <th>Actual</th>
                                                 <th>Estimation 1</th>
                                                 <th>Estimation 2</th>
                                                 <th>Estimation 3</th>
@@ -227,6 +259,7 @@
                                 </div>
 
                                 <div class="box-body">
+                                   
                                     <table id="munitable" class="table  display table-hover" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
@@ -267,7 +300,7 @@
         </div>
 
         <script type="text/javascript" src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
-
+   
 
         <script>
             $(function () {
@@ -408,12 +441,17 @@
             });
 
         </script>
+           <script src="bootstrap/js/bootstrap.min.js"></script>
+        <script src="dist/js/app.min.js"></script>
+       <script src="plugins/select2/select2.full.min.js"></script>
+        <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
         <script>
 
             $(document).ready(function () {
 
 
-                $('#select3').on('change', function (evt) {
+               var testing= $('#select3').on('change', function (evt) {
                     var dist = $("#select2").val();
                     var yr = $("#select3").val();
                     $('#munibox').addClass('hidden');
@@ -441,16 +479,12 @@
                                 }]
                         });
                     }
-
-
-
-
-
                 });
+            console.log(testing);
                 $('#select2').on('change', function (evt) {
                     var test = $("#select2").val();
-
-                    $.ajax({
+ 
+                   $.ajax({
                         url: 'loadCropEstYearList?tag=' + test + '',
                         type: 'POST',
                         dataType: "JSON",
@@ -477,19 +511,8 @@
                 var test = $("#select2").val();
                 console.log(test);
                 $dist.trigger("change");
-
-
-                //ESTIMATE TABLE        
-                var table3 = $('#esttable').DataTable({
-                    'ajax': {
-                        'url': 'viewDiffDistEst'
-                    },
-                    "paging": false,
-//                    "ordering": false,
-                    "info": false,
-                    "searching": false
-                });
-                var table4 = $('#testTable').DataTable({
+   
+   var table4 = $('#testTable').DataTable({
                     'ajax': {
                         'url': 'viewTestEstimates'
                     },
@@ -499,21 +522,49 @@
                     "searching": false
                 });
             });
+            
+                //ESTIMATE TABLE        
+                $('#esttable').DataTable({
+                     "paging": false,
+//                    "ordering": false,
+                    "info": false,
+                    "searching": false
+                    
+                });
+                $(".selectforc").select2({
+                               minimumResultsForSearch: Infinity
+                            });
+                    $('.selectforc').on('change', function(evt) {
+       var test = $(".selectforc").val();
+       var options = $(this).find('option:selected').val();
+                       $.ajax({
+                        url: 'changeSelectedForecastforYear?name=' + options + '',
+                        type: 'POST',
+                        dataType: "JSON",
+                        success: function () {
+                        alert("success");
+                        }});
+     
+     
+            });
+               
+             
 //
 
         </script>
+        
+        <script type="text/javascript">
+        
+    </script>
 
 
 
 
 
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="dist/js/app.min.js"></script>
-        <script src="plugins/select2/select2.full.min.js"></script>
-        <script src="plugins/datatables/jquery.dataTables.min.js"></script>
-        <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+      
         <script src="Highcharts/highcharts.js"></script>
         <script src="Highcharts/modules/drilldown.js"></script>
         <script src="Highcharts/modules/exporting.js"></script>
+         
     </body>
 </html>

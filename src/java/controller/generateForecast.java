@@ -69,9 +69,7 @@ public class generateForecast extends HttpServlet {
             if (check){
                 
                 ServletContext context = getServletContext();
-                RequestDispatcher rd = context.getRequestDispatcher("/viewCropEstimate.jsp");
-                HttpSession session = request.getSession();
-                rd.forward(request, response);
+                 response.sendRedirect("viewCropEstimate");
             }
             else {
                 ServletContext context = getServletContext();
