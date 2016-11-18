@@ -20,6 +20,7 @@ on barangay selection
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>SRA | Home</title>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        
         <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
 
         <link rel="stylesheet" href="plugins/select2/select2.min.css">
@@ -453,6 +454,8 @@ on barangay selection
                         </form>
 
                     </div>
+                                  <input class="btn btn-success pull-right" type="button" value="Back" 
+        onClick="history.go(-1);return true;"> 
                 </section>
 
             </div>

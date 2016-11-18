@@ -48,9 +48,11 @@ public class viewTestEstimates extends BaseServlet {
                 obj.add(Double.toString(fct.get(i).getRainfall()));
                 obj.add(Double.toString(fct.get(i).getTiller()));
                 obj.add(Double.toString(fct.get(i).getTemp()));
+                obj.add(Double.toString(fct.get(i).getActual()));
                 obj.add(Double.toString(fct.get(i).getForecasted()));
                 obj.add(Double.toString(fct.get(i).getForecast2()));
                 obj.add(Double.toString(fct.get(i).getForecast3()));
+                obj.add(Integer.toString(fct.get(i).getId()));
                 list.add(obj);
             }
         }

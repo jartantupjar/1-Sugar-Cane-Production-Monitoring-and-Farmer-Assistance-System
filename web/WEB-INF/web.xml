@@ -336,6 +336,14 @@
         <servlet-name>viewCropEstimate</servlet-name>
         <servlet-class>controller.viewCropEstimate</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>deleteCropEstimateTestRow</servlet-name>
+        <servlet-class>controller.deleteCropEstimateTestRow</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewAllFarmers</servlet-name>
+        <servlet-class>controller.viewAllFarmers</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
@@ -671,6 +679,14 @@
     <servlet-mapping>
         <servlet-name>viewCropEstimate</servlet-name>
         <url-pattern>/viewCropEstimate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deleteCropEstimateTestRow</servlet-name>
+        <url-pattern>/deleteCropEstimateTestRow</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewAllFarmers</servlet-name>
+        <url-pattern>/viewAllFarmers</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

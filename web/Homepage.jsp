@@ -21,7 +21,9 @@
                 <section class="content">
 <div class="row">
     <div class="col-md-4 col-md-offset-4">
+          <c:if test="${empty narrative}">
         <a class="btn btn-info btn-block" href="viewCropAssessment">Create Crop Assessment</a>
+          </c:if>
   <br>
     </div>
     <div class="col-md-12"> 

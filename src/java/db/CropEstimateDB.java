@@ -36,16 +36,52 @@ public class CropEstimateDB {
         ce.setRainfall(rain);
         fce.setArea(area);
         fce.setRainfall(rain);
-          fce.setForecasted(genForecast1(ce));
+        ArrayList<cropEstimate> ces = viewAllDiffEstimates();
+       
+          fce.setForecasted(genForecast1(ce,ces));
         if (tiller != null) {
           ce.setTiller(tiller);
            fce.setTiller(tiller);
-             fce.setForecast2(genForecast2(ce));
+             fce.setForecast2(genForecast2(ce,ces));
         }
         if (temp != null) {
            ce.setTemp(temp);
             fce.setTemp(temp);
-        fce.setForecast3(genForecast3(ce));
+        fce.setForecast3(genForecast3(ce,ces));
+        }
+
+        inputTestEstimates(fce);
+
+   //method to input forecasts to db
+        return true;
+    }
+    public boolean selectEstimates(Double area,Double production, Double rain, Double tiller, Double temp) {
+        cropEstimate fce=new cropEstimate();
+        cropEstimate ce = new cropEstimate();
+        ce.setArea(area);
+        ce.setActual(production);
+        ce.setRainfall(rain);
+        fce.setArea(area);
+         fce.setActual(production);
+        fce.setRainfall(rain);
+        ArrayList<cropEstimate> ces = viewAllDiffEstimates();
+       ArrayList<cropEstimate> tests= viewTestEstimates();
+        if(tests!=null){
+            ces.addAll(tests);
+        }
+        for(int i=0;i<ces.size();i++){
+            System.out.println(ces.get(i).getActual());
+        }
+          fce.setForecasted(genForecast1(ce,ces));
+        if (tiller != null) {
+          ce.setTiller(tiller);
+           fce.setTiller(tiller);
+             fce.setForecast2(genForecast2(ce,ces));
+        }
+        if (temp != null) {
+           ce.setTemp(temp);
+            fce.setTemp(temp);
+        fce.setForecast3(genForecast3(ce,ces));
         }
 
         inputTestEstimates(fce);
@@ -105,21 +141,13 @@ public boolean updateForecastSelection(cropEstimate ce){
 
  
 }
-public boolean inputTestEstimates(cropEstimate ce){
+public boolean deleteSelectedTest(int id){
       try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "INSERT INTO cropestimatetests (district,area,rainfall,avg_temperature,tiller_count,forecast1, forecast2, forecast3) VALUES (?,?,?,?,?,?,?,?);";
+            String query = "DELETE FROM cropestimatetests where id=?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
-
-            pstmt.setString(1, "TARLAC");
-            pstmt.setDouble(2, ce.getArea());
-            pstmt.setDouble(3, ce.getRainfall());
-            pstmt.setDouble(4, ce.getTemp());
-            pstmt.setDouble(5, ce.getTiller());
-            pstmt.setDouble(6, ce.getForecasted());
-            pstmt.setDouble(7, ce.getForecast2());
-            pstmt.setDouble(8, ce.getForecast3());
+            pstmt.setInt(1,id);
             int isSuccess = pstmt.executeUpdate();
 
             pstmt.close();
@@ -133,12 +161,41 @@ public boolean inputTestEstimates(cropEstimate ce){
 
  
 }
-    public double genForecast1(cropEstimate ce) {
+public boolean inputTestEstimates(cropEstimate ce){
+      try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "INSERT INTO cropestimatetests (district,area,actual_tons_cane,rainfall,avg_temperature,tiller_count,forecast1, forecast2, forecast3) VALUES (?,?,?,?,?,?,?,?,?);";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+
+            pstmt.setString(1, "TARLAC");
+            pstmt.setDouble(2, ce.getArea());
+            pstmt.setDouble(3, ce.getActual());
+            pstmt.setDouble(4, ce.getRainfall());
+            pstmt.setDouble(5, ce.getTemp());
+            pstmt.setDouble(6, ce.getTiller());
+            pstmt.setDouble(7, ce.getForecasted());
+            pstmt.setDouble(8, ce.getForecast2());
+            pstmt.setDouble(9, ce.getForecast3());
+            int isSuccess = pstmt.executeUpdate();
+
+            pstmt.close();
+            conn.close();
+
+            return isSuccess == 1;
+        } catch (SQLException ex) {
+            Logger.getLogger(UsersDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+
+ 
+}
+    public double genForecast1(cropEstimate ce,ArrayList<cropEstimate> ces) {
         DataSet observedData = new DataSet();
         Observation dp;
-        ArrayList<cropEstimate> ces = new ArrayList();
+//        ArrayList<cropEstimate> ces = new ArrayList();
 //          ArrayList<Integer> yrlist= getDistinctYearEstYears();
-        ces = viewAllDiffEstimates();
+//        ces = viewAllDiffEstimates();
         for (int i = 0; i < ces.size(); i++) {
             dp = new Observation(ces.get(i).getActual());
             dp.setIndependentValue("area", ces.get(i).getArea());
@@ -172,12 +229,12 @@ public boolean inputTestEstimates(cropEstimate ce){
         }
     
 
-    public double genForecast2(cropEstimate ce) {
+    public double genForecast2(cropEstimate ce,ArrayList<cropEstimate> ces) {
          DataSet observedData = new DataSet();
         Observation dp;
-        ArrayList<cropEstimate> ces = new ArrayList();
+//        ArrayList<cropEstimate> ces = new ArrayList();
 //          ArrayList<Integer> yrlist= getDistinctYearEstYears();
-        ces = viewAllDiffEstimates();
+//        ces = viewAllDiffEstimates();
         for (int i = 0; i < ces.size(); i++) {
             dp = new Observation(ces.get(i).getActual());
             dp.setIndependentValue("area", ces.get(i).getArea());
@@ -212,12 +269,12 @@ public boolean inputTestEstimates(cropEstimate ce){
             return forecastvalue.getDependentValue();
     }
 
-    public double genForecast3(cropEstimate ce) {
+    public double genForecast3(cropEstimate ce,ArrayList<cropEstimate> ces) {
         DataSet observedData = new DataSet();
         Observation dp;
-        ArrayList<cropEstimate> ces = new ArrayList();
+//        ArrayList<cropEstimate> ces = new ArrayList();
 //          ArrayList<Integer> yrlist= getDistinctYearEstYears();
-        ces = viewAllDiffEstimates();
+//        ces = viewAllDiffEstimates();
         for (int i = 0; i < ces.size(); i++) {
             dp = new Observation(ces.get(i).getActual());
             dp.setIndependentValue("area", ces.get(i).getArea());
@@ -311,7 +368,7 @@ public boolean inputTestEstimates(cropEstimate ce){
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select area,rainfall,tiller_count,avg_temperature,actual_tons_cane,forecast1,forecast2,forecast3 from cropestimatetests;";
+            String query = "select id,area,rainfall,tiller_count,avg_temperature,actual_tons_cane,forecast1,forecast2,forecast3 from cropestimatetests;";
             PreparedStatement pstmt = conn.prepareStatement(query);
   
             ResultSet rs = pstmt.executeQuery();
@@ -322,6 +379,7 @@ public boolean inputTestEstimates(cropEstimate ce){
                 do {
 
                     ce = new cropEstimate();
+                    ce.setId(rs.getInt("id"));
                   ce.setArea(rs.getDouble("area"));
                     ce.setRainfall(rs.getDouble("rainfall"));
                     ce.setTiller(rs.getDouble("tiller_count"));

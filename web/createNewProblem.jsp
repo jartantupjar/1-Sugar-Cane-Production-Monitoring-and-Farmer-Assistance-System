@@ -102,8 +102,11 @@
                                 </div>
                             </div> 
 
-                            <div class="col-md-3">                   
+                            <div class="col-md-3">        
+                                  <input class="btn btn-success " type="button" value="Back" 
+        onClick="history.go(-1);return true;"> 
                                 <p><button class="btn btn-primary" style="width: 100%" type="submit"  value="submit">Create</button></p>
+                            
                             </div>
                         </form>
                     </div>

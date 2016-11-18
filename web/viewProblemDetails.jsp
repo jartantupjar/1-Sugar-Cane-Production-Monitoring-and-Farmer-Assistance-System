@@ -121,7 +121,9 @@
                         </div>
                     </div>        
                     <br>
-                    <div class="col-md-3">         
+                    <div class="col-md-3">   
+                          <input class="btn btn-success" type="button" value="Back" 
+        onClick="history.go(-1);return true;"> 
                         <p><a class="btn btn-primary" style="width: 100%" href="createProject.jsp"><i class="fa fa-file "></i> Create Program</a></p>
                         <p><a class="btn btn-success" style="width: 100%" href="createNewRecommendation.jsp"><i class="fa fa-gear "></i> Create Recommendation</a></p>
                     </div>

@@ -65,36 +65,16 @@ comparison page add current vs historical details(past 2yrs)
                             </div>
 
                         </div>
+                        
                         <div class="col-md-12">
                             <div class="box box-info">
                                 <div class="box-header with-border">
-                                    <h3 class="box-title">#Farmer Details</h3>
-
-                                    <div class="box-tools pull-right">
-                                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                    </div>
+                                    <h3 class="box-title">Basic Details</h3>
                                 </div>
                                 <div class="box-body">
-                                    <ul class="nav nav-tabs">
-                                        <li>  </li>
-                                        <li class="active"><a href=".tab_1" data-toggle="tab"><b>Details</b></a></li>
-                                        <li ><a href="#tab_2" data-toggle="tab"><b>Crop Validation</b></a></li>
-                                        <li ><a href=".tab_3" data-toggle="tab"><b>Soil Analysis</b></a></li>
-                                        <li><a href=".tab_4" data-toggle="tab"><b>Fertilizer</b></a></li>
-                                        <li><a href=".tab_5" data-toggle="tab"><b>Tiller</b></a></li>
-                                        <li><a href=".tab_6" data-toggle="tab"><b>Problems </b></a></li>
-                                        <li><a href=".tab_7" data-toggle="tab"><b>Recommendations</b></a></li>
-
-
-                                    </ul>
-
-                                    <div class="tab-content">
-                                        <div class="tab-pane active tab_1" >
-                                            <table id="fieldtable" class="table table-hover table-responsive">
+                                <table id="fieldtable" class="table table-hover table-responsive">
                                                 <thead><tr>
-                                                        <th>Details</th>
+                                                        <th></th>
                                                         <th><c:out value="${farm.id}"/></th>
                                                             <c:forEach var="flow" items="${flist}">
 
@@ -186,9 +166,34 @@ comparison page add current vs historical details(past 2yrs)
 
 
                                             </table>
+                                </div>
+                                </div>
+                            <div class="box box-info">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">#Farmer Details</h3>
 
-                                        </div>
-                                        <div class="tab-pane tab_2" id="tab_2">
+                                    <div class="box-tools pull-right">
+                                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                    </div>
+                                </div>
+                                <div class="box-body">
+                                    <ul class="nav nav-tabs">
+                                        <li>  </li>
+                                        <li class="active"><a href=".tab_1" data-toggle="tab"><b>Crop Validation</b></a></li>
+                                        <li><a href=".tab_2" data-toggle="tab"><b>Soil Analysis</b></a></li>
+                                        <li><a href=".tab_3" data-toggle="tab"><b>Fertilizer</b></a></li>
+                                        <li><a href=".tab_4" data-toggle="tab"><b>Tiller</b></a></li>
+                                        <li><a href=".tab_5" data-toggle="tab"><b>Problems </b></a></li>
+                                        <li><a href=".tab_6" data-toggle="tab"><b>Recommendations</b></a></li>
+
+
+                                    </ul>
+
+                                    <div class="tab-content">
+                                        
+                                        <div class="tab-pane active tab_1" id="tab_2">
                                             <h3 class="profile-username text-center"></h3>
                                             <table id="fieldtable" class="table table-hover table-responsive">
                                                 <thead><tr>
@@ -396,7 +401,7 @@ comparison page add current vs historical details(past 2yrs)
 
                                             </table>
                                         </div>
-                                        <div class="tab-pane tab_3" id="tab_8">
+                                        <div class="tab-pane tab_2" id="tab_8">
                                             <h3 class="profile-username text-center"></h3>
                                             <table id="fieldtable" class="table table-hover table-responsive">
                                                 <thead><tr>
@@ -479,7 +484,7 @@ comparison page add current vs historical details(past 2yrs)
 
                                             </table>
                                         </div>
-                                        <div class="tab-pane tab_4" id="tab_8">
+                                        <div class="tab-pane tab_3" id="tab_8">
                                             <h3 class="profile-username text-center"></h3>
                                             <table id="fieldtable" class="table table-hover table-responsive">
                                                 <thead><tr>
@@ -542,7 +547,7 @@ comparison page add current vs historical details(past 2yrs)
 
                                             </table>
                                         </div>
-                                        <div class="tab-pane tab_5" id="tab_8">
+                                        <div class="tab-pane tab_4" id="tab_8">
                                             <h3 class="profile-username text-center"></h3>
                                             <table id="fieldtable" class="table table-hover table-responsive">
                                                 <thead><tr>
@@ -591,7 +596,7 @@ comparison page add current vs historical details(past 2yrs)
 
                                             </table>
                                         </div>
-                                        <div class="tab-pane tab_6" id="tab_8">
+                                        <div class="tab-pane tab_5" id="tab_8">
                                             <h3 class="profile-username text-center"></h3>
                                             <table id="fieldtable" class="table table-hover table-responsive">
                                                 <thead><tr>
@@ -634,7 +639,7 @@ comparison page add current vs historical details(past 2yrs)
 
                                             </table>
                                         </div>
-                                        <div class="tab-pane tab_7" id="tab_8">
+                                        <div class="tab-pane tab_6" id="tab_8">
                                             <h3 class="profile-username text-center"></h3>
                                             <table id="fieldtable" class="table table-hover table-responsive">
                                                 <thead><tr>
@@ -743,7 +748,8 @@ comparison page add current vs historical details(past 2yrs)
                             </div>
 
                         </form>
-
+  <input class="btn btn-success pull-right" type="button" value="Back" 
+        onClick="history.go(-1);return true;"> 
                     </div>
                 </section>
 

@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * @author ndrs
  */
 public class cropEstimate {
-    private int year,selection;
+    private int year,selection,id;
     private double area,actual,forecasted,forecast2,forecast3,difference,rainfall,tiller,temp;
     private String district,municipality;
     private Date week_ending;
@@ -230,6 +230,20 @@ public class cropEstimate {
      */
     public void setSelection(int selection) {
         this.selection = selection;
+    }
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
     }
     
 }
