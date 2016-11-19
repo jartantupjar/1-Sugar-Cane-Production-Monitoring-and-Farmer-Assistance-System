@@ -47,8 +47,11 @@
                                                 <span class="username"><a href="#">${post.farmer}</a></span>
                                             <span class="description">${post.date_posted}</span>
                                             <br>
-                                            <c:if test="${not empty post.prob_id }">
-                                                <span class="username">Problem: ${post.name}</span>
+                                            <c:if test="${post.prob_id != ""}">
+                                                <span class="username">Problem: ${post.problem_name}</span>
+                                            </c:if>
+                                            <c:if test="${post.recom_id != ""}">
+                                                <span class="username">Recommendation ${post.recommendation_name}</span>
                                             </c:if>
                                             <div>
                                                 <c:if test="${post.status == 'Pending'}">
@@ -124,6 +127,7 @@
                                                         </span>
                                                         <input type="text" name="user" hidden="true" value="${user.username}">
                                                         <input type="text" name="id" hidden="true" value="${post.id}">
+                                                        <input type="text" name="field" hidden="true" value="${fid}">
                                                         <p> <textarea type="text" name="msg" id="msg" class="form-control" placeholder="Comment Here ...." style="width: 100%"></textarea> </p>
                                                         <button type="submit" class="btn btn-sm btn-primary">Submit</button>
                                                     </form>

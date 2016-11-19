@@ -5,10 +5,13 @@
  */
 package controller;
 
-import db.ForumDB;
+import db.CalendarDB;
+import db.ProblemsDB;
+import entity.Calendar;
+import entity.Problems;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -21,7 +24,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Bryll Joey Delfin
  */
-public class saveComment extends HttpServlet {
+public class showDisasterReport extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,25 +39,21 @@ public class saveComment extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            CalendarDB caldb = new CalendarDB();
+            ProblemsDB pdb = new ProblemsDB();
+            ArrayList<Calendar> calist = caldb.getCurrentYearDetails();//gets the phases/today/crop yr
+            Calendar cal = caldb.getCalendarTypes(calist.get(0).getTodayDate());//weekofyear//month//day
             /* TODO output your page here. You may use following sample code. */
-            ForumDB fdb = new ForumDB();
-            String username = request.getParameter("user");
-            String message = request.getParameter("msg");
-            int post_id = Integer.parseInt(request.getParameter("id"));
-            int fields_id = Integer.parseInt(request.getParameter("field"));
-            HttpSession session = request.getSession();
-            Date cdate = (Date) session.getAttribute("todayDate");
-            int pass = 0;
-            int pass2 = 0;
-            pass = fdb.addComments(post_id, message, cdate, username);
-            if(pass!=0){
-                   pass2 = fdb.addCommentsUsers(pass, username);
-                   fdb.addCommentNotification(fields_id, "The MDO: "+username+" has commented on your post", cdate, post_id);
-            }
-            if(pass2 >0){
-                
+            ArrayList<Problems> reportType = pdb.getReportsByType(cal.getEyear());
+            ArrayList<Problems> reportDistrict = pdb.getReportsByDistrict(cal.getEyear());
+            
+
+            if(reportType != null){
+                HttpSession session = request.getSession();
+                session.setAttribute("typeReport", reportType);
+                session.setAttribute("districtReport", reportDistrict);
                 ServletContext context = getServletContext();
-                RequestDispatcher rd = context.getRequestDispatcher("/Forum.jsp");
+                RequestDispatcher rd = context.getRequestDispatcher("/Disaster_Report.jsp");
                 rd.forward(request, response);
             }
             else{

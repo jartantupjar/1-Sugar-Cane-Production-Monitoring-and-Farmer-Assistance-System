@@ -13,8 +13,8 @@ import java.sql.Date;
  */
 public class Problems {
     private Integer prob_id, totalFarms, fields_id,tSolutions, totalFields;
-    private String prob_name, prob_details, barangay,municipality, status,type,impact,farmer,farm,validation,phase,user_name;
-    private Double prob_loss;
+    private String prob_name, prob_details, barangay,municipality, status,type,impact,farmer,farm,validation,phase,user_name, district;
+    private Double prob_loss,damage;
     private double percent_affected;
     private Date date_updated ,date_created;
 
@@ -315,5 +315,33 @@ public class Problems {
      */
     public void setTotalFields(Integer totalFields) {
         this.totalFields = totalFields;
+    }
+
+    /**
+     * @return the damage
+     */
+    public Double getDamage() {
+        return damage;
+    }
+
+    /**
+     * @param damage the damage to set
+     */
+    public void setDamage(Double damage) {
+        this.damage = damage;
+    }
+
+    /**
+     * @return the district
+     */
+    public String getDistrict() {
+        return district;
+    }
+
+    /**
+     * @param district the district to set
+     */
+    public void setDistrict(String district) {
+        this.district = district;
     }
 }

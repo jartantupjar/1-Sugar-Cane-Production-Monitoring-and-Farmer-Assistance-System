@@ -41,31 +41,42 @@ public class CropAssessmentDB {
         prevT = getPrevCropAssessmentReportForTheWeek(week_of_year, year, tdate);
         CropAssessment ca = new CropAssessment();
         CropAssessment ca2 = new CropAssessment();
-        DecimalFormat df = new DecimalFormat("#.##");
-        double etc = Double.valueOf(df.format(getTotalEstimatedTonsCane(year)));
-        double eah = Double.valueOf(df.format(getTotalEstimatedArea(year)));
-
+        DecimalFormat df = new DecimalFormat("#.00");
+        DecimalFormat commaformat = new DecimalFormat("#.00");
+        commaformat.setGroupingUsed(true);
+        commaformat.setGroupingSize(3);
+        double etc = Double.valueOf(df.format(getTotalEstimatedTonsCane(year-1))); // change into the crop year
+        double eah = Double.valueOf(df.format(getTotalEstimatedArea(year-1)));
+        
         ca.setParticulars("Area");
-        ca.setEstimated(eah);
-        ca.setPrevious(prevT.get(0).getPrevArea());
-        ca.setThisweek(currT.get(0).getThisArea());
-        double todate = ca.getPrevious() + ca.getThisweek();
-        double percenta = 0;
-        ca.setTodate(todate);
-        percenta = Double.valueOf(df.format((ca.getTodate() / eah) * 100));
-        ca.setPercent(percenta);
-        ca.setStanding(Double.valueOf(df.format(ca.getEstimated() - ca.getTodate())));
+        ca.setEstimated(commaformat.format(eah));
+        String prev = commaformat.format(prevT.get(0).getPrevArea());
+        ca.setPrevious(prev);
+        String curr = commaformat.format(currT.get(0).getThisArea());
+        ca.setThisweek(curr);
+        double todate = prevT.get(0).getPrevArea() + currT.get(0).getThisArea();
+        Double percenta = 0.00;
+        ca.setTodate(commaformat.format(todate));
+        System.out.println(todate+"TODATE");
+        System.out.println(eah+"EAH");
+        percenta = Double.valueOf(df.format((todate / eah) * 100));
+        ca.setPercent(percenta.toString());
+        String standing = commaformat.format(Double.valueOf(df.format(eah - todate)));
+        ca.setStanding(standing);
         ca.setWeek_ending(currT.get(0).getWeek_ending());
         ca2.setParticulars("Tons Cane");
-        ca2.setEstimated(etc);
-        ca2.setPrevious(prevT.get(0).getPrevTons_Cane());
-        ca2.setThisweek(currT.get(0).getThisTons_Cane());
-        double todate2 = ca2.getPrevious() + ca2.getThisweek();
-        double percentb = 0;
-        ca2.setTodate(todate2);
-        percentb = Double.valueOf(df.format((ca2.getTodate() / etc) * 100));
-        ca2.setPercent(percentb);
-        ca2.setStanding(Double.valueOf(df.format(ca2.getEstimated() - ca2.getTodate())));
+        ca2.setEstimated(commaformat.format(etc));
+        String prevt = commaformat.format(prevT.get(0).getPrevTons_Cane());
+        ca2.setPrevious(prevt);
+        String currt = commaformat.format(currT.get(0).getThisTons_Cane());
+        ca2.setThisweek(currt);
+        double todate2 = prevT.get(0).getPrevTons_Cane() + currT.get(0).getThisTons_Cane();
+        Double percentb = 0.00;
+        ca2.setTodate(commaformat.format(todate2));
+        percentb = Double.valueOf(df.format((todate2 / etc) * 100));
+        ca2.setPercent(commaformat.format(percentb));
+        String standingt = commaformat.format(Double.valueOf(df.format(etc - todate2)));
+        ca2.setStanding(standingt);
         cT.add(ca);
         cT.add(ca2);
         return cT;
@@ -213,7 +224,7 @@ public class CropAssessmentDB {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "SELECT sum(forecasted) as 'total' FROM weeklyestimate where year = ? ;";
-            String query2 = "SELECT sum(tons_cane) as 'total' FROM production where year = ? ;";
+            String query2 = "SELECT forecasted1 as total FROM sra.cropestimatedistrict where year = ? ;";
             PreparedStatement pstmt = null;
             if (year<=2016){
                pstmt = conn.prepareStatement(query);  
@@ -227,6 +238,9 @@ public class CropAssessmentDB {
             Double tc = 0.00;
             if (rs.next()) {
                 tc = rs.getDouble("total");
+            }
+            else {
+                tc = 0.00;
             }
             rs.close();
             pstmt.close();
@@ -246,7 +260,7 @@ public class CropAssessmentDB {
             Connection conn = myFactory.getConnection();
             PreparedStatement pstmt = null;
             String query = "SELECT sum(area) as 'total' FROM cropestimatedistrict where year = ? ;";
-            String query2 = "SELECT sum(area_harvested) as 'total' FROM production where year = ? ;";
+            String query2 = "SELECT area as total FROM sra.cropestimatedistrict where year = ? ;";
             if(year<=2016){
               pstmt = conn.prepareStatement(query);  
             }
@@ -259,6 +273,9 @@ public class CropAssessmentDB {
             Double area = 0.00;
             if (rs.next()) {
                 area = rs.getDouble("total");
+            }
+            else {
+                area = 0.00;
             }
             rs.close();
             pstmt.close();

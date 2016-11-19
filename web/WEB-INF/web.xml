@@ -328,6 +328,10 @@
         <servlet-name>updateDurationByPhases</servlet-name>
         <servlet-class>controller.updateDurationByPhases</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>showDisasterReport</servlet-name>
+        <servlet-class>controller.showDisasterReport</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
@@ -655,6 +659,10 @@
     <servlet-mapping>
         <servlet-name>updateDurationByPhases</servlet-name>
         <url-pattern>/updateDurationByPhases</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>showDisasterReport</servlet-name>
+        <url-pattern>/showDisasterReport</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
