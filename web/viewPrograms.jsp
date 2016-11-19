@@ -16,7 +16,6 @@
 
                     <h1>
                         Plans & Programs List
-                        <small>Optional description</small>
                     </h1>
                 </section>
                 <section class="content">

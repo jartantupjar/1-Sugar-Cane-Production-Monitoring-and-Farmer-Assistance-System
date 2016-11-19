@@ -16,7 +16,6 @@
 
                     <h1>
                         Send Related Recommendations
-                        <small>***Subjective***</small>
                     </h1>
                 </section>
                 <section class="content">

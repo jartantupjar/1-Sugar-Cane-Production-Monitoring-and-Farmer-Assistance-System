@@ -17,7 +17,6 @@
                     <h1>
 
                         Recommendations Details 
-                        <small>Optional description</small>
                     </h1>
                 </section>
                 <section class="content">

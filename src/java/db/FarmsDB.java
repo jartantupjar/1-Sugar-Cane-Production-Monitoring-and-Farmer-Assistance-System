@@ -1223,6 +1223,7 @@ public class FarmsDB {
                 cr.setId(farmRec.get(i).getId());
                 cr.setRecommendation_name(farmRec.get(i).getRecommendation_name());
                 cr.setType(farmRec.get(i).getType());
+                cr.setPhase(farmRec.get(i).getPhase());
                 cr.setDescription(farmRec.get(i).getDescription());
                 reclist.add(cr);
             }
@@ -1311,6 +1312,7 @@ public class FarmsDB {
                 cr.setProb_id(farmRec.get(i).getProb_id());
                 cr.setProb_name(farmRec.get(i).getProb_name());
                 cr.setType(farmRec.get(i).getType());
+                cr.setPhase(farmRec.get(i).getPhase());
                 cr.setProb_details(farmRec.get(i).getProb_details());
                 reclist.add(cr);
             }

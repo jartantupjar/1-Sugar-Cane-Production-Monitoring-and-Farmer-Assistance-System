@@ -68,15 +68,12 @@ public class viewFieldDetails extends BaseServlet {
                   
                    ArrayList<Integer>histyrs= prodb.getDistinctHistProdYrs(cropyr);
                     farmer  = prodb.viewFarmerSummarybyYearTest(null,farm.getFarmer(),histyrs.get(0));
-                    
-                    
-            }
+                  }
         }else{
          farm=farmsdb.getAllFieldDetails(id);
           farmer  = prodb.viewFarmerSummarybyYearTest(null,farm.getFarmer(),cropyr);
         }
        DecimalFormat df = new DecimalFormat("#.##");
-       
                    farm.setProduction(Double.parseDouble(df.format(farmer.getProduction())));
                    farm.setTotalHa(farmer.getTotalArea());
                    if(farm.getProduction()!=0 && farm.getTotalHa()!=0){
@@ -85,9 +82,7 @@ public class viewFieldDetails extends BaseServlet {
                        farm.setYield(0); 
                    }
                    
-     
-       
-        session.setAttribute("farm", farm);
+          session.setAttribute("farm", farm);
           session.setAttribute("id", id);
 
         RequestDispatcher rd = context.getRequestDispatcher("/farmerComparison.jsp");

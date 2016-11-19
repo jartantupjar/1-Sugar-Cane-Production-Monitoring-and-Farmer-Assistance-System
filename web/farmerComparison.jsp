@@ -20,7 +20,7 @@ on barangay selection
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>SRA | Home</title>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-        
+
         <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
 
         <link rel="stylesheet" href="plugins/select2/select2.min.css">
@@ -39,7 +39,6 @@ on barangay selection
 
                     <h1>
                         Farm Profile
-                        <small>Optional description</small>
                     </h1>
                 </section>
                 <section class="content">
@@ -201,8 +200,8 @@ on barangay selection
                             </div>
                         </div>
                         <div class="col-md-12">
-                            
-                        <div class="col-md-4">
+
+                            <div class="col-md-4">
                                 <div class="box box-primary">
                                     <div class="box-header">
                                         <h1 class="box-title">Soil Analysis</h1>
@@ -241,18 +240,18 @@ on barangay selection
                                 </div>
 
                             </div>
-                           
+
                             <div class="col-md-4">
                                 <div class="box box-primary ">
                                     <div class="box-body">
- <h3 class="profile-username text-center">Fertilizer Info for ${farm.fertilizer.year}:</h3>
+                                        <h3 class="profile-username text-center">Fertilizer Info for ${farm.fertilizer.year}:</h3>
                                         <table id="recTable" class="table  display table-hover" cellspacing="0" width="100%">
                                             <thead>
                                                 <tr>
                                                     <th>Fertilizer</th>
                                                     <th>First Dose</th>
                                                     <th>Second Dose</th>
-                                                   
+
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -276,13 +275,13 @@ on barangay selection
                             <div class="col-md-4">
                                 <div class="box box-primary ">
                                     <div class="box-body">
- <h3 class="profile-username text-center">Tiller Info for ${farm.tillers.year}:</h3>
+                                        <h3 class="profile-username text-center">Tiller Info for ${farm.tillers.year}:</h3>
                                         <table id="recTable" class="table  display table-hover" cellspacing="0" width="100%">
                                             <thead>
                                                 <tr>
                                                     <th>rep</th>
                                                     <th>count</th>
-                                                   
+
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -302,30 +301,30 @@ on barangay selection
                                     </div>
                                 </div>
                             </div>
- </div>
-                                        <div class="col-md-12">
-                                            <div class="col-md-6" > 
-                            <div class="box box-info">
-                                <div class="box-header with-border">
-                                    <h1 class="box-title">Problems List</h1>
-                                    <div class="box-tools pull-right">
-                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="col-md-6" > 
+                                <div class="box box-info">
+                                    <div class="box-header with-border">
+                                        <h1 class="box-title">Problems List</h1>
+                                        <div class="box-tools pull-right">
+                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="box-body">
-                                    <table id="probTable" class="table  dispTable table-hover" cellspacing="0" width="100%">
-                                        <thead>
-                                            <tr>
-                                                 <th>Problem</th>
-                                                 <th>Status</th>
-                                                 <th>Type</th>
-                                                <th>Description</th>
-                                                 <th></th>
-                                            </tr>
-                                        </thead>
-                                         <tbody>
+                                    <div class="box-body">
+                                        <table id="probTable" class="table  dispTable table-hover" cellspacing="0" width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Problem</th>
+                                                    <th>Status</th>
+                                                    <th>Type</th>
+                                                    <th>Description</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
                                                 <c:if test="${not empty farm.problems}">
                                                     <c:forEach items="${farm.problems}" var="prob">
                                                         <tr>
@@ -340,33 +339,33 @@ on barangay selection
 
                                                 </c:if>
                                             </tbody>
-                                    </table>
-                                </div>
-
-                            </div>
-                        </div>
-                                            <div class="col-md-6" > 
-                            <div class="box box-info">
-                                <div class="box-header with-border">
-                                    <h1 class="box-title">Recommendations List</h1>
-                                    <div class="box-tools pull-right">
-                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                        </table>
                                     </div>
-                                </div>
 
-                                <div class="box-body">
-                                    <table class="table  dispTable table-hover" cellspacing="0" width="100%">
-                                        <thead>
-                                            <tr>
-                                                 <th>Recommendation</th>
-                                                 <th>Status</th>
-                                                 <th>Type</th>
-                                                <th>Description</th>
-                                                 <th></th>
-                                            </tr>
-                                        </thead>
-                                         <tbody>
+                                </div>
+                            </div>
+                            <div class="col-md-6" > 
+                                <div class="box box-info">
+                                    <div class="box-header with-border">
+                                        <h1 class="box-title">Recommendations List</h1>
+                                        <div class="box-tools pull-right">
+                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                        </div>
+                                    </div>
+
+                                    <div class="box-body">
+                                        <table class="table  dispTable table-hover" cellspacing="0" width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Recommendation</th>
+                                                    <th>Status</th>
+                                                    <th>Type</th>
+                                                    <th>Description</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
                                                 <c:if test="${not empty farm.recommendation}">
                                                     <c:forEach items="${farm.recommendation}" var="rec">
                                                         <tr>
@@ -375,23 +374,42 @@ on barangay selection
                                                             <td><c:out value="${rec.type}"/></td>
                                                             <td><c:out value="${rec.description}"/></td>
                                                             <td><a class="btn btn-primary" href="viewRecDetails?id=${rec.id}">details</a></td>
-                                                            
+
                                                         </tr>
                                                     </c:forEach>
 
 
                                                 </c:if>
                                             </tbody>
-                                    </table>
-                                </div>
+                                        </table>
+                                    </div>
 
+                                </div>
                             </div>
                         </div>
-                                            </div>
+
                         <div class="col-md-offset-5 col-sm-2 ">
 
-                            <button id="obsrvButton" class="btn btn-info btn-block" type="button" style="height: 6%;">Create New Observation</button>
-                        </div>                      
+                            <button id="actionButton" class="btn btn-success btn-block" type="button" style="height: 6%;">View Action Tools</button>
+                            <button id="obsrvButton" class="btn btn-info btn-block" type="button" style="">Create Observation</button>
+                        </div>       
+                        <div class="col-md-offset-3 col-sm-6 hidden" id="actionBlock">
+                            <form id="frm-sendRec" action="viewSendRec">
+                                <input name="farmid" type="hidden" value="${id}"/>
+
+
+                                <button class="btn btn-app btn-linkedin atools" name="atools" id="crec" value="crec">
+                                    <i class="fa fa-edit" ></i> Create Recommendations
+                                </button>
+                                <button class="btn btn-app btn-linkedin atools" name="atools" id="sorec" value="sorec">
+                                    <i class="fa fa-edit" ></i> Send Recommendations
+                                </button>
+                                <button class="btn btn-app btn-linkedin atools" name="atools" id="dprob" value="dprob">
+                                    <i class="fa fa-edit" ></i> Determine Problems
+                                </button>
+
+                            </form>
+                        </div>
                         <div id="observBlock" class="col-md-12 hidden">
                             <h1> Farm Observation</h1>
                             <div class="col-md-7">
@@ -454,8 +472,9 @@ on barangay selection
                         </form>
 
                     </div>
-                                  <input class="btn btn-success pull-right" type="button" value="Back" 
-        onClick="history.go(-1);return true;"> 
+                    <input class="btn btn-success pull-right" type="button" value="Back" 
+                           onClick="history.go(-1);
+                return true;"> 
                 </section>
 
             </div>
@@ -502,6 +521,13 @@ on barangay selection
 
                 $("#obsrvButton").on("click", function () {
                     $('#observBlock').removeClass('hidden');
+                    $('#obsrvButton').addClass('hidden');
+                    $('#actionButton').addClass('hidden');
+
+                });
+                $("#actionButton").on("click", function () {
+                    $('#actionBlock').removeClass('hidden');
+                    $('#actionButton').addClass('hidden');
                     $('#obsrvButton').addClass('hidden');
 
                 });

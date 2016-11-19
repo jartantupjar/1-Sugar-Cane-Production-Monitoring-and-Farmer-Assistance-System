@@ -25,8 +25,7 @@
                 <section class="content-header">
 
                     <h1>
-                        Create Plan & Program 
-                        <small>Optional description</small>
+                        Create Plans & Programs
                     </h1>
                 </section>
                 <section class="content">

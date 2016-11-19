@@ -28,7 +28,6 @@ comparison page add current vs historical details(past 2yrs)
 
                     <h1>
                         Farmer Comparison
-                        <small>Optional description</small>
                     </h1>
                 </section>
                 <section class="content">
@@ -187,6 +186,7 @@ comparison page add current vs historical details(past 2yrs)
                                         <li><a href=".tab_4" data-toggle="tab"><b>Tiller</b></a></li>
                                         <li><a href=".tab_5" data-toggle="tab"><b>Problems </b></a></li>
                                         <li><a href=".tab_6" data-toggle="tab"><b>Recommendations</b></a></li>
+                                     
 
 
                                     </ul>
@@ -484,7 +484,7 @@ comparison page add current vs historical details(past 2yrs)
 
                                             </table>
                                         </div>
-                                        <div class="tab-pane tab_3" id="tab_8">
+                                        <div class="tab-pane tab_8" id="tab_8">
                                             <h3 class="profile-username text-center"></h3>
                                             <table id="fieldtable" class="table table-hover table-responsive">
                                                 <thead><tr>
@@ -547,7 +547,7 @@ comparison page add current vs historical details(past 2yrs)
 
                                             </table>
                                         </div>
-                                        <div class="tab-pane tab_4" id="tab_8">
+                                        <div class="tab-pane tab_7" id="tab_8">
                                             <h3 class="profile-username text-center"></h3>
                                             <table id="fieldtable" class="table table-hover table-responsive">
                                                 <thead><tr>
@@ -601,6 +601,7 @@ comparison page add current vs historical details(past 2yrs)
                                             <table id="fieldtable" class="table table-hover table-responsive">
                                                 <thead><tr>
                                                         <th>Problem</th>
+                                                        <th>Phase</th>
                                                         <th><c:out value="${farm.id}"/></th>
                                                             <c:forEach var="flow" items="${flist}">
 
@@ -613,6 +614,7 @@ comparison page add current vs historical details(past 2yrs)
                                                         <c:forEach var="flow" items="${comprob}" >
                                                             <tr>
                                                                 <th><c:out value="${flow.prob_name}"/></th>
+                                                                <td><c:out value="${flow.phase}"/></td>
 
                                                                 <c:forEach var="fly" items="${flow.farms}">
 
@@ -644,6 +646,7 @@ comparison page add current vs historical details(past 2yrs)
                                             <table id="fieldtable" class="table table-hover table-responsive">
                                                 <thead><tr>
                                                         <th>Recommendation</th>
+                                                        <th>Phase</th>
                                                         <th><c:out value="${farm.id}"/></th>
                                                             <c:forEach var="flow" items="${flist}">
 
@@ -655,8 +658,9 @@ comparison page add current vs historical details(past 2yrs)
                                                     <c:if test="${not empty comprec}">
                                                         <c:forEach var="flow" items="${comprec}" >
                                                             <tr>
+                                                               
                                                                 <th class="pull-left"><c:out value="${flow.recommendation_name}"/></th>
-
+                                                              <td class=""><c:out value="${flow.phase}"/></td>
                                                                 <c:forEach var="fly" items="${flow.farms}">
 
                                                                     <c:choose>
@@ -681,6 +685,155 @@ comparison page add current vs historical details(past 2yrs)
 
 
                                             </table>
+                                        </div>
+                                        <div class="tab-pane tab_4" id="tab_8">
+                                          
+                                            <div class="col-md-2">
+                                                 <h3 class="profile-username text-center text-bold">${farm.id}</h3>
+                                              <table id="fieldtable" class="table table-hover table-responsive">
+                                                <thead><tr>
+                                                       
+                                                        <th>Rep</th>
+                                                        <th>Count</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <c:if test="${not empty farm.tillist}">
+                                                         <c:forEach items="${farm.tillist}" var="til" varStatus="status">
+                                                        <tr>
+                                                             <td><c:out value="${til.rep}"/></td>
+                                                            <td class="text-blue"><c:out value="${til.count}"/></td>
+                                                        </tr>
+                                                    </c:forEach>
+
+
+                                                    </c:if>
+
+
+                                                </tbody>
+
+
+                                            </table>
+                                                </div>
+                                                   <c:forEach items="${flist}" var="flow">
+                                            <div class="col-md-2">
+                                                <h3 class="profile-username text-center text-bold">${flow.id}</h3>
+                                              <table id="fieldtable" class="table table-hover table-responsive">
+                                                <thead><tr>
+                                                      
+                                                        <th>Rep</th>
+                                                        <th>Count</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <c:if test="${not empty flow.tillist}">
+                                                        <c:forEach items="${flow.tillist}" var="til" varStatus="status">
+                                                        <tr>
+                                                           <td> <c:out value="${til.rep}"/></td>
+                                                              <c:choose>
+                                                                <c:when test='${til.count !=farm.tillist[status.index].count}'>
+                                                                    <td class="text-red"><c:out value="${til.count}"/></td>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <td class="text-green"><c:out value="${til.count}"/></td>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                            
+                                                        </tr>
+                                                    </c:forEach>
+
+
+                                                    </c:if>
+
+
+                                                </tbody>
+
+
+                                            </table>
+                                                </div>
+                                                   </c:forEach>
+                                        </div>
+                                        <div class="tab-pane tab_3" id="tab_8">
+                                          
+                                            <div class="col-md-3">
+                                                 <h3 class="profile-username text-center text-bold">${farm.id}</h3>
+                                              <table id="fieldtable" class="table table-hover table-responsive">
+                                                <thead><tr>
+                                                        <th>Fertilizer</th>
+                                                        <th>First Dose</th>
+                                                        <th>Second Dose</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <c:if test="${not empty farm.fertlist}">
+                                                         <c:forEach items="${farm.fertlist}" var="til" varStatus="status">
+                                                        <tr>
+                                                             <th class="text-blue"><c:out value="${til.fertilizer}"/></th>
+                                                            <td class="text-blue"><c:out value="${til.first_dose}"/></td>
+                                                            <td class="text-blue"><c:out value="${til.second_dose}"/></td>
+                                                        </tr>
+                                                    </c:forEach>
+
+
+                                                    </c:if>
+
+
+                                                </tbody>
+
+
+                                            </table>
+                                            	</div>
+                                                   <c:forEach items="${flist}" var="flow">
+                                            <div class="col-md-3">
+                                                <h3 class="profile-username text-center text-bold">${flow.id}</h3>
+                                              <table id="fieldtable" class="table table-hover table-responsive">
+                                                <thead><tr>
+                                                        <th>Fertilizer</th>
+                                                        <th>First Dose</th>
+                                                        <th>Second Dose</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <c:if test="${not empty flow.fertlist}">
+                                                        <c:forEach items="${flow.fertlist}" var="til" varStatus="status">
+                                                        <tr>
+                                                           <c:choose>
+                                                                <c:when test='${til.fertilizer !=farm.fertlist[status.index].fertilizer}'>
+                                                                    <th class="text-red"><c:out value="${til.fertilizer}"/></th>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <th class="text-green"><c:out value="${til.fertilizer}"/></th>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                              <c:choose>
+                                                                <c:when test='${til.first_dose !=farm.fertlist[status.index].first_dose}'>
+                                                                    <td class="text-red"><c:out value="${til.first_dose}"/></td>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <td class="text-green"><c:out value="${til.first_dose}"/></td>
+                                                                </c:otherwise>
+                                                              </c:choose>
+                                                              <c:choose>
+                                                                <c:when test='${til.second_dose !=farm.fertlist[status.index].second_dose}'>
+                                                                    <td class="text-red"><c:out value="${til.second_dose}"/></td>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <td class="text-green"><c:out value="${til.second_dose}"/></td>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                         </tr>
+                                                    </c:forEach>
+
+
+                                                    </c:if>
+
+
+                                                </tbody>
+
+
+                                            </table>
+                                                </div>
+                                                   </c:forEach>
                                         </div>
                                     </div>
 
@@ -719,12 +872,8 @@ comparison page add current vs historical details(past 2yrs)
 
 
 
-                            <div class="col-md-7 text-center">
-                                <div class="box box-danger">
-                                    <div class="box-header">
-                                        <h3 class="box-title">Action Tools</h3>
-                                    </div>
-                                    <div class="box-body">
+                            <div class="col-md-offset-2 col-md-7 text-center">
+                               
 
                                         <button class="btn btn-app btn-linkedin atools" name="atools" id="crec" value="crec">
                                             <i class="fa fa-edit" ></i> Create Recommendations
@@ -738,13 +887,7 @@ comparison page add current vs historical details(past 2yrs)
                                         <button class="btn btn-app btn-linkedin atools" name="atools" id="dprob" value="dprob">
                                             <i class="fa fa-edit" ></i> Determine Problem
                                         </button>
-                         
-                                    </div>
-
-                                    <!-- /.box-body -->
-                                </div>    
-
-
+                            
                             </div>
 
                         </form>
