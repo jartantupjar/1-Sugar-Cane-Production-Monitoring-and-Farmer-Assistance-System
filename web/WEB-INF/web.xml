@@ -41,6 +41,10 @@
         <servlet-class>controller.viewPostDetails</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>showDisasterReport</servlet-name>
+        <servlet-class>controller.showDisasterReport</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>RejectPost</servlet-name>
         <servlet-class>controller.RejectPost</servlet-class>
     </servlet>
@@ -329,8 +333,20 @@
         <servlet-class>controller.updateDurationByPhases</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>showDisasterReport</servlet-name>
-        <servlet-class>controller.showDisasterReport</servlet-class>
+        <servlet-name>changeSelectedForecastforYear</servlet-name>
+        <servlet-class>controller.changeSelectedForecastforYear</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewCropEstimate</servlet-name>
+        <servlet-class>controller.viewCropEstimate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>deleteCropEstimateTestRow</servlet-name>
+        <servlet-class>controller.deleteCropEstimateTestRow</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewAllFarmers</servlet-name>
+        <servlet-class>controller.viewAllFarmers</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
@@ -355,6 +371,10 @@
     <servlet-mapping>
         <servlet-name>createNewRecommendation</servlet-name>
         <url-pattern>/createNewRecommendation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>showDisasterReport</servlet-name>
+        <url-pattern>/showDisasterReport</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -661,8 +681,20 @@
         <url-pattern>/updateDurationByPhases</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>showDisasterReport</servlet-name>
-        <url-pattern>/showDisasterReport</url-pattern>
+        <servlet-name>changeSelectedForecastforYear</servlet-name>
+        <url-pattern>/changeSelectedForecastforYear</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewCropEstimate</servlet-name>
+        <url-pattern>/viewCropEstimate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deleteCropEstimateTestRow</servlet-name>
+        <url-pattern>/deleteCropEstimateTestRow</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewAllFarmers</servlet-name>
+        <url-pattern>/viewAllFarmers</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

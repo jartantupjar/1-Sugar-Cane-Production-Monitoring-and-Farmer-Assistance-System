@@ -44,15 +44,20 @@ public class generateForecast extends HttpServlet {
        
             CropEstimateDB cedb = new CropEstimateDB();
             cropEstimate ce= new cropEstimate();
-            Double area=null,rain=null,tiller=null,temp=null;
-            String area1=null,rain1=null,tiller1=null,temp1=null;
+            Double area=null,rain=null,tiller=null,temp=null,production=null;
+            String area1=null,rain1=null,tiller1=null,temp1=null,production1=null;
        
         area1=request.getParameter("area");
+        production1=request.getParameter("production");
         rain1=request.getParameter("rain");
         temp1=request.getParameter("temp");
         tiller1= request.getParameter("tiller");
         if(!area1.isEmpty()){
              area= Double.parseDouble(area1);
+            }
+         if(!production1.isEmpty()){
+             production= Double.parseDouble(production1);
+             System.out.println(production+"PRODUCTION");
             }
         if(!rain1.isEmpty()){
              rain= Double.parseDouble(rain1);
@@ -65,13 +70,11 @@ public class generateForecast extends HttpServlet {
             }
         
         
-        boolean check =  cedb.selectEstimates(area, rain, tiller, temp);
+        boolean check =  cedb.selectEstimates(area,production, rain, tiller, temp);
             if (check){
                 
                 ServletContext context = getServletContext();
-                RequestDispatcher rd = context.getRequestDispatcher("/viewCropEstimate.jsp");
-                HttpSession session = request.getSession();
-                rd.forward(request, response);
+                 response.sendRedirect("viewCropEstimate");
             }
             else {
                 ServletContext context = getServletContext();

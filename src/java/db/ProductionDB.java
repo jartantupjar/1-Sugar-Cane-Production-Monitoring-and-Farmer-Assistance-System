@@ -513,6 +513,32 @@ public class ProductionDB {
 
         return null;
     }
+    public ArrayList<String> getDistinctFarmers() {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select Distinct farmers_name from fields f;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<String> list = null;
+
+            if (rs.next()) {
+                list = new ArrayList<>();
+                do {
+                    list.add(rs.getString("farmers_name"));
+                } while (rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(CropEstimateDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
 
     public ArrayList<prodMunicipality> getProdMunicipalforYear(int year) {
         try {
@@ -962,6 +988,41 @@ public class ProductionDB {
         for (int i = 0; i < farmers.size(); i++) {
             Farmer nbs = viewOtherFarmerBasicDet(farmers.get(i));
             Farmer pbs = viewFarmerSummarybyYear(brgy, farmers.get(i), curyear);
+            nbs.setProduction(pbs.getProduction());
+            nbs.setTotalArea(pbs.getTotalArea());
+            nbs.setYear(Integer.toString(curyear));
+            Double yield = pbs.getProduction() / nbs.getTotalArea();
+            nbs.setCurYield(yield);
+            mslist.add(nbs);
+        }
+        return mslist;
+
+    }
+    public ArrayList<Farmer> viewAllFarmersTable(int curyear) {
+        ArrayList<Farmer> mslist = new ArrayList<>();
+        ArrayList<String> farmers = getDistinctFarmers();
+        for (int i = 0; i < farmers.size(); i++) {
+            Farmer nbs = viewOtherFarmerBasicDet(farmers.get(i));
+            Farmer pbs = viewFarmerSummarybyYear(null, farmers.get(i), curyear);
+            nbs.setProduction(pbs.getProduction());
+            nbs.setTotalArea(pbs.getTotalArea());
+            nbs.setYear(Integer.toString(curyear));
+            Double yield = pbs.getProduction() / nbs.getTotalArea();
+            nbs.setCurYield(yield);
+            mslist.add(nbs);
+        }
+        return mslist;
+
+    }
+    public ArrayList<Farmer> viewAllCurrFarmerTable(int curyear) {
+        ArrayList<Farmer> mslist = new ArrayList<>();
+        ArrayList<String> farmers = getDistinctFarmers();
+         CalendarDB caldb = new CalendarDB();
+        ArrayList<Calendar> calist = caldb.getCurrentYearDetails();
+        Date todayDate = calist.get(0).getTodayDate();
+        for (int i = 0; i < farmers.size(); i++) {
+            Farmer nbs = viewOtherFarmerBasicDet(farmers.get(i));
+            Farmer pbs = viewCurrFarmerSummarybyYear(farmers.get(i), curyear,todayDate);
             nbs.setProduction(pbs.getProduction());
             nbs.setTotalArea(pbs.getTotalArea());
             nbs.setYear(Integer.toString(curyear));

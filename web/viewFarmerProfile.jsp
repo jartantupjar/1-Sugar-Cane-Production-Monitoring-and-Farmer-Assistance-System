@@ -11,7 +11,9 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
     <head>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>SRA | Home</title>
+        
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+     
         <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
@@ -197,6 +199,8 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                                 <!-- /.box-body -->
                             </div>
                         </div>
+                                              <input class="btn btn-success pull-right" type="button" value="Back" 
+        onClick="history.go(-1);return true;"> 
                     </div>
                 </section>
 
@@ -222,6 +226,8 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
         <script>
 
             $(document).ready(function () {
+                
+                
                    var table = $('#fieldtable').DataTable({
                     'ajax': {
                         'url': 'viewFarmersFieldTable?name=${farm}'
@@ -262,6 +268,27 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                             }
                         }]
                 });
+                setInterval(function () { autoloadpage(); }, 30000);
+ function autoloadpage() {
+      $('#fieldtable').DataTable({
+           destroy: true,
+                    'ajax': {
+                        'url': 'viewFarmersFieldTable?name=${farm}'
+                    },
+                    'columnDefs': [{
+                            'targets': 7,
+                            'render': function (data, type, full, meta) {
+                                    return   '<div class="progress-group"> <span class="progress-number"><b>' + data + ' </b></span>  <div class="progress progress-sm progress-striped active"><div class="progress-bar progress-bar-primary" style="width: ' + data + '%"></div></div> </div>';
+                               
+                            }
+                        },{
+                            'targets': 8,
+                            'render': function (data, type, full, meta) {
+                                return '<a class="btn btn-primary" href="viewFieldDetails?id=' + data + '">details</a>';
+                            }
+                        }]
+                });
+ }
             });
 
 

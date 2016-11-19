@@ -67,9 +67,7 @@ public class sendRelatedRec extends BaseServlet {
         fixedRecDB recdb=new fixedRecDB();
         recdb.sendRecommendations(message,farmz, recz);
         
-           RequestDispatcher rd = context.getRequestDispatcher("/viewCropEstimate.jsp");
-
-        rd.forward(request, response);
+           response.sendRedirect("MDOHomepage");
 
         response.setCharacterEncoding("utf-8");
     } 

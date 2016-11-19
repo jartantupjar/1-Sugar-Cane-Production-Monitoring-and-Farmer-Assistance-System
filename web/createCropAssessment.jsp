@@ -157,6 +157,8 @@
                                 
                                 <div class="row">
                                     <div class="col-md-4 col-md-offset-4">
+                                          <input class="btn btn-success pull-right" type="button" value="Back" 
+        onClick="history.go(-1);return true;"> 
                                         <button class="btn btn-info btn-block" type="submit" >Submit</button>
                                         <br>
                                     </div>

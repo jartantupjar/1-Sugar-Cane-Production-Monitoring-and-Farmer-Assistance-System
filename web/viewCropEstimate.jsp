@@ -12,9 +12,10 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>SRA | Home</title>
-        <meta content="width=device-width, i/nitial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
         <link rel="stylesheet" href="plugins/select2/select2.min.css">
         <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+        <link rel="stylesheet" href="plugins/datatables/select.dataTables.min.css">
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
@@ -57,16 +58,49 @@
                                                 <th>Estimation 1</th>
                                                 <th>Estimation 2</th>
                                                 <th>Estimation 3</th>
+                                                <th>Selection</th>
 
                                             </tr>
                                         </thead>
+                                        <tbody>
+                                            <c:if test="${not empty est}">
+                                                <c:forEach items="${est}" var="estims">
+                                                    <tr>
+                                                        <td><c:out value="${estims.year}"/></td>
+                                                        <td><c:out value="${estims.area}"/></td>
+                                                        <td><c:out value="${estims.rainfall}"/></td>
+                                                        <td><c:out value="${estims.tiller}"/></td>
+                                                        <td><c:out value="${estims.temp}"/></td>
+                                                        <td><c:out value="${estims.actual}"/></td>
+                                                        <td><c:out value="${estims.forecasted}"/></td>
+                                                        <td><c:out value="${estims.forecast2}"/></td>
+                                                        <td><c:out value="${estims.forecast3}"/></td>
+                                                        <td>
+                                                            <select name="status" class="form-control selectforc" style="width: 100%;">
+                                                                <c:forEach begin="1" end="3" var="i">
+                                                                    <c:choose>
+                                                                        <c:when test="${i eq estims.selection}">
+                                                                            <option value="${estims.year},${i}" selected="selected">Estimation ${i}</option>
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <option value="${estims.year},${i}">Estimation ${i}</option>
+                                                                        </c:otherwise>
+                                                                    </c:choose>
+                                                                </c:forEach>
+                                                            </select>
 
+
+                                                        </td>
+                                                    </tr>        
+                                                </c:forEach>
+                                            </c:if>
+                                        </tbody>
                                     </table>
                                     <button type="button" class="btn btn-info pull-right" id="showform" >Gen Forecast</button>
                                 </div>
 
                             </div>
-                            
+
 
 
                             <div class="box box-info hidden" id="genform">
@@ -90,6 +124,15 @@
 
                                                 </div>
                                             </div>
+                                             <div class="form-group">
+                                                <label class="control-label">Total Production
+                                                    <span class="required" aria-required="true"> * </span>
+                                                </label>
+                                                <div class="">
+                                                    <input type="text" class="form-control" name="production" id="projectname" placeholder="Name...">
+
+                                                </div>
+                                            </div>
 
                                             <div class="form-group">
                                                 <label class="control-label">Year Rainfall
@@ -97,6 +140,14 @@
                                                 </label>
                                                 <div class="">
                                                     <input type="text" class="form-control" name="rain" id="projectname" placeholder="Name...">
+
+                                                </div>
+                                            </div>
+                                          <div class="form-group">
+                                                <label class="control-label">Total Tiller Amount
+                                                </label>
+                                                <div class="">
+                                                    <input type="text" class="form-control" name="tiller" id="projectname" placeholder="Name...">
 
                                                 </div>
                                             </div>
@@ -108,14 +159,7 @@
                                                     <input type="text" class="form-control" name="temp" id="projectname" placeholder="Name...">
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label class="control-label">Total Tiller Amount
-                                                </label>
-                                                <div class="">
-                                                    <input type="text" class="form-control" name="tiller" id="projectname" placeholder="Name...">
-
-                                                </div>
-                                            </div>
+                                            
 
 
                                         </div>
@@ -137,17 +181,18 @@
 
                                 <div class="box-body">
 
-                                    <table id="testTable" class="table display table-hover" cellspacing="0" width="100%">
+                                    <table id="testTable" class="table display dataTable table-hover" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>Area</th>
                                                 <th>Rainfall</th>
                                                 <th>Tiller Count</th>
                                                 <th>Avg Temp</th>
-                                                <th>Actual</th>
+                                                <th>Production</th>
                                                 <th>Estimation 1</th>
                                                 <th>Estimation 2</th>
                                                 <th>Estimation 3</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
 
@@ -183,7 +228,7 @@
 
                                 </select>
                             </div>
-                           
+
 
                         </div>
 
@@ -227,6 +272,7 @@
                                 </div>
 
                                 <div class="box-body">
+
                                     <table id="munitable" class="table  display table-hover" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
@@ -325,7 +371,7 @@
                                 backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
                             },
                             series: [{
-                                    name: 'Estimate 1'+ '<input type="checkbox" name="E1">',
+                                    name: 'Estimate 1' + '<input type="checkbox" name="E1">',
                                     type: 'column',
                                     data: estd,
                                     tooltip: {
@@ -408,12 +454,17 @@
             });
 
         </script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <script src="dist/js/app.min.js"></script>
+        <script src="plugins/select2/select2.full.min.js"></script>
+        <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
         <script>
 
             $(document).ready(function () {
 
 
-                $('#select3').on('change', function (evt) {
+                var testing = $('#select3').on('change', function (evt) {
                     var dist = $("#select2").val();
                     var yr = $("#select3").val();
                     $('#munibox').addClass('hidden');
@@ -436,17 +487,13 @@
                             'columnDefs': [{
                                     'targets': 6,
                                     'render': function (data, type, full, meta) {
-                                        return '<a class="btn btn-primary" href="' + data + '"> more details </a>';
+                                        return '<a class="btn btn-primary" href="viewFarmerProfile?name=' + data + '"> more details </a>';
                                     }
                                 }]
                         });
                     }
-
-
-
-
-
                 });
+                console.log(testing);
                 $('#select2').on('change', function (evt) {
                     var test = $("#select2").val();
 
@@ -475,31 +522,78 @@
 
                 var $dist = $("#select2").select2({minimumResultsForSearch: Infinity});
                 var test = $("#select2").val();
-                console.log(test);
                 $dist.trigger("change");
 
 
-                //ESTIMATE TABLE        
-                var table3 = $('#esttable').DataTable({
-                    'ajax': {
-                        'url': 'viewDiffDistEst'
-                    },
-                    "paging": false,
-//                    "ordering": false,
-                    "info": false,
-                    "searching": false
-                });
-                var table4 = $('#testTable').DataTable({
-                    'ajax': {
-                        'url': 'viewTestEstimates'
-                    },
-                    "paging": false,
-//                    "ordering": false,
-                    "info": false,
-                    "searching": false
-                });
+
             });
+
+
+            //ESTIMATE TABLE        
+            $('#esttable').DataTable({
+                "paging": false,
+//                    "ordering": false,
+                "info": false,
+                "searching": false
+
+            });
+            $(".selectforc").select2({
+                minimumResultsForSearch: Infinity
+            });
+            $('.selectforc').on('change', function (evt) {
+                var test = $(".selectforc").val();
+                var options = $(this).find('option:selected').val();
+                $.ajax({
+                    url: 'changeSelectedForecastforYear?name=' + options + '',
+                    type: 'POST',
+                    dataType: "JSON",
+                    success: function () {
+                        alert("success");
+                    }});
+
+
+            });
+
+
 //
+
+        </script>
+        <script src="plugins/datatables/dataTables.select.min.js"></script>
+        <script type="text/javascript">
+            var table4 = $('#testTable').DataTable({
+                'ajax': {
+                    'url': 'viewTestEstimates'
+                },
+                'columnDefs': [{
+                        'targets': 8,
+                        'render': function (data, type, full, meta) {
+                            return '<td class="dliker""><button class="btn btn-danger   cliker" id="' + data + '" type="button" >delete</button></td>';
+                        }
+                    }],
+                "paging": false,
+//                    "ordering": false,
+                "info": false,
+                "searching": false,
+                "select": true
+            });
+            table4.on('click', '.cliker', function () {
+                var bid = this.id;
+                var $killline = $(this).closest('td');
+                var $killrow = $($killline).parent('tr');
+                $killrow.addClass("danger");
+                $.ajax({
+                    url: 'deleteCropEstimateTestRow?id=' + bid + '',
+                    type: 'POST',
+                    dataType: "JSON",
+                    success: function () {
+                        alert("success");
+                    }});
+                $killrow.fadeOut(1000, function () {
+                    $(this).remove();
+
+                });
+
+            });
 
         </script>
 
@@ -507,13 +601,10 @@
 
 
 
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="dist/js/app.min.js"></script>
-        <script src="plugins/select2/select2.full.min.js"></script>
-        <script src="plugins/datatables/jquery.dataTables.min.js"></script>
-        <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+
         <script src="Highcharts/highcharts.js"></script>
         <script src="Highcharts/modules/drilldown.js"></script>
         <script src="Highcharts/modules/exporting.js"></script>
+
     </body>
 </html>
