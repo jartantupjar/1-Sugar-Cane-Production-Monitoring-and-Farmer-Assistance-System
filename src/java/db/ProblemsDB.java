@@ -331,6 +331,74 @@ public class ProblemsDB {
         }
         return null;
     }
+    public ArrayList<Problems> getReportsByType(Integer year) {
+        try {
+            // for the page of disaster alert.... shows all disaster problems (which are not subjective)
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select p.type, pf.date ,count(pf.Fields_id) as 'recorded_count', sum(pf.damage) as 'total_damage'\n" +
+"                            from problems p join `problems-fields` pf on p.id = pf.problems_id \n" +
+"                            where p.type != 'Subjective' and  year(pf.date) = ? \n" +
+"                            group by p.type;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, year);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<Problems> pT = null;
+            Problems p;
+            if (rs.next()) { 
+                 pT = new ArrayList<Problems>();
+                do {
+                    p = new Problems();
+                    p.setType(rs.getString("type")); 
+                   p.setTotalFarms(rs.getInt("recorded_count"));
+                    p.setDamage(rs.getDouble("total_damage"));
+                    pT.add(p);
+                } while (rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            
+            return pT;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProblemsDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public ArrayList<Problems> getReportsByDistrict(Integer year) {
+        try {
+            // for the page of disaster alert.... shows all disaster problems (which are not subjective)
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select f.district,count(pf.Fields_id) as 'recorded_count', sum(pf.damage) as 'total_damage'\n" +
+"                            from problems p join `problems-fields` pf on p.id = pf.problems_id join fields f on pf.Fields_id = f.id\n" +
+"                            where p.type != 'Subjective' and  year(pf.date) = ? \n" +
+"                            group by f.district;;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, year);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<Problems> pT = null;
+            Problems p;
+            if (rs.next()) { 
+                 pT = new ArrayList<Problems>();
+                do {
+                    p = new Problems();
+                    p.setDistrict(rs.getString("district")); 
+                   p.setTotalFarms(rs.getInt("recorded_count"));
+                    p.setDamage(rs.getDouble("total_damage"));
+                    pT.add(p);
+                } while (rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            
+            return pT;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProblemsDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     public ArrayList<Problems> getDisastersListByBarangay(Integer id, String municipality) {
         try {
             // for the page of disaster alert.... shows all disaster problems (which are not subjective)

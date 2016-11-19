@@ -487,6 +487,29 @@ public class ForumDB {
         }
         return 0;
     }
+    public Integer addCommentNotification(Integer fields_id,String message,Date date, Integer post_id){
+        int check=0;
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "INSERT INTO notifications(disaster,received,Fields_id,message,date,Posts_id) values(?,?,?,?,?,?); ";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, "N");
+            pstmt.setString(2, "N");
+            pstmt.setInt(3, fields_id);
+            pstmt.setString(4,message);
+            pstmt.setDate(5, date);
+            pstmt.setInt(6, post_id);
+            check  = pstmt.executeUpdate();
+                
+                pstmt.close();
+                conn.close();            
+            return check;
+                 }catch (SQLException ex) {
+            Logger.getLogger(ForumDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
     public Integer addAlertNotification(Integer fields_id,String message,Date date, Integer disaster_id){
         int check=0;
         try {

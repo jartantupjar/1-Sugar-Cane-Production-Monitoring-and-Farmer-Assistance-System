@@ -59,17 +59,11 @@
 
                         </div>
                         <div class="col-md-3 pull-right">
-                            <div class="form-group">
-                                <label>Options</label>
-                                <select class="form-control" id="particulars">
-                                    <option>By Type</option>
-                                    <option>By Region</option>
-                                    <option>By Municipality</option> 
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <button class="btn btn-warning" style="width: 100%"><a href="CitiesWeekView.jsp">Print Report</a></button>
-                            </div>
+                            <form id="frm-example" action="showDisasterReport">
+                                <div class="form-group">
+                                    <button class="btn btn-warning" style="width: 100%" type="submit">Print Report</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </section>

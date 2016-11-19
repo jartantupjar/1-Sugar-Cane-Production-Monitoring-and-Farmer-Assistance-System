@@ -14,7 +14,9 @@ import java.sql.Date;
 public class CropAssessment {
     private double prevArea, prevTons_Cane, thisArea, thisTons_Cane, todateArea, todateTonc_Cane;
     private double estiArea, estiTons_Cane, percArea, percTons_Canel;
-    private double estimated,previous,thisweek,todate,percent, standing, rainfall;
+    private double rainfall;
+    private String previous,thisweek,todate,percent, standing;
+    private String estimated;
     private String particulars;
     private Date week_ending;
     /**
@@ -185,88 +187,61 @@ public class CropAssessment {
         this.week_ending = week_ending;
     }
 
+
     /**
      * @return the estimated
      */
-    public double getEstimated() {
+    public String getEstimated() {
         return estimated;
     }
 
     /**
      * @param estimated the estimated to set
      */
-    public void setEstimated(double estimated) {
+    public void setEstimated(String estimated) {
         this.estimated = estimated;
-    }
-
-    /**
-     * @return the previous
-     */
-    public double getPrevious() {
-        return previous;
     }
 
     /**
      * @param previous the previous to set
      */
-    public void setPrevious(double previous) {
+    public void setPrevious(String previous) {
         this.previous = previous;
-    }
-
-    /**
-     * @return the thisweek
-     */
-    public double getThisweek() {
-        return thisweek;
     }
 
     /**
      * @param thisweek the thisweek to set
      */
-    public void setThisweek(double thisweek) {
+    public void setThisweek(String thisweek) {
         this.thisweek = thisweek;
-    }
-
-    /**
-     * @return the todate
-     */
-    public double getTodate() {
-        return todate;
     }
 
     /**
      * @param todate the todate to set
      */
-    public void setTodate(double todate) {
+    public void setTodate(String todate) {
         this.todate = todate;
-    }
-
-    /**
-     * @return the percent
-     */
-    public double getPercent() {
-        return percent;
     }
 
     /**
      * @param percent the percent to set
      */
-    public void setPercent(double percent) {
+    public void setPercent(String percent) {
         this.percent = percent;
-    }
-
-    /**
-     * @return the standing
-     */
-    public double getStanding() {
-        return standing;
     }
 
     /**
      * @param standing the standing to set
      */
-    public void setStanding(double standing) {
+    public void setStanding(String standing) {
         this.standing = standing;
+    }
+
+    /**
+     * @param rainfall the rainfall to set
+     */
+    public void setRainfall(String rainfall) {
+        this.setRainfall(rainfall);
     }
 
     /**
@@ -281,6 +256,41 @@ public class CropAssessment {
      */
     public void setRainfall(double rainfall) {
         this.rainfall = rainfall;
+    }
+
+    /**
+     * @return the previous
+     */
+    public String getPrevious() {
+        return previous;
+    }
+
+    /**
+     * @return the thisweek
+     */
+    public String getThisweek() {
+        return thisweek;
+    }
+
+    /**
+     * @return the todate
+     */
+    public String getTodate() {
+        return todate;
+    }
+
+    /**
+     * @return the percent
+     */
+    public String getPercent() {
+        return percent;
+    }
+
+    /**
+     * @return the standing
+     */
+    public String getStanding() {
+        return standing;
     }
     
 }

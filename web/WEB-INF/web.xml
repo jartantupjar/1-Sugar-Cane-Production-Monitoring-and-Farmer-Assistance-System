@@ -41,6 +41,10 @@
         <servlet-class>controller.viewPostDetails</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>showDisasterReport</servlet-name>
+        <servlet-class>controller.showDisasterReport</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>RejectPost</servlet-name>
         <servlet-class>controller.RejectPost</servlet-class>
     </servlet>
@@ -367,6 +371,10 @@
     <servlet-mapping>
         <servlet-name>createNewRecommendation</servlet-name>
         <url-pattern>/createNewRecommendation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>showDisasterReport</servlet-name>
+        <url-pattern>/showDisasterReport</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
