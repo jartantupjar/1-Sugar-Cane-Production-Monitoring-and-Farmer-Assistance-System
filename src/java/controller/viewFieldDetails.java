@@ -52,13 +52,14 @@ public class viewFieldDetails extends BaseServlet {
         //added date
         
             Farm farm;
-            Farmer farmer;
+          
              CalendarDB caldb= new CalendarDB();
             ArrayList<Calendar> calist= caldb.getCurrentYearDetails();
             int cropyr=calist.get(0).getYear();
             Date todayDate=calist.get(0).getTodayDate();
             
             farm=farmsdb.getAllFieldDetails(id);
+              Farmer farmer;
        if(cropyr>2016){
             if(caldb.checkifMilling()){
                   

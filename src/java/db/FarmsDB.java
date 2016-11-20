@@ -108,6 +108,34 @@ public class FarmsDB {
         }
         return null;
     }
+    public ArrayList<String> getAllFarmersFields(String fname) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select id from fields where farmers_name=?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, fname);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<String> farms = null;
+        
+
+            ProductionDB prodb = new ProductionDB();
+            if (rs.next()) {
+                farms = new ArrayList<String>();
+                do {
+                    farms.add(rs.getString("id"));
+
+                } while (rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            return farms;
+        } catch (SQLException ex) {
+            Logger.getLogger(FarmsDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 
     public ArrayList<Farm> getCurrFarmerFieldsTable(String fname, int cropyr, Date todayDate) {
         try {
@@ -210,9 +238,11 @@ public class FarmsDB {
                 farm.setArea(rs.getDouble("area"));
                 farm.setBarangay(rs.getString("barangay"));
                 farm.setMunicipality(rs.getString("municipality"));
-                farm.setProduction(rs.getDouble("tons_cane"));
-                farm.setYield(rs.getDouble("tavgyield"));
-
+                
+    Farm yfarm=getFarmDet(Integer.toString(fid));
+    farm.setProduction(yfarm.getProduction());
+    farm.setTotalHa(yfarm.getTotalHa());
+    farm.setYield(yfarm.getYield());
             }
             rs.close();
             pstmt.close();
@@ -224,14 +254,17 @@ public class FarmsDB {
         return null;
     }
 
-    public Farm getFieldProductionDet(int fid) {
+    public Farm getFieldProductionDet(int fid,int cropyr,Date todayDate) {
         // **** TODO : GET (INTEGER)YEAR TO GIVE TO FERTILIZER, TILLERS,CROP VALIDATION AND MONTHLY
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select id,Farmers_name,barangay,municipality,area from fields where id=?;";
+            String query = "SELECT ifnull(sum(p.tons_cane),0) as production, ifnull(sum(p.area_harvested),0) as tarea,ifnull(round(sum(p.tons_cane)/sum(p.area_harvested),2),0) as yield, p.year from production p join fields f on p.fields_id=f.id where f.id=? and year=? and date<=?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, fid);
+            pstmt.setInt(2, cropyr);
+            pstmt.setDate(3, todayDate);
+            
             ResultSet rs = pstmt.executeQuery();
 
             Farm farm = null;
@@ -239,11 +272,42 @@ public class FarmsDB {
 
                 farm = new Farm();
                 farm.setId(fid);
-                farm.setFarmer(rs.getString("Farmers_name"));
-                farm.setArea(rs.getDouble("area"));
-                farm.setBarangay(rs.getString("barangay"));
-                farm.setMunicipality(rs.getString("municipality"));
+                farm.setProduction(rs.getDouble("production"));
+                farm.setTotalHa(rs.getDouble("tarea"));
+                farm.setYield(rs.getDouble("yield"));
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            return farm;
+        } catch (SQLException ex) {
+            Logger.getLogger(FarmsDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public Farm getHistFieldProductionDet(String farmers_name,int cropyr) {
+        // **** TODO : GET (INTEGER)YEAR TO GIVE TO FERTILIZER, TILLERS,CROP VALIDATION AND MONTHLY
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select *,round(cane/area,2) as yield\n" +
+"from (select sum(tons_cane) as cane from historicalproduction where farmers_name=? and year=?)t1 \n" +
+"join (select sum(area) as area from fields where farmers_name=?)t2;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, farmers_name);
+            pstmt.setString(2, farmers_name);
+            pstmt.setInt(3, cropyr);
+            
+            ResultSet rs = pstmt.executeQuery();
 
+            Farm farm = null;
+            if (rs.next()) {
+
+                farm = new Farm();
+                farm.setFarmer(farmers_name);
+                farm.setProduction(rs.getDouble("cane"));
+                farm.setTotalHa(rs.getDouble("area"));
+                farm.setYield(rs.getDouble("yield"));
             }
             rs.close();
             pstmt.close();
@@ -512,7 +576,28 @@ public class FarmsDB {
                 f.setBarangay(rs.getString("barangay"));
                 f.setMunicipality(rs.getString("municipality"));
                 f.setYield(rs.getDouble("avgyield"));
-
+                  CalendarDB caldb= new CalendarDB();
+                  ArrayList<Calendar> calist= caldb.getCurrentYearDetails();
+                  int cropyr=calist.get(0).getYear();
+                  Date todayDate=calist.get(0).getTodayDate();
+                   Farm yfarm=null;
+            if(cropyr>2016){
+            if(caldb.checkifMilling()){
+                 yfarm = getFieldProductionDet(Integer.parseInt(id),cropyr,todayDate);
+            }else{
+                ProductionDB prodb= new ProductionDB();
+                  ArrayList<Integer>histyrs= prodb.getDistinctHistProdYrs(cropyr);
+                    yfarm =getHistFieldProductionDet(f.getFarmer(),histyrs.get(0));
+            }
+            }else{
+                 yfarm =getHistFieldProductionDet(f.getFarmer(),cropyr);
+            }
+                f.setProduction(yfarm.getProduction());
+                f.setTotalHa(yfarm.getTotalHa());
+                f.setYield(yfarm.getYield());
+             
+                
+                
             }
             rs.close();
             pstmt.close();
@@ -641,9 +726,10 @@ public class FarmsDB {
 //added date
 
     public ArrayList<String> searchFarmsbyTags(String[] list, int id) {
-        ArrayList<String> bfarm, sa, till, fz, cv;
+        ArrayList<String> bfarm, sa, till, fz, cv,prod;
 
         bfarm = checkFieldBasicDetails(list);
+        prod= checkFieldProdDetails(list);
         sa = checkFieldSoilAnalysis(list);
         till = checkFieldTill(list);
         fz = checkFieldFzer(list);
@@ -651,9 +737,13 @@ public class FarmsDB {
         CalendarDB caldb = new CalendarDB();
         ArrayList<Calendar> calist = caldb.getCurrentYearDetails();
         int cropyr = calist.get(0).getYear();
-
+//check each for crop year 2017 and above
+        //check if area is necessary for prod field det
         if (!bfarm.isEmpty()) {
             bfarm = (getAllBasicDetbyTags(bfarm, id));
+        }
+        if (!prod.isEmpty()) {
+            prod = (getAllProdFieldDetbyTags(prod, id));
         }
         if (!sa.isEmpty()) {
             sa = (getAllSAbyTags(sa, id));
@@ -673,6 +763,12 @@ public class FarmsDB {
             idlists.add(bfarm);
             for (int i = 0; i < bfarm.size(); i++) {
                 System.out.println(bfarm.get(i) + "bfarm post check");
+            }
+        }
+        if (!prod.isEmpty()) {
+            idlists.add(prod);
+            for (int i = 0; i < prod.size(); i++) {
+                System.out.println(prod.get(i) + "prod post check");
             }
         }
         if (!sa.isEmpty()) {
@@ -710,27 +806,7 @@ public class FarmsDB {
             }
 
         }
-//                for(int i=0; i<tfarmid.size();i++){
-//                    int nCount=counter;
-//                  for(int b=0; b<tfarmid.size();b++){
-//                      if(tfarmid.get(i).equals(tfarmid.get(b))){
-//                          nCount--;
-//                      }
-//                      if(nCount==0){
-//                          flist.add(tfarmid.get(i));
-//                      }
-//                      
-//                  } 
-//                   
-//                }
 
-//            }
-//                 if(!idlists.isEmpty()){
-//                System.out.println("final list w/farm ids:");
-//          for (int x=0;x<idlists.get(0).size();x++){
-//              System.out.println(idlists.get(0).get(x));
-//          }
-//          }
         return idlists.get(0);
     }
 
@@ -1007,7 +1083,123 @@ public class FarmsDB {
         return null;
 
     }
+public ArrayList<String>getAllProdFieldDetbyTags(ArrayList<String>list,int id){
+    CalendarDB caldb= new CalendarDB();
+     ArrayList<Calendar> calist= caldb.getCurrentYearDetails();
+    int cropyr=calist.get(0).getYear();
+    Date todayDate=calist.get(0).getTodayDate();
+      
+    ArrayList<String>fids=new ArrayList<>();
+    if(cropyr>2016){
+            if(caldb.checkifMilling()){
+               //cur details for HA,PROD,YIELD,TAREA 
+                fids=getAllCurProdDetbyTags(list,id,cropyr,todayDate);
+            }else{
+                ProductionDB prodb=new ProductionDB();
+           ArrayList<Integer>histyrs= prodb.getDistinctHistProdYrs(cropyr);
+                fids=getAllProdDetbyTags(list,id,histyrs.get(0));
+             
+            }
+        }else{
+           fids=getAllProdDetbyTags(list,id,cropyr);
+        }
+        return fids;
+}
+public ArrayList<String> getAllProdDetbyTags(ArrayList<String> list, int id,int cropyr) {
 
+        try {
+          
+     Farm getfarm = getFarmDet(Integer.toString(id));
+            Farm farm = getHistFieldProductionDet(getfarm.getFarmer(),cropyr);
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select cane,area,cane/area as yield,t1.farmers_name\n" +
+"from (select sum(tons_cane) as cane,farmers_name  from historicalproduction where year=? group by farmers_name)t1 \n" +
+"join (select sum(area) as area, farmers_name from fields group by farmers_name)t2 on t1.farmers_name = t2.farmers_name\n" +
+"having round(yield,2)=?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            int c = 0;
+             pstmt.setInt(c = c + 1, cropyr);
+             pstmt.setDouble(c = c + 1, farm.getYield());
+          
+            ResultSet rs = pstmt.executeQuery();
+
+            ArrayList<String> fids = new ArrayList<>();
+            if (rs.next()) {
+                fids = new ArrayList<>();
+                do {
+                    fids.addAll(getAllFarmersFields(rs.getString("farmers_name")));
+                } while (rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            return fids;
+        } catch (SQLException ex) {
+            Logger.getLogger(FarmsDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+public ArrayList<String> getAllCurProdDetbyTags(ArrayList<String> list, int id,int cropyr,Date todayDate) {
+
+        try {
+            String values = "";
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i).equalsIgnoreCase("totalHa")) {
+                    values += "sum(area_harvested)=?";
+                } else if (list.get(i).equalsIgnoreCase("production")) {
+                    values += "sum(tons_cane)=?";
+                } else if (list.get(i).equalsIgnoreCase("yield")) {
+                    values += "round(sum(tons_cane)/sum(area_harvested),2)=?";
+                }
+                //else if(list.get(i).equalsIgnoreCase("yield")) values+="yield=?" ;
+                // else if(list.get(i).equalsIgnoreCase("totalHa")) values+="totalHa=?" ;
+                //   else if(list.get(i).equalsIgnoreCase("production")) values+="production=?" ;
+ 
+                if (list.size() > 0 && i != list.size() - 1) {
+                    values += " and ";
+                }
+            }
+            System.out.println("where query for prod det::" + values);
+
+            Farm farm = getFieldProductionDet(id,cropyr,todayDate);
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select fields_id from production where year=? and date<=? group by fields_id having " + values;
+            System.out.println(query + ": the query");
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            int c = 0;
+             pstmt.setInt(c = c + 1, cropyr);
+             pstmt.setDate(c = c + 1, todayDate);
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i).equalsIgnoreCase("totalHa")) {
+                   pstmt.setDouble(c = c + 1, farm.getTotalHa());
+                  } else if (list.get(i).equalsIgnoreCase("production")) {
+                    pstmt.setDouble(c = c + 1, farm.getProduction());
+                } else if (list.get(i).equalsIgnoreCase("yield")) {
+                    pstmt.setDouble(c = c + 1, farm.getYield());
+                } 
+            }
+            ResultSet rs = pstmt.executeQuery();
+
+            ArrayList<String> fids = new ArrayList<>();
+            if (rs.next()) {
+                fids = new ArrayList<>();
+                do {
+                    fids.add(rs.getString("fields_id"));
+                } while (rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            return fids;
+        } catch (SQLException ex) {
+            Logger.getLogger(FarmsDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     public ArrayList<String> getAllBasicDetbyTags(ArrayList<String> list, int id) {
 
         try {
@@ -1078,6 +1270,7 @@ public class FarmsDB {
         }
         return null;
     }
+    
 
     public ArrayList<String> checkFieldCropVal(String[] list) {
         ArrayList<String> taglist = new ArrayList<>();
@@ -1173,7 +1366,14 @@ public class FarmsDB {
                 chcklist.add(list[i]);
             } else if (list[i].equalsIgnoreCase("farmer")) {
                 chcklist.add(list[i]);
-            } else if (list[i].equalsIgnoreCase("yield")) {
+            } 
+        }
+        return chcklist;
+    }
+    public ArrayList<String> checkFieldProdDetails(String[] list) {
+        ArrayList<String> chcklist = new ArrayList<>();
+        for (int i = 0; i < list.length; i++) {
+             if (list[i].equalsIgnoreCase("yield")) {
                 chcklist.add(list[i]);
             } else if (list[i].equalsIgnoreCase("totalHa")) {
                 chcklist.add(list[i]);
