@@ -272,6 +272,31 @@ public Calendar getCalendarTypes(Date todayDate){
 
         return false;
     }
+    public boolean checkifTillering() {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select cc.year,cc.district,cc.phase,c.current_date from crop_calendar cc join configuration c where cc.phase='Tillering' and c.`current_date` between cc.date_starting and cc.date_ending;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            ResultSet rs = pstmt.executeQuery();
+            Calendar cal=null;
+            boolean chckr=false;
+            if (rs.next()) {
+        chckr=true;
+           
+            }
+
+            rs.close();
+            pstmt.close();
+            conn.close();
+            return chckr;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CropEstimateDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false;
+    }
     public boolean checkifvalidDate(Date todayDate) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();

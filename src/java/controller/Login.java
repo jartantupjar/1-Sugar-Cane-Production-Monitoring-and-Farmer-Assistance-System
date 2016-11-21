@@ -2,6 +2,7 @@ package controller;
 
 import db.CalendarDB;
 import db.CropAssessmentDB;
+import db.CropEstimateDB;
 import db.UsersDB;
 import entity.Calendar;
 import entity.CropAssessment;
@@ -46,6 +47,7 @@ public class Login extends HttpServlet {
             oneUser.setPassword(request.getParameter("password"));
             UsersDB myUserDB = new UsersDB();
             CropAssessmentDB cadb = new CropAssessmentDB();
+            CropEstimateDB cedb=new CropEstimateDB();
             User successful = myUserDB.authenticate(oneUser);
             if (successful != null) {
                  ServletContext context = getServletContext();
@@ -70,6 +72,15 @@ public class Login extends HttpServlet {
                 //start of the crop assessment report
                 ArrayList<CropAssessment> caT=null;
                  Date week_ending =null;
+                 if(cropyear>2016){
+                     if(!cedb.checkExistingCropEstYear(cropyear)){
+                         cedb.generateYearlyEstimate(); 
+                     }else{
+                         
+                     }
+                     
+                 }
+                
                  boolean milling = false;
                 if(caldb.checkifMilling()){//checks if today is milling period
                     caT  = new ArrayList<CropAssessment>();
@@ -77,6 +88,8 @@ public class Login extends HttpServlet {
                     System.out.println(calist.get(0).getTodayDate()+"TODAYDATE");
                 caT = cadb.getCropAssesmentRajversion(cal.getEweek(), cropyear, calist.get(0).getTodayDate().toString());
                 week_ending=caT.get(0).getWeek_ending();
+                }else {
+                    
                 }
                
 

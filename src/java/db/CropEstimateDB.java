@@ -62,7 +62,7 @@ public class CropEstimateDB {
         ce.setActual(production);
         ce.setRainfall(rain);
         fce.setArea(area);
-         fce.setActual(production);
+        fce.setActual(production);
         fce.setRainfall(rain);
         ArrayList<cropEstimate> ces = viewAllDiffEstimates();
        ArrayList<cropEstimate> tests= viewTestEstimates();
@@ -96,7 +96,7 @@ public boolean inputEstimates(cropEstimate ce){
             String query = "INSERT INTO cropestimatedistrict (year,district,area,rainfall,avg_temperature,tiller_count,forecasted1, forecasted2, forecasted3) VALUES (?,?,?,?,?,?,?,?,?);";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
-            pstmt.setInt(1, getLastDistinctYear()+1);
+            pstmt.setInt(1, ce.getYear());
             pstmt.setString(2, "TARLAC");
             pstmt.setDouble(3, ce.getArea());
             pstmt.setDouble(4, ce.getRainfall());
@@ -105,6 +105,31 @@ public boolean inputEstimates(cropEstimate ce){
             pstmt.setDouble(7, ce.getForecasted());
             pstmt.setDouble(8, ce.getForecast2());
             pstmt.setDouble(9, ce.getForecast3());
+            int isSuccess = pstmt.executeUpdate();
+
+            pstmt.close();
+            conn.close();
+
+            return isSuccess == 1;
+        } catch (SQLException ex) {
+            Logger.getLogger(UsersDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+
+ 
+}
+public boolean inputAllEstimates(cropEstimate ce){
+      try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "INSERT INTO cropestimatedistrict (year,district,forecasted1, forecasted2, forecasted3) VALUES (?,?,?,?,?);";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+
+            pstmt.setInt(1, ce.getYear());
+            pstmt.setString(2, "TARLAC");
+            pstmt.setDouble(3, ce.getForecasted());
+            pstmt.setDouble(4, ce.getForecast2());
+            pstmt.setDouble(5, ce.getForecast3());
             int isSuccess = pstmt.executeUpdate();
 
             pstmt.close();
@@ -165,7 +190,7 @@ public boolean inputTestEstimates(cropEstimate ce){
       try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "INSERT INTO cropestimatetests (district,area,actual_tons_cane,rainfall,avg_temperature,tiller_count,forecast1, forecast2, forecast3) VALUES (?,?,?,?,?,?,?,?,?);";
+            String query = "INSERT INTO cropestimatetests (district,area,actual_tons_cane,rainfall,avg_temperature,tiller_count,forecast1, forecast2, forecast3) VALUES (?,?,?,?,?,?,ROUND(?,3),ROUND(?,3),ROUND(?,3));";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
             pstmt.setString(1, "TARLAC");
@@ -174,7 +199,13 @@ public boolean inputTestEstimates(cropEstimate ce){
             pstmt.setDouble(4, ce.getRainfall());
             pstmt.setDouble(5, ce.getTemp());
             pstmt.setDouble(6, ce.getTiller());
-            pstmt.setDouble(7, ce.getForecasted());
+              DecimalFormat df = new DecimalFormat("#.###");
+               System.out.println(ce.getForecasted());
+               System.out.println(ce.getForecast2());
+               System.out.println(ce.getForecast3());
+               
+          
+            pstmt.setDouble(7,ce.getForecasted());
             pstmt.setDouble(8, ce.getForecast2());
             pstmt.setDouble(9, ce.getForecast3());
             int isSuccess = pstmt.executeUpdate();
@@ -444,6 +475,100 @@ public boolean inputTestEstimates(cropEstimate ce){
             Logger.getLogger(ProblemsDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    public boolean generateYearlyEstimate() {
+        cropEstimate ce = new cropEstimate();
+           cropEstimate fce = new cropEstimate();
+         ce= getAverageEstimate();
+         fce.setYear(ce.getYear());
+        fce.setArea(ce.getArea());
+        fce.setRainfall(ce.getRainfall());
+        fce.setTiller(ce.getTiller());
+        fce.setTemp(ce.getTemp());
+        System.out.println(ce.getTemp());
+        ArrayList<cropEstimate> ces = viewAllDiffEstimates();
+        fce.setForecasted(genForecast1(ce,ces));
+        fce.setForecast2(genForecast2(ce,ces));
+        fce.setForecast3(genForecast3(ce,ces));
+       
+
+        inputEstimates(fce);
+
+   //method to input forecasts to db
+        return true;
+    }
+    public boolean generateUpdatedYearlyEstimate() {
+      
+        cropEstimate ce = new cropEstimate();
+           cropEstimate fce = new cropEstimate();
+         ce= getAverageEstimate();
+         fce.setYear(ce.getYear());
+        fce.setArea(ce.getArea());
+        fce.setRainfall(ce.getRainfall());
+        fce.setTiller(ce.getTiller());
+        fce.setTemp(ce.getTemp());
+        ArrayList<cropEstimate> ces = viewAllDiffEstimates();
+        fce.setForecasted(genForecast1(ce,ces));
+        fce.setForecast2(genForecast2(ce,ces));
+        fce.setForecast3(genForecast3(ce,ces));
+       
+
+        inputEstimates(fce);
+
+   //method to input forecasts to db
+        return true;
+    }
+    public cropEstimate getAverageEstimate() {
+        try {
+            // put functions here : previous week production, this week production
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select max(year)+1 as year,Round(avg(area),0) as area,avg(rainfall) as rainfall,Round(avg(tiller_count),0) as tiller,avg(avg_temperature) as temp from cropestimatedistrict where district=\"tarlac\";";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            ResultSet rs = pstmt.executeQuery();
+       
+            cropEstimate ce=null;
+            if (rs.next()) {
+                     ce = new cropEstimate();
+                     ce.setYear(rs.getInt("year"));
+                    ce.setArea(rs.getDouble("area"));
+                    ce.setRainfall(rs.getDouble("rainfall"));
+                    ce.setTiller(rs.getDouble("tiller"));
+                    ce.setTemp(rs.getDouble("temp"));
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+
+            return ce;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProblemsDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public boolean checkExistingCropEstYear(int cropyr) {
+        try {
+            // put functions here : previous week production, this week production
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select * from cropestimatedistrict where year=?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, cropyr);
+            ResultSet rs = pstmt.executeQuery();
+       
+            boolean chrk=false;
+            if (rs.next()) {
+                    chrk=true;
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+
+            return chrk;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProblemsDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 
     public ArrayList<cropEstimate> viewMunicipalityEstimates(int year) {
