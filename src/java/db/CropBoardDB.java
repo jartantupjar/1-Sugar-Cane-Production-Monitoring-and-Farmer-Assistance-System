@@ -26,7 +26,7 @@ public class CropBoardDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select id,district,week_ending ,weekofyear(week_ending), sum(area) as total_area, sum(actual) as total_actual, sum(lkg) as total_lkg \n"
+            String query = "select id,district,week_ending ,weekofyear(week_ending) as wof, sum(area) as total_area, sum(actual) as total_actual, sum(lkg) as total_lkg \n"
                     + "from dashboarddata\n"
                     + "where year = ? and week_ending <= ? \n"
                     + "group by weekofyear(week_ending)\n"
@@ -46,7 +46,9 @@ public class CropBoardDB {
                     c.setLkg(rs.getDouble("total_lkg"));
                     c.setId(rs.getInt("id"));
                     c.setDistrict("district");
-                    c.setWeek_ending(rs.getDate("week_ending"));
+                    c.setWeek_ending(rs.getDate("wof"));
+                    System.out.println(c.getWeek_ending()+"WOFWOF");
+                    c.setWeekofyear(rs.getInt("week_of_year"));
                     if (type.equalsIgnoreCase("TC")) {
                         c.setProduction(c.getTc());
                     } else if (type.equalsIgnoreCase("HA")) {
@@ -75,7 +77,7 @@ public class CropBoardDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select date,weekofyear(date), sum(area_harvested) as total_area, sum(tons_cane) as total_actual, sum(lkg) as total_lkg \n"
+            String query = "select date,weekofyear(date) as wof, sum(area_harvested) as total_area, sum(tons_cane) as total_actual, sum(lkg) as total_lkg \n"
                     + "from production\n"
                     + "where year = ? and date <= ? \n"
                     + "group by weekofyear(date)\n"
@@ -95,7 +97,9 @@ public class CropBoardDB {
                     c.setLkg(rs.getDouble("total_lkg"));
 //                    c.setId(rs.getInt("id"));
 //                    c.setDistrict("district");
+                    c.setWeekofyear(rs.getInt("wof"));
                     c.setWeek_ending(rs.getDate("date"));
+                    c.setRainfall(getcurrentrainfall(c.getWeek_ending().toString()));
                     if (type.equalsIgnoreCase("TC")) {
                         c.setProduction(c.getTc());
                     } else if (type.equalsIgnoreCase("HA")) {
@@ -525,6 +529,33 @@ public class CropBoardDB {
             conn.close();
 
             return cT;
+        } catch (SQLException ex) {
+            Logger.getLogger(CropBoardDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public Double getcurrentrainfall(String date) {
+        try {
+            // put functions here : previous week production, this week production
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT sum(r.amount) as rainfall FROM rainfall r join crop_calendar c where phase='Milling' and r.date between c.date_starting and c.date_ending and r.date =? ;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            ResultSet rs = pstmt.executeQuery();
+            pstmt.setString(1, date);
+            ArrayList<Double> cT = null;
+            Double c = 0.00;
+            if (rs.next()) {
+                cT = new ArrayList<Double>();
+                do {
+                    c = rs.getDouble("rainfall");
+                } while (rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+
+            return c;
         } catch (SQLException ex) {
             Logger.getLogger(CropBoardDB.class.getName()).log(Level.SEVERE, null, ex);
         }

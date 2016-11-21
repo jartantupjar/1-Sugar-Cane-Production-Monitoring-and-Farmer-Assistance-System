@@ -12,7 +12,7 @@ import java.sql.Date;
  * @author Bryll Joey Delfin
  */
 public class CropBoard {
-    private int id, year;
+    private int id, year, weekofyear;
     private String district, region;
     private Double area, tc, lkg, rainfall, estimated, production;
     private Date week_ending;
@@ -169,6 +169,20 @@ public class CropBoard {
      */
     public void setProduction(Double production) {
         this.production = production;
+    }
+
+    /**
+     * @return the weekofyear
+     */
+    public int getWeekofyear() {
+        return weekofyear;
+    }
+
+    /**
+     * @param weekofyear the weekofyear to set
+     */
+    public void setWeekofyear(int weekofyear) {
+        this.weekofyear = weekofyear;
     }
     
 }

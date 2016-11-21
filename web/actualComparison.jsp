@@ -28,7 +28,6 @@ comparison page add current vs historical details(past 2yrs)
 
                     <h1>
                         Farmer Comparison
-                        <small>Optional description</small>
                     </h1>
                 </section>
                 <section class="content">

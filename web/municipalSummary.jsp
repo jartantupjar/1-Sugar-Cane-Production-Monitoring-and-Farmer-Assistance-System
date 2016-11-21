@@ -25,7 +25,6 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
 
                     <h1>
                         Municipal Summary : <c:out value="${munidet.municipality}"/> 
-                        <small>Optional description</small>
                     </h1>
                 </section>
                 <section class="content">

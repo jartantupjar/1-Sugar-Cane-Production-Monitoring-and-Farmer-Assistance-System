@@ -29,7 +29,6 @@ current vs then diagram
 
                     <h1>
                         Plan & Program Details
-                        <small>Optional description</small>
                     </h1>
                 </section>
                 <section class="content">
