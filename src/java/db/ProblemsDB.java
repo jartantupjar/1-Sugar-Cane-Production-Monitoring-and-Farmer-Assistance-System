@@ -301,8 +301,8 @@ public class ProblemsDB {
             Connection conn = myFactory.getConnection();
             String query = "select p.id, p.type, f.municipality, f.barangay, pf.date ,count(pf.Fields_id) as 'recorded_count' \n" +
                             "from problems p join `problems-fields` pf on p.id = pf.problems_id join fields f on pf.Fields_id = f.id\n" +
-                            "where p.type != 'Subjective'\n" +
-                            "group by p.id, p.type, f.municipality;";
+                            "where p.type != 'Subjective'  \n" +
+                            "group by p.id, p.type, f.municipality order by pf.date ;";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             ArrayList<Problems> pT = null;

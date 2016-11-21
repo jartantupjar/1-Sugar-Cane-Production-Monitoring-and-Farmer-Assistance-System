@@ -137,7 +137,7 @@ public Calendar getCalendarTypes(Date todayDate){
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT * FROM crop_calendar where year = ?;";
+            String query = "SELECT * FROM crop_calendar where year = ? order by date_starting;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, cyear);
             ResultSet rs = pstmt.executeQuery();
@@ -308,6 +308,31 @@ public Calendar getCalendarTypes(Date todayDate){
             Logger.getLogger(CalendarDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         return pdate;
+    }
+    
+    
+    
+    public int updatePhaseDates(Calendar cal, int year, String district) {
+        try {
+            // put functions here : previous week production, this week production
+            int i = 0;
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "Insert into crop_calendar(year,district,phase,date_starting,date_ending) values (?,?,?,?,?);";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, year);
+            pstmt.setString(2, district);
+            pstmt.setString(3, cal.getPhase());
+            pstmt.setDate(4, cal.getStarting());
+            pstmt.setDate(5, cal.getEnding());
+            i = pstmt.executeUpdate();
+            pstmt.close();
+            conn.close();
+            return i;
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(subjectiveRecDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
     }
 
     public int addPhasesDates(Calendar cal, int year, String district) {

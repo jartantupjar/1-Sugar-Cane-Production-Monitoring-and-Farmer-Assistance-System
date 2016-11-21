@@ -82,7 +82,7 @@ public class linkToProblem extends HttpServlet {
             }
             test2 = fdb.updatePostProblems(title, fields_id, prob_id);
             test = pdb.linktoProblems(fields_id, prob_id, pdate, "Verifying");
-            fdb.addRecommendationProblem(fields_id, "You been linked to this problem", pdate, prob_id);
+            fdb.addRecommendationProblem(fields_id, "You been linked to this problem", pdate, test);
             if (test > 0 && test2 > 0) {
 
                 ServletContext context = getServletContext();

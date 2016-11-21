@@ -24,7 +24,7 @@
                     </h1>
                 </section>
                 <section class="content">
-
+                    <div class="row">
                     <div class="col-md-4">
                         <div class="box box-solid box-primary">
                             <div class="box-header with-border">
@@ -126,6 +126,7 @@
         onClick="history.go(-1);return true;"> 
                         <p><a class="btn btn-primary" style="width: 100%" href="createProject.jsp"><i class="fa fa-file "></i> Create Program</a></p>
                         <p><a class="btn btn-success" style="width: 100%" href="createNewRecommendation.jsp"><i class="fa fa-gear "></i> Create Recommendation</a></p>
+                    </div>
                     </div>
                 </section>
 

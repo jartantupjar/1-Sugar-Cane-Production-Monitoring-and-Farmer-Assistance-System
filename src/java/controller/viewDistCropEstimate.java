@@ -5,8 +5,10 @@
  */
 package controller;
 
+import db.CropBoardDB;
 import db.CropEstimateDB;
 import db.fixedRecDB;
+import entity.CropBoard;
 import entity.FarmRecTable;
 import entity.Recommendation;
 import entity.cropEstimate;
@@ -34,14 +36,24 @@ public class viewDistCropEstimate extends BaseServlet {
         CropEstimateDB estdb = new CropEstimateDB();
 
         HttpSession session = request.getSession();
-       
+        cropEstimate ce = new cropEstimate();
+       ArrayList<cropEstimate> fct = new ArrayList<>();
+       ArrayList<CropBoard> production = new ArrayList<>();
+       ArrayList<cropEstimate> ces = new ArrayList<>();
+       CropBoardDB cdb = new CropBoardDB();
          int year = Integer.parseInt(request.getParameter("year"));
-
-        ArrayList<cropEstimate> fct = estdb.viewDistrictEstimates(year);
+         if(year <=2016){
+        fct = estdb.viewDistrictEstimates(year);
+         }
+         else{
         
+        ce = estdb.getEstimatePreviousYear(year);
+        ces = estdb.getWeeklyEstimatePreviousYear(year);
+         }
         JSONObject data = new JSONObject();
         JSONArray list = new JSONArray();
         if (fct != null) {
+            if(year <=2016){
             for (int i = 0; i < fct.size(); i++) {
                 ArrayList<String> obj = new ArrayList<>();
                 obj.add(Integer.toString(fct.get(i).getYear()));
@@ -52,6 +64,7 @@ public class viewDistCropEstimate extends BaseServlet {
                  obj.add(Double.toString(fct.get(i).getDifference())+"%");
                 list.add(obj);
             }
+        }
         }
       data.put("data", list);
           response.setContentType("applications/json");

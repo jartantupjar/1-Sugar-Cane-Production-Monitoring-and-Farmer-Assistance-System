@@ -45,8 +45,8 @@ public class CropAssessmentDB {
         DecimalFormat commaformat = new DecimalFormat("#.00");
         commaformat.setGroupingUsed(true);
         commaformat.setGroupingSize(3);
-        double etc = Double.valueOf(df.format(getTotalEstimatedTonsCane(year-1))); // change into the crop year
-        double eah = Double.valueOf(df.format(getTotalEstimatedArea(year-1)));
+        double etc = Double.valueOf(df.format(getTotalEstimatedTonsCane(year))); // change into the crop year
+        double eah = Double.valueOf(df.format(getTotalEstimatedArea(year)));
         
         ca.setParticulars("Area");
         ca.setEstimated(commaformat.format(eah));
@@ -223,8 +223,13 @@ public class CropAssessmentDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
+            int num = getSelectedForecast(year);
+            System.out.println(num+"YEARRRRRRRRRRRRRRRRRRRRRRRRR");
+            if(num==0){
+                num++;
+            }
             String query = "SELECT sum(forecasted) as 'total' FROM weeklyestimate where year = ? ;";
-            String query2 = "SELECT forecasted1 as total FROM sra.cropestimatedistrict where year = ? ;";
+            String query2 = "SELECT forecasted"+num+" as total FROM cropestimatedistrict where year = ? ;";
             PreparedStatement pstmt = null;
             if (year<=2016){
                pstmt = conn.prepareStatement(query);  
@@ -388,6 +393,32 @@ public class CropAssessmentDB {
             if (rs.next()) {
                 do {
                     id = rs.getInt("id");
+                } while (rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+
+            return id;
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(CropAssessmentDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public Integer getSelectedForecast(int year) {
+        try {
+            // put functions here : previous week production, this week production
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT forecast FROM cropestimatedistrict where year = ?  ;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, year);
+            ResultSet rs = pstmt.executeQuery();
+            int id = 0;
+            CropAssessment c;
+            if (rs.next()) {
+                do {
+                    id = rs.getInt("forecast");
                 } while (rs.next());
             }
             rs.close();
