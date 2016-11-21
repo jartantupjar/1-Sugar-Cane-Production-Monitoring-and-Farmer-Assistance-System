@@ -274,6 +274,88 @@ public class CropEstimateDB {
 
         return null;
     }
+    public double getTotalCurrDisRainfall(Date todayDate) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select IFNULL(sum(amount),0) as amt from rainfall r  where r.date<=? and r.date between ? and ?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+          CalendarDB caldb= new CalendarDB();
+            Calendar cal=caldb.getCurrentCropYearStartEnd();
+            
+            pstmt.setDate(1, todayDate);
+            pstmt.setDate(2, cal.getStarting());
+            pstmt.setDate(3, cal.getEnding());
+            ResultSet rs = pstmt.executeQuery();
+            double val=0;
+
+            if (rs.next()) {
+                val= rs.getDouble("amt");
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+
+            return val;
+        } catch (SQLException ex) {
+            Logger.getLogger(CropEstimateDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return 0;
+    }
+    public double getTotalCurrDisTiller(int cropyr) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select IFNULL(sum(count),0) as amt from tillers where year=?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, cropyr);
+            ResultSet rs = pstmt.executeQuery();
+            double val=0;
+
+            if (rs.next()) {
+                val= rs.getDouble("amt");
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+
+            return val;
+        } catch (SQLException ex) {
+            Logger.getLogger(CropEstimateDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return 0;
+    }
+    public double getTotalCurrDisAreaDamage(Date todayDate) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select IFNULL(sum(damage),2) as amt from `problems-fields` where date<=? and status='inactive' and date between ? and ?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            
+             CalendarDB caldb= new CalendarDB();
+            Calendar cal=caldb.getCurrentCropYearStartEnd();
+            pstmt.setDate(1, todayDate);
+            pstmt.setDate(2, cal.getStarting());
+            pstmt.setDate(3, cal.getEnding());
+            ResultSet rs = pstmt.executeQuery();
+            double val=0;
+
+            if (rs.next()) {
+                val= rs.getDouble("amt");
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+
+            return val;
+        } catch (SQLException ex) {
+            Logger.getLogger(CropEstimateDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return 0;
+    }
 
     public double genForecast1(cropEstimate ce, ArrayList<cropEstimate> ces) {
         DataSet observedData = new DataSet();
@@ -714,11 +796,18 @@ public class CropEstimateDB {
         fce.setYear(cropyr);
         fce.setActual(cet.getActual());
         fce.setArea(cet.getArea());
-        fce.setRainfall(0);
-        fce.setTemp(0);
-        fce.setTiller(0);
+        //get total rainfall
+        fce.setRainfall(getTotalCurrDisRainfall(todayDate));
+        //get avg temp
+        fce.setTemp(26);
+        //get total tiller
+        //add if date finished tillering
+        fce.setTiller(getTotalCurrDisTiller(cropyr));
+        
         //get disaster update here 
         //reduce value to forecasted
+        double dmgarea=getTotalCurrDisAreaDamage(todayDate);
+        System.out.println(dmgarea+"total recorded damaged area");
         
         fce.setForecasted(cur.getForecasted());
         fce.setForecast2(cur.getForecast2());
