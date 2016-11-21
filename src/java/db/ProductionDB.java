@@ -55,6 +55,7 @@ public class ProductionDB {
 
         return null;
     }
+    
 
     public String getDistrictAreaAvgTest1(int curyr, String muni, String district) {
         try {
@@ -1046,7 +1047,7 @@ public class ProductionDB {
             nbs.setProduction(pbs.getProduction());
             nbs.setTotalArea(pbs.getTotalArea());
             nbs.setYear(Integer.toString(curyear));
-            Double yield = pbs.getProduction() / nbs.getTotalArea();
+            Double yield = pbs.getProduction()/nbs.getTotalArea();
             nbs.setCurYield(yield);
             mslist.add(nbs);
         }

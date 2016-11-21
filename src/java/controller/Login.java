@@ -74,9 +74,13 @@ public class Login extends HttpServlet {
                  Date week_ending =null;
                  if(cropyear>2016){
                      if(!cedb.checkExistingCropEstYear(cropyear)){
+                      
                          cedb.generateYearlyEstimate(); 
+                         cedb.updateYearlyEstimate();
                      }else{
-                         
+                            cedb.deleteSelectedDistrictYear(cropyear);
+                            cedb.generateYearlyEstimate();
+                            cedb.updateYearlyEstimate();
                      }
                      
                  }
