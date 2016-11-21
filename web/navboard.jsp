@@ -122,7 +122,7 @@
           <ul class="treeview-menu" style="display: none;">
            <li class="active"><a href="Homepage_Board.jsp"><i class="fa fa-link"></i><span>Dashboard</span></a></li>
          
-           <li><a href="#"><i class="fa fa-link"></i><span>Pampanga Performance(Summary)</span> </a></li>
+<!--           <li><a href="#"><i class="fa fa-link"></i><span>Pampanga Performance(Summary)</span> </a></li>-->
            <li><a href="Problems.jsp"><i class="fa fa-link"></i><span>Problems (Reoccuring)</span></a></li>
            <li><a href="Calendar.jsp"><i class="fa fa-link"></i><span>Calendar</span> </a></li>
            <li><a href="viewCropEstimate"><i class="fa fa-link"></i><span>Crop Estimate</span></a></li>
@@ -131,8 +131,6 @@
           <li><a href="#"><i class="fa fa-share"></i><span>District Performance (Summary)</span><i class="fa fa-angle-left pull-right"></i></a>
            <ul class="treeview-menu" style="display: none;">
                <li><a href="MDOHomepage"> <i class="fa fa-link"></i><span>Tarlac</span></a></li>
-               <li><a href="#"> <i class="fa fa-link"></i><span>Pampanga</span></a></li>
-               <li><a href="#"> <i class="fa fa-link"></i><span>Caramsuco</span></a></li>
            </ul>
                </li>
           

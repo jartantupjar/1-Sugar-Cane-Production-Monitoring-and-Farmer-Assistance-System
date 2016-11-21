@@ -12,6 +12,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>SRA | Home</title>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <link href="plugins/pace2/pace-theme-barber-shop.css" rel="stylesheet" />
         <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css"> 
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
@@ -100,6 +101,7 @@
         <script src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="dist/js/app.min.js"></script>
+        <script src="plugins/pace2/pace.min.js"></script>
         <script src="Highcharts/highcharts.js"></script>
         <script src="Highcharts/modules/exporting.js"></script>
         <script src="plugins/datatables/jquery.dataTables.min.js"></script>
@@ -229,6 +231,7 @@
                     else if(sv === 'LKG'){
                         var ti = '50 kilograms';
                     }   
+                    Pace.track(function(){
             $.ajax({
                     url: "viewWeeklyProducedReportByRegion?id="+sv,
                     type: "POST",
@@ -283,7 +286,7 @@
                     legend: {
                         layout: 'vertical',
                         align: 'left',
-                        x: 120,
+                        x: 170,
                         verticalAlign: 'top',
                         y: 90,
                         floating: true,
@@ -308,10 +311,10 @@
                 });
                     }
                 });   
+                });
             sel.onchange = function(){
                 var sl = sel.options[sel.selectedIndex].value;
-                
-               
+                Pace.track(function(){
               $.ajax({
                     url: "viewWeeklyProducedReportByRegion?id="+sl,
                     type: "POST",
@@ -371,7 +374,7 @@
                     legend: {
                         layout: 'vertical',
                         align: 'left',
-                        x: 120,
+                        x: 170,
                         verticalAlign: 'top',
                         y: 90,
                         floating: true,
@@ -396,6 +399,7 @@
                 });
                     }
                 }); 
+                });
              };       
             });
         </script>

@@ -20,7 +20,7 @@
             <div class="content-wrapper">
                 <section class="content-header">
                     <h1>
-                        Page Header
+                        Post
                         <small>Optional description</small>
                     </h1>
                 </section>
@@ -95,15 +95,14 @@
 
                                         </c:if>
                                     </div>
+                                        <input class="btn btn-success" style="width: 35%" type="button" value="Back" 
+        onClick="history.go(-1);return true;"> 
                                     <!-- /.box-body -->
                                     <div class="box-footer box-comments">
                                         <c:set var="com" value="${comments}"></c:set>
                                         <c:forEach var="comments" items="${comments}">
                                             <c:if test="${comments.comment_message != null}">
                                                 <div class="box-comment">
-                                                    <!-- User image -->
-                                                    <img class="img-circle img-sm" src="dist/img/user1-128x128.jpg">
-
                                                     <div class="comment-text">
                                                         <span class="username">
                                                             ${comments.comment_User}
@@ -302,8 +301,14 @@
                                                 <option>Pest and Disease Control</option>
                                             </select>
                                         </div>
+                                        <div class="form-group">
+                                        <a style="width: 35%" class="btn btn-github" id="ap"><i class="fa fa-warning "></i> Aims to solve a problem </a>
+                                        <a style="width: 35%" class="btn btn-instagram" id="ai"><i class="fa fa-gear "></i>  Aims to improve </a>
+                                        </div>
+                                        <div class="form-group hidden" id="duration">
                                         <label>Duration</label>
-                                        <input class="form-control" type="number"  name="config" min="1" max="100" >
+                                        <input class="form-control"type="number" placeholder="Enter number of days" name="config" min="1" max="100" >
+                                        </div>
                                         <label>Description</label>
                                         <input class="form-control" type="text"  name="description" >
                                     </div>
@@ -362,6 +367,20 @@
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
         <script type="text/javascript" src="plugins/datatable/dataTables.checkboxes.min.js"></script>
         <script>
+            $(function(){
+             $("#ap").on("click",function(){
+                $('#pts').removeClass('hidden');
+                $('#duration').addClass('hidden');
+                $('#creater').removeClass('hidden');
+             });
+             $("#ai").on("click",function(){
+                $('#duration').removeClass('hidden');
+                $('#pts').addClass('hidden');
+                $('#creater').removeClass('hidden');
+             });
+            });
+        </script>
+        <script>
             $(function () {
                 $("#lp").on("click", function () {
                     $('#linkp').removeClass('hidden');
@@ -384,8 +403,7 @@
                 });
                 $("#cr").on("click", function () {
                     $('#rec').removeClass('hidden');
-                    $('#creater').removeClass('hidden');
-                    $('#pts').removeClass('hidden');
+                    
                     $('#prob').addClass('hidden');
                     $('#createp').addClass('hidden');
                 });

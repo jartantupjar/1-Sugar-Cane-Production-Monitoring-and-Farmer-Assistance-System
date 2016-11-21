@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class cropEstimate {
     private int year,selection,id;
-    private double area,actual,forecasted,forecast2,forecast3,difference,rainfall,tiller,temp;
+    private double area,actual,forecasted,forecast2,forecast3,difference,rainfall,tiller,temp, lkg;
     private String district,municipality;
     private Date week_ending;
     private ArrayList<MonthlyCropEstimate> monthcropest;
@@ -244,6 +244,20 @@ public class cropEstimate {
      */
     public void setId(int id) {
         this.id = id;
+    }
+
+    /**
+     * @return the lkg
+     */
+    public double getLkg() {
+        return lkg;
+    }
+
+    /**
+     * @param lkg the lkg to set
+     */
+    public void setLkg(double lkg) {
+        this.lkg = lkg;
     }
     
 }

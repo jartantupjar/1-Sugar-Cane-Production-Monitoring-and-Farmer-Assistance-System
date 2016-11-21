@@ -88,19 +88,7 @@
                                                 </div>
                                                 <input type="text" class="form-control pull-right datepicker" name="gend" id="datepickerstart">
                                             </div> <br>
-                                <label> Milling Phase:</label> <div class="input-group date">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-calendar"></i>
-                                                </div>
-                                                <input type="text" class="form-control pull-right datepicker" name="mstart" id="datepickerstart">
-                                            </div>  <br>
-                                            <label> Milling Phase End:</label> <div class="input-group date">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-calendar"></i>
-                                                </div>
-                                                <input type="text" class="form-control pull-right datepicker" name="mend" id="datepickerstart">
-                                            </div> <br>
-                                <label> Tillering Phase:</label> <div class="input-group date">
+                                            <label> Tillering Phase:</label> <div class="input-group date">
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
@@ -112,7 +100,7 @@
                                                 </div>
                                                 <input type="text" class="form-control pull-right datepicker" name="tend" id="datepickerstart">
                                             </div> <br>
-                                <label>Stalk Elongation Phase:</label> <div class="input-group date">
+                                            <label>Stalk Elongation Phase:</label> <div class="input-group date">
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
@@ -135,6 +123,18 @@
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
                                                 <input type="text" class="form-control pull-right datepicker" name="yend" id="datepickerstart">
+                                            </div> <br>
+                                <label> Milling Phase:</label> <div class="input-group date">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                                <input type="text" class="form-control pull-right datepicker" name="mstart" id="datepickerstart">
+                                            </div>  <br>
+                                            <label> Milling Phase End:</label> <div class="input-group date">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                                <input type="text" class="form-control pull-right datepicker" name="mend" id="datepickerstart">
                                             </div> <br>
                                 </div>
                             </div>

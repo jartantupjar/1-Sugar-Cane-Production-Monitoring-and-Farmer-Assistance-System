@@ -30,7 +30,6 @@
                             <div class="form-group">
                                             <label>Year</label>
                                             <select class="form-control" id="year1">
-                                                <option>2012</option>
                                                 <option>2013</option>
                                                 <option>2014</option>
                                                 <option>2015</option>
@@ -56,7 +55,6 @@
                             <div class="form-group">
                                             <label>Year</label>
                                             <select class="form-control" id="year2">
-                                                <option>2012</option>
                                                 <option>2013</option>
                                                 <option>2014</option>
                                                 <option>2015</option>

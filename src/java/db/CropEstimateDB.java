@@ -281,7 +281,10 @@ public class CropEstimateDB {
 //        ArrayList<cropEstimate> ces = new ArrayList();
 //          ArrayList<Integer> yrlist= getDistinctYearEstYears();
 //        ces = viewAllDiffEstimates();
+  System.out.println(ces.size() + "size data");
         for (int i = 0; i < ces.size(); i++) {
+            System.out.println(ces.size() + "size data`");
+             System.out.println(ces.get(i).getArea() + "area data");
             dp = new Observation(ces.get(i).getActual());
             dp.setIndependentValue("area", ces.get(i).getArea());
             dp.setIndependentValue("rainfall", ces.get(i).getRainfall());
@@ -311,6 +314,101 @@ public class CropEstimateDB {
         System.out.println("Output data, forecast values");
 
         return forecastvalue.getDependentValue();
+    }
+    public double genLKGForecast1(cropEstimate ce, ArrayList<cropEstimate> ces) {
+        DataSet observedData = new DataSet();
+        Observation dp;
+//        ArrayList<cropEstimate> ces = new ArrayList();
+//          ArrayList<Integer> yrlist= getDistinctYearEstYears();
+//        ces = viewAllDiffEstimates();
+  System.out.println(ces.size() + "size data");
+        for (int i = 0; i < ces.size(); i++) {
+            System.out.println(ces.size() + "size data`");
+             System.out.println(ces.get(i).getArea() + "area data");
+            dp = new Observation(ces.get(i).getLkg());
+            dp.setIndependentValue("area", ces.get(i).getArea());
+            dp.setIndependentValue("rainfall", ces.get(i).getRainfall());
+            observedData.add(dp);
+        }
+        System.out.println(observedData + "obsr data");
+
+        ForecastingModel forecaster = Forecaster.getBestForecast(observedData);
+
+        System.out.println("Forecast model type selected: " + forecaster.getForecastType());
+        System.out.println(forecaster.toString());
+
+        Observation forecastvalue = new Observation(0.0);
+        forecastvalue.setIndependentValue("area", ce.getArea());
+        forecastvalue.setIndependentValue("rainfall", ce.getRainfall());
+
+        DataSet fcDataSet = new DataSet();
+        fcDataSet.add(forecastvalue);
+        Iterator itt = fcDataSet.iterator();
+
+        while (itt.hasNext()) {
+            DataPoint d = (DataPoint) itt.next();
+            forecaster.forecast(forecastvalue);
+        }
+        System.out.println("TC:" + forecastvalue.getDependentValue());
+
+        System.out.println("Output data, forecast values");
+
+        return forecastvalue.getDependentValue();
+    }
+
+    public cropEstimate getEstimatePreviousYear(int currYear) {
+        cropEstimate ce = null;
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select avg(area), avg(rainfal), avg(actual_lkg)\n"
+                    + "from weeklyestimate\n"
+                    + "where year = ? -1;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, currYear);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                ce = new cropEstimate();
+                ce.setArea(rs.getDouble("avg(area)"));
+                ce.setRainfall(rs.getDouble("avg(rainfal)"));
+                ce.setLkg(rs.getDouble("avg(actual_lkg)"));
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UsersDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ce;
+    }
+
+    public ArrayList<cropEstimate> getWeeklyEstimatePreviousYear(int currYear) {
+        ArrayList<cropEstimate> ces = new ArrayList<cropEstimate>();
+        cropEstimate ce = null;
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select area, rainfal,actual, actual_lkg \n"
+                    + "from weeklyestimate \n"
+                    + "where year = ?-1;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, currYear);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                ce = new cropEstimate();
+                ce.setArea(rs.getDouble("area"));
+                ce.setRainfall(rs.getDouble("rainfal"));
+                ce.setActual(rs.getDouble("actual"));
+                ce.setLkg(rs.getDouble("actual_lkg"));
+                ces.add(ce);
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UsersDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ces;
     }
 
     public double genForecast2(cropEstimate ce, ArrayList<cropEstimate> ces) {
@@ -877,7 +975,18 @@ public class CropEstimateDB {
     public ArrayList<Integer> getDistinctYears(Integer selection) {
         ArrayList<Integer> taglist = null;
         if (selection == 0) {
-            taglist = getAllDistinctYrsCropEst();
+            CalendarDB caldb = new CalendarDB();
+        ArrayList<Calendar> calist = caldb.getCurrentYearDetails();
+        int cropyr = calist.get(0).getYear();
+            if(cropyr>2016){
+                ProductionDB prodb= new ProductionDB();
+                  taglist = getAllDistinctYrsCropEst();
+                  taglist.addAll(prodb.getDistinctProdYrsASC(cropyr));
+                
+            }else{
+                taglist = getAllDistinctYrsCropEst();
+            }
+
         } else {
             taglist = getDistinctMunicipalYears();
         }
@@ -1028,7 +1137,7 @@ public class CropEstimateDB {
             requiredDataPoints.add(dp1);
             requiredDataPoints.add(dp2);
         }
-       // Dump data set before forecast
+        // Dump data set before forecast
 
         // the forecasted value/s
         forecaster.forecast(requiredDataPoints);

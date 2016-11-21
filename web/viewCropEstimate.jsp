@@ -251,6 +251,11 @@
                                                 <th>Actual Production</th>
                                                 <th>Estimated Production</th>
                                                 <th>% Difference</th>
+                                                <c:if test="${todayYear >= 2017}">
+                                                <th>Actual LKG</th>
+                                                <th>Estimated LKG</th>
+                                                <th>% Difference</th>
+                                                </c:if>
                                             </tr>
                                         </thead>
                                     </table>

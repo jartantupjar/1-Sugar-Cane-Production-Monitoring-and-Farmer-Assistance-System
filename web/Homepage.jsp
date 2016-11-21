@@ -171,7 +171,7 @@
                                 </c:if>
                     <br>
                     <c:if test="${todayYear <= 2016}">
-                    <div class="col-md-6" > 
+                    <div class="col-md-8" > 
                         <div class="box box-info">
                             <div class="box-header with-border">
                                 <h1 class="box-title">Weather Forecast (Today)</h1>
