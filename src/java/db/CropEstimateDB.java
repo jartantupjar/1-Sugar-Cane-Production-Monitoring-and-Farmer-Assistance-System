@@ -96,7 +96,7 @@ public class CropEstimateDB {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "UPDATE cropestimatedistrict set area=?,rainfall=?,avg_temperature=?,tiller_count=?,actual_tons_cane=?,forecasted1=?, forecasted2=?, forecasted3=? where year=? and district=?;";
+            String query = "UPDATE cropestimatedistrict set area=?,rainfall=?,avg_temperature=?,tiller_count=?,actual_tons_cane=?,forecasted1=?, forecasted2=?, forecasted3=?,actual_lkg=? where year=? and district=?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
             pstmt.setDouble(1, ce.getArea());
@@ -107,8 +107,9 @@ public class CropEstimateDB {
             pstmt.setDouble(6, ce.getForecasted());
             pstmt.setDouble(7, ce.getForecast2());
             pstmt.setDouble(8, ce.getForecast3());
-            pstmt.setInt(9, ce.getYear());
-            pstmt.setString(10, "TARLAC");
+            pstmt.setDouble(9, ce.getLkg());
+            pstmt.setInt(10, ce.getYear());
+            pstmt.setString(11, "TARLAC");
             int isSuccess = pstmt.executeUpdate();
 
             pstmt.close();
@@ -126,7 +127,7 @@ public class CropEstimateDB {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "INSERT INTO cropestimatedistrict (year,district,forecasted1, forecasted2, forecasted3,forecast) VALUES (?,?,?,?,?,0);";
+            String query = "INSERT INTO cropestimatedistrict (year,district,forecasted1, forecasted2, forecasted3,forecast,forecasted1_lkg,forecasted2_lkg,forecasted3_lkg,forecast_lkg) VALUES (?,?,?,?,?,?,?,?,?,?);";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
             pstmt.setInt(1, ce.getYear());
@@ -134,6 +135,11 @@ public class CropEstimateDB {
             pstmt.setDouble(3, ce.getForecasted());
             pstmt.setDouble(4, ce.getForecast2());
             pstmt.setDouble(5, ce.getForecast3());
+            pstmt.setDouble(6, ce.getSelection());
+            pstmt.setDouble(7, ce.getForecastlkg());
+            pstmt.setDouble(8, ce.getForecastlkg2());
+            pstmt.setDouble(9, ce.getForecastlkg3());
+            pstmt.setDouble(10, ce.getSelectionlkg());
             int isSuccess = pstmt.executeUpdate();
 
             pstmt.close();
@@ -152,6 +158,28 @@ public class CropEstimateDB {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "UPDATE cropestimatedistrict SET forecast=? where year=? and district=?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, ce.getSelection());
+            pstmt.setInt(2, ce.getYear());
+            pstmt.setString(3, "TARLAC");
+
+            int isSuccess = pstmt.executeUpdate();
+
+            pstmt.close();
+            conn.close();
+
+            return isSuccess == 1;
+        } catch (SQLException ex) {
+            Logger.getLogger(UsersDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+
+    }
+    public boolean updateLkgForecastSelection(cropEstimate ce) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "UPDATE cropestimatedistrict SET forecast_lkg=? where year=? and district=?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, ce.getSelection());
             pstmt.setInt(2, ce.getYear());
@@ -215,16 +243,22 @@ public class CropEstimateDB {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "INSERT INTO cropestimatetests (district,area,actual_tons_cane,rainfall,avg_temperature,tiller_count,forecast1, forecast2, forecast3) VALUES (?,?,?,?,?,?,ROUND(?,3),ROUND(?,3),ROUND(?,3));";
+            String query = "INSERT INTO cropestimatetests (district,area,actual_tons_cane,rainfall,avg_temperature,tiller_count,forecast1, forecast2, forecast3) VALUES (?,?,ROUND(?,3),?,?,?,ROUND(?,3),ROUND(?,3),ROUND(?,3));";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
             pstmt.setString(1, "TARLAC");
             pstmt.setDouble(2, ce.getArea());
-            pstmt.setDouble(3, ce.getActual());
+             DecimalFormat df = new DecimalFormat("#.###");
+//              pstmt.setDouble(3, Double.parseDouble(df.format(ce.getActual())));
+//            pstmt.setLong(3, (long)ce.getActual());
+             
+            String actualz=String.format("%.0f", ce.getActual());
+            System.out.println(actualz+"fuaiewifafopwEORWIEB");
+            pstmt.setString(3, actualz);
             pstmt.setDouble(4, ce.getRainfall());
             pstmt.setDouble(5, ce.getTemp());
             pstmt.setDouble(6, ce.getTiller());
-            DecimalFormat df = new DecimalFormat("#.###");
+           
             System.out.println(ce.getForecasted());
             System.out.println(ce.getForecast2());
             System.out.println(ce.getForecast3());
@@ -249,7 +283,7 @@ public class CropEstimateDB {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select IFNULL(sum(tons_cane),0) as tc,IFNULL(sum(area_harvested),0) as ha from production where year=? and date <=?;";
+            String query = "select IFNULL(sum(tons_cane),0) as tc,IFNULL(sum(area_harvested),0) as ha,IFNULL(sum(lkg),0) as lkg from production where year=? and date <=?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, curyr);
             pstmt.setDate(2, todayDate);
@@ -260,6 +294,7 @@ public class CropEstimateDB {
                 ce = new cropEstimate();
                 ce.setActual(rs.getDouble("tc"));
                 ce.setArea(rs.getDouble("ha"));
+                ce.setLkg(rs.getDouble("lkg"));
             }
             rs.close();
             pstmt.close();
@@ -290,6 +325,30 @@ public class CropEstimateDB {
 
             if (rs.next()) {
                 val = rs.getDouble("amt");
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+
+            return val;
+        } catch (SQLException ex) {
+            Logger.getLogger(CropEstimateDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return 0;
+    }
+    public double getTotalCurrDisTotalArea() {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select sum(area) as ar from fields;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+          
+            ResultSet rs = pstmt.executeQuery();
+            double val = 0;
+
+            if (rs.next()) {
+                val = rs.getDouble("ar");
             }
             rs.close();
             pstmt.close();
@@ -534,6 +593,45 @@ public class CropEstimateDB {
 
         return forecastvalue.getDependentValue();
     }
+    public double genLkgForecast2(cropEstimate ce, ArrayList<cropEstimate> ces) {
+        DataSet observedData = new DataSet();
+        Observation dp;
+//        ArrayList<cropEstimate> ces = new ArrayList();
+//          ArrayList<Integer> yrlist= getDistinctYearEstYears();
+//        ces = viewAllDiffEstimates();
+        for (int i = 0; i < ces.size(); i++) {
+            dp = new Observation(ces.get(i).getLkg());
+            dp.setIndependentValue("area", ces.get(i).getArea());
+            dp.setIndependentValue("rainfall", ces.get(i).getRainfall());
+            dp.setIndependentValue("production", ces.get(i).getActual());
+            observedData.add(dp);
+        }
+        System.out.println(observedData + "obsr data");
+
+        ForecastingModel forecaster = Forecaster.getBestForecast(observedData);
+
+        System.out.println("Forecast model type selected: " + forecaster.getForecastType());
+        System.out.println(forecaster.toString());
+
+        Observation forecastvalue = new Observation(0.0);
+        forecastvalue.setIndependentValue("area", ce.getArea());
+        forecastvalue.setIndependentValue("rainfall", ce.getRainfall());
+        forecastvalue.setIndependentValue("production", ce.getActual());
+
+        DataSet fcDataSet = new DataSet();
+        fcDataSet.add(forecastvalue);
+        Iterator itt = fcDataSet.iterator();
+
+        while (itt.hasNext()) {
+            DataPoint d = (DataPoint) itt.next();
+            forecaster.forecast(forecastvalue);
+        }
+        System.out.println("TC:" + forecastvalue.getDependentValue());
+
+        System.out.println("Output data, forecast values");
+
+        return forecastvalue.getDependentValue();
+    }
 
     public double genForecast3(cropEstimate ce, ArrayList<cropEstimate> ces) {
         DataSet observedData = new DataSet();
@@ -576,6 +674,49 @@ public class CropEstimateDB {
 
         return forecastvalue.getDependentValue();
     }
+    public double genLkgForecast3(cropEstimate ce, ArrayList<cropEstimate> ces) {
+        DataSet observedData = new DataSet();
+        Observation dp;
+//        ArrayList<cropEstimate> ces = new ArrayList();
+//          ArrayList<Integer> yrlist= getDistinctYearEstYears();
+//        ces = viewAllDiffEstimates();
+        for (int i = 0; i < ces.size(); i++) {
+            dp = new Observation(ces.get(i).getLkg());
+            dp.setIndependentValue("area", ces.get(i).getArea());
+            dp.setIndependentValue("rainfall", ces.get(i).getRainfall());
+            dp.setIndependentValue("tiller", ces.get(i).getTiller());
+            dp.setIndependentValue("temp", ces.get(i).getTemp());
+            dp.setIndependentValue("production", ces.get(i).getActual());
+            observedData.add(dp);
+        }
+        System.out.println(observedData + "obsr data");
+
+        ForecastingModel forecaster = Forecaster.getBestForecast(observedData);
+
+        System.out.println("Forecast model type selected: " + forecaster.getForecastType());
+        System.out.println(forecaster.toString());
+
+        Observation forecastvalue = new Observation(0.0);
+        forecastvalue.setIndependentValue("area", ce.getArea());
+        forecastvalue.setIndependentValue("rainfall", ce.getRainfall());
+        forecastvalue.setIndependentValue("tiller", ce.getTiller());
+        forecastvalue.setIndependentValue("temp", ce.getTemp());
+        forecastvalue.setIndependentValue("production", ce.getActual());
+
+        DataSet fcDataSet = new DataSet();
+        fcDataSet.add(forecastvalue);
+        Iterator itt = fcDataSet.iterator();
+
+        while (itt.hasNext()) {
+            DataPoint d = (DataPoint) itt.next();
+            forecaster.forecast(forecastvalue);
+        }
+        System.out.println("TC:" + forecastvalue.getDependentValue());
+
+        System.out.println("Output data, forecast values");
+
+        return forecastvalue.getDependentValue();
+    }
 
     public cropEstimate viewDistEstbyYear(int year) {
         try {
@@ -583,7 +724,7 @@ public class CropEstimateDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select year,district,area,rainfall,tiller_count,avg_temperature,actual_tons_cane,forecasted1,forecasted2,forecasted3,forecast from cropestimatedistrict where year=?;";
+            String query = "select year,district,area,rainfall,tiller_count,avg_temperature,actual_tons_cane,forecasted1,forecasted2,forecasted3,forecast,actual_lkg,forecasted1_lkg,forecasted2_lkg,forecasted3_lkg,forecast_lkg from cropestimatedistrict where year=?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, year);
             ResultSet rs = pstmt.executeQuery();
@@ -608,6 +749,16 @@ public class CropEstimateDB {
                 ce.setForecast3(estim3);
                 ce.setSelection(selection);
                 //    ce.setDifference(getYieldDif(actual,estim));
+                   double actualkg = rs.getDouble("actual_lkg");
+                    double estim1lkg = rs.getDouble("forecasted1_lkg");
+                    double estim2lkg = rs.getDouble("forecasted2_lkg");
+                    double estim3lkg = rs.getDouble("forecasted3_lkg");
+                    int selectionlkg = rs.getInt("forecast_lkg");
+                    ce.setLkg(actualkg);
+                    ce.setForecastlkg(estim1lkg);
+                    ce.setForecastlkg2(estim2lkg);
+                    ce.setForecastlkg3(estim3lkg);
+                    ce.setSelectionlkg(selectionlkg);
 
             }
             rs.close();
@@ -621,6 +772,58 @@ public class CropEstimateDB {
         return null;
     }
 
+//    public ArrayList<cropEstimate> viewAllDiffEstimates() {
+//        try {
+//            ProductionDB prodb = new ProductionDB();
+//            CalendarDB caldb = new CalendarDB();
+//            ArrayList<Calendar> calist = caldb.getCurrentYearDetails();
+//            int cropyr = calist.get(0).getYear();
+//            // put functions here : previous week production, this week production
+//            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+//            Connection conn = myFactory.getConnection();
+//            String query = "select year,district,area,rainfall,tiller_count,avg_temperature,actual_tons_cane,forecasted1,forecasted2,forecasted3,forecast from cropestimatedistrict where year<=?;";
+//            PreparedStatement pstmt = conn.prepareStatement(query);
+//            pstmt.setInt(1, cropyr);
+//            ResultSet rs = pstmt.executeQuery();
+//            ArrayList<cropEstimate> list = null;
+//            cropEstimate ce;
+//            if (rs.next()) {
+//                list = new ArrayList<>();
+//                do {
+//
+//                    ce = new cropEstimate();
+//                    ce.setYear(rs.getInt("year"));
+//                    ce.setDistrict(rs.getString("district"));
+//
+//                    ce.setArea(rs.getDouble("area"));
+//                    ce.setRainfall(rs.getDouble("rainfall"));
+//                    ce.setTiller(rs.getDouble("tiller_count"));
+//                    ce.setTemp(rs.getDouble("avg_temperature"));
+//
+//                    double actual = rs.getDouble("actual_tons_cane");
+//                    double estim = rs.getDouble("forecasted1");
+//                    double estim2 = rs.getDouble("forecasted2");
+//                    double estim3 = rs.getDouble("forecasted3");
+//                    int selection = rs.getInt("forecast");
+//                    ce.setActual(actual);
+//                    ce.setForecasted(estim);
+//                    ce.setForecast2(estim2);
+//                    ce.setForecast3(estim3);
+//                    ce.setSelection(selection);
+//                    //    ce.setDifference(getYieldDif(actual,estim));
+//                    list.add(ce);
+//                } while (rs.next());
+//            }
+//            rs.close();
+//            pstmt.close();
+//            conn.close();
+//
+//            return list;
+//        } catch (SQLException ex) {
+//            Logger.getLogger(ProblemsDB.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return null;
+//    }
     public ArrayList<cropEstimate> viewAllDiffEstimates() {
         try {
             ProductionDB prodb = new ProductionDB();
@@ -630,7 +833,7 @@ public class CropEstimateDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select year,district,area,rainfall,tiller_count,avg_temperature,actual_tons_cane,forecasted1,forecasted2,forecasted3,forecast from cropestimatedistrict where year<=?;";
+            String query = "select year,district,area,rainfall,tiller_count,avg_temperature,actual_tons_cane,forecasted1,forecasted2,forecasted3,forecast,actual_lkg,forecasted1_lkg,forecasted2_lkg,forecasted3_lkg,forecast_lkg from cropestimatedistrict where year<=?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, cropyr);
             ResultSet rs = pstmt.executeQuery();
@@ -659,6 +862,19 @@ public class CropEstimateDB {
                     ce.setForecast2(estim2);
                     ce.setForecast3(estim3);
                     ce.setSelection(selection);
+                   double actualkg = rs.getDouble("actual_lkg");
+                    double estim1lkg = rs.getDouble("forecasted1_lkg");
+                    double estim2lkg = rs.getDouble("forecasted2_lkg");
+                    double estim3lkg = rs.getDouble("forecasted3_lkg");
+                    int selectionlkg = rs.getInt("forecast_lkg");
+                    ce.setLkg(actualkg);
+                    ce.setForecastlkg(estim1lkg);
+                    ce.setForecastlkg2(estim2lkg);
+                    ce.setForecastlkg3(estim3lkg);
+                    ce.setSelectionlkg(selectionlkg);
+                    
+                    
+                    
                     //    ce.setDifference(getYieldDif(actual,estim));
                     list.add(ce);
                 } while (rs.next());
@@ -723,7 +939,7 @@ public class CropEstimateDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select year,district,week_ending,area,actual,forecasted from weeklyestimate where year=?;";
+            String query = "select year,district,week_ending,area,actual,forecasted,actual_lkg,forecasted_lkg from weeklyestimate where year=?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, year);
             ResultSet rs = pstmt.executeQuery();
@@ -740,9 +956,14 @@ public class CropEstimateDB {
                     ce.setArea(rs.getDouble("area"));
                     double actual = rs.getDouble("actual");
                     double estim = rs.getDouble("forecasted");
+                    double lkg = rs.getDouble("actual_lkg");
+                    double estimlkg = rs.getDouble("forecasted_lkg");
                     ce.setActual(actual);
                     ce.setForecasted(estim);
+                    ce.setLkg(lkg);
+                    ce.setForecastlkg(estimlkg);
                     ce.setDifference(getYieldDif(actual, estim));
+                    ce.setDifferencelkg(getYieldDif(lkg,estimlkg));
                     list.add(ce);
                 } while (rs.next());
             }
@@ -757,7 +978,7 @@ public class CropEstimateDB {
         return null;
     }
 
-    public boolean generateYearlyEstimate() {
+    public boolean generateYearlyEstimate(int selec,int seleclkg) {
         CalendarDB caldb = new CalendarDB();
 
         ArrayList<Calendar> calist = caldb.getCurrentYearDetails();//gets the phases/today/crop yr
@@ -773,11 +994,18 @@ public class CropEstimateDB {
         fce.setRainfall(ce.getRainfall());
         fce.setTiller(ce.getTiller());
         fce.setTemp(ce.getTemp());
+        fce.setActual(ce.getActual());
         System.out.println(ce.getTemp());
         ArrayList<cropEstimate> ces = viewAllDiffEstimates();
         fce.setForecasted(genForecast1(ce, ces));
         fce.setForecast2(genForecast2(ce, ces));
         fce.setForecast3(genForecast3(ce, ces));
+        fce.setSelection(selec);
+       
+        fce.setForecastlkg(genLKGForecast1(ce,ces));
+         fce.setForecastlkg2(genLkgForecast2(ce,ces));
+         fce.setForecastlkg3(genLkgForecast3(ce,ces));
+         fce.setSelectionlkg(seleclkg);
         inputEstimates(fce);
 
         //method to input forecasts to db
@@ -798,6 +1026,13 @@ public class CropEstimateDB {
         fce.setYear(cropyr);
         fce.setActual(cet.getActual());
         fce.setArea(cet.getArea());
+        fce.setForecasted(cur.getForecasted());
+        fce.setForecast2(cur.getForecast2());
+        fce.setForecast3(cur.getForecast3());
+        fce.setLkg(cet.getLkg());
+        System.out.println(cur.getForecasted()+"eoweonrweooerower");
+        System.out.println(cur.getForecast2()+"eoweonrweooerower");
+        System.out.println(cur.getForecast3()+"eoweonrweooerower");
         //get total rainfall
         fce.setRainfall(getTotalCurrDisRainfall(todayDate));
         //get avg temp
@@ -805,32 +1040,42 @@ public class CropEstimateDB {
         //get total tiller
         //add if date finished tillering
         fce.setTiller(getTotalCurrDisTiller(cropyr));
-
+   
         //get disaster update here 
         //reduce value to forecasted
         System.out.println(fce.getActual() + "total actual");
         double dmgarea = getTotalCurrDisAreaDamage(todayDate);
-        System.out.println(dmgarea + "total  damaged area");
+//        System.out.println(dmgarea + "total  damaged area");
         double yield = fce.getActual() / fce.getArea();
-        System.out.println(yield + "cur yield area");
+//        System.out.println(yield + "cur yield area");
         double newarea = fce.getArea() - dmgarea;
-        System.out.println(newarea + "new area");
+//        System.out.println(newarea + "new area");
         double newprod = yield * newarea;
-        System.out.println(newprod + "new prod");
-
-        yield=fce.getForecasted()/fce.getActual();
+//        System.out.println(newprod + "new prod");
+if(dmgarea!=0.00){
+     double tarea=getTotalCurrDisTotalArea();
+      System.out.println(cur.getForecasted() + "total district production");
+      System.out.println(tarea + "total district area");
+      System.out.println(fce.getArea() + "HA district area");
+        yield=cur.getForecasted()/fce.getArea();
+         System.out.println(yield + "forecast/area yield");
         newprod= yield*newarea;
+         System.out.println(newprod + "new forecast production");
         fce.setForecasted(newprod);
-        
-        yield=fce.getForecast2()/fce.getActual();
+        //THIS IS GETTING THE TODAY ACCURATE FORECAST
+//        yield=cur.getForecast2()/tarea;
+//        newprod= yield*newarea;
+//        fce.setForecast2(newprod);
+        yield=cur.getForecast2()/fce.getArea();
         newprod= yield*newarea;
         fce.setForecast2(newprod);
         
-         yield=fce.getForecast3()/fce.getActual();
+        
+         yield=cur.getForecast3()/fce.getArea();
         newprod= yield*newarea;
-        fce.setForecast3(cur.getForecast3());
+        fce.setForecast3(newprod);
         
-        
+        }
         updateDistrictEstimate(fce);
 
         //method to input forecasts to db
@@ -863,7 +1108,7 @@ public class CropEstimateDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select max(year)+1 as year,Round(avg(area),0) as area,avg(rainfall) as rainfall,Round(avg(tiller_count),0) as tiller,avg(avg_temperature) as temp from cropestimatedistrict where district=\"tarlac\";";
+            String query = "select max(year)+1 as year,Round(avg(area),0) as area,avg(rainfall) as rainfall,Round(avg(tiller_count),0) as tiller,avg(avg_temperature) as temp,avg(actual_tons_cane) as tonscane from cropestimatedistrict where district=\"tarlac\";";
             PreparedStatement pstmt = conn.prepareStatement(query);
             ResultSet rs = pstmt.executeQuery();
 
@@ -875,6 +1120,7 @@ public class CropEstimateDB {
                 ce.setRainfall(rs.getDouble("rainfall"));
                 ce.setTiller(rs.getDouble("tiller"));
                 ce.setTemp(rs.getDouble("temp"));
+                ce.setActual(rs.getDouble("tonscane"));
             }
             rs.close();
             pstmt.close();
@@ -970,7 +1216,38 @@ public class CropEstimateDB {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
 
-            String query = "select Distinct(year) from weeklyestimate where year<=?;";
+            String query = "select Distinct(year) from weeklyestimate where year<=? order by year ASC;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, cropyr);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<Integer> list = null;
+
+            if (rs.next()) {
+                list = new ArrayList<>();
+                do {
+                    list.add(rs.getInt("year"));
+                } while (rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(CropEstimateDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
+    ArrayList<Integer> getAllDistinctYrsCropEstDESC() {
+        CalendarDB caldb = new CalendarDB();
+        ArrayList<Calendar> calist = caldb.getCurrentYearDetails();
+        int cropyr = calist.get(0).getYear();
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+
+            String query = "select Distinct(year) from weeklyestimate where year<=? order by year DESC;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, cropyr);
             ResultSet rs = pstmt.executeQuery();
@@ -1080,7 +1357,28 @@ public class CropEstimateDB {
 
     }
 
-    public ArrayList<Integer> getDistinctYears(Integer selection) {
+    public ArrayList<Integer> getDistinctYearsDESC(Integer selection) {
+        ArrayList<Integer> taglist = null;
+        if (selection == 0) {
+            CalendarDB caldb = new CalendarDB();
+            ArrayList<Calendar> calist = caldb.getCurrentYearDetails();
+            int cropyr = calist.get(0).getYear();
+            if (cropyr > 2016) {
+                ProductionDB prodb = new ProductionDB();
+               taglist=prodb.getDistinctProdYrs(cropyr);
+                taglist.addAll(getAllDistinctYrsCropEstDESC());
+               
+
+            } else {
+                taglist = getAllDistinctYrsCropEst();
+            }
+
+        } else {
+            taglist = getDistinctMunicipalYears();
+        }
+        return taglist;
+    }
+     public ArrayList<Integer> getDistinctYears(Integer selection) {
         ArrayList<Integer> taglist = null;
         if (selection == 0) {
             CalendarDB caldb = new CalendarDB();

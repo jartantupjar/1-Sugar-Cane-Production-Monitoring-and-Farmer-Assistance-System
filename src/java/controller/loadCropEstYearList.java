@@ -46,7 +46,7 @@ public class loadCropEstYearList extends BaseServlet {
 
           int tag = Integer.parseInt(request.getParameter("tag"));
       System.out.println(tag);
-        ArrayList<Integer> data = cedb.getDistinctYears(tag);
+        ArrayList<Integer> data = cedb.getDistinctYearsDESC(tag);
           JSONArray jarray = new JSONArray();
         for (int i = 0; i < data.size(); i++) {
             jarray.add(data.get(i));
