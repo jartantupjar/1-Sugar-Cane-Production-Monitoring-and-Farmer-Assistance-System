@@ -82,7 +82,7 @@ public class viewDistCropEstimate extends BaseServlet {
                         cen.setActual(production.get(i).getTc());
                         cen.setArea(production.get(i).getArea());
                         cen.setLkg(production.get(i).getLkg());
-//                        cen.setRainfall(production.get(i).getRainfall());
+                        cen.setRainfall(production.get(i).getRainfall());
                         ces.add(cen);
                     }
                     
@@ -99,7 +99,7 @@ public class viewDistCropEstimate extends BaseServlet {
                     for(int j=0;j<i;j++){
                         cen = new cropEstimate();
                         cen.setActual(production.get(j).getTc());
-                        cen.setArea(production.get(j).getTc());
+                        cen.setArea(production.get(j).getArea());
                         cen.setLkg(production.get(j).getLkg());
                         cen.setRainfall(production.get(j).getRainfall());
                         ces.add(cen);
