@@ -364,6 +364,18 @@
         <servlet-name>changeSelectedLkgForecastforYear</servlet-name>
         <servlet-class>controller.changeSelectedLkgForecastforYear</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>viewLkgTestEstimates</servlet-name>
+        <servlet-class>controller.viewLkgTestEstimates</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>deleteLkgEstimateTestRow</servlet-name>
+        <servlet-class>controller.deleteLkgEstimateTestRow</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>generateLkgForecast</servlet-name>
+        <servlet-class>controller.generateLkgForecast</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
@@ -727,6 +739,18 @@
     <servlet-mapping>
         <servlet-name>changeSelectedLkgForecastforYear</servlet-name>
         <url-pattern>/changeSelectedLkgForecastforYear</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewLkgTestEstimates</servlet-name>
+        <url-pattern>/viewLkgTestEstimates</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deleteLkgEstimateTestRow</servlet-name>
+        <url-pattern>/deleteLkgEstimateTestRow</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>generateLkgForecast</servlet-name>
+        <url-pattern>/generateLkgForecast</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
