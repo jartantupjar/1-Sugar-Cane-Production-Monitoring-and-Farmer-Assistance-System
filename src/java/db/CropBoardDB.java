@@ -541,8 +541,9 @@ public class CropBoardDB {
             Connection conn = myFactory.getConnection();
             String query = "SELECT sum(r.amount) as rainfall FROM rainfall r join crop_calendar c where phase='Milling' and r.date between c.date_starting and c.date_ending and r.date =? ;";
             PreparedStatement pstmt = conn.prepareStatement(query);
-            ResultSet rs = pstmt.executeQuery();
             pstmt.setString(1, date);
+            ResultSet rs = pstmt.executeQuery();
+  
             ArrayList<Double> cT = null;
             Double c = 0.00;
             if (rs.next()) {

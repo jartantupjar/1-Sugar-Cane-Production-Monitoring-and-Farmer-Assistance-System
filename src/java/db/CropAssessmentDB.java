@@ -227,6 +227,7 @@ public class CropAssessmentDB {
             System.out.println(num+"YEARRRRRRRRRRRRRRRRRRRRRRRRR");
             if(num==0){
                 num++;
+                System.out.println(num+" LOL");
             }
             String query = "SELECT sum(forecasted) as 'total' FROM weeklyestimate where year = ? ;";
             String query2 = "SELECT forecasted"+num+" as total FROM cropestimatedistrict where year = ? ;";
@@ -243,6 +244,7 @@ public class CropAssessmentDB {
             Double tc = 0.00;
             if (rs.next()) {
                 tc = rs.getDouble("total");
+                System.out.println(tc+"TANGINA NYO");
             }
             else {
                 tc = 0.00;
@@ -250,7 +252,7 @@ public class CropAssessmentDB {
             rs.close();
             pstmt.close();
             conn.close();
-
+            
             return tc;
         } catch (SQLException ex) {
             java.util.logging.Logger.getLogger(CropAssessmentDB.class.getName()).log(Level.SEVERE, null, ex);

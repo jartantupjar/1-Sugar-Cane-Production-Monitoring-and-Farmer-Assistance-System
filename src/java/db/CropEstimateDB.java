@@ -99,13 +99,11 @@ public class CropEstimateDB {
             String query = "UPDATE cropestimatedistrict set area=?,rainfall=?,avg_temperature=?,tiller_count=?,actual_tons_cane=?,forecasted1=?, forecasted2=?, forecasted3=? where year=? and district=?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
-            
-            
             pstmt.setDouble(1, ce.getArea());
             pstmt.setDouble(2, ce.getRainfall());
             pstmt.setDouble(3, ce.getTemp());
             pstmt.setDouble(4, ce.getTiller());
-            pstmt.setDouble(5,ce.getActual());
+            pstmt.setDouble(5, ce.getActual());
             pstmt.setDouble(6, ce.getForecasted());
             pstmt.setDouble(7, ce.getForecast2());
             pstmt.setDouble(8, ce.getForecast3());
@@ -274,23 +272,24 @@ public class CropEstimateDB {
 
         return null;
     }
+
     public double getTotalCurrDisRainfall(Date todayDate) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "select IFNULL(sum(amount),0) as amt from rainfall r  where r.date<=? and r.date between ? and ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
-          CalendarDB caldb= new CalendarDB();
-            Calendar cal=caldb.getCurrentCropYearStartEnd();
-            
+            CalendarDB caldb = new CalendarDB();
+            Calendar cal = caldb.getCurrentCropYearStartEnd();
+
             pstmt.setDate(1, todayDate);
             pstmt.setDate(2, cal.getStarting());
             pstmt.setDate(3, cal.getEnding());
             ResultSet rs = pstmt.executeQuery();
-            double val=0;
+            double val = 0;
 
             if (rs.next()) {
-                val= rs.getDouble("amt");
+                val = rs.getDouble("amt");
             }
             rs.close();
             pstmt.close();
@@ -303,18 +302,19 @@ public class CropEstimateDB {
 
         return 0;
     }
+
     public double getTotalCurrDisTiller(int cropyr) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select IFNULL(sum(count),0) as amt from tillers where year=?;";
+            String query = "select IFNULL(avg(count),0) as amt  from (select sum(count) as count from tillers t join fields f on t.Fields_id=f.id group by Farmers_name)t1;";
             PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setInt(1, cropyr);
+//            pstmt.setInt(1, cropyr);
             ResultSet rs = pstmt.executeQuery();
-            double val=0;
+            double val = 0;
 
             if (rs.next()) {
-                val= rs.getDouble("amt");
+                val = rs.getDouble("amt");
             }
             rs.close();
             pstmt.close();
@@ -327,23 +327,24 @@ public class CropEstimateDB {
 
         return 0;
     }
+
     public double getTotalCurrDisAreaDamage(Date todayDate) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "select IFNULL(sum(damage),2) as amt from `problems-fields` where date<=? and status='inactive' and date between ? and ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
-            
-             CalendarDB caldb= new CalendarDB();
-            Calendar cal=caldb.getCurrentCropYearStartEnd();
+
+            CalendarDB caldb = new CalendarDB();
+            Calendar cal = caldb.getCurrentCropYearStartEnd();
             pstmt.setDate(1, todayDate);
             pstmt.setDate(2, cal.getStarting());
             pstmt.setDate(3, cal.getEnding());
             ResultSet rs = pstmt.executeQuery();
-            double val=0;
+            double val = 0;
 
             if (rs.next()) {
-                val= rs.getDouble("amt");
+                val = rs.getDouble("amt");
             }
             rs.close();
             pstmt.close();
@@ -363,10 +364,10 @@ public class CropEstimateDB {
 //        ArrayList<cropEstimate> ces = new ArrayList();
 //          ArrayList<Integer> yrlist= getDistinctYearEstYears();
 //        ces = viewAllDiffEstimates();
-  System.out.println(ces.size() + "size data");
+        System.out.println(ces.size() + "size data");
         for (int i = 0; i < ces.size(); i++) {
             System.out.println(ces.size() + "size data`");
-             System.out.println(ces.get(i).getArea() + "area data");
+            System.out.println(ces.get(i).getArea() + "area data");
             dp = new Observation(ces.get(i).getActual());
             dp.setIndependentValue("area", ces.get(i).getArea());
             dp.setIndependentValue("rainfall", ces.get(i).getRainfall());
@@ -397,16 +398,17 @@ public class CropEstimateDB {
 
         return forecastvalue.getDependentValue();
     }
+
     public double genLKGForecast1(cropEstimate ce, ArrayList<cropEstimate> ces) {
         DataSet observedData = new DataSet();
         Observation dp;
 //        ArrayList<cropEstimate> ces = new ArrayList();
 //          ArrayList<Integer> yrlist= getDistinctYearEstYears();
 //        ces = viewAllDiffEstimates();
-  System.out.println(ces.size() + "size data");
+        System.out.println(ces.size() + "size data");
         for (int i = 0; i < ces.size(); i++) {
             System.out.println(ces.size() + "size data`");
-             System.out.println(ces.get(i).getArea() + "area data");
+            System.out.println(ces.get(i).getArea() + "area data");
             dp = new Observation(ces.get(i).getLkg());
             dp.setIndependentValue("area", ces.get(i).getArea());
             dp.setIndependentValue("rainfall", ces.get(i).getRainfall());
@@ -585,27 +587,27 @@ public class CropEstimateDB {
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, year);
             ResultSet rs = pstmt.executeQuery();
-                     
-            cropEstimate ce=null;
+
+            cropEstimate ce = null;
             if (rs.next()) {
-                   ce = new cropEstimate();
-                    ce.setYear(rs.getInt("year"));
-                    ce.setDistrict(rs.getString("district"));
-                    ce.setArea(rs.getDouble("area"));
-                    ce.setRainfall(rs.getDouble("rainfall"));
-                    ce.setTiller(rs.getDouble("tiller_count"));
-                    ce.setTemp(rs.getDouble("avg_temperature"));
-                    double actual = rs.getDouble("actual_tons_cane");
-                    double estim = rs.getDouble("forecasted1");
-                    double estim2 = rs.getDouble("forecasted2");
-                    double estim3 = rs.getDouble("forecasted3");
-                    int selection = rs.getInt("forecast");
-                    ce.setActual(actual);
-                    ce.setForecasted(estim);
-                    ce.setForecast2(estim2);
-                    ce.setForecast3(estim3);
-                    ce.setSelection(selection);
-                    //    ce.setDifference(getYieldDif(actual,estim));
+                ce = new cropEstimate();
+                ce.setYear(rs.getInt("year"));
+                ce.setDistrict(rs.getString("district"));
+                ce.setArea(rs.getDouble("area"));
+                ce.setRainfall(rs.getDouble("rainfall"));
+                ce.setTiller(rs.getDouble("tiller_count"));
+                ce.setTemp(rs.getDouble("avg_temperature"));
+                double actual = rs.getDouble("actual_tons_cane");
+                double estim = rs.getDouble("forecasted1");
+                double estim2 = rs.getDouble("forecasted2");
+                double estim3 = rs.getDouble("forecasted3");
+                int selection = rs.getInt("forecast");
+                ce.setActual(actual);
+                ce.setForecasted(estim);
+                ce.setForecast2(estim2);
+                ce.setForecast3(estim3);
+                ce.setSelection(selection);
+                //    ce.setDifference(getYieldDif(actual,estim));
 
             }
             rs.close();
@@ -791,7 +793,7 @@ public class CropEstimateDB {
         cropEstimate cet = new cropEstimate();
         cropEstimate fce = new cropEstimate();
         cropEstimate cur = new cropEstimate();
-        cur=viewDistEstbyYear(cropyr);
+        cur = viewDistEstbyYear(cropyr);
         cet = getTotalCurrDisProduction(cropyr, todayDate);
         fce.setYear(cropyr);
         fce.setActual(cet.getActual());
@@ -803,15 +805,32 @@ public class CropEstimateDB {
         //get total tiller
         //add if date finished tillering
         fce.setTiller(getTotalCurrDisTiller(cropyr));
-        
+
         //get disaster update here 
         //reduce value to forecasted
-        double dmgarea=getTotalCurrDisAreaDamage(todayDate);
-        System.out.println(dmgarea+"total recorded damaged area");
+        System.out.println(fce.getActual() + "total actual");
+        double dmgarea = getTotalCurrDisAreaDamage(todayDate);
+        System.out.println(dmgarea + "total  damaged area");
+        double yield = fce.getActual() / fce.getArea();
+        System.out.println(yield + "cur yield area");
+        double newarea = fce.getArea() - dmgarea;
+        System.out.println(newarea + "new area");
+        double newprod = yield * newarea;
+        System.out.println(newprod + "new prod");
+
+        yield=fce.getForecasted()/fce.getActual();
+        newprod= yield*newarea;
+        fce.setForecasted(newprod);
         
-        fce.setForecasted(cur.getForecasted());
-        fce.setForecast2(cur.getForecast2());
+        yield=fce.getForecast2()/fce.getActual();
+        newprod= yield*newarea;
+        fce.setForecast2(newprod);
+        
+         yield=fce.getForecast3()/fce.getActual();
+        newprod= yield*newarea;
         fce.setForecast3(cur.getForecast3());
+        
+        
         updateDistrictEstimate(fce);
 
         //method to input forecasts to db
@@ -1065,14 +1084,14 @@ public class CropEstimateDB {
         ArrayList<Integer> taglist = null;
         if (selection == 0) {
             CalendarDB caldb = new CalendarDB();
-        ArrayList<Calendar> calist = caldb.getCurrentYearDetails();
-        int cropyr = calist.get(0).getYear();
-            if(cropyr>2016){
-                ProductionDB prodb= new ProductionDB();
-                  taglist = getAllDistinctYrsCropEst();
-                  taglist.addAll(prodb.getDistinctProdYrsASC(cropyr));
-                
-            }else{
+            ArrayList<Calendar> calist = caldb.getCurrentYearDetails();
+            int cropyr = calist.get(0).getYear();
+            if (cropyr > 2016) {
+                ProductionDB prodb = new ProductionDB();
+                taglist = getAllDistinctYrsCropEst();
+                taglist.addAll(prodb.getDistinctProdYrsASC(cropyr));
+
+            } else {
                 taglist = getAllDistinctYrsCropEst();
             }
 
