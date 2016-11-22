@@ -56,7 +56,7 @@ public class viewWeeklyProducedReportByRegion extends HttpServlet {
             if(todayYear <= 2016){
              weekOfYear = cdb.getWeekOfYear(datep.toString());
             }
-            else{ weekOfYear = cdb.getWeekOfYear(date.toString());}
+            else{ weekOfYear = cdb.getWeekOfYear(datep.toString());}
             double avge = 0;
             ArrayList<CropBoard> cT = new ArrayList<CropBoard>();
             ArrayList<CropBoard> aT = new ArrayList<CropBoard>();
@@ -103,7 +103,6 @@ public class viewWeeklyProducedReportByRegion extends HttpServlet {
             totala = sum / div;
             double avga = Math.round(totala * 100.0) / 100.0;
             cT = cdb.getCurrentWeeklyProducedReportByRegion(type, todayYear,date.toString(), weekOfYear);
-                System.out.println(datep +"DATE"+todayYear);
             JSONArray listp = new JSONArray();
             JSONArray listc = new JSONArray();
             JSONArray lista = new JSONArray();

@@ -373,13 +373,12 @@ public Calendar getCalendarTypes(Date todayDate){
             int i = 0;
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "Insert into crop_calendar(year,district,phase,date_starting,date_ending) values (?,?,?,?,?);";
+            String query = "update set date_starting = ? and date_ending = ? where year = ? and district = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setInt(1, year);
-            pstmt.setString(2, district);
-            pstmt.setString(3, cal.getPhase());
-            pstmt.setDate(4, cal.getStarting());
-            pstmt.setDate(5, cal.getEnding());
+            pstmt.setInt(3, year);
+            pstmt.setString(4, district);
+            pstmt.setDate(1, cal.getStarting());
+            pstmt.setDate(1, cal.getEnding());
             i = pstmt.executeUpdate();
             pstmt.close();
             conn.close();

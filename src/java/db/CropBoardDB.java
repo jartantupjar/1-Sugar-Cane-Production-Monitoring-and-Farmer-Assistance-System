@@ -46,9 +46,9 @@ public class CropBoardDB {
                     c.setLkg(rs.getDouble("total_lkg"));
                     c.setId(rs.getInt("id"));
                     c.setDistrict("district");
-                    c.setWeek_ending(rs.getDate("wof"));
+                    c.setWeek_ending(rs.getDate("week_ending"));
                     System.out.println(c.getWeek_ending()+"WOFWOF");
-                    c.setWeekofyear(rs.getInt("week_of_year"));
+                    c.setWeekofyear(rs.getInt("week_ending"));
                     if (type.equalsIgnoreCase("TC")) {
                         c.setProduction(c.getTc());
                     } else if (type.equalsIgnoreCase("HA")) {
