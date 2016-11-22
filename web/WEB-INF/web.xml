@@ -348,6 +348,22 @@
         <servlet-name>viewAllFarmers</servlet-name>
         <servlet-class>controller.viewAllFarmers</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>viewCropEstimateBoard</servlet-name>
+        <servlet-class>controller.viewCropEstimateBoard</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>loadCompChatDataLkg</servlet-name>
+        <servlet-class>controller.loadCompChatDataLkg</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>loadEstimatesLineDataLkg</servlet-name>
+        <servlet-class>controller.loadEstimatesLineDataLkg</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>changeSelectedLkgForecastforYear</servlet-name>
+        <servlet-class>controller.changeSelectedLkgForecastforYear</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
@@ -695,6 +711,22 @@
     <servlet-mapping>
         <servlet-name>viewAllFarmers</servlet-name>
         <url-pattern>/viewAllFarmers</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewCropEstimateBoard</servlet-name>
+        <url-pattern>/viewCropEstimateBoard</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>loadCompChatDataLkg</servlet-name>
+        <url-pattern>/loadCompChatDataLkg</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>loadEstimatesLineDataLkg</servlet-name>
+        <url-pattern>/loadEstimatesLineDataLkg</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>changeSelectedLkgForecastforYear</servlet-name>
+        <url-pattern>/changeSelectedLkgForecastforYear</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -132,6 +132,36 @@ public Calendar getCalendarTypes(Date todayDate){
 
         return null;
     }
+    public Calendar getCurrentCropYearStartEnd() {
+        try {
+                 ArrayList<Calendar> calist = getCurrentYearDetails();//gets the phases/today/crop yr
+        int cropyr = calist.get(0).getYear();
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select min(date_starting) as st,max(date_ending) as ed from crop_calendar where year=?;";
+                PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, cropyr);
+            ResultSet rs = pstmt.executeQuery();
+            
+ Calendar cal=null;
+            if (rs.next()) {
+              
+                   cal= new Calendar();
+                    cal.setYear(cropyr);
+                    cal.setStarting(rs.getDate("st"));
+                    cal.setEnding(rs.getDate("ed"));
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            return cal;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CropEstimateDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
     
     public ArrayList<Calendar> getPhases(int cyear) {
         try {

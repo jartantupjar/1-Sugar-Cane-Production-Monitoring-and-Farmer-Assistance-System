@@ -13,8 +13,9 @@ import java.util.ArrayList;
  * @author ndrs
  */
 public class cropEstimate {
-    private int year,selection,id;
-    private double area,actual,forecasted,forecast2,forecast3,difference,rainfall,tiller,temp, lkg;
+    private int year,selection,selectionlkg,id;
+    private double area,actual,forecasted,forecast2,forecast3,difference,differencelkg,rainfall,tiller,temp, lkg;
+    private double forecastlkg,forecastlkg2,forecastlkg3;
     private String district,municipality;
     private Date week_ending;
     private ArrayList<MonthlyCropEstimate> monthcropest;
@@ -258,6 +259,76 @@ public class cropEstimate {
      */
     public void setLkg(double lkg) {
         this.lkg = lkg;
+    }
+
+    /**
+     * @return the selectionlkg
+     */
+    public int getSelectionlkg() {
+        return selectionlkg;
+    }
+
+    /**
+     * @param selectionlkg the selectionlkg to set
+     */
+    public void setSelectionlkg(int selectionlkg) {
+        this.selectionlkg = selectionlkg;
+    }
+
+    /**
+     * @return the forecastlkg
+     */
+    public double getForecastlkg() {
+        return forecastlkg;
+    }
+
+    /**
+     * @param forecastlkg the forecastlkg to set
+     */
+    public void setForecastlkg(double forecastlkg) {
+        this.forecastlkg = forecastlkg;
+    }
+
+    /**
+     * @return the forecastlkg2
+     */
+    public double getForecastlkg2() {
+        return forecastlkg2;
+    }
+
+    /**
+     * @param forecastlkg2 the forecastlkg2 to set
+     */
+    public void setForecastlkg2(double forecastlkg2) {
+        this.forecastlkg2 = forecastlkg2;
+    }
+
+    /**
+     * @return the forecastlkg3
+     */
+    public double getForecastlkg3() {
+        return forecastlkg3;
+    }
+
+    /**
+     * @param forecastlkg3 the forecastlkg3 to set
+     */
+    public void setForecastlkg3(double forecastlkg3) {
+        this.forecastlkg3 = forecastlkg3;
+    }
+
+    /**
+     * @return the differencelkg
+     */
+    public double getDifferencelkg() {
+        return differencelkg;
+    }
+
+    /**
+     * @param differencelkg the differencelkg to set
+     */
+    public void setDifferencelkg(double differencelkg) {
+        this.differencelkg = differencelkg;
     }
     
 }

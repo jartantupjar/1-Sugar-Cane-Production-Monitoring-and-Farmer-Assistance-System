@@ -8,6 +8,7 @@ import entity.Calendar;
 import entity.CropAssessment;
 import entity.CropNarrative;
 import entity.User;
+import entity.cropEstimate;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
@@ -74,9 +75,15 @@ public class Login extends HttpServlet {
                  Date week_ending =null;
                  if(cropyear>2016){
                      if(!cedb.checkExistingCropEstYear(cropyear)){
-                         cedb.generateYearlyEstimate(); 
+                  
+                         cedb.generateYearlyEstimate(1,1); 
+                         cedb.updateYearlyEstimate();
                      }else{
-                         
+                         cropEstimate ces= cedb.viewDistEstbyYear(cropyear);
+                       
+                            cedb.deleteSelectedDistrictYear(cropyear);
+                            cedb.generateYearlyEstimate(ces.getSelection(),ces.getSelectionlkg());
+                            cedb.updateYearlyEstimate();
                      }
                      
                  }

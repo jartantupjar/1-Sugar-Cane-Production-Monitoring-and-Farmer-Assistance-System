@@ -70,6 +70,9 @@ public class viewDistCropEstimate extends BaseServlet {
                 obj.add(Double.toString(fct.get(i).getActual()));
                 obj.add(Double.toString(fct.get(i).getForecasted()));
                  obj.add(Double.toString(fct.get(i).getDifference())+"%");
+                 obj.add(Double.toString(fct.get(i).getLkg()));
+                obj.add(Double.toString(fct.get(i).getForecastlkg()));
+                 obj.add(Double.toString(fct.get(i).getDifference())+"%");
                 list.add(obj);
             }
         }

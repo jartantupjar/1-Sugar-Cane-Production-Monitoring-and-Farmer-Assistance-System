@@ -56,18 +56,7 @@
 
                                                      </a>
                                             </li>
-                                        <c:choose>
-                                            <c:when test='${recdet.duration !=null}'>
-                                                <li class="list-group-item">
-                                                    <b class="">Duration(days)</b>  <a class="pull-right"> 
-
-                                                            <c:out value="${recdet.duration}"></c:out> 
-
-                                                            </a>
-                                                    </li>
-                                            </c:when>
-
-                                        </c:choose>
+                                       
                                        
                                      
 
@@ -76,13 +65,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="box box-solid box-info">
-                                <div class="box-header">
-                                    <h3 class="box-title">Recommendation Details(improvement since implementation but how?)</h3>
-                                </div>
-                            </div>
-                        </div>
+                       
 
                         <div class="col-md-6">
                             <div class="box box-solid box-info">

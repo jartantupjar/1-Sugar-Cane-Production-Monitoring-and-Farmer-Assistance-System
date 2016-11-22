@@ -53,7 +53,8 @@
                                                 <th>Rainfall</th>
                                                 <th>Tiller Count</th>
                                                 <th>Avg Temp</th>
-                                                <th>Actual</th>
+                                                <th>Tons Cane</th>
+                                                <th>LKG</th>
                                                 <th>Estimation 1</th>
                                                 <th>Estimation 2</th>
                                                 <th>Estimation 3</th>
@@ -71,14 +72,15 @@
                                                         <td><c:out value="${estims.tiller}"/></td>
                                                         <td><c:out value="${estims.temp}"/></td>
                                                         <td><c:out value="${estims.actual}"/></td>
-                                                        <td><c:out value="${estims.forecasted}"/></td>
-                                                        <td><c:out value="${estims.forecast2}"/></td>
-                                                        <td><c:out value="${estims.forecast3}"/></td>
+                                                        <td><c:out value="${estims.lkg}"/></td>
+                                                        <td><c:out value="${estims.forecastlkg}"/></td>
+                                                        <td><c:out value="${estims.forecastlkg2}"/></td>
+                                                        <td><c:out value="${estims.forecastlkg3}"/></td>
                                                         <td>
                                                             <select name="status" class="form-control selectforc" style="width: 100%;">
                                                                 <c:forEach begin="1" end="3" var="i">
                                                                     <c:choose>
-                                                                        <c:when test="${i eq estims.selection}">
+                                                                        <c:when test="${i eq estims.selectionlkg}">
                                                                             <option value="${estims.year},${i}" selected="selected">Estimation ${i}</option>
                                                                         </c:when>
                                                                         <c:otherwise>
@@ -217,7 +219,6 @@
                                 <label>Select</label>
                                 <select class="form-control select2" id="select2" style="width: 100%;">
                                     <option value="0" selected="selected">District</option>
-                                    <option value="1">Municipality</option>
 
                                 </select>
                             </div> 
@@ -265,39 +266,7 @@
                             </div>
 
                         </div>
-                        <div class="col-md-12"> 
-                            <div class="box box-info" id="munibox">
-                                <div class="box-header with-border">
-                                    <h1 class="box-title">Yearly Municipality Estimates</h1>
-                                    <div class="box-tools pull-right">
-                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                    </div>
-                                </div>
-
-                                <div class="box-body">
-
-                                    <table id="munitable" class="table  display table-hover" cellspacing="0" width="100%">
-                                        <thead>
-                                            <tr>
-                                                <th>Year</th>
-                                                <th>Municipality</th>
-                                                <th>Area</th>
-                                                <th>Actual</th>
-                                                <th>Estimated</th>
-                                                <th>% Difference</th>
-                                                <th>More Details</th>
-
-                                            </tr>
-                                        </thead>
-
-                                    </table>
-
-                                </div>
-
-                            </div>
-
-                        </div>
+                        
 
 
 
@@ -327,7 +296,7 @@
                 var est2d;
                 var est3d;
                 $.ajax({
-                    url: 'loadEstimatesLineData',
+                    url: 'loadEstimatesLineDataLkg',
                     type: 'POST',
                     dataType: "JSON",
                     success: function (data) {
@@ -341,7 +310,7 @@
                                 zoomType: 'xy'
                             },
                             title: {
-                                text: 'Yearly Tons Cane Estimate Data'
+                                text: 'Yearly LKG Estimate Data'
                             },
                             xAxis: [{
                                     categories: categ,
@@ -469,11 +438,9 @@
 
 
                 var testing = $('#select3').on('change', function (evt) {
-                    var dist = $("#select2").val();
+                  
                     var yr = $("#select3").val();
-                    $('#munibox').addClass('hidden');
-                    $('#distbox').addClass('hidden');
-                    if (dist === '0') {
+                    
                         $('#distbox').removeClass('hidden');
                         var table = $('#distable').DataTable({
                             destroy: true,
@@ -481,21 +448,7 @@
                                 'url': 'viewDistCropEstimate?year=' + yr + ''
                             }
                         });
-                    } else {
-                        $('#munibox').removeClass('hidden');
-                        var table2 = $('#munitable').DataTable({
-                            destroy: true,
-                            'ajax': {
-                                'url': 'viewMuniCropEst?year=' + yr + ''
-                            },
-                            'columnDefs': [{
-                                    'targets': 6,
-                                    'render': function (data, type, full, meta) {
-                                        return '<a class="btn btn-primary" href="viewFarmerProfile?name=' + data + '"> more details </a>';
-                                    }
-                                }]
-                        });
-                    }
+                    
                 });
                 console.log(testing);
                 $('#select2').on('change', function (evt) {
@@ -548,7 +501,7 @@
                 var test = $(".selectforc").val();
                 var options = $(this).find('option:selected').val();
                 $.ajax({
-                    url: 'changeSelectedForecastforYear?name=' + options + '',
+                    url: 'changeSelectedLkgForecastforYear?name=' + options + '',
                     type: 'POST',
                     dataType: "JSON",
                     success: function () {

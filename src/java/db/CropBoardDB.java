@@ -543,6 +543,7 @@ public class CropBoardDB {
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, date);
             ResultSet rs = pstmt.executeQuery();
+  
             ArrayList<Double> cT = null;
             Double c = 0.00;
             if (rs.next()) {
