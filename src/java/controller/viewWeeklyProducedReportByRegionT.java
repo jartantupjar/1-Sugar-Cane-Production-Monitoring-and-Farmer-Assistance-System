@@ -74,6 +74,7 @@ public class viewWeeklyProducedReportByRegionT extends HttpServlet {
             }
             else {
                 cT = cdb.getCurrentWeeklyProducedReportByRegion("HA",todayYear,date.toString(),weekOfYear);
+                
             JSONArray prod = new JSONArray();
             if(cT != null){
                 for(int i=0;i<cT.size();i++){
