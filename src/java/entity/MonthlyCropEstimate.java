@@ -11,7 +11,7 @@ package entity;
  */
 public class MonthlyCropEstimate {
     private int year;
-    private Double tActual,tForc;
+    private Double tActual,tForc,lkg,forecastlkg;
     private String month,district;
 
     /**
@@ -82,5 +82,33 @@ public class MonthlyCropEstimate {
      */
     public void setDistrict(String district) {
         this.district = district;
+    }
+
+    /**
+     * @return the lkg
+     */
+    public Double getLkg() {
+        return lkg;
+    }
+
+    /**
+     * @param lkg the lkg to set
+     */
+    public void setLkg(Double lkg) {
+        this.lkg = lkg;
+    }
+
+    /**
+     * @return the forecastlkg
+     */
+    public Double getForecastlkg() {
+        return forecastlkg;
+    }
+
+    /**
+     * @param forecastlkg the forecastlkg to set
+     */
+    public void setForecastlkg(Double forecastlkg) {
+        this.forecastlkg = forecastlkg;
     }
 }
