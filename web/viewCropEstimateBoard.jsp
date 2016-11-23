@@ -97,14 +97,73 @@
                                             </c:if>
                                         </tbody>
                                     </table>
-                                    <button type="button" class="btn btn-info pull-right" id="showform" >Gen Forecast</button>
+                                   
                                 </div>
 
                             </div>
 
 
+                            <div class="box box-info">
+                                <div class="box-header with-border">
 
-                            <div class="box box-info hidden" id="genform">
+                                    <div class="box-tools pull-right">
+                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                    </div>
+                                </div>   
+                                <div class="box-body" id="container2"></div>
+                            </div>
+
+                        </div>
+                        <div>
+                            <div class="col-md-3 form-group">
+                                <label>Select</label>
+                                <select class="form-control select2" id="select2" style="width: 100%;">
+                                    <option value="0" selected="selected">District</option>
+
+                                </select>
+                            </div> 
+                            <div class="col-md-3 form-group">
+                                <label>Year</label>
+                                <select class="form-control" id="select3" style="width: 100%;">
+
+                                </select>
+                            </div>
+
+
+                        </div>
+
+                        <div class="col-md-12"> 
+                            <div class="box box-info" id="distbox">
+                                <div class="box-header with-border">
+                                    <h1 class="box-title">Weekly District Estimates</h1>
+                                    <div class="box-tools pull-right">
+                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                    </div>
+                                </div>
+
+                                <div class="box-body">
+                                    <table id="distable" class="table  display table-hover" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>Year</th>
+                                                <th>Week Ending</th>
+                                                <th>Harvest Area</th>
+                                                <th>Actual Production</th>
+                                                <th>Estimated Production</th>
+                                                <th>% Difference</th>
+                                                <th>Actual LKG</th>
+                                                <th>Estimated LKG</th>
+                                                <th>% Difference</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+ <button type="button" class="btn btn-info pull-right" id="showform" >Gen Forecast</button>
+                                </div>
+
+                            </div>
+ <div class="box box-info hidden" id="genform">
                                 <div class="box-header with-border">
                                     <h1 class="box-title">Generate Forecast</h1>
                                     <div class="box-tools pull-right">
@@ -114,7 +173,7 @@
                                 </div>
 
                                 <div class="box-body">
-                                    <form action="generateForecast" id="submit_form" method="POST" >
+                                    <form action="generateLkgForecast" id="submit_form" method="POST" >
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label class="control-label">Area Harvested
@@ -126,11 +185,20 @@
                                                 </div>
                                             </div>
                                              <div class="form-group">
-                                                <label class="control-label">Total Production
+                                                <label class="control-label">Total Tons_Cane
                                                     <span class="required" aria-required="true"> * </span>
                                                 </label>
                                                 <div class="">
                                                     <input type="text" maxlength="7" class="form-control" name="production" id="projectname" placeholder="Name...">
+
+                                                </div>
+                                            </div>
+                                             <div class="form-group">
+                                                <label class="control-label">Expected Total LKG(to be used as part of the next test forecast)
+                                                    <span class="required" aria-required="true"> * </span>
+                                                </label>
+                                                <div class="">
+                                                    <input type="text" maxlength="7" class="form-control" name="lkg" id="projectname" placeholder="Name...">
 
                                                 </div>
                                             </div>
@@ -189,7 +257,8 @@
                                                 <th>Rainfall</th>
                                                 <th>Tiller Count</th>
                                                 <th>Avg Temp</th>
-                                                <th>Production</th>
+                                                <th>Tons_Cane</th>
+                                                <th>LKG</th>
                                                 <th>Estimation 1</th>
                                                 <th>Estimation 2</th>
                                                 <th>Estimation 3</th>
@@ -202,72 +271,11 @@
                                 </div>
 
                             </div>
-                            <div class="box box-info">
-                                <div class="box-header with-border">
-
-                                    <div class="box-tools pull-right">
-                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                    </div>
-                                </div>   
-                                <div class="box-body" id="container2"></div>
-                            </div>
-
-                        </div>
-                        <div>
-                            <div class="col-md-3 form-group">
-                                <label>Select</label>
-                                <select class="form-control select2" id="select2" style="width: 100%;">
-                                    <option value="0" selected="selected">District</option>
-
-                                </select>
-                            </div> 
-                            <div class="col-md-3 form-group">
-                                <label>Year</label>
-                                <select class="form-control" id="select3" style="width: 100%;">
-
-                                </select>
-                            </div>
-
-
-                        </div>
-
-                        <div class="col-md-12"> 
-                            <div class="box box-info" id="distbox">
-                                <div class="box-header with-border">
-                                    <h1 class="box-title">Weekly District Estimates</h1>
-                                    <div class="box-tools pull-right">
-                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                    </div>
-                                </div>
-
-                                <div class="box-body">
-                                    <table id="distable" class="table  display table-hover" cellspacing="0" width="100%">
-                                        <thead>
-                                            <tr>
-                                                <th>Year</th>
-                                                <th>Week Ending</th>
-                                                <th>Harvest Area</th>
-                                                <th>Actual Production</th>
-                                                <th>Estimated Production</th>
-                                                <th>% Difference</th>
-                                                <c:if test="${todayYear >= 2017}">
-                                                <th>Actual LKG</th>
-                                                <th>Estimated LKG</th>
-                                                <th>% Difference</th>
-                                                </c:if>
-                                            </tr>
-                                        </thead>
-                                    </table>
-
-                                </div>
-
-                            </div>
-
                         </div>
                         
 
+
+                           
 
 
 
@@ -384,7 +392,7 @@
                 var list;
                 var dlist;
                 $.ajax({
-                    url: 'loadCompChartData',
+                    url: 'loadCompChatDataLkg',
                     type: 'POST',
                     dataType: "JSON",
                     success: function (data) {
@@ -397,7 +405,7 @@
                                 type: 'column'
                             },
                             title: {
-                                text: 'District Estimate Drilldown'
+                                text: 'District LKG Estimate Drilldown'
                             },
                             subtitle: {
                                 text: 'Click columns to drill down to single series. Click categories to drill down both.'
@@ -519,10 +527,10 @@
         <script type="text/javascript">
             var table4 = $('#testTable').DataTable({
                 'ajax': {
-                    'url': 'viewTestEstimates'
+                    'url': 'viewLkgTestEstimates'
                 },
                 'columnDefs': [{
-                        'targets': 8,
+                        'targets': 9,
                         'render': function (data, type, full, meta) {
                             return '<td class="dliker""><button class="btn btn-danger   cliker" id="' + data + '" type="button" >delete</button></td>';
                         }
@@ -539,7 +547,7 @@
                 var $killrow = $($killline).parent('tr');
                 $killrow.addClass("danger");
                 $.ajax({
-                    url: 'deleteCropEstimateTestRow?id=' + bid + '',
+                    url: 'deleteLkgEstimateTestRow?id=' + bid + '',
                     type: 'POST',
                     dataType: "JSON",
                     success: function () {

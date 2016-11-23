@@ -55,9 +55,9 @@ JSONArray drilldata=new JSONArray();
                     JSONObject yrobj = new JSONObject();
                     yrobj.put("name", fct.get(i).getYear());
                      if(z!=1){
-                    yrobj.put("y", fct.get(i).getActual());
+                    yrobj.put("y", fct.get(i).getLkg());
                  }else{
-                     yrobj.put("y", fct.get(i).getForecasted());
+                     yrobj.put("y", fct.get(i).getForecastlkg());
                          }
                    yrobj.put("drilldown", fct.get(i).getYear() +"-"+ val);
                     yrlist.add(yrobj);
@@ -70,9 +70,9 @@ JSONArray drilldata=new JSONArray();
                  JSONArray month = new JSONArray(); 
                  month.add(fct.get(i).getMonthcropest().get(d).getMonth());
                  if(z!=1){
-                     month.add(fct.get(i).getMonthcropest().get(d).gettActual());
+                     month.add(fct.get(i).getMonthcropest().get(d).getLkg());
                  }else{
-                     month.add(fct.get(i).getMonthcropest().get(d).gettForc());
+                     month.add(fct.get(i).getMonthcropest().get(d).getForecastlkg());
                  }
                  months.add(month);
                  }
