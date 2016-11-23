@@ -53,22 +53,15 @@ public class createNewProgram extends BaseServlet {
 
         try {
             String reserv = request.getParameter("reservation");
-
             String[] lines = reserv.split("-");
-         
             String inidate = lines[0];
             java.util.Date inicheck = new SimpleDateFormat("MM/dd/yyyy").parse(inidate);
-
-            
-            Date modifiediniDate = new java.sql.Date(inicheck.getTime());
-         
+             Date modifiediniDate = new java.sql.Date(inicheck.getTime());
             newProg.setDate_initial(modifiediniDate);
-
             String enddate = lines[1];
             java.util.Date endcheck = new SimpleDateFormat("MM/dd/yyyy").parse(enddate);
             Date modifiedendDate = new java.sql.Date(endcheck.getTime());
             newProg.setDate_end(modifiedendDate);
-
             newProg.setDate_created(modifiediniDate);
         } catch (ParseException ex) {
             Logger.getLogger(createNewProgram.class.getName()).log(Level.SEVERE, null, ex);

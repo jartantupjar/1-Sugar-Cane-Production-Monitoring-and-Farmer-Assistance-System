@@ -369,16 +369,21 @@ public Calendar getCalendarTypes(Date todayDate){
     
     public int updatePhaseDates(Calendar cal, int year, String district) {
         try {
+                CalendarDB cdb = new CalendarDB();
+            ArrayList<Calendar> calist=cdb.getCurrentYearDetails();
+            int curyr= calist.get(0).getYear();
+            System.out.println(curyr+"#*#*#*#*#*#*#*#*#*#*#*#*");
             // put functions here : previous week production, this week production
             int i = 0;
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "update set date_starting = ? and date_ending = ? where year = ? and district = ?;";
+            String query = "update crop_calendar set date_starting = ? ,date_ending = ? where year = ? and district = ? and phase = ? ;";
             PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setInt(3, year);
+            pstmt.setInt(3, curyr);
             pstmt.setString(4, district);
             pstmt.setDate(1, cal.getStarting());
-            pstmt.setDate(1, cal.getEnding());
+            pstmt.setDate(2, cal.getEnding());
+            pstmt.setString(5, cal.getPhase());
             i = pstmt.executeUpdate();
             pstmt.close();
             conn.close();

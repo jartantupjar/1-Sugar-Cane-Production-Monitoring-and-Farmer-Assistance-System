@@ -10,6 +10,7 @@ import entity.Calendar;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -40,21 +41,21 @@ public class editDates extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             int check = 0;
             HttpSession session = request.getSession();
-            int year = (int) session.getAttribute("todayYear");
+            
             String district = "Tarlac";
             /* TODO output your page here. You may use following sample code. */
             Calendar cal = new Calendar();
             CalendarDB cdb = new CalendarDB();
+            ArrayList<Calendar> calist=cdb.getCurrentYearDetails();
+            int year= calist.get(0).getYear();
             ArrayList<Calendar> cT = new ArrayList<Calendar>();
             if(request.getParameter("pstart")!= ""){
                 cal = new Calendar();
                 cal.setPhase("Planting");
-                String sdate = request.getParameter("pstart");
-                System.out.println(sdate + " STAAART");
-                String edate = request.getParameter("pend");
-                System.out.println(edate+" ENDDDDDDDDDD");
-                Date start = cdb.convertStringtoSQLDate(sdate);
-                Date end = cdb.convertStringtoSQLDate(edate);
+                String reserv = request.getParameter("pstart");
+                String[] lines = reserv.split("-");
+                Date start = cdb.convertStringtoSQLDate(lines[0]);
+                Date end = cdb.convertStringtoSQLDate(lines[1]);
                 cal.setStarting(start);
                 cal.setEnding(end);
                 cT.add(cal);
@@ -62,10 +63,10 @@ public class editDates extends HttpServlet {
             if(request.getParameter("gstart")!= ""){
                 cal = new Calendar();
                 cal.setPhase("Germination");
-                String sdate = request.getParameter("gstart");
-                String edate = request.getParameter("gend");
-                Date start = cdb.convertStringtoSQLDate(sdate);
-                Date end = cdb.convertStringtoSQLDate(edate);
+                String reserv = request.getParameter("gstart");
+                String[] lines = reserv.split("-");
+                Date start = cdb.convertStringtoSQLDate(lines[0]);
+                Date end = cdb.convertStringtoSQLDate(lines[1]);
                 cal.setStarting(start);
                 cal.setEnding(end);
                 cT.add(cal);
@@ -73,10 +74,10 @@ public class editDates extends HttpServlet {
             if(request.getParameter("mstart")!= ""){
                 cal = new Calendar();
                 cal.setPhase("Milling");
-                String sdate = request.getParameter("mstart");
-                String edate = request.getParameter("mend");
-                Date start = cdb.convertStringtoSQLDate(sdate);
-                Date end = cdb.convertStringtoSQLDate(edate);
+                String reserv = request.getParameter("mstart");
+                String[] lines = reserv.split("-");
+                Date start = cdb.convertStringtoSQLDate(lines[0]);
+                Date end = cdb.convertStringtoSQLDate(lines[1]);
                 cal.setStarting(start);
                 cal.setEnding(end);
                 cT.add(cal);
@@ -84,10 +85,10 @@ public class editDates extends HttpServlet {
             if(request.getParameter("tstart")!= ""){
                 cal = new Calendar();
                 cal.setPhase("Tillering");
-                String sdate = request.getParameter("tstart");
-                String edate = request.getParameter("tend");
-                Date start = cdb.convertStringtoSQLDate(sdate);
-                Date end = cdb.convertStringtoSQLDate(edate);
+                String reserv = request.getParameter("tstart");
+                String[] lines = reserv.split("-");
+                Date start = cdb.convertStringtoSQLDate(lines[0]);
+                Date end = cdb.convertStringtoSQLDate(lines[1]);
                 cal.setStarting(start);
                 cal.setEnding(end);
                 cT.add(cal);
@@ -95,10 +96,10 @@ public class editDates extends HttpServlet {
             if(request.getParameter("sstart")!= ""){
                 cal = new Calendar();
                 cal.setPhase("Stalk Elongation");
-                String sdate = request.getParameter("sstart");
-                String edate = request.getParameter("send");
-                Date start = cdb.convertStringtoSQLDate(sdate);
-                Date end = cdb.convertStringtoSQLDate(edate);
+                String reserv = request.getParameter("sstart");
+                String[] lines = reserv.split("-");
+                Date start = cdb.convertStringtoSQLDate(lines[0]);
+                Date end = cdb.convertStringtoSQLDate(lines[1]);
                 cal.setStarting(start);
                 cal.setEnding(end);
                 cT.add(cal);
@@ -106,10 +107,10 @@ public class editDates extends HttpServlet {
             if(request.getParameter("rstart")!= ""){
                 cal = new Calendar();
                 cal.setPhase("Ripening");
-                String sdate = request.getParameter("rstart");
-                String edate = request.getParameter("rend");
-                Date start = cdb.convertStringtoSQLDate(sdate);
-                Date end = cdb.convertStringtoSQLDate(edate);
+                String reserv = request.getParameter("rstart");
+                String[] lines = reserv.split("-");
+                Date start = cdb.convertStringtoSQLDate(lines[0]);
+                Date end = cdb.convertStringtoSQLDate(lines[1]);
                 cal.setStarting(start);
                 cal.setEnding(end);
                 cT.add(cal);
@@ -117,10 +118,10 @@ public class editDates extends HttpServlet {
             if(request.getParameter("ystart")!= ""){
                 cal = new Calendar();
                 cal.setPhase("Yield Formation");
-                String sdate = request.getParameter("ystart");
-                String edate = request.getParameter("yend");
-                Date start = cdb.convertStringtoSQLDate(sdate);
-                Date end = cdb.convertStringtoSQLDate(edate);
+                String reserv = request.getParameter("ystart");
+                String[] lines = reserv.split("-");
+                Date start = cdb.convertStringtoSQLDate(lines[0]);
+                Date end = cdb.convertStringtoSQLDate(lines[1]);
                 cal.setStarting(start);
                 cal.setEnding(end);
                 cT.add(cal);
@@ -138,8 +139,8 @@ public class editDates extends HttpServlet {
             
             if (check>0) {
             ServletContext context = getServletContext();
-            RequestDispatcher rd = context.getRequestDispatcher("/Calendar.jsp");
-            rd.forward(request, response);
+        response.sendRedirect("viewPhasesDates");
+//            rd.forward(request, response);
         } else {
             ServletContext context = getServletContext();
             RequestDispatcher rd = context.getRequestDispatcher("/Homepage.jsp");
