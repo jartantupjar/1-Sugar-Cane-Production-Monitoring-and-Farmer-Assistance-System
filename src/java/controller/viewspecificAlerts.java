@@ -41,12 +41,14 @@ public class viewspecificAlerts extends HttpServlet {
             String id = parameters[0];
             int probid = Integer.parseInt(id);
             String municipality = parameters[1]; 
+            String date = parameters[2];
             ServletContext context = getServletContext();
             System.out.println(probid + "id");
             System.out.println(municipality + " muni");
                 HttpSession session = request.getSession();
                 session.setAttribute("probid", probid);
                 session.setAttribute("municipality", municipality);
+                session.setAttribute("date", date);
                 RequestDispatcher rd = context.getRequestDispatcher("/BrgyAlertDrillDown.jsp");
                 rd.forward(request, response);
         }

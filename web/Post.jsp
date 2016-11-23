@@ -57,13 +57,13 @@
                                                 <c:if test="${post.status == 'Pending'}">
                                                     <div class="col-md-2 pull-left">
                                                         <form name="approve"  action="ApprovePost">
-                                                            <input type="text" value="${post.id_and_status}" name="postd" hidden="true">
+                                                            <input type="text" value="${post.id_and_status}" name="postd" class="hidden">
                                                             <button type="submit" class="btn btn-success pull-right" style="width: 100%" id="b_approve" name="b_approve" value="submit"><i class="fa fa-check"></i> Approve</button>
                                                         </form>
                                                     </div>
                                                     <div class="col-md-2 pull-left">
                                                         <form name="reject" action="RejectPost">
-                                                            <input type="text" value="${post.id_and_status}" name="postd" hidden="true">
+                                                            <input type="text" value="${post.id_and_status}" name="postd" class="hidden">
                                                             <button type="submit" class="btn btn-danger pull-right" style="width: 100%" id="b_approve"  name="b_approve" value="submit"><i class="fa fa-times"></i> Reject</button>
                                                         </form>
                                                     </div>
@@ -520,7 +520,7 @@
                         'style': 'multi'
                     },
                     'order': [[1, 'asc']]
-
+                    $('#probTable1').DataTable().search('${post.phase}').draw();
                 });
                 $('#frm-example').on('submit', function (e) {
                     var form = this;
