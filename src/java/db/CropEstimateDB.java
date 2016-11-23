@@ -6,6 +6,7 @@
 package db;
 
 import entity.Calendar;
+import entity.CropBoard;
 import entity.MonthlyCropEstimate;
 import entity.cropEstimate;
 import java.sql.Connection;
@@ -106,6 +107,27 @@ public class CropEstimateDB {
         ArrayList<Calendar> calist = caldb.getCurrentYearDetails();
        int cropyr= calist.get(0).getYear();
         ArrayList<cropEstimate> ces =getWeeklyEstimatePreviousYears(cropyr);
+        
+        CropBoardDB cdb = new CropBoardDB();
+        ArrayList<CropBoard> product = new ArrayList<>();
+        if(cropyr>2016){
+            product =cdb.getCurrentWeeklyProducedReport("TC", cropyr, calist.get(0).getTodayDate().toString());
+            if(product!=null){
+                for(int i=0;i<product.size();i++){
+                    cropEstimate newprod = new cropEstimate();  
+                    newprod.setArea(product.get(i).getArea());
+                    newprod.setActual(product.get(i).getProduction());
+                    newprod.setRainfall(product.get(i).getRainfall());
+                    newprod.setLkg(product.get(i).getLkg());
+                    ces.add(newprod);
+                    
+                }
+                
+            }
+        }
+          
+          
+          
         ArrayList<cropEstimate> tests = viewLkgTestEstimates();
         if (tests != null) {
             ces.addAll(tests);
@@ -1094,7 +1116,7 @@ public class CropEstimateDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select year,district,week_ending,area,actual,forecasted,actual_lkg,forecasted_lkg from weeklyestimate where year=?;";
+            String query = "select year,district,week_ending,area,rainfal,actual,forecasted,actual_lkg,forecasted_lkg from weeklyestimate where year=?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, year);
             ResultSet rs = pstmt.executeQuery();
@@ -1109,6 +1131,7 @@ public class CropEstimateDB {
                     ce.setDistrict(rs.getString("district"));
                     ce.setWeek_ending(rs.getDate("week_ending"));
                     ce.setArea(rs.getDouble("area"));
+                    ce.setRainfall(rs.getDouble("rainfal"));
                     double actual = rs.getDouble("actual");
                     double estim = rs.getDouble("forecasted");
                     double lkg = rs.getDouble("actual_lkg");

@@ -67,7 +67,7 @@ public class viewDistCropEstimate extends BaseServlet {
                 obj.add(Integer.toString(fct.get(i).getYear()));
                 obj.add(fct.get(i).getWeek_ending().toString());
                 obj.add(Double.toString(fct.get(i).getArea()));
-//                obj.add(Double.toString(fct.get(i).getRainfall()));
+                obj.add(Double.toString(fct.get(i).getRainfall()));
                 obj.add(Double.toString(fct.get(i).getActual()));
                 obj.add(Double.toString(fct.get(i).getForecasted()));
                  obj.add(Double.toString(fct.get(i).getDifference())+"%");
@@ -97,6 +97,7 @@ public class viewDistCropEstimate extends BaseServlet {
                 obj.add(Integer.toString(calist.get(0).getYear()));
                 obj.add(production.get(i).getWeek_ending().toString());
                 obj.add(production.get(i).getArea().toString());
+                obj.add(production.get(i).getRainfall().toString());
                 obj.add(production.get(i).getTc().toString());
                 if(i>3){
                     ces = new ArrayList<>();
