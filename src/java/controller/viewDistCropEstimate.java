@@ -77,7 +77,7 @@ public class viewDistCropEstimate extends BaseServlet {
                 list.add(obj);
             }
         }
-            else{
+            else if(caldb.checkifMilling()){
                 DecimalFormat df = new DecimalFormat("###.00");
                 if(production.size()>3){
                     ces = new ArrayList<>();

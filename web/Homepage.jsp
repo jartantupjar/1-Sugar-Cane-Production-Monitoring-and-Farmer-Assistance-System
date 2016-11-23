@@ -6,7 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>SRA | Home</title>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-       <link href="plugins/pace2/pace-theme-barber-shop.css" rel="stylesheet" />
+       <link href="plugins/pace2/themes/green/pace-theme-loading-bar.css" rel="stylesheet" />
        <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css"> 
           <link rel="stylesheet" href="plugins/select2/select2.min.css">
    </head>
