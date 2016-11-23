@@ -66,8 +66,8 @@ public class sendRelatedRec extends BaseServlet {
     String message= request.getParameter("description");
         fixedRecDB recdb=new fixedRecDB();
         recdb.sendRecommendations(message,farmz, recz);
-        
-           response.sendRedirect("MDOHomepage");
+        String xfarm=farmz.get(0);
+                response.sendRedirect("viewFieldDetails?id="+xfarm);
 
         response.setCharacterEncoding("utf-8");
     } 
