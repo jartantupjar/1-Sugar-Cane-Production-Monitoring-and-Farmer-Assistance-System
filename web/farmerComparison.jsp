@@ -388,12 +388,15 @@ on barangay selection
                             </div>
                         </div>
 
-                        <div class="col-md-offset-5 col-sm-2 ">
+                        <div class="col-md-offset-5 col-sm-3 ">
 
                             <button id="actionButton" class="btn btn-success btn-block" type="button" style="height: 6%;">View Action Tools</button>
                             <button id="obsrvButton" class="btn btn-info btn-block" type="button" style="">Create Observation</button>
                         </div>       
-                        <div class="col-md-offset-3 col-sm-6 hidden" id="actionBlock">
+                        <div class="col-md-offset-3 col-sm-6 hidden" id="actionBlock"
+                             >
+                               <br>
+                            <h3> Action Tools</h3>
                             <form id="frm-sendRec" action="viewSendRec">
                                 <input name="farmid" type="hidden" value="${id}"/>
 
@@ -409,8 +412,10 @@ on barangay selection
                                 </button>
 
                             </form>
+                              
                         </div>
                         <div id="observBlock" class="col-md-12 hidden">
+                              <br>
                             <h1> Farm Observation</h1>
                             <div class="col-md-7">
                                 <div class="form-group">
@@ -474,7 +479,7 @@ on barangay selection
                     </div>
                     <input class="btn btn-success pull-right" type="button" value="Back" 
                            onClick="history.go(-1);
-                return true;"> 
+                                   return true;"> 
                 </section>
 
             </div>
@@ -496,12 +501,12 @@ on barangay selection
 
         <script src="dist/js/app.min.js"></script>
         <script type="text/javascript">
-            $(function () {
-                $('#cropVal-content-div').slimScroll({
-                    height: '420px',
-                    alwaysVisible: true
-                });
-            });
+                               $(function () {
+                                   $('#cropVal-content-div').slimScroll({
+                                       height: '420px',
+                                       alwaysVisible: true
+                                   });
+                               });
         </script>
         <script type="text/javascript">
             $(function () {
@@ -522,13 +527,16 @@ on barangay selection
                 $("#obsrvButton").on("click", function () {
                     $('#observBlock').removeClass('hidden');
                     $('#obsrvButton').addClass('hidden');
-                    $('#actionButton').addClass('hidden');
+                    $('#actionBlock').addClass('hidden');
+                    $('#actionButton').removeClass('hidden');
+                    //   $('#actionButton').addClass('hidden');
 
                 });
                 $("#actionButton").on("click", function () {
                     $('#actionBlock').removeClass('hidden');
+                    $('#observBlock').addClass('hidden');
                     $('#actionButton').addClass('hidden');
-                    $('#obsrvButton').addClass('hidden');
+                     $('#obsrvButton').removeClass('hidden');
 
                 });
 
