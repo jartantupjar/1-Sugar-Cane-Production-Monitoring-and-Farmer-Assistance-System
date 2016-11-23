@@ -129,13 +129,13 @@
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
-                                                <input type="text" class="form-control pull-right datepicker" name="ystart" id="datepickerstart">
+                                                <input type="text" class="form-control pull-right datepicker" name="rstart" id="datepickerstart">
                                             </div>  <br>
                                             <label> Ripening Phase End:</label> <div class="input-group date">
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
-                                                <input type="text" class="form-control pull-right datepicker" name="yend" id="datepickerstart">
+                                                <input type="text" class="form-control pull-right datepicker" name="rend" id="datepickerstart">
                                             </div> <br>
                                 <label> Milling Phase:</label> <div class="input-group date">
                                                 <div class="input-group-addon">
