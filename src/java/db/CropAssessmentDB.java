@@ -39,46 +39,62 @@ public class CropAssessmentDB {
         ArrayList<CropAssessment> prevT = new ArrayList<CropAssessment>();
         currT = getCropAssessmentReportForTheWeek(week_of_year, year, tdate);
         prevT = getPrevCropAssessmentReportForTheWeek(week_of_year, year, tdate);
-        CropAssessment ca = new CropAssessment();
-        CropAssessment ca2 = new CropAssessment();
+        CropAssessment ca = new CropAssessment(); //area part
+        CropAssessment ca2 = new CropAssessment(); // tons cane part
+        CropAssessment ca3 = new CropAssessment(); // lkg part
         DecimalFormat df = new DecimalFormat("#.00");
         DecimalFormat commaformat = new DecimalFormat("#.00");
         commaformat.setGroupingUsed(true);
         commaformat.setGroupingSize(3);
         double etc = Double.valueOf(df.format(getTotalEstimatedTonsCane(year))); // change into the crop year
         double eah = Double.valueOf(df.format(getTotalEstimatedArea(year)));
-        
-        ca.setParticulars("Area");
+        double elkg = Double.valueOf(df.format(getTotalEstimatedLKG(year)));
+        ca.setParticulars("Area"); // crop asessment for area particulars
         ca.setEstimated(commaformat.format(eah));
         String prev = commaformat.format(prevT.get(0).getPrevArea());
-        ca.setPrevious(prev);
+        System.out.println(prevT.get(0).getPrevArea()+"LOLOLOL");
+        ca.setPrevious(prev); // previous
         String curr = commaformat.format(currT.get(0).getThisArea());
-        ca.setThisweek(curr);
+        ca.setThisweek(curr); // this week
         double todate = prevT.get(0).getPrevArea() + currT.get(0).getThisArea();
         Double percenta = 0.00;
-        ca.setTodate(commaformat.format(todate));
+        ca.setTodate(commaformat.format(todate)); // todate
         System.out.println(todate+"TODATE");
         System.out.println(eah+"EAH");
-        percenta = Double.valueOf(df.format((todate / eah) * 100));
+        percenta = Double.valueOf(df.format((todate / eah) * 100)); // difference
         ca.setPercent(percenta.toString());
-        String standing = commaformat.format(Double.valueOf(df.format(eah - todate)));
-        ca.setStanding(standing);
+        String standing = commaformat.format(Double.valueOf(df.format(eah - todate)));  
+        ca.setStanding(standing); // remaining
         ca.setWeek_ending(currT.get(0).getWeek_ending());
-        ca2.setParticulars("Tons Cane");
+        ca2.setParticulars("Tons Cane"); // crop assessment for tons cane particulars
         ca2.setEstimated(commaformat.format(etc));
         String prevt = commaformat.format(prevT.get(0).getPrevTons_Cane());
-        ca2.setPrevious(prevt);
+        ca2.setPrevious(prevt); // previous
         String currt = commaformat.format(currT.get(0).getThisTons_Cane());
-        ca2.setThisweek(currt);
+        ca2.setThisweek(currt); // thisweek
         double todate2 = prevT.get(0).getPrevTons_Cane() + currT.get(0).getThisTons_Cane();
-        Double percentb = 0.00;
-        ca2.setTodate(commaformat.format(todate2));
+        Double percentb = 0.00; 
+        ca2.setTodate(commaformat.format(todate2)); // todate
         percentb = Double.valueOf(df.format((todate2 / etc) * 100));
-        ca2.setPercent(commaformat.format(percentb));
+        ca2.setPercent(commaformat.format(percentb)); // difference
         String standingt = commaformat.format(Double.valueOf(df.format(etc - todate2)));
-        ca2.setStanding(standingt);
+        ca2.setStanding(standingt); //remaining
+        ca3.setParticulars("LKG"); // crop assessment for lkg particulars
+        ca3.setEstimated(df.format(elkg));
+        String prevl = commaformat.format(prevT.get(0).getPrevLKG());
+        ca3.setPrevious(prevl);
+        String currl = commaformat.format(currT.get(0).getThisLKG());
+        ca3.setThisweek(currl);
+        double todate3 = prevT.get(0).getPrevLKG() + currT.get(0).getThisLKG();
+        ca3.setTodate(commaformat.format(todate3));
+        Double percentc = 0.00;
+        percentc = Double.valueOf(df.format((todate3/elkg)*100));
+        ca3.setPercent(commaformat.format(percentc));
+        String standingl = commaformat.format(Double.valueOf(df.format(elkg-todate3)));
+        ca3.setStanding(standingl);
         cT.add(ca);
         cT.add(ca2);
+        cT.add(ca3);
         return cT;
     }
 
@@ -176,7 +192,7 @@ public class CropAssessmentDB {
             PreparedStatement pstmt = null;
             String query = "SELECT * FROM weeklyestimate where id = ? and year = ?  ;";
             
-            String query2 = "select date as week_ending,weekofyear(date), round(sum(area_harvested),2) as area, round(sum(tons_cane),2) as actual, sum(lkg)\n" +
+            String query2 = "select date as week_ending,weekofyear(date), round(sum(area_harvested),2) as area, round(sum(tons_cane),2) as actual, sum(lkg) as lkg \n" +
 "                    from production\n" +
 "                    where year = ? and date<= ? and weekofyear(date) = ?\n" +
 "                    group by weekofyear(date)\n" +
@@ -204,6 +220,12 @@ public class CropAssessmentDB {
 //                    c.setEstiTons_Cane(rs.getDouble("forecasted"));
                     c.setThisArea(rs.getDouble("area"));
                     c.setWeek_ending(rs.getDate("week_ending"));
+                    if(year<=2016){
+                        
+                    }
+                    else {
+                        c.setThisLKG(rs.getDouble("lkg"));
+                    }
                     cT.add(c);
                 } while (rs.next());
             }
@@ -294,6 +316,48 @@ public class CropAssessmentDB {
         }
         return 0.00;
     }
+    
+    public Double getTotalEstimatedLKG(int year) {
+        try {
+            // put functions here : previous week production, this week production
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            int num = getSelectedForecastLKG(year);
+            System.out.println(num+"YEARRRRRRRRRRRRRRRRRRRRRRRRR");
+            if(num==0){
+                num++;
+                System.out.println(num+" LOL");
+            }
+            String query = "SELECT sum(forecasted_lkg) as 'total' FROM weeklyestimate where year = ? ;";
+            String query2 = "SELECT forecasted"+num+"_lkg as 'total' FROM cropestimatedistrict where year = ? ;";
+            PreparedStatement pstmt = null;
+            if (year<=2016){
+               pstmt = conn.prepareStatement(query);  
+            }
+            else
+            {
+                pstmt = conn.prepareStatement(query2);  
+            }
+            pstmt.setInt(1, year);
+            ResultSet rs = pstmt.executeQuery();
+            Double tc = null;
+            if (rs.next()) {
+                tc = rs.getDouble("total");
+                System.out.println(tc+"TANGINA NYO");
+            }
+            else {
+                tc = 0.00;
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            
+            return tc;
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(CropAssessmentDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0.00;
+    }
 
     public ArrayList<CropAssessment> getRainFall(int weekofyear, int year) {
         try {
@@ -339,7 +403,7 @@ public class CropAssessmentDB {
             PreparedStatement pstmt = null;
             String query = "SELECT sum(area) as 'previous_area',sum(actual) as 'previous_tc' FROM weeklyestimate where id < ? and year = ? ;";
 
-            String query2 = "select date as week_ending,weekofyear(date), round(sum(area_harvested),2) as previous_area, round(sum(tons_cane),2) as previous_tc, sum(lkg)\n" +
+            String query2 = "select date as week_ending,weekofyear(date), round(sum(area_harvested),2) as previous_area, round(sum(tons_cane),2) as previous_tc, sum(lkg) as previous_lkg \n" +
 "                    from production\n" +
 "                    where year = ? and date<= ? and weekofyear(date) < ?\n" +
 "                    group by weekofyear(date)\n" +
@@ -363,8 +427,14 @@ public class CropAssessmentDB {
                 cT = new ArrayList<>();
                 do {
                     c = new CropAssessment();
-                    c.setPrevTons_Cane(rs.getDouble("previous_area"));
-                    c.setPrevArea(rs.getDouble("previous_tc"));
+                    c.setPrevTons_Cane(rs.getDouble("previous_tc"));
+                    c.setPrevArea(rs.getDouble("previous_area"));
+                    if(year <= 2016){
+                        
+                    }
+                    else {
+                        c.setPrevLKG(rs.getDouble("previous_lkg"));
+                    }
                     cT.add(c);
 
                 } while (rs.next());
@@ -421,6 +491,33 @@ public class CropAssessmentDB {
             if (rs.next()) {
                 do {
                     id = rs.getInt("forecast");
+                } while (rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+
+            return id;
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(CropAssessmentDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public Integer getSelectedForecastLKG(int year) {
+        try {
+            // put functions here : previous week production, this week production
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT forecast_lkg FROM cropestimatedistrict where year = ?  ;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, year);
+            ResultSet rs = pstmt.executeQuery();
+            int id = 0;
+            CropAssessment c;
+            if (rs.next()) {
+                do {
+                    id = rs.getInt("forecast_lkg");
+                    System.out.println(id+"AYYYYYYYYYYYYYYYYYYYYYYD");
                 } while (rs.next());
             }
             rs.close();

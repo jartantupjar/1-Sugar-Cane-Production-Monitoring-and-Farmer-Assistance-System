@@ -43,13 +43,13 @@
                                             <tr>
                                                 <th>District</th>
                                                 <th>Total Farms</th>
-                                                <th>Damage</th>
+                                                <th>Damage (Area)</th>
                                             </tr>
                                             <c:forEach var="report" items="${districtReport}">
                                                 <tr>	
                                                     <td>${report.district}</td>
                                                     <td><span class="pull-right">${report.totalFarms}</span></td>
-                                                    <td><span class="pull-right">${report.damage}</span></td>
+                                                    <td><span class="pull-right">${report.damage} HA</span></td>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>
@@ -76,13 +76,13 @@
                                             <tr>
                                                 <th>Type</th>
                                                 <th>Total Farms</th>
-                                                <th>Damage</th>
+                                                <th>Damage (Area) </th>
                                             </tr>
                                             <c:forEach var="type" items="${typeReport}">
                                                 <tr>	
                                                     <td>${type.type}</td>
                                                     <td><span class="pull-right">${type.totalFarms}</span></td>
-                                                    <td><span class="pull-right">${type.damage}</span></td>
+                                                    <td><span class="pull-right">${type.damage} HA</span></td>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>

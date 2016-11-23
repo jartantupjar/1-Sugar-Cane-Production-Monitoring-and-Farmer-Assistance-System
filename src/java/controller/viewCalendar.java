@@ -56,16 +56,19 @@ public class viewCalendar extends HttpServlet {
                       days.put("color", "SaddleBrown");  
                     }
                     else if(cT.get(i).getPhase().equalsIgnoreCase("Germination")){
-                      days.put("color", "green");  
+                      days.put("color", "#2E7D32");  
+                    }
+                    else if(cT.get(i).getPhase().equalsIgnoreCase("Ripening")){
+                      days.put("color", "INDIANRED");  
                     }
                     else if(cT.get(i).getPhase().equalsIgnoreCase("Milling")){
-                      days.put("color", "blue");  
+                      days.put("color", "#1565C0");  
                     }
                     else if(cT.get(i).getPhase().equalsIgnoreCase("Tillering")){
                       days.put("color", "purple");  
                     }
                     else if(cT.get(i).getPhase().equalsIgnoreCase("Stalk Elongation")){
-                      days.put("color", "red");  
+                      days.put("color", "#990000");  
                     }else {
                       days.put("color", "orange");    
                     }

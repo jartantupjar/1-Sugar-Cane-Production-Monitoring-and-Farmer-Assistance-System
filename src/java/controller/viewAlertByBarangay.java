@@ -5,7 +5,9 @@
  */
 package controller;
 
+import db.CalendarDB;
 import db.ProblemsDB;
+import entity.Calendar;
 import entity.Problems;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -43,10 +45,12 @@ public class viewAlertByBarangay extends HttpServlet {
         ProblemsDB pdb = new ProblemsDB();
         ArrayList<Problems> probT = new ArrayList<Problems>();
         HttpSession session = request.getSession();
+        
         String num =  session.getAttribute("probid").toString();
         int probid = Integer.parseInt(num);
         String municipality = (String) session.getAttribute("municipality");
-        probT = pdb.getDisastersListByBarangay(probid,municipality);
+        String date = (String) session.getAttribute("date");
+        probT = pdb.getDisastersListByBarangay(probid,municipality,date);
         JSONArray list = new JSONArray();
         for(int i=0;i<probT.size();i++){
             ArrayList<String> obj = new ArrayList<String>();
