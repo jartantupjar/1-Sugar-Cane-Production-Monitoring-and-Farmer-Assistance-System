@@ -103,6 +103,17 @@ public class editDates extends HttpServlet {
                 cal.setEnding(end);
                 cT.add(cal);
             }
+            if(request.getParameter("rstart")!= ""){
+                cal = new Calendar();
+                cal.setPhase("Ripening");
+                String sdate = request.getParameter("rstart");
+                String edate = request.getParameter("rend");
+                Date start = cdb.convertStringtoSQLDate(sdate);
+                Date end = cdb.convertStringtoSQLDate(edate);
+                cal.setStarting(start);
+                cal.setEnding(end);
+                cT.add(cal);
+            }
             if(request.getParameter("ystart")!= ""){
                 cal = new Calendar();
                 cal.setPhase("Yield Formation");
@@ -114,9 +125,17 @@ public class editDates extends HttpServlet {
                 cal.setEnding(end);
                 cT.add(cal);
             }
+            if(cT.size()==1){
             for(int i=0; i<cT.size();i++){
-                check = cdb.addPhasesDates(cT.get(i), year,district);
+                check = cdb.updatePhaseDates(cT.get(i), year,district);
+            }    
             }
+            else{
+                for(int i=0; i<cT.size();i++){
+                check = cdb.addPhasesDates(cT.get(i), year+1,district);
+            }
+            }
+            
             if (check>0) {
             ServletContext context = getServletContext();
             RequestDispatcher rd = context.getRequestDispatcher("/Calendar.jsp");
