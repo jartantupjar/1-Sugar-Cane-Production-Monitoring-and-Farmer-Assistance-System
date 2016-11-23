@@ -6,6 +6,7 @@
 package db;
 
 import entity.Calendar;
+import entity.CropBoard;
 import entity.MonthlyCropEstimate;
 import entity.cropEstimate;
 import java.sql.Connection;
@@ -91,7 +92,7 @@ public class CropEstimateDB {
         //method to input forecasts to db
         return true;
     }
-    public boolean selectLkgEstimates(Double area, Double production,Double lkg, Double rain, Double tiller, Double temp) {
+    public boolean selectLkgEstimates(Double area, Double production,Double lkg, Double rain) {
         cropEstimate fce = new cropEstimate();
         cropEstimate ce = new cropEstimate();
         ce.setArea(area);
@@ -99,8 +100,34 @@ public class CropEstimateDB {
         ce.setRainfall(rain);
         fce.setArea(area);
         fce.setActual(production);
+        fce.setLkg(lkg);
         fce.setRainfall(rain);
-        ArrayList<cropEstimate> ces = viewAllDiffEstimates();
+        CalendarDB caldb = new CalendarDB();
+        
+        ArrayList<Calendar> calist = caldb.getCurrentYearDetails();
+       int cropyr= calist.get(0).getYear();
+        ArrayList<cropEstimate> ces =getWeeklyEstimatePreviousYears(cropyr);
+        
+        CropBoardDB cdb = new CropBoardDB();
+        ArrayList<CropBoard> product = new ArrayList<>();
+        if(cropyr>2016){
+            product =cdb.getCurrentWeeklyProducedReport("TC", cropyr, calist.get(0).getTodayDate().toString());
+            if(product!=null){
+                for(int i=0;i<product.size();i++){
+                    cropEstimate newprod = new cropEstimate();  
+                    newprod.setArea(product.get(i).getArea());
+                    newprod.setActual(product.get(i).getProduction());
+                    newprod.setRainfall(product.get(i).getRainfall());
+                    newprod.setLkg(product.get(i).getLkg());
+                    ces.add(newprod);
+                    
+                }
+                
+            }
+        }
+          
+          
+          
         ArrayList<cropEstimate> tests = viewLkgTestEstimates();
         if (tests != null) {
             ces.addAll(tests);
@@ -108,17 +135,10 @@ public class CropEstimateDB {
         for (int i = 0; i < ces.size(); i++) {
             System.out.println(ces.get(i).getActual());
         }
-        fce.setForecasted(genForecast1(ce, ces));
-        if (tiller != null) {
-            ce.setTiller(tiller);
-            fce.setTiller(tiller);
-            fce.setForecast2(genForecast2(ce, ces));
-        }
-        if (temp != null) {
-            ce.setTemp(temp);
-            fce.setTemp(temp);
-            fce.setForecast3(genForecast3(ce, ces));
-        }
+        fce.setForecastlkg(genLKGForecast1(ce, ces));
+        fce.setForecastlkg2(genLkgForecast2(ce, ces));
+        fce.setForecastlkg3(genLkgForecast3(ce, ces));
+        
         inputLkgTestEstimates(fce);
 
         //method to input forecasts to db
@@ -335,7 +355,7 @@ public class CropEstimateDB {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "INSERT INTO lkgestimatetests (district,area,actual_tons_cane,actual_lkg,rainfall,avg_temperature,tiller_count,forecast1, forecast2, forecast3) VALUES (?,?,ROUND(?,3),ROUND(?,3),?,?,?,ROUND(?,3),ROUND(?,3),ROUND(?,3));";
+            String query = "INSERT INTO lkgestimatetests (district,area,actual_tons_cane,actual_lkg,rainfall,forecast1, forecast2, forecast3) VALUES (?,?,ROUND(?,3),ROUND(?,3),?,ROUND(?,3),ROUND(?,3),ROUND(?,3));";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
             pstmt.setString(1, "TARLAC");
@@ -349,16 +369,14 @@ public class CropEstimateDB {
             pstmt.setString(3, actualz);
             pstmt.setDouble(4, ce.getLkg());
             pstmt.setDouble(5, ce.getRainfall());
-            pstmt.setDouble(6, ce.getTemp());
-            pstmt.setDouble(7, ce.getTiller());
 
             System.out.println(ce.getForecastlkg());
             System.out.println(ce.getForecastlkg2());
             System.out.println(ce.getForecastlkg3());
 
-            pstmt.setDouble(8, ce.getForecastlkg());
-            pstmt.setDouble(9, ce.getForecastlkg2());
-            pstmt.setDouble(10, ce.getForecastlkg3());
+            pstmt.setDouble(6, ce.getForecastlkg());
+            pstmt.setDouble(7, ce.getForecastlkg2());
+            pstmt.setDouble(8, ce.getForecastlkg3());
             int isSuccess = pstmt.executeUpdate();
 
             pstmt.close();
@@ -647,6 +665,34 @@ public class CropEstimateDB {
         }
         return ces;
     }
+    public ArrayList<cropEstimate> getWeeklyEstimatePreviousYears(int currYear) {
+        ArrayList<cropEstimate> ces = new ArrayList<cropEstimate>();
+        cropEstimate ce = null;
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select area, rainfal,actual, actual_lkg \n"
+                    + "from weeklyestimate \n"
+                    + "where year <= ?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, currYear);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                ce = new cropEstimate();
+                ce.setArea(rs.getDouble("area"));
+                ce.setRainfall(rs.getDouble("rainfal"));
+                ce.setActual(rs.getDouble("actual"));
+                ce.setLkg(rs.getDouble("actual_lkg"));
+                ces.add(ce);
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UsersDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ces;
+    }
 
     public double genForecast2(cropEstimate ce, ArrayList<cropEstimate> ces) {
         DataSet observedData = new DataSet();
@@ -779,9 +825,6 @@ public class CropEstimateDB {
         for (int i = 0; i < ces.size(); i++) {
             dp = new Observation(ces.get(i).getLkg());
             dp.setIndependentValue("area", ces.get(i).getArea());
-            dp.setIndependentValue("rainfall", ces.get(i).getRainfall());
-            dp.setIndependentValue("tiller", ces.get(i).getTiller());
-            dp.setIndependentValue("temp", ces.get(i).getTemp());
             dp.setIndependentValue("production", ces.get(i).getActual());
             observedData.add(dp);
         }
@@ -794,10 +837,7 @@ public class CropEstimateDB {
 
         Observation forecastvalue = new Observation(0.0);
         forecastvalue.setIndependentValue("area", ce.getArea());
-        forecastvalue.setIndependentValue("rainfall", ce.getRainfall());
-        forecastvalue.setIndependentValue("tiller", ce.getTiller());
-        forecastvalue.setIndependentValue("temp", ce.getTemp());
-        forecastvalue.setIndependentValue("production", ce.getActual());
+         forecastvalue.setIndependentValue("production", ce.getActual());
 
         DataSet fcDataSet = new DataSet();
         fcDataSet.add(forecastvalue);
@@ -1032,7 +1072,7 @@ public class CropEstimateDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select id,area,rainfall,tiller_count,avg_temperature,actual_tons_cane,actual_lkg,forecast1,forecast2,forecast3 from lkgestimatetests;";
+            String query = "select id,area,rainfall,actual_tons_cane,actual_lkg,forecast1,forecast2,forecast3 from lkgestimatetests;";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
             ResultSet rs = pstmt.executeQuery();
@@ -1046,8 +1086,6 @@ public class CropEstimateDB {
                     ce.setId(rs.getInt("id"));
                     ce.setArea(rs.getDouble("area"));
                     ce.setRainfall(rs.getDouble("rainfall"));
-                    ce.setTiller(rs.getDouble("tiller_count"));
-                    ce.setTemp(rs.getDouble("avg_temperature"));
                     double actual = rs.getDouble("actual_tons_cane");
                     double lkg = rs.getDouble("actual_lkg");
                     double estim = rs.getDouble("forecast1");
@@ -1078,7 +1116,7 @@ public class CropEstimateDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select year,district,week_ending,area,actual,forecasted,actual_lkg,forecasted_lkg from weeklyestimate where year=?;";
+            String query = "select year,district,week_ending,area,rainfal,actual,forecasted,actual_lkg,forecasted_lkg from weeklyestimate where year=?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, year);
             ResultSet rs = pstmt.executeQuery();
@@ -1093,6 +1131,7 @@ public class CropEstimateDB {
                     ce.setDistrict(rs.getString("district"));
                     ce.setWeek_ending(rs.getDate("week_ending"));
                     ce.setArea(rs.getDouble("area"));
+                    ce.setRainfall(rs.getDouble("rainfal"));
                     double actual = rs.getDouble("actual");
                     double estim = rs.getDouble("forecasted");
                     double lkg = rs.getDouble("actual_lkg");

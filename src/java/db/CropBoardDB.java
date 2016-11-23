@@ -99,7 +99,7 @@ public class CropBoardDB {
 //                    c.setDistrict("district");
                     c.setWeekofyear(rs.getInt("wof"));
                     c.setWeek_ending(rs.getDate("date"));
-                    c.setRainfall(getcurrentrainfall(c.getWeek_ending().toString()));
+                    c.setRainfall(getcurrentrainfall(c.getWeekofyear()));
                     if (type.equalsIgnoreCase("TC")) {
                         c.setProduction(c.getTc());
                     } else if (type.equalsIgnoreCase("HA")) {
@@ -534,14 +534,14 @@ public class CropBoardDB {
         }
         return null;
     }
-    public Double getcurrentrainfall(String date) {
+    public Double getcurrentrainfall(Integer weekofyear) {
         try {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT sum(r.amount) as rainfall FROM rainfall r join crop_calendar c where phase='Milling' and r.date between c.date_starting and c.date_ending and r.date =? ;";
+            String query = "SELECT sum(r.amount) as rainfall FROM rainfall r join crop_calendar c where phase='Milling' and r.date between c.date_starting and c.date_ending and weekofyear(r.date) =? ;";
             PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setString(1, date);
+            pstmt.setInt(1, weekofyear);
             ResultSet rs = pstmt.executeQuery();
   
             ArrayList<Double> cT = null;

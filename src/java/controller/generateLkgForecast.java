@@ -50,8 +50,6 @@ public class generateLkgForecast extends HttpServlet {
         area1=request.getParameter("area");
         production1=request.getParameter("production");
         rain1=request.getParameter("rain");
-        temp1=request.getParameter("temp");
-        tiller1= request.getParameter("tiller");
         lkg1=request.getParameter("lkg");
         if(!area1.isEmpty()){
              area= Double.parseDouble(area1);
@@ -65,15 +63,11 @@ public class generateLkgForecast extends HttpServlet {
         if(!rain1.isEmpty()){
              rain= Double.parseDouble(rain1);
             }
-        if(!temp1.isEmpty()){
-             temp= Double.parseDouble(temp1);
-            }
-        if(!tiller1.isEmpty()){
-             tiller= Double.parseDouble(tiller1);
-            }
+        
+     
         
         
-        boolean check =  cedb.selectLkgEstimates(area,production,lkg, rain, tiller, temp);
+        boolean check =  cedb.selectLkgEstimates(area,production,lkg, rain);
             if (check){
                 
                 ServletContext context = getServletContext();

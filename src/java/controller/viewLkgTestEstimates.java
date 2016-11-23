@@ -46,8 +46,6 @@ public class viewLkgTestEstimates extends BaseServlet {
                 ArrayList<String> obj = new ArrayList<>();
                 obj.add(Double.toString(fct.get(i).getArea()));
                 obj.add(Double.toString(fct.get(i).getRainfall()));
-                obj.add(Double.toString(fct.get(i).getTiller()));
-                obj.add(Double.toString(fct.get(i).getTemp()));
                 obj.add(Double.toString(fct.get(i).getActual()));
                 obj.add(Double.toString(fct.get(i).getLkg()));
                 obj.add(Double.toString(fct.get(i).getForecastlkg()));
