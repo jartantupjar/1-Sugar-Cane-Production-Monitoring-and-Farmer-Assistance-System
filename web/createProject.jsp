@@ -230,8 +230,6 @@
         <script src="plugins/daterangepicker/moment.min.js"></script>
         <script src="plugins/daterangepicker/daterangepicker.js"></script>
         <script src="plugins/datepicker/bootstrap-datepicker.js"></script>
-
-
         <script src="dist/js/app.min.js"></script>
 
         <script>

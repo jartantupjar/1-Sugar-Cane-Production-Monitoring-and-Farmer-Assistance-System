@@ -18,6 +18,8 @@
   <link rel="stylesheet" href="plugins/fullcalendar/fullcalendar.print.css" media="print">
   <link rel="stylesheet" href="bootstrap/css/bootstrap-year-calendar.min.css">
   <link rel="stylesheet" href="bootstrap/css/bootstrap-year-calendar.css">
+     <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker-bs3.css">
+        <link rel="stylesheet" href="plugins/datepicker/datepicker3.css">
   <!-- Theme style -->
 
 
@@ -68,87 +70,51 @@
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
-                                                <input type="text" class="form-control pull-right datepicker" name="pstart" id="datepickerstart">
+                                                 <input type="text" class="form-control reservation pull-right" name="pstart" id="reservation">
                                             </div> <br>
-                                            <label> Planting Phase End:</label> 
-                                            <div class="input-group date">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-calendar"></i>
-                                                </div>
-                                                <input type="text" class="form-control pull-right datepicker" name="pend" id="datepickerstart1">
-                                            </div> <br>
+                                            
                                 <label> Germination Phase:</label> <div class="input-group date">
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
-                                                <input type="text" class="form-control pull-right datepicker" name="gstart" id="datepickerstart">
+                                                <input type="text" class="form-control pull-right reservation" name="gstart" id="datepickerstart">
                                             </div> <br>
-                                            <label> Germination Phase End:</label> <div class="input-group date">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-calendar"></i>
-                                                </div>
-                                                <input type="text" class="form-control pull-right datepicker" name="gend" id="datepickerstart">
-                                            </div> <br>
+                                            
                                             <label> Tillering Phase:</label> <div class="input-group date">
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
-                                                <input type="text" class="form-control pull-right datepicker" name="tstart" id="datepickerstart">
+                                                <input type="text" class="form-control pull-right reservation" name="tstart" id="datepickerstart">
                                             </div>  <br>
-                                            <label> Tillering Phase End:</label> <div class="input-group date">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-calendar"></i>
-                                                </div>
-                                                <input type="text" class="form-control pull-right datepicker" name="tend" id="datepickerstart">
-                                            </div> <br>
+                                            
                                             <label>Stalk Elongation Phase:</label> <div class="input-group date">
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
-                                                <input type="text" class="form-control pull-right datepicker" name="sstart" id="datepickerstart">
+                                                <input type="text" class="form-control pull-right reservation" name="sstart" id="datepickerstart">
                                             </div>  <br>
-                                            <label> Stalk Elongation Phase End:</label> <div class="input-group date">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-calendar"></i>
-                                                </div>
-                                                <input type="text" class="form-control pull-right datepicker" name="send" id="datepickerstart">
-                                            </div> <br>
+                                            
                                 <label> Yield Formation Phase:</label> <div class="input-group date">
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
-                                                <input type="text" class="form-control pull-right datepicker" name="ystart" id="datepickerstart">
+                                                <input type="text" class="form-control pull-right reservation" name="ystart" id="datepickerstart">
                                             </div>  <br>
-                                            <label> Yield Formation Phase End:</label> <div class="input-group date">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-calendar"></i>
-                                                </div>
-                                                <input type="text" class="form-control pull-right datepicker" name="yend" id="datepickerstart">
-                                            </div> <br>
+                                            
                                             <label> Ripening Phase:</label> <div class="input-group date">
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
-                                                <input type="text" class="form-control pull-right datepicker" name="rstart" id="datepickerstart">
+                                                <input type="text" class="form-control pull-right reservation" name="rstart" id="datepickerstart">
                                             </div>  <br>
-                                            <label> Ripening Phase End:</label> <div class="input-group date">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-calendar"></i>
-                                                </div>
-                                                <input type="text" class="form-control pull-right datepicker" name="rend" id="datepickerstart">
-                                            </div> <br>
+                                            
                                 <label> Milling Phase:</label> <div class="input-group date">
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
-                                                <input type="text" class="form-control pull-right datepicker" name="mstart" id="datepickerstart">
+                                                <input type="text" class="form-control pull-right reservation" name="mstart" id="datepickerstart">
                                             </div>  <br>
-                                            <label> Milling Phase End:</label> <div class="input-group date">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-calendar"></i>
-                                                </div>
-                                                <input type="text" class="form-control pull-right datepicker" name="mend" id="datepickerstart">
-                                            </div> <br>
+                                           
                                 </div>
                             </div>
           <button class="btn btn-app btn-linkedin btn-lg pull-right" type="submit">
@@ -242,14 +208,24 @@
 <script src="dist/js/demo.js"></script>
 <!-- fullCalendar 2.2.5 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+ <script src="plugins/select2/select2.full.min.js"></script>
 <script src="plugins/fullcalendar/fullcalendar.min.js"></script>
-<script src="plugins/datepicker/bootstrap-datepicker.js"></script>
+     <script src="plugins/input-mask/jquery.inputmask.js"></script>
+        <script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+        <script src="plugins/input-mask/jquery.inputmask.extensions.js"></script>
+        <script src="plugins/daterangepicker/moment.min.js"></script>
+        <script src="plugins/daterangepicker/daterangepicker.js"></script>
+        <script src="plugins/datepicker/bootstrap-datepicker.js"></script>
         <script>
             $(function () {
+              //Datemask dd/mm/yyyy
+                //Datemask2 mm/dd/yyyy
                 $('.datepicker').datepicker({
                     autoclose: true
                 });
 
+                $('.reservation').daterangepicker();
+              
 
             });
         </script>
