@@ -405,7 +405,7 @@ public class CropAssessmentDB {
 
             String query2 = "select date as week_ending,weekofyear(date), round(sum(area_harvested),2) as previous_area, round(sum(tons_cane),2) as previous_tc, sum(lkg) as previous_lkg \n" +
 "                    from production\n" +
-"                    where year = ? and date<= ? and weekofyear(date) < ?\n" +
+"                    where year = ? and date<= ? and yearweek(date) < yearweek(?) \n" +
 "                    group by weekofyear(date)\n" +
 "                    order by date;";
             if(year <= 2016){
@@ -417,7 +417,10 @@ public class CropAssessmentDB {
             else{
             pstmt = conn.prepareStatement(query2);
             pstmt.setInt(1, year);
-            pstmt.setInt(3, weekofyear);
+            if (weekofyear == 1){
+                weekofyear = 52;
+            }
+            pstmt.setString(3, tdate);
             pstmt.setString(2, tdate);
             }
             ResultSet rs = pstmt.executeQuery();

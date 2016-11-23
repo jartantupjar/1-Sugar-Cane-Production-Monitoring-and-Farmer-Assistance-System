@@ -182,7 +182,7 @@ current vs then diagram
                 <c:if test="${not empty kpis}">
                                             <table class="table table-hover">
                                                 <thead><tr>
-                                                        <th style="width: 30%">Performance Indicator</th>
+                                                        <th >Performance Indicator</th>
                                                    
                                                 <input value="${kpis[0].kpi_year}" name="kpi_year" class="form-control hidden" />
                                                 <input value="${kpis[0].tYears}" name="tYears" class="form-control hidden" />
@@ -197,7 +197,6 @@ current vs then diagram
                                             </thead>
                                                  
                                             <tbody>
-                                      
                                                 <c:forEach items="${kpis}" var="kpilist" varStatus="loopCount">
                                                     <tr>
                                                         <td><input class='form-control hidden' name = "kNa${loopCount.count}[]" value='${kpilist.kpi}'/><c:out value="${kpilist.kpi}"/></td>
@@ -212,7 +211,7 @@ current vs then diagram
                                                    
                                             </tbody>
                                         </table>
-                                       <button class="btn btn-info pull-right" id="uButton" style="width: 10%" value="submit" form="kpitable">Update</button>
+                                       <button class="btn btn-info pull-right hidden" id="uButton" style="width: 10%" value="submit" form="kpitable">Update</button>
                                         <button class="btn btn-danger pull-right" id="eButton" style="width: 10%" type="button">Edit</button>
                </c:if>
                                                   </div>
@@ -329,6 +328,7 @@ current vs then diagram
       $("#eButton").on("click", function () {
                       $('.editz').removeClass('hidden');
                       $('#eButton').addClass('hidden');
+                      $('#uButton').removeClass('hidden');
                       
                 });
       $("#uButton").on("click", function () {
