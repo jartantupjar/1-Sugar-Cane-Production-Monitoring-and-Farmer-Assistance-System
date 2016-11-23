@@ -12,7 +12,7 @@ import java.sql.Date;
  * @author Bryll Joey Delfin
  */
 public class CropAssessment {
-    private double prevArea, prevTons_Cane, thisArea, thisTons_Cane, todateArea, todateTonc_Cane;
+    private double prevArea, prevTons_Cane, thisArea, thisTons_Cane, todateArea, todateTonc_Cane, thisLKG, prevLKG, todateLKG; 
     private double estiArea, estiTons_Cane, percArea, percTons_Canel;
     private double rainfall;
     private String previous,thisweek,todate,percent, standing;
@@ -291,6 +291,48 @@ public class CropAssessment {
      */
     public String getStanding() {
         return standing;
+    }
+
+    /**
+     * @return the thisLKG
+     */
+    public double getThisLKG() {
+        return thisLKG;
+    }
+
+    /**
+     * @param thisLKG the thisLKG to set
+     */
+    public void setThisLKG(double thisLKG) {
+        this.thisLKG = thisLKG;
+    }
+
+    /**
+     * @return the prevLKG
+     */
+    public double getPrevLKG() {
+        return prevLKG;
+    }
+
+    /**
+     * @param prevLKG the prevLKG to set
+     */
+    public void setPrevLKG(double prevLKG) {
+        this.prevLKG = prevLKG;
+    }
+
+    /**
+     * @return the todateLKG
+     */
+    public double getTodateLKG() {
+        return todateLKG;
+    }
+
+    /**
+     * @param todateLKG the todateLKG to set
+     */
+    public void setTodateLKG(double todateLKG) {
+        this.todateLKG = todateLKG;
     }
     
 }

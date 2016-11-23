@@ -74,6 +74,12 @@ public class viewForumList extends HttpServlet {
                             obj.add("N/A");
                             obj.add("0");
                         }
+                        else{
+                            obj.add("N/A");
+                        obj.add("0");
+                        obj.add("N/A");
+                        obj.add("0");
+                        }
                     } else {
                         obj.add("N/A");
                         obj.add("0");

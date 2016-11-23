@@ -45,10 +45,11 @@
               <div id="external-events">
                   <div class="external-event" style="background-color: #8B4513; color: white"> Planting</div>
                 <div class="external-event bg-green">Germination</div>
-                <div class="external-event bg-blue">Milling</div>
                 <div class="external-event bg-purple">Tillering</div>
                 <div class="external-event bg-red">Stalk Elongation</div>
                 <div class="external-event bg-orange">Yield Formation</div>
+                <div class="external-event" style="background-color: #CD5C5C; color: white"> Ripening</div>
+                <div class="external-event bg-blue">Milling</div>
               </div>
             </div>
           </div>
@@ -119,6 +120,18 @@
                                                 <input type="text" class="form-control pull-right datepicker" name="ystart" id="datepickerstart">
                                             </div>  <br>
                                             <label> Yield Formation Phase End:</label> <div class="input-group date">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                                <input type="text" class="form-control pull-right datepicker" name="yend" id="datepickerstart">
+                                            </div> <br>
+                                            <label> Ripening Phase:</label> <div class="input-group date">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                                <input type="text" class="form-control pull-right datepicker" name="ystart" id="datepickerstart">
+                                            </div>  <br>
+                                            <label> Ripening Phase End:</label> <div class="input-group date">
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>

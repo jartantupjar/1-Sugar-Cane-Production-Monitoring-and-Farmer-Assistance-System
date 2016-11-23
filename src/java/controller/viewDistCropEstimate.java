@@ -96,6 +96,7 @@ public class viewDistCropEstimate extends BaseServlet {
                 obj.add(Integer.toString(calist.get(0).getYear()));
                 obj.add(production.get(i).getWeek_ending().toString());
                 obj.add(production.get(i).getArea().toString());
+                obj.add(production.get(i).getRainfall().toString());
                 obj.add(production.get(i).getTc().toString());
                 if(i>3){
                     ces = new ArrayList<>();

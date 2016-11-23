@@ -42,6 +42,7 @@
                             <th style="width: 5%">Year</th>
                             <th>Week Ending</th>
                             <th>Harvest Area</th>
+                            <th>Rainfall</th>
                             <th>Actual Production</th>
                             <th>Estimated Production</th>
                             <th>% Difference</th>
