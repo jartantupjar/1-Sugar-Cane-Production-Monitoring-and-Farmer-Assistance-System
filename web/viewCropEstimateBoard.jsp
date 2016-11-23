@@ -212,22 +212,7 @@
 
                                                 </div>
                                             </div>
-                                          <div class="form-group">
-                                                <label class="control-label">Total Tiller Amount
-                                                </label>
-                                                <div class="">
-                                                    <input type="text" maxlength="7" class="form-control" name="tiller" id="projectname" placeholder="Name...">
-
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label">Yearly Temperature
-
-                                                </label>
-                                                <div class="">
-                                                    <input type="text" class="form-control" maxlength="4" name="temp" id="projectname" placeholder="Name...">
-                                                </div>
-                                            </div>
+                                       
                                             
 
 
@@ -255,8 +240,6 @@
                                             <tr>
                                                 <th>Area</th>
                                                 <th>Rainfall</th>
-                                                <th>Tiller Count</th>
-                                                <th>Avg Temp</th>
                                                 <th>Tons_Cane</th>
                                                 <th>LKG</th>
                                                 <th>Estimation 1</th>
@@ -530,7 +513,7 @@
                     'url': 'viewLkgTestEstimates'
                 },
                 'columnDefs': [{
-                        'targets': 9,
+                        'targets': 7,
                         'render': function (data, type, full, meta) {
                             return '<td class="dliker""><button class="btn btn-danger   cliker" id="' + data + '" type="button" >delete</button></td>';
                         }

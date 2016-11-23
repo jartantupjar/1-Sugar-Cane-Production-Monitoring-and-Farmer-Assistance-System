@@ -56,7 +56,7 @@ public class viewDistCropEstimate extends BaseServlet {
          else{
         production =cdb.getCurrentWeeklyProducedReport("TC", year, calist.get(0).getTodayDate().toString());
         ce = estdb.getEstimatePreviousYear(year);
-        ces = estdb.getWeeklyEstimatePreviousYear(year);
+        ces = estdb.getWeeklyEstimatePreviousYears(year);
          }
         JSONObject data = new JSONObject();
         JSONArray list = new JSONArray();
@@ -67,6 +67,7 @@ public class viewDistCropEstimate extends BaseServlet {
                 obj.add(Integer.toString(fct.get(i).getYear()));
                 obj.add(fct.get(i).getWeek_ending().toString());
                 obj.add(Double.toString(fct.get(i).getArea()));
+//                obj.add(Double.toString(fct.get(i).getRainfall()));
                 obj.add(Double.toString(fct.get(i).getActual()));
                 obj.add(Double.toString(fct.get(i).getForecasted()));
                  obj.add(Double.toString(fct.get(i).getDifference())+"%");
