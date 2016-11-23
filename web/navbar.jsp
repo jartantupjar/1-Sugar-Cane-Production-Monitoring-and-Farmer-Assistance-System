@@ -124,7 +124,6 @@
            <li><a href="createNewRecommendation.jsp"><i class="fa fa-link"></i><span>Create Recommendations</span></a></li>
            <li><a href="viewPhasesDates"><i class="fa fa-link"></i><span>Calendar</span> </a></li>
            <li><a href="viewCropEstimate"><i class="fa fa-link"></i><span>Crop Estimate (Options)</span></a></li>
-           <li><a href="viewCropEstimateBoard"><i class="fa fa-link"></i><span>Crop Estimate (Board)</span></a></li>
            <li><a href="viewPrograms.jsp"><i class="fa fa-link"></i><span>View Programs</span></a></li>
            <li><a href="searchFarmer.jsp"><i class="fa fa-link"></i><span>Search Farmer</span></a></li>
          

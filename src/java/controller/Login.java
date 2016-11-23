@@ -95,6 +95,7 @@ public class Login extends HttpServlet {
                     System.out.println(calist.get(0).getTodayDate()+"TODAYDATE");
                 caT = cadb.getCropAssesmentRajversion(cal.getEweek(), cropyear, calist.get(0).getTodayDate().toString());
                 week_ending=caT.get(0).getWeek_ending();
+                System.out.println(week_ending+"*****8");
                 }else {
                     
                 }

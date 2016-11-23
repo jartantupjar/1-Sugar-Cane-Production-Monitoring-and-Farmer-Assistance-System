@@ -5,6 +5,7 @@
  */
 package controller;
 
+import db.CalendarDB;
 import db.CropAssessmentDB;
 import entity.CropAssessment;
 import java.io.IOException;
@@ -12,7 +13,7 @@ import java.io.PrintWriter;
 import java.sql.Date;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
+import entity.Calendar;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -35,68 +36,19 @@ public class viewCropAssessment extends BaseServlet {
    
         ////////////////****** TODO CHECK IF NAME IS A FARMR
 //        String name = request.getParameter("name");
-        System.err.println("TODAYS DATE " + session.getAttribute("todayDate"));
-     
-        String sdate= session.getAttribute("todayDate").toString();
-        System.out.println(sdate);
-        Date todayDate = Date.valueOf(sdate);
+      
         
-          CropAssessment ca = new CropAssessment(); //for area
-          CropAssessment ca2 = new CropAssessment(); // for tons cane
-          CropAssessmentDB cadb = new CropAssessmentDB();
-          ArrayList<CropAssessment> caT = new ArrayList<CropAssessment>(); //the whole report itself
-          ArrayList<CropAssessment> prevT = new ArrayList<CropAssessment>(); // gets the previous of area and tc
-          ArrayList<CropAssessment> currT = new ArrayList<CropAssessment>(); // gets the current of area and tc
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(todayDate);
-                int week_of_year = cal.get(Calendar.WEEK_OF_YEAR);
-                System.out.println(week_of_year);
-                int year = cal.get(Calendar.YEAR);
-                ArrayList<CropAssessment> rain = cadb.getRainFall(week_of_year,year);
-                DecimalFormat df = new DecimalFormat("#.##");   
-                DecimalFormat cf = new DecimalFormat("#.##");
-                cf.setGroupingSize(3);
-                cf.setGroupingUsed(true);
-                currT = cadb.getCropAssessmentReportForTheWeek(week_of_year, year, todayDate.toString());
-                prevT = cadb.getPrevCropAssessmentReportForTheWeek(week_of_year, year, todayDate.toString());
-                double etc = Double.valueOf(df.format(cadb.getTotalEstimatedTonsCane(year)));
-                double eah = Double.valueOf(df.format(cadb.getTotalEstimatedArea(year)));
-                Date week_ending = currT.get(0).getWeek_ending();
-                    ca.setParticulars("Area");
-                    String ea = cf.format(eah);
-                    ca.setEstimated(ea);
-                    String pa = cf.format(prevT.get(0).getPrevArea());
-                    ca.setPrevious(pa);
-                    String cura = cf.format(currT.get(0).getThisArea());
-                    ca.setThisweek(cura);
-                    double todate = prevT.get(0).getPrevArea() +currT.get(0).getThisArea();
-                    ca.setTodate(cf.format(todate));
-                    Double percenta = 0.00;
-                    Double percentb = 0.00;
-                    percenta = Double.valueOf(df.format((todate/eah)*100));
-                    ca.setPercent(percenta.toString());
-                    String sta = cf.format(Double.valueOf(df.format(eah- todate)));
-                    ca.setStanding(sta);
-                    caT.add(ca);
-                    ca2.setParticulars("Tons Cane");
-                    String ec = cf.format(etc);
-                    ca2.setEstimated(ec);
-                    String pc = cf.format(prevT.get(0).getPrevTons_Cane());
-                    ca2.setPrevious(pc);
-                    String cc = cf.format(currT.get(0).getThisTons_Cane());
-                    ca2.setThisweek(cc);
-                    double todate2 = prevT.get(0).getPrevTons_Cane() +currT.get(0).getThisTons_Cane();
-                    ca2.setTodate(cf.format(todate2));
-                    percentb = Double.valueOf(df.format((todate2/etc)*100));
-                    ca2.setPercent(percentb.toString());
-                    String sc = cf.format(Double.valueOf(df.format(etc-todate2)));
-                    ca2.setStanding(sc);
-                    caT.add(ca2);
+        CalendarDB caldb=new CalendarDB();
+        CropAssessmentDB cadb = new CropAssessmentDB();
+           ArrayList<entity.Calendar> calist = caldb.getCurrentYearDetails();//gets the phases/today/crop yr
+                Integer cropyear = calist.get(0).getYear();
+                Date todayDate=calist.get(0).getTodayDate();
+                Calendar cal= caldb.getCalendarTypes(todayDate);
+     ArrayList<CropAssessment>  caT = cadb.getCropAssesmentRajversion(cal.getEweek(), cropyear, calist.get(0).getTodayDate().toString());
                  RequestDispatcher rd=null;
         if (caT!=null) {
-             session.setAttribute("Week_ending", week_ending);
               session.setAttribute("CropAss", caT);
-               session.setAttribute("todayYear", year);
+               session.setAttribute("todayYear", cropyear);
             rd = context.getRequestDispatcher("/createCropAssessment.jsp");
         }
         rd.forward(request, response);
