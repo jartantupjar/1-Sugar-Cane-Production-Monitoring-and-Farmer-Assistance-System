@@ -129,6 +129,21 @@ comparison page add current vs historical details(past 2yrs)
                                                         </c:forEach>
                                                     </tr>
                                                     <tr>
+                                                        <th>Harvest Area</th>
+                                                        <td class="text-blue"><c:out value="${farm.totalHa}"/></td>
+                                                        <c:forEach var="flow" items="${flist}">
+                                                            <c:choose>
+                                                                <c:when test='${flow.totalHa !=farm.totalHa}'>
+                                                                    <td class="text-red"><c:out value="${flow.totalHa}"/></td>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <td class="text-green"><c:out value="${flow.totalHa}"/></td>
+                                                                </c:otherwise>
+                                                            </c:choose>
+
+                                                        </c:forEach>
+                                                    </tr>
+                                                    <tr>
                                                         <th>Total Area</th>
                                                         <td class="text-blue"><c:out value="${farm.area}"/></td>
                                                         <c:forEach var="flow" items="${flist}">
@@ -879,7 +894,7 @@ comparison page add current vs historical details(past 2yrs)
                                             <i class="fa fa-edit" ></i> Create Recommendations
                                         </button>
                                         <button class="btn btn-app btn-linkedin atools" name="atools" id="srec" value="srec">
-                                            <i class="fa fa-edit" ></i> Send Recommendations
+                                            <i class="fa fa-edit" ></i> Send Related Recommendations
                                         </button>
                                         <button class="btn btn-app btn-linkedin atools" name="atools" id="sorec" value="sorec">
                                             <i class="fa fa-edit" ></i> Send Other Recommendations

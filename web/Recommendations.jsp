@@ -14,7 +14,7 @@
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-        <link href="plugins/pace2/pace-theme-center-simple.css" rel="stylesheet" />
+       <link href="plugins/pace2/themes/green/pace-theme-center-simple.css" rel="stylesheet" />
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">

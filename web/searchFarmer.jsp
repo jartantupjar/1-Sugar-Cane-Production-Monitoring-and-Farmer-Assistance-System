@@ -11,6 +11,7 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>SRA | Home</title>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+         <link href="plugins/pace2/themes/green/pace-theme-center-simple.css" rel="stylesheet" />
         <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
         <link rel="stylesheet" href="plugins/select2/select2.min.css">
     </head>
@@ -76,6 +77,7 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
         <script type="text/javascript" src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="dist/js/app.min.js"></script>
+               <script src="plugins/pace2/pace.min.js"></script>
         <script src="plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
 
