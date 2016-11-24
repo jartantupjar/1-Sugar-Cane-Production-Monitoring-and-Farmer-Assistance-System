@@ -376,6 +376,14 @@
         <servlet-name>generateLkgForecast</servlet-name>
         <servlet-class>controller.generateLkgForecast</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>sendRelatedRecObserv</servlet-name>
+        <servlet-class>controller.sendRelatedRecObserv</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewSendRecObserv</servlet-name>
+        <servlet-class>controller.viewSendRecObserv</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
@@ -751,6 +759,14 @@
     <servlet-mapping>
         <servlet-name>generateLkgForecast</servlet-name>
         <url-pattern>/generateLkgForecast</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>sendRelatedRecObserv</servlet-name>
+        <url-pattern>/sendRelatedRecObserv</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewSendRecObserv</servlet-name>
+        <url-pattern>/viewSendRecObserv</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

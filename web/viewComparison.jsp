@@ -859,8 +859,12 @@ comparison page add current vs historical details(past 2yrs)
                         </div>
 
 
-                        <form id="frm-FarmDiff" action="viewSendRec">
+                        <form id="frm-FarmDiff" action="viewSendRecObserv">
                             <div class="col-md-offset-9 col-md-4">
+                                   <input  style="width: 16; height: 16" value="${farm.id}" name="allid[]" class="form-control hidden">
+                                <c:forEach var="flow" items="${flist}">
+                                                  <input  style="width: 16; height: 16" value="${flow.id}" name="allid[]" class="form-control hidden">
+                                                      </c:forEach> 
                                 <div class="box box-info">
                                     <div class="box-body ">
                                         <table id="selecttable" class="table table-hover table-bordered table-responsive">
