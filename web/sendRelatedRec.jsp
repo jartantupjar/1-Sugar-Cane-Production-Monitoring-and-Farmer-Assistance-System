@@ -155,7 +155,7 @@
 
             var table = $('#example').DataTable({
                 'ajax': {
-                    'url': 'viewSelectedRecommendations?farmid=${flist}'
+                    'url': 'viewSelectedRecommendations?farmid=${allid}'
                 },
                 'columnDefs': [{
                         'targets': 0,
