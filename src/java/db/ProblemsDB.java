@@ -433,7 +433,7 @@ public class ProblemsDB {
                     + "from `problems-fields` pf join problems p on pf.Problems_id = p.id join fields f on f.id = pf.Fields_id\n"
                     + "where p.type != 'subjective' and pf.date <= ? and p.id = ? and municipality = ? \n"
                     + "group by p.id, f.municipality, f.barangay\n"
-                    + "order by count) t1 join\n"
+                    + "order by pf.date desc) t1 join\n"
                     + "(select count(id)as 'total', municipality, barangay\n"
                     + "from fields group by municipality, barangay) \n"
                     + "t2 on t1.municipality = t2.municipality and t1.barangay = t2.barangay order by t1.date desc;";
