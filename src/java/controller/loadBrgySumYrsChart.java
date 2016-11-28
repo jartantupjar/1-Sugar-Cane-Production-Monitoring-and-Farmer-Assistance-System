@@ -43,7 +43,7 @@ public class loadBrgySumYrsChart extends BaseServlet {
         ArrayList<brgySummary> curlist = pdb.viewCurrBrgySummaryDet(bname);
         
         
-        ArrayList<String> avgprod= pdb.viewDistrictAvgProdSummary();
+        ArrayList<String> avgprod= pdb.viewDistrictAvgProdBrgySummary();
         JSONObject data = new JSONObject();
      
       

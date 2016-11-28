@@ -47,10 +47,10 @@
                                                 <span class="username"><a href="#">${post.farmer}</a></span>
                                             <span class="description">${post.date_posted}</span>
                                             <br>
-                                            <c:if test="${post.prob_id != ""}">
+                                            <c:if test="${post.prob_id != ''}">
                                                 <span class="username">Problem: ${post.problem_name}</span>
                                             </c:if>
-                                            <c:if test="${post.recom_id != ""}">
+                                            <c:if test="${post.recom_id != ''}">
                                                 <span class="username">Recommendation ${post.recommendation_name}</span>
                                             </c:if>
                                             <div>

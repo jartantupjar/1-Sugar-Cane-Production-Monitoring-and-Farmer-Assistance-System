@@ -294,7 +294,34 @@ public class ProductionDB {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select ROUND(avg(actual),2) as avg from weeklyestimate where year<2017 and district=?;";
+//            String query = "select Round(avg(t1.sum),2) as avg from (select sum(tons_cane) as sum from historicalproduction hp where year<? and district=? group by hp.year,hp.municipality) t1 ;";
+            String query = "select Round(avg(t1.sum),2) as avg from (select sum(tons_cane) as sum from historicalproduction hp where district=? group by hp.year,hp.municipality) t1 ;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+//            pstmt.setInt(1, curyr);
+            pstmt.setString(1, district);
+            ResultSet rs = pstmt.executeQuery();
+            String production = null;
+
+            if (rs.next()) {
+                production = rs.getString("avg");
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+
+            return production;
+        } catch (SQLException ex) {
+            Logger.getLogger(CropEstimateDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
+    public String getDistrictProductionAvgTest2Brgy(int curyr, String district) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+//            String query = "select Round(avg(t1.sum),2) as avg from (select sum(tons_cane) as sum from historicalproduction hp where year<? and district=? group by hp.year,hp.municipality) t1 ;";
+            String query = "select Round(avg(t1.sum),2) as avg from (select sum(tons_cane) as sum from historicalproduction hp where district=? group by hp.year,hp.barangay) t1 ;";
             PreparedStatement pstmt = conn.prepareStatement(query);
 //            pstmt.setInt(1, curyr);
             pstmt.setString(1, district);
@@ -917,6 +944,26 @@ public class ProductionDB {
         for (int i = 0; i < categ.size(); i++) {
             String district = "TARLAC";
             String average = getDistrictProductionAvgTest2(categ.get(i), district);
+            if (average == null) {
+                mslist.add("0");
+            } else {
+                mslist.add(average);
+            }
+
+        }
+        return mslist;
+    }
+    public ArrayList<String> viewDistrictAvgProdBrgySummary() {
+        ArrayList<String> mslist = new ArrayList<>();
+        CalendarDB caldb = new CalendarDB();
+        ArrayList<Calendar> calist = caldb.getCurrentYearDetails();
+        int cropyr = calist.get(0).getYear();
+        
+        ArrayList<Integer> categ = getDistinctHistProdYrsASC(cropyr);
+
+        for (int i = 0; i < categ.size(); i++) {
+            String district = "TARLAC";
+            String average = getDistrictProductionAvgTest2Brgy(categ.get(i), district);
             if (average == null) {
                 mslist.add("0");
             } else {
