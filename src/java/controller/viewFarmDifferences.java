@@ -69,10 +69,18 @@ public class viewFarmDifferences extends BaseServlet {
               dalist2.addAll(list);
         ArrayList<compRecommendation>comprec= farmdb.getSimilarRecommendations(farm,dalist);
         ArrayList<compProblems>compProb= farmdb.getSimilarProblems(farm,dalist2);
+        
+      
+       
+       
          session.setAttribute("flist",list);
          session.setAttribute("farm",farm);
          session.setAttribute("comprec",comprec);
          session.setAttribute("comprob",compProb);
+          fixedRecDB frb = new fixedRecDB();
+       ArrayList<Recommendation> fct = new ArrayList<Recommendation>();
+       fct = frb.viewRecList();
+         session.setAttribute("darecs",fct);
          
          
             RequestDispatcher rd = context.getRequestDispatcher("/viewComparison.jsp");
