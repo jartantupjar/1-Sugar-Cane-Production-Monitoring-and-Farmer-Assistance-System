@@ -869,12 +869,12 @@ comparison page add current vs historical details(past 2yrs)
                                     <div class="box-body ">
                                         <table id="selecttable" class="table table-hover table-bordered table-responsive">
                                             <tbody>
-                                                <tr>   <td><input type="checkbox" style="width: 16; height: 16" value="${farm.id}" name="farmid[]" class="msgCheckbox pull-left"></td>
+                                                <tr>   <td><input type="checkbox" style="width: 16; height: 16" value="${farm.id}" name="farmid[]" class="msgCheckbox pull-left" checked></td>
                                                     <td>Farm : ${farm.id} </td> 
                                                 </tr>
                                                 <c:forEach var="flow" items="${flist}">
                                                     <tr>
-                                                        <td><input type="checkbox" style="width: 16; height: 16" value="${flow.id}" name="farmid[]" class="msgCheckbox pull-left"></td>
+                                                        <td><input type="checkbox" style="width: 16; height: 16" value="${flow.id}" name="farmid[]" class="msgCheckbox pull-left" checked></td>
                                                         <td>Farm : ${flow.id} </td> 
                                                     </tr>
                                                 </c:forEach> 
@@ -897,22 +897,22 @@ comparison page add current vs historical details(past 2yrs)
                                 <button class="btn btn-app btn-linkedin atools" name="atools" id="crec" value="crec">
                                     <i class="fa fa-edit" ></i> Create Recommendations
                                 </button>
-                                <button class="btn btn-app btn-linkedin atools" name="atools" id="srec" value="srec">
+<!--                                <button class="btn btn-app btn-linkedin atools" name="atools" id="srec" value="srec">
                                     <i class="fa fa-edit" ></i> Send Related Recommendations
-                                </button>
-                                <button class="btn btn-app btn-linkedin atools" name="atools" id="srec" value="srec">
+                                </button>-->
+                                <button class="btn btn-app btn-linkedin atools" name="atools" id="srec" value="vrec">
                                     <i class="fa fa-edit" ></i> Send Recommendations
                                 </button>
-                                <button class="btn btn-app btn-linkedin atools" name="atools" id="sorec" value="sorec">
+<!--                                <button class="btn btn-app btn-linkedin atools" name="atools" id="sorec" value="sorec">
                                     <i class="fa fa-edit" ></i> Send Other Recommendations
-                                </button>
+                                </button>-->
                                 <button class="btn btn-app btn-linkedin atools" name="atools" id="dprob" value="dprob">
                                     <i class="fa fa-edit" ></i> Determine Problem
                                 </button>
 
                             </div>
 
-                        </form>
+                     
 
                         <div class="col-md-6" > 
 
@@ -939,7 +939,7 @@ comparison page add current vs historical details(past 2yrs)
                                   <c:if test="${not empty darecs}">
                                        <c:forEach items="${darecs}" var="rec" >
                                            <tr>
-                                       <td><input type="checkbox" name="id[]" class="checkbox" id="buttonClick" value="${rec.id}"> </td>
+                                               <td><input type="checkbox" name="recsid[]" class="checkbox" id="buttonClick" value="${rec.id}"> </td>
                                        <td><c:out value="${rec.recommendation_name}"/></td>
                                        <td><c:out value="${rec.type}"/></td>
                                        <td><c:out value="${rec.phase}"/></td>
@@ -958,7 +958,8 @@ comparison page add current vs historical details(past 2yrs)
                             </div>
 
                         </div>
-                        <div class="col-md-6" > 
+                        
+                        <div class="col-md-6"> 
                                 <div class="box box-info">
                                 <div class="box-header">
                                     <h1 class="box-title">Selected Recommendations: </h1>
@@ -990,6 +991,8 @@ comparison page add current vs historical details(past 2yrs)
 
 
                     </div>
+                                                </form>
+                                                
                 </section>
 
             </div>
@@ -1091,6 +1094,27 @@ comparison page add current vs historical details(past 2yrs)
                     //}
 
                 });
+                var table1=$('#finalrecs');
+                    $('#frm-FarmDiff').on('submit', function (e) {
+                var form = this;
+
+                // Iterate over all checkboxes in the table
+                table1.$('input[type="checkbox"]').each(function () {
+                    // If checkbox doesn't exist in DOM
+                    if (!$.contains(document, this)) {
+                        // If checkbox is checked
+                        if (this.checked) {
+                            // Create a hidden element 
+                            $(form).append(
+                                    $('<input>')
+                                    .attr('type', 'hidden')
+                                    .attr('name', this.name)
+                                    .val(this.value)
+                                    );
+                        }
+                    }
+                });
+            });
 
             });
         </script>

@@ -6,7 +6,9 @@
 package controller;
 
 import db.FarmsDB;
+import db.fixedRecDB;
 import entity.Farm;
+import entity.Recommendation;
 import entity.compRecommendation;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -42,6 +44,8 @@ public class viewSendRecObserv extends HttpServlet {
             String paramName;
             ArrayList<String> list = new ArrayList<String>();
                 ArrayList<String> allist = new ArrayList<String>();
+                ArrayList<String> recslist = new ArrayList<String>();
+                
             while (parameterNames.hasMoreElements()) {
                  paramName = parameterNames.nextElement();
                  System.out.println(paramName);
@@ -55,6 +59,12 @@ public class viewSendRecObserv extends HttpServlet {
                 for(int i=0;i<request.getParameterValues(paramName).length;i++){
                      allist.add(request.getParameterValues(paramName)[i]);
                  System.out.println(request.getParameterValues(paramName)[i]+ " NIGGAGANGIAIGGNGIG");
+                }
+
+        }else if (paramName.startsWith("recsid")) {
+                for(int i=0;i<request.getParameterValues(paramName).length;i++){
+                     recslist.add(request.getParameterValues(paramName)[i]);
+                 System.out.println(request.getParameterValues(paramName)[i]+ "ALLMYRECS now get recs");
                 }
 
         }
@@ -71,6 +81,14 @@ public class viewSendRecObserv extends HttpServlet {
               session.setAttribute("allid", allist);
             }else if(values.equals("sorec")){
                 rd = context.getRequestDispatcher("/sendRecommendations.jsp");
+            }else if(values.equals("vrec")){
+                  rd = context.getRequestDispatcher("/validateRecommendations.jsp");
+                  fixedRecDB fixdb= new fixedRecDB();
+                  ArrayList<Recommendation> recs=null;
+                  recs=fixdb.viewAllRecDetails(recslist);
+               
+                  //convert recslist to recommendations
+                  session.setAttribute("darecs", recs);
             }else{
                 rd = context.getRequestDispatcher("/determineProblem.jsp"); 
             }

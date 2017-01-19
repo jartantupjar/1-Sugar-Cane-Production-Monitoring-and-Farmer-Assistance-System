@@ -160,6 +160,7 @@ public class fixedRecDB {
         return null;
     }
 
+    
     public ArrayList<FarmRecTable> viewFarmRecTable(int id) {
         try {
             CalendarDB caldb= new CalendarDB();
@@ -242,7 +243,15 @@ public class fixedRecDB {
         }
         return null;
     }
-
+public ArrayList<Recommendation> viewAllRecDetails(ArrayList<String> list){
+    ArrayList<Recommendation> allrecs=new ArrayList<>();
+   for(int i=0;i<list.size();i++){
+       allrecs.add(viewRecDetails(Integer.parseInt(list.get(i))));
+   }
+   
+   return allrecs;
+    
+}
     public Recommendation viewRecDetails(int id) {
         try {
             // put functions here : previous week production, this week production
