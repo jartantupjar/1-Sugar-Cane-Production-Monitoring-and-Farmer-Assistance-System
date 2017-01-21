@@ -858,9 +858,179 @@ comparison page add current vs historical details(past 2yrs)
 
                         </div>
 
-
                         <form id="frm-FarmDiff" action="viewSendRecObserv">
-                            <div class="col-md-offset-9 col-md-4">
+                            <div class="col-md-offset-5 col-sm-3 ">
+                                <button id="createRecs" class="btn btn-info btn-block" name="atools" id="crec" value="crec" type="submit" style="height: 6%;">Create Recommendations</button>
+                                <button id="viewRecs" class="btn btn-success btn-block" type="button" style="height: 6%;">Send Recommendations</button>
+                                <button id="viewProbs" class="btn btn-danger btn-block" type="button" style="height: 6%;">Report Problems</button>
+                            </div>   
+
+
+
+
+
+
+
+
+
+
+
+
+                            <div class="col-md-12 hidden" id="recBlock">
+                                  <br>
+                            <h1> Send Recommendations</h1>
+                                <div class="col-md-6" > 
+
+                                    <div class="box box-info">
+                                        <div class="box-header">
+                                            <h1 class="box-title">All Recommendations: </h1>
+
+                                        </div>
+
+                                        <div class="box-body ">
+
+                                            <table id="allrecs" class="table  display table-hover pull-right" cellspacing="0" width="100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th>Recommendation</th>
+                                                        <th>Type</th>
+                                                        <th>Phase</th>
+                                                        <th>More Info</th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <c:if test="${not empty darecs}">
+                                                        <c:forEach items="${darecs}" var="rec" >
+                                                            <tr>
+                                                                <td><input type="checkbox" name="recsid[]" class="checkbox" id="buttonClick" value="${rec.id}"> </td>
+                                                                <td><c:out value="${rec.recommendation_name}"/></td>
+                                                                <td><c:out value="${rec.type}"/></td>
+                                                                <td><c:out value="${rec.phase}"/></td>
+                                                                <td><a href="viewRecDetails?id=${rec.id}" target="_blank" class="btn btn-primary text-center">...</a></td>
+                                                            </tr>
+                                                        </c:forEach>
+                                                    </c:if>
+                                                </tbody>
+                                            </table>
+
+
+
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-6"> 
+                                    <div class="box box-info">
+                                        <div class="box-header">
+                                            <h1 class="box-title">Selected Recommendations: </h1>
+
+                                        </div>
+
+                                        <div class="box-body ">
+                                            <table id="finalrecs" class="table  display table-hover pull-right" cellspacing="0" width="100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th>Recommendation</th>
+                                                        <th>Type</th>
+                                                        <th>Phase</th>
+                                                        <th>More Info</th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    
+
+                                </div>
+                            </div>
+                            <div class="col-md-12 hidden" id="probBlock">
+                                  <br>
+                            <h1> Report Problems</h1>
+                                <div class="col-md-6" > 
+
+                                    <div class="box box-info">
+                                        <div class="box-header">
+                                            <h1 class="box-title">All Problems: </h1>
+
+                                        </div>
+
+                                        <div class="box-body ">
+
+                                            <table id="allprobs" class="table  display table-hover pull-right" cellspacing="0" width="100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th>Problems</th>
+                                                        <th>Type</th>
+                                                        <th>Phase</th>
+                                                        <th>More Info</th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <c:if test="${not empty daprobs}">
+                                                        <c:forEach items="${daprobs}" var="prob" >
+                                                            <tr>
+                                                                <td><input type="checkbox" name="probsid[]" class="checkbox" id="buttonClick" value="${prob.prob_id}"> </td>
+                                                                <td><c:out value="${prob.prob_name}"/></td>
+                                                                <td><c:out value="${prob.type}"/></td>
+                                                                <td><c:out value="${prob.phase}"/></td>
+                                                                <td><a href="viewProbDetails?id=${prob.prob_id}" target="_blank" class="btn btn-primary text-center">...</a></td>
+                                                            </tr>
+                                                        </c:forEach>
+                                                    </c:if>
+                                                </tbody>
+                                            </table>
+
+
+
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-6"> 
+                                    <div class="box box-info">
+                                        <div class="box-header">
+                                            <h1 class="box-title">Selected Problems: </h1>
+
+                                        </div>
+
+                                        <div class="box-body ">
+                                            <table id="finalprobs" class="table  display table-hover pull-right" cellspacing="0" width="100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th>Problems</th>
+                                                        <th>Type</th>
+                                                        <th>Phase</th>
+                                                        <th>More Info</th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    
+
+                                </div>
+                            </div>
+                            <div class="col-md-offset-9 col-md-4 hidden" id="checkBlock">
                                 <input  style="width: 16; height: 16" value="${farm.id}" name="allid[]" class="form-control hidden">
                                 <c:forEach var="flow" items="${flist}">
                                     <input  style="width: 16; height: 16" value="${flow.id}" name="allid[]" class="form-control hidden">
@@ -880,119 +1050,26 @@ comparison page add current vs historical details(past 2yrs)
                                                 </c:forEach> 
                                             </tbody>
                                         </table>
-
-
                                     </div>
                                 </div>
                             </div>
-
-
-
-
-
-
                             <div class="col-md-offset-2 col-md-7 text-center">
-
-
-                                <button class="btn btn-app btn-linkedin atools" name="atools" id="crec" value="crec">
+                                <button class="btn btn-app btn-linkedin atools hidden" name="atools" id="crec" value="crec">
                                     <i class="fa fa-edit" ></i> Create Recommendations
                                 </button>
-<!--                                <button class="btn btn-app btn-linkedin atools" name="atools" id="srec" value="srec">
-                                    <i class="fa fa-edit" ></i> Send Related Recommendations
-                                </button>-->
-                                <button class="btn btn-app btn-linkedin atools" name="atools" id="srec" value="vrec">
+                                <button class="btn btn-app btn-linkedin atools hidden" name="atools" id="srec" value="vrec">
                                     <i class="fa fa-edit" ></i> Send Recommendations
                                 </button>
-<!--                                <button class="btn btn-app btn-linkedin atools" name="atools" id="sorec" value="sorec">
-                                    <i class="fa fa-edit" ></i> Send Other Recommendations
-                                </button>-->
-                                <button class="btn btn-app btn-linkedin atools" name="atools" id="dprob" value="dprob">
-                                    <i class="fa fa-edit" ></i> Determine Problem
+                                <button class="btn btn-app btn-linkedin atools hidden" name="atools" id="dprob" value="dprob">
+                                    <i class="fa fa-edit" ></i> Report Problems
                                 </button>
-
+                                <input class="btn btn-app btn-twitter" type="button" value="Back" 
+                                           onClick="history.go(-1);
+                                                   return true;"> 
                             </div>
 
-                     
+                        </form>
 
-                        <div class="col-md-6" > 
-
-                            <div class="box box-info">
-                                <div class="box-header">
-                                    <h1 class="box-title">All Recommendations: </h1>
-
-                                </div>
-
-                                <div class="box-body ">
-
-                                    <table id="allrecs" class="table  display table-hover pull-right" cellspacing="0" width="100%">
-                                        <thead>
-                                            <tr>
-                                                <th></th>
-                                                <th>Recommendation</th>
-                                                <th>Type</th>
-                                                <th>Phase</th>
-                                                <th>More Info</th>
-
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                  <c:if test="${not empty darecs}">
-                                       <c:forEach items="${darecs}" var="rec" >
-                                           <tr>
-                                               <td><input type="checkbox" name="recsid[]" class="checkbox" id="buttonClick" value="${rec.id}"> </td>
-                                       <td><c:out value="${rec.recommendation_name}"/></td>
-                                       <td><c:out value="${rec.type}"/></td>
-                                       <td><c:out value="${rec.phase}"/></td>
-                                       <td><a href="viewRecDetails?id=${rec.id}" target="_blank" class="btn btn-primary text-center">...</a></td>
-                                           </tr>
-                                           </c:forEach>
-                                           </c:if>
-                                        </tbody>
-                                    </table>
-
-                                    
-
-
-                                </div>
-
-                            </div>
-
-                        </div>
-                        
-                        <div class="col-md-6"> 
-                                <div class="box box-info">
-                                <div class="box-header">
-                                    <h1 class="box-title">Selected Recommendations: </h1>
-
-                                </div>
-
-                                    <div class="box-body ">
-                                        <table id="finalrecs" class="table  display table-hover pull-right" cellspacing="0" width="100%">
-                                        <thead>
-                                            <tr>
-                                                <th></th>
-                                                <th>Recommendation</th>
-                                                <th>Type</th>
-                                                <th>Phase</th>
-                                                <th>More Info</th>
-
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-  
-                                        </tbody>
-                                    </table>
-                                        
-                                    </div>
-                            </div>
-                        <input class="btn btn-success pull-right" type="button" value="Back" 
-                               onClick="history.go(-1);
-                                       return true;"> 
-
-
-                    </div>
-                                                </form>
-                                                
                 </section>
 
             </div>
@@ -1015,12 +1092,11 @@ comparison page add current vs historical details(past 2yrs)
         <script src="dist/js/app.min.js"></script>
 
         <script type="text/javascript">
-                                   $(function () {
-                                       $(".select2").select2();
-                                   });
+                                               $(function () {
+                                                   $(".select2").select2();
+                                               });
         </script>
-        <script type="text/javascript">
-            $(function () {
+        <script type="text/javascript">             $(function () {
                 $('.box-profile').slimScroll({
                     height: '420px',
                     alwaysVisible: true
@@ -1041,9 +1117,7 @@ comparison page add current vs historical details(past 2yrs)
                     }
 
                 }
-                for (var b = 0; b < checkedValue.length; b++) {
-                    console.log(checkedValue[b] + "+" + b);
-                }
+
 
 
 
@@ -1051,14 +1125,35 @@ comparison page add current vs historical details(past 2yrs)
         </script>
         <script src="plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+        <script>  $(document).ready(function () {
+
+                $("#viewRecs").on("click", function () {
+                    $('#recBlock').removeClass('hidden');
+                    $('#checkBlock').removeClass('hidden');
+                    $('#srec').removeClass('hidden');
+                    $('#dprob').addClass('hidden');
+                    $('#viewRecs').addClass('hidden');
+                    $('#viewProbs').removeClass('hidden');
+                    $('#probBlock').addClass('hidden');
+                    
+                });
+
+                $("#viewProbs").on("click", function () {
+                    $('#probBlock').removeClass('hidden');
+                    $('#checkBlock').removeClass('hidden');
+                    $('#dprob').removeClass('hidden');
+                     $('#viewRecs').removeClass('hidden');
+                    $('#viewProbs').addClass('hidden');
+                    $('#srec').addClass('hidden');
+                    $('#recBlock').addClass('hidden');
+                });
+            });
+        </script>
         <script>
             $(document).ready(function () {
 
 
                 var table = $('#allrecs').DataTable({
-                    
-                  
-                   
                     'order': [[1, 'asc']]
                             //      ,
                             //       'rowCallback': function(row, data, dataIndex){
@@ -1073,9 +1168,9 @@ comparison page add current vs historical details(past 2yrs)
                             //      }     
 
                 });
-                
-                 
-              
+
+
+
                 $('body').on('click', '#allrecs tbody tr td input.checkbox', function () {
                     if ($(this.checked)) {
 
@@ -1089,32 +1184,95 @@ comparison page add current vs historical details(past 2yrs)
                     //if( $(this).attr('checked')){
                     var row = $(this).closest('tr').clone();
                     table.row.add(row).draw();
-                
+
                     $(this).closest('tr').remove();
                     //}
 
                 });
-                var table1=$('#finalrecs');
-                    $('#frm-FarmDiff').on('submit', function (e) {
-                var form = this;
+                var table1 = $('#finalrecs');
+                $('#frm-FarmDiff').on('submit', function (e) {
+                    var form = this;
 
-                // Iterate over all checkboxes in the table
-                table1.$('input[type="checkbox"]').each(function () {
-                    // If checkbox doesn't exist in DOM
-                    if (!$.contains(document, this)) {
-                        // If checkbox is checked
-                        if (this.checked) {
-                            // Create a hidden element 
-                            $(form).append(
-                                    $('<input>')
-                                    .attr('type', 'hidden')
-                                    .attr('name', this.name)
-                                    .val(this.value)
-                                    );
+                    // Iterate over all checkboxes in the table
+                    table1.$('input[type="checkbox"]').each(function () {
+                        // If checkbox doesn't exist in DOM
+                        if (!$.contains(document, this)) {
+                            // If checkbox is checked
+                            if (this.checked) {
+                                // Create a hidden element 
+                                $(form).append(
+                                        $('<input>')
+                                        .attr('type', 'hidden')
+                                        .attr('name', this.name)
+                                        .val(this.value)
+                                        );
+                            }
                         }
-                    }
+                    });
                 });
+
             });
+        </script>
+        <script>
+            $(document).ready(function () {
+
+
+                var table2 = $('#allprobs').DataTable({
+                    'order': [[1, 'asc']]
+                            //      ,
+                            //       'rowCallback': function(row, data, dataIndex){
+                            //         // Get row ID
+                            //       var rowId = data[0];
+                            //       // alert(rowId);
+                            //         // If row ID is in the list of selected row IDs
+                            //         if($.inArray(rowId, rows_selected) !== -1){
+                            //            $(row).find('input[type="checkbox"]').prop('checked', true);
+                            //            $(row).addClass('selected');
+                            //         }
+                            //      }     
+
+                });
+
+
+
+                $('body').on('click', '#allprobs tbody tr td input.checkbox', function () {
+                    if ($(this.checked)) {
+
+                        var row = $(this).closest('tr').clone();
+                        $('#finalprobs tbody').append(row);
+                        table2.row(this.closest('tr')).remove().draw();
+                    }
+
+                });
+                $('body').on('click', '#finalprobs tbody tr td input.checkbox', function () {
+                    //if( $(this).attr('checked')){
+                    var row = $(this).closest('tr').clone();
+                    table2.row.add(row).draw();
+                    $(this).closest('tr').remove();
+                    //}
+
+                });
+                var table3 = $('#finalprobs');
+                $('#frm-FarmDiff').on('submit', function (e) {
+                    var form = this;
+
+                    // Iterate over all checkboxes in the table
+                    table3.$('input[type="checkbox"]').each(function () {
+                        // If checkbox doesn't exist in DOM
+                        if (!$.contains(document, this)) {
+                            // If checkbox is checked
+                            if (this.checked) {
+                                // Create a hidden element 
+                                $(form).append(
+                                        $('<input>')
+                                        .attr('type', 'hidden')
+                                        .attr('name', this.name)
+                                        .val(this.value)
+                                        );
+                            }
+                        }
+                    });
+                });
 
             });
         </script>

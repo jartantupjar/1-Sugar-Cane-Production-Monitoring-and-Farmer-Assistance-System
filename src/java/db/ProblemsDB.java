@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -58,7 +58,48 @@ public class ProblemsDB {
         }
         return null;
     }
+    public ArrayList<Problems> viewAllProblems() {
+        try {
+            // put functions here : previous week production, this week production
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT p.id, p.name,p.description,p.type,p.phase from problems p;";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            ArrayList<Problems> pT = null;
+            Problems p;
+            if (rs.next()) {
+                pT = new ArrayList<Problems>();
+                do {
+                    p = new Problems();
+                    p.setProb_id(rs.getInt("id"));
+                    p.setProb_name(rs.getString("name"));
+                    p.setProb_details(rs.getString("description"));
+                    p.setType(rs.getString("type"));
+                    p.setPhase(rs.getString("phase"));
+               
+                    pT.add(p);
+                } while (rs.next());
+            }
+            rs.close();
+            stmt.close();
+            conn.close();
 
+            return pT;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProblemsDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public ArrayList<Problems> viewSelectedProblems(ArrayList<String> list){
+         ArrayList<Problems> problems=new ArrayList<>();
+        for(int i=0; i<list.size();i++){
+            problems.add(getProblemsDetails(Integer.parseInt(list.get(i))));
+        }
+        return problems;
+    }
+    
     public ArrayList<Recommendation> getAllSolutions(int prob_id) {
         try {
             // put functions here : previous week production, this week production
@@ -171,7 +212,7 @@ public class ProblemsDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select p.id, p.name, p.description,p.type, count(pf.Fields_id) as counter from problems p join `problems-fields` pf on p.id = pf.Problems_id where p.id = ?  ;";
+            String query = "select p.id, p.name, p.description,p.type,p.phase,count(pf.Fields_id) as counter from problems p join `problems-fields` pf on p.id = pf.Problems_id where p.id = ?  ;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
@@ -183,6 +224,7 @@ public class ProblemsDB {
                     p.setProb_name(rs.getString("name"));
                     p.setProb_details(rs.getString("description"));
                     p.setType(rs.getString("type"));
+                    p.setPhase(rs.getString("phase"));
                     p.setTotalFarms(rs.getInt("counter"));
                 } while (rs.next());
             }
