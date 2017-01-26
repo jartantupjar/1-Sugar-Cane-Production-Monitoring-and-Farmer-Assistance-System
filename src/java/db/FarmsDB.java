@@ -1462,10 +1462,15 @@ public ArrayList<String> getAllCurProdDetbyTags(ArrayList<String> list, int id,i
             System.out.println("***loop starts here***");
             for (int i = 0; i < reclist.size(); i++) {
                 System.out.println(reclist.get(i).getRecommendation_name() + ":post rec name");
-                for (int b = 0; b < reclist.get(i).getFarms().size(); b++) {
-                    System.out.println(reclist.get(i).getFarms().get(b) + "farm");
-
-                }
+                fixedRecDB recdb= new fixedRecDB();
+                // SETS THE LIST OF PROBLEMS THAT THE RECOMMENDATION IS LINKED TO(IF THERE IS)
+               reclist.get(i).setProblist(recdb.viewProbRecTable(reclist.get(i).getId()));
+                
+                
+//                for (int b = 0; b < reclist.get(i).getFarms().size(); b++) {
+//                    System.out.println(reclist.get(i).getFarms().get(b) + "farm");
+//
+//                }
             }
         }
 
@@ -1551,6 +1556,9 @@ public ArrayList<String> getAllCurProdDetbyTags(ArrayList<String> list, int id,i
             System.out.println("***loop starts here***");
             for (int i = 0; i < reclist.size(); i++) {
                 System.out.println(reclist.get(i).getProb_name() + ":post prob name");
+                ProblemsDB probdb=new ProblemsDB();
+                // CODE FOR ADDING SOLUTIONS FOR THE PROBLEM
+                reclist.get(i).setReclist(probdb.getAllSolutions(reclist.get(i).getProb_id()));
                 for (int b = 0; b < reclist.get(i).getFarms().size(); b++) {
                     System.out.println(reclist.get(i).getFarms().get(b) + "farm");
 

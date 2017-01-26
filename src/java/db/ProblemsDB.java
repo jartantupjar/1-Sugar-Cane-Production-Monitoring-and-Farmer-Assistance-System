@@ -105,7 +105,7 @@ public class ProblemsDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT * FROM `recommendations-problems` where Problems_id = ?;";
+            String query = "SELECT r.id,r.type,r.recommendation FROM `recommendations-problems` rp join recommendations r on rp.recommendations_id=r.id where problems_id = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, prob_id);
             ResultSet rs = pstmt.executeQuery();
@@ -115,7 +115,8 @@ public class ProblemsDB {
                 rT = new ArrayList<Recommendation>();
                 do {
                     r = new Recommendation();
-                    r.setId(rs.getInt("Recommendations_id"));
+                    r.setId(rs.getInt("id"));
+                    r.setRecommendation_name(rs.getString("recommendation"));
                     rT.add(r);
 
                 } while (rs.next());

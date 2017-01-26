@@ -14,6 +14,7 @@ import java.util.ArrayList;
  */
 public class compRecommendation {
     private ArrayList<Integer> farms;
+    private ArrayList<Problems> problist;
      private Integer id , counter;
     private int config;
     private double trigger_num,duration;
@@ -229,5 +230,19 @@ public class compRecommendation {
      */
     public void setFarms(ArrayList<Integer> farms) {
         this.farms = farms;
+    }
+
+    /**
+     * @return the problist
+     */
+    public ArrayList<Problems> getProblist() {
+        return problist;
+    }
+
+    /**
+     * @param problist the problist to set
+     */
+    public void setProblist(ArrayList<Problems> problist) {
+        this.problist = problist;
     }
 }

@@ -617,6 +617,7 @@ comparison page add current vs historical details(past 2yrs)
                                                 <thead><tr>
                                                         <th>Problem</th>
                                                         <th>Phase</th>
+                                                        <th>Solutions</th>
                                                         <th><c:out value="${farm.id}"/></th>
                                                             <c:forEach var="flow" items="${flist}">
 
@@ -630,7 +631,18 @@ comparison page add current vs historical details(past 2yrs)
                                                             <tr>
                                                                 <th><c:out value="${flow.prob_name}"/></th>
                                                                 <td><c:out value="${flow.phase}"/></td>
-
+                                                                <c:choose>
+                                                                    <c:when test='${not empty flow.reclist}'>
+                                                                        <td>
+                                                                            <c:forEach items="${flow.reclist}" var="reclist">
+                                                                                <a href="viewRecDetails?id=${reclist.id}" target="_blank">${reclist.recommendation_name}</a><br></br>
+                                                                            </c:forEach>
+                                                                        </td>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <td></td>
+                                                                    </c:otherwise>
+                                                                </c:choose>
                                                                 <c:forEach var="fly" items="${flow.farms}">
 
                                                                     <c:choose>
@@ -662,6 +674,7 @@ comparison page add current vs historical details(past 2yrs)
                                                 <thead><tr>
                                                         <th>Recommendation</th>
                                                         <th>Phase</th>
+                                                        <th>Problems Targeted</th>
                                                         <th><c:out value="${farm.id}"/></th>
                                                             <c:forEach var="flow" items="${flist}">
 
@@ -676,6 +689,18 @@ comparison page add current vs historical details(past 2yrs)
 
                                                                 <th class="pull-left"><c:out value="${flow.recommendation_name}"/></th>
                                                                 <td class=""><c:out value="${flow.phase}"/></td>
+                                                                <c:choose>
+                                                                    <c:when test='${not empty flow.problist}'>
+                                                                        <td>
+                                                                            <c:forEach items="${flow.problist}" var="problist">
+                                                                                <a href="viewProbDetails?id=${problist.prob_id}" target="_blank"> ${problist.prob_name}</a><br></br>
+                                                                            </c:forEach>
+                                                                        </td>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <td></td>
+                                                                    </c:otherwise>
+                                                                </c:choose>
                                                                 <c:forEach var="fly" items="${flow.farms}">
 
                                                                     <c:choose>
@@ -877,8 +902,8 @@ comparison page add current vs historical details(past 2yrs)
 
 
                             <div class="col-md-12 hidden" id="recBlock">
-                                  <br>
-                            <h1> Send Recommendations</h1>
+                                <br>
+                                <h1> Send Recommendations</h1>
                                 <div class="col-md-6" > 
 
                                     <div class="box box-info">
@@ -949,13 +974,13 @@ comparison page add current vs historical details(past 2yrs)
                                             </table>
                                         </div>
                                     </div>
-                                    
+
 
                                 </div>
                             </div>
                             <div class="col-md-12 hidden" id="probBlock">
-                                  <br>
-                            <h1> Report Problems</h1>
+                                <br>
+                                <h1> Report Problems</h1>
                                 <div class="col-md-6" > 
 
                                     <div class="box box-info">
@@ -1026,7 +1051,7 @@ comparison page add current vs historical details(past 2yrs)
                                             </table>
                                         </div>
                                     </div>
-                                    
+
 
                                 </div>
                             </div>
@@ -1064,8 +1089,8 @@ comparison page add current vs historical details(past 2yrs)
                                     <i class="fa fa-edit" ></i> Report Problems
                                 </button>
                                 <input class="btn btn-app btn-twitter" type="button" value="Back" 
-                                           onClick="history.go(-1);
-                                                   return true;"> 
+                                       onClick="history.go(-1);
+                                               return true;"> 
                             </div>
 
                         </form>
@@ -1092,9 +1117,9 @@ comparison page add current vs historical details(past 2yrs)
         <script src="dist/js/app.min.js"></script>
 
         <script type="text/javascript">
-                                               $(function () {
-                                                   $(".select2").select2();
-                                               });
+                                           $(function () {
+                                               $(".select2").select2();
+                                           });
         </script>
         <script type="text/javascript">             $(function () {
                 $('.box-profile').slimScroll({
@@ -1135,14 +1160,14 @@ comparison page add current vs historical details(past 2yrs)
                     $('#viewRecs').addClass('hidden');
                     $('#viewProbs').removeClass('hidden');
                     $('#probBlock').addClass('hidden');
-                    
+
                 });
 
                 $("#viewProbs").on("click", function () {
                     $('#probBlock').removeClass('hidden');
                     $('#checkBlock').removeClass('hidden');
                     $('#dprob').removeClass('hidden');
-                     $('#viewRecs').removeClass('hidden');
+                    $('#viewRecs').removeClass('hidden');
                     $('#viewProbs').addClass('hidden');
                     $('#srec').addClass('hidden');
                     $('#recBlock').addClass('hidden');
