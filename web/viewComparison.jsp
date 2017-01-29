@@ -980,7 +980,7 @@ comparison page add current vs historical details(past 2yrs)
                             </div>
                             <div class="col-md-12 hidden" id="probBlock">
                                 <br>
-                                <h1> Report Problems</h1>
+                                <h1> Report Problems</h1><h3>shorten the preselection using phase?</h3>
                                 <div class="col-md-6" > 
 
                                     <div class="box box-info">
