@@ -45,7 +45,7 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                                             <b>Total Fields</b> <a class="pull-right"><c:out value="${munidet.tfields}"/> </a>
                                         </li>
                                         <li class="list-group-item">
-                                            <b>Total Area</b> <a class="pull-right"><c:out value="${munidet.area}"/> </a>
+                                            <b>Total Area(ha)</b> <a class="pull-right"><c:out value="${munidet.area}"/> </a>
                                         </li>
                                         
                                     </ul>
@@ -118,8 +118,8 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                                                 <th>Barangay</th>
                                                 <th># of Farms</th>
                                                 <th>Year</th>
-                                                <th>Total Area</th>
-                                                <th>Production</th>
+                                                <th>Total Area(ha)</th>
+                                                <th>Production(tc)</th>
 <!--                                                <th>Yield</th>-->
                                                 <th>Details</th>
                                         </tr>
@@ -181,7 +181,7 @@ var categ;
             type: 'column'
         },
         title: {
-            text: 'Yearly Production'
+            text: 'Yearly Production (tc)'
         },
        
         xAxis: {

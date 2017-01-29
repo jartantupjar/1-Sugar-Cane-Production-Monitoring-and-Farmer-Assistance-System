@@ -49,14 +49,14 @@
                                         <thead>
                                             <tr>
                                                 <th>Year</th>
-                                                <th>Area</th>
-                                                <th>Rainfall</th>
+                                                <th>Area(ha)</th>
+                                                <th>Rainfall(mm)</th>
                                                 <th>Tiller Count</th>
-                                                <th>Avg Temp</th>
-                                                <th>Actual</th>
-                                                <th>Estimation 1</th>
-                                                <th>Estimation 2</th>
-                                                <th>Estimation 3</th>
+                                                <th>Avg Temp(°C)</th>
+                                                <th>Actual(tc)</th>
+                                                <th>Estimation 1(tc)</th>
+                                                <th>Estimation 2(tc)</th>
+                                                <th>Estimation 3(tc)</th>
                                                 <th>Selection</th>
 
                                             </tr>
@@ -115,7 +115,7 @@
                                     <form action="generateForecast" id="submit_form" method="POST" >
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label class="control-label">Area Harvested
+                                                <label class="control-label">Area Harvested(ha)
                                                     <span class="required" aria-required="true"> * </span>
                                                 </label>
                                                 <div class="">
@@ -124,7 +124,7 @@
                                                 </div>
                                             </div>
                                              <div class="form-group">
-                                                <label class="control-label">Total Production
+                                                <label class="control-label">Total Production(tc)
                                                     <span class="required" aria-required="true"> * </span>
                                                 </label>
                                                 <div class="">
@@ -134,7 +134,7 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label class="control-label">Year Rainfall
+                                                <label class="control-label">Year Rainfall(mm)
                                                     <span class="required" aria-required="true"> * </span>
                                                 </label>
                                                 <div class="">
@@ -151,7 +151,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label">Yearly Temperature
+                                                <label class="control-label">Yearly Temperature(°C)
 
                                                 </label>
                                                 <div class="">
@@ -183,14 +183,14 @@
                                     <table id="testTable" class="table display dataTable table-hover" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
-                                                <th>Area</th>
-                                                <th>Rainfall</th>
+                                                <th>Area(tc)</th>
+                                                <th>Rainfall(mm)</th>
                                                 <th>Tiller Count</th>
-                                                <th>Avg Temp</th>
-                                                <th>Production</th>
-                                                <th>Estimation 1</th>
-                                                <th>Estimation 2</th>
-                                                <th>Estimation 3</th>
+                                                <th>Avg Temp(°C)</th>
+                                                <th>Production(tc)</th>
+                                                <th>Estimation(tc) 1</th>
+                                                <th>Estimation(tc) 2</th>
+                                                <th>Estimation(tc) 3</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -247,10 +247,10 @@
                                             <tr>
                                                 <th>Year</th>
                                                 <th>Week Ending</th>
-                                                <th>Harvest Area</th>
-                                                <th>Rainfall</th>
-                                                <th>Actual Production</th>
-                                                <th>Estimated Production</th>
+                                                <th>Harvest Area(ha)</th>
+                                                <th>Rainfall(mm)</th>
+                                                <th>Actual Production(tc)</th>
+                                                <th>Estimated Production(tc)</th>
                                                 <th>% Difference</th>
                                                 <c:if test="${todayYear >= 2017}">
                                                 <th>Actual LKG</th>
@@ -429,7 +429,7 @@
                                 type: 'column'
                             },
                             title: {
-                                text: 'District Tons Cane Estimate Drilldown'
+                                text: 'District Tons Cane(tc) Estimate Drilldown'
                             },
                             subtitle: {
                                 text: 'Click columns to drill down to single series. Click categories to drill down both.'
