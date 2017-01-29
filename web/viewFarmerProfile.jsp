@@ -79,13 +79,13 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                                     <ul class="list-group list-group-unbordered">
 
                                         <li class="list-group-item">
-                                            <b>Current Production</b> <a class="pull-right"><c:out value="${farmDet.curProd}"/> </a>
+                                            <b>Current Production(tc)</b> <a class="pull-right"><c:out value="${farmDet.curProd}"/> </a>
                                         </li>
                                         <li class="list-group-item">
-                                            <b>Current Area Harvested</b> <a class="pull-right"><c:out value="${farmDet.curHA}"/> </a>
+                                            <b>Current Area Harvested(ha)</b> <a class="pull-right"><c:out value="${farmDet.curHA}"/> </a>
                                         </li>
                                         <li class="list-group-item">
-                                            <b>Current Yield</b>  <a class="pull-right"><c:out value="${farmDet.curYield}"/></a>
+                                            <b>Current Yield(tc/ha)</b>  <a class="pull-right"><c:out value="${farmDet.curYield}"/></a>
                                         </li>
 <!--                                        <li class="list-group-item">
                                             <b>Total Production</b> <a class="pull-right"><c:out value="${farmDet.totalProd}"/> </a>
@@ -100,7 +100,7 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                                             </a>
                                         </li>-->
                                         <li class="list-group-item">
-                                            <b>Total Average Yield (avg(TC/HA))</b> <a class="pull-right"><c:out value="${farmDet.tavgYield}"/> 
+                                            <b>Total Average Yield (tc/ha)</b> <a class="pull-right"><c:out value="${farmDet.tavgYield}"/> 
                                             </a>
                                         </li>
                                     </ul>
@@ -182,11 +182,11 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                                                 <th>id</th>
                                                 <th>Barangay</th>
                                                 <th>Municipality</th>
-                                                <th>Total Area</th>
-                                                <th>Tons Cane</th>
-                                                <th>Harvested Area</th>
+                                                <th>Total Area(ha)</th>
+                                                <th>Tons Cane(tc)</th>
+                                                <th>Harvested Area(ha)</th>
                                                 
-                                                <th>Yield</th>
+                                                <th>Yield(tc/ha)</th>
                                                 <th>% completed</th>
                                                
                                                 <th></th>

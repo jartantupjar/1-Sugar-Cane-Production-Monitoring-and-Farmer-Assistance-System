@@ -55,6 +55,11 @@
                                             <c:out value="${problem.tSolutions}"></c:out>
                                             </a>
                                         </li>
+                                        <li class="list-group-item">
+                                            <b>Description</b> <a class="">
+                                            <c:out value="${problem.prob_details}"></c:out>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>

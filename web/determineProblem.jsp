@@ -37,7 +37,7 @@
                                         
                                         <div class="form-group">
                                             <label>Message</label>
-                                            <p> <textarea type="text" name="msg" id="msg" class="form-control" placeholder="Title of Problem" style="width: 100%"></textarea> </p>
+                                            <p> <textarea type="text" name="msg" id="msg" class="form-control" placeholder="These problems are based on my observed comparison" style="width: 100%"></textarea> </p>
                                         </div>
                                     </div>
 

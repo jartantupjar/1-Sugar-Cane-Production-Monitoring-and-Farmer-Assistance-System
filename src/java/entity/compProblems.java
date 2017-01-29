@@ -19,6 +19,7 @@ public class compProblems {
     private double percent_affected;
     private Date date_updated ,date_created;
      private ArrayList<Integer> farms;
+     private ArrayList<Recommendation> reclist;
 
     /**
      * @return the prob_id
@@ -326,6 +327,20 @@ public class compProblems {
      */
     public void setFarms(ArrayList<Integer> farms) {
         this.farms = farms;
+    }
+
+    /**
+     * @return the reclist
+     */
+    public ArrayList<Recommendation> getReclist() {
+        return reclist;
+    }
+
+    /**
+     * @param reclist the reclist to set
+     */
+    public void setReclist(ArrayList<Recommendation> reclist) {
+        this.reclist = reclist;
     }
 
 }

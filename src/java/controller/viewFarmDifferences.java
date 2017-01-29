@@ -6,6 +6,7 @@
 package controller;
 
 import db.FarmsDB;
+import db.ProblemsDB;
 import db.fixedRecDB;
 import entity.Farm;
 import entity.Problems;
@@ -69,13 +70,30 @@ public class viewFarmDifferences extends BaseServlet {
               dalist2.addAll(list);
         ArrayList<compRecommendation>comprec= farmdb.getSimilarRecommendations(farm,dalist);
         ArrayList<compProblems>compProb= farmdb.getSimilarProblems(farm,dalist2);
+        
+    //Recommendations list
+         fixedRecDB frb = new fixedRecDB();
+       ArrayList<Recommendation> fct = new ArrayList<Recommendation>();
+       fct = frb.viewRecList();
+       
+       //Problems List
+         ProblemsDB prb= new ProblemsDB();
+         ArrayList<Problems> pct = new ArrayList<Problems>();
+         pct= prb.viewAllProblems();
+       
+       
          session.setAttribute("flist",list);
          session.setAttribute("farm",farm);
          session.setAttribute("comprec",comprec);
          session.setAttribute("comprob",compProb);
+         session.setAttribute("darecs",fct);
+         session.setAttribute("daprobs",pct);
+      
          
          
-            RequestDispatcher rd = context.getRequestDispatcher("/viewComparison.jsp");
+        
+         
+        RequestDispatcher rd = context.getRequestDispatcher("/viewComparison.jsp");
 
         rd.forward(request, response);
    

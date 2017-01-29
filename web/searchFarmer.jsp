@@ -44,8 +44,8 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                                                 <th>Farmer</th>
                                                 <th># of Farms</th>
                                                 <th>Year</th>
-                                                <th>Total Area</th>
-                                                <th>Production</th>
+                                                <th>Total Area(ha)</th>
+                                                <th>Production(tc)</th>
                                                 <th>Details</th>
                                         </tr>
                                         </thead>

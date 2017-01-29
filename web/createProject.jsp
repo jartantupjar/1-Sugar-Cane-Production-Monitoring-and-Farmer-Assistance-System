@@ -432,7 +432,7 @@
                     'select': {
                         'style': 'multi'
                     },
-                    'order': [[1, 'asc']]
+                    'order': [[5, 'desc']]
 
                 });
                 $('#frm-example').on('submit', function (e) {
