@@ -1046,7 +1046,17 @@ comparison page add current vs historical details(past 2yrs)
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-
+                                                    <c:if test="${not empty autoprob}">
+                                                        <c:forEach items="${autoprob}" var="prob">
+                                                            <tr>
+                                                                <td><input type="checkbox" name="probsid[]" class="checkbox" id="buttonClick" value="${prob.prob_id}" checked> </td>
+                                                                <td><c:out value="${prob.prob_name}"/></td>
+                                                                <td><c:out value="${prob.type}"/></td>
+                                                                <td><c:out value="${prob.phase}"/></td>
+                                                                <td><a href="viewProbDetails?id=${prob.prob_id}" target="_blank" class="btn btn-primary text-center">...</a></td>
+                                                            </tr>
+                                                        </c:forEach>
+                                                    </c:if>
                                                 </tbody>
                                             </table>
                                         </div>

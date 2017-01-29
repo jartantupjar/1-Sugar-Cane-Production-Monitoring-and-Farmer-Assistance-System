@@ -8,6 +8,7 @@ package db;
 import entity.Calendar;
 import entity.Problems;
 import entity.Recommendation;
+import entity.compProblems;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -24,6 +25,24 @@ import java.util.logging.Logger;
  */
 public class ProblemsDB {
 
+    
+    public ArrayList<Problems> removeSelectedProblems(ArrayList<Problems> orig, ArrayList<compProblems>selected){
+            if (!selected.isEmpty()) {
+            for (int i = 0; i < selected.size(); i++) {
+                for (int j = i; j < orig.size(); j++) {
+                    if (selected.get(i).getProb_id().equals(orig.get(j).getProb_id())) {
+                        orig.remove(j);
+                        j--;
+                    }
+                }
+            }
+        }
+     
+       
+        
+        return orig;
+    }
+    
     public ArrayList<Problems> getProblemsList() {
         try {
             // put functions here : previous week production, this week production
