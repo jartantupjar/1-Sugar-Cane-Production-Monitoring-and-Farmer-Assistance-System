@@ -63,31 +63,51 @@ public class viewFarmDifferences extends BaseServlet {
              }
           }
           ArrayList<Farm> list=farmdb.getAllFieldComp(fids);
-         Farm farm=farmdb.getAllFieldDetails(Integer.parseInt(id));
+         Farm farm=farmdb.getAllFieldDetailsComp(Integer.parseInt(id));
          ArrayList<Farm> dalist= new ArrayList<>();
          ArrayList<Farm> dalist2= new ArrayList<>();
+         ArrayList<Farm> dalist3= new ArrayList<>();
+          Farm farm2= new Farm();
               dalist.addAll(list);
               dalist2.addAll(list);
-        ArrayList<compRecommendation>comprec= farmdb.getSimilarRecommendations(farm,dalist);
-        ArrayList<compProblems>compProb= farmdb.getSimilarProblems(farm,dalist2);
+              dalist3.addAll(list);
+              farm2=farm;
+              
+              //check and cross part
+        ArrayList<compRecommendation>comprec= farmdb.getSimilarRecommendations(farm2,dalist);
+        ArrayList<compProblems>compProb= farmdb.getSimilarProblems(farm2,dalist2);
         
-    //Recommendations list
+    //All Recommendations list
          fixedRecDB frb = new fixedRecDB();
        ArrayList<Recommendation> fct = new ArrayList<Recommendation>();
        fct = frb.viewRecList();
        
-       //Problems List
+       
+        //auto gen problist -(get similar problems)
+          ArrayList<compProblems> autoprob=new ArrayList<compProblems>();
+          autoprob=farmdb.getSimilarProblems(farm2,dalist3);
+          
+          
+       //All Problems List
          ProblemsDB prb= new ProblemsDB();
          ArrayList<Problems> pct = new ArrayList<Problems>();
          pct= prb.viewAllProblems();
        
-       
+          if(!autoprob.isEmpty()){
+            pct=prb.removeSelectedProblems(pct,autoprob);  
+          }
+
+       //remove from all list 
+          
+          
+         
          session.setAttribute("flist",list);
          session.setAttribute("farm",farm);
          session.setAttribute("comprec",comprec);
          session.setAttribute("comprob",compProb);
          session.setAttribute("darecs",fct);
          session.setAttribute("daprobs",pct);
+         session.setAttribute("autoprob",autoprob);
       
          
          

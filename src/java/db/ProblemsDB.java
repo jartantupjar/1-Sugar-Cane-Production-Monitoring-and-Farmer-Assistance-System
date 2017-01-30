@@ -8,6 +8,7 @@ package db;
 import entity.Calendar;
 import entity.Problems;
 import entity.Recommendation;
+import entity.compProblems;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -24,6 +25,24 @@ import java.util.logging.Logger;
  */
 public class ProblemsDB {
 
+    
+    public ArrayList<Problems> removeSelectedProblems(ArrayList<Problems> orig, ArrayList<compProblems>selected){
+            if (!selected.isEmpty()) {
+            for (int i = 0; i < selected.size(); i++) {
+                for (int j = i; j < orig.size(); j++) {
+                    if (selected.get(i).getProb_id().equals(orig.get(j).getProb_id())) {
+                        orig.remove(j);
+                        j--;
+                    }
+                }
+            }
+        }
+     
+       
+        
+        return orig;
+    }
+    
     public ArrayList<Problems> getProblemsList() {
         try {
             // put functions here : previous week production, this week production
@@ -278,7 +297,44 @@ public class ProblemsDB {
         }
         return null;
     }
+public ArrayList<Problems> getFarmProblemDetbyFarmComp(int id) {
+        try {
+            CalendarDB caldb = new CalendarDB();
+            ArrayList<Calendar> calist = caldb.getCurrentYearDetails();
+            Date todayDate = calist.get(0).getTodayDate();
+            // put functions here : previous week production, this week production
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select p.id,p.name,p.type,p.phase,p.description,pf.status from `Problems-Fields` pf join problems p on p.id=pf.problems_id where pf.Fields_id=? and pf.date<=? and pf.status='Active';";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, id);
+            pstmt.setDate(2, todayDate);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<Problems> list = null;
+            if (rs.next()) {
+                list = new ArrayList<>();
+                do {
+                    Problems p = new Problems();
+                    p.setProb_id(rs.getInt("id"));
+                    p.setProb_name(rs.getString("name"));
+                    p.setProb_details(rs.getString("description"));
+                    p.setStatus(rs.getString("status"));
+                    p.setPhase(rs.getString("phase"));
+                    p.setType(rs.getString("type"));
+                    // p.setTotalFarms(rs.getInt("counter"));
+                    list.add(p);
+                } while (rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
 
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProblemsDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     public Problems getAlertDetails(int id) {
         try {
             // put functions here : previous week production, this week production

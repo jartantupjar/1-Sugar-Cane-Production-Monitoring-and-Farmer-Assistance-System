@@ -204,13 +204,39 @@ public class FarmsDB {
 
         return farm;
     }
+    //USES AND GETS ONLY ACTIVE PROBLEMS AND RECOMMENDATIONS
+    public Farm getAllFieldDetailsComp(int fid) {
+        CalendarDB caldb = new CalendarDB();
+        ArrayList<Calendar> calist = caldb.getCurrentYearDetails();
+        int cropyr = calist.get(0).getYear();
+        Farm farm = null;
+        farm = getBasicFieldDetails(fid);
+        farm.setYear(cropyr);
+        // farmproductiondetails
+        fixedRecDB fRecDB = new fixedRecDB();
+
+        ProblemsDB probdb = new ProblemsDB();
+        //added date
+        farm.setRecommendation(fRecDB.viewFarmRecTablebyFarmComparison(fid));
+        //added date
+        farm.setProblems(probdb.getFarmProblemDetbyFarmComp(fid));
+
+        farm.setSoilanalysis(getFieldSoilAnalysis(farm.getId()));
+        farm.setFertilizer(getFieldFertilizers(farm.getId(), cropyr));
+        farm.setTillist(getFieldTillersList(farm.getId(), cropyr));
+        farm.setFertlist(getFieldFertilizersList(farm.getId(), cropyr));
+        farm.setTillers(getFieldTillers(farm.getId(), cropyr));
+        farm.setCropVal(getFieldCropValidation(farm.getId(), cropyr));
+
+        return farm;
+    }
 
     public ArrayList<Farm> getAllFieldComp(ArrayList<String> list) {
         ArrayList<Farm> flist = null;
         if (list != null) {
             flist = new ArrayList<>();
             for (int i = 0; i < list.size(); i++) {
-                Farm farm = getAllFieldDetails(Integer.parseInt(list.get(i)));
+                Farm farm = getAllFieldDetailsComp(Integer.parseInt(list.get(i)));
                 flist.add(farm);
             }
 
@@ -1389,7 +1415,7 @@ public ArrayList<String> getAllCurProdDetbyTags(ArrayList<String> list, int id,i
         list = dalist;
         ArrayList<Recommendation> farmRec = new ArrayList<Recommendation>();
 
-        if (!farmRec.isEmpty()) {
+        if (!farm.getRecommendation().isEmpty()) {
             farmRec.addAll(farm.getRecommendation());
         }
 
@@ -1483,10 +1509,11 @@ public ArrayList<String> getAllCurProdDetbyTags(ArrayList<String> list, int id,i
         list = dalist;
         ArrayList<Problems> farmRec = new ArrayList<Problems>();
 
-        if (!farmRec.isEmpty()) {
+        if (!farm.getProblems().isEmpty()) {
             farmRec.addAll(farm.getProblems());
         }
-
+      
+  
         ArrayList<compProblems> reclist = new ArrayList<>();
 
         for (int i = 0; i < list.size(); i++) {

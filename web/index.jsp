@@ -90,7 +90,9 @@
 
  
    var currentDate='02/02/2015';
-     $("#datepicker").datepicker("setDate", currentDate);
+//     $("#datepicker").datepicker("setDate", currentDate);
+     $("#datepicker").datepicker("setDate",new Date());
+
        $('#datepicker').datepicker({
                     autoclose: true
                 });

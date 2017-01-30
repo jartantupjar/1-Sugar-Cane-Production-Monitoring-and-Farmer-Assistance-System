@@ -72,16 +72,16 @@ on barangay selection
                                             </a>
                                         </li>
                                         <li class="list-group-item">
-                                            <b>Total Area</b> <a class="pull-right">
+                                            <b>Total Area(ha)</b> <a class="pull-right">
                                                 <c:out value="${farm.area}"/></a>
                                         </li>
                                         <li class="list-group-item">
-                                            <b>Production(TC)</b> <a class="pull-right">
+                                            <b>Production(tc)</b> <a class="pull-right">
                                                 <c:out value="${farm.production}"/>
                                             </a>
                                         </li>
                                         <li class="list-group-item">
-                                            <b>Harvested Area</b> <a class="pull-right">
+                                            <b>Harvested Area(ha)</b> <a class="pull-right">
                                                 <c:out value="${farm.totalHa}"/>
                                             </a>
                                         </li>
@@ -139,7 +139,7 @@ on barangay selection
                                             </a>
                                         </li>
                                         <li class="list-group-item">
-                                            <b>Furrow Distance</b> <a class="pull-right">
+                                            <b>Furrow Distance(m)</b> <a class="pull-right">
                                                 <c:out value="${farm.cropVal.furrow_distance}"/>
                                             </a>
                                         </li>
@@ -165,17 +165,17 @@ on barangay selection
                                             </a>
                                         </li>
                                         <li class="list-group-item">
-                                            <b>Stalk Length</b> <a class="pull-right">
+                                            <b>Stalk Length(cm)</b> <a class="pull-right">
                                                 <c:out value="${farm.cropVal.stalk_length}"/>
                                             </a>
                                         </li>
                                         <li class="list-group-item">
-                                            <b>Diameter</b> <a class="pull-right">
+                                            <b>Diameter(mm)</b> <a class="pull-right">
                                                 <c:out value="${farm.cropVal.diameter}"/>
                                             </a>
                                         </li>
                                         <li class="list-group-item">
-                                            <b>Weight</b> <a class="pull-right">
+                                            <b>Weight(kg)</b> <a class="pull-right">
                                                 <c:out value="${farm.cropVal.weight}"/>
                                             </a>
                                         </li>
@@ -213,23 +213,23 @@ on barangay selection
                                         <ul class="list-group list-group-unbordered">
 
                                             <li class="list-group-item">
-                                                <b>PH Level</b> <a class="pull-right">
+                                                <b>PH Level(ph)</b> <a class="pull-right">
                                                     <c:out value="${farm.soilanalysis.ph_lvl}"/></a>
                                             </li>
 
                                             <li class="list-group-item">
-                                                <b>Organic Matter</b> <a class="pull-right">
+                                                <b>Organic Matter(mg)</b> <a class="pull-right">
                                                     <c:out value="${farm.soilanalysis.organic_matter}"/>
                                                 </a>
                                             </li>
                                             <li class="list-group-item">
-                                                <b>Phosphorus</b> <a class="pull-right">
+                                                <b>Phosphorus(mg)</b> <a class="pull-right">
                                                     <c:out value="${farm.soilanalysis.phosphorus}"/>
                                                 </a>
                                             </li>
 
                                             <li class="list-group-item">
-                                                <b>Potassium</b> <a class="pull-right">
+                                                <b>Potassium(mg)</b> <a class="pull-right">
                                                     <c:out value="${farm.soilanalysis.potassium}"/>
                                                 </a>
                                             </li>
@@ -249,8 +249,8 @@ on barangay selection
                                             <thead>
                                                 <tr>
                                                     <th>Fertilizer</th>
-                                                    <th>First Dose</th>
-                                                    <th>Second Dose</th>
+                                                    <th>First Dose(bags)</th>
+                                                    <th>Second Dose(bags)</th>
 
                                                 </tr>
                                             </thead>

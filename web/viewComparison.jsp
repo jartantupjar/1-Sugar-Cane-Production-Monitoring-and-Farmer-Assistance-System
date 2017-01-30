@@ -129,7 +129,7 @@ comparison page add current vs historical details(past 2yrs)
                                                 </c:forEach>
                                             </tr>
                                             <tr>
-                                                <th>Harvest Area(HA)</th>
+                                                <th>Harvest Area(ha)</th>
                                                 <td class="text-blue"><c:out value="${farm.totalHa}"/></td>
                                                 <c:forEach var="flow" items="${flist}">
                                                     <c:choose>
@@ -144,7 +144,7 @@ comparison page add current vs historical details(past 2yrs)
                                                 </c:forEach>
                                             </tr>
                                             <tr>
-                                                <th>Total Area(HA)</th>
+                                                <th>Total Area(ha)</th>
                                                 <td class="text-blue"><c:out value="${farm.area}"/></td>
                                                 <c:forEach var="flow" items="${flist}">
                                                     <c:choose>
@@ -298,7 +298,7 @@ comparison page add current vs historical details(past 2yrs)
                                                         </c:forEach>
                                                     </tr>
                                                     <tr>
-                                                        <th>Furrow Distance</th>
+                                                        <th>Furrow Distance(m)</th>
                                                         <td class="text-blue"><c:out value="${farm.cropVal.furrow_distance}"/></td>
                                                         <c:forEach var="flow" items="${flist}">
                                                             <c:choose>
@@ -368,7 +368,7 @@ comparison page add current vs historical details(past 2yrs)
                                                         </c:forEach>
                                                     </tr>
                                                     <tr>
-                                                        <th>Stalk Length</th>
+                                                        <th>Stalk Length(cm)</th>
                                                         <td class="text-blue"><c:out value="${farm.cropVal.stalk_length}"/></td>
                                                         <c:forEach var="flow" items="${flist}">
                                                             <c:choose>
@@ -382,7 +382,7 @@ comparison page add current vs historical details(past 2yrs)
                                                         </c:forEach>
                                                     </tr>
                                                     <tr>
-                                                        <th>Diameter</th>
+                                                        <th>Diameter(mm)</th>
                                                         <td class="text-blue"><c:out value="${farm.cropVal.diameter}"/></td>
                                                         <c:forEach var="flow" items="${flist}">
                                                             <c:choose>
@@ -396,7 +396,7 @@ comparison page add current vs historical details(past 2yrs)
                                                         </c:forEach>
                                                     </tr>
                                                     <tr>
-                                                        <th>Weight</th>
+                                                        <th>Weight(kg)</th>
                                                         <td class="text-blue"><c:out value="${farm.cropVal.weight}"/></td>
                                                         <c:forEach var="flow" items="${flist}">
                                                             <c:choose>
@@ -430,7 +430,7 @@ comparison page add current vs historical details(past 2yrs)
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <th>PH Level</th>
+                                                        <th>PH Level(ph)</th>
                                                         <td class="text-blue"><c:out value="${farm.soilanalysis.ph_lvl}"></c:out> </td>
 
                                                         <c:forEach var="flow" items="${flist}">
@@ -445,7 +445,7 @@ comparison page add current vs historical details(past 2yrs)
                                                         </c:forEach>
                                                     </tr>
                                                     <tr>
-                                                        <th>Organic Matter</th>
+                                                        <th>Organic Matter(mg)</th>
                                                         <td class="text-blue"><c:out value="${farm.soilanalysis.organic_matter}"/></td>
                                                         <c:forEach var="flow" items="${flist}">
                                                             <c:choose>
@@ -461,12 +461,12 @@ comparison page add current vs historical details(past 2yrs)
                                                     </tr>
 
                                                     <tr>
-                                                        <th>Phosphorus</th>
+                                                        <th>Phosphorus(mg)</th>
                                                         <td class="text-blue"><c:out value="${farm.soilanalysis.phosphorus}"/></td>
                                                         <c:forEach var="flow" items="${flist}">
                                                             <c:choose>
                                                                 <c:when test='${flow.soilanalysis.phosphorus !=farm.soilanalysis.phosphorus}'>
-                                                                    <td class=" text-red"><c:out value="${flow.soilanalysis.ph_lvl}"></c:out> </td>
+                                                                    <td class=" text-red"><c:out value="${flow.soilanalysis.phosphorus}"></c:out> </td>
                                                                 </c:when>
                                                                 <c:otherwise>
                                                                     <td class=" text-green"><c:out value="${flow.soilanalysis.phosphorus}"></c:out>  </td>
@@ -476,7 +476,7 @@ comparison page add current vs historical details(past 2yrs)
                                                         </c:forEach>
                                                     </tr>
                                                     <tr>
-                                                        <th>Potassium</th>
+                                                        <th>Potassium(mg)</th>
                                                         <td class="text-blue"><c:out value="${farm.soilanalysis.potassium}"/></td>
                                                         <c:forEach var="flow" items="${flist}">
                                                             <c:choose>
@@ -615,7 +615,7 @@ comparison page add current vs historical details(past 2yrs)
                                             <h3 class="profile-username text-center"></h3>
                                             <table id="fieldtable" class="table table-hover table-responsive">
                                                 <thead><tr>
-                                                        <th>Problem</th>
+                                                        <th>Problem(only active)</th>
                                                         <th>Phase</th>
                                                         <th>Solutions</th>
                                                         <th><c:out value="${farm.id}"/></th>
@@ -672,7 +672,7 @@ comparison page add current vs historical details(past 2yrs)
                                             <h3 class="profile-username text-center"></h3>
                                             <table id="fieldtable" class="table table-hover table-responsive">
                                                 <thead><tr>
-                                                        <th>Recommendation</th>
+                                                        <th>Recommendation(only active)</th>
                                                         <th>Phase</th>
                                                         <th>Problems Targeted</th>
                                                         <th><c:out value="${farm.id}"/></th>
@@ -771,7 +771,7 @@ comparison page add current vs historical details(past 2yrs)
                                                                     <tr>
                                                                         <td> <c:out value="${til.rep}"/></td>
                                                                         <c:choose>
-                                                                            <c:when test='${til.count !=farm.tillist[status.index].count}'>
+                                                                            <c:when test='${til.count <farm.tillist[status.index].count}'>
                                                                                 <td class="text-red"><c:out value="${til.count}"/></td>
                                                                             </c:when>
                                                                             <c:otherwise>
@@ -800,8 +800,8 @@ comparison page add current vs historical details(past 2yrs)
                                                 <table id="fieldtable" class="table table-hover table-responsive">
                                                     <thead><tr>
                                                             <th>Fertilizer</th>
-                                                            <th>First Dose</th>
-                                                            <th>Second Dose</th>
+                                                            <th>First Dose(bags)</th>
+                                                            <th>Second Dose(bags)</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -980,7 +980,7 @@ comparison page add current vs historical details(past 2yrs)
                             </div>
                             <div class="col-md-12 hidden" id="probBlock">
                                 <br>
-                                <h1> Report Problems</h1>
+                                <h1> Report Problems</h1><h3>shorten the preselection using phase?</h3>
                                 <div class="col-md-6" > 
 
                                     <div class="box box-info">
@@ -1046,7 +1046,17 @@ comparison page add current vs historical details(past 2yrs)
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-
+                                                    <c:if test="${not empty autoprob}">
+                                                        <c:forEach items="${autoprob}" var="prob">
+                                                            <tr>
+                                                                <td><input type="checkbox" name="probsid[]" class="checkbox" id="buttonClick" value="${prob.prob_id}" checked> </td>
+                                                                <td><c:out value="${prob.prob_name}"/></td>
+                                                                <td><c:out value="${prob.type}"/></td>
+                                                                <td><c:out value="${prob.phase}"/></td>
+                                                                <td><a href="viewProbDetails?id=${prob.prob_id}" target="_blank" class="btn btn-primary text-center">...</a></td>
+                                                            </tr>
+                                                        </c:forEach>
+                                                    </c:if>
                                                 </tbody>
                                             </table>
                                         </div>
