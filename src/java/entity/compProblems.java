@@ -13,13 +13,14 @@ import java.util.ArrayList;
  * @author ndrs
  */
 public class compProblems {
-        private Integer prob_id, totalFarms, fields_id,tSolutions, totalFields;
-    private String prob_name, prob_details, barangay,municipality, status,type,impact,farmer,farm,validation,phase,user_name;
+
+    private Integer prob_id, totalFarms, fields_id, tSolutions, totalFields;
+    private String prob_name, prob_details, barangay, municipality, status, type, impact, farmer, farm, validation, phase, user_name;
     private Double prob_loss;
     private double percent_affected;
-    private Date date_updated ,date_created;
-     private ArrayList<Integer> farms;
-     private ArrayList<Recommendation> reclist;
+    private Date date_updated, date_created;
+    private ArrayList<Integer> farms;
+    private ArrayList<Recommendation> reclist;
 
     /**
      * @return the prob_id

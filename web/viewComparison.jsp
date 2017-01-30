@@ -615,7 +615,7 @@ comparison page add current vs historical details(past 2yrs)
                                             <h3 class="profile-username text-center"></h3>
                                             <table id="fieldtable" class="table table-hover table-responsive">
                                                 <thead><tr>
-                                                        <th>Problem</th>
+                                                        <th>Problem(only active)</th>
                                                         <th>Phase</th>
                                                         <th>Solutions</th>
                                                         <th><c:out value="${farm.id}"/></th>
@@ -672,7 +672,7 @@ comparison page add current vs historical details(past 2yrs)
                                             <h3 class="profile-username text-center"></h3>
                                             <table id="fieldtable" class="table table-hover table-responsive">
                                                 <thead><tr>
-                                                        <th>Recommendation</th>
+                                                        <th>Recommendation(only active)</th>
                                                         <th>Phase</th>
                                                         <th>Problems Targeted</th>
                                                         <th><c:out value="${farm.id}"/></th>
@@ -969,7 +969,17 @@ comparison page add current vs historical details(past 2yrs)
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-
+                                                    <c:if test="${not empty autorec}">
+                                                        <c:forEach items="${autorec}" var="rec">
+                                                            <tr>
+                                                                <td><input type="checkbox" name="recsid[]" class="checkbox" id="buttonClick" value="${rec.id}" checked> </td>
+                                                                <td><c:out value="${rec.recommendation_name}"/></td>
+                                                                <td><c:out value="${rec.type}"/></td>
+                                                                <td><c:out value="${rec.phase}"/></td>
+                                                                <td><a href="viewRecDetails?id=${rec.id}" target="_blank" class="btn btn-primary text-center">...</a></td>
+                                                            </tr>
+                                                        </c:forEach>
+                                                    </c:if>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -980,7 +990,7 @@ comparison page add current vs historical details(past 2yrs)
                             </div>
                             <div class="col-md-12 hidden" id="probBlock">
                                 <br>
-                                <h1> Report Problems</h1>
+                                <h1> Report Problems</h1><h3>shorten the preselection using phase?</h3>
                                 <div class="col-md-6" > 
 
                                     <div class="box box-info">
@@ -1046,7 +1056,17 @@ comparison page add current vs historical details(past 2yrs)
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-
+                                                    <c:if test="${not empty autoprob}">
+                                                        <c:forEach items="${autoprob}" var="prob">
+                                                            <tr>
+                                                                <td><input type="checkbox" name="probsid[]" class="checkbox" id="buttonClick" value="${prob.prob_id}" checked> </td>
+                                                                <td><c:out value="${prob.prob_name}"/></td>
+                                                                <td><c:out value="${prob.type}"/></td>
+                                                                <td><c:out value="${prob.phase}"/></td>
+                                                                <td><a href="viewProbDetails?id=${prob.prob_id}" target="_blank" class="btn btn-primary text-center">...</a></td>
+                                                            </tr>
+                                                        </c:forEach>
+                                                    </c:if>
                                                 </tbody>
                                             </table>
                                         </div>
