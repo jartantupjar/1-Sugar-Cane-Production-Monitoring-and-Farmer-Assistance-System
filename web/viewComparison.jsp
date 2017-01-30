@@ -114,7 +114,7 @@ comparison page add current vs historical details(past 2yrs)
                                             </tr>
 
                                             <tr>
-                                                <th>Production</th>
+                                                <th>Production(TC)</th>
                                                 <td class="text-blue"><c:out value="${farm.production}"/></td>
                                                 <c:forEach var="flow" items="${flist}">
                                                     <c:choose>
@@ -129,7 +129,7 @@ comparison page add current vs historical details(past 2yrs)
                                                 </c:forEach>
                                             </tr>
                                             <tr>
-                                                <th>Harvest Area</th>
+                                                <th>Harvest Area(HA)</th>
                                                 <td class="text-blue"><c:out value="${farm.totalHa}"/></td>
                                                 <c:forEach var="flow" items="${flist}">
                                                     <c:choose>
@@ -144,7 +144,7 @@ comparison page add current vs historical details(past 2yrs)
                                                 </c:forEach>
                                             </tr>
                                             <tr>
-                                                <th>Total Area</th>
+                                                <th>Total Area(HA)</th>
                                                 <td class="text-blue"><c:out value="${farm.area}"/></td>
                                                 <c:forEach var="flow" items="${flist}">
                                                     <c:choose>
@@ -160,7 +160,7 @@ comparison page add current vs historical details(past 2yrs)
                                             </tr>
 
                                             <tr>
-                                                <th>Current Yield</th>
+                                                <th>Current Yield(TC/HA)</th>
                                                 <td class="text-blue"><c:out value="${farm.yield}"/></td>
                                                 <c:forEach var="flow" items="${flist}">
                                                     <c:choose>
