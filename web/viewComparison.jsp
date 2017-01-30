@@ -969,7 +969,17 @@ comparison page add current vs historical details(past 2yrs)
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-
+                                                    <c:if test="${not empty autorec}">
+                                                        <c:forEach items="${autorec}" var="rec">
+                                                            <tr>
+                                                                <td><input type="checkbox" name="recsid[]" class="checkbox" id="buttonClick" value="${rec.id}" checked> </td>
+                                                                <td><c:out value="${rec.recommendation_name}"/></td>
+                                                                <td><c:out value="${rec.type}"/></td>
+                                                                <td><c:out value="${rec.phase}"/></td>
+                                                                <td><a href="viewRecDetails?id=${rec.id}" target="_blank" class="btn btn-primary text-center">...</a></td>
+                                                            </tr>
+                                                        </c:forEach>
+                                                    </c:if>
                                                 </tbody>
                                             </table>
                                         </div>

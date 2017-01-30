@@ -9,6 +9,8 @@ import entity.Calendar;
 import entity.FarmRecTable;
 import entity.Problems;
 import entity.Recommendation;
+import entity.compProblems;
+import entity.compRecommendation;
 import static java.lang.Math.random;
 import java.sql.Connection;
 import java.sql.Date;
@@ -65,7 +67,22 @@ public class fixedRecDB {
         }
         return null;
     }
-
+public ArrayList<Recommendation> removeSelectedRecommendations(ArrayList<Recommendation> orig, ArrayList<compRecommendation>selected){
+            if (!selected.isEmpty()) {
+            for (int i = 0; i < selected.size(); i++) {
+                for (int j = i; j < orig.size(); j++) {
+                    if (selected.get(i).getId().equals(orig.get(j).getId())) {
+                        orig.remove(j);
+                        j--;
+                    }
+                }
+            }
+        }
+     
+       
+        
+        return orig;
+    }
     public int linktoRecommendation(Integer field_id, Integer recomid, Date date, String status) {
         try {
             // put functions here : previous week production, this week production

@@ -31,7 +31,6 @@ import javax.servlet.http.HttpSession;
  */
 public class viewFarmDifferences extends BaseServlet {
 
-   
     @Override
     public void servletAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -39,83 +38,86 @@ public class viewFarmDifferences extends BaseServlet {
         FarmsDB farmdb = new FarmsDB();
 
         HttpSession session = request.getSession();
-       
-           String id = request.getParameter("id");
-            String tag = request.getParameter("taglist");
-             System.out.println(tag+": this tag m8");
-             String[] tags = tag.split(",");
-           
-      Enumeration<String> parameterNames = request.getParameterNames();
-            String paramName;
-            
-            ArrayList<String> fids = new ArrayList<>();
-            while (parameterNames.hasMoreElements()) {
-                 paramName = parameterNames.nextElement();
+
+        String id = request.getParameter("id");
+        String tag = request.getParameter("taglist");
+        System.out.println(tag + ": this tag m8");
+        String[] tags = tag.split(",");
+
+        Enumeration<String> parameterNames = request.getParameterNames();
+        String paramName;
+
+        ArrayList<String> fids = new ArrayList<>();
+        while (parameterNames.hasMoreElements()) {
+            paramName = parameterNames.nextElement();
 //               System.out.println(paramName+"da paramname");
             if (paramName.startsWith("fids")) {
-                for(int i=0;i<request.getParameterValues(paramName).length;i++){
-                  String paramlist= request.getParameterValues(paramName)[i];
-                    if(!paramlist.equals(id)){
+                for (int i = 0; i < request.getParameterValues(paramName).length; i++) {
+                    String paramlist = request.getParameterValues(paramName)[i];
+                    if (!paramlist.equals(id)) {
                         fids.add(paramlist);
-                    }    
-     //            System.out.println(request.getParameterValues(paramName)[i]);
+                    }
+                    //            System.out.println(request.getParameterValues(paramName)[i]);
                 }
-             }
-          }
-          ArrayList<Farm> list=farmdb.getAllFieldComp(fids);
-         Farm farm=farmdb.getAllFieldDetailsComp(Integer.parseInt(id));
-         ArrayList<Farm> dalist= new ArrayList<>();
-         ArrayList<Farm> dalist2= new ArrayList<>();
-         ArrayList<Farm> dalist3= new ArrayList<>();
-          Farm farm2= new Farm();
-              dalist.addAll(list);
-              dalist2.addAll(list);
-              dalist3.addAll(list);
-              farm2=farm;
-              
-              //check and cross part
-        ArrayList<compRecommendation>comprec= farmdb.getSimilarRecommendations(farm2,dalist);
-        ArrayList<compProblems>compProb= farmdb.getSimilarProblems(farm2,dalist2);
-        
-    //All Recommendations list
-         fixedRecDB frb = new fixedRecDB();
-       ArrayList<Recommendation> fct = new ArrayList<Recommendation>();
-       fct = frb.viewRecList();
-       
-       
-        //auto gen problist -(get similar problems)
-          ArrayList<compProblems> autoprob=new ArrayList<compProblems>();
-          autoprob=farmdb.getSimilarProblems(farm2,dalist3);
-          
-          
-       //All Problems List
-         ProblemsDB prb= new ProblemsDB();
-         ArrayList<Problems> pct = new ArrayList<Problems>();
-         pct= prb.viewAllProblems();
-       
-          if(!autoprob.isEmpty()){
-            pct=prb.removeSelectedProblems(pct,autoprob);  
-          }
+            }
+        }
+        ArrayList<Farm> list = farmdb.getAllFieldComp(fids);
+        Farm farm = farmdb.getAllFieldDetailsComp(Integer.parseInt(id));
+        ArrayList<Farm> dalist = new ArrayList<>();
+        ArrayList<Farm> dalist2 = new ArrayList<>();
+        ArrayList<Farm> dalist3 = new ArrayList<>();
+        ArrayList<Farm> dalist4 = new ArrayList<>();
+        Farm farm2 = new Farm();
+        dalist.addAll(list);
+        dalist2.addAll(list);
+        dalist3.addAll(list);
+        dalist4.addAll(list);
+        farm2 = farm;
 
-       //remove from all list 
-          
-          
-         
-         session.setAttribute("flist",list);
-         session.setAttribute("farm",farm);
-         session.setAttribute("comprec",comprec);
-         session.setAttribute("comprob",compProb);
-         session.setAttribute("darecs",fct);
-         session.setAttribute("daprobs",pct);
-         session.setAttribute("autoprob",autoprob);
-      
-         
-         
-        
-         
+        //check and cross part
+        ArrayList<compRecommendation> comprec = farmdb.getSimilarRecommendations(farm2, dalist);
+        ArrayList<compProblems> compProb = farmdb.getSimilarProblems(farm2, dalist2);
+//**autogen
+        //auto gen reclist -(get similar recommendations)
+        ArrayList<compRecommendation> autorec = new ArrayList<compRecommendation>();
+        autorec = farmdb.getSimilarRecommendations(farm2, dalist4);
+
+        //auto gen problist -(get similar problems)
+        ArrayList<compProblems> autoprob = new ArrayList<compProblems>();
+        autoprob = farmdb.getSimilarProblems(farm2, dalist3);
+//**all list
+        //All Recommendations list
+        fixedRecDB frb = new fixedRecDB();
+        ArrayList<Recommendation> fct = new ArrayList<Recommendation>();
+        fct = frb.viewRecList();
+
+        //All Problems List
+        ProblemsDB prb = new ProblemsDB();
+        ArrayList<Problems> pct = new ArrayList<Problems>();
+        pct = prb.viewAllProblems();
+//**remove pre from all
+        //remove preselected from complete list 
+        //problems
+        if (!autoprob.isEmpty()) {
+            pct = prb.removeSelectedProblems(pct, autoprob);
+        }
+        //recommendations
+        if (!autorec.isEmpty()) {
+            fct = frb.removeSelectedRecommendations(fct, autorec);
+        }
+
+        session.setAttribute("flist", list);
+        session.setAttribute("farm", farm);
+        session.setAttribute("comprec", comprec);
+        session.setAttribute("comprob", compProb);
+        session.setAttribute("darecs", fct);
+        session.setAttribute("daprobs", pct);
+        session.setAttribute("autoprob", autoprob);
+        session.setAttribute("autorec", autorec);
+
         RequestDispatcher rd = context.getRequestDispatcher("/viewComparison.jsp");
 
         rd.forward(request, response);
-   
+
     }
 }
