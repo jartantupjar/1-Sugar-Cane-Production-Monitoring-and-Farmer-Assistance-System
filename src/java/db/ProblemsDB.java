@@ -124,7 +124,7 @@ public class ProblemsDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT r.id,r.type,r.recommendation FROM `recommendations-problems` rp join recommendations r on rp.recommendations_id=r.id where problems_id = ?;";
+            String query = "SELECT r.id ,r.recommendation,r.type,r.phase,r.description FROM `recommendations-problems` rp join recommendations r on rp.recommendations_id=r.id where problems_id = ?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, prob_id);
             ResultSet rs = pstmt.executeQuery();
@@ -136,6 +136,9 @@ public class ProblemsDB {
                     r = new Recommendation();
                     r.setId(rs.getInt("id"));
                     r.setRecommendation_name(rs.getString("recommendation"));
+                    r.setPhase(rs.getString("phase"));
+                    r.setType(rs.getString("type"));
+                    r.setDescription(rs.getString("description"));
                     rT.add(r);
 
                 } while (rs.next());

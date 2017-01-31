@@ -77,14 +77,18 @@ public class viewFarmDifferences extends BaseServlet {
         //check and cross part
         ArrayList<compRecommendation> comprec = farmdb.getSimilarRecommendations(farm2, dalist);
         ArrayList<compProblems> compProb = farmdb.getSimilarProblems(farm2, dalist2);
-//**autogen
-        //auto gen reclist -(get similar recommendations)
-        ArrayList<compRecommendation> autorec = new ArrayList<compRecommendation>();
-        autorec = farmdb.getSimilarRecommendations(farm2, dalist4);
-
-        //auto gen problist -(get similar problems)
+        
+   //**autogen     
+          //auto gen problist -(get similar problems)
         ArrayList<compProblems> autoprob = new ArrayList<compProblems>();
+        ArrayList<compProblems> autoprob1 = new ArrayList<compProblems>();
         autoprob = farmdb.getSimilarProblems(farm2, dalist3);
+           autoprob1.addAll(autoprob);
+          //auto gen reclist -(get similar recommendations)
+        ArrayList<compRecommendation> autorec = new ArrayList<compRecommendation>();
+        autorec = farmdb.getPreSelectedRecommendations(farm2, dalist4,autoprob1);
+
+      
 //**all list
         //All Recommendations list
         fixedRecDB frb = new fixedRecDB();
