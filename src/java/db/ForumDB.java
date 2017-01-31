@@ -45,6 +45,7 @@ public class ForumDB {
                     f.setDate_posted(rs.getDate("date_posted"));
                     f.setStatus(rs.getString("status"));
                     f.setRecom_id(rs.getInt("Recommendations_id"));
+                    f.setPhase(rs.getString("phase"));
                     if(f.getRecom_id() != null){
                             String recom_name = getRecommendationName(f.getRecom_id());
                             f.setRecommendation_name(recom_name);
@@ -158,6 +159,53 @@ public class ForumDB {
                         f.setId_and_status(line);
                         System.out.println(id+ " ID POST  ID");
                         f.setImage(getImages(id));
+                        fT.add(f);
+                }
+                rs.close();
+                pstmt.close();
+                conn.close();            
+            return f;
+                 }catch (SQLException ex) {
+            Logger.getLogger(ForumDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }public Forum getForumDetailByName(String id){
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT p.id,p.Fields_id,p.message,p.date_started,p.date_posted,p.title ,p.status, p.Recommendations_id, p.Problems_id,p.phase  from posts p  where p.title = ?  ;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1,id);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<Forum> fT = new ArrayList<Forum>();
+            ArrayList<String> images = new ArrayList<String>();
+            Forum f = null;
+                if (rs.next()) {
+                        f = new Forum();
+                        f.setId(rs.getInt("id"));
+                        f.setTitle(rs.getString("title"));
+                        //f.setFarmer(rs.getString("Farmers_name"));
+                        f.setFields_id(rs.getInt("Fields_id"));
+                        f.setFarmer(getPostersName(f.getFields_id()));
+                        f.setMessage(rs.getString("message"));
+                        f.setDate_started(rs.getDate("date_started"));
+                        f.setDate_posted(rs.getDate("date_posted"));
+                        f.setStatus(rs.getString("status"));
+                        f.setProb_id(rs.getInt("Problems_id"));
+                        f.setPhase(rs.getString("phase"));
+                        if(f.getProb_id() != null){
+                            String prob_name = getProblemName(f.getProb_id());
+                            f.setProblem_name(prob_name);
+                        }
+                        f.setRecom_id(rs.getInt("Recommendations_id"));
+                        if(f.getRecom_id() != null){
+                            String recom_name = getRecommendationName(f.getRecom_id());
+                            f.setRecommendation_name(recom_name);
+                        }
+                        String line = f.getId()+","+f.getStatus();
+                        f.setId_and_status(line);
+                        System.out.println(id+ " ID POST  ID");
+                        f.setImage(getImages(f.getId()));
                         fT.add(f);
                 }
                 rs.close();
@@ -454,6 +502,29 @@ public class ForumDB {
             pstmt.setDate(5, date);
             pstmt.setInt(6, rec_id);
             pstmt.setInt(7, rec_field_id);
+            check  = pstmt.executeUpdate();
+                
+                pstmt.close();
+                conn.close();            
+            return check;
+                 }catch (SQLException ex) {
+            Logger.getLogger(ForumDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+    public Integer addRedirectionNotification(Integer fields_id,String message,Date date, Integer post_id){
+        int check=0;
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "INSERT INTO notifications(disaster,received,Fields_id,message,date,Posts_id) values(?,?,?,?,?,?); ";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, "N");
+            pstmt.setString(2, "N");
+            pstmt.setInt(3, fields_id);
+            pstmt.setString(4,message);
+            pstmt.setDate(5, date);
+            pstmt.setInt(6, post_id);
             check  = pstmt.executeUpdate();
                 
                 pstmt.close();

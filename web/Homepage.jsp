@@ -112,10 +112,10 @@
                                         <c:forEach var="ca" items="${CropAss}">
                                         <tr>	
                                             <td>${ca.particulars}</td>
-                                            <td>${ca.estimated}</td>
-                                            <td>${ca.previous}</td>
-                                            <td>${ca.thisweek}</td>
-                                            <td>${ca.todate}</td>
+                                            <td><span class="pull-right">${ca.estimated}</span></td>
+                                            <td><span class="pull-right">${ca.previous}</span></td>
+                                            <td><span class="pull-right">${ca.thisweek}</span></td>
+                                            <td><span class="pull-right">${ca.todate}</span></td>
                                             <td>
                                                 <div class="progress-group" >
                                                     <span class="progress-number">
@@ -160,7 +160,7 @@
                                         <c:forEach var="ca" items="${CropAss}">
                                         <tr>	
                                             <td>${ca.particulars}</td>
-                                            <td>${ca.standing}</td>
+                                            <td><span class="pull-right">${ca.standing}</span></td>
                                         </tr>
                                         </c:forEach>
                                     </tbody>
@@ -418,7 +418,47 @@
                       "paging": false,
                     "ordering": false,
                     "info": false,
-                    "searching":true
+                    "searching":true,
+                    'columnDefs': [{
+                            'targets': 2,
+                            'searchable': false,
+                            'orderable': false,
+                            'render': function (data, type, full, meta) {
+                                return '<span class="pull-right">' + data + '</span>';
+                            }
+                        },
+                    {
+                            'targets': 3,
+                            'searchable': false,
+                            'orderable': false,
+                            'render': function (data, type, full, meta) {
+                                return '<span class="pull-right">' + data + '</span>';
+                            }
+                        },
+                    {
+                            'targets': 4,
+                            'searchable': false,
+                            'orderable': false,
+                            'render': function (data, type, full, meta) {
+                                return '<span class="pull-right">' + data + '</span>';
+                            }
+                        },
+                    {
+                            'targets': 5,
+                            'searchable': false,
+                            'orderable': false,
+                            'render': function (data, type, full, meta) {
+                                return '<span class="pull-right">' + data + '</span>';
+                            }
+                        },
+                    {
+                            'targets': 6,
+                            'searchable': false,
+                            'orderable': false,
+                            'render': function (data, type, full, meta) {
+                                return '<span class="pull-right">' + data + '</span>';
+                            }
+                        }]
                 });
                 $('#munitable').DataTable().search('${Week_ending}').draw();
                  $('#munitable_filter').addClass('hidden');

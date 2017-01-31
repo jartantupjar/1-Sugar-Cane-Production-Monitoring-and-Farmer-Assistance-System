@@ -91,6 +91,7 @@
                                             <c:if test="${post.status == 'Rejected'}">
                                                 <a class="btn btn-success" style="width: 25%" id="lr"><i class="fa fa-chain"></i>  Refer to a Recommendation</a>
                                                 <a class="btn btn-warning" style="width: 25%" id="lp"><i class="fa fa-times-circle"></i>Refer to a Problem</a>
+                                                <a class="btn btn-info" style="width: 25%" id="lpo"><i class="fa fa-times-circle"></i>Refer to a Post</a>
                                             </c:if>
 
                                         </c:if>
@@ -102,6 +103,7 @@
                                         <c:set var="com" value="${comments}"></c:set>
                                         <c:forEach var="comments" items="${comments}">
                                             <c:if test="${comments.comment_message != null}">
+                                                <form id="frm-example" action="useComment">
                                                 <div class="box-comment">
                                                     <div class="comment-text">
                                                         <span class="username">
@@ -110,9 +112,13 @@
                                                         </span><!-- /.username -->
                                                         ${comments.comment_message}
                                                     </div>
-                                                    <button type="button" class="btn btn-default btn-xs pull-right"><i class="fa fa-share"></i><a href="createNewRecommendation.jsp">Create Recommendation</a></button>
+                                                    <input type="text" name="user" hidden="true" value="${comments.comment_User}">
+                                                    <input type="text" name="mess" hidden="true" value="${comments.comment_message}">
+                                                    <input type="text" name="title" hidden="true" value="${post.title}">
+                                                    <button type="submit" class="btn btn-default btn-xs pull-right"><i class="fa fa-share"></i>Create Recommendation</button>
                                                     <!-- /.comment-text -->
                                                 </div>
+                                                </form>
                                             </c:if>
                                         </c:forEach>
                                         <c:if test="${post.status == 'Accepted'}">
@@ -217,6 +223,46 @@
                             <div class="col-md-3">      
                                 <p><button class="btn btn-primary hidden" id="saver" style="width: 100%" type="submit"  value="submit">Save and Link</button></p>
                             </div>
+                        </form>
+                            <form id="frm-example" action="linktoPost">
+                            <div class="col-md-12"  > 
+                                <div class="box box-info hidden" id="linkpo">
+                                    <div class="box-header with-border">
+                                        <h1 class="box-title">Refer to another Post</h1>
+                                        <div class="box-tools pull-right">
+                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                        </div>
+                                    </div>
+
+                                    <div class="box-body">
+                                        <table id="postTable1" class="table  dispTable table-hover" cellspacing="0" width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>Title</th>
+                                                    <th>Recommendation</th>
+                                                    <th>Rec. Count</th>
+                                                    <th>Problem</th>
+                                                    <th>Prob. Count</th>
+                                                    <th>Phase</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text"  name="fields"  hidden="true" value="${fid}">
+                                <input type="text"  name="date" hidden="true" value="${post.date_posted}">
+                                <input type="text"  name="title" hidden="true" value="${post.title}">
+                            </div>
+
+                            <div class="col-md-3"> 
+                                <p><button class="btn btn-primary hidden" id="savepo" style="width: 100%" type="submit"  value="submit">Save and Link</button></p>
+                            </div>
+
                         </form>
                         <form id="frm-example3" action="createNewProblem">
                             <div class="col-md-10"> 
@@ -387,6 +433,16 @@
                     $('#savep').removeClass('hidden');
                     $('#linkr').addClass('hidden');
                     $('#saver').addClass('hidden');
+                    $('#linkpo').addClass('hidden');
+                    $('#savepo').addClass('hidden');
+                });
+                 $("#lpo").on("click", function () {
+                    $('#linkpo').removeClass('hidden');
+                    $('#savepo').removeClass('hidden');
+                    $('#linkr').addClass('hidden');
+                    $('#saver').addClass('hidden');
+                    $('#linkp').addClass('hidden');
+                    $('#savep').addClass('hidden');
                 });
                 $("#lr").on("click", function () {
                     $('#linkr').removeClass('hidden');
@@ -502,9 +558,9 @@
             $(document).ready(function () {
                 var rows_selected = [];
 
-                var table1 = $('#probTable1').DataTable({
+                var table1 = $('#postTable1').DataTable({
                     'ajax': {
-                        'url': 'viewProbList'
+                        'url': 'viewPostList'
                     },
                     'columnDefs': [{
                             'targets': 0,
@@ -519,9 +575,42 @@
                     'select': {
                         'style': 'multi'
                     },
-                    'order': [[1, 'asc']]
-                    $('#probTable1').DataTable().search('${post.phase}').draw();
+                    'order': [[1, 'asc']],
+                    'rowCallback': function (row, data, dataIndex) {
+                        // Get row ID
+                        var rowId = data[0];
+                        var limit = 1;
+                        // alert(rowId);
+                        // If row ID is in the list of selected row IDs
+                        //  alert("notclicked");
+    //                                         if($.inArray(rowId, rows_selected) !== -1){
+    //                                              
+    //                                            $(row).find('input[type="checkbox"]').prop('checked', true);
+    //                                            $(row).addClass('selected');
+    //                                          
+    //                                         }
+                        table1.$('input[type="checkbox"]', row).on('change', function (evt) {
+                            console.log("outentered");
+                            var tcounter = 0;
+
+                            table1.$('input[type="checkbox"]').each(function () {
+                                if (this.checked) {
+
+                                    tcounter += 1;
+
+                                }
+
+                            });
+
+                            if (tcounter > limit) {
+                                console.log(tcounter);
+                                this.checked = false;
+                            }
+                        });
+                    }
+                    
                 });
+                $('#postTable1').DataTable().search('${post.phase}').draw();
                 $('#frm-example').on('submit', function (e) {
                     var form = this;
 
@@ -544,7 +633,7 @@
                 });
 
 
-                $('#probTable-select-all').on('click', function () {
+                $('#postTable-select-all').on('click', function () {
                     // Check/uncheck all checkboxes in the table
                     var rows = table1.rows({'search': 'applied'}).nodes();
                     $('input[type="checkbox"]', rows).prop('checked', this.checked);

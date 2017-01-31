@@ -384,6 +384,18 @@
         <servlet-name>viewSendRecObserv</servlet-name>
         <servlet-class>controller.viewSendRecObserv</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>useComment</servlet-name>
+        <servlet-class>controller.useComment</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewPostList</servlet-name>
+        <servlet-class>controller.viewPostList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>linktoPost</servlet-name>
+        <servlet-class>controller.linktoPost</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
@@ -767,6 +779,18 @@
     <servlet-mapping>
         <servlet-name>viewSendRecObserv</servlet-name>
         <url-pattern>/viewSendRecObserv</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>useComment</servlet-name>
+        <url-pattern>/useComment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewPostList</servlet-name>
+        <url-pattern>/viewPostList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>linktoPost</servlet-name>
+        <url-pattern>/linktoPost</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
