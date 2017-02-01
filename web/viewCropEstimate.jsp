@@ -123,7 +123,7 @@
 
                                                 </div>
                                             </div>
-                                             <div class="form-group">
+                                            <div class="form-group">
                                                 <label class="control-label">Total Production(tc)
                                                     <span class="required" aria-required="true"> * </span>
                                                 </label>
@@ -142,7 +142,7 @@
 
                                                 </div>
                                             </div>
-                                          <div class="form-group">
+                                            <div class="form-group">
                                                 <label class="control-label">Total Tiller Amount
                                                 </label>
                                                 <div class="">
@@ -158,7 +158,7 @@
                                                     <input type="text" class="form-control" maxlength="4" name="temp" id="projectname" placeholder="Name...">
                                                 </div>
                                             </div>
-                                            
+
 
 
                                         </div>
@@ -252,11 +252,11 @@
                                                 <th>Actual Production(tc)</th>
                                                 <th>Estimated Production(tc)</th>
                                                 <th>% Difference</th>
-                                                <c:if test="${todayYear >= 2017}">
-                                                <th>Actual LKG</th>
-                                                <th>Estimated LKG</th>
-                                                <th>% Difference</th>
-                                                </c:if>
+                                                    <c:if test="${todayYear >= 2017}">
+                                                    <th>Actual LKG</th>
+                                                    <th>Estimated LKG</th>
+                                                    <th>% Difference</th>
+                                                    </c:if>
                                             </tr>
                                         </thead>
                                     </table>
@@ -327,6 +327,7 @@
                 var estd;
                 var est2d;
                 var est3d;
+
                 $.ajax({
                     url: 'loadEstimatesLineData',
                     type: 'POST',
@@ -337,7 +338,8 @@
                         estd = data.estd;
                         est2d = data.est2d;
                         est3d = data.est3d;
-                        $('#container4').highcharts({
+                        console.log(estd);
+                        var chart = $('#container4').highcharts({
                             chart: {
                                 zoomType: 'xy'
                             },
@@ -376,7 +378,7 @@
                                 backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
                             },
                             series: [{
-                                    name: 'Estimate 1' + '<input type="checkbox" name="E1">',
+                                    name: 'Estimate 1',
                                     type: 'column',
                                     data: estd,
                                     tooltip: {
@@ -404,8 +406,14 @@
                                         valueSuffix: ' mm'
                                     }
 
-                                }]
+                                }], plotOptions: {
+                                series: {
+                                    borderWidth: 4,
+                                    borderColor: 'white'
+                                }
+                            }
                         });
+
                     }
                 });
             });
