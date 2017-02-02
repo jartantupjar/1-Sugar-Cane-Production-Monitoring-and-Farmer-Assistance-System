@@ -45,7 +45,7 @@
 
                                 <div class="box-body">
                                     <div class="box-body" id="container4"></div>
-                                    <table id="esttable" class="table display table-hover" cellspacing="0" width="100%">
+                                    <table id="esttable" class="table display table-hover text-right" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>Year</th>
@@ -180,7 +180,7 @@
 
                                 <div class="box-body">
 
-                                    <table id="testTable" class="table display dataTable table-hover" cellspacing="0" width="100%">
+                                    <table id="testTable" class="table display dataTable  table-hover text-right" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>Area(tc)</th>
@@ -242,7 +242,7 @@
                                 </div>
 
                                 <div class="box-body">
-                                    <table id="distable" class="table  display table-hover" cellspacing="0" width="100%">
+                                    <table id="distable" class="table  display table-hover text-right" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>Year</th>
@@ -278,7 +278,7 @@
 
                                 <div class="box-body">
 
-                                    <table id="munitable" class="table  display table-hover" cellspacing="0" width="100%">
+                                    <table id="munitable" class="table  display table-hover text-right" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>Year</th>

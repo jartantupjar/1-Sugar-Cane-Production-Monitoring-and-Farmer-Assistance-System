@@ -13,6 +13,7 @@ import entity.cropEstimate;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -54,10 +55,39 @@ public class loadEstimatesLineDataLkg extends BaseServlet {
                 }else{
                   bar.add(fct.get(i).getLkg());  
                 }
+                   List<Double> doublist=new ArrayList<>();
+                doublist.add(fct.get(i).getForecastlkg());
+                doublist.add(fct.get(i).getForecastlkg2());
+                doublist.add(fct.get(i).getForecastlkg3());
+//                if(){
+                if(estdb.closest(fct.get(i).getLkg(),doublist)==fct.get(i).getForecastlkg()){
+                     JSONObject colpick = new JSONObject();
+                    colpick.put("y", fct.get(i).getForecastlkg());
+                    colpick.put("borderColor", "red");
+                    est1.add(colpick);
+                }else {
+                     est1.add(fct.get(i).getForecastlkg());
+                }
+                if(estdb.closest(fct.get(i).getLkg(),doublist)==fct.get(i).getForecastlkg2()){
+                     JSONObject colpick = new JSONObject();
+                    colpick.put("y", fct.get(i).getForecastlkg2());
+                    colpick.put("borderColor", "red");
+              est2.add(colpick);
+                }else{
+                      est2.add(fct.get(i).getForecastlkg2());
+                }
+                if(estdb.closest(fct.get(i).getLkg(),doublist)==fct.get(i).getForecastlkg3()){
+                     JSONObject colpick = new JSONObject();
+                    colpick.put("y", fct.get(i).getForecastlkg3());
+                    colpick.put("borderColor", "red");
+                    est3.add(colpick);
+                }else{
+                     est3.add(fct.get(i).getForecastlkg3());
+                }
                 
-                est1.add(fct.get(i).getForecastlkg());
-                est2.add(fct.get(i).getForecastlkg2());
-                est3.add(fct.get(i).getForecastlkg3());
+//                est1.add(fct.get(i).getForecastlkg());
+//                est2.add(fct.get(i).getForecastlkg2());
+//                est3.add(fct.get(i).getForecastlkg3());
             }
             
             
