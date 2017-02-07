@@ -45,12 +45,12 @@
 
                                 <div class="box-body">
                                     <div class="box-body" id="container4"></div>
-                                    <table id="esttable" class="table display table-hover" cellspacing="0" width="100%">
+                                    <table id="esttable" class="table display table-hover text-right" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>Year</th>
                                                 <th>Area(ha)</th>
-                                                <th>Rainfall(mm)</th>
+                                                <th >Rainfall(mm)</th>
                                                 <th>Tiller Count</th>
                                                 <th>Avg Temp(°C)</th>
                                                 <th>Tons Cane(tc)</th>
@@ -67,15 +67,15 @@
                                                 <c:forEach items="${est}" var="estims">
                                                     <tr>
                                                         <td><c:out value="${estims.year}"/></td>
-                                                        <td><c:out value="${estims.area}"/></td>
-                                                        <td><c:out value="${estims.rainfall}"/></td>
-                                                        <td><c:out value="${estims.tiller}"/></td>
-                                                        <td><c:out value="${estims.temp}"/></td>
-                                                        <td><c:out value="${estims.actual}"/></td>
-                                                        <td><c:out value="${estims.lkg}"/></td>
-                                                        <td><c:out value="${estims.forecastlkg}"/></td>
-                                                        <td><c:out value="${estims.forecastlkg2}"/></td>
-                                                        <td><c:out value="${estims.forecastlkg3}"/></td>
+                                                        <td ><c:out value="${estims.area}"/></td>
+                                                        <td ><c:out value="${estims.rainfall}"/></td>
+                                                        <td ><c:out value="${estims.tiller}"/></td>
+                                                        <td ><c:out value="${estims.temp}"/></td>
+                                                        <td ><c:out value="${estims.actual}"/></td>
+                                                        <td ><c:out value="${estims.lkg}"/></td>
+                                                        <td ><c:out value="${estims.forecastlkg}"/></td>
+                                                        <td ><c:out value="${estims.forecastlkg2}"/></td>
+                                                        <td ><c:out value="${estims.forecastlkg3}"/></td>
                                                         <td>
                                                             <select name="status" class="form-control selectforc" style="width: 100%;">
                                                                 <c:forEach begin="1" end="3" var="i">
@@ -144,7 +144,7 @@
                                 </div>
 
                                 <div class="box-body">
-                                    <table id="distable" class="table  display table-hover" cellspacing="0" width="100%">
+                                    <table id="distable" class="table  display table-hover text-right" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>Year</th>
@@ -364,7 +364,12 @@
                                         valueSuffix: ' mm'
                                     }
 
-                                }]
+                                }], plotOptions: {
+                                series: {
+                                    borderWidth: 4,
+                                    borderColor: 'white'
+                                }
+                            }
                         });
                     }
                 });

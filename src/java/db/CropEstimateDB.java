@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.sourceforge.openforecast.DataPoint;
@@ -30,7 +31,21 @@ import net.sourceforge.openforecast.Observation;
  * @author ndrs
  */
 public class CropEstimateDB {
+    
+public double closest(double of, List<Double> in) {
+    double min = Double.MAX_VALUE;
+    double closest = of;
 
+    for (double v : in) {
+        final double diff = Math.abs(v - of);
+        if (diff < min) {
+            min = diff;
+            closest = v;
+        }
+    }
+
+    return closest;
+}
     public boolean selectEstimates(Double area, Double rain, Double tiller, Double temp) {
         cropEstimate fce = new cropEstimate();
         cropEstimate ce = new cropEstimate();
