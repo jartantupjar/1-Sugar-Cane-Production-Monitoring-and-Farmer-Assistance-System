@@ -83,12 +83,18 @@
                             <div class="col-md-5">
                                 <div class="box box-solid box-success">
                                     <div class="box-header with-border">
-                                        <h3 class="box-title">Comments Details</h3>
+                                        <h3 class="box-title">Post: ${ctitle}</h3>
                                     </div>
                                     <br>
                                     <div class="box-body">
-                                        <span style="width: 100%" rows="6"  name="message" class="pull-left"> Comment by <b>${cuser}</b> at Post <b>"${ctitle}"</b> : </span>
-                                        <span><b>${cmess}</b></span>
+                                        <div class="form-group">
+                                            <label for="projectname" class="control-label">User</label>
+                                            <input type="text" class="form-control" readonly="true" name="recommendation_name" id="recommendation_name" value="${cuser}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="projectname" class="control-label">Comment</label>
+                                            <input type="text" class="form-control" readonly="true" name="recommendation_name" id="recommendation_name" value="${cmess}">
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -74,7 +74,9 @@
                                     </div>
                                     <!-- /.box-header -->
                                     <div class="box-body">
+                                        
                                         <c:forEach var="bj" items="${post.image}">
+                                            
                                             <img class="img-rounded " src="${bj}" alt="Photo" style="width:40%">
                                         </c:forEach>
 
