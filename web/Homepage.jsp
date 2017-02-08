@@ -31,7 +31,9 @@
             <div class="box-header with-border">
                 <h1 class="box-title">Crop Estimate</h1>
                 <div class="box-tools pull-right">
-                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+            
+                    <a tabindex="0" class="" role="button" data-toggle="popover" data-trigger="focus" title="Dismissible popover" data-placement="left" data-content="And here's some amazing content. It's very engaging. Right?"><i class="fa fa-question text-orange"></i></a>  
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>    
                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                 </div>
             </div>   
@@ -273,7 +275,13 @@
         <script src="plugins/select2/select2.full.min.js"></script>
         <script src="plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
-        <script></script>
+        <script>
+             $(document).ready(function () {
+                  $('[data-toggle="popover"]').popover();
+             });
+            
+            
+        </script>
   
         <script type="text/javascript">
        $(document).ready(function () {
