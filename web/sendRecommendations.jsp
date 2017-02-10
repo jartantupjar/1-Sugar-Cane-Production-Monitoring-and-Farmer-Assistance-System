@@ -27,7 +27,9 @@
                                 <div class="box box-info">
                                     <div class="box-header">
                                         <h1 class="box-title">Send To: </h1>
-
+                                        <div class="box-tools pull-right">
+                                            <a tabindex="0" class="text-overflow" id="popSendto" role="button"><i class="fa fa-question text-orange"></i></a>
+                                        </div>
                                     </div>
 
                                     <div class="box-body ">
@@ -53,38 +55,44 @@
                                 </div>
 
                             </div>
-                           <div class="col-md-6 pull-right">
+                            <div class="col-md-6 pull-right">
                                 <div class="box box-info" id="genform">
-                                <div class="box-header with-border">
-                                    <h1 class="box-title">Additional Message</h1>
-                                    <div class="box-tools pull-right">
-                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                    </div>
-                                </div>
+                                    <div class="box-header with-border">
+                                        <h1 class="box-title">Additional Message</h1>
+                                        <div class="box-tools pull-right">
 
-                                <div class="box-body">
+                                            <a tabindex="0" class="text-overflow" id="popMsg" role="button"><i class="fa fa-question text-orange"></i></a>
 
-
-
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3">Message
-
-                                        </label>
-                                        <div class="col-md-9">
-                                            <textarea class="form-control" name="description" rows="3" >This recommendation is based on my observed comparison</textarea>
+                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                         </div>
                                     </div>
 
+                                    <div class="box-body">
 
+
+
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Message
+
+                                            </label>
+                                            <div class="col-md-9">
+                                                <textarea class="form-control" name="description" rows="3" >This recommendation is based on my observed comparison</textarea>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
                                 </div>
                             </div>
-                               </div>
                             <div class="col-md-12" > 
-                                
+
                                 <div class="box box-info">
                                     <div class="box-header">
                                         <h1 class="box-title">Select Recommendations: </h1>
-
+                                        <div class="box-tools pull-right">
+                                            <a tabindex="0" class="text-overflow" id="popSelRec" role="button"><i class="fa fa-question text-orange"></i></a>
+                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                        </div>
                                     </div>
 
                                     <div class="box-body ">
@@ -112,8 +120,9 @@
 
 
                             <div class="col-md-2 text-center pull-right">       
-                                  <input class="btn btn-success" type="button" value="Back" 
-        onClick="history.go(-1);return true;"> 
+                                <input class="btn btn-success" type="button" value="Back" 
+                                       onClick="history.go(-1);
+                                               return true;"> 
                                 <p><button class="btn btn-primary btn-block" style="width: 100%" value="submit">Send</button></p>
                             </div>
                         </form>  
@@ -142,12 +151,23 @@
     <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
     <script type="text/javascript" src="plugins/datatable/dataTables.checkboxes.min.js"></script>
     <script src="plugins/datepicker/bootstrap-datepicker.js"></script>
+       <script src="popoverText.js"></script>
+        <script>
+                                   $(document).ready(function () {
+                                       $('#popSendto').popover(popSendto);
+                                       $('#popMsg').popover(popMsg);
+                                       $('#popSelRec').popover(popSelRec);
+                                       
+  });
+
+
+        </script>
     <script>
-        $(function () {
-            $('.datepicker').datepicker({
-                autoclose: true
-            });
-        });</script>
+                                           $(function () {
+                                               $('.datepicker').datepicker({
+                                                   autoclose: true
+                                               });
+                                           });</script>
     <script>
 
         $(document).ready(function () {

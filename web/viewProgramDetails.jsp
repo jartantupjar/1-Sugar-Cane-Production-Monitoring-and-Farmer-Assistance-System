@@ -75,6 +75,7 @@ current vs then diagram
                                         <h3 class="box-title">Progress</h3>
 
                                         <div class="box-tools pull-right">
+                                            <a tabindex="0" class="text-overflow" id="popProgBar" role="button"><i class="fa fa-question text-orange"></i></a>
                                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                                             </button>
                                             <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -110,11 +111,12 @@ current vs then diagram
                                     <!-- /.box-body -->
                                 </div>
                             </div>
-                                                             <div class="col-md-6" > 
+                            <div class="col-md-6" > 
                                 <div class="box box-info">
                                     <div class="box-header with-border">
                                         <h1 class="box-title">Problems List</h1>
                                         <div class="box-tools pull-right">
+                                            <a tabindex="0" class="text-overflow" id="popProgProbList" role="button"><i class="fa fa-question text-orange"></i></a>
                                             <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                             <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                         </div>
@@ -135,7 +137,7 @@ current vs then diagram
                                                     <td><c:out value="${plist.prob_details}"></c:out></td>
                                                     </tr>
                                             </c:forEach>
-                                     
+
 
                                         </tbody>
 
@@ -144,26 +146,27 @@ current vs then diagram
 
                             </div>
                         </div>
-                            <div class="col-md-12" > 
-                                <div>   
-                                    <h3>
-                                        DISTRICT/BARANGAY :
+                        <div class="col-md-12" > 
+                            <div>   
+                                <h3>
+                                    DISTRICT/BARANGAY :
 
-                                    </h3></div>
-                                <div class="box box-info">
-                                    <div class="box-header with-border">
-                                        <h1 class="box-title">Observational Improvement</h1>
-                                        <div class="box-tools pull-right">
-                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                        </div>
-                                    </div>   
-                                    <div class="box-body" id="container1"> </div>
-                                </div>
-
+                                </h3></div>
+                            <div class="box box-info">
+                                <div class="box-header with-border">
+                                    <h1 class="box-title">Observational Improvement</h1>
+                                    <div class="box-tools pull-right">
+                                        <a tabindex="0" class="text-overflow" id="popObsImp" role="button"><i class="fa fa-question text-orange"></i></a>
+                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                    </div>
+                                </div>   
+                                <div class="box-body" id="container1"> </div>
                             </div>
-                            
-                        
+
+                        </div>
+
+
 
 
 
@@ -173,17 +176,18 @@ current vs then diagram
                                     <div class="box-header with-border">
                                         <h1 class="box-title"><input name="prog_name" class="form-control hidden" value="${progdet.prog_name}"/><c:out value="${progdet.prog_name}"></c:out></h1>
                                             <div class="box-tools pull-right">
+                                                <a tabindex="0" class="text-overflow" id="popUpdKPIProg" role="button"><i class="fa fa-question text-orange"></i></a>
                                                 <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                                 <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                             </div>
                                         </div>
 
                                         <div class="box-body">
-                <c:if test="${not empty kpis}">
+                                        <c:if test="${not empty kpis}">
                                             <table class="table table-hover">
                                                 <thead><tr>
                                                         <th >Performance Indicator</th>
-                                                   
+
                                                 <input value="${kpis[0].kpi_year}" name="kpi_year" class="form-control hidden" />
                                                 <input value="${kpis[0].tYears}" name="tYears" class="form-control hidden" />
                                                 <c:forEach  var="yrlist" begin="${kpis[0].kpi_year}" end="${kpis[0].kpi_year-1+kpis[0].tYears}">
@@ -191,38 +195,39 @@ current vs then diagram
                                                     <th>Actual</th>
                                                     <th class="hidden editz">Add</th>
                                                     </c:forEach>
-                                             
 
-                                            </tr>
-                                            </thead>
-                                                 
-                                            <tbody>
-                                                <c:forEach items="${kpis}" var="kpilist" varStatus="loopCount">
-                                                    <tr>
-                                                        <td><input class='form-control hidden' name = "kNa${loopCount.count}[]" value='${kpilist.kpi}'/><c:out value="${kpilist.kpi}"/></td>
-                                                            <c:forEach items="${kpilist.values}" var="yearloop" varStatus="aCountr">
 
-                                                            <td><c:out value="${yearloop}" /></td>
-                                                            <td><c:out value="${kpilist.aValues[aCountr.index]}" /></td>
-                                                            <td class="hidden editz"><input class='form-control' type="number" name = "y${loopCount.count}[]" value="0" /></td>
-                                                            </c:forEach>
-                                                    </tr>
-                                                </c:forEach>
-                                                   
-                                            </tbody>
-                                        </table>
-                                       <button class="btn btn-info pull-right hidden" id="uButton" style="width: 10%" value="submit" form="kpitable">Update</button>
-                                        <button class="btn btn-danger pull-right" id="eButton" style="width: 10%" type="button">Edit</button>
-               </c:if>
-                                                  </div>
+                                                </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                    <c:forEach items="${kpis}" var="kpilist" varStatus="loopCount">
+                                                        <tr>
+                                                            <td><input class='form-control hidden' name = "kNa${loopCount.count}[]" value='${kpilist.kpi}'/><c:out value="${kpilist.kpi}"/></td>
+                                                                <c:forEach items="${kpilist.values}" var="yearloop" varStatus="aCountr">
+
+                                                                <td><c:out value="${yearloop}" /></td>
+                                                                <td><c:out value="${kpilist.aValues[aCountr.index]}" /></td>
+                                                                <td class="hidden editz"><input class='form-control' type="number" name = "y${loopCount.count}[]" value="0" /></td>
+                                                                </c:forEach>
+                                                        </tr>
+                                                    </c:forEach>
+
+                                                </tbody>
+                                            </table>
+                                            <button class="btn btn-info pull-right hidden" id="uButton" style="width: 10%" value="submit" form="kpitable">Update</button>
+                                            <button class="btn btn-danger pull-right" id="eButton" style="width: 10%" type="button">Edit</button>
+                                        </c:if>
+                                    </div>
 
                                 </div>
                             </form>
                         </div>
 
 
-  <input class="btn btn-success pull-right" type="button" value="Back" 
-        onClick="history.go(-1);return true;"> 
+                        <input class="btn btn-success pull-right" type="button" value="Back" 
+                               onClick="history.go(-1);
+                return true;"> 
 
                     </div>
                 </section>
@@ -242,15 +247,26 @@ current vs then diagram
         <script type="text/javascript" src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="dist/js/app.min.js"></script>
-
         <script src="plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
         <script src="Highcharts/highcharts.js"></script>
         <script src="Highcharts/modules/drilldown.js"></script>
         <script src="Highcharts/modules/exporting.js"></script>
+        <script src="popoverText.js"></script>
         <script>
-    $(function () {
-        
+            $(document).ready(function () {
+                $('#popProgBar').popover(popProgBar);
+                $('#popProgProbList').popover(popProgProbList);
+                $('#popObsImp').popover(popObsImp);
+                $('#popUpdKPIProg').popover(popUpdKPIProg);
+
+            });
+
+
+        </script>
+        <script>
+            $(function () {
+
                 var categ;
                 var prce;
                 var poce;
@@ -258,86 +274,85 @@ current vs then diagram
                     url: 'loadProgramsProductionChart?name=${progdet.prog_name}',
                     type: 'POST',
                     dataType: "JSON",
-                    success: function (data) {  
+                    success: function (data) {
                         categ = data.categ;
                         prce = data.prce;
                         poce = data.poce;
-                        
-                        
-    $('#container1').highcharts({
-        chart: {
-            type: 'column',
-            spacingBottom: 30
-        },
-        title: {
-            text: 'Program-Production Improvement '
-        },
-        
-        legend: {
-            layout: 'vertical',
-            align: 'left',
-            verticalAlign: 'top',
-            x: 100,
-            y: 0,
-            floating: true,
-            borderWidth: 1,
-            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
-        },
-        xAxis: {
-            categories: categ
-        },
-        yAxis: {
-            title: {
-                text: 'Y-Axis'
-            },
-            labels: {
-                formatter: function () {
-                    return this.value;
-                }
-            }
-        },
-        tooltip: {
-            formatter: function () {
-                return '<b>' + this.series.name + '</b><br/>' +
-                    this.x + ': ' + this.y;
-            }
-        },
-        plotOptions: {
-            area: {
-                fillOpacity: 0.5
-            }
-        },
-        credits: {
-            enabled: false
-        },
-        series: [{
-            name: 'Pre',
-            data: prce
-        }, {
-            name: 'On-Going',
-            data: poce
-        }]
-    });
+
+
+                        $('#container1').highcharts({
+                            chart: {
+                                type: 'column',
+                                spacingBottom: 30
+                            },
+                            title: {
+                                text: 'Program-Production Improvement '
+                            },
+                            legend: {
+                                layout: 'vertical',
+                                align: 'left',
+                                verticalAlign: 'top',
+                                x: 100,
+                                y: 0,
+                                floating: true,
+                                borderWidth: 1,
+                                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+                            },
+                            xAxis: {
+                                categories: categ
+                            },
+                            yAxis: {
+                                title: {
+                                    text: 'Y-Axis'
+                                },
+                                labels: {
+                                    formatter: function () {
+                                        return this.value;
+                                    }
+                                }
+                            },
+                            tooltip: {
+                                formatter: function () {
+                                    return '<b>' + this.series.name + '</b><br/>' +
+                                            this.x + ': ' + this.y;
+                                }
+                            },
+                            plotOptions: {
+                                area: {
+                                    fillOpacity: 0.5
+                                }
+                            },
+                            credits: {
+                                enabled: false
+                            },
+                            series: [{
+                                    name: 'Pre',
+                                    data: prce
+                                }, {
+                                    name: 'On-Going',
+                                    data: poce
+                                }]
+                        });
                     }
-});
-    });
-    
+                });
+            });
+
         </script>
         <script>
-     $(function () {
-      $("#eButton").on("click", function () {
-                      $('.editz').removeClass('hidden');
-                      $('#eButton').addClass('hidden');
-                      $('#uButton').removeClass('hidden');
-                      
+            $(function () {
+                $("#eButton").on("click", function () {
+                    $('.editz').removeClass('hidden');
+                    $('#eButton').addClass('hidden');
+                    $('#uButton').removeClass('hidden');
+
                 });
-      $("#uButton").on("click", function () {
-                      $('#eButton').removeClass('hidden');
-                      $('.editz').addClass('hidden');
-                      
+                $("#uButton").on("click", function () {
+                    $('#eButton').removeClass('hidden');
+                    $('.editz').addClass('hidden');
+
                 });
-                
-    });
+
+            });
 
         </script>
     </body>

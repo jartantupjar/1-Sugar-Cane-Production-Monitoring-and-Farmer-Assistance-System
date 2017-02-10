@@ -38,6 +38,7 @@ comparison page add current vs historical details(past 2yrs)
                             <div class="box box-info">
                                 <div class="box-header" style="height:4%">
                                     <h5 class="box-title">Legend:</h5>
+                                   
                                 </div>
                                 <div class="box-body ">
                                     <table class="table table-hover table-bordered">
@@ -69,6 +70,9 @@ comparison page add current vs historical details(past 2yrs)
                             <div class="box box-info">
                                 <div class="box-header with-border">
                                     <h3 class="box-title">Basic Details</h3>
+                                     <div class="box-tools pull-right">
+                                      <a tabindex="0" class="text-overflow" id="popFarmBasicDet" role="button"><i class="fa fa-question text-orange"></i></a>
+                                         </div>
                                 </div>
                                 <div class="box-body">
                                     <table id="fieldtable" class="table table-hover table-responsive">
@@ -187,7 +191,8 @@ comparison page add current vs historical details(past 2yrs)
                                     <h3 class="box-title">#Farmer Details</h3>
 
                                     <div class="box-tools pull-right">
-                                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                      <a tabindex="0" class="text-overflow" id="popFarmComparison" role="button"><i class="fa fa-question text-orange"></i></a>
+                                         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                                         </button>
                                         <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                     </div>
@@ -903,7 +908,8 @@ comparison page add current vs historical details(past 2yrs)
 
                             <div class="col-md-12 hidden" id="recBlock">
                                 <br>
-                                <h1> Send Recommendations</h1>
+                                <h1> Send Recommendations<small><a tabindex="0" class="text-overflow" id="popSendRec" role="button"><i class="fa fa-info-circle text-orange"></i></a></small>
+                                       </h1>
                                 <div class="col-md-6" > 
 
                                     <div class="box box-info">
@@ -990,7 +996,8 @@ comparison page add current vs historical details(past 2yrs)
                             </div>
                             <div class="col-md-12 hidden" id="probBlock">
                                 <br>
-                                <h1> Report Problems</h1><h3>shorten the preselection using phase?</h3>
+                                <h1> Report Problems<small><a tabindex="0" class="text-overflow" id="popSendProb" role="button"><i class="fa fa-info-circle text-orange"></i></a></small></h1><h3>shorten the preselection using phase?</h3>
+                                
                                 <div class="col-md-6" > 
 
                                     <div class="box box-info">
@@ -1076,12 +1083,20 @@ comparison page add current vs historical details(past 2yrs)
                                 </div>
                             </div>
                             <div class="col-md-offset-9 col-md-4 hidden" id="checkBlock">
+                                    
                                 <input  style="width: 16; height: 16" value="${farm.id}" name="allid[]" class="form-control hidden">
                                 <c:forEach var="flow" items="${flist}">
                                     <input  style="width: 16; height: 16" value="${flow.id}" name="allid[]" class="form-control hidden">
                                 </c:forEach> 
                                 <div class="box box-info">
-                                    <div class="box-body ">
+                                      
+                                    <div class="box-header with-border">
+                                      <a tabindex="0" class="text-overflow" id="popSendto" role="button"><i class="fa fa-question text-orange"></i></a>
+                                      
+                                        </div>
+                                     
+                                    <div class="box-body">
+                                         
                                         <table id="selecttable" class="table table-hover table-bordered table-responsive">
                                             <tbody>
                                                 <tr>   <td><input type="checkbox" style="width: 16; height: 16" value="${farm.id}" name="farmid[]" class="msgCheckbox pull-left" checked></td>
@@ -1099,6 +1114,7 @@ comparison page add current vs historical details(past 2yrs)
                                 </div>
                             </div>
                             <div class="col-md-offset-2 col-md-7 text-center">
+                                
                                 <button class="btn btn-app btn-linkedin atools hidden" name="atools" id="crec" value="crec">
                                     <i class="fa fa-edit" ></i> Create Recommendations
                                 </button>
@@ -1170,6 +1186,18 @@ comparison page add current vs historical details(past 2yrs)
         </script>
         <script src="plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+         <script src="popoverText.js"></script>
+        <script>
+                                   $(document).ready(function () {
+                                       $('#popFarmBasicDet').popover(popFarmBasicDet);
+                                       $('#popFarmComparison').popover(popFarmComparison);
+                                       $('#popSendRec').popover(popSendRec);
+                                       $('#popSendProb').popover(popSendProb);
+                                       $('#popSendto').popover(popSendto);
+  });
+
+
+        </script>
         <script>  $(document).ready(function () {
 
                 $("#viewRecs").on("click", function () {

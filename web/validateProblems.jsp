@@ -27,7 +27,10 @@
                                 <div class="box box-info">
                                     <div class="box-header">
                                         <h1 class="box-title">Send To: </h1>
-
+<div class="box-tools pull-right">
+                                            <a tabindex="0" class="text-overflow" id="popSendto" role="button"><i class="fa fa-question text-orange"></i></a>
+                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                        </div>
                                     </div>
 
                                     <div class="box-body ">
@@ -58,7 +61,8 @@
                                 <div class="box-header with-border">
                                     <h1 class="box-title">Additional Message</h1>
                                     <div class="box-tools pull-right">
-                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                        <a tabindex="0" class="text-overflow" id="popProbMsg" role="button"><i class="fa fa-question text-orange"></i></a>
+                                           <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                     </div>
                                 </div>
 
@@ -84,7 +88,10 @@
                                 <div class="box box-info">
                                     <div class="box-header">
                                         <h1 class="box-title">Selected Problems: </h1>
-
+ <div class="box-tools pull-right">
+                                            <a tabindex="0" class="text-overflow" id="popVSelProb" role="button"><i class="fa fa-question text-orange"></i></a>
+                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                        </div>
                                     </div>
 
                                     <div class="box-body ">
@@ -156,6 +163,16 @@
     <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
     <script type="text/javascript" src="plugins/datatable/dataTables.checkboxes.min.js"></script>
     <script src="plugins/datepicker/bootstrap-datepicker.js"></script>
+    <script src="popoverText.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#popSendto').popover(popSendto);
+            $('#popProbMsg').popover(popProbMsg);
+            $('#popVSelProb').popover(popVSelProb);
+        });
+
+
+    </script>
     <script>
         $(function () {
             $('.datepicker').datepicker({

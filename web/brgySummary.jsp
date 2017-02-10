@@ -58,7 +58,8 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                                 <div class="box-header with-border">
                                     <h1 class="box-title">Barangay Yearly Production</h1>
                                     <div class="box-tools pull-right " >
-                                        <button class="btn btn-box-tool"  data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                      <a tabindex="0" class="text-overflow" id="popBrgyYrProdChart" role="button"><i class="fa fa-question text-orange"></i></a>
+                                      <button class="btn btn-box-tool"  data-widget="collapse"><i class="fa fa-minus"></i></button>
                                         <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                     </div>
                                 </div>
@@ -81,7 +82,8 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                                 <div class="box-header with-border">
                                     <h1 class="box-title">Farmer Production for Current Year</h1>
                                     <div class="box-tools pull-right " >
-                                        <button class="btn btn-box-tool"  data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                       <a tabindex="0" class="text-overflow" id="PopFarmerProdCurrYear" role="button"><i class="fa fa-question text-orange"></i></a>
+                                      <button class="btn btn-box-tool"  data-widget="collapse"><i class="fa fa-minus"></i></button>
                                         <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                     </div>
                                 </div>
@@ -108,7 +110,8 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                                     <h3 class="box-title">#Farmer Details</h3>
 
                                     <div class="box-tools pull-right">
-                                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                         <a tabindex="0" class="text-overflow" id="PopBrgyFarmerList" role="button"><i class="fa fa-question text-orange"></i></a>
+                                      <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                                         </button>
                                         <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                     </div>
@@ -157,7 +160,16 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
            <script src="Highcharts/highcharts.js"></script>
         <script src="Highcharts/modules/drilldown.js"></script>
+<script src="popoverText.js"></script>
+        <script>
+            $(document).ready(function () {
+            $('#popBrgyYrProdChart').popover(popBrgyYrProdChart);
+                $('#PopFarmerProdCurrYear').popover(PopFarmerProdCurrYear);
+                $('#PopBrgyFarmerList').popover(PopBrgyFarmerList);
 
+            });
+            
+            </script>
         <script>
 
             $(document).ready(function () {

@@ -30,6 +30,7 @@
                                 <div class="box-header with-border">
                                     <h1 class="box-title ">A. Area Harvested</h1>
                                     <div class="box-tools pull-right">
+                                       <a tabindex="0" class="text-overflow" id="popAreaHarv" role="button"><i class="fa fa-question text-orange"></i></a>
                                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                         <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                     </div>
@@ -88,6 +89,7 @@
                                 <div class="box-header with-border">
                                     <h1 class="box-title">B. Standing Crop</h1>
                                     <div class="box-tools pull-right">
+                                       <a tabindex="0" class="text-overflow" id="popStandCrop" role="button"><i class="fa fa-question text-orange"></i></a>
                                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                         <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                     </div>
@@ -117,11 +119,18 @@
 
                         <div class="col-md-12" id="content" >
                             <h3 class="text-bold">PART 2:NARRATIVE REPORT  <small>Optional description</small></h3>
+                            
                             <form action="submitCA">
                                 
                                 <input name="weekending" value="${Week_ending}" type="hidden">
                                 <input name="cropyear" value="${todayYear}" type="hidden">
-                                <div class="box box-info">                        
+                                <div class="box box-info">   
+                                    <div class="box-header">
+                                    <div class="box-tools pull-right">
+                                        <a tabindex="0" class="text-overflow" id="popNarativeRep" role="button"><i class="fa fa-question text-orange"></i></a>
+                                      
+                                    </div>
+                                        </div>
                                     <div class="box-body">
 
 
@@ -192,6 +201,18 @@
         <script src="plugins/select2/select2.full.min.js"></script>
         <script src="plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+        <script src="popoverText.js"></script>
+        <script>
+            $(document).ready(function () {
+            $('#popAreaHarv').popover(popAreaHarv);
+                $('#popStandCrop').popover(popStandCrop);
+                $('#popWeatherForecast').popover(popWeatherForecast);
+                $('#popNarativeRep').popover(popNarativeRep);
+
+            });
+
+
+        </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js"></script>
         <script>
  

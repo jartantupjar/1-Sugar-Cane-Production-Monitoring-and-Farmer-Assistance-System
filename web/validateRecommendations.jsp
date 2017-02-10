@@ -27,7 +27,10 @@
                                 <div class="box box-info">
                                     <div class="box-header">
                                         <h1 class="box-title">Send To: </h1>
-
+                                        <div class="box-tools pull-right">
+                                            <a tabindex="0" class="text-overflow" id="popSendto" role="button"><i class="fa fa-question text-orange"></i></a>
+                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                        </div>
                                     </div>
 
                                     <div class="box-body ">
@@ -53,69 +56,73 @@
                                 </div>
 
                             </div>
-                           <div class="col-md-6 pull-right">
+                            <div class="col-md-6 pull-right">
                                 <div class="box box-info" id="genform">
-                                <div class="box-header with-border">
-                                    <h1 class="box-title">Additional Message</h1>
-                                    <div class="box-tools pull-right">
-                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                    </div>
-                                </div>
-
-                                <div class="box-body">
-
-
-
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3">Message
-
-                                        </label>
-                                        <div class="col-md-9">
-                                            <textarea class="form-control" name="description" rows="3" >This recommendation is based on my observed comparison</textarea>
+                                    <div class="box-header with-border">
+                                        <h1 class="box-title">Additional Message</h1>
+                                        <div class="box-tools pull-right">
+                                            <a tabindex="0" class="text-overflow" id="popMsg" role="button"><i class="fa fa-question text-orange"></i></a>
+                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                         </div>
                                     </div>
 
+                                    <div class="box-body">
 
+
+
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">Message
+
+                                            </label>
+                                            <div class="col-md-9">
+                                                <textarea class="form-control" name="description" rows="3" >This recommendation is based on my observed comparison</textarea>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
                                 </div>
                             </div>
-                               </div>
                             <div class="col-md-12" > 
-                                
+
                                 <div class="box box-info">
                                     <div class="box-header">
                                         <h1 class="box-title">Selected Recommendations: </h1>
-
+                                        <div class="box-tools pull-right">
+                                            <a tabindex="0" class="text-overflow" id="popVSelRec" role="button"><i class="fa fa-question text-orange"></i></a>
+                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                        </div>
                                     </div>
 
                                     <div class="box-body ">
 
                                         <table id="allrecs" class="table  display table-hover pull-right" cellspacing="0" width="100%">
-                                        <thead>
-                                            <tr>
-                                            
-                                                <th>Recommendation</th>
-                                                <th>Type</th>
-                                                <th>Phase</th>
-                                                <th>Description</th>
-                                                <th>More Info</th>
+                                            <thead>
+                                                <tr>
 
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                  <c:if test="${not empty darecs}">
-                                       <c:forEach items="${darecs}" var="rec" >
-                                           <tr>
-                                     
-                                       <td><input class="form-control hidden" name="id[]" value="${rec.id}"><c:out value="${rec.recommendation_name}"/></td>
-                                       <td><c:out value="${rec.type}"/></td>
-                                       <td><c:out value="${rec.phase}"/></td>
-                                       <td><c:out value="${rec.description}"/></td>
-                                       <td><a href="viewRecDetails?id=${rec.id}" target="_blank" class="btn btn-primary text-center">...</a></td>
-                                           </tr>
-                                           </c:forEach>
-                                           </c:if>
-                                        </tbody>
-                                    </table>
+                                                    <th>Recommendation</th>
+                                                    <th>Type</th>
+                                                    <th>Phase</th>
+                                                    <th>Description</th>
+                                                    <th>More Info</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <c:if test="${not empty darecs}">
+                                                    <c:forEach items="${darecs}" var="rec" >
+                                                        <tr>
+
+                                                            <td><input class="form-control hidden" name="id[]" value="${rec.id}"><c:out value="${rec.recommendation_name}"/></td>
+                                                            <td><c:out value="${rec.type}"/></td>
+                                                            <td><c:out value="${rec.phase}"/></td>
+                                                            <td><c:out value="${rec.description}"/></td>
+                                                            <td><a href="viewRecDetails?id=${rec.id}" target="_blank" class="btn btn-primary text-center">...</a></td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                </c:if>
+                                            </tbody>
+                                        </table>
 
 
                                     </div>
@@ -126,8 +133,9 @@
 
 
                             <div class="col-md-2 text-center pull-right">       
-                                  <input class="btn btn-success" type="button" value="Back" 
-        onClick="history.go(-1);return true;"> 
+                                <input class="btn btn-success" type="button" value="Back" 
+                                       onClick="history.go(-1);
+                return true;"> 
                                 <p><button class="btn btn-primary btn-block" style="width: 100%" value="submit">Send</button></p>
                             </div>
                         </form>  
@@ -156,6 +164,16 @@
     <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
     <script type="text/javascript" src="plugins/datatable/dataTables.checkboxes.min.js"></script>
     <script src="plugins/datepicker/bootstrap-datepicker.js"></script>
+    <script src="popoverText.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#popSendto').popover(popSendto);
+            $('#popMsg').popover(popMsg);
+            $('#popVSelRec').popover(popVSelRec);
+        });
+
+
+    </script>
     <script>
         $(function () {
             $('.datepicker').datepicker({
