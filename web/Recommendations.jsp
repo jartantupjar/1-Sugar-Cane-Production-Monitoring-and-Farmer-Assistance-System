@@ -14,7 +14,7 @@
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-       <link href="plugins/pace2/themes/green/pace-theme-center-simple.css" rel="stylesheet" />
+        <link href="plugins/pace2/themes/green/pace-theme-center-simple.css" rel="stylesheet" />
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
@@ -35,8 +35,8 @@
                                 <div class="box-header with-border">
                                     <h1 class="box-title">Recommendations</h1>
                                     <div class="box-tools pull-right">
+                                        <a tabindex="0" class="text-overflow" id="popRec" role="button"><i class="fa fa-question text-orange"></i></a>
                                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                        <!-- In box-tools add this button if you intend to use the contacts pane -->
                                         <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                     </div>
                                 </div>
@@ -77,6 +77,15 @@
         <script src="plugins/pace2/pace.min.js"></script>
         <script src="plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+        <script src="popoverText.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#popRec').popover(popRec);
+
+            });
+
+
+        </script>
         <script>
 
             $(document).ready(function () {

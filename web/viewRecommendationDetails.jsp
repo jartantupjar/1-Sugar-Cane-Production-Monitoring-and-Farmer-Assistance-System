@@ -26,64 +26,74 @@
                                 <div class="box-body box-profile">
 
                                     <h3 class="profile-username text-center"><c:out value="${recdet.recommendation_name}"></c:out></h3> 
-                                    <ul class="list-group list-group-unbordered">
+                                        <ul class="list-group list-group-unbordered">
 
 
-<!--                                        <li class="list-group-item">
-                                            <b>Recommendation </b>  <a class="pull-right">
-                                                    <c:out value="${recdet.recommendation_name}"></c:out>
-                                                    </a>
-                                            </li>-->
+                                            <!--                                        <li class="list-group-item">
+                                                                                        <b>Recommendation </b>  <a class="pull-right">
+                                        <c:out value="${recdet.recommendation_name}"></c:out>
+                                        </a>
+                                </li>-->
                                             <li class="list-group-item">
                                                 <b>Type</b><a class="pull-right">
-                                                    <c:out value="${recdet.type}"></c:out>
-                                                   </a>
+                                                <c:out value="${recdet.type}"></c:out>
+                                                </a>
                                             </li>
                                             <li class="list-group-item">
                                                 <b>Description </b><a class="text-right"><p>
-                                                <c:out value="${recdet.description}"></c:out>
-                                                </p></a>
+                                                    <c:out value="${recdet.description}"></c:out>
+                                                    </p></a>
                                             </li>
                                             <li class="list-group-item">
                                                 <b>Phase</b> <a class="pull-right">
-                                                    <c:out value="${recdet.phase}"></c:out>
+                                                <c:out value="${recdet.phase}"></c:out>
 
-                                                   </a>
+                                                </a>
                                             </li>
                                             <li class="list-group-item">
                                                 <b>Status</b> <a class="pull-right">
-                                                    <c:out value="${recdet.status}"></c:out>
+                                                <c:out value="${recdet.status}"></c:out>
 
-                                                     </a>
+                                                </a>
                                             </li>
-                                       
-                                       
-                                     
 
-                                    </ul>
 
+
+
+                                        </ul>
+
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                       
 
-                        <div class="col-md-6">
-                            <div class="box box-solid box-info">
-                                <div class="box-header with-border">
-                                    <h3 class="box-title">Problems being solved: </h3>
-                                </div>
-                                <div class="box-body">
-                                      <c:if test="${not empty problist}">
-                                    <table class="table table-bordered" >
-                                        <thead>
-                                            <tr>
-                                                <th>Problem</th>
-                                                <th>Description</th>
-                                                <th>Details</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                          
+                                     
+
+                            <div class="col-md-7">
+                                <c:if test="${not empty problist}">
+                                <div class="box box-info"> 
+                                     
+                                    <div class="box-header with-border">
+                                   
+                                        <h3 class="box-title">Problems being solved: </h3>
+                                         <div class="box-tools pull-right">
+                                              <a tabindex="0" class="" id="popProbSolved" role="button"><i class="fa fa-question text-orange"></i></a>
+                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                        </div>
+                                    </div>
+
+                                    <div class="box-body">
+                                    <c:if test="${not empty problist}">
+                                        <table class="table table-bordered" >
+                                            <thead>
+                                                <tr>
+                                                    <th>Problem</th>
+                                                    <th>Description</th>
+                                                    <th>Details</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
                                                 <c:forEach var="plist" items="${problist}">
 
                                                     <tr>	
@@ -92,23 +102,25 @@
                                                         <td><a class="btn btn-primary" href="viewProbDetails?id=${plist.prob_id}" >details</a></td>
                                                     </tr>
                                                 </c:forEach>
-                                          
 
-                                        </tbody>
-                                    </table>
-                                      </c:if>
+
+                                            </tbody>
+                                        </table>
+                                    </c:if>
                                 </div>
+                                                        
                             </div>
+                                </c:if>
                         </div>
-                     
-                        
-                        <div class="col-md-8" > 
+
+
+                        <div class="col-md-12" > 
                             <div class="box box-info">
                                 <div class="box-header with-border">
                                     <h1 class="box-title">Recommendation w/ fields</h1>
                                     <div class="box-tools pull-right">
+                                        <a tabindex="0" class="text-overflow" id="popRecfield" role="button"><i class="fa fa-question text-orange"></i></a>
                                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                        <!-- In box-tools add this button if you intend to use the contacts pane -->
                                         <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                     </div>
                                 </div>
@@ -131,10 +143,10 @@
                                 </div>
 
                             </div>
-                           
+
                         </div>   
-                            <input class="btn btn-success pull-right" type="button" value="Back" 
-        onClick="history.go(-1);return true;">                            
+                        <input class="btn btn-success pull-right" type="button" value="Back" 
+                               onClick="history.go(-1);return true;">                            
                     </div>
 
                     <br>
@@ -149,6 +161,16 @@
         <script src="dist/js/app.min.js"></script>
         <script src="plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+        <script src="popoverText.js"></script>
+        <script>
+                                   $(document).ready(function () {
+                                       $('#popRecfield').popover(popRecfield);
+                                       $('#popProbSolved').popover(popProbSolved);
+
+                                   });
+
+
+        </script>
         <script>
 
             $(document).ready(function () {
@@ -158,13 +180,13 @@
                     },
                     'columnDefs': [{
                             'targets': 7,
-                        
+
                             'render': function (data, type, full, meta) {
                                 return '<a href="viewFieldDetails?id=' + data + '" class="btn btn-primary">Details</a>';
                             }
-                            
+
                         }]
-                       
+
                 });
             });
 
