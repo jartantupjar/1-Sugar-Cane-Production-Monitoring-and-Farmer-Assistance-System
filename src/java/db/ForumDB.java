@@ -447,6 +447,29 @@ public class ForumDB {
         }
         return 0;
     }
+    public Integer addnewpost(String title, String message, Date date_s, Date date_p, String status, String phase, Integer rec_id){
+        int check=0;
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "INSERT INTO posts(title,message,date_started,date_posted,status,phase,Recommendations_id) values(?,?,?,?,?,?,?)";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, title);
+            pstmt.setString(2, title);
+            pstmt.setDate(3, date_s);
+            pstmt.setDate(4, date_p);
+            pstmt.setString(5, title);
+            pstmt.setString(6, title);
+            pstmt.setInt(7, rec_id);
+            check  = pstmt.executeUpdate();
+                pstmt.close();
+                conn.close();            
+            return check;
+                 }catch (SQLException ex) {
+            Logger.getLogger(ForumDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
     public Integer addCommentsUsers(Integer comments_id,String username){
         int check=0;
         try {
@@ -512,12 +535,22 @@ public class ForumDB {
         }
         return 0;
     }
-    public Integer addRedirectionNotification(Integer fields_id,String message,Date date, Integer post_id){
+    public Integer addRedirectionNotification(Integer fields_id,String message,Date date, Integer post_id, Integer prob_id, Integer recom_id){
         int check=0;
         try {
+            String query = "";
+            Integer finid = 0;
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "INSERT INTO notifications(disaster,received,Fields_id,message,date,Posts_id) values(?,?,?,?,?,?); ";
+            if(prob_id == 0){
+            query = "INSERT INTO notifications(disaster,received,Fields_id,message,date,Posts_id,`Recommendations_Fields_id`) values(?,?,?,?,?,?,?); ";  
+            finid = recom_id;
+            }
+            else if(recom_id ==0){
+            query = "INSERT INTO notifications(disaster,received,Fields_id,message,date,Posts_id,`Problems-Fields_id`) values(?,?,?,?,?,?,?); ";    
+            finid = prob_id;
+            }
+            
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, "N");
             pstmt.setString(2, "N");
@@ -525,6 +558,7 @@ public class ForumDB {
             pstmt.setString(4,message);
             pstmt.setDate(5, date);
             pstmt.setInt(6, post_id);
+            pstmt.setInt(7, finid);
             check  = pstmt.executeUpdate();
                 
                 pstmt.close();

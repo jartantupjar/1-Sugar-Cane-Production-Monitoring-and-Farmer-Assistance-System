@@ -6,7 +6,10 @@
 package controller;
 
 import db.ForumDB;
+import db.ProblemsDB;
+import db.fixedRecDB;
 import entity.Forum;
+import entity.Recommendation;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -41,6 +44,8 @@ public class linktoPost extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             HttpSession session = request.getSession();
             ForumDB fdb = new ForumDB();
+            ProblemsDB pdb = new ProblemsDB();
+            fixedRecDB rdb = new fixedRecDB();
             int test = 0;
             java.sql.Date tdate = (java.sql.Date) session.getAttribute("todaysDate");
             int fields_id = Integer.parseInt(request.getParameter("fields"));
@@ -64,9 +69,15 @@ public class linktoPost extends HttpServlet {
             }
             Forum f = new Forum();
             f = fdb.getForumDetailByName(param);
-            if(f != null){
-                 test  = fdb.addRedirectionNotification(fields_id, "You been redirected to this : " + f.getTitle(), tdate,f.getId());
+            if(f.getProb_id()!= null){
+            int pfid = pdb.linktoProblems(fields_id, f.getProb_id(), tdate, "Veryfying");
+            test  = fdb.addRedirectionNotification(fields_id, "You been redirected to this post : " + f.getTitle(), tdate,f.getId(),pfid,0);
             }
+            else if(f.getRecom_id() != null){
+            int rfid = rdb.linktoRecommendation(fields_id, f.getRecom_id(), tdate,"Active");
+            test  = fdb.addRedirectionNotification(fields_id, "You been redirected to this post : " + f.getTitle(), tdate,f.getId(),0,rfid);
+            }
+            
             if(test>0){
                 ServletContext context = getServletContext();
                 RequestDispatcher rd = context.getRequestDispatcher("/Forum.jsp");

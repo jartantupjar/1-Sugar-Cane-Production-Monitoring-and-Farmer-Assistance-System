@@ -44,7 +44,14 @@
                                         <div class="box-header with-border">
                                             <div class="user-block">
                                                 <img class="img-circle" src="dist/img/user1-128x128.jpg" alt="User Image">
+                                            <c:choose>
+                                            <c:when test="${post.farmer != ''}">
                                                 <span class="username"><a href="#">${post.farmer}</a></span>
+                                            </c:when>
+                                            <c:otherwise>
+                                            <span class="username"><a href="#">AUTO GENERATED POST</a></span>
+                                            </c:otherwise>
+                                            </c:choose>
                                             <span class="description">${post.date_posted}</span>
                                             <br>
                                             <c:if test="${post.prob_id != ''}">
