@@ -70,6 +70,10 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                     
                         <div class="col-md-4">
                             <div class="box box-primary">
+                                 <div class="box-tools pull-right">
+                                       <a tabindex="0" class="text-overflow" id="popFarmerProdDet" role="button"><i class="fa fa-question text-orange"></i></a>
+                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                          </div>
                                 <div class="box-body box-profile">
 
                                     <h3 class="profile-username text-center">Production Details : <c:out value="${farmDet.tYears}"/> year/s worth of data </h3>
@@ -115,6 +119,7 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                                 <div class="box-header with-border">
                                     <h1 class="box-title">Problems List</h1>
                                     <div class="box-tools pull-right">
+                                         <a tabindex="0" class="text-overflow" id="popFarmerProbList" role="button"><i class="fa fa-question text-orange"></i></a>
                                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                         <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                     </div>
@@ -140,7 +145,8 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                                 <div class="box-header with-border">
                                     <h1 class="box-title">Rec & Proj List(add list of programs)</h1>
                                     <div class="box-tools pull-right " >
-                                        <button class="btn btn-box-tool"  data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                       <a tabindex="0" class="text-overflow" id="popRecProjList" role="button"><i class="fa fa-question text-orange"></i></a>
+                                         <button class="btn btn-box-tool"  data-widget="collapse"><i class="fa fa-minus"></i></button>
                                         <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                     </div>
                                 </div>
@@ -170,7 +176,8 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                                     <h3 class="box-title">#Farms Details</h3>
 
                                     <div class="box-tools pull-right">
-                                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                        <a tabindex="0" class="text-overflow" id="popFarmerFarmList" role="button"><i class="fa fa-question text-orange"></i></a>
+                                       <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                                         </button>
                                         <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                     </div>
@@ -222,7 +229,17 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
 
         <script src="plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script src="popoverText.js"></script>
+        <script>
+            $(document).ready(function () {
+            $('#popFarmerProdDet').popover(popFarmerProdDet);
+                $('#popFarmerProbList').popover(popFarmerProbList);
+                $('#popRecProjList').popover(popRecProjList);
+                $('#popFarmerFarmList').popover(popFarmerFarmList);
 
+            });
+            
+            </script>
         <script>
 
             $(document).ready(function () {

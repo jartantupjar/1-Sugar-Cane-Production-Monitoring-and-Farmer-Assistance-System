@@ -38,6 +38,7 @@
                                 <div class="box-header with-border">
                                     <h1 class="box-title">Estimations</h1>
                                     <div class="box-tools pull-right">
+                                        <a tabindex="0" class="text-overflow" id="popYrlyLKGEst" role="button"><i class="fa fa-question text-orange"></i></a>
                                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                         <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                     </div>
@@ -97,7 +98,7 @@
                                             </c:if>
                                         </tbody>
                                     </table>
-                                   
+
                                 </div>
 
                             </div>
@@ -107,6 +108,7 @@
                                 <div class="box-header with-border">
 
                                     <div class="box-tools pull-right">
+                                        <a tabindex="0" class="text-overflow" id="popDistLKGEstDrill" role="button"><i class="fa fa-question text-orange"></i></a>
                                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                         <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                     </div>
@@ -138,6 +140,7 @@
                                 <div class="box-header with-border">
                                     <h1 class="box-title">Weekly District Estimates</h1>
                                     <div class="box-tools pull-right">
+                                        <a tabindex="0" class="text-overflow" id="popWeeklyDistLKGEst" role="button"><i class="fa fa-question text-orange"></i></a>
                                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                         <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                     </div>
@@ -160,14 +163,15 @@
                                             </tr>
                                         </thead>
                                     </table>
- <button type="button" class="btn btn-info pull-right" id="showform" >Gen Forecast</button>
+                                    <button type="button" class="btn btn-info pull-right" id="showform" >Gen Forecast</button>
                                 </div>
 
                             </div>
- <div class="box box-info hidden" id="genform">
+                            <div class="box box-info hidden" id="genform">
                                 <div class="box-header with-border">
                                     <h1 class="box-title">Generate Forecast</h1>
                                     <div class="box-tools pull-right">
+                                       <a tabindex="0" class="text-overflow" id="popLKGGenForc" role="button"><i class="fa fa-question text-orange"></i></a>
                                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                         <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                     </div>
@@ -185,7 +189,7 @@
 
                                                 </div>
                                             </div>
-                                             <div class="form-group">
+                                            <div class="form-group">
                                                 <label class="control-label">Total Tons_Cane(tc)
                                                     <span class="required" aria-required="true"> * </span>
                                                 </label>
@@ -194,7 +198,7 @@
 
                                                 </div>
                                             </div>
-                                             <div class="form-group">
+                                            <div class="form-group">
                                                 <label class="control-label">Expected Total LKG(to be used as part of the next test forecast)
                                                     <span class="required" aria-required="true"> * </span>
                                                 </label>
@@ -213,8 +217,8 @@
 
                                                 </div>
                                             </div>
-                                       
-                                            
+
+
 
 
                                         </div>
@@ -229,7 +233,8 @@
                                 <div class="box-header with-border">
                                     <h1 class="box-title">Forecast Simulations</h1>
                                     <div class="box-tools pull-right">
-                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                        <a tabindex="0" class="text-overflow" id="popLKGForcSim" role="button"><i class="fa fa-question text-orange"></i></a>
+                                       <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                         <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                     </div>
                                 </div>
@@ -256,10 +261,10 @@
 
                             </div>
                         </div>
-                        
 
 
-                           
+
+
 
 
 
@@ -429,23 +434,36 @@
         <script src="plugins/select2/select2.full.min.js"></script>
         <script src="plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+        <script src="popoverText.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#popYrlyLKGEst').popover(popYrlyLKGEst);
+                $('#popDistLKGEstDrill').popover(popDistLKGEstDrill);
+                $('#popWeeklyDistLKGEst').popover(popWeeklyDistLKGEst);
+                $('#popLKGGenForc').popover(popLKGGenForc);
+                $('#popLKGForcSim').popover(popLKGForcSim);
+
+            });
+
+
+        </script>
         <script>
 
             $(document).ready(function () {
 
 
                 var testing = $('#select3').on('change', function (evt) {
-                  
+
                     var yr = $("#select3").val();
-                    
-                        $('#distbox').removeClass('hidden');
-                        var table = $('#distable').DataTable({
-                            destroy: true,
-                            'ajax': {
-                                'url': 'viewDistCropEstimate?year=' + yr + ''
-                            }
-                        });
-                    
+
+                    $('#distbox').removeClass('hidden');
+                    var table = $('#distable').DataTable({
+                        destroy: true,
+                        'ajax': {
+                            'url': 'viewDistCropEstimate?year=' + yr + ''
+                        }
+                    });
+
                 });
                 console.log(testing);
                 $('#select2').on('change', function (evt) {

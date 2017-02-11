@@ -104,6 +104,7 @@ on barangay selection
                                 <div class="box-header">
                                     <h1 class="box-title">Crop Validation for ${farm.cropVal.year}</h1>
                                     <div class="box-tools pull-right">
+                                        <a tabindex="0" class="text-overflow" id="popCropVal" role="button"><i class="fa fa-question text-orange"></i></a>
                                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                     </div>
                                 </div>
@@ -206,7 +207,9 @@ on barangay selection
                                     <div class="box-header">
                                         <h1 class="box-title">Soil Analysis</h1>
                                         <div class="box-tools pull-right">
+                                            <a tabindex="0" class="text-overflow" id="popSoilAna" role="button"><i class="fa fa-question text-orange"></i></a>
                                             <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                         </div>
                                     </div>
                                     <div class="box-body box-profile">
@@ -243,6 +246,12 @@ on barangay selection
 
                             <div class="col-md-4">
                                 <div class="box box-primary ">
+                                    <div class="box-header with-border">
+                                        <div class="box-tools pull-right">
+                                            <a tabindex="0" class="text-overflow" id="popFertInfo" role="button"><i class="fa fa-question text-orange"></i></a>
+                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                        </div>
+                                    </div>
                                     <div class="box-body">
                                         <h3 class="profile-username text-center">Fertilizer Info for ${farm.fertilizer.year}:</h3>
                                         <table id="recTable" class="table  display table-hover" cellspacing="0" width="100%">
@@ -274,6 +283,13 @@ on barangay selection
                             </div>
                             <div class="col-md-4">
                                 <div class="box box-primary ">
+                                    <div class="box-header with-border">
+
+                                        <div class="box-tools pull-right">
+                                            <a tabindex="0" class="text-overflow" id="popTillInfo" role="button"><i class="fa fa-question text-orange"></i></a>
+                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                        </div>
+                                    </div>
                                     <div class="box-body">
                                         <h3 class="profile-username text-center">Tiller Info for ${farm.tillers.year}:</h3>
                                         <table id="recTable" class="table  display table-hover" cellspacing="0" width="100%">
@@ -308,6 +324,7 @@ on barangay selection
                                     <div class="box-header with-border">
                                         <h1 class="box-title">Problems List</h1>
                                         <div class="box-tools pull-right">
+                                            <a tabindex="0" class="text-overflow" id="popFarmProbList" role="button"><i class="fa fa-question text-orange"></i></a>
                                             <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                             <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                         </div>
@@ -349,6 +366,7 @@ on barangay selection
                                     <div class="box-header with-border">
                                         <h1 class="box-title">Recommendations List</h1>
                                         <div class="box-tools pull-right">
+                                            <a tabindex="0" class="text-overflow" id="popFarmRecList" role="button"><i class="fa fa-question text-orange"></i></a>
                                             <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                             <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                         </div>
@@ -389,14 +407,13 @@ on barangay selection
                         </div>
 
                         <div class="col-md-offset-5 col-sm-3 ">
-
                             <button id="actionButton" class="btn btn-success btn-block" type="button" style="height: 6%;">View Action Tools</button>
                             <button id="obsrvButton" class="btn btn-info btn-block" type="button" style="">Create Observation</button>
                         </div>       
                         <div class="col-md-offset-3 col-sm-6 hidden" id="actionBlock"
                              >
-                               <br>
-                            <h3> Action Tools</h3>
+                            <br>
+                            <h3> Action Tools<a tabindex="0" class="text-overflow" id="popFarmActionTools" role="button"><i class="fa fa-info-circle text-blue"></i></a></h3>
                             <form id="frm-sendRec" action="viewSendRec">
                                 <input name="farmid" type="hidden" value="${id}"/>
 
@@ -412,11 +429,14 @@ on barangay selection
                                 </button>
 
                             </form>
-                              
+
                         </div>
                         <div id="observBlock" class="col-md-12 hidden">
-                              <br>
-                            <h1> Farm Observation</h1>
+                            <br>
+                            
+                          
+                            <h1> Farm Observation <small><a tabindex="0" class="text-overflow" id="popFarmObs" role="button"><i class="fa fa-info-circle text-orange"></i></a></small></h1>
+                             
                             <div class="col-md-7">
                                 <div class="form-group">
                                     <select id="select2" class="select2" multiple="multiple" data-placeholder="Select a Tag" style="width: 100%;">
@@ -536,7 +556,7 @@ on barangay selection
                     $('#actionBlock').removeClass('hidden');
                     $('#observBlock').addClass('hidden');
                     $('#actionButton').addClass('hidden');
-                     $('#obsrvButton').removeClass('hidden');
+                    $('#obsrvButton').removeClass('hidden');
 
                 });
 
@@ -671,7 +691,22 @@ on barangay selection
 
         <script src="plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+ <script src="popoverText.js"></script>
+        <script>
+                                   $(document).ready(function () {
+                                       $('#popCropVal').popover(popCropVal);
+                                       $('#popSoilAna').popover(popSoilAna);
+                                       $('#popFertInfo').popover(popFertInfo);
+                                       $('#popTillInfo').popover(popTillInfo);
+                                       $('#popFarmProbList').popover(popFarmProbList);
+                                       $('#popFarmRecList').popover(popFarmRecList);
+                                       $('#popFarmActionTools').popover(popFarmActionTools);
+                                       $('#popFarmObs').popover(popFarmObs);
 
+                                   });
+
+
+        </script>
         <script>
 // 
 //            $(document).ready(function () {

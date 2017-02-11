@@ -38,6 +38,7 @@
                                 <div class="box-header with-border">
                                     <h1 class="box-title">Estimations</h1>
                                     <div class="box-tools pull-right">
+                                        <a tabindex="0" class="text-overflow" id="popYrlyTCEst" role="button"><i class="fa fa-question text-orange"></i></a>
                                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                         <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                     </div>
@@ -106,6 +107,7 @@
                                 <div class="box-header with-border">
                                     <h1 class="box-title">Generate Forecast</h1>
                                     <div class="box-tools pull-right">
+                                        <a tabindex="0" class="text-overflow" id="popTCGenForc" role="button"><i class="fa fa-question text-orange"></i></a>
                                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                         <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                     </div>
@@ -173,6 +175,7 @@
                                 <div class="box-header with-border">
                                     <h1 class="box-title">Forecast Simulations</h1>
                                     <div class="box-tools pull-right">
+                                        <a tabindex="0" class="text-overflow" id="popTCForcSim" role="button"><i class="fa fa-question text-orange"></i></a>
                                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                         <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                     </div>
@@ -204,6 +207,7 @@
                                 <div class="box-header with-border">
 
                                     <div class="box-tools pull-right">
+                                        <a tabindex="0" class="text-overflow" id="popDistTCDrill" role="button"><i class="fa fa-question text-orange"></i></a>
                                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                         <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                     </div>
@@ -236,6 +240,7 @@
                                 <div class="box-header with-border">
                                     <h1 class="box-title">Weekly District Estimates</h1>
                                     <div class="box-tools pull-right">
+                                        <a tabindex="0" class="text-overflow" id="popWeekDistEst" role="button"><i class="fa fa-question text-orange"></i></a>
                                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                         <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                     </div>
@@ -271,6 +276,7 @@
                                 <div class="box-header with-border">
                                     <h1 class="box-title">Yearly Municipality Estimates</h1>
                                     <div class="box-tools pull-right">
+                                        <a tabindex="0" class="text-overflow" id="popYrMuniEst" role="button"><i class="fa fa-question text-orange"></i></a>
                                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                         <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                     </div>
@@ -472,6 +478,20 @@
         <script src="plugins/select2/select2.full.min.js"></script>
         <script src="plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+        <script src="popoverText.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#popYrlyTCEst').popover(popYrlyTCEst);
+                $('#popTCGenForc').popover(popTCGenForc);
+                $('#popTCForcSim').popover(popTCForcSim);
+                $('#popDistTCDrill').popover(popDistTCDrill);
+                $('#popWeekDistEst').popover(popWeekDistEst);
+                $('#popYrMuniEst').popover(popYrMuniEst);
+
+            });
+
+
+        </script>
         <script>
 
             $(document).ready(function () {
