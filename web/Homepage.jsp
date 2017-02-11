@@ -84,37 +84,7 @@
 
                                 </div>
                             </div>
-                            <div class="box-body no-padding">
-                                <table class="table table-bordered"  >
-                                    <thead>
-                                        <tr>
-                                            <th>Particulars</th>
-                                            <th>Estimated Production</th>
-                                            <th>Previous</th>
-                                            <th>This Week</th>
-                                            <th>To Date</th>
-                                            <th>Percent Completed</th>	
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <c:forEach var="ca" items="${CropAss}">
-                                        <tr>	
-                                            <td>${ca.particulars}</td>
-                                            <td><span class="pull-right">${ca.estimated}</span></td>
-                                            <td><span class="pull-right">${ca.previous}</span></td>
-                                            <td><span class="pull-right">${ca.thisweek}</span></td>
-                                            <td><span class="pull-right">${ca.todate}</span></td>
-                                            <td>
-                                                <div class="progress-group" >
-                                                    <span class="progress-number">
-                                                        <b>
-                                                            ${ca.percent}%
-                                                        </b>
-                                                    </span>
-                                                        <span>
-                                                            <div class="progress progress-sm progress-striped-active">
-                                                                <div class="progress-bar progress-bar-primary" style="width : ${ca.percent}%"></div>
-                                                                </div>
+
                         </div>
                         <br>
                         <c:if test="${not empty CropAss}">
@@ -159,7 +129,8 @@
                                                                 <span>
                                                                     <div class="progress progress-sm progress-striped-active">
                                                                         <div class="progress-bar progress-bar-primary" style="width : ${ca.percent}%"></div>
-                                                                    </div>                                      </div>
+                                                                    </div>
+                                                            </div>
                                                             </b>
                                                             </span>
                                                             </div>
@@ -235,75 +206,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
-                            <div class="box-body no-padding">
-                                <table class="table table-bordered" >
-                                    <thead>
-                                        <tr>
-                                            <th>Particulars</th>
-                                            <th>Estimated Production</th>	
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <c:forEach var="ca" items="${CropAss}">
-                                        <tr>	
-                                            <td>${ca.particulars}</td>
-                                            <td><span class="pull-right">${ca.standing}</span></td>
-                                        </tr>
-                                        </c:forEach>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </div>
-                    </div> 
-                                </c:if>
-                    <br>
-                    <c:if test="${todayYear <= 2016}">
-                    <div class="col-md-8" > 
-                        <div class="box box-info">
-                            <div class="box-header with-border">
-                                <h1 class="box-title">Weather Forecast (Today)</h1>
-                                <div class="box-tools pull-right">
-                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                </div>
-                            </div>   
-                            <div class="box-body no-padding" id="container1">
-                                <table class="table table-bordered" >
-                                    <thead>
-                                    <c:forEach var="rain" items="${rainfall}">
-                                       
-                                            <th> mm of rain of week ending : ${rain.week_ending}</th>
-                                       
-                                    </c:forEach>
-                                    </thead>
-                                    <tbody>
-                                        <c:forEach var="r" items="${rainfall}">
-                                        
-                                            <td>${r.rainfall} mm</td>
-                                        
-                                        </c:forEach>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                      </div>
-                    </c:if>
-                    <c:if test="${not empty narrative}">
-                    <div class="col-md-6" > 
-                        <div class="box box-info">
-                            <div class="box-header with-border">
-                                <h1 class="box-title">Narrative Report for Week Ending <c:out value="${narrative.weekending}" /> </h1>
-                                <div class="box-tools pull-right">
-                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                </div>
-                            </div>   
-                            <div class="box-body no-padding" id="container1">
-                                <table class="table table-bordered">
-
                         </c:if>
                         <c:if test="${not empty narrative}">
                             <div class="col-md-6" > 
@@ -318,7 +220,6 @@
                                     </div>   
                                     <div class="box-body no-padding" id="container1">
                                         <table class="table table-bordered">
-
                                             <tbody>
 
                                                 <tr>
@@ -537,50 +438,7 @@
                     "paging": false,
                     "ordering": false,
                     "info": false,
-                    "searching":true,
-                    'columnDefs': [{
-                            'targets': 2,
-                            'searchable': false,
-                            'orderable': false,
-                            'render': function (data, type, full, meta) {
-                                return '<span class="pull-right">' + data + '</span>';
-                            }
-                        },
-                    {
-                            'targets': 3,
-                            'searchable': false,
-                            'orderable': false,
-                            'render': function (data, type, full, meta) {
-                                return '<span class="pull-right">' + data + '</span>';
-                            }
-                        },
-                    {
-                            'targets': 4,
-                            'searchable': false,
-                            'orderable': false,
-                            'render': function (data, type, full, meta) {
-                                return '<span class="pull-right">' + data + '</span>';
-                            }
-                        },
-                    {
-                            'targets': 5,
-                            'searchable': false,
-                            'orderable': false,
-                            'render': function (data, type, full, meta) {
-                                return '<span class="pull-right">' + data + '</span>';
-                            }
-                        },
-                    {
-                            'targets': 6,
-                            'searchable': false,
-                            'orderable': false,
-                            'render': function (data, type, full, meta) {
-                                return '<span class="pull-right">' + data + '</span>';
-                            }
-                        }]
-
                     "searching": true
-
                 });
                 $('#munitable').DataTable().search('${Week_ending}').draw();
                 $('#munitable_filter').addClass('hidden');
