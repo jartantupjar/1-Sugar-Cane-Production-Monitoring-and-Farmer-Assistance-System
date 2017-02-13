@@ -92,7 +92,7 @@
                                 return '<a href="viewProbDetails?id=' + data + '" class="btn btn-primary">More Details</a>';
                             }
 
-                        }]
+                        }], 'order': [[3, 'desc']]
                 });
             });
 
