@@ -71,10 +71,11 @@
                                                                 <div id="bypassme" class="progress progress-sm progress-striped-active">
                                                                     <div class="progress-bar progress-bar-primary" style="width : ${ca.percent}%"></div>
                                                                 </div>
+                                                                </span>
                                                         </div>
 
-                                                        </span>
-                                                        </div>
+                                                  
+                                                     
                                                     </td>
                                                 </tr>
                                             </c:forEach>
@@ -165,7 +166,12 @@
                                         </table>
                                     </div>
                                 </div>
-                                
+                                </div>
+                                 <div class="col-md-12" id="improvement" >
+                                     <h3 class="text-bold">PART 3:DISTRICT STATUS REPORT  <small>Optional description</small></h3>
+                             
+                                     
+                                     </div>
                                 <div class="row">
                                     <div class="col-md-4 col-md-offset-4">
                                           <input class="btn btn-success pull-right" type="button" value="Back" 
@@ -178,7 +184,7 @@
                             
                                     </div>
                                 </form>
-                            </div>
+                            
                         </div>
                 </section>
 
