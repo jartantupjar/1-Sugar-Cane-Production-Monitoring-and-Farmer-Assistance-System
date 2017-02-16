@@ -30,8 +30,8 @@ public class CalendarDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query1="truncate configuration;";
-           PreparedStatement pstmt= conn.prepareStatement(query1);
+            String query1 = "truncate configuration;";
+            PreparedStatement pstmt = conn.prepareStatement(query1);
             pstmt.executeUpdate();
             pstmt.close();
             String query = "insert configuration values(?,?);";
@@ -49,25 +49,28 @@ public class CalendarDB {
         }
         return false;
     }
-public void processNewTodayDate(Date todayDate){
-    Calendar cal=getInitialCurrentYearDetails(todayDate);
-    insertCurrentDate(todayDate,cal.getYear());   
-}
-public Calendar getCalendarTypes(Date todayDate){
-     java.util.Calendar cal = java.util.Calendar.getInstance();
-                cal.setTime(todayDate);
-                CropBoardDB cdb = new CropBoardDB();
-                int week_of_year = cdb.getWeekOfYear(todayDate.toString());
-                int year = cal.get(java.util.Calendar.YEAR);
-                int month = cal.get(java.util.Calendar.MONTH);
-                int day = cal.get(java.util.Calendar.DAY_OF_MONTH);
-                Calendar calen= new Calendar();
-                calen.setEday(day);
-                calen.setEmonth(month);
-                calen.setEyear(year);
-                calen.setEweek(week_of_year);
-                return calen;
-}
+
+    public void processNewTodayDate(Date todayDate) {
+        Calendar cal = getInitialCurrentYearDetails(todayDate);
+        insertCurrentDate(todayDate, cal.getYear());
+    }
+
+    public Calendar getCalendarTypes(Date todayDate) {
+        java.util.Calendar cal = java.util.Calendar.getInstance();
+        cal.setTime(todayDate);
+        CropBoardDB cdb = new CropBoardDB();
+        int week_of_year = cdb.getWeekOfYear(todayDate.toString());
+        int year = cal.get(java.util.Calendar.YEAR);
+        int month = cal.get(java.util.Calendar.MONTH);
+        int day = cal.get(java.util.Calendar.DAY_OF_MONTH);
+        Calendar calen = new Calendar();
+        calen.setEday(day);
+        calen.setEmonth(month);
+        calen.setEyear(year);
+        calen.setEweek(week_of_year);
+        return calen;
+    }
+
     public ArrayList<Calendar> getCaledarInputs() {
         try {
             // put functions here : previous week production, this week production
@@ -101,11 +104,72 @@ public Calendar getCalendarTypes(Date todayDate){
         return null;
     }
 
+    public Calendar getCurrWeekDetails() {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select c.`current_date` as `current_date`,(SELECT (Select DATE(c.`current_date` + INTERVAL (0 - WEEKDAY(c.`current_date`)) DAY))) as thismonday,(SELECT DATE(c.`current_date` + INTERVAL (6 - WEEKDAY(c.`current_date`)) DAY)) as thisunday from configuration c;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            ResultSet rs = pstmt.executeQuery();
+            Calendar cal = null;
+
+            if (rs.next()) {
+                cal = new Calendar();
+                cal.setTodayDate(rs.getDate("current_date"));
+                cal.setMondayofWeek(rs.getDate("thismonday"));
+                cal.setSundayofWeek(rs.getDate("thisSunday"));
+
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            return cal;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CropEstimateDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+
+    }
+     public Calendar getDateWeekDetails(Date previousWeek) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT (Select DATE(? + INTERVAL (0 - WEEKDAY(?)) DAY)) as thismonday,(SELECT DATE(? + INTERVAL (6 - WEEKDAY(?)) DAY)) as thisSunday;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setDate(1, previousWeek);
+            pstmt.setDate(2, previousWeek);
+            pstmt.setDate(3, previousWeek);
+            pstmt.setDate(4, previousWeek);
+            ResultSet rs = pstmt.executeQuery();
+            Calendar cal = null;
+
+            if (rs.next()) {
+                cal = new Calendar();
+            
+                cal.setMondayofWeek(rs.getDate("thismonday"));
+                cal.setSundayofWeek(rs.getDate("thisSunday"));
+
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            return cal;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CropEstimateDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+
+    }
+
     public ArrayList<Calendar> getCurrentYearDetails() {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select cc.year,cc.district,cc.phase,c.current_date from crop_calendar cc join configuration c where c.`current_date` between cc.date_starting and cc.date_ending;";
+            String query = "select cc.year,cc.district,cc.phase,c.current_date,(Select DATE(c.`current_date` + INTERVAL (0 - WEEKDAY(c.`current_date`)) DAY)) as thismonday,(SELECT DATE(c.`current_date` + INTERVAL (6 - WEEKDAY(c.`current_date`)) DAY)) as thisSunday from crop_calendar cc join configuration c where c.`current_date` between cc.date_starting and cc.date_ending;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             ResultSet rs = pstmt.executeQuery();
             ArrayList<Calendar> list = null;
@@ -118,6 +182,8 @@ public Calendar getCalendarTypes(Date todayDate){
                     cal.setDistrict(rs.getString("district"));
                     cal.setPhase(rs.getString("phase"));
                     cal.setTodayDate(rs.getDate("current_date"));
+                    cal.setMondayofWeek(rs.getDate("thismonday"));
+                    cal.setSundayofWeek(rs.getDate("thisSunday"));
                     list.add(cal);
                 } while (rs.next());
             }
@@ -132,24 +198,25 @@ public Calendar getCalendarTypes(Date todayDate){
 
         return null;
     }
+
     public Calendar getCurrentCropYearStartEnd() {
         try {
-                 ArrayList<Calendar> calist = getCurrentYearDetails();//gets the phases/today/crop yr
-        int cropyr = calist.get(0).getYear();
+            ArrayList<Calendar> calist = getCurrentYearDetails();//gets the phases/today/crop yr
+            int cropyr = calist.get(0).getYear();
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "select min(date_starting) as st,max(date_ending) as ed from crop_calendar where year=?;";
-                PreparedStatement pstmt = conn.prepareStatement(query);
+            PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, cropyr);
             ResultSet rs = pstmt.executeQuery();
-            
- Calendar cal=null;
+
+            Calendar cal = null;
             if (rs.next()) {
-              
-                   cal= new Calendar();
-                    cal.setYear(cropyr);
-                    cal.setStarting(rs.getDate("st"));
-                    cal.setEnding(rs.getDate("ed"));
+
+                cal = new Calendar();
+                cal.setYear(cropyr);
+                cal.setStarting(rs.getDate("st"));
+                cal.setEnding(rs.getDate("ed"));
             }
             rs.close();
             pstmt.close();
@@ -162,7 +229,7 @@ public Calendar getCalendarTypes(Date todayDate){
 
         return null;
     }
-    
+
     public ArrayList<Calendar> getPhases(int cyear) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
@@ -198,7 +265,7 @@ public Calendar getCalendarTypes(Date todayDate){
 
         return null;
     }
-    
+
     public ArrayList<Integer> getRecommendationsByPhase(String phase) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
@@ -228,8 +295,8 @@ public Calendar getCalendarTypes(Date todayDate){
 
         return null;
     }
-    
-    public Integer updateDurationByPhases(Calendar id){
+
+    public Integer updateDurationByPhases(Calendar id) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
@@ -238,17 +305,16 @@ public Calendar getCalendarTypes(Date todayDate){
             pstmt.setInt(1, id.getDuration());
             pstmt.setInt(2, id.getRecom_id());
             int check = pstmt.executeUpdate();
-                pstmt.close();
-                conn.close();            
+            pstmt.close();
+            conn.close();
             return check;
-                 }catch (SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(CalendarDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
 
     //THIS METHOD IS ONLY FOR LOGIN ***DO NOT USE
-
     public Calendar getInitialCurrentYearDetails(Date todayDate) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
@@ -257,15 +323,14 @@ public Calendar getCalendarTypes(Date todayDate){
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setDate(1, todayDate);
             ResultSet rs = pstmt.executeQuery();
-            Calendar cal=null;
+            Calendar cal = null;
             if (rs.next()) {
-           
-         
-                  cal  = new Calendar();
-                    cal.setYear(rs.getInt("year"));
-                   cal.setDistrict(rs.getString("district"));
-                    cal.setPhase(rs.getString("phase"));
-           
+
+                cal = new Calendar();
+                cal.setYear(rs.getInt("year"));
+                cal.setDistrict(rs.getString("district"));
+                cal.setPhase(rs.getString("phase"));
+
             }
 
             rs.close();
@@ -279,6 +344,7 @@ public Calendar getCalendarTypes(Date todayDate){
 
         return null;
     }
+
     public boolean checkifMilling() {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
@@ -286,11 +352,11 @@ public Calendar getCalendarTypes(Date todayDate){
             String query = "select cc.year,cc.district,cc.phase,c.current_date from crop_calendar cc join configuration c where cc.phase='Milling' and c.`current_date` between cc.date_starting and cc.date_ending;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             ResultSet rs = pstmt.executeQuery();
-            Calendar cal=null;
-            boolean chckr=false;
+            Calendar cal = null;
+            boolean chckr = false;
             if (rs.next()) {
-        chckr=true;
-           
+                chckr = true;
+
             }
 
             rs.close();
@@ -304,6 +370,7 @@ public Calendar getCalendarTypes(Date todayDate){
 
         return false;
     }
+
     public boolean checkifTillering() {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
@@ -311,11 +378,11 @@ public Calendar getCalendarTypes(Date todayDate){
             String query = "select cc.year,cc.district,cc.phase,c.current_date from crop_calendar cc join configuration c where cc.phase='Tillering' and c.`current_date` between cc.date_starting and cc.date_ending;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             ResultSet rs = pstmt.executeQuery();
-            Calendar cal=null;
-            boolean chckr=false;
+            Calendar cal = null;
+            boolean chckr = false;
             if (rs.next()) {
-        chckr=true;
-           
+                chckr = true;
+
             }
 
             rs.close();
@@ -329,6 +396,7 @@ public Calendar getCalendarTypes(Date todayDate){
 
         return false;
     }
+
     public boolean checkifvalidDate(Date todayDate) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
@@ -337,11 +405,11 @@ public Calendar getCalendarTypes(Date todayDate){
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setDate(1, todayDate);
             ResultSet rs = pstmt.executeQuery();
-            Calendar cal=null;
-            boolean chckr=false;
+            Calendar cal = null;
+            boolean chckr = false;
             if (rs.next()) {
-        chckr=true;
-           
+                chckr = true;
+
             }
 
             rs.close();
@@ -366,15 +434,13 @@ public Calendar getCalendarTypes(Date todayDate){
         }
         return pdate;
     }
-    
-    
-    
+
     public int updatePhaseDates(Calendar cal, int year, String district) {
         try {
-                CalendarDB cdb = new CalendarDB();
-            ArrayList<Calendar> calist=cdb.getCurrentYearDetails();
-            int curyr= calist.get(0).getYear();
-            System.out.println(curyr+"#*#*#*#*#*#*#*#*#*#*#*#*");
+            CalendarDB cdb = new CalendarDB();
+            ArrayList<Calendar> calist = cdb.getCurrentYearDetails();
+            int curyr = calist.get(0).getYear();
+            System.out.println(curyr + "#*#*#*#*#*#*#*#*#*#*#*#*");
             // put functions here : previous week production, this week production
             int i = 0;
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();

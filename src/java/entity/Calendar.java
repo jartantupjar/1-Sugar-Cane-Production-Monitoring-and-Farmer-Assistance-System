@@ -14,7 +14,7 @@ import java.sql.Date;
 public class Calendar {
     private int syear,sday,smonth,eyear,eday,emonth, year,eweek, duration, recom_id;
     private String phase, district, datepickers,datepickere;
-    private Date starting, ending,todayDate;
+    private Date starting, ending,todayDate,MondayofWeek,SundayofWeek;
 
     /**
      * @return the syear
@@ -227,6 +227,34 @@ public class Calendar {
     }
 
     /**
+     * @return the MondayofWeek
+     */
+    public Date getMondayofWeek() {
+        return MondayofWeek;
+    }
+
+    /**
+     * @param MondayofWeek the MondayofWeek to set
+     */
+    public void setMondayofWeek(Date MondayofWeek) {
+        this.MondayofWeek = MondayofWeek;
+    }
+
+    /**
+     * @return the SundayofWeek
+     */
+    public Date getSundayofWeek() {
+        return SundayofWeek;
+    }
+
+    /**
+     * @param SundayofWeek the SundayofWeek to set
+     */
+    public void setSundayofWeek(Date SundayofWeek) {
+        this.SundayofWeek = SundayofWeek;
+    }
+
+    /**
      * @return the datepickers
      */
     public String getDatepickers() {
@@ -253,6 +281,5 @@ public class Calendar {
     public void setDatepickere(String datepickere) {
         this.datepickere = datepickere;
     }
-
     
             }
