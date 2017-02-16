@@ -8,6 +8,7 @@ package db;
 import entity.Calendar;
 import entity.CropAssessment;
 import entity.CropNarrative;
+import entity.Farmer;
 import entity.statusReport;
 import java.io.File;
 import java.sql.Connection;
@@ -150,15 +151,46 @@ public class CropAssessmentDB {
         return false;
         
     }
+     public Date getPreviousWeek(Date endDate) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select date_add(?,INTERVAL -7 DAY) as previousweek;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+
+            pstmt.setDate(1, endDate);
+           
+            ResultSet rs = pstmt.executeQuery();
+            Date value = null ;
+            if (rs.next()) {
+                value = rs.getDate("previousweek");
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            
+            return value;
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(CropAssessmentDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     public ArrayList<statusReport> getAllStatusReports(Date week){
         ArrayList<statusReport> srlist= new ArrayList<>();
        srlist.add(getStatusReportByWeek((Date.valueOf("2016-12-25"))));
+      //gets the previous week from input date 
+//       srlist.add(getStatusReportByWeek((getPreviousWeek(week))));
+        
        srlist.add(getStatusReportByWeek(week));
        
         return srlist;
     }
     public statusReport getStatusReportByWeek(Date week) {
         CalendarDB caldb = new CalendarDB();
+        
+        caldb.getCurrentYearDetails();
+        
+        
         Calendar cal = new Calendar();
         cal = caldb.getDateWeekDetails(week);
         
@@ -167,6 +199,13 @@ public class CropAssessmentDB {
         sr.setWeekStarting(cal.getMondayofWeek());
         
         
+       // statistically related
+        sr.setHighestProdFarmer(getProdFarmerbyDate(cal.getMondayofWeek(),cal.getSundayofWeek(),"desc"));
+        sr.setLowestProdFarmer(getProdFarmerbyDate(cal.getMondayofWeek(),cal.getSundayofWeek(),"asc"));
+        sr.setHighestYieldFarmer(getYieldFarmerbyDate(cal.getMondayofWeek(),cal.getSundayofWeek(),"desc"));
+        sr.setLowestYieldFarmer(getYieldFarmerbyDate(cal.getMondayofWeek(),cal.getSundayofWeek(),"asc"));
+        
+        //improvement related
         sr.setRecsSuggested(getTotalRecByStatus(cal.getMondayofWeek(), cal.getSundayofWeek(), "verifying"));
         sr.setRecsImplemented(getTotalRecByStatus(cal.getMondayofWeek(), cal.getSundayofWeek(), "active"));
         sr.setProbsReported(getTotalProbsByStatus(cal.getMondayofWeek(), cal.getSundayofWeek(), "active"));
@@ -174,6 +213,8 @@ public class CropAssessmentDB {
         
         return sr;
     }
+    
+  
     
     public int getTotalRecByStatus(Date startDate, Date endDate, String status) {
         try {
@@ -224,7 +265,62 @@ public class CropAssessmentDB {
         }
         return 0;
     }
-    
+      public Farmer getYieldFarmerbyDate(Date startDate, Date endDate,String status) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select tc/area as yield,farmer from (select f.farmers_name farmer,p.date as thedate,sum(p.tons_cane) as tc, sum(p.area_harvested) as area  from production p join fields f on p.Fields_id=f.id where p.date>= ? and p.date<=?  group by f.Farmers_name )a order by yield "+status+"; ";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setDate(1, startDate);
+            pstmt.setDate(2, endDate);
+//            pstmt.set(3, status);
+            ResultSet rs = pstmt.executeQuery();
+           Farmer farmer=null;
+            if (rs.next()) {
+                //remove farmer unknown
+                rs.next();
+                farmer=new Farmer();
+                farmer.settYield(rs.getDouble("yield"));
+                farmer.setName(rs.getString("farmer"));
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            
+            return farmer;
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(CropAssessmentDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+       public Farmer getProdFarmerbyDate(Date startDate, Date endDate,String status) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select f.farmers_name farmer,p.date as thedate,sum(p.tons_cane) as tc from production p join fields f on p.Fields_id=f.id where p.date>=? and p.date<=? group by f.Farmers_name order by tc "+status+"; ";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setDate(1, startDate);
+            pstmt.setDate(2, endDate);
+//            pstmt.setString(3, status);
+            ResultSet rs = pstmt.executeQuery();
+           Farmer farmer=null;
+            if (rs.next()) {
+                  //remove farmer unknown
+                rs.next();
+                farmer=new Farmer();
+                farmer.setProduction(rs.getDouble("tc"));
+                farmer.setName(rs.getString("farmer"));
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            
+            return farmer;
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(CropAssessmentDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     public CropNarrative getAssessmentNarrative(int year, Date weekending) {
         try {
             // put functions here : previous week production, this week production
