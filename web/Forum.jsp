@@ -27,7 +27,8 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="box">
-                                <div class="box-header">
+                                <div class="box-header pull-right">
+                                     <a tabindex="0" class="" id="popForums" role="button"><i class="fa fa-question text-orange"></i></a> 
                                 </div>
                                 <div class="box-body">
                                     <ul class="nav nav-tabs">
@@ -111,6 +112,14 @@
         <script src="dist/js/app.min.js"></script>
         <script src="plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+        <script src="popoverText.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#popForums').popover(popForumD);
+            });
+
+
+        </script>
         <script>
 
             $(document).ready(function () {

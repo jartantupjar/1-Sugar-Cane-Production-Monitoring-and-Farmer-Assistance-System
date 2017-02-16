@@ -46,8 +46,11 @@ public class viewPhasesDates extends HttpServlet {
             if (cT != null) {
                 HttpSession session = request.getSession();
                 session.setAttribute("phase", cT);
+                for(int i=0;i<cT.size();i++){
+                    session.setAttribute("test"+i, cT.get(i).getDatepickers()+" - "+cT.get(i).getDatepickere());
+                }
                 ServletContext context = getServletContext();
-                RequestDispatcher rd = context.getRequestDispatcher("/Calendar.jsp");
+                RequestDispatcher rd = context.getRequestDispatcher("/Calendar.jsp");   
                 rd.forward(request, response);
             } else {
                 ServletContext context = getServletContext();

@@ -33,6 +33,7 @@
                                 <div class="box-header with-border">
                                     <h1 class="box-title"><c:out value="${post.title}">${post.title}</c:out></h1> 
                                         <div class="box-tools pull-right">
+                                            <a tabindex="0" class="" id="popP" role="button"><i class="fa fa-question text-orange"></i></a> 
                                             <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                             <!-- In box-tools add this button if you intend to use the contacts pane -->
                                             <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -58,7 +59,7 @@
                                                 <span class="username">Problem: ${post.problem_name}</span>
                                             </c:if>
                                             <c:if test="${post.recom_id != ''}">
-                                                <span class="username">Recommendation ${post.recommendation_name}</span>
+                                                <span class="username">Recommendation: ${post.recommendation_name}</span>
                                             </c:if>
                                             <div>
                                                 <c:if test="${post.status == 'Pending'}">
@@ -165,6 +166,7 @@
                                     <div class="box-header with-border">
                                         <h1 class="box-title">Refer to this Problem <small>Optional</small></h1>
                                         <div class="box-tools pull-right">
+                                            <a tabindex="0" class="" id="popPostlinktoproblem" role="button"><i class="fa fa-question text-orange"></i></a> 
                                             <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                             <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                         </div>
@@ -202,6 +204,7 @@
                                     <div class="box-header with-border">
                                         <h1 class="box-title">Link to a recommendation</h1>
                                         <div class="box-tools pull-right">
+                                            <a tabindex="0" class="" id="popPostlinktorec" role="button"><i class="fa fa-question text-orange"></i></a> 
                                             <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                             <!-- In box-tools add this button if you intend to use the contacts pane -->
                                             <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -239,6 +242,7 @@
                                     <div class="box-header with-border">
                                         <h1 class="box-title">Refer to another Post</h1>
                                         <div class="box-tools pull-right">
+                                            <a tabindex="0" class="" id="popPostlinktopost" role="button"><i class="fa fa-question text-orange"></i></a> 
                                             <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                             <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                         </div>
@@ -279,6 +283,7 @@
                                     <div class="box-header with-border">
                                         <h1 class="box-title">Create a New Problem</h1>
                                         <div class="box-tools pull-right">
+                                            <a tabindex="0" class="" id="popPostcreateprob" role="button"><i class="fa fa-question text-orange"></i></a> 
                                             <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                             <!-- In box-tools add this button if you intend to use the contacts pane -->
                                             <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -321,6 +326,7 @@
                                     <div class="box-header with-border">
                                         <h1 class="box-title">Create a New Recommendation</h1>
                                         <div class="box-tools pull-right">
+                                            <a tabindex="0" class="" id="popPostcreaterec" role="button"><i class="fa fa-question text-orange"></i></a> 
                                             <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                             <!-- In box-tools add this button if you intend to use the contacts pane -->
                                             <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -421,6 +427,17 @@
         <script src="plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
         <script type="text/javascript" src="plugins/datatable/dataTables.checkboxes.min.js"></script>
+        <script src="popoverText.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#popP').popover(popPostpage);
+                $('#popPostlinktoproblem').popover(popPosLTP);
+                $('#popPostlinktorec').popover(popPosLTR);
+                $('#popPostlinktopost').popover(popPosLTPost);
+                $('#popPostcreateprob').popover(popPosCP);
+                $('#popPostcreaterec').popover(popPosCR);
+            });
+        </script>
         <script>
             $(function(){
              $("#ap").on("click",function(){

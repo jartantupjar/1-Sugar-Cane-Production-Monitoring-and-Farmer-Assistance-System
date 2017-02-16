@@ -167,7 +167,7 @@ public Calendar getCalendarTypes(Date todayDate){
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT * FROM crop_calendar where year = ? order by date_starting;";
+            String query = "SELECT *, DATE_FORMAT(date_starting,'%m-%d-%Y') as 'datepickers',DATE_FORMAT(date_ending,'%m-%d-%Y') as 'datepickere'FROM crop_calendar where year = ? order by date_starting;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, cyear);
             ResultSet rs = pstmt.executeQuery();
@@ -182,6 +182,8 @@ public Calendar getCalendarTypes(Date todayDate){
                     cal.setPhase(rs.getString("phase"));
                     cal.setStarting(rs.getDate("date_starting"));
                     cal.setEnding(rs.getDate("date_ending"));
+                    cal.setDatepickers(rs.getString("datepickers"));
+                    cal.setDatepickere(rs.getString("datepickere"));
                     list.add(cal);
                 } while (rs.next());
             }

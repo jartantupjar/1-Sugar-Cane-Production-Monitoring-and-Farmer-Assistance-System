@@ -455,11 +455,11 @@ public class ForumDB {
             String query = "INSERT INTO posts(title,message,date_started,date_posted,status,phase,Recommendations_id) values(?,?,?,?,?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, title);
-            pstmt.setString(2, title);
+            pstmt.setString(2, message);
             pstmt.setDate(3, date_s);
             pstmt.setDate(4, date_p);
-            pstmt.setString(5, title);
-            pstmt.setString(6, title);
+            pstmt.setString(5, status);
+            pstmt.setString(6, phase);
             pstmt.setInt(7, rec_id);
             check  = pstmt.executeUpdate();
                 pstmt.close();

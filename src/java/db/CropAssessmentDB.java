@@ -365,13 +365,25 @@ public class CropAssessmentDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT *  FROM weeklyestimate where year = ? and id between ? and ?";
-            PreparedStatement pstmt = conn.prepareStatement(query);
+            String query = "";
+            PreparedStatement pstmt = null ;
+            if(year>2017){
+            query = "SELECT *  FROM weeklyestimate where year = ? and id between ? and ?";
+            pstmt = conn.prepareStatement(query);
             int id = getWeeklyEstimateID(weekofyear, year);
             pstmt.setInt(1, year);
             pstmt.setInt(2, id);
             int consid = id + 3;
             pstmt.setInt(3, consid);
+            }
+            else{
+            query = "SELECT *, weekofyear(date), sum(amount)as rainfal, date as 'week_ending' FROM rainfall WHERE year(date) = ? AND weekofyear(date) BETWEEN ? AND ?  group by weekofyear(date) ;";
+            pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, year);
+            pstmt.setInt(2, weekofyear);
+            pstmt.setInt(3, weekofyear+3);
+            }
+            
             ResultSet rs = pstmt.executeQuery();
             ArrayList<CropAssessment> rainfall = null;
             CropAssessment rain;

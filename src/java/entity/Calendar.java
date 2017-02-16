@@ -13,7 +13,7 @@ import java.sql.Date;
  */
 public class Calendar {
     private int syear,sday,smonth,eyear,eday,emonth, year,eweek, duration, recom_id;
-    private String phase, district;
+    private String phase, district, datepickers,datepickere;
     private Date starting, ending,todayDate;
 
     /**
@@ -225,5 +225,34 @@ public class Calendar {
     public void setRecom_id(int recom_id) {
         this.recom_id = recom_id;
     }
+
+    /**
+     * @return the datepickers
+     */
+    public String getDatepickers() {
+        return datepickers;
+    }
+
+    /**
+     * @param datepickers the datepickers to set
+     */
+    public void setDatepickers(String datepickers) {
+        this.datepickers = datepickers;
+    }
+
+    /**
+     * @return the datepickere
+     */
+    public String getDatepickere() {
+        return datepickere;
+    }
+
+    /**
+     * @param datepickere the datepickere to set
+     */
+    public void setDatepickere(String datepickere) {
+        this.datepickere = datepickere;
+    }
+
     
             }

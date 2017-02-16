@@ -31,7 +31,9 @@
                                 <div class="box box-solid box-success">
                                     <div class="box-header with-border">
                                         <h3 class="box-title">Problem Details</h3>
+                                        
                                     </div>
+                                    <a tabindex="0" class="" id="popProbDetails" role="button"><i class="fa fa-question text-orange"></i></a>
                                     <br>
                                     <div class="box-body">
                                     <ul class="list-group list-group-unbordered">
@@ -62,6 +64,7 @@
                                     <div class="box-header with-border">
                                         <h3 class="box-title">Message Details</h3>
                                     </div>
+                                    <a tabindex="0" class="" id="popMessDetails" role="button"><i class="fa fa-question text-orange"></i></a>
                                     <br>
                                     <form id="frm-example" action="sendAlertToFarmers">
                                     <div class="box-body">
@@ -83,5 +86,14 @@
         <script src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="dist/js/app.min.js"></script>
+        <script src="popoverText.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#popProbDetails').popover(popProbD);
+                $('#popMessDetails').popover(popMessD);
+            });
+
+
+        </script>
     </body>
 </html>
