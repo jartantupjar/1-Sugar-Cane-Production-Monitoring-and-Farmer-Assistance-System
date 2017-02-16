@@ -132,6 +132,38 @@ public class CalendarDB {
         return null;
 
     }
+     public Calendar getDateWeekDetails(Date previousWeek) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT (Select DATE(? + INTERVAL (0 - WEEKDAY(?)) DAY)) as thismonday,(SELECT DATE(? + INTERVAL (6 - WEEKDAY(?)) DAY)) as thisSunday;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setDate(1, previousWeek);
+            pstmt.setDate(2, previousWeek);
+            pstmt.setDate(3, previousWeek);
+            pstmt.setDate(4, previousWeek);
+            ResultSet rs = pstmt.executeQuery();
+            Calendar cal = null;
+
+            if (rs.next()) {
+                cal = new Calendar();
+            
+                cal.setMondayofWeek(rs.getDate("thismonday"));
+                cal.setSundayofWeek(rs.getDate("thisSunday"));
+
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            return cal;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CropEstimateDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+
+    }
 
     public ArrayList<Calendar> getCurrentYearDetails() {
         try {

@@ -5,8 +5,10 @@
  */
 package db;
 
+import entity.Calendar;
 import entity.CropAssessment;
 import entity.CropNarrative;
+import entity.statusReport;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.Date;
@@ -32,7 +34,7 @@ import net.sf.jasperreports.view.JasperViewer;
  * @author Bryll Joey Delfin
  */
 public class CropAssessmentDB {
-
+    
     public ArrayList<CropAssessment> getCropAssesmentRajversion(Integer week_of_year, Integer year, String tdate) {
         ArrayList<CropAssessment> cT = new ArrayList<CropAssessment>();
         ArrayList<CropAssessment> currT = new ArrayList<CropAssessment>();
@@ -52,18 +54,18 @@ public class CropAssessmentDB {
         ca.setParticulars("Area"); // crop asessment for area particulars
         ca.setEstimated(commaformat.format(eah));
         String prev = commaformat.format(prevT.get(0).getPrevArea());
-        System.out.println(prevT.get(0).getPrevArea()+"LOLOLOL");
+        System.out.println(prevT.get(0).getPrevArea() + "LOLOLOL");
         ca.setPrevious(prev); // previous
         String curr = commaformat.format(currT.get(0).getThisArea());
         ca.setThisweek(curr); // this week
         double todate = prevT.get(0).getPrevArea() + currT.get(0).getThisArea();
         Double percenta = 0.00;
         ca.setTodate(commaformat.format(todate)); // todate
-        System.out.println(todate+"TODATE");
-        System.out.println(eah+"EAH");
+        System.out.println(todate + "TODATE");
+        System.out.println(eah + "EAH");
         percenta = Double.valueOf(df.format((todate / eah) * 100)); // difference
         ca.setPercent(percenta.toString());
-        String standing = commaformat.format(Double.valueOf(df.format(eah - todate)));  
+        String standing = commaformat.format(Double.valueOf(df.format(eah - todate)));
         ca.setStanding(standing); // remaining
         ca.setWeek_ending(currT.get(0).getWeek_ending());
         ca2.setParticulars("Tons Cane"); // crop assessment for tons cane particulars
@@ -73,7 +75,7 @@ public class CropAssessmentDB {
         String currt = commaformat.format(currT.get(0).getThisTons_Cane());
         ca2.setThisweek(currt); // thisweek
         double todate2 = prevT.get(0).getPrevTons_Cane() + currT.get(0).getThisTons_Cane();
-        Double percentb = 0.00; 
+        Double percentb = 0.00;
         ca2.setTodate(commaformat.format(todate2)); // todate
         percentb = Double.valueOf(df.format((todate2 / etc) * 100));
         ca2.setPercent(commaformat.format(percentb)); // difference
@@ -88,16 +90,16 @@ public class CropAssessmentDB {
         double todate3 = prevT.get(0).getPrevLKG() + currT.get(0).getThisLKG();
         ca3.setTodate(commaformat.format(todate3));
         Double percentc = 0.00;
-        percentc = Double.valueOf(df.format((todate3/elkg)*100));
+        percentc = Double.valueOf(df.format((todate3 / elkg) * 100));
         ca3.setPercent(commaformat.format(percentc));
-        String standingl = commaformat.format(Double.valueOf(df.format(elkg-todate3)));
+        String standingl = commaformat.format(Double.valueOf(df.format(elkg - todate3)));
         ca3.setStanding(standingl);
         cT.add(ca);
         cT.add(ca2);
         cT.add(ca3);
         return cT;
     }
-
+    
     public boolean checkExistingNarrative(int cyear, Date weekending) {
         try {
             // put functions here : previous week production, this week production
@@ -109,20 +111,20 @@ public class CropAssessmentDB {
             pstmt.setString(2, "TARLAC");
             pstmt.setDate(3, weekending);
             ResultSet rs = pstmt.executeQuery();
-
+            
             if (rs.next()) {
                 return true;
             }
             rs.close();
             pstmt.close();
             conn.close();
-
+            
         } catch (SQLException ex) {
             java.util.logging.Logger.getLogger(CropAssessmentDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
-
+    
     public boolean submitNarrative(CropNarrative cn) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
@@ -146,9 +148,83 @@ public class CropAssessmentDB {
             java.util.logging.Logger.getLogger(CropAssessmentDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
-
+        
     }
-
+    public ArrayList<statusReport> getAllStatusReports(Date week){
+        ArrayList<statusReport> srlist= new ArrayList<>();
+       srlist.add(getStatusReportByWeek((Date.valueOf("2016-12-25"))));
+       srlist.add(getStatusReportByWeek(week));
+       
+        return srlist;
+    }
+    public statusReport getStatusReportByWeek(Date week) {
+        CalendarDB caldb = new CalendarDB();
+        Calendar cal = new Calendar();
+        cal = caldb.getDateWeekDetails(week);
+        
+        statusReport sr = new statusReport();
+        sr.setWeekEnding(cal.getSundayofWeek());
+        sr.setWeekStarting(cal.getMondayofWeek());
+        
+        
+        sr.setRecsSuggested(getTotalRecByStatus(cal.getMondayofWeek(), cal.getSundayofWeek(), "verifying"));
+        sr.setRecsImplemented(getTotalRecByStatus(cal.getMondayofWeek(), cal.getSundayofWeek(), "active"));
+        sr.setProbsReported(getTotalProbsByStatus(cal.getMondayofWeek(), cal.getSundayofWeek(), "active"));
+        sr.setProbsSolved(getTotalProbsByStatus(cal.getMondayofWeek(), cal.getSundayofWeek(), "inactive"));
+        
+        return sr;
+    }
+    
+    public int getTotalRecByStatus(Date startDate, Date endDate, String status) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select count(*) as count from `recommendations-fields` rf where rf.date>= ? and rf.date <=? and status=?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setDate(1, startDate);
+            pstmt.setDate(2, endDate);
+            pstmt.setString(3, status);
+            ResultSet rs = pstmt.executeQuery();
+            int value = 0;
+            if (rs.next()) {
+                value = rs.getInt("count");
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            
+            return value;
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(CropAssessmentDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+    
+    public int getTotalProbsByStatus(Date startDate, Date endDate, String status) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select count(*) as count from `problems-fields` pf where pf.date>=? and pf.date <=? and status=?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setDate(1, startDate);
+            pstmt.setDate(2, endDate);
+            pstmt.setString(3, status);
+            ResultSet rs = pstmt.executeQuery();
+            int value = 0;
+            if (rs.next()) {
+                value = rs.getInt("count");
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            
+            return value;
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(CropAssessmentDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+    
     public CropNarrative getAssessmentNarrative(int year, Date weekending) {
         try {
             // put functions here : previous week production, this week production
@@ -171,20 +247,20 @@ public class CropAssessmentDB {
                 cn.setDinput(rs.getString("prices_of_inputs"));
                 cn.setDother(rs.getString("others"));
                 cn.setDanalysis(rs.getString("overall_analysis"));
-
+                
             }
             rs.close();
             pstmt.close();
             conn.close();
-
+            
             return cn;
         } catch (SQLException ex) {
             java.util.logging.Logger.getLogger(CropAssessmentDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
-
-    public ArrayList<CropAssessment> getCropAssessmentReportForTheWeek(int weekofyear, int year ,String tdate) {
+    
+    public ArrayList<CropAssessment> getCropAssessmentReportForTheWeek(int weekofyear, int year, String tdate) {
         try {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
@@ -192,11 +268,11 @@ public class CropAssessmentDB {
             PreparedStatement pstmt = null;
             String query = "SELECT * FROM weeklyestimate where id = ? and year = ?  ;";
             
-            String query2 = "select date as week_ending,weekofyear(date), round(sum(area_harvested),2) as area, round(sum(tons_cane),2) as actual, sum(lkg) as lkg \n" +
-"                    from production\n" +
-"                    where year = ? and date<= ? and weekofyear(date) = ?\n" +
-"                    group by weekofyear(date)\n" +
-"                    order by date;";
+            String query2 = "select date as week_ending,weekofyear(date), round(sum(area_harvested),2) as area, round(sum(tons_cane),2) as actual, sum(lkg) as lkg \n"
+                    + "                    from production\n"
+                    + "                    where year = ? and date<= ? and weekofyear(date) = ?\n"
+                    + "                    group by weekofyear(date)\n"
+                    + "                    order by date;";
             if (year <= 2016) {
                 pstmt = conn.prepareStatement(query);
                 int id = getWeeklyEstimateID(weekofyear, year);
@@ -208,7 +284,7 @@ public class CropAssessmentDB {
                 pstmt.setInt(3, weekofyear);
                 pstmt.setString(2, tdate);
             }
-
+            
             ResultSet rs = pstmt.executeQuery();
             ArrayList<CropAssessment> cT = null;
             CropAssessment c;
@@ -220,10 +296,9 @@ public class CropAssessmentDB {
 //                    c.setEstiTons_Cane(rs.getDouble("forecasted"));
                     c.setThisArea(rs.getDouble("area"));
                     c.setWeek_ending(rs.getDate("week_ending"));
-                    if(year<=2016){
+                    if (year <= 2016) {
                         
-                    }
-                    else {
+                    } else {
                         c.setThisLKG(rs.getDouble("lkg"));
                     }
                     cT.add(c);
@@ -232,43 +307,40 @@ public class CropAssessmentDB {
             rs.close();
             pstmt.close();
             conn.close();
-
+            
             return cT;
         } catch (SQLException ex) {
             java.util.logging.Logger.getLogger(CropAssessmentDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
-
+    
     public Double getTotalEstimatedTonsCane(int year) {
         try {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             int num = getSelectedForecast(year);
-            System.out.println(num+"YEARRRRRRRRRRRRRRRRRRRRRRRRR");
-            if(num==0){
+            System.out.println(num + "YEARRRRRRRRRRRRRRRRRRRRRRRRR");
+            if (num == 0) {
                 num++;
-                System.out.println(num+" LOL");
+                System.out.println(num + " LOL");
             }
             String query = "SELECT sum(forecasted) as 'total' FROM weeklyestimate where year = ? ;";
-            String query2 = "SELECT forecasted"+num+" as 'total' FROM cropestimatedistrict where year = ? ;";
+            String query2 = "SELECT forecasted" + num + " as 'total' FROM cropestimatedistrict where year = ? ;";
             PreparedStatement pstmt = null;
-            if (year<=2016){
-               pstmt = conn.prepareStatement(query);  
-            }
-            else
-            {
-                pstmt = conn.prepareStatement(query2);  
+            if (year <= 2016) {
+                pstmt = conn.prepareStatement(query);
+            } else {
+                pstmt = conn.prepareStatement(query2);
             }
             pstmt.setInt(1, year);
             ResultSet rs = pstmt.executeQuery();
             Double tc = null;
             if (rs.next()) {
                 tc = rs.getDouble("total");
-                System.out.println(tc+"TANGINA NYO");
-            }
-            else {
+                System.out.println(tc + "TANGINA NYO");
+            } else {
                 tc = 0.00;
             }
             rs.close();
@@ -281,7 +353,7 @@ public class CropAssessmentDB {
         }
         return 0.00;
     }
-
+    
     public Double getTotalEstimatedArea(int year) {
         try {
             // put functions here : previous week production, this week production
@@ -290,12 +362,11 @@ public class CropAssessmentDB {
             PreparedStatement pstmt = null;
             String query = "SELECT sum(area) as 'total' FROM cropestimatedistrict where year = ? ;";
             String query2 = "SELECT area as total FROM sra.cropestimatedistrict where year = ? ;";
-            if(year<=2016){
-              pstmt = conn.prepareStatement(query);  
-            }
-            else{
+            if (year <= 2016) {
+                pstmt = conn.prepareStatement(query);
+            } else {
                 year--;
-              pstmt = conn.prepareStatement(query2);
+                pstmt = conn.prepareStatement(query2);
             }
             
             pstmt.setInt(1, year);
@@ -303,14 +374,13 @@ public class CropAssessmentDB {
             Double area = 0.00;
             if (rs.next()) {
                 area = rs.getDouble("total");
-            }
-            else {
+            } else {
                 area = 0.00;
             }
             rs.close();
             pstmt.close();
             conn.close();
-
+            
             return area;
         } catch (SQLException ex) {
             java.util.logging.Logger.getLogger(CropAssessmentDB.class.getName()).log(Level.SEVERE, null, ex);
@@ -324,29 +394,26 @@ public class CropAssessmentDB {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             int num = getSelectedForecastLKG(year);
-            System.out.println(num+"YEARRRRRRRRRRRRRRRRRRRRRRRRR");
-            if(num==0){
+            System.out.println(num + "YEARRRRRRRRRRRRRRRRRRRRRRRRR");
+            if (num == 0) {
                 num++;
-                System.out.println(num+" LOL");
+                System.out.println(num + " LOL");
             }
             String query = "SELECT sum(forecasted_lkg) as 'total' FROM weeklyestimate where year = ? ;";
-            String query2 = "SELECT forecasted"+num+"_lkg as 'total' FROM cropestimatedistrict where year = ? ;";
+            String query2 = "SELECT forecasted" + num + "_lkg as 'total' FROM cropestimatedistrict where year = ? ;";
             PreparedStatement pstmt = null;
-            if (year<=2016){
-               pstmt = conn.prepareStatement(query);  
-            }
-            else
-            {
-                pstmt = conn.prepareStatement(query2);  
+            if (year <= 2016) {
+                pstmt = conn.prepareStatement(query);
+            } else {
+                pstmt = conn.prepareStatement(query2);
             }
             pstmt.setInt(1, year);
             ResultSet rs = pstmt.executeQuery();
             Double tc = null;
             if (rs.next()) {
                 tc = rs.getDouble("total");
-                System.out.println(tc+"TANGINA NYO");
-            }
-            else {
+                System.out.println(tc + "TANGINA NYO");
+            } else {
                 tc = 0.00;
             }
             rs.close();
@@ -359,7 +426,7 @@ public class CropAssessmentDB {
         }
         return 0.00;
     }
-
+    
     public ArrayList<CropAssessment> getRainFall(int weekofyear, int year) {
         try {
             // put functions here : previous week production, this week production
@@ -382,20 +449,20 @@ public class CropAssessmentDB {
                     rain.setRainfall(rs.getDouble("rainfal"));
                     rain.setWeek_ending(rs.getDate("week_ending"));
                     rainfall.add(rain);
-
+                    
                 } while (rs.next());
             }
             rs.close();
             pstmt.close();
             conn.close();
-
+            
             return rainfall;
         } catch (SQLException ex) {
             java.util.logging.Logger.getLogger(CropAssessmentDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
-
+    
     public ArrayList<CropAssessment> getPrevCropAssessmentReportForTheWeek(int weekofyear, int year, String tdate) {
         try {
             // put functions here : previous week production, this week production
@@ -403,25 +470,24 @@ public class CropAssessmentDB {
             Connection conn = myFactory.getConnection();
             PreparedStatement pstmt = null;
             String query = "SELECT sum(area) as 'previous_area',sum(actual) as 'previous_tc' FROM weeklyestimate where id < ? and year = ? ;";
-
-            String query2 = "select date as week_ending,weekofyear(date), round(sum(area_harvested),2) as previous_area, round(sum(tons_cane),2) as previous_tc, sum(lkg) as previous_lkg \n" +
-"                    from production\n" +
-"                    where year = ? and date< ? and yearweek(date)< yearweek(?)\n" +
-"                    order by date;";
-            if(year <= 2016){
-            pstmt = conn.prepareStatement(query);
-            int id = getWeeklyEstimateID(weekofyear, year);
-            pstmt.setInt(1, id);
-            pstmt.setInt(2, year);
-            }
-            else{
-            pstmt = conn.prepareStatement(query2);
-            pstmt.setInt(1, year);
-            if (weekofyear == 1){
-                weekofyear = 52;
-            }
-            pstmt.setString(3, tdate);
-            pstmt.setString(2, tdate);
+            
+            String query2 = "select date as week_ending,weekofyear(date), round(sum(area_harvested),2) as previous_area, round(sum(tons_cane),2) as previous_tc, sum(lkg) as previous_lkg \n"
+                    + "                    from production\n"
+                    + "                    where year = ? and date< ? and yearweek(date)< yearweek(?)\n"
+                    + "                    order by date;";
+            if (year <= 2016) {
+                pstmt = conn.prepareStatement(query);
+                int id = getWeeklyEstimateID(weekofyear, year);
+                pstmt.setInt(1, id);
+                pstmt.setInt(2, year);
+            } else {
+                pstmt = conn.prepareStatement(query2);
+                pstmt.setInt(1, year);
+                if (weekofyear == 1) {
+                    weekofyear = 52;
+                }
+                pstmt.setString(3, tdate);
+                pstmt.setString(2, tdate);
             }
             ResultSet rs = pstmt.executeQuery();
             ArrayList<CropAssessment> cT = null;
@@ -432,27 +498,26 @@ public class CropAssessmentDB {
                     c = new CropAssessment();
                     c.setPrevTons_Cane(rs.getDouble("previous_tc"));
                     c.setPrevArea(rs.getDouble("previous_area"));
-                    if(year <= 2016){
+                    if (year <= 2016) {
                         
-                    }
-                    else {
+                    } else {
                         c.setPrevLKG(rs.getDouble("previous_lkg"));
                     }
                     cT.add(c);
-
+                    
                 } while (rs.next());
             }
             rs.close();
             pstmt.close();
             conn.close();
-
+            
             return cT;
         } catch (SQLException ex) {
             java.util.logging.Logger.getLogger(CropAssessmentDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
-
+    
     public Integer getWeeklyEstimateID(int weekofyear, int year) {
         try {
             // put functions here : previous week production, this week production
@@ -473,13 +538,14 @@ public class CropAssessmentDB {
             rs.close();
             pstmt.close();
             conn.close();
-
+            
             return id;
         } catch (SQLException ex) {
             java.util.logging.Logger.getLogger(CropAssessmentDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
+    
     public Integer getSelectedForecast(int year) {
         try {
             // put functions here : previous week production, this week production
@@ -499,13 +565,14 @@ public class CropAssessmentDB {
             rs.close();
             pstmt.close();
             conn.close();
-
+            
             return id;
         } catch (SQLException ex) {
             java.util.logging.Logger.getLogger(CropAssessmentDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
+    
     public Integer getSelectedForecastLKG(int year) {
         try {
             // put functions here : previous week production, this week production
@@ -520,20 +587,20 @@ public class CropAssessmentDB {
             if (rs.next()) {
                 do {
                     id = rs.getInt("forecast_lkg");
-                    System.out.println(id+"AYYYYYYYYYYYYYYYYYYYYYYD");
+                    System.out.println(id + "AYYYYYYYYYYYYYYYYYYYYYYD");
                 } while (rs.next());
             }
             rs.close();
             pstmt.close();
             conn.close();
-
+            
             return id;
         } catch (SQLException ex) {
             java.util.logging.Logger.getLogger(CropAssessmentDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
-
+    
     public ArrayList<CropAssessment> getEstimatedProduction(int year) {
         try {
             // put functions here : previous week production, this week production
@@ -555,14 +622,14 @@ public class CropAssessmentDB {
             rs.close();
             pstmt.close();
             conn.close();
-
+            
             return cT;
         } catch (SQLException ex) {
             java.util.logging.Logger.getLogger(CropAssessmentDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
-
+    
     public boolean printCA(int year, String district, String weekending) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
@@ -581,13 +648,13 @@ public class CropAssessmentDB {
             System.out.println(pathing);
             File file = new File("cropassessmenttest.jrxml");
             String path = file.getAbsolutePath();
-
+            
             String only_path = path;
             System.out.println(only_path);
             JasperReport jasperReport = JasperCompileManager.compileReport("C:\\Users\\Bryll Joey Delfin\\Documents\\NetBeansProjects\\Reality\\src\\java\\reports\\cropassessmenttest.jrxml");
-
+            
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, map, conn);
-
+            
             System.out.println("it printed the file");
             JasperExportManager.exportReportToPdfFile(jasperPrint, "C:\\Users\\Bryll Joey Delfin\\Documents\\NetBeansProjects\\Reality\\CropAssess" + district + weekending + ".pdf");
 
@@ -595,14 +662,14 @@ public class CropAssessmentDB {
             JasperViewer jv = new JasperViewer(jasperPrint, false);
 //                jv.viewReport( jasperPrint, false );
             JasperViewer.viewReport(jasperPrint, false);
-
+            
             return true;
-
+            
         } catch (JRException ex) {
             Logger.getLogger(CropAssessmentDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
-
+        
     }
-
+    
 }
