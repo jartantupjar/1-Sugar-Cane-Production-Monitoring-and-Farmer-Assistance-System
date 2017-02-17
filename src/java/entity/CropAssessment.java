@@ -17,7 +17,7 @@ public class CropAssessment {
     private double rainfall;
     private String previous,thisweek,todate,percent, standing;
     private String estimated;
-    private String particulars;
+    private String particulars,dayname;
     private Date week_ending;
     /**
      * @return the prevArea
@@ -333,6 +333,20 @@ public class CropAssessment {
      */
     public void setTodateLKG(double todateLKG) {
         this.todateLKG = todateLKG;
+    }
+
+    /**
+     * @return the dayname
+     */
+    public String getDayname() {
+        return dayname;
+    }
+
+    /**
+     * @param dayname the dayname to set
+     */
+    public void setDayname(String dayname) {
+        this.dayname = dayname;
     }
     
 }

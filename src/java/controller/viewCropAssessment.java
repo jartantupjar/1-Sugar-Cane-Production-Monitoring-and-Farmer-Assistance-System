@@ -44,7 +44,7 @@ public class viewCropAssessment extends BaseServlet {
         Date todayDate = calist.get(0).getTodayDate();
         Calendar cal = caldb.getCalendarTypes(todayDate);
         ArrayList<CropAssessment> caT = cadb.getCropAssesmentRajversion(cal.getEweek(), cropyear, calist.get(0).getTodayDate().toString());
-       
+       ArrayList<CropAssessment> rain= cadb.getRainfallByDate(calist.get(0).getMondayofWeek(),calist.get(0).getSundayofWeek());
 ArrayList<statusReport> srlist;
 srlist=cadb.getAllStatusReports(todayDate);
         
@@ -57,9 +57,14 @@ srlist=cadb.getAllStatusReports(todayDate);
         if (caT != null) {
             session.setAttribute("CropAss", caT);
             session.setAttribute("todayYear", cropyear);
+            session.setAttribute("carain", rain);
+            
             session.setAttribute("statusRep",srlist);
+            
 //            session.setAttribute("Week_ending",calist.get(0).getSundayofWeek());
+
             session.setAttribute("SundayofWeek",calist.get(0).getSundayofWeek());
+            session.setAttribute("MondayofWeek",calist.get(0).getMondayofWeek());
             
             rd = context.getRequestDispatcher("/createCropAssessment.jsp");
         }

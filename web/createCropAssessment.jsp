@@ -85,7 +85,7 @@
 
                             </div>
                         </div>
-                        <div class="col-md-5"  >
+                        <div class="col-md-4"  >
                             <div class="box box-info">
                                 <div class="box-header with-border">
                                     <h1 class="box-title">B. Standing Crop</h1>
@@ -116,7 +116,45 @@
                                 </div>
 
                             </div>
+                            
                         </div>
+                        <div class="col-md-8">
+                             
+                          
+                                <div class="box box-info">
+                                    <div class="box-header with-border">
+                                        <h1 class="box-title">C. Weather Update</h1>
+                                        <div class="box-tools pull-right">
+                                            <a tabindex="0" class="" id="popWeatherForecast" role="button"><i class="fa fa-question text-orange"></i></a>  
+                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                        </div>
+                                    </div>   
+                                    <div class="box-body no-padding" id="container1">
+                                        <table class="table table-bordered" >
+                                            <thead>
+                                                
+                                            <th class="text-center" colspan="7"> Rainfall Amount(mm) of the week </th>
+                                            <tr>
+                                                <c:forEach var="rain" items="${carain}">
+
+                                                <th>${rain.dayname}</th>
+
+                                            </c:forEach>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <c:forEach var="r" items="${carain}">
+
+                                                <td>${r.rainfall} mm</td>
+
+                                            </c:forEach>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                               
+                            </div>
+                       
+                            </div>
                         <div class="col-md-12" id="improvement" >
                             <h3 class="text-bold">PART 2: DISTRICT IMPROVEMENT STATUS REPORT  <small>Optional description</small></h3>
                             <div class="col-md-12"  > 
@@ -135,16 +173,24 @@
 
                                                 <tr >
                                                     <th class="text-center" rowspan="2">Particulars</th>
-                                                    <th class="text-center" colspan="2">Improvements</th>
+                                                    <!--<th class="text-center" colspan="2">Improvements</th>-->
+                                                       <c:forEach var="sr" items="${statusRep}" varStatus="status">
+                                                        <th class="text-center" colspan="2">
+                                                             <c:if test="${status.first}">   
+                                                                <br> Last Week
+                                                            </c:if>
+                                                            <c:if test="${status.last}">   
+                                                                <br> This Week
+                                                            </c:if>
+                                                        </th>
+
+                                                    </c:forEach>
                                                     <th style="width:15%" class="text-center"  rowspan="2">Improvement</th>	
                                                 </tr>
                                                 <tr>
                                                     <c:forEach var="sr" items="${statusRep}" varStatus="status">
-                                                        <th class="text-center"> ${sr.weekStarting} to ${sr.weekEnding}
-                                                            <c:if test="${status.last}">   
-                                                                <br> (this week)
-                                                            </c:if>
-                                                        </th>
+                                                        <th class="text-center">Name </th>
+                                                        <th class="text-center"> TC/Yield </th>
 
                                                     </c:forEach>
                                                     <!--                                                <th class="text-center">JAN ____ TO JAN ____</th>
@@ -156,7 +202,8 @@
                                                 <tr>
                                                     <td> Highest Producing Farmer</td>
                                                     <c:forEach var="sr" items="${statusRep}" varStatus="status">
-                                                        <td>${sr.highestProdFarmer.name} with TC ${sr.highestProdFarmer.production} Tons Cane </td>
+                                                        <td>${sr.highestProdFarmer.name}</td>
+                                                        <td>${sr.highestProdFarmer.production} TC</td>
                                                     </c:forEach>
                                                     <td>
                                                         <div class="progress-group" >
@@ -171,7 +218,8 @@
                                                 <tr>
                                                     <td> Lowest Producing Farmer</td>
                                                     <c:forEach var="sr" items="${statusRep}" varStatus="status">
-                                                        <td>${sr.lowestProdFarmer.name} with ${sr.lowestProdFarmer.production} Tons Cane</td>
+                                                        <td>${sr.lowestProdFarmer.name} </td>
+                                                        <td>${sr.lowestProdFarmer.production} TC</td>
                                                     </c:forEach>
                                                     <td>
                                                         <div class="progress-group" >
@@ -186,7 +234,8 @@
                                                 <tr>
                                                     <td> Highest Yielding Farmer</td>
                                                     <c:forEach var="sr" items="${statusRep}" varStatus="status">
-                                                        <td>${sr.highestYieldFarmer.name} with ${sr.highestYieldFarmer.tYield} Yield </td>
+                                                        <td>${sr.highestYieldFarmer.name}</td>
+                                                        <td>${sr.highestYieldFarmer.tYield} Yield</td>
                                                     </c:forEach>
                                                     <td>
                                                         <div class="progress-group" >
@@ -201,7 +250,8 @@
                                                 <tr>
                                                     <td> Lowest Yielding Farmer</td>
                                                     <c:forEach var="sr" items="${statusRep}" varStatus="status">
-                                                        <td>${sr.lowestYieldFarmer.name} with ${sr.lowestYieldFarmer.tYield} Yield </td>
+                                                        <td>${sr.lowestYieldFarmer.name}</td>
+                                                        <td>${sr.lowestYieldFarmer.tYield} Yield</td>
                                                     </c:forEach>
                                                     <td>
                                                         <div class="progress-group" >
@@ -241,9 +291,13 @@
                                                 </tr>
                                                 <tr>
                                                     <c:forEach var="sr" items="${statusRep}" varStatus="status">
-                                                        <th class="text-center"> ${sr.weekStarting} to ${sr.weekEnding}
+                                                        <th class="text-center">
+                                                          
+                                                           <c:if test="${status.first}">  
+                                                              Previous Week
+                                                                  </c:if>
                                                             <c:if test="${status.last}">   
-                                                                <br> (this week)
+                                                                 This Week
                                                             </c:if>
                                                         </th>
 
