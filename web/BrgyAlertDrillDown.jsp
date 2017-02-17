@@ -33,6 +33,7 @@
                                     <div class="box-header with-border">
                                         <h1 class="box-title">Disaster Report</h1>
                                         <div class="box-tools pull-right">
+                                            <a tabindex="0" class="" id="popDisaster" role="button"><i class="fa fa-question text-orange"></i></a>   
                                             <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                             <!-- In box-tools add this button if you intend to use the contacts pane -->
                                             <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -74,13 +75,21 @@
     </div>
 
 </div>
+<script src="popoverText.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#popDisaster').popover(popDisasterB);
+            });
 
+
+        </script>
 <script src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <script src="dist/js/app.min.js"></script>
 
 <script src="plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+ 
 <script>
                                    $(document).ready(function () {
                                        var table = $('#example').DataTable({

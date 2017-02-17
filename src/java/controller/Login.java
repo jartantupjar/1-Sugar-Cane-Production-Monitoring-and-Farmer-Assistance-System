@@ -108,10 +108,10 @@ public class Login extends HttpServlet {
                     CropNarrative cn = null;
                     ArrayList<CropAssessment> rain = cadb.getRainFall(cal.getEweek(), cropyear);
 
-                    if (cadb.checkExistingNarrative(cropyear, week_ending) == true) {
+                    if (cadb.checkExistingNarrative(cropyear, calist.get(0).getSundayofWeek()) == true) {
 //                        System.out.println("it entered tester");
                         cn = new CropNarrative();
-                        cn = cadb.getAssessmentNarrative(cropyear, week_ending);
+                        cn = cadb.getAssessmentNarrative(cropyear, calist.get(0).getSundayofWeek());
                     }
                     session.setAttribute("rainfall", rain);
                     session.setAttribute("narrative", cn);

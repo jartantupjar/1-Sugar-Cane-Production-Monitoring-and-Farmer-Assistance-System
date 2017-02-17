@@ -5,11 +5,15 @@
  */
 package controller;
 
-import db.CalendarDB;
-import entity.Calendar;
+import db.ForumDB;
+import db.ProblemsDB;
+import db.fixedRecDB;
+import entity.Forum;
+import entity.Recommendation;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -22,7 +26,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Bryll Joey Delfin
  */
-public class viewPhasesDates extends HttpServlet {
+public class linktoPost extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,21 +42,48 @@ public class viewPhasesDates extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            CalendarDB cdb = new CalendarDB();
-            ArrayList<Calendar> cT = new ArrayList<Calendar>();
-            ArrayList<Calendar> calist = cdb.getCurrentYearDetails();//gets the phases/today/crop yr
-            Integer cropyear = calist.get(0).getYear();
-            cT = cdb.getPhases(cropyear);
-            if (cT != null) {
-                HttpSession session = request.getSession();
-                session.setAttribute("phase", cT);
-                for(int i=0;i<cT.size();i++){
-                    session.setAttribute("test"+i, cT.get(i).getDatepickers()+" - "+cT.get(i).getDatepickere());
+            HttpSession session = request.getSession();
+            ForumDB fdb = new ForumDB();
+            ProblemsDB pdb = new ProblemsDB();
+            fixedRecDB rdb = new fixedRecDB();
+            int test = 0;
+            java.sql.Date tdate = (java.sql.Date) session.getAttribute("todaysDate");
+            int fields_id = Integer.parseInt(request.getParameter("fields"));
+            Enumeration<String> parameterNames = request.getParameterNames();
+            String paramName;
+            String param = "";
+            ArrayList<String> pT = new ArrayList<String>();
+            while (parameterNames.hasMoreElements()) {
+                paramName = parameterNames.nextElement();
+                System.out.println(paramName);
+                if (paramName.startsWith("probid1[]")) {
+                    for (int i = 0; i < request.getParameterValues(paramName).length; i++) {
+                        pT.add(request.getParameterValues(paramName)[i]);
+                         param = request.getParameterValues(paramName)[i];
+                        //connects recommendation to problem table 
+                       //int test = recDB.connectRecommendationtoProblem(check,prob_id);
+                        
+                    }
+
                 }
+            }
+            Forum f = new Forum();
+            f = fdb.getForumDetailByName(param);
+            if(f.getProb_id()!= null){
+            int pfid = pdb.linktoProblems(fields_id, f.getProb_id(), tdate, "Veryfying");
+            test  = fdb.addRedirectionNotification(fields_id, "You been redirected to this post : " + f.getTitle(), tdate,f.getId(),pfid,0);
+            }
+            else if(f.getRecom_id() != null){
+            int rfid = rdb.linktoRecommendation(fields_id, f.getRecom_id(), tdate,"Active");
+            test  = fdb.addRedirectionNotification(fields_id, "You been redirected to this post : " + f.getTitle(), tdate,f.getId(),0,rfid);
+            }
+            
+            if(test>0){
                 ServletContext context = getServletContext();
-                RequestDispatcher rd = context.getRequestDispatcher("/Calendar.jsp");   
+                RequestDispatcher rd = context.getRequestDispatcher("/Forum.jsp");
                 rd.forward(request, response);
-            } else {
+            }
+            else{
                 ServletContext context = getServletContext();
                 RequestDispatcher rd = context.getRequestDispatcher("/index.jsp");
                 rd.forward(request, response);

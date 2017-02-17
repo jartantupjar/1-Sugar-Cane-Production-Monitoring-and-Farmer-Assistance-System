@@ -17,6 +17,12 @@ private Date weekStarting,weekEnding;
     private int recsSuggested;
     private int probsReported;
     private int probsSolved;
+    
+    private Farmer highestProdFarmer;
+    private Farmer lowestProdFarmer;
+    private Farmer highestYieldFarmer;
+    private Farmer lowestYieldFarmer;
+            
 
     /**
      * @return the recsImplemented
@@ -104,6 +110,62 @@ private Date weekStarting,weekEnding;
      */
     public void setProbsReported(int probsReported) {
         this.probsReported = probsReported;
+    }
+
+    /**
+     * @return the highestProdFarmer
+     */
+    public Farmer getHighestProdFarmer() {
+        return highestProdFarmer;
+    }
+
+    /**
+     * @param highestProdFarmer the highestProdFarmer to set
+     */
+    public void setHighestProdFarmer(Farmer highestProdFarmer) {
+        this.highestProdFarmer = highestProdFarmer;
+    }
+
+    /**
+     * @return the lowestProdFarmer
+     */
+    public Farmer getLowestProdFarmer() {
+        return lowestProdFarmer;
+    }
+
+    /**
+     * @param lowestProdFarmer the lowestProdFarmer to set
+     */
+    public void setLowestProdFarmer(Farmer lowestProdFarmer) {
+        this.lowestProdFarmer = lowestProdFarmer;
+    }
+
+    /**
+     * @return the highestYieldFarmer
+     */
+    public Farmer getHighestYieldFarmer() {
+        return highestYieldFarmer;
+    }
+
+    /**
+     * @param highestYieldFarmer the highestYieldFarmer to set
+     */
+    public void setHighestYieldFarmer(Farmer highestYieldFarmer) {
+        this.highestYieldFarmer = highestYieldFarmer;
+    }
+
+    /**
+     * @return the lowestYieldFarmer
+     */
+    public Farmer getLowestYieldFarmer() {
+        return lowestYieldFarmer;
+    }
+
+    /**
+     * @param lowestYieldFarmer the lowestYieldFarmer to set
+     */
+    public void setLowestYieldFarmer(Farmer lowestYieldFarmer) {
+        this.lowestYieldFarmer = lowestYieldFarmer;
     }
 
     

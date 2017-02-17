@@ -42,6 +42,7 @@
                                 <div class="box-header with-border">
                                     <h1 class="box-title">Weather Trends</h1>
                                     <div class="box-tools pull-right">
+                                        <a tabindex="0" class="" id="popWeatherT" role="button"><i class="fa fa-question text-orange"></i></a>  
                                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                         <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                     </div>
@@ -67,6 +68,7 @@
                                 <div class="box-header with-border">
                                     <h1 class="box-title">Weather Trends</h1>
                                     <div class="box-tools pull-right">
+                                        <a tabindex="0" class="" id="popWeatherT1" role="button"><i class="fa fa-question text-orange"></i></a>  
                                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                         <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                     </div>
@@ -92,6 +94,7 @@
         </div>
 
         <script type="text/javascript" src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
+        
         <script type="text/javascript">
             $(function () {    
             var sel = document.getElementById('year1');
@@ -360,6 +363,14 @@
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
         <script src="Highcharts/highcharts.js"></script>
         <script src="Highcharts/modules/exporting.js"></script>
-        
+        <script src="popoverText.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#popWeatherT').popover(popWeatherT);
+                $('#popWeatherT1').popover(popWeatherTS);
+            });
+
+
+        </script>
     </body>
 </html>

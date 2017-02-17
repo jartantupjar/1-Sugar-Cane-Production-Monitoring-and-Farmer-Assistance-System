@@ -37,7 +37,7 @@ public class submitCA extends BaseServlet {
             CropNarrative cn= new CropNarrative();
              String sdate= session.getAttribute("todayDate").toString();
              String cropyear= request.getParameter("cropyear");
-           String weekending= request.getParameter("weekending");
+           String weekending= request.getParameter("SundayofWeek");
           
            String dweather = request.getParameter("dweather");
            String dprice = request.getParameter("dprice");

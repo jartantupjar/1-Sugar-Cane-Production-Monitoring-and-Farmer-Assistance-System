@@ -58,6 +58,9 @@ srlist=cadb.getAllStatusReports(todayDate);
             session.setAttribute("CropAss", caT);
             session.setAttribute("todayYear", cropyear);
             session.setAttribute("statusRep",srlist);
+//            session.setAttribute("Week_ending",calist.get(0).getSundayofWeek());
+            session.setAttribute("SundayofWeek",calist.get(0).getSundayofWeek());
+            
             rd = context.getRequestDispatcher("/createCropAssessment.jsp");
         }
         rd.forward(request, response);

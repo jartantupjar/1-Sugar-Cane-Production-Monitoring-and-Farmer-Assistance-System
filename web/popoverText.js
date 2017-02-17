@@ -867,8 +867,223 @@ var popVSelRec = {toggle: "popover", trigger: "focus", placement: "auto", html: 
 };
 //
 
+//shows recorded count per municipality  
+var popDisasterR = {toggle: "popover", trigger: "focus", placement: "auto", html: true,
+
+    title: 'Disaster Report',
+    content: function () {
+        return '<dl>\n\
+                    <dt>Description</dt>\n\
+                        <dd>hello world</dd>\n\
+                    <dt>Tips</dt>\n\
+                        <dd> <ul>\n\
+                            <li>hello world</li>\n\
+                            </ul>\n\
+                        <dd>\n\
+                </dl>';
+    }
+    
+};
+//shows recorded count per baranagay
+var popDisasterB = {toggle: "popover", trigger: "focus", placement: "auto", html: true,
+
+    title: 'Disaster Report',
+    content: function () {
+        return '<dl>\n\
+                    <dt>Description</dt>\n\
+                        <dd>hello world</dd>\n\
+                    <dt>Tips</dt>\n\
+                        <dd> <ul>\n\
+                            <li>hello world</li>\n\
+                            </ul>\n\
+                        <dd>\n\
+                </dl>';
+    }
+    
+};
+
+//for weather trends
+var popWeatherT = {toggle: "popover", trigger: "focus", placement: "auto", html: true,
+
+    title: 'Weather Trends',
+    content: function () {
+        return '<dl>\n\
+                    <dt>Description</dt>\n\
+                        <dd>hello world</dd>\n\
+                    <dt>Tips</dt>\n\
+                        <dd> <ul>\n\
+                            <li>hello world</li>\n\
+                            </ul>\n\
+                        <dd>\n\
+                </dl>';
+    }
+    
+};
+//Forum
+var popForumD = {toggle: "popover", trigger: "focus", placement: "auto", html: true,
+
+    title: 'Forum',
+    content: function () {
+        return '<dl>\n\
+                    <dt>Description</dt>\n\
+                        <dd>hello world</dd>\n\
+                    <dt>Tips</dt>\n\
+                        <dd> <ul>\n\
+                            <li>hello world</li>\n\
+                            </ul>\n\
+                        <dd>\n\
+                </dl>';
+    }
+    
+};
+var popPostpage = {toggle: "popover", trigger: "focus", placement: "auto", html: true,
+
+    title: 'Post',
+    content: function () {
+        return '<dl>\n\
+                    <dt>Description</dt>\n\
+                        <dd>hello world</dd>\n\
+                    <dt>Tips</dt>\n\
+                        <dd> <ul>\n\
+                            <li>hello world</li>\n\
+                            </ul>\n\
+                        <dd>\n\
+                </dl>';
+    }
+    
+};
+var popPosLTR = {toggle: "popover", trigger: "focus", placement: "auto", html: true,
+
+    title: 'Link to Recommendation',
+    content: function () {
+        return '<dl>\n\
+                    <dt>Description</dt>\n\
+                        <dd>hello world</dd>\n\
+                    <dt>Tips</dt>\n\
+                        <dd> <ul>\n\
+                            <li>hello world</li>\n\
+                            </ul>\n\
+                        <dd>\n\
+                </dl>';
+    }
+    
+};
+var popPosLTP = {toggle: "popover", trigger: "focus", placement: "auto", html: true,
+
+    title: 'Link to Problem',
+    content: function () {
+        return '<dl>\n\
+                    <dt>Description</dt>\n\
+                        <dd>hello world</dd>\n\
+                    <dt>Tips</dt>\n\
+                        <dd> <ul>\n\
+                            <li>hello world</li>\n\
+                            </ul>\n\
+                        <dd>\n\
+                </dl>';
+    }
+    
+};
+var popPosLTPost = {toggle: "popover", trigger: "focus", placement: "auto", html: true,
+
+    title: 'Link to Post',
+    content: function () {
+        return '<dl>\n\
+                    <dt>Description</dt>\n\
+                        <dd>hello world</dd>\n\
+                    <dt>Tips</dt>\n\
+                        <dd> <ul>\n\
+                            <li>hello world</li>\n\
+                            </ul>\n\
+                        <dd>\n\
+                </dl>';
+    }
+    
+};
+var popPosCP = {toggle: "popover", trigger: "focus", placement: "auto", html: true,
+
+    title: 'Create Problem',
+    content: function () {
+        return '<dl>\n\
+                    <dt>Description</dt>\n\
+                        <dd>hello world</dd>\n\
+                    <dt>Tips</dt>\n\
+                        <dd> <ul>\n\
+                            <li>hello world</li>\n\
+                            </ul>\n\
+                        <dd>\n\
+                </dl>';
+    }
+    
+};
+var popPosCR = {toggle: "popover", trigger: "focus", placement: "auto", html: true,
+
+    title: 'Create Recommendation',
+    content: function () {
+        return '<dl>\n\
+                    <dt>Description</dt>\n\
+                        <dd>hello world</dd>\n\
+                    <dt>Tips</dt>\n\
+                        <dd> <ul>\n\
+                            <li>hello world</li>\n\
+                            </ul>\n\
+                        <dd>\n\
+                </dl>';
+    }
+    
+};
+var popWeatherTS = {toggle: "popover", trigger: "focus", placement: "auto", html: true,
+
+    title: 'Weather Trends',
+    content: function () {
+        return '<dl>\n\
+                    <dt>Description</dt>\n\
+                        <dd>hello world</dd>\n\
+                    <dt>Tips</dt>\n\
+                        <dd> <ul>\n\
+                            <li>hello world</li>\n\
+                            </ul>\n\
+                        <dd>\n\
+                </dl>';
+    }
+    
+};
+// sending alerts details
+var popProbD = {toggle: "popover", trigger: "focus", placement: "auto", html: true,
+
+    title: 'Sending Alerts',
+    content: function () {
+        return '<dl>\n\
+                    <dt>Description</dt>\n\
+                        <dd>hello world</dd>\n\
+                    <dt>Tips</dt>\n\
+                        <dd> <ul>\n\
+                            <li>hello world</li>\n\
+                            </ul>\n\
+                        <dd>\n\
+                </dl>';
+    }
+    
+};
+// sending alerts details
+var popMessD = {toggle: "popover", trigger: "focus", placement: "auto", html: true,
+
+    title: 'Sending Alers',
+    content: function () {
+        return '<dl>\n\
+                    <dt>Description</dt>\n\
+                        <dd>hello world</dd>\n\
+                    <dt>Tips</dt>\n\
+                        <dd> <ul>\n\
+                            <li>hello world</li>\n\
+                            </ul>\n\
+                        <dd>\n\
+                </dl>';
+    }
+    
+};
 //****Confirm/Validate Problems(on press of report in comparison page)****
-//popsendto also shared
+//popsendto also shared 
 
 var popProbMsg = {toggle: "popover", trigger: "focus", placement: "auto", html: true,
 
@@ -900,8 +1115,8 @@ var popVSelProb = {toggle: "popover", trigger: "focus", placement: "auto", html:
                         <dd>\n\
                 </dl>';
     }
+    
 };
 
 //****another page****
-
 

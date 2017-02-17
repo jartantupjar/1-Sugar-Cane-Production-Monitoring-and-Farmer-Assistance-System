@@ -66,53 +66,53 @@
                             </div>
 
                             <div class="box-body no-padding">
-                                <label> Planting Phase:</label> <div class="input-group date">
+                                <label> Planting Phase:</label> <div class="input-group date" id="date1">
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
-                                                 <input type="text" class="form-control reservation pull-right" name="pstart" id="reservation">
+                                    <input type="text" class="form-control reservation pull-right" name="pstart" id="reservation" value="${test0}">
                                             </div> <br>
                                             
-                                <label> Germination Phase:</label> <div class="input-group date">
+                                <label> Germination Phase:</label> <div class="input-group date" id="date2">
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
-                                                <input type="text" class="form-control pull-right reservation" name="gstart" id="datepickerstart">
+                                                <input type="text" class="form-control pull-right reservation" name="gstart" id="datepickerstart" value="${test1}">
                                             </div> <br>
                                             
-                                            <label> Tillering Phase:</label> <div class="input-group date">
+                                            <label> Tillering Phase:</label> <div class="input-group date" id="date3">
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
-                                                <input type="text" class="form-control pull-right reservation" name="tstart" id="datepickerstart">
+                                                <input type="text" class="form-control pull-right reservation" name="tstart" id="datepickerstart" value="${test2}">
                                             </div>  <br>
                                             
-                                            <label>Stalk Elongation Phase:</label> <div class="input-group date">
+                                            <label>Stalk Elongation Phase:</label> <div class="input-group date" id="date4">
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
-                                                <input type="text" class="form-control pull-right reservation" name="sstart" id="datepickerstart">
+                                                <input type="text" class="form-control pull-right reservation" name="sstart" id="datepickerstart" value="${test3}">
                                             </div>  <br>
                                             
-                                <label> Yield Formation Phase:</label> <div class="input-group date">
+                                <label> Yield Formation Phase:</label> <div class="input-group date" id="date5">
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
-                                                <input type="text" class="form-control pull-right reservation" name="ystart" id="datepickerstart">
+                                                <input type="text" class="form-control pull-right reservation" name="ystart" id="datepickerstart" value="${test4}">
                                             </div>  <br>
                                             
-                                            <label> Ripening Phase:</label> <div class="input-group date">
+                                            <label> Ripening Phase:</label> <div class="input-group date" id="date6">
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
-                                                <input type="text" class="form-control pull-right reservation" name="rstart" id="datepickerstart">
+                                                <input type="text" class="form-control pull-right reservation" name="rstart" id="datepickerstart" value="${test5}">
                                             </div>  <br>
                                             
-                                <label> Milling Phase:</label> <div class="input-group date">
+                                <label> Milling Phase:</label> <div class="input-group date" id="date7">
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
-                                                <input type="text" class="form-control pull-right reservation" name="mstart" id="datepickerstart">
+                                                <input type="text" class="form-control pull-right reservation" name="mstart" id="datepickerstart" value="${test6}">
                                             </div>  <br>
                                            
                                 </div>
@@ -229,6 +229,19 @@
 
             });
         </script>
+<!--        <script>
+            $(function () {
+
+   var currentDate= "${test}";
+//     $("#datepicker").datepicker("setDate", currentDate);
+     $("#date1").datepicker("setDate", currentDate);
+
+       $('#date1').datepicker({
+                    autoclose: true
+                });
+            });
+        </script>-->
+        
 <!-- Page specific script -->
  
 <script>

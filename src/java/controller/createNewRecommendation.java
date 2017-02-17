@@ -65,7 +65,7 @@ public class createNewRecommendation extends HttpServlet {
             } else {
                 fields_id = 0;
             }
-            System.out.println(fields_id);
+            System.out.println(fields_id+"FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
             String title = request.getParameter("title");
             String dur = request.getParameter("config");
             System.out.println(dur+"DUR TAKEN");
@@ -156,6 +156,7 @@ public class createNewRecommendation extends HttpServlet {
                 rd.forward(request, response);
                 }
                 else{
+                fdb.addnewpost(r.getRecommendation_name(), r.getDescription(), dateparam, dateparam, "Accepted", calist.get(0).getPhase(), pass);
                 ServletContext context = getServletContext();
                 RequestDispatcher rd = context.getRequestDispatcher("/createNewRecommendation.jsp");
                 rd.forward(request, response);
