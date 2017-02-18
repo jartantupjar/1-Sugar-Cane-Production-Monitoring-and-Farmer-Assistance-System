@@ -253,8 +253,8 @@
 
                             </div>
                             <div class="col-md-4 col-md-offset-9">
-                                <button class="btn btn-danger" id="pCA">Print Crop Assessment</button>
-                                <br>
+                                <a href="viewCropAssessment?toprint=true" class="btn btn-danger" role="button" target="_blank">Print Crop Assessment</a>
+                    
                             </div>       
                         </c:if>
                     </div>

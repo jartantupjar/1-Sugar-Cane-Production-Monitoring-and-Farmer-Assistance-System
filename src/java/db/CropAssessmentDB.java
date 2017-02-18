@@ -212,9 +212,9 @@ public class CropAssessmentDB {
 
     public ArrayList<statusReport> getAllStatusReports(Date week) {
         ArrayList<statusReport> srlist = new ArrayList<>();
-        srlist.add(getStatusReportByWeek((Date.valueOf("2016-12-25"))));
+//        srlist.add(getStatusReportByWeek((Date.valueOf("2016-12-25"))));
         //gets the previous week from input date 
-//       srlist.add(getStatusReportByWeek((getPreviousWeek(week))));
+       srlist.add(getStatusReportByWeek((getPreviousWeek(week))));
 
         srlist.add(getStatusReportByWeek(week));
 

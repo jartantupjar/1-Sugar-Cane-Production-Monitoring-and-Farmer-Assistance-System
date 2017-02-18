@@ -22,7 +22,13 @@
             }
         </style>
     </head>
+
+
     <body class="hold-transition skin-blue sidebar-mini">
+
+
+
+
         <div class="wrapper">
             <div class="content-wrapper">
                 <section class="content-header">
@@ -31,7 +37,7 @@
                 <section class="content">
                     <div class="row" >
                         <h3 class="text-center text-bold">CROP ASSESSMENT REPORT</h3>
-                        <h3 class="text-center text-bold">Crop Year: ${todayYear}</h3>
+                        <h3 class="text-center text-bold">Crop Year: ${cayear}</h3>
 
                         <h3 >&nbsp  Week Ending: ${SundayofWeek}</h3>
                         <h3 class="text-bold">&nbsp PART 1:PRODUCTION DATA</h3>
@@ -166,7 +172,7 @@
 
                         </div>
                         <div class="col-md-12" id="improvement" >
-                            <h3 class="text-bold">PART 2: DISTRICT IMPROVEMENT STATUS REPORT  <small>Optional description</small></h3>
+                            <h3 class="text-bold">PART 2: DISTRICT IMPROVEMENT STATUS REPORT</h3>
                             <div class="col-md-12"  > 
                                 <div class="box box-info">
                                     <div class="box-header">
@@ -439,7 +445,7 @@
                                                         <td>${sr.probsSolved}</td>
                                                     </c:forEach>
                                                     <td>
-                                                         <c:choose>
+                                                        <c:choose>
                                                             <c:when test="${statusRep[0].probsSolved<statusRep[1].probsSolved}">
                                                                 <div>
                                                                     <span class="fa fa-arrow-up text-green">
@@ -465,13 +471,14 @@
                             </div>
 
                         </div>
-                        <div class="col-md-12" id="content" >
-                            <h3 class="text-bold">PART 3:NARRATIVE REPORT  <small>Optional description</small></h3>
+                        <form action="submitCA" method="POST">
+                            <div class="col-md-12" id="content" >
+                                <h3 class="text-bold">PART 3:NARRATIVE REPORT </h3>
 
-                            <form action="submitCA">
+
 
                                 <input name="SundayofWeek" value="${SundayofWeek}" type="hidden">
-                                <input name="cropyear" value="${todayYear}" type="hidden">
+                                <input name="cropyear" value="${cayear}" type="hidden">
                                 <div class="box box-info">   
                                     <div class="box-header">
                                         <div class="box-tools pull-right hidethis">
@@ -513,18 +520,18 @@
                                         </table>
                                     </div>
                                 </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-4 col-md-offset-4 hidethis">
-                                <a  class="btn btn-primary btn-block" role="button" id="gprint" ><i class="fa fa-print"></i> Print Report</a>
-                                <button class="btn btn-info btn-block" type="submit" >Submit</button>
-
-                                <!--                                <button id="cmd" type="button">print PDF</button>-->
-                                <br>
                             </div>
 
-                        </div>
+                            <div class="row">
+                                <div class="col-md-4 col-md-offset-4 hidethis">
+                                    <a  class="btn btn-primary btn-block" role="button" onClick="window.print();" ><i class="fa fa-print"></i> Print Report</a>
+                                    <button class="btn btn-info btn-block" type="submit" >Submit</button>
+
+                                    <!--                                <button id="cmd" type="button">print PDF</button>-->
+                                    <br>
+                                </div>
+
+                            </div>
                         </form>
 
                     </div>
@@ -551,6 +558,8 @@
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
         <script src="popoverText.js"></script>
 
+
+
         <script>
             $(document).ready(function () {
                 $('#popAreaHarv').popover(popAreaHarv);
@@ -562,53 +571,14 @@
 
 
         </script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js"></script>
         <script>
-
-            $(document).ready(function () {
-                var doc = new jsPDF();
-
-                var specialElementHandlers = {
-                    '#bypassme': function (element, renderer) {
-                        return true;
-                    }
-                };
-                $('#cmd').click(function () {
-                    doc.fromHTML($('#content').html(), {
-                        'width': 170,
-                        'elementHandlers': specialElementHandlers
-                    });
-                    doc.save('sample-file.pdf');
-                });
-
-                $('#gprint').click(function () {
-                    window.print();
-                });
-
-            });
+    if (${printca} !== null) {
+        window.onload = function () {
+            window.print();
+        };
+    }
         </script>
-        <script>
 
-            $(document).ready(function () {
-                var table = $('#munitable').DataTable({
-                    'ajax': {
-                        'url': 'viewDistCropEstimate?year=${todayYear}'
-                    },
-                    "paging": false,
-                    "ordering": false,
-                    "info": false,
-                    "searching": true
-                });
-                $('#munitable').DataTable().search('${Week_ending}').draw();
-                $('#munitable_filter').addClass('hidden');
-
-
-
-
-            });
-
-
-        </script>
         <script src="Highcharts/highcharts.js"></script>
         <script src="Highcharts/modules/treemap.js"></script>
         <script src="Highcharts/highcharts-more.js"></script>
