@@ -59,8 +59,7 @@
                             </div>
 
                         </div>
-                        <input class="btn btn-success pull-right" style="width: 25%" type="button" value="Back" 
-                               onClick="history.go(-1);return true;"> 
+                       
                     </div>
                 </section>
             </div>

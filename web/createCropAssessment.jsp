@@ -1,4 +1,5 @@
 <%@include file="security.jsp" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <html>
@@ -10,7 +11,16 @@
 
         <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css"> 
         <link rel="stylesheet" href="plugins/select2/select2.min.css">
-
+        <style type="text/css" media="print">
+            img
+            {
+                display:none;
+            }  
+            .hidethis
+            {
+                display:none;
+            }
+        </style>
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
@@ -29,7 +39,7 @@
                             <div class="box box-info">
                                 <div class="box-header with-border">
                                     <h1 class="box-title ">A. Area Harvested</h1>
-                                    <div class="box-tools pull-right">
+                                    <div class="box-tools pull-right hidethis">
                                         <a tabindex="0" class="text-overflow" id="popAreaHarv" role="button"><i class="fa fa-question text-orange"></i></a>
                                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                         <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -89,7 +99,7 @@
                             <div class="box box-info">
                                 <div class="box-header with-border">
                                     <h1 class="box-title">B. Standing Crop</h1>
-                                    <div class="box-tools pull-right">
+                                    <div class="box-tools pull-right hidethis">
                                         <a tabindex="0" class="text-overflow" id="popStandCrop" role="button"><i class="fa fa-question text-orange"></i></a>
                                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                         <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -116,52 +126,52 @@
                                 </div>
 
                             </div>
-                            
+
                         </div>
                         <div class="col-md-8">
-                             
-                          
-                                <div class="box box-info">
-                                    <div class="box-header with-border">
-                                        <h1 class="box-title">C. Weather Update</h1>
-                                        <div class="box-tools pull-right">
-                                            <a tabindex="0" class="" id="popWeatherForecast" role="button"><i class="fa fa-question text-orange"></i></a>  
-                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                        </div>
-                                    </div>   
-                                    <div class="box-body no-padding" id="container1">
-                                        <table class="table table-bordered" >
-                                            <thead>
-                                                
-                                            <th class="text-center" colspan="7"> Rainfall Amount(mm) of the week </th>
-                                            <tr>
-                                                <c:forEach var="rain" items="${carain}">
+
+
+                            <div class="box box-info">
+                                <div class="box-header with-border">
+                                    <h1 class="box-title">C. Weather Update</h1>
+                                    <div class="box-tools pull-right hidethis">
+                                        <a tabindex="0" class="" id="popWeatherForecast" role="button"><i class="fa fa-question text-orange"></i></a>  
+                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                    </div>
+                                </div>   
+                                <div class="box-body no-padding" id="container1">
+                                    <table class="table table-bordered" >
+                                        <thead>
+
+                                        <th class="text-center" colspan="7"> Rainfall Amount(mm) of the week </th>
+                                        <tr>
+                                            <c:forEach var="rain" items="${carain}">
 
                                                 <th>${rain.dayname}</th>
 
                                             </c:forEach>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <c:forEach var="r" items="${carain}">
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            <c:forEach var="r" items="${carain}">
 
-                                                <td>${r.rainfall} mm</td>
+                                            <td>${r.rainfall} mm</td>
 
-                                            </c:forEach>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                               
+                                        </c:forEach>
+                                        </tbody>
+                                    </table>
+                                </div>
+
                             </div>
-                       
-                            </div>
+
+                        </div>
                         <div class="col-md-12" id="improvement" >
                             <h3 class="text-bold">PART 2: DISTRICT IMPROVEMENT STATUS REPORT  <small>Optional description</small></h3>
                             <div class="col-md-12"  > 
                                 <div class="box box-info">
                                     <div class="box-header">
                                         <h1 class="box-title">A. Farmer Performance</h1>
-                                        <div class="box-tools pull-right">
+                                        <div class="box-tools pull-right hidethis">
                                             <a tabindex="0" class="text-overflow" id="popAreaHarv" role="button"><i class="fa fa-question text-orange"></i></a>
                                             <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                         </div>
@@ -174,9 +184,9 @@
                                                 <tr >
                                                     <th class="text-center" rowspan="2">Particulars</th>
                                                     <!--<th class="text-center" colspan="2">Improvements</th>-->
-                                                       <c:forEach var="sr" items="${statusRep}" varStatus="status">
+                                                    <c:forEach var="sr" items="${statusRep}" varStatus="status">
                                                         <th class="text-center" colspan="2">
-                                                             <c:if test="${status.first}">   
+                                                            <c:if test="${status.first}">   
                                                                 <br> Last Week
                                                             </c:if>
                                                             <c:if test="${status.last}">   
@@ -204,16 +214,27 @@
                                                     <c:forEach var="sr" items="${statusRep}" varStatus="status">
                                                         <td>${sr.highestProdFarmer.name}</td>
                                                         <td>${sr.highestProdFarmer.production} TC</td>
+
                                                     </c:forEach>
                                                     <td>
-                                                        <div class="progress-group" >
-                                                            <span class="progress-number">
-                                                                <b>
-                                                                    arrow down
-                                                                </b>
-                                                            </span>
-                                                        </div>
+                                                        <c:choose>
+                                                            <c:when test="${statusRep[0].highestProdFarmer.production<=statusRep[1].highestProdFarmer.production}">
+                                                                <div>
+                                                                    <span class="fa fa-arrow-up text-green">
+                                                                        <fmt:formatNumber type="number" pattern="###.##" value="${statusRep[1].highestProdFarmer.production-statusRep[0].highestProdFarmer.production}"/>
+                                                                    </span>
+                                                                </div>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <div>
+                                                                    <span class="fa fa-arrow-down text-red">
+                                                                        <fmt:formatNumber type="number" pattern="###.##" value="${statusRep[0].highestProdFarmer.production-statusRep[1].highestProdFarmer.production}" />
+                                                                    </span>
+                                                                </div>
+                                                            </c:otherwise>
+                                                        </c:choose> 
                                                     </td>
+
                                                 </tr>
                                                 <tr>
                                                     <td> Lowest Producing Farmer</td>
@@ -222,13 +243,23 @@
                                                         <td>${sr.lowestProdFarmer.production} TC</td>
                                                     </c:forEach>
                                                     <td>
-                                                        <div class="progress-group" >
-                                                            <span class="progress-number">
-                                                                <b>
-                                                                    arrow down
-                                                                </b>
-                                                            </span>
-                                                        </div>
+                                                        <c:choose>
+                                                            <c:when test="${statusRep[0].lowestProdFarmer.production<=statusRep[1].lowestProdFarmer.production}">
+                                                                <div>
+                                                                    <span class="fa fa-arrow-up text-green">
+                                                                        <fmt:formatNumber type="number" pattern="###.##" value="${statusRep[1].lowestProdFarmer.production-statusRep[0].lowestProdFarmer.production}"/>
+                                                                    </span>
+                                                                </div>
+                                                            </c:when>
+
+                                                            <c:otherwise>
+                                                                <div>
+                                                                    <span class="fa fa-arrow-down text-red">
+                                                                        <fmt:formatNumber type="number" pattern="###.##" value="${statusRep[0].lowestProdFarmer.production-statusRep[1].lowestProdFarmer.production}" />
+                                                                    </span>
+                                                                </div>
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -238,13 +269,23 @@
                                                         <td>${sr.highestYieldFarmer.tYield} Yield</td>
                                                     </c:forEach>
                                                     <td>
-                                                        <div class="progress-group" >
-                                                            <span class="progress-number">
-                                                                <b>
-                                                                    arrow down
-                                                                </b>
-                                                            </span>
-                                                        </div>
+                                                        <c:choose>
+                                                            <c:when test="${statusRep[0].highestYieldFarmer.tYield<=statusRep[1].highestYieldFarmer.tYield}">
+                                                                <div>
+                                                                    <span class="fa fa-arrow-up text-green">
+                                                                        <fmt:formatNumber type="number" pattern="###.##" value="${statusRep[1].highestYieldFarmer.tYield-statusRep[0].highestYieldFarmer.tYield}"/>
+                                                                    </span>
+                                                                </div>
+                                                            </c:when>
+
+                                                            <c:otherwise>
+                                                                <div>
+                                                                    <span class="fa fa-arrow-down text-red">
+                                                                        <fmt:formatNumber type="number" pattern="###.##" value="${statusRep[0].highestYieldFarmer.tYield-statusRep[1].highestYieldFarmer.tYield}" />
+                                                                    </span>
+                                                                </div>
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -254,13 +295,24 @@
                                                         <td>${sr.lowestYieldFarmer.tYield} Yield</td>
                                                     </c:forEach>
                                                     <td>
-                                                        <div class="progress-group" >
-                                                            <span class="progress-number">
-                                                                <b>
-                                                                    arrow down
-                                                                </b>
-                                                            </span>
-                                                        </div>
+                                                        <c:choose>
+                                                            <c:when test="${statusRep[0].lowestYieldFarmer.tYield<=statusRep[1].lowestYieldFarmer.tYield}">
+                                                                <div>
+                                                                    <span class="fa fa-arrow-up text-green">
+                                                                        <fmt:formatNumber type="number" pattern="###.##" value="${statusRep[1].lowestYieldFarmer.tYield-statusRep[0].lowestYieldFarmer.tYield}"/>
+                                                                    </span>
+                                                                </div>
+                                                            </c:when>
+
+                                                            <c:otherwise>
+                                                                <div>
+                                                                    <span class="fa fa-arrow-down text-red">
+                                                                        <fmt:formatNumber type="number" pattern="###.##" value="${statusRep[0].lowestYieldFarmer.tYield-statusRep[1].lowestYieldFarmer.tYield}" />
+
+                                                                    </span>
+                                                                </div>
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                     </td>
                                                 </tr>
 
@@ -274,7 +326,7 @@
                                 <div class="box box-info">
                                     <div class="box-header">
                                         <h1 class="box-title">B. District Improvements</h1>
-                                        <div class="box-tools pull-right">
+                                        <div class="box-tools pull-right hidethis">
                                             <a tabindex="0" class="text-overflow" id="popAreaHarv" role="button"><i class="fa fa-question text-orange"></i></a>
                                             <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                         </div>
@@ -292,12 +344,12 @@
                                                 <tr>
                                                     <c:forEach var="sr" items="${statusRep}" varStatus="status">
                                                         <th class="text-center">
-                                                          
-                                                           <c:if test="${status.first}">  
-                                                              Previous Week
-                                                                  </c:if>
+
+                                                            <c:if test="${status.first}">  
+                                                                Previous Week
+                                                            </c:if>
                                                             <c:if test="${status.last}">   
-                                                                 This Week
+                                                                This Week
                                                             </c:if>
                                                         </th>
 
@@ -315,13 +367,22 @@
                                                         <td>${sr.recsSuggested}</td>
                                                     </c:forEach>
                                                     <td>
-                                                        <div class="progress-group" >
-                                                            <span class="progress-number">
-                                                                <b>
-                                                                    arrow down
-                                                                </b>
-                                                            </span>
-                                                        </div>
+                                                        <c:choose>
+                                                            <c:when test="${statusRep[0].recsSuggested<statusRep[1].recsSuggested}">
+                                                                <div>
+                                                                    <span class="fa fa-arrow-up text-green">
+                                                                        <fmt:formatNumber type="number" pattern="###.##" value="${statusRep[1].recsSuggested-statusRep[0].recsSuggested}"/>
+                                                                    </span>
+                                                                </div>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <div>
+                                                                    <span class="fa fa-arrow-down text-red">
+                                                                        <fmt:formatNumber type="number" pattern="###.##" value="${statusRep[0].recsSuggested-statusRep[1].recsSuggested}"/>
+                                                                    </span>
+                                                                </div>
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -330,13 +391,22 @@
                                                         <td>${sr.recsImplemented}</td>
                                                     </c:forEach>
                                                     <td>
-                                                        <div class="progress-group" >
-                                                            <span class="progress-number">
-                                                                <b>
-                                                                    arrow down
-                                                                </b>
-                                                            </span>
-                                                        </div>
+                                                        <c:choose>
+                                                            <c:when test="${statusRep[0].recsImplemented<statusRep[1].recsImplemented}">
+                                                                <div>
+                                                                    <span class="fa fa-arrow-up text-green">
+                                                                        <fmt:formatNumber type="number" pattern="###.##" value="${statusRep[1].recsImplemented-statusRep[0].recsImplemented}"/>
+                                                                    </span>
+                                                                </div>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <div>
+                                                                    <span class="fa fa-arrow-down text-red">
+                                                                        <fmt:formatNumber type="number" pattern="###.##" value="${statusRep[0].recsImplemented-statusRep[1].recsImplemented}"/>
+                                                                    </span>
+                                                                </div>
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -345,13 +415,22 @@
                                                         <td>${sr.probsReported}</td>
                                                     </c:forEach>
                                                     <td>
-                                                        <div class="progress-group" >
-                                                            <span class="progress-number">
-                                                                <b>
-                                                                    arrow down
-                                                                </b>
-                                                            </span>
-                                                        </div>
+                                                        <c:choose>
+                                                            <c:when test="${statusRep[0].probsReported<statusRep[1].probsReported}">
+                                                                <div>
+                                                                    <span class="fa fa-arrow-up text-red">
+                                                                        <fmt:formatNumber type="number" pattern="###.##" value="${statusRep[1].probsReported-statusRep[0].probsReported}"/>
+                                                                    </span>
+                                                                </div>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <div>
+                                                                    <span class="fa fa-arrow-down text-green">
+                                                                        <fmt:formatNumber type="number" pattern="###.##" value="${statusRep[0].probsReported-statusRep[1].probsReported}"/>
+                                                                    </span>
+                                                                </div>
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -360,13 +439,22 @@
                                                         <td>${sr.probsSolved}</td>
                                                     </c:forEach>
                                                     <td>
-                                                        <div class="progress-group" >
-                                                            <span class="progress-number">
-                                                                <b>
-                                                                    arrow down
-                                                                </b>
-                                                            </span>
-                                                        </div>
+                                                         <c:choose>
+                                                            <c:when test="${statusRep[0].probsSolved<statusRep[1].probsSolved}">
+                                                                <div>
+                                                                    <span class="fa fa-arrow-up text-green">
+                                                                        <fmt:formatNumber type="number" pattern="###.##" value="${statusRep[1].probsSolved-statusRep[0].probsSolved}"/>
+                                                                    </span>
+                                                                </div>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <div>
+                                                                    <span class="fa fa-arrow-down text-red">
+                                                                        <fmt:formatNumber type="number" pattern="###.##" value="${statusRep[0].probsSolved-statusRep[1].probsSolved}"/>
+                                                                    </span>
+                                                                </div>
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -386,7 +474,7 @@
                                 <input name="cropyear" value="${todayYear}" type="hidden">
                                 <div class="box box-info">   
                                     <div class="box-header">
-                                        <div class="box-tools pull-right">
+                                        <div class="box-tools pull-right hidethis">
                                             <a tabindex="0" class="text-overflow" id="popNarativeRep" role="button"><i class="fa fa-question text-orange"></i></a>
 
                                         </div>
@@ -396,7 +484,7 @@
 
                                         <table class="table table-bordered">
                                             <tbody>
-                                                
+
                                                 <tr>
                                                     <th style="width:20%">WEATHER</th>
                                                     <td> <textarea style="resize:none" class="form-control" name="dweather" rows="2"  placeholder="Enter ..."></textarea></td>
@@ -413,7 +501,7 @@
                                                     <th>PRICES OF INPUTS</th>
                                                     <td> <textarea style="resize:none" class="form-control" name="dinput" rows="2"  placeholder="Enter ..."></textarea></td>
                                                 </tr>
-                                               <tr>
+                                                <tr>
                                                     <th style="width:20%">FINDINGS (PROBLEMS & RECOMMENDATIONS)</th>
                                                     <td> <textarea style="resize:none" class="form-control" name="dother" rows="2"  placeholder="Enter ..."></textarea></td>
                                                 </tr>
@@ -428,12 +516,10 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-4 col-md-offset-4">
-                                <input class="btn btn-success pull-right" type="button" value="Back" 
-                                       onClick="history.go(-1);
-                                               return true;"> 
+                            <div class="col-md-4 col-md-offset-4 hidethis">
+                                <a  class="btn btn-primary btn-block" role="button" id="gprint" ><i class="fa fa-print"></i> Print Report</a>
                                 <button class="btn btn-info btn-block" type="submit" >Submit</button>
-                                <button class="btn btn-info btn-block" type="button" id="gprint" >Generate PDF</button>
+
                                 <!--                                <button id="cmd" type="button">print PDF</button>-->
                                 <br>
                             </div>
@@ -464,41 +550,42 @@
         <script src="plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
         <script src="popoverText.js"></script>
-        <script>
-                                           $(document).ready(function () {
-                                               $('#popAreaHarv').popover(popAreaHarv);
-                                               $('#popStandCrop').popover(popStandCrop);
-                                               $('#popWeatherForecast').popover(popWeatherForecast);
-                                               $('#popNarativeRep').popover(popNarativeRep);
 
-                                           });
+        <script>
+            $(document).ready(function () {
+                $('#popAreaHarv').popover(popAreaHarv);
+                $('#popStandCrop').popover(popStandCrop);
+                $('#popWeatherForecast').popover(popWeatherForecast);
+                $('#popNarativeRep').popover(popNarativeRep);
+
+            });
 
 
         </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js"></script>
         <script>
 
-                                           $(document).ready(function () {
-                                               var doc = new jsPDF();
+            $(document).ready(function () {
+                var doc = new jsPDF();
 
-                                               var specialElementHandlers = {
-                                                   '#bypassme': function (element, renderer) {
-                                                       return true;
-                                                   }
-                                               };
-                                               $('#cmd').click(function () {
-                                                   doc.fromHTML($('#content').html(), {
-                                                       'width': 170,
-                                                       'elementHandlers': specialElementHandlers
-                                                   });
-                                                   doc.save('sample-file.pdf');
-                                               });
+                var specialElementHandlers = {
+                    '#bypassme': function (element, renderer) {
+                        return true;
+                    }
+                };
+                $('#cmd').click(function () {
+                    doc.fromHTML($('#content').html(), {
+                        'width': 170,
+                        'elementHandlers': specialElementHandlers
+                    });
+                    doc.save('sample-file.pdf');
+                });
 
-                                               $('#gprint').click(function () {
-                                                   window.print();
-                                               });
+                $('#gprint').click(function () {
+                    window.print();
+                });
 
-                                           });
+            });
         </script>
         <script>
 

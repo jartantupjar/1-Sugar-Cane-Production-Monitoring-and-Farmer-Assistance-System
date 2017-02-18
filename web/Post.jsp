@@ -106,8 +106,7 @@
 
                                         </c:if>
                                     </div>
-                                        <input class="btn btn-success" style="width: 35%" type="button" value="Back" 
-        onClick="history.go(-1);return true;"> 
+                                      
                                     <!-- /.box-body -->
                                     <div class="box-footer box-comments">
                                         <c:set var="com" value="${comments}"></c:set>

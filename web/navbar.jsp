@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <header class="main-header">
 <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
            <link rel="stylesheet" href="font-awesome-4.6.3/css/font-awesome.min.css">
@@ -17,14 +18,18 @@
     <!-- Header Navbar -->
     <nav class="navbar navbar-static-top" role="navigation">
       <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+     <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
         <span class="sr-only">Toggle navigation</span>
       </a>
+      <a  class="btn-btn-success pull-left" onClick="history.go(-1);return true;" role="button" style="color: #3c8dbc; background-color: white; padding-bottom:10px; padding-top:12px; padding-right:7px;  padding-left:7px;">
+        <span class="fa fa-chevron-left fa-2x"></span>
+      </a>
+       
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
           
             <!-- timeline time label -->
-           
+          
           
         <ul class="nav navbar-nav">
          

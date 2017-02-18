@@ -145,8 +145,7 @@
                             </div>
 
                         </div>   
-                        <input class="btn btn-success pull-right" type="button" value="Back" 
-                               onClick="history.go(-1);return true;">                            
+                                                
                     </div>
 
                     <br>
