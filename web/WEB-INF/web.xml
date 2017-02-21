@@ -396,6 +396,14 @@
         <servlet-name>linktoPost</servlet-name>
         <servlet-class>controller.linktoPost</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>viewAllCropAssessment</servlet-name>
+        <servlet-class>controller.viewAllCropAssessment</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DistinctCropYearList</servlet-name>
+        <servlet-class>controller.DistinctCropYearList</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
@@ -791,6 +799,14 @@
     <servlet-mapping>
         <servlet-name>linktoPost</servlet-name>
         <url-pattern>/linktoPost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewAllCropAssessment</servlet-name>
+        <url-pattern>/viewAllCropAssessment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DistinctCropYearList</servlet-name>
+        <url-pattern>/DistinctCropYearList</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -161,7 +161,7 @@ public class CropAssessmentDB {
             pstmt.setDate(1, startDate);
             pstmt.setDate(2, endDate);
             ResultSet rs = pstmt.executeQuery();
-               ArrayList<CropAssessment> rainfall = null;
+            ArrayList<CropAssessment> rainfall = null;
             CropAssessment rain;
             if (rs.next()) {
                 rainfall = new ArrayList<>();
@@ -174,16 +174,15 @@ public class CropAssessmentDB {
 
                 } while (rs.next());
             }
-               rs.close();
+            rs.close();
             pstmt.close();
             conn.close();
             return rainfall;
-         } catch (SQLException ex) {
+        } catch (SQLException ex) {
             java.util.logging.Logger.getLogger(CropAssessmentDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
-     
 
     public Date getPreviousWeek(Date endDate) {
         try {
@@ -210,11 +209,75 @@ public class CropAssessmentDB {
         return null;
     }
 
+    public Date getNextWeek(Date endDate) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select date_add(?,INTERVAL 7 DAY) as previousweek;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+
+            pstmt.setDate(1, endDate);
+
+            ResultSet rs = pstmt.executeQuery();
+            Date value = null;
+            if (rs.next()) {
+                value = rs.getDate("previousweek");
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+
+            return value;
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(CropAssessmentDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public ArrayList<Calendar> getCropAssessmentList(String year) {
+        CalendarDB caldb = new CalendarDB();
+         Calendar cal =null;
+        if(year.equalsIgnoreCase("all")){
+          cal = caldb.getAllCropYearStartEnd();
+         }else {
+             cal = caldb.getCropYearStartEnd(Integer.parseInt(year));
+        }
+        ArrayList<Date> datelist = getAllWeekDatesfromRange(cal.getStarting(), cal.getEnding());
+        ArrayList<Calendar> calist = new ArrayList<>();
+        for (int i = 0; i < datelist.size(); i++) {
+            Calendar c = caldb.getInitialCurrentYearDetails(datelist.get(i));
+            calist.add(c);
+        }
+
+        return calist;
+    }
+
+    public ArrayList<Date> getAllWeekDatesfromRange(Date min, Date max) {
+        CalendarDB caldb = new CalendarDB();
+        ArrayList<Calendar> cal = caldb.getCurrentYearDetails();
+        Date thissun = cal.get(0).getSundayofWeek();
+        ArrayList<Date> list = new ArrayList<>();
+        Date curdate = min, thedate;
+
+        if (max.before(thissun) || max.equals(thissun)) {
+            thedate = max;
+        } else {
+            thedate = thissun;
+        }
+
+        do {
+            list.add(curdate);
+            curdate = getNextWeek(curdate);
+
+        } while (!curdate.after(thedate));
+        return list;
+    }
+
     public ArrayList<statusReport> getAllStatusReports(Date week) {
         ArrayList<statusReport> srlist = new ArrayList<>();
 //        srlist.add(getStatusReportByWeek((Date.valueOf("2016-12-25"))));
         //gets the previous week from input date 
-       srlist.add(getStatusReportByWeek((getPreviousWeek(week))));
+        srlist.add(getStatusReportByWeek((getPreviousWeek(week))));
 
         srlist.add(getStatusReportByWeek(week));
 
