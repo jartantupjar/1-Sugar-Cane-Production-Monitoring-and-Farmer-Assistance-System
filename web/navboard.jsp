@@ -20,6 +20,9 @@
       <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
         <span class="sr-only">Toggle navigation</span>
       </a>
+        <a  class="btn-btn-success pull-left" onClick="history.go(-1);return true;" role="button" style="color: #3c8dbc; background-color: white; padding-bottom:10px; padding-top:12px; padding-right:7px;  padding-left:7px;">
+        <span class="fa fa-chevron-left fa-2x"></span>
+      </a>
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
           

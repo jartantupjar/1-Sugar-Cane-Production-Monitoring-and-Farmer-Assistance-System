@@ -120,9 +120,7 @@
 
 
                             <div class="col-md-2 text-center pull-right">       
-                                <input class="btn btn-success" type="button" value="Back" 
-                                       onClick="history.go(-1);
-                                               return true;"> 
+                               
                                 <p><button class="btn btn-primary btn-block" style="width: 100%" value="submit">Send</button></p>
                             </div>
                         </form>  

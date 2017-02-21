@@ -834,8 +834,8 @@ comparison page add current vs historical details(past 2yrs)
                                                     <table id="fieldtable" class="table table-hover table-responsive">
                                                         <thead><tr>
                                                                 <th>Fertilizer</th>
-                                                                <th>First Dose</th>
-                                                                <th>Second Dose</th>
+                                                                <th>First Dose (bags)</th>
+                                                                <th>Second Dose (bags)</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -1124,9 +1124,7 @@ comparison page add current vs historical details(past 2yrs)
                                 <button class="btn btn-app btn-linkedin atools hidden" name="atools" id="dprob" value="dprob">
                                     <i class="fa fa-edit" ></i> Report Problems
                                 </button>
-                                <input class="btn btn-app btn-twitter" type="button" value="Back" 
-                                       onClick="history.go(-1);
-                                               return true;"> 
+                               
                             </div>
 
                         </form>

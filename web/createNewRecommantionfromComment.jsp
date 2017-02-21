@@ -126,8 +126,7 @@
                             </div> 
 
                             <div class="col-md-10 hidden" id="createBut">   
-                                <input class="btn btn-success" style="width: 35%" type="button" value="Back" 
-        onClick="history.go(-1);return true;"> 
+                                
                                 <p><button class="btn btn-primary" style="width: 35%" type="submit"  value="submit">Create</button></p>
                             </div>
                         </form>

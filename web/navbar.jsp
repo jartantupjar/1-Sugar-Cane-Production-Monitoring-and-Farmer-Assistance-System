@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <header class="main-header">
 <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
            <link rel="stylesheet" href="font-awesome-4.6.3/css/font-awesome.min.css">
@@ -17,14 +18,18 @@
     <!-- Header Navbar -->
     <nav class="navbar navbar-static-top" role="navigation">
       <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+     <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
         <span class="sr-only">Toggle navigation</span>
       </a>
+      <a  class="btn-btn-success pull-left" onClick="history.go(-1);return true;" role="button" style="color: #3c8dbc; background-color: white; padding-bottom:10px; padding-top:12px; padding-right:7px;  padding-left:7px;">
+        <span class="fa fa-chevron-left fa-2x"></span>
+      </a>
+       
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
           
             <!-- timeline time label -->
-           
+          
           
         <ul class="nav navbar-nav">
          
@@ -126,7 +131,16 @@
            <li><a href="viewCropEstimate"><i class="fa fa-link"></i><span>Crop Estimate (Options)</span></a></li>
            <li><a href="viewPrograms.jsp"><i class="fa fa-link"></i><span>View Programs</span></a></li>
            <li><a href="searchFarmer.jsp"><i class="fa fa-link"></i><span>Search Farmer</span></a></li>
-         
+          
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-file"></i> <span>Reports</span> <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu" style="display: none;">
+          <li><a href="ViewCropAssessment"><i class="fa fa-file"></i><span>Crop Assessment Reports</span></a></li>
+           <li><a href="thereports.jsp"><i class="fa fa-file-o"></i><span>Year Report</span></a></li>
+          </ul>
+        </li>
         
       </ul>
       <!-- /.sidebar-menu -->
