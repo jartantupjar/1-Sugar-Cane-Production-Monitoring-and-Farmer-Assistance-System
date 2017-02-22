@@ -40,11 +40,13 @@
                         <h3 class="text-center text-bold">Crop Year: ${cayear}</h3>
 
                         <h3 >&nbsp  Week Ending: ${SundayofWeek}</h3>
-                        <h3 class="text-bold">&nbsp PART 1:PRODUCTION DATA</h3>
+                       
+                        <h3 class="text-bold">&nbsp PART 1:PRODUCTION STATUS DATA</h3>
+                         <c:if test="${not empty CropAss}">
                         <div class="col-md-12"  > 
                             <div class="box box-info">
                                 <div class="box-header with-border">
-                                    <h1 class="box-title ">A. Area Harvested</h1>
+                                    <h1 class="box-title ">Area Harvested</h1>
                                     <div class="box-tools pull-right hidethis">
                                         <a tabindex="0" class="text-overflow" id="popAreaHarv" role="button"><i class="fa fa-question text-orange"></i></a>
                                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
@@ -104,7 +106,7 @@
                         <div class="col-md-4"  >
                             <div class="box box-info">
                                 <div class="box-header with-border">
-                                    <h1 class="box-title">B. Standing Crop</h1>
+                                    <h1 class="box-title">Standing Crop</h1>
                                     <div class="box-tools pull-right hidethis">
                                         <a tabindex="0" class="text-overflow" id="popStandCrop" role="button"><i class="fa fa-question text-orange"></i></a>
                                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
@@ -134,12 +136,13 @@
                             </div>
 
                         </div>
+                        </c:if>
                         <div class="col-md-8">
 
 
                             <div class="box box-info">
                                 <div class="box-header with-border">
-                                    <h1 class="box-title">C. Weather Update</h1>
+                                    <h1 class="box-title">Weather Update</h1>
                                     <div class="box-tools pull-right hidethis">
                                         <a tabindex="0" class="" id="popWeatherForecast" role="button"><i class="fa fa-question text-orange"></i></a>  
                                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
@@ -494,7 +497,7 @@
 
                                                 <tr>
                                                     <th style="width:20%">WEATHER</th>
-                                                    <td> <textarea style="resize:none" class="form-control" name="dweather" rows="2"  placeholder="Enter ..."></textarea></td>
+                                                    <td> <textarea style="resize:none" class="form-control" name="dweather" rows="2"  placeholder="Enter ..." ></textarea></td>
                                                 </tr>
                                                 <tr>
                                                     <th>PRICE OF SUGAR</th>

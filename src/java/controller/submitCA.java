@@ -55,12 +55,7 @@ public class submitCA extends BaseServlet {
            cn.setDother(dother);
            cn.setDanalysis(danalysis);
     
-           
-         
-     
-          
-          
-            if(cadb.checkExistingNarrative(cn.getYear(),cn.getWeekending())==false){
+           if(cadb.checkExistingNarrative(cn.getYear(),cn.getWeekending())==false){
              
                cadb.submitNarrative(cn);
                 ServletContext context = getServletContext();
