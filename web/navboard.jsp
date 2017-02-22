@@ -99,14 +99,14 @@
     <section class="sidebar">
 
       <!-- Sidebar user panel (optional) -->
-      <div class="user-panel">
+     <div class="user-panel">
         <div class="pull-left image">
           <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-        <p><c:out value="${user.name}"></c:out>
-          </p>
-              <small><c:out value="${user.group}"></c:out></small>
+        <p><c:out value="${user.name}"></c:out></p>
+         <a href="#"><i class="fa fa-circle text-success"></i>${user.group}</a>
+              
         </div>
       </div>
         
@@ -136,6 +136,15 @@
                <li><a href="MDOHomepage"> <i class="fa fa-link"></i><span>Tarlac</span></a></li>
            </ul>
                </li>
+                <li class="treeview">
+          <a href="#">
+            <i class="fa fa-file"></i> <span>Reports</span> <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu" style="display: none;">
+          <li><a href="cropAssessmentList.jsp"><i class="fa fa-file"></i><span>Crop Assessment Reports</span></a></li>
+           <li><a href="thereports.jsp"><i class="fa fa-file-o"></i><span>Year Report</span></a></li>
+          </ul>
+        </li>
           
           </ul>
         </li> 

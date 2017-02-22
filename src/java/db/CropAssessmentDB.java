@@ -173,10 +173,46 @@ public class CropAssessmentDB {
                 cn.setDinput(rs.getString("prices_of_inputs"));
                 cn.setDother(rs.getString("others"));
                 cn.setDanalysis(rs.getString("overall_analysis"));
+                cn.setDbfindings(rs.getString("board_findings"));
+                cn.setDbanalysis(rs.getString("board_overall"));
             }
             rs.close();
             pstmt.close();
             conn.close();
+            return cn;
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(CropAssessmentDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public CropNarrative viewBoardCropNarrative(Date sundayofweek) {
+        try {
+            // put functions here : previous week production, this week production
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select year,board_findings,board_overall from cropassessment where district=? AND week_ending=?";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+
+            pstmt.setString(1, "TARLAC");
+            pstmt.setDate(2, sundayofweek);
+            ResultSet rs = pstmt.executeQuery();
+            CropNarrative cn = null;
+            if (rs.next()) {
+                cn = new CropNarrative();
+                cn.setYear(rs.getInt("year"));
+                cn.setWeekending(sundayofweek);
+                cn.setDbfindings(rs.getString("board_findings"));
+                cn.setDbanalysis(rs.getString("board_overall"));
+                 if (cn.getDbfindings() == null && cn.getDbanalysis() == null) {
+                cn = null;
+            }
+            }
+           
+            rs.close();
+            pstmt.close();
+            conn.close();
+
             return cn;
         } catch (SQLException ex) {
             java.util.logging.Logger.getLogger(CropAssessmentDB.class.getName()).log(Level.SEVERE, null, ex);
@@ -199,6 +235,29 @@ public class CropAssessmentDB {
             pstmt.setString(7, cn.getDinput());
             pstmt.setString(8, cn.getDother());
             pstmt.setString(9, cn.getDanalysis());
+            int i = pstmt.executeUpdate();
+            pstmt.close();
+            conn.close();
+            return i == 1;
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(CropAssessmentDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+
+    }
+
+    public boolean submitBoardNarrative(CropNarrative cn) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "UPDATE cropassessment SET board_findings=?, board_overall=? WHERE year=? and district=? and week_ending=?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, cn.getDbfindings());
+            pstmt.setString(2, cn.getDbanalysis());
+            pstmt.setInt(3, cn.getYear());
+            pstmt.setString(4, "TARLAC");
+            pstmt.setDate(5, cn.getWeekending());
+
             int i = pstmt.executeUpdate();
             pstmt.close();
             conn.close();

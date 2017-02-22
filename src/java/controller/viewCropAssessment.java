@@ -43,12 +43,7 @@ public class viewCropAssessment extends BaseServlet {
         RequestDispatcher rd = null;
 
 // *** FROM THE SELECTED PARAMETER
-        User user = (User) session.getAttribute("user");
-        if (user.getGroup().equalsIgnoreCase("MDO")) {
-
-        } else {
-
-        }
+       
 
         String theweek = request.getParameter("theweek");
         String toprint = request.getParameter("toprint");
@@ -78,15 +73,19 @@ public class viewCropAssessment extends BaseServlet {
         ArrayList<statusReport> srlist = cadb.getAllStatusReports(thisweek);
 
         CropNarrative cn = null;
+         CropNarrative bn = null;
         if (cadb.checkExistingNarrative(daweek.getSundayofWeek()) == true) {
               cn=cadb.viewCropNarrative(daweek.getSundayofWeek());
+              
         }
+        bn=cadb.viewBoardCropNarrative(daweek.getSundayofWeek());
         session.setAttribute("statusRep", srlist);
         session.setAttribute("CropAss", caT);
         session.setAttribute("cayear", weekcal.getYear());
         session.setAttribute("carain", rain);
         session.setAttribute("statusRep", srlist);
-        session.setAttribute("MdoCropNarr", cn);
+        session.setAttribute("MdoNarrative", cn);
+        session.setAttribute("boardNarrative", bn);
 //            session.setAttribute("Week_ending",calist.get(0).getSundayofWeek());
         session.setAttribute("SundayofWeek", daweek.getSundayofWeek());
         session.setAttribute("MondayofWeek", daweek.getMondayofWeek());
