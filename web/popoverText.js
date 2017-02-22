@@ -50,6 +50,88 @@ var popAreaHarv = {toggle: "popover", trigger: "focus", placement: "auto",html: 
                 </dl>';
     }
 };
+
+//linegraph
+var popLineGraph = {toggle: "popover", trigger: "focus", placement: "auto",html: true,
+
+    title: 'Line Graph', 
+    content: function () {
+        return '<dl>\n\
+                    <dt>Description</dt>\n\
+                        <dd>hello world</dd>\n\
+                    <dt>Tips</dt>\n\
+                        <dd> <ul>\n\
+                            <li>hello world</li>\n\
+                            </ul>\n\
+                        <dd>\n\
+                </dl>';
+    }
+};
+//production by week
+var popProdByWeek = {toggle: "popover", trigger: "focus", placement: "auto",html: true,
+
+    title: 'Line Graph', 
+    content: function () {
+        return '<dl>\n\
+                    <dt>Description</dt>\n\
+                        <dd>hello world</dd>\n\
+                    <dt>Tips</dt>\n\
+                        <dd> <ul>\n\
+                            <li>hello world</li>\n\
+                            </ul>\n\
+                        <dd>\n\
+                </dl>';
+    }
+};
+//production by week full view
+var popProdByWeekFV = {toggle: "popover", trigger: "focus", placement: "auto",html: true,
+
+    title: 'Prodcution By Week', 
+    content: function () {
+        return '<dl>\n\
+                    <dt>Description</dt>\n\
+                        <dd>hello world</dd>\n\
+                    <dt>Tips</dt>\n\
+                        <dd> <ul>\n\
+                            <li>hello world</li>\n\
+                            </ul>\n\
+                        <dd>\n\
+                </dl>';
+    }
+};
+//production by week full view
+var popProdByWeekFV = {toggle: "popover", trigger: "focus", placement: "auto",html: true,
+
+    title: 'Production By Week Full View', 
+    content: function () {
+        return '<dl>\n\
+                    <dt>Description</dt>\n\
+                        <dd>hello world</dd>\n\
+                    <dt>Tips</dt>\n\
+                        <dd> <ul>\n\
+                            <li>hello world</li>\n\
+                            </ul>\n\
+                        <dd>\n\
+                </dl>';
+    }
+};
+//ongoing project list
+var popWPSR = {toggle: "popover", trigger: "focus", placement: "auto",html: true,
+
+    title: 'WeeklyProduction Statistics Report', 
+    content: function () {
+        return '<dl>\n\
+                    <dt>Description</dt>\n\
+                        <dd>hello world</dd>\n\
+                    <dt>Tips</dt>\n\
+                        <dd> <ul>\n\
+                            <li>hello world</li>\n\
+                            </ul>\n\
+                        <dd>\n\
+                </dl>';
+    }
+};
+
 //standing crop
 var popStandCrop = {toggle: "popover", trigger: "focus", placement: "auto", html: true,
 
@@ -1032,9 +1114,94 @@ var popPosCR = {toggle: "popover", trigger: "focus", placement: "auto", html: tr
     }
     
 };
+// create new recommendation
+var popCreateNR = {toggle: "popover", trigger: "focus", placement: "auto", html: true,
+
+    title: 'Create New Recommendation',
+    content: function () {
+        return '<dl>\n\
+                    <dt>Description</dt>\n\
+                        <dd>hello world</dd>\n\
+                    <dt>Tips</dt>\n\
+                        <dd> <ul>\n\
+                            <li>hello world</li>\n\
+                            </ul>\n\
+                        <dd>\n\
+                </dl>';
+    }
+    
+};
+
+// problem list
+var popPL = {toggle: "popover", trigger: "focus", placement: "auto", html: true,
+
+    title: 'Problem List',
+    content: function () {
+        return '<dl>\n\
+                    <dt>Description</dt>\n\
+                        <dd>hello world</dd>\n\
+                    <dt>Tips</dt>\n\
+                        <dd> <ul>\n\
+                            <li>hello world</li>\n\
+                            </ul>\n\
+                        <dd>\n\
+                </dl>';
+    }
+    
+};
+var popCalendar = {toggle: "popover", trigger: "focus", placement: "auto", html: true,
+
+    title: 'Dates',
+    content: function () {
+        return '<dl>\n\
+                    <dt>Description</dt>\n\
+                        <dd>hello world</dd>\n\
+                    <dt>Tips</dt>\n\
+                        <dd> <ul>\n\
+                            <li>hello world</li>\n\
+                            </ul>\n\
+                        <dd>\n\
+                </dl>';
+    }
+    
+};
+var popDates = {toggle: "popover", trigger: "focus", placement: "auto", html: true,
+
+    title: 'Yearly Calendar',
+    content: function () {
+        return '<dl>\n\
+                    <dt>Description</dt>\n\
+                        <dd>hello world</dd>\n\
+                    <dt>Tips</dt>\n\
+                        <dd> <ul>\n\
+                            <li>hello world</li>\n\
+                            </ul>\n\
+                        <dd>\n\
+                </dl>';
+    }
+    
+};
+
 var popWeatherTS = {toggle: "popover", trigger: "focus", placement: "auto", html: true,
 
     title: 'Weather Trends',
+    content: function () {
+        return '<dl>\n\
+                    <dt>Description</dt>\n\
+                        <dd>hello world</dd>\n\
+                    <dt>Tips</dt>\n\
+                        <dd> <ul>\n\
+                            <li>hello world</li>\n\
+                            </ul>\n\
+                        <dd>\n\
+                </dl>';
+    }
+    
+};
+// create new recommendation from comment
+var popCRFC = {toggle: "popover", trigger: "focus", placement: "auto", html: true,
+
+    title: 'Create New Recommendation',
     content: function () {
         return '<dl>\n\
                     <dt>Description</dt>\n\
@@ -1119,4 +1286,8 @@ var popVSelProb = {toggle: "popover", trigger: "focus", placement: "auto", html:
 };
 
 //****another page****
+
+
+
+
 

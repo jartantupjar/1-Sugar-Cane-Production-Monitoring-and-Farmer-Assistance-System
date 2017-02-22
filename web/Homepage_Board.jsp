@@ -49,6 +49,7 @@
                                     <div class="box-header with-border">
                                         <h1 class="box-title">Line Graph</h1>
                                         <div class="box-tools pull-right">
+                                            <a tabindex="0" class="text-overflow" id="popLineG" role="button"><i class="fa fa-question text-orange"></i></a>
                                             <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                             <!-- In box-tools add this button if you intend to use the contacts pane -->
                                             <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -67,6 +68,7 @@
                                 <div class="box-header with-border">
                                     <h1 class="box-title">Ongoing Programs List : ${todayDate}</h1>
                                     <div class="box-tools pull-right">
+                                        <a tabindex="0" class="text-overflow" id="popOPL" role="button"><i class="fa fa-question text-orange"></i></a>
                                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                         <!-- In box-tools add this button if you intend to use the contacts pane -->
                                         <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -109,7 +111,15 @@
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
         <script src="Highcharts/highcharts.js"></script>
         <script src="Highcharts/modules/exporting.js"></script>
-        
+        <script src="popoverText.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#popLineG').popover(popAreaHarv);
+                $('#popOPL').popover(popAreaHarv);
+            });
+
+
+        </script>
         <script>
 
             $(document).ready(function () {

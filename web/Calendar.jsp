@@ -59,6 +59,7 @@
                             <div class="box-header with-border">
                                 <h1 class="box-title">Dates</h1>
                                 <div class="box-tools pull-right">
+                                    <a tabindex="0" class="text-overflow" id="popCalendar" role="button"><i class="fa fa-question text-orange"></i></a>
                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                     <!-- In box-tools add this button if you intend to use the contacts pane -->
                                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>  </button>
@@ -127,6 +128,7 @@
                                 <div class="box-header with-border">
                                     <h1 class="box-title">Calendar</h1>
                                     <div class="box-tools pull-right">
+                                        <a tabindex="0" class="text-overflow" id="popDates" role="button"><i class="fa fa-question text-orange"></i></a>
                                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                         <!-- In box-tools add this button if you intend to use the contacts pane -->
                                         <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -216,6 +218,15 @@
         <script src="plugins/daterangepicker/moment.min.js"></script>
         <script src="plugins/daterangepicker/daterangepicker.js"></script>
         <script src="plugins/datepicker/bootstrap-datepicker.js"></script>
+        <script src="popoverText.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#popCalendar').popover(popAreaHarv);
+                $('#popDates').popover(popAreaHarv);
+            });
+
+
+        </script>
         <script>
             $(function () {
               //Datemask dd/mm/yyyy

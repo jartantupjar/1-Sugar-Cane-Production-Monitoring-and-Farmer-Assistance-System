@@ -27,6 +27,9 @@
                                 <div class="box box-solid box-success">
                                     <div class="box-header with-border">
                                         <h3 class="box-title">Recommendation Details</h3>
+                                        <div class="box-tools pull-right">
+                                        <a tabindex="0" class="text-overflow" id="popCreateRec" role="button"><i class="fa fa-question text-orange"></i></a>
+                                        </div>
                                     </div>
                                     <br>
                                     <div class="box-body">
@@ -81,6 +84,7 @@
                                     <div class="box-header with-border">
                                         <h1 class="box-title">Problems List <small>Optional</small></h1>
                                         <div class="box-tools pull-right">
+                                            <a tabindex="0" class="text-overflow" id="popPlist" role="button"><i class="fa fa-question text-orange"></i></a>
                                             <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                             <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                         </div>
@@ -131,6 +135,15 @@
     <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
     <script type="text/javascript" src="plugins/datatable/dataTables.checkboxes.min.js"></script>
     <script src="plugins/datepicker/bootstrap-datepicker.js"></script>
+    <script src="popoverText.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#popCreateRec').popover(popAreaHarv);
+                $('#popPlist').popover(popPL);
+            });
+
+
+        </script>
     <script>
             $(function(){
              $("#ap").on("click",function(){

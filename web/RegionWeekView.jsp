@@ -44,6 +44,7 @@
                             <div class="box-header with-border">
                                 <h1 class="box-title">Production by Week: ${datepick}  (Example: Luzon)</h1>
                                 <div class="box-tools pull-right">
+                                    <a tabindex="0" class="text-overflow" id="popPBW" role="button"><i class="fa fa-question text-orange"></i></a>
                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
 -                                    <!-- In box-tools add this button if you intend to use the contacts pane -->
                                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -61,6 +62,7 @@
                             <div class="box-header with-border">
                                 <h1 class="box-title">Production by week : ${datepick} (full view)</h1>
                                 <div class="box-tools pull-right">
+                                    <a tabindex="0" class="text-overflow" id="popPBWFV" role="button"><i class="fa fa-question text-orange"></i></a>
                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                     <!-- In box-tools add this button if you intend to use the contacts pane -->
                                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -106,7 +108,15 @@
         <script src="Highcharts/modules/exporting.js"></script>
         <script src="plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
-        
+        <script src="popoverText.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#popPBW').popover(popAreaHarv);
+                $('#popPBWFV').popover(popAreaHarv);
+            });
+
+
+        </script>
 <!--        <script>
             $(function () {
                 var sel = document.getElementById("particulars");

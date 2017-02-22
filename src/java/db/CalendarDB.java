@@ -132,7 +132,8 @@ public class CalendarDB {
         return null;
 
     }
-     public Calendar getDateWeekDetails(Date previousWeek) {
+
+    public Calendar getDateWeekDetails(Date previousWeek) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
@@ -147,7 +148,7 @@ public class CalendarDB {
 
             if (rs.next()) {
                 cal = new Calendar();
-            
+
                 cal.setMondayofWeek(rs.getDate("thismonday"));
                 cal.setSundayofWeek(rs.getDate("thisSunday"));
 
@@ -206,6 +207,68 @@ public class CalendarDB {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "select min(date_starting) as st,max(date_ending) as ed from crop_calendar where year=?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, cropyr);
+            ResultSet rs = pstmt.executeQuery();
+
+            Calendar cal = null;
+            if (rs.next()) {
+
+                cal = new Calendar();
+                cal.setYear(cropyr);
+                cal.setStarting(rs.getDate("st"));
+                cal.setEnding(rs.getDate("ed"));
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            return cal;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CropEstimateDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
+
+    public Calendar getAllCropYearStartEnd() {
+        try {
+            ArrayList<Calendar> calist = getCurrentYearDetails();//gets the phases/today/crop yr
+            int cropyr = calist.get(0).getYear();
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT DATE(t1.ds + INTERVAL (6 - WEEKDAY(t1.ds)) DAY) as st,DATE(t1.de + INTERVAL (6 - WEEKDAY(t1.de)) DAY) as ed,year from (select min(cc.date_starting) as ds,max(cc.date_ending) as de,cc.year from crop_calendar cc)t1;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+//            pstmt.setInt(1, cropyr);
+            ResultSet rs = pstmt.executeQuery();
+
+            Calendar cal = null;
+            if (rs.next()) {
+
+                cal = new Calendar();
+                cal.setYear(cropyr);
+                cal.setStarting(rs.getDate("st"));
+                cal.setEnding(rs.getDate("ed"));
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            return cal;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CropEstimateDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
+
+    public Calendar getCropYearStartEnd(int year) {
+        try {
+            ArrayList<Calendar> calist = getCurrentYearDetails();//gets the phases/today/crop yr
+            int cropyr = calist.get(0).getYear();
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "SELECT DATE(t1.ds + INTERVAL (6 - WEEKDAY(t1.ds)) DAY) as st,DATE(t1.de + INTERVAL (6 - WEEKDAY(t1.de)) DAY) as ed,year from (select min(cc.date_starting) as ds,max(cc.date_ending) as de,cc.year from crop_calendar cc where cc.year=? group by cc.year)t1;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, cropyr);
             ResultSet rs = pstmt.executeQuery();
@@ -314,7 +377,36 @@ public class CalendarDB {
         return null;
     }
 
+    public ArrayList<String> getDistinctCropCalYears() {
+        try {
+            ArrayList<Calendar> calist = getCurrentYearDetails();
+            Date todayDate = calist.get(0).getTodayDate();
+
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select distinct year from crop_calendar where year<=? order by year desc;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setDate(1, todayDate);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<String> list = null;
+            if (rs.next()) {
+                list = new ArrayList<String>();
+                do {
+                    list.add(rs.getString("year"));
+
+                } while (rs.next());
+            }
+            pstmt.close();
+            conn.close();
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(CalendarDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
     //THIS METHOD IS ONLY FOR LOGIN ***DO NOT USE
+
     public Calendar getInitialCurrentYearDetails(Date todayDate) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
@@ -330,6 +422,7 @@ public class CalendarDB {
                 cal.setYear(rs.getInt("year"));
                 cal.setDistrict(rs.getString("district"));
                 cal.setPhase(rs.getString("phase"));
+                cal.setTodayDate(todayDate);
 
             }
 

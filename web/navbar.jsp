@@ -137,7 +137,7 @@
             <i class="fa fa-file"></i> <span>Reports</span> <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu" style="display: none;">
-          <li><a href="ViewCropAssessment"><i class="fa fa-file"></i><span>Crop Assessment Reports</span></a></li>
+          <li><a href="cropAssessmentList.jsp"><i class="fa fa-file"></i><span>Crop Assessment Reports</span></a></li>
            <li><a href="thereports.jsp"><i class="fa fa-file-o"></i><span>Year Report</span></a></li>
           </ul>
         </li>
