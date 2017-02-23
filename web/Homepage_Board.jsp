@@ -79,12 +79,12 @@
                                     <table id="example" class="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th>Project Name</th>
-                                                <th style="width: 15%">Date Started</th>
-                                                <th style="width: 15%">Date Ended</th>
-                                                <th>Description</th>
+                                                <th style="width: 20%">Project Name</th>
+                                                <th style="">Date Started</th>
+                                                <th style="">Date Ended</th>
+                                                <th style="width:10%">Description</th>
                                                 <th>District</th>
-                                                <th>Details</th>
+                                                <th style="width: 10%">Details</th>
                                             </tr>
                                         </thead>
                                     </table>
@@ -107,14 +107,15 @@
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="dist/js/app.min.js"></script>
         <script src="plugins/pace2/pace.min.js"></script>
+         <script src="popoverText.js"></script>
         <script src="plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
         <script src="Highcharts/highcharts.js"></script>
         <script src="Highcharts/modules/exporting.js"></script>
-        <script src="popoverText.js"></script>
+       
         <script>
             $(document).ready(function () {
-                $('#popLineG').popover(popAreaHarv);
+                $('#popLineG').popover(popYieldMap);
                 $('#popOPL').popover(popAreaHarv);
             });
 

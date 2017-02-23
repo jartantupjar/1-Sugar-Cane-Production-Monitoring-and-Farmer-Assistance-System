@@ -1,6 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <header class="main-header">
+     <% response.setHeader("Cache-Control","no-cache"); //HTTP 1.1 
+ response.setHeader("Pragma","no-cache"); //HTTP 1.0 
+ response.setDateHeader ("Expires", 0); //prevents caching at the proxy server  
+%>
 <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
            <link rel="stylesheet" href="font-awesome-4.6.3/css/font-awesome.min.css">
  <link rel="stylesheet" href="ionicons-2.0.1/css/ionicons.min.css">
@@ -119,18 +123,18 @@
       <ul class="sidebar-menu">
       <li class="header">Navigation</li>
     
-           <li class="active"><a href="MDOHomepage"><i class="fa fa-link"></i><span>Home</span></a></li>
-           <li class=""><a href="Disaster Report.jsp"><i class="fa fa-link"></i><span>Alerts</span></a></li>
-           <li><a href="WeatherReport.jsp"><i class="fa fa-link"></i><span>Weather Report</span> </a></li>
-           <li><a href="WeatherTrends.jsp"><i class="fa fa-link"></i><span>Weather Trends</span> </a></li>
-           <li><a href="Forum.jsp"><i class="fa fa-link"></i><span>Forum</span></a></li>
-           <li><a href="Recommendations.jsp"><i class="fa fa-link"></i><span>Recommendations</span></a></li>
-           <li><a href="Problems.jsp"><i class="fa fa-link"></i><span>Problems</span></a></li>
-           <li><a href="createNewRecommendation.jsp"><i class="fa fa-link"></i><span>Create Recommendations</span></a></li>
-           <li><a href="viewPhasesDates"><i class="fa fa-link"></i><span>Calendar</span> </a></li>
-           <li><a href="viewCropEstimate"><i class="fa fa-link"></i><span>Crop Estimate (Options)</span></a></li>
-           <li><a href="viewPrograms.jsp"><i class="fa fa-link"></i><span>View Programs</span></a></li>
-           <li><a href="searchFarmer.jsp"><i class="fa fa-link"></i><span>Search Farmer</span></a></li>
+           <li class="active"><a href="MDOHomepage"><i class="fa fa-dashboard"></i><span>Home</span></a></li>
+           <li class=""><a href="Disaster Report.jsp"><i class="fa fa-bell"></i><span>Alerts</span></a></li>
+           <li><a href="WeatherReport.jsp"><i class="fa fa-cloud"></i><span>Weather Report</span> </a></li>
+           <li><a href="WeatherTrends.jsp"><i class="fa fa-bar-chart"></i><span>Weather Trends</span> </a></li>
+           <li><a href="Forum.jsp"><i class="fa fa-comments"></i><span>Forum</span></a></li>
+           <li><a href="Recommendations.jsp"><i class="fa fa-check"></i><span>Recommendations</span></a></li>
+           <li><a href="Problems.jsp"><i class="fa fa-exclamation-triangle"></i><span>Problems</span></a></li>
+           <li><a href="createNewRecommendation.jsp"><i class="fa fa-plus"></i><span>Create Recommendations</span></a></li>
+           <li><a href="viewPhasesDates"><i class="fa fa-calendar"></i><span>Calendar</span> </a></li>
+           <li><a href="viewCropEstimate"><i class="fa fa-bar-chart"></i><span>Crop Estimate (Options)</span></a></li>
+           <li><a href="viewPrograms.jsp"><i class="fa fa-eye"></i><span>View Programs</span></a></li>
+           <li><a href="searchFarmer.jsp"><i class="fa fa-search"></i><span>Search Farmer</span></a></li>
           
          <li class="treeview">
           <a href="#">

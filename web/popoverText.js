@@ -3,7 +3,7 @@
 //Crop Estimate
 var popCropEst = {toggle: "popover", trigger: "focus", placement: "auto",html: true,
 
-    title: 'Crop Estimate', 
+    title: 'Crop Estimated', 
     content: function () {
         return '<dl>\n\
                     <dt>Description</dt>\n\
@@ -52,7 +52,7 @@ var popAreaHarv = {toggle: "popover", trigger: "focus", placement: "auto",html: 
 };
 
 //linegraph
-var popLineGraph = {toggle: "popover", trigger: "focus", placement: "auto",html: true,
+var popLineGraph = {toggle: "popover", trigger: "focus", placement: "",html: true,
 
     title: 'Line Graph', 
     content: function () {
@@ -61,7 +61,7 @@ var popLineGraph = {toggle: "popover", trigger: "focus", placement: "auto",html:
                         <dd>hello world</dd>\n\
                     <dt>Tips</dt>\n\
                         <dd> <ul>\n\
-                            <li>hello world</li>\n\
+                            <li>hello forld</li>\n\
                             </ul>\n\
                         <dd>\n\
                 </dl>';
