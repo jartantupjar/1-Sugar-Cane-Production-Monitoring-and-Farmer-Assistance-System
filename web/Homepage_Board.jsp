@@ -107,7 +107,7 @@
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="dist/js/app.min.js"></script>
         <script src="plugins/pace2/pace.min.js"></script>
-         <script src="popoverText.js"></script>
+         <script src="plugins/poptest/popoverText.js"></script>
         <script src="plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
         <script src="Highcharts/highcharts.js"></script>
@@ -115,8 +115,8 @@
        
         <script>
             $(document).ready(function () {
-                $('#popLineG').popover(popYieldMap);
-                $('#popOPL').popover(popAreaHarv);
+                $('#popLineG').popover(popLineGraph);
+                $('#popOPL').popover(popProdByWeek);
             });
 
 

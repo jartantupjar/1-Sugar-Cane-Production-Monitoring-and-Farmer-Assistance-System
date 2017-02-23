@@ -74,7 +74,7 @@
     </div>
 
 </div>
-<script src="popoverText.js"></script>
+<script src="plugins/poptest/popoverText.js"></script>
         <script>
             $(document).ready(function () {
                 $('#popDisaster').popover(popDisasterB);

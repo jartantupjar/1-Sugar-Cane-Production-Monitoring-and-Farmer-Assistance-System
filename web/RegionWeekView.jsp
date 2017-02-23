@@ -108,7 +108,7 @@
         <script src="Highcharts/modules/exporting.js"></script>
         <script src="plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
-        <script src="popoverText.js"></script>
+        <script src="plugins/poptest/popoverText.js"></script>
         <script>
             $(document).ready(function () {
                 $('#popPBW').popover(popAreaHarv);

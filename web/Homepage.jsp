@@ -1,7 +1,10 @@
 <%@include file="security.jsp" %>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <html>
     <head>
+
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>SRA | Home</title>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -214,7 +217,7 @@
                                         <h1 class="box-title">Narrative Report for Week Ending <c:out value="${narrative.weekending}" /> </h1>
                                         <div class="box-tools pull-right">
                                             <a tabindex="0" class="" id="popNarativeRep" role="button"><i class="fa fa-question text-orange"></i></a>  
-                                          <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                             <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                         </div>
                                     </div>   
@@ -254,7 +257,7 @@
                             </div>
                             <div class="col-md-4 col-md-offset-9">
                                 <a href="viewCropAssessment?toprint=true" class="btn btn-danger" role="button" target="_blank">Print Crop Assessment</a>
-                    
+
                             </div>       
                         </c:if>
                     </div>
@@ -279,7 +282,7 @@
         <script src="plugins/select2/select2.full.min.js"></script>
         <script src="plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
-        <script src="popoverText.js"></script>
+        <script src="plugins/poptest/popoverText.js"></script>
         <script>
             $(document).ready(function () {
                 $('#popCropEst').popover(popCropEst);
@@ -288,7 +291,7 @@
                 $('#popStandCrop').popover(popStandCrop);
                 $('#popWeatherForecast').popover(popWeatherForecast);
                 $('#popNarativeRep').popover(popNarativeRep);
-                
+
 
             });
 

@@ -135,7 +135,7 @@
     <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
     <script type="text/javascript" src="plugins/datatable/dataTables.checkboxes.min.js"></script>
     <script src="plugins/datepicker/bootstrap-datepicker.js"></script>
-    <script src="popoverText.js"></script>
+    <script src="plugins/poptest/popoverText.js"></script>
         <script>
             $(document).ready(function () {
                 $('#popCreateRec').popover(popAreaHarv);
