@@ -25,7 +25,7 @@ var popYieldMap = {toggle: "popover", trigger: "focus", placement: "auto",html: 
     content: function () {
         return '<dl>\n\
                     <dt>Description</dt>\n\
-                        <dd>hello world</dd>\n\
+                        <dd>sample world</dd>\n\
                     <dt>Tips</dt>\n\
                         <dd> <ul>\n\
                             <li> hello world </li>\n\
