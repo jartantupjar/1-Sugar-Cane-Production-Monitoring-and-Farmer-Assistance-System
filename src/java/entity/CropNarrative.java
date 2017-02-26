@@ -22,6 +22,8 @@ public class CropNarrative {
     private String dinput;
     private String dother;
     private String danalysis;
+    private String dbanalysis;
+    private String dbfindings;
 
     /**
      * @return the year
@@ -161,5 +163,33 @@ public class CropNarrative {
      */
     public void setDweather(String dweather) {
         this.dweather = dweather;
+    }
+
+    /**
+     * @return the dbanalysis
+     */
+    public String getDbanalysis() {
+        return dbanalysis;
+    }
+
+    /**
+     * @param dbanalysis the dbanalysis to set
+     */
+    public void setDbanalysis(String dbanalysis) {
+        this.dbanalysis = dbanalysis;
+    }
+
+    /**
+     * @return the dbfindings
+     */
+    public String getDbfindings() {
+        return dbfindings;
+    }
+
+    /**
+     * @param dbfindings the dbfindings to set
+     */
+    public void setDbfindings(String dbfindings) {
+        this.dbfindings = dbfindings;
     }
 }

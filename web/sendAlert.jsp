@@ -86,7 +86,7 @@
         <script src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="dist/js/app.min.js"></script>
-        <script src="popoverText.js"></script>
+        <script src="plugins/poptest/popoverText.js"></script>
         <script>
             $(document).ready(function () {
                 $('#popProbDetails').popover(popProbD);

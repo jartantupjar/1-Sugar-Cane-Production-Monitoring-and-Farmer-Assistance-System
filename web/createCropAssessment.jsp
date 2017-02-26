@@ -40,106 +40,109 @@
                         <h3 class="text-center text-bold">Crop Year: ${cayear}</h3>
 
                         <h3 >&nbsp  Week Ending: ${SundayofWeek}</h3>
-                        <h3 class="text-bold">&nbsp PART 1:PRODUCTION DATA</h3>
-                        <div class="col-md-12"  > 
-                            <div class="box box-info">
-                                <div class="box-header with-border">
-                                    <h1 class="box-title ">A. Area Harvested</h1>
-                                    <div class="box-tools pull-right hidethis">
-                                        <a tabindex="0" class="text-overflow" id="popAreaHarv" role="button"><i class="fa fa-question text-orange"></i></a>
-                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+
+                        <h3 class="text-bold">&nbsp PART 1:PRODUCTION STATUS DATA</h3>
+                        <c:if test="${not empty CropAss}">
+                            <div class="col-md-12"  > 
+                                <div class="box box-info">
+                                    <div class="box-header with-border">
+                                        <h1 class="box-title ">Area Harvested</h1>
+                                        <div class="box-tools pull-right hidethis">
+                                            <a tabindex="0" class="text-overflow" id="popAreaHarv" role="button"><i class="fa fa-question text-orange"></i></a>
+                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="box-body no-padding">
-                                    <table class="table table-bordered"  >
-                                        <thead>
+                                    <div class="box-body no-padding">
+                                        <table class="table table-bordered"  >
+                                            <thead>
 
-                                            <tr >
-                                                <th class="text-center" rowspan="2">Particulars</th>
-                                                <th class="text-center" colspan="3">Estimated Production</th>
-                                                <th style="width:15%" class="text-center"  rowspan="2">Percent Completed</th>	
-                                            </tr>
-                                            <tr>
-                                                <th class="text-center">Previous</th>
-                                                <th class="text-center">This Week</th>
-                                                <th class="text-center">To Date</th>
-
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <c:forEach var="ca" items="${CropAss}">
-                                                <tr>	
-                                                    <td >${ca.particulars}</td>
-                                                    <td>${ca.estimated}</td>
-                                                    <td>${ca.previous}</td>
-                                                    <td>${ca.thisweek}</td>
-                                                    <td>${ca.todate}</td>
-                                                    <td>
-                                                        <div class="progress-group" >
-                                                            <span class="progress-number">
-                                                                <b>
-                                                                    ${ca.percent}%
-                                                                </b>
-                                                            </span>
-                                                            <span>
-                                                                <div id="bypassme" class="progress progress-sm progress-striped-active">
-                                                                    <div class="progress-bar progress-bar-primary" style="width : ${ca.percent}%"></div>
-                                                                </div>
-                                                            </span>
-                                                        </div>
-
-
-
-                                                    </td>
+                                                <tr >
+                                                    <th class="text-center" rowspan="2">Particulars</th>
+                                                    <th class="text-center" colspan="3">Estimated Production</th>
+                                                    <th style="width:15%" class="text-center"  rowspan="2">Percent Completed</th>	
                                                 </tr>
-                                            </c:forEach>
-                                        </tbody>
-                                    </table>
+                                                <tr>
+                                                    <th class="text-center">Previous</th>
+                                                    <th class="text-center">This Week</th>
+                                                    <th class="text-center">To Date</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <c:forEach var="ca" items="${CropAss}">
+                                                    <tr>	
+                                                        <td >${ca.particulars}</td>
+                                                        <td>${ca.estimated}</td>
+                                                        <td>${ca.previous}</td>
+                                                        <td>${ca.thisweek}</td>
+                                                        <td>${ca.todate}</td>
+                                                        <td>
+                                                            <div class="progress-group" >
+                                                                <span class="progress-number">
+                                                                    <b>
+                                                                        ${ca.percent}%
+                                                                    </b>
+                                                                </span>
+                                                                <span>
+                                                                    <div id="bypassme" class="progress progress-sm progress-striped-active">
+                                                                        <div class="progress-bar progress-bar-primary" style="width : ${ca.percent}%"></div>
+                                                                    </div>
+                                                                </span>
+                                                            </div>
+
+
+
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4"  >
+                                <div class="box box-info">
+                                    <div class="box-header with-border">
+                                        <h1 class="box-title">Standing Crop</h1>
+                                        <div class="box-tools pull-right hidethis">
+                                            <a tabindex="0" class="text-overflow" id="popStandCrop" role="button"><i class="fa fa-question text-orange"></i></a>
+                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                        </div>
+                                    </div>
+
+                                    <div class="box-body no-padding">
+                                        <table class="table table-bordered"  >
+                                            <thead>
+                                                <tr>
+                                                    <th>Particulars</th>
+                                                    <th>Estimated Production</th>	
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <c:forEach var="ca" items="${CropAss}">
+                                                    <tr>	
+                                                        <td>${ca.particulars}</td>
+                                                        <td>${ca.standing}</td>
+                                                    </tr>
+                                                </c:forEach>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
                                 </div>
 
                             </div>
-                        </div>
-                        <div class="col-md-4"  >
-                            <div class="box box-info">
-                                <div class="box-header with-border">
-                                    <h1 class="box-title">B. Standing Crop</h1>
-                                    <div class="box-tools pull-right hidethis">
-                                        <a tabindex="0" class="text-overflow" id="popStandCrop" role="button"><i class="fa fa-question text-orange"></i></a>
-                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                    </div>
-                                </div>
-
-                                <div class="box-body no-padding">
-                                    <table class="table table-bordered"  >
-                                        <thead>
-                                            <tr>
-                                                <th>Particulars</th>
-                                                <th>Estimated Production</th>	
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <c:forEach var="ca" items="${CropAss}">
-                                                <tr>	
-                                                    <td>${ca.particulars}</td>
-                                                    <td>${ca.standing}</td>
-                                                </tr>
-                                            </c:forEach>
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                            </div>
-
-                        </div>
+                        </c:if>
                         <div class="col-md-8">
 
 
                             <div class="box box-info">
                                 <div class="box-header with-border">
-                                    <h1 class="box-title">C. Weather Update</h1>
+                                    <h1 class="box-title">Weather Update</h1>
                                     <div class="box-tools pull-right hidethis">
                                         <a tabindex="0" class="" id="popWeatherForecast" role="button"><i class="fa fa-question text-orange"></i></a>  
                                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
@@ -481,6 +484,10 @@
                                 <input name="cropyear" value="${cayear}" type="hidden">
                                 <div class="box box-info">   
                                     <div class="box-header">
+
+                                        <h1 class="box-title">A. MDO Narrative</h1>
+
+
                                         <div class="box-tools pull-right hidethis">
                                             <a tabindex="0" class="text-overflow" id="popNarativeRep" role="button"><i class="fa fa-question text-orange"></i></a>
 
@@ -494,38 +501,70 @@
 
                                                 <tr>
                                                     <th style="width:20%">WEATHER</th>
-                                                    <td> <textarea style="resize:none" class="form-control" name="dweather" rows="2"  placeholder="Enter ..."></textarea></td>
+                                                    <td> <textarea style="resize:none" id="dweatr" class="form-control mdoform readonly" name="dweather" rows="2"  placeholder="Enter ..." >${MdoNarrative.dweather}</textarea></td>
                                                 </tr>
                                                 <tr>
                                                     <th>PRICE OF SUGAR</th>
-                                                    <td> <textarea style="resize:none" class="form-control" name="dprice" rows="2"  placeholder="Enter ..."></textarea></td>
+                                                    <td> <textarea style="resize:none" class="form-control mdoform" name="dprice" rows="2"  placeholder="Enter ...">${MdoNarrative.dprice}</textarea></td>
                                                 </tr>
                                                 <tr>
                                                     <th>MILL OPERATION</th>
-                                                    <td> <textarea style="resize:none" class="form-control" name="dmill" rows="2"  placeholder="Enter ..."></textarea></td>
+                                                    <td> <textarea style="resize:none" class="form-control mdoform" name="dmill" rows="2"  placeholder="Enter ...">${MdoNarrative.dmill}</textarea></td>
                                                 </tr>
                                                 <tr>
                                                     <th>PRICES OF INPUTS</th>
-                                                    <td> <textarea style="resize:none" class="form-control" name="dinput" rows="2"  placeholder="Enter ..."></textarea></td>
+                                                    <td> <textarea style="resize:none" class="form-control mdoform" name="dinput" rows="2"  placeholder="Enter ...">${MdoNarrative.dinput}</textarea></td>
                                                 </tr>
                                                 <tr>
                                                     <th style="width:20%">FINDINGS (PROBLEMS & RECOMMENDATIONS)</th>
-                                                    <td> <textarea style="resize:none" class="form-control" name="dother" rows="2"  placeholder="Enter ..."></textarea></td>
+                                                    <td> <textarea style="resize:none" class="form-control mdoform" name="dother" rows="2"  placeholder="Enter ...">${MdoNarrative.dother}</textarea></td>
                                                 </tr>
                                                 <tr>
                                                     <th>OVERALL ANALYSIS</th>
-                                                    <td> <textarea style="resize:none" class="form-control" name="danalysis" rows="2"  placeholder="Enter ..."></textarea></td>
+                                                    <td> <textarea style="resize:none" class="form-control mdoform" name="danalysis" rows="2"  placeholder="Enter ...">${MdoNarrative.danalysis}</textarea></td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
+                                <c:if test="${(user.group eq 'MDO' and not empty boardNarrative) or user.group eq 'Board'}">
+                                    <div class="box box-info">   
+                                        <div class="box-header">
+
+                                            <h1 class="box-title">B. Board Narrative</h1>
+
+
+                                            <div class="box-tools pull-right hidethis">
+                                                <a tabindex="0" class="text-overflow" id="popNarativeRep" role="button"><i class="fa fa-question text-orange"></i></a>
+
+                                            </div>
+                                        </div>
+                                        <div class="box-body">
+
+
+                                            <table class="table table-bordered">
+                                                <tbody>
+
+
+                                                    <tr>
+                                                        <th style="width:20%">FINDINGS (PROBLEMS & SUGGESTIONS)</th>
+                                                        <td> <textarea style="resize:none" class="form-control boardform" name="dbfindings" rows="2"  placeholder="Enter ...">${boardNarrative.dbfindings}</textarea></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>OVERALL ANALYSIS</th>
+                                                        <td> <textarea style="resize:none" class="form-control boardform" name="dbanalysis" rows="2"  placeholder="Enter ...">${boardNarrative.dbanalysis}</textarea></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </c:if>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-4 col-md-offset-4 hidethis">
                                     <a  class="btn btn-primary btn-block" role="button" onClick="window.print();" ><i class="fa fa-print"></i> Print Report</a>
-                                    <button class="btn btn-info btn-block" type="submit" >Submit</button>
+                                    <button class="btn btn-info btn-block" id="mdosubmit" type="submit" >Submit</button>
 
                                     <!--                                <button id="cmd" type="button">print PDF</button>-->
                                     <br>
@@ -556,27 +595,44 @@
         <script src="plugins/select2/select2.full.min.js"></script>
         <script src="plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
-        <script src="popoverText.js"></script>
+        <script src="plugins/poptest/popoverText.js"></script>
 
 
 
         <script>
-            $(document).ready(function () {
-                $('#popAreaHarv').popover(popAreaHarv);
-                $('#popStandCrop').popover(popStandCrop);
-                $('#popWeatherForecast').popover(popWeatherForecast);
-                $('#popNarativeRep').popover(popNarativeRep);
+                                        $(document).ready(function () {
 
-            });
+                                            if (${not empty MdoNarrative}) {
+                                                $('.mdoform').prop('readonly', true);
+                                                $('#mdosubmit').addClass('hidden');
+
+                                            }else if(${user.group eq 'Board'}){
+                                                $('.mdoform').prop('readonly', true);
+                                            }
+                                            if (${not empty boardNarrative}) {
+                                                $('.boardform').prop('readonly', true);
+                                                
+                                            }else if (${user.group eq 'Board'}) {
+                                                    $('#mdosubmit').removeClass('hidden');
+                                                }
+
+
+                                            $('#popAreaHarv').popover(popAreaHarv);
+                                            $('#popStandCrop').popover(popStandCrop);
+                                            $('#popWeatherForecast').popover(popWeatherForecast);
+                                            $('#popNarativeRep').popover(popNarativeRep);
+
+                                        });
 
 
         </script>
         <script>
-    if (${printca} !== null) {
-        window.onload = function () {
-            window.print();
-        };
-    }
+            if (${not empty printca}) {
+                window.onload = function () {
+                    window.print();
+                };
+            }
+
         </script>
 
         <script src="Highcharts/highcharts.js"></script>

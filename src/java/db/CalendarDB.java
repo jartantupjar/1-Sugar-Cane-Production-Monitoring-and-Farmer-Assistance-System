@@ -463,7 +463,32 @@ public class CalendarDB {
 
         return false;
     }
+ public boolean checkifMilling(Date date) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select cc.year,cc.district,cc.phase from crop_calendar cc  where cc.phase='Milling' and ? between cc.date_starting and cc.date_ending;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setDate(1, date);
+            ResultSet rs = pstmt.executeQuery();
+            Calendar cal = null;
+            boolean chckr = false;
+            if (rs.next()) {
+                chckr = true;
 
+            }
+
+            rs.close();
+            pstmt.close();
+            conn.close();
+            return chckr;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CropEstimateDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false;
+    }
     public boolean checkifTillering() {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();

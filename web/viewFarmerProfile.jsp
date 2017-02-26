@@ -228,7 +228,7 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
 
         <script src="plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
-<script src="popoverText.js"></script>
+<script src="plugins/poptest/popoverText.js"></script>
         <script>
             $(document).ready(function () {
             $('#popFarmerProdDet').popover(popFarmerProdDet);

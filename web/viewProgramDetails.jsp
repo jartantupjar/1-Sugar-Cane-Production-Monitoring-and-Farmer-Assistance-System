@@ -250,7 +250,7 @@ current vs then diagram
         <script src="Highcharts/highcharts.js"></script>
         <script src="Highcharts/modules/drilldown.js"></script>
         <script src="Highcharts/modules/exporting.js"></script>
-        <script src="popoverText.js"></script>
+        <script src="plugins/poptest/popoverText.js"></script>
         <script>
             $(document).ready(function () {
                 $('#popProgBar').popover(popProgBar);

@@ -1184,7 +1184,7 @@ comparison page add current vs historical details(past 2yrs)
         </script>
         <script src="plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
-         <script src="popoverText.js"></script>
+         <script src="plugins/poptest/popoverText.js"></script>
         <script>
                                    $(document).ready(function () {
                                        $('#popFarmBasicDet').popover(popFarmBasicDet);
