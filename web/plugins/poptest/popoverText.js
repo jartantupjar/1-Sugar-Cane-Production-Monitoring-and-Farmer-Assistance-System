@@ -78,10 +78,10 @@ var popProdByWeek = {toggle: "popover", trigger: "focus", placement: "auto",html
     content: function () {
         return '<dl>\n\
                     <dt>Description</dt>\n\
-                        <dd>hello world</dd>\n\
+                        <dd>This shows the list of ongoing programs</dd>\n\
                     <dt>Tips</dt>\n\
                         <dd> <ul>\n\
-                            <li>hello world</li>\n\
+                            <li>Click more details to view the programs details</li>\n\
                             </ul>\n\
                         <dd>\n\
                 </dl>';
@@ -126,11 +126,8 @@ var popWPSR = {toggle: "popover", trigger: "focus", placement: "auto",html: true
     content: function () {
         return '<dl>\n\
                     <dt>Description</dt>\n\
-                        <dd>hello world</dd>\n\
-                    <dt>Tips</dt>\n\
-                        <dd> <ul>\n\
-                            <li>hello world</li>\n\
-                            </ul>\n\
+                        <dd>The report shows the weekly production report with all the districts</dd>\n\
+                   \
                         <dd>\n\
                 </dl>';
     }
@@ -276,12 +273,8 @@ var popProgProbList = {toggle: "popover", trigger: "focus", placement: "auto", h
     content: function () {
         return '<dl>\n\
                     <dt>Description</dt>\n\
-                        <dd>hello world</dd>\n\
-                    <dt>Tips</dt>\n\
-                        <dd> <ul>\n\
-                            <li>hello world</li>\n\
-                            </ul>\n\
-                        <dd>\n\
+                        <dd>This shows the list of all problems that will be addressed by the program/dd>\n\
+                   \
                 </dl>';
     }
 };
@@ -383,10 +376,11 @@ var popDistTCDrill = {toggle: "popover", trigger: "focus", placement: "auto", ht
     content: function () {
         return '<dl>\n\
                     <dt>Description</dt>\n\
-                        <dd>hello world</dd>\n\
+                        <dd>The graph shows the comparison of the actual Tons Cane and the estimated</dd>\n\
                     <dt>Tips</dt>\n\
                         <dd> <ul>\n\
-                            <li>hello world</li>\n\
+                            <li>Click on the blue graph to drilldown to the monthly actual Tons Cane</li>\n\
+                            <li>Click on the black graph to drilldown to the monthly estimated Tons Cane</li>\n\
                             </ul>\n\
                         <dd>\n\
                 </dl>';
@@ -398,10 +392,11 @@ var popWeekDistEst = {toggle: "popover", trigger: "focus", placement: "auto", ht
     content: function () {
         return '<dl>\n\
                     <dt>Description</dt>\n\
-                        <dd>hello world</dd>\n\
+                        <dd>This shows the crop estimate per week in the district</dd>\n\
                     <dt>Tips</dt>\n\
                         <dd> <ul>\n\
-                            <li>hello world</li>\n\
+                          \
+                            <li>Use the dropdown to choose from year</li>\n\
                             </ul>\n\
                         <dd>\n\
                 </dl>';
@@ -413,10 +408,11 @@ var popYrMuniEst = {toggle: "popover", trigger: "focus", placement: "auto", html
     content: function () {
         return '<dl>\n\
                     <dt>Description</dt>\n\
-                        <dd>hello world</dd>\n\
+                        <dd>This shows the crop estimate in the municipalities per week</dd>\n\
                     <dt>Tips</dt>\n\
                         <dd> <ul>\n\
-                            <li>hello world</li>\n\
+                            <li>Use the dropdown to choose from year</li>\n\
+                            <li>Click more details to view the production of the municipality</li>\n\
                             </ul>\n\
                         <dd>\n\
                 </dl>';
@@ -432,10 +428,10 @@ var popYrlyLKGEst = {toggle: "popover", trigger: "focus", placement: "auto", htm
     content: function () {
         return '<dl>\n\
                     <dt>Description</dt>\n\
-                        <dd>hello world</dd>\n\
+                         <dd>The graph shows the 3 estimations of LKG for each year</dd>\n\
                     <dt>Tips</dt>\n\
                         <dd> <ul>\n\
-                            <li>hello world</li>\n\
+                            <li>The highlighted graph refers to the one which is closest to the actual LKG</li>\n\
                             </ul>\n\
                         <dd>\n\
                 </dl>';
@@ -448,10 +444,11 @@ var popDistLKGEstDrill = {toggle: "popover", trigger: "focus", placement: "auto"
     content: function () {
         return '<dl>\n\
                     <dt>Description</dt>\n\
-                        <dd>hello world</dd>\n\
+                        <dd>The graph shows the comparison of the actual LKG and the estimated</dd>\n\
                     <dt>Tips</dt>\n\
                         <dd> <ul>\n\
-                            <li>hello world</li>\n\
+                            <li>Click on the blue graph to drilldown to the monthly actual LKG</li>\n\
+                            <li>Click on the black graph to drilldown to the monthly estimated LKG</li>\n\
                             </ul>\n\
                         <dd>\n\
                 </dl>';
@@ -464,10 +461,11 @@ var popWeeklyDistLKGEst = {toggle: "popover", trigger: "focus", placement: "auto
     content: function () {
         return '<dl>\n\
                     <dt>Description</dt>\n\
-                        <dd>hello world</dd>\n\
+                        <dd>This shows the crop estimate per week in the district</dd>\n\
                     <dt>Tips</dt>\n\
                         <dd> <ul>\n\
-                            <li>hello world</li>\n\
+                          \
+                            <li>Use the dropdown to choose from year</li>\n\
                             </ul>\n\
                         <dd>\n\
                 </dl>';
@@ -480,10 +478,10 @@ var popLKGGenForc = {toggle: "popover", trigger: "focus", placement: "auto", htm
     content: function () {
         return '<dl>\n\
                     <dt>Description</dt>\n\
-                        <dd>hello world</dd>\n\
+                          <dd>The forecast form prompts the user to input the parameters to generate a crop estimate for LKG</dd>\n\
                     <dt>Tips</dt>\n\
                         <dd> <ul>\n\
-                            <li>Input the values in the text field using the previous years data as guide</li>\n\
+                              <li>Input the values in the text field using the previous years data as guide</li>\n\
 \                           <li>The dropdown lets the user choose between the 3 estimations that will update the crop assessment</li>\n\
                             </ul>\n\
                         <dd>\n\
@@ -680,16 +678,16 @@ var popCropVal = {toggle: "popover", trigger: "focus", placement: "auto", html: 
     content: function () {
         return '<dl>\n\
                     <dt>Description</dt>\n\
-                        <dd>hello world</dd>\n\
+                        <dd>This shows the farm information from the crop validation survey</dd>\n\
                     <dt>Tips</dt>\n\
                         <dd> <ul>\n\
-                            <li>hello world</li>\n\
+                            <li>This is updated annually</li>\n\
                             </ul>\n\
                         <dd>\n\
                 </dl>';
     }
 };
-
+  
 var popSoilAna = {toggle: "popover", trigger: "focus", placement: "auto", html: true,
 
     title: 'Soil Analysis',
@@ -790,10 +788,10 @@ var popSendto = {toggle: "popover", trigger: "focus", placement: "auto", html: t
     content: function () {
         return '<dl>\n\
                     <dt>Description</dt>\n\
-                        <dd>hello world</dd>\n\
+                        <dd>The user can select which farm/s to send the recommendations or problems</dd>\n\
                     <dt>Tips</dt>\n\
                         <dd> <ul>\n\
-                            <li>hello world</li>\n\
+                            <li>By default all farms are selected, user can select which farms to include or exclude</li>\n\
                             </ul>\n\
                         <dd>\n\
                 </dl>';
@@ -822,12 +820,8 @@ var popSelRec = {toggle: "popover", trigger: "focus", placement: "auto", html: t
     content: function () {
         return '<dl>\n\
                     <dt>Description</dt>\n\
-                        <dd>hello world</dd>\n\
-                    <dt>Tips</dt>\n\
-                        <dd> <ul>\n\
-                            <li>hello world</li>\n\
-                            </ul>\n\
-                        <dd>\n\
+                        <dd>These are the recommendations that have been selected to be sent to the farms</dd>\n\
+                   \
                 </dl>';
     }
 };
@@ -840,10 +834,12 @@ var popFarmBasicDet = {toggle: "popover", trigger: "focus", placement: "auto", h
     content: function () {
         return '<dl>\n\
                     <dt>Description</dt>\n\
-                        <dd>hello world</dd>\n\
+                        <dd>This shows the farms main details like owner, area and production</dd>\n\
                     <dt>Tips</dt>\n\
                         <dd> <ul>\n\
-                            <li>hello world</li>\n\
+                               <li>Blue text refers to the selected farm</li>\n\
+                         <li>Green text refers to similar information between the farms</li>\n\
+                         <li>Red text refers to the different information between the farms</li>\n\
                             </ul>\n\
                         <dd>\n\
                 </dl>';
@@ -855,10 +851,12 @@ var popFarmComparison = {toggle: "popover", trigger: "focus", placement: "auto",
     content: function () {
         return '<dl>\n\
                     <dt>Description</dt>\n\
-                        <dd>hello world</dd>\n\
+                        <dd>This shows the overall details of the farm</dd>\n\
                     <dt>Tips</dt>\n\
                         <dd> <ul>\n\
-                            <li>hello world</li>\n\
+                            <li>Blue text refers to the selected farm</li>\n\
+\n\                         <li>Green text refers to similar information between the farms</li>\n\
+\n\                         <li>Red text refers to the different information between the farms</li>\n\
                             </ul>\n\
                         <dd>\n\
                 </dl>';
@@ -871,10 +869,11 @@ var popSendRec = {toggle: "popover", trigger: "focus", placement: "auto", html: 
     content: function () {
         return '<dl>\n\
                     <dt>Description</dt>\n\
-                        <dd>hello world</dd>\n\
+                        <dd>This is where the user selects recommendations to be sent to the farms</dd>\n\
                     <dt>Tips</dt>\n\
                         <dd> <ul>\n\
-                            <li>hello world</li>\n\
+                            <li>Click the checkbox to select recommendations</li>\n\
+                               \n\<li>Click the button to access the details</li>\n\
                             </ul>\n\
                         <dd>\n\
                 </dl>';
@@ -887,10 +886,11 @@ var popSendProb = {toggle: "popover", trigger: "focus", placement: "auto", html:
     content: function () {
         return '<dl>\n\
                     <dt>Description</dt>\n\
-                        <dd>hello world</dd>\n\
+                         <dd>This is where the user selects problems to be sent to the farms</dd>\n\
                     <dt>Tips</dt>\n\
                         <dd> <ul>\n\
-                            <li>hello world</li>\n\
+                            <li>Click the checkbox to select problems</li>\n\
+                               \n\<li>Click the button to access the details</li>\n\
                             </ul>\n\
                         <dd>\n\
                 </dl>';
@@ -909,10 +909,10 @@ var popVSelRec = {toggle: "popover", trigger: "focus", placement: "auto", html: 
     content: function () {
         return '<dl>\n\
                     <dt>Description</dt>\n\
-                        <dd>hello world</dd>\n\
+                        <dd>This is where the user finalizes the recommendations to be sent to the farmer/s</dd>\n\
                     <dt>Tips</dt>\n\
                         <dd> <ul>\n\
-                            <li>hello world</li>\n\
+                            <li>Check/Uncheck any recommendations as needed</li>\n\
                             </ul>\n\
                         <dd>\n\
                 </dl>';
@@ -984,7 +984,7 @@ var popForumD = {toggle: "popover", trigger: "focus", placement: "auto", html: t
                         <dd> <ul>\n\
                             <li>The status can be filtered to find pending posts</li>\n\
                             </ul>\n\
-                        <dd>\n\
+                        </dd>\n\
                 </dl>';
     }
     
@@ -995,10 +995,10 @@ var popPostpage = {toggle: "popover", trigger: "focus", placement: "auto", html:
     content: function () {
         return '<dl>\n\
                     <dt>Description</dt>\n\
-                        <dd>hello world</dd>\n\
+                        <dd>This is where the user approves or rejects the post</dd>\n\
                     <dt>Tips</dt>\n\
                         <dd> <ul>\n\
-                            <li>hello world</li>\n\
+                            <li>Accept the if the post is new</li>\n\
                             </ul>\n\
                         <dd>\n\
                 </dl>';
@@ -1011,10 +1011,10 @@ var popPosLTR = {toggle: "popover", trigger: "focus", placement: "auto", html: t
     content: function () {
         return '<dl>\n\
                     <dt>Description</dt>\n\
-                        <dd>hello world</dd>\n\
+                        <dd>This is where the post can be linked to a recommendation when it is rejected</dd>\n\
                     <dt>Tips</dt>\n\
                         <dd> <ul>\n\
-                            <li>hello world</li>\n\
+                            <li>Choose from the recommendations on which to link to the post</li>\n\
                             </ul>\n\
                         <dd>\n\
                 </dl>';
@@ -1027,10 +1027,10 @@ var popPosLTP = {toggle: "popover", trigger: "focus", placement: "auto", html: t
     content: function () {
         return '<dl>\n\
                     <dt>Description</dt>\n\
-                        <dd>hello world</dd>\n\
+                       <dd>This is where the post can be linked to a problem when it is rejected</dd>\n\
                     <dt>Tips</dt>\n\
                         <dd> <ul>\n\
-                            <li>hello world</li>\n\
+                            <li>Choose from the problems list on which to link to the post</li>\n\
                             </ul>\n\
                         <dd>\n\
                 </dl>';
@@ -1055,10 +1055,10 @@ var popPosCP = {toggle: "popover", trigger: "focus", placement: "auto", html: tr
     content: function () {
         return '<dl>\n\
                     <dt>Description</dt>\n\
-                        <dd>hello world</dd>\n\
+                        <dd>This is where new problems are created</dd>\n\
                     <dt>Tips</dt>\n\
                         <dd> <ul>\n\
-                            <li>hello world</li>\n\
+                            <li>The "Period" refers to which crop phase the problem normally occurs</li>\n\
                             </ul>\n\
                         <dd>\n\
                 </dl>';
@@ -1071,11 +1071,11 @@ var popPosCR = {toggle: "popover", trigger: "focus", placement: "auto", html: tr
     content: function () {
         return '<dl>\n\
                     <dt>Description</dt>\n\
-                        <dd>hello world</dd>\n\
+                       <dd>This is where new recommendations/farming practices are created which will be sent to the farmers</dd>\n\
                     <dt>Tips</dt>\n\
                         <dd> <ul>\n\
-                            <li>hello world</li>\n\
-                            </ul>\n\
+                            <li>Clicking "Aims to solve a problem" shows a list of problems that you want to be addressed"</li>\n\
+                            <li>Clicking "Aims to improve" prompts for the duration of the recommendation"</li>\n\ \
                         <dd>\n\
                 </dl>';
     }
@@ -1119,10 +1119,10 @@ var popCalendar = {toggle: "popover", trigger: "focus", placement: "auto", html:
     content: function () {
         return '<dl>\n\
                     <dt>Description</dt>\n\
-                        <dd>hello world</dd>\n\
+                        <dd>This shows the duration of each crop phases</dd>\n\
                     <dt>Tips</dt>\n\
                         <dd> <ul>\n\
-                            <li>hello world</li>\n\
+                            <li>Click edit to modify the dates for the crop phases for the next crop year</li>\n\
                             </ul>\n\
                         <dd>\n\
                 </dl>';
@@ -1135,10 +1135,10 @@ var popDates = {toggle: "popover", trigger: "focus", placement: "auto", html: tr
     content: function () {
         return '<dl>\n\
                     <dt>Description</dt>\n\
-                        <dd>This shows the crop calendar where the phases are set</dd>\n\
+                        <dd>This shows the crop calendar where the duration of the phases are seen</dd>\n\
                     <dt>Tips</dt>\n\
                         <dd> <ul>\n\
-                            <li>hello world</li>\n\
+                            <li>Each crop phase has a corresponding color that highlights the calendar</li>\n\
                             </ul>\n\
                         <dd>\n\
                 </dl>';
@@ -1152,10 +1152,10 @@ var popWeatherTS = {toggle: "popover", trigger: "focus", placement: "auto", html
     content: function () {
         return '<dl>\n\
                     <dt>Description</dt>\n\
-                        <dd>hello world</dd>\n\
+                        <dd>The graph shows the amount of rainfall which correlates to the production for each month</dd>\n\
                     <dt>Tips</dt>\n\
                         <dd> <ul>\n\
-                            <li>hello world</li>\n\
+                            <li>Use the dropdown to select the year for comparison</li>\n\
                             </ul>\n\
                         <dd>\n\
                 </dl>';
@@ -1187,12 +1187,8 @@ var popProbD = {toggle: "popover", trigger: "focus", placement: "auto", html: tr
     content: function () {
         return '<dl>\n\
                     <dt>Description</dt>\n\
-                        <dd>hello world</dd>\n\
-                    <dt>Tips</dt>\n\
-                        <dd> <ul>\n\
-                            <li>hello world</li>\n\
-                            </ul>\n\
-                        <dd>\n\
+                        <dd>The disaster or alert details are displayed which will be sent to the farmers</dd>\n\
+                   \
                 </dl>';
     }
     
@@ -1205,11 +1201,7 @@ var popMessD = {toggle: "popover", trigger: "focus", placement: "auto", html: tr
         return '<dl>\n\
                     <dt>Description</dt>\n\
                         <dd>This is where the user inputs the message regarding the disaster to the farmers affected</dd>\n\
-                    <dt>Tips</dt>\n\
-                        <dd> <ul>\n\
-                            <li>The default message can be modified</li>\n\
-                            </ul>\n\
-                        <dd>\n\
+                 \
                 </dl>';
     }
     
@@ -1239,10 +1231,10 @@ var popVSelProb = {toggle: "popover", trigger: "focus", placement: "auto", html:
     content: function () {
         return '<dl>\n\
                     <dt>Description</dt>\n\
-                        <dd>hello world</dd>\n\
+                  <dd>This is where the user finalizes the problems to be sent to the farmer/s</dd>\n\
                     <dt>Tips</dt>\n\
                         <dd> <ul>\n\
-                            <li>hello world</li>\n\
+                            <li>Check/Uncheck any problems as needed</li>\n\
                             </ul>\n\
                         <dd>\n\
                 </dl>';
