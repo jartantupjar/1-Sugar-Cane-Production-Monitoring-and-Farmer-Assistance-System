@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+ 
 <header class="main-header">
 
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="ionicons-2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
     <link rel="stylesheet" href="dist/css/skins/skin-blue.min.css">
+    <link rel="stylesheet" href="plugins/poptest/popover-min.css">
 
     <!-- Logo -->
     <a href="index2.html" class="logo">

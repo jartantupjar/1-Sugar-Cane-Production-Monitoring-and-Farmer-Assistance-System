@@ -93,7 +93,9 @@
         <script>
             $(document).ready(function () {
                 $('#popSearchFarmer').popover(popSearchFarmer);
-
+                $('#popFarmPerf').popover(popFarmPerf);
+                $('#popDistImp').popover(popDistImp);
+                    
             });
 
 

@@ -56,15 +56,19 @@ public class MDOHomepage extends BaseServlet {
             week_ending = caT.get(0).getWeek_ending();
         }
         CropNarrative cn = null;
+         CropNarrative bn = null;
         ArrayList<CropAssessment> rain = cadb.getRainFall(cal.getEweek(), cropyear);
 
         if (cadb.checkExistingNarrative(cropyear, calist.get(0).getSundayofWeek()) == true) {
 //                        System.out.println("it entered tester");
             cn = new CropNarrative();
             cn = cadb.getAssessmentNarrative(cropyear, calist.get(0).getSundayofWeek());
+            bn=cadb.viewBoardCropNarrative(calist.get(0).getSundayofWeek());
         }
+        
         session.setAttribute("rainfall", rain);
         session.setAttribute("narrative", cn);
+         session.setAttribute("hboardnarrative", bn);
         session.setAttribute("CropAss", caT);
 //END OF MDO
 

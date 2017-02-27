@@ -1,6 +1,8 @@
 
 //****HOME PAGE ****
 //Crop Estimate
+
+
 var popCropEst = {toggle: "popover", trigger: "focus", placement: "auto",html: true,
 
     title: 'Crop Estimate', 
@@ -11,7 +13,6 @@ var popCropEst = {toggle: "popover", trigger: "focus", placement: "auto",html: t
                     <dt>Tips</dt>\n\
                         <dd> <ul>\n\
                             <li>Any needed changes to the estimate can be done in the "crop estimate" page which is usually done upon noticing a varied difference</li>\n\
-                            <li></li>\n\
                             </ul>\n\
                         <dd>\n\
                 </dl>';
@@ -171,6 +172,62 @@ var popNarativeRep = {toggle: "popover", trigger: "focus", placement: "auto", ht
                         <dd> <ul>\n\
                             <li> The problems come from the reports sent by the farmer</li>\n\
                             <li> "Overall Analysis" is the summary of all the factors reported for the week</li>\n\
+\
+                            </ul>\n\
+                        <dd>\n\
+                </dl>';
+    }
+};
+//Board narrative
+var popBoardNarativeRep = {toggle: "popover", trigger: "focus", placement: "auto", html: true,
+
+    title: 'Board Narrative Report',
+    content: function () {
+        return '<dl>\n\
+                    <dt>Description</dt>\n\
+                        <dd>This narrative can be used as a tool for communicating any suggestions and findings to the MDO</dd>\n\
+                    <dt>Tips</dt>\n\
+                        <dd> <ul>\n\
+                            <li> Findings may include any significant trend or report problems that need to be addressed immediately</li>\n\
+                            <li> Overall Analysis section may be used to report any programs that were created that may be of significance to the MDOs</li>\n\
+\
+                            </ul>\n\
+                        <dd>\n\
+                </dl>';
+    }
+};
+//**district improvement status report
+//farmer performance
+var popFarmPerf = {toggle: "popover", trigger: "focus", placement: "auto", html: true,
+
+    title: 'Farmer Performance Report',
+    content: function () {
+        return '<dl>\n\
+                    <dt>Description</dt>\n\
+                        <dd>This report shows the farmers that have the highest and lowest contribution for the week</dd>\n\
+                        <dd>This report also shows the farmers that had the highest and lowest yields of the week</dd>\n\
+                    <dt>Tips</dt>\n\
+                        <dd> <ul>\n\
+                            <li> The arrow colors signify whether it has improved or not</li>\n\
+                            <li> Improvement can be seen using the arrow direction as to how higher or lower a farmer has done</li>\n\
+\
+                            </ul>\n\
+                        <dd>\n\
+                </dl>';
+    }
+};
+//district improvements
+var popDistImp = {toggle: "popover", trigger: "focus", placement: "auto", html: true,
+
+    title: 'District Improvement Report',
+    content: function () {
+        return '<dl>\n\
+                    <dt>Description</dt>\n\
+                        <dd>This report shows the status report of the district with regards to recommendations and problems</dd>\n\
+                    <dt>Tips</dt>\n\
+                        <dd> <ul>\n\
+                            <li> The recommendations are based from the past week</li>\n\
+                            <li> The data is all based from farmer to MDO data</li>\n\
 \
                             </ul>\n\
                         <dd>\n\
