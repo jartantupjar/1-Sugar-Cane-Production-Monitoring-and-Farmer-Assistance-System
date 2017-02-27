@@ -241,14 +241,25 @@
                                                     <th>PRICES OF INPUTS</th>
                                                     <td> <c:out value="${narrative.dinput}" /></td>
                                                 </tr>
+                                                
                                                 <tr>
-                                                    <th>OTHERS</th>
+                                                    <th>FINDINGS</th>
                                                     <td> <c:out value="${narrative.dother}" /></td>
                                                 </tr>
                                                 <tr>
                                                     <th>OVERALL ANALYSIS</th>
                                                     <td><c:out value="${narrative.danalysis}" /></td>
                                                 </tr>
+                                            <th class="text-center text-red" colspan="2">BOARD NARRATIVE</th>
+                                                <tr>
+                                                    <th class="text-red">FINDINGS (PROBLEMS & SUGGESTIONS)</th>
+                                                    <td class="text-red"><c:out value="${hboardnarrative.dbfindings}"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="text-red">OVERALL ANALYSIS</th>
+                                                   <td class="text-red"><c:out value="${hboardnarrative.dbanalysis}" /></td>
+                                                </tr>
+
                                             </tbody>
                                         </table>
                                     </div>
