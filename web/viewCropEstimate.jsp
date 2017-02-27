@@ -16,6 +16,8 @@
         <link rel="stylesheet" href="plugins/select2/select2.min.css">
         <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
         <link rel="stylesheet" href="plugins/datatables/select.dataTables.min.css">
+        <link rel="stylesheet" href="plugins/poptest/popover-min.css">
+       
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">

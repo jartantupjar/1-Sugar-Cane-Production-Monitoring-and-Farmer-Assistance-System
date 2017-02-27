@@ -21,6 +21,7 @@
                 display:none;
             }
         </style>
+       
     </head>
 
 
@@ -181,7 +182,7 @@
                                     <div class="box-header">
                                         <h1 class="box-title">A. Farmer Performance</h1>
                                         <div class="box-tools pull-right hidethis">
-                                            <a tabindex="0" class="text-overflow" id="popAreaHarv" role="button"><i class="fa fa-question text-orange"></i></a>
+                                            <a tabindex="0" class="text-overflow" id="popFarmPerf" role="button"><i class="fa fa-question text-orange"></i></a>
                                             <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                         </div>
                                     </div>
@@ -336,7 +337,7 @@
                                     <div class="box-header">
                                         <h1 class="box-title">B. District Improvements</h1>
                                         <div class="box-tools pull-right hidethis">
-                                            <a tabindex="0" class="text-overflow" id="popAreaHarv" role="button"><i class="fa fa-question text-orange"></i></a>
+                                            <a tabindex="0" class="text-overflow" id="popDistImp" role="button"><i class="fa fa-question text-orange"></i></a>
                                             <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                         </div>
                                     </div>
@@ -535,7 +536,7 @@
 
 
                                             <div class="box-tools pull-right hidethis">
-                                                <a tabindex="0" class="text-overflow" id="popNarativeRep" role="button"><i class="fa fa-question text-orange"></i></a>
+                                                <a tabindex="0" class="text-overflow" id="popBoardNarativeRep" role="button"><i class="fa fa-question text-orange"></i></a>
 
                                             </div>
                                         </div>
@@ -621,6 +622,9 @@
                                             $('#popStandCrop').popover(popStandCrop);
                                             $('#popWeatherForecast').popover(popWeatherForecast);
                                             $('#popNarativeRep').popover(popNarativeRep);
+                                            $('#popFarmPerf').popover(popFarmPerf);
+                                            $('#popDistImp').popover(popDistImp);
+                                            
 
                                         });
 
