@@ -82,7 +82,7 @@
         <script src="plugins/poptest/popoverText.js"></script>
         <script>
             $(document).ready(function () {
-                $('#popWeeklyProd').popover(popAreaHarv);
+                $('#popWeeklyProd').popover(popWPSR);
             });
 
 

@@ -221,8 +221,8 @@
         <script src="plugins/poptest/popoverText.js"></script>
         <script>
             $(document).ready(function () {
-                $('#popCalendar').popover(popAreaHarv);
-                $('#popDates').popover(popAreaHarv);
+                $('#popCalendar').popover(popCalendar);
+                $('#popDates').popover(popDates);
             });
 
 

@@ -1513,9 +1513,11 @@ public class FarmsDB {
         list = dalist;
         ArrayList<Recommendation> farmRec = new ArrayList<Recommendation>();
 //adds recommendation of FARM 1 if there is
+ if (farm.getRecommendation()!=null) {
         if (!farm.getRecommendation().isEmpty()) {
             farmRec.addAll(farm.getRecommendation());
         }
+ }
 
 //adds all recommendations of the farms to the list 'farmRec'
         ArrayList<compRecommendation> reclist = new ArrayList<>();

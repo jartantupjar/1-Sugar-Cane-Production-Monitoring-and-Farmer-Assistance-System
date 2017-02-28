@@ -404,6 +404,10 @@
         <servlet-name>DistinctCropYearList</servlet-name>
         <servlet-class>controller.DistinctCropYearList</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>viewTopTen</servlet-name>
+        <servlet-class>controller.viewTopTen</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
@@ -807,6 +811,10 @@
     <servlet-mapping>
         <servlet-name>DistinctCropYearList</servlet-name>
         <url-pattern>/DistinctCropYearList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewTopTen</servlet-name>
+        <url-pattern>/viewTopTen</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
