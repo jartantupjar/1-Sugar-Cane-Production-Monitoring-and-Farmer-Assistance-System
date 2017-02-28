@@ -12,6 +12,11 @@
         <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css"> 
         <link rel="stylesheet" href="plugins/select2/select2.min.css">
         <style type="text/css" media="print">
+            @media print {
+                a[href]:after {
+                    content: none !important;
+                }
+            }
             img
             {
                 display:none;
@@ -20,8 +25,9 @@
             {
                 display:none;
             }
+
         </style>
-       
+
     </head>
 
 
@@ -222,7 +228,7 @@
                                                 <tr>
                                                     <td> Highest Producing Farmer</td>
                                                     <c:forEach var="sr" items="${statusRep}" varStatus="status">
-                                                        <td>${sr.highestProdFarmer.name}</td>
+                                                        <td> <a id="helloworld" href="viewFarmerProfile?name=${sr.highestProdFarmer.name}" >${sr.highestProdFarmer.name} </a></td>
                                                         <td>${sr.highestProdFarmer.production} TC</td>
 
                                                     </c:forEach>
@@ -249,7 +255,7 @@
                                                 <tr>
                                                     <td> Lowest Producing Farmer</td>
                                                     <c:forEach var="sr" items="${statusRep}" varStatus="status">
-                                                        <td>${sr.lowestProdFarmer.name} </td>
+                                                        <td><a href="viewFarmerProfile?name=${sr.lowestProdFarmer.name}" >${sr.lowestProdFarmer.name}</a> </td>
                                                         <td>${sr.lowestProdFarmer.production} TC</td>
                                                     </c:forEach>
                                                     <td>
@@ -275,7 +281,7 @@
                                                 <tr>
                                                     <td> Highest Yielding Farmer</td>
                                                     <c:forEach var="sr" items="${statusRep}" varStatus="status">
-                                                        <td>${sr.highestYieldFarmer.name}</td>
+                                                        <td><a href="viewFarmerProfile?name=${sr.highestYieldFarmer.name}" >${sr.highestYieldFarmer.name}</a></td>
                                                         <td>${sr.highestYieldFarmer.tYield} Yield</td>
                                                     </c:forEach>
                                                     <td>
@@ -301,7 +307,7 @@
                                                 <tr>
                                                     <td> Lowest Yielding Farmer</td>
                                                     <c:forEach var="sr" items="${statusRep}" varStatus="status">
-                                                        <td>${sr.lowestYieldFarmer.name}</td>
+                                                        <td> <a href="viewFarmerProfile?name=${sr.lowestYieldFarmer.name}" >${sr.lowestYieldFarmer.name}</a></td>
                                                         <td>${sr.lowestYieldFarmer.tYield} Yield</td>
                                                     </c:forEach>
                                                     <td>
@@ -374,7 +380,7 @@
                                                 <tr>
                                                     <td> Recommendations Suggested</td>
                                                     <c:forEach var="sr" items="${statusRep}" varStatus="status">
-                                                        <td>${sr.recsSuggested}</td>
+                                                        <td><a target="_blank" href="selectReportList?MondayofWeek=${sr.weekStarting}&SundayofWeek=${sr.weekEnding}&repType=rec&status=verifying">${sr.recsSuggested}</a></td>
                                                     </c:forEach>
                                                     <td>
                                                         <c:choose>
@@ -396,9 +402,9 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td> Recommendations Implemented</td>
+                                                    <td >  Recommendations Implemented</td>
                                                     <c:forEach var="sr" items="${statusRep}" varStatus="status">
-                                                        <td>${sr.recsImplemented}</td>
+                                                        <td> <a target="_blank" href="selectReportList?MondayofWeek=${sr.weekStarting}&SundayofWeek=${sr.weekEnding}&repType=rec&status=active">${sr.recsImplemented}</a></td>
                                                     </c:forEach>
                                                     <td>
                                                         <c:choose>
@@ -422,7 +428,7 @@
                                                 <tr>
                                                     <td> Problems Reported</td>
                                                     <c:forEach var="sr" items="${statusRep}" varStatus="status">
-                                                        <td>${sr.probsReported}</td>
+                                                        <td><a target="_blank" href="selectReportList?MondayofWeek=${sr.weekStarting}&SundayofWeek=${sr.weekEnding}&repType=prob&status=active"> ${sr.probsReported}</a></td>
                                                     </c:forEach>
                                                     <td>
                                                         <c:choose>
@@ -446,7 +452,7 @@
                                                 <tr>
                                                     <td> Problems Solved</td>
                                                     <c:forEach var="sr" items="${statusRep}" varStatus="status">
-                                                        <td>${sr.probsSolved}</td>
+                                                        <td><a target="_blank" href="selectReportList?MondayofWeek=${sr.weekStarting}&SundayofWeek=${sr.weekEnding}&repType=prob&status=inactive">${sr.probsSolved}</a></td>
                                                     </c:forEach>
                                                     <td>
                                                         <c:choose>
@@ -607,15 +613,15 @@
                                                 $('.mdoform').prop('readonly', true);
                                                 $('#mdosubmit').addClass('hidden');
 
-                                            }else if(${user.group eq 'Board'}){
+                                            } else if (${user.group eq 'Board'}) {
                                                 $('.mdoform').prop('readonly', true);
                                             }
                                             if (${not empty boardNarrative}) {
                                                 $('.boardform').prop('readonly', true);
-                                                
-                                            }else if (${user.group eq 'Board'}) {
-                                                    $('#mdosubmit').removeClass('hidden');
-                                                }
+
+                                            } else if (${user.group eq 'Board'}) {
+                                                $('#mdosubmit').removeClass('hidden');
+                                            }
 
 
                                             $('#popAreaHarv').popover(popAreaHarv);
@@ -624,7 +630,7 @@
                                             $('#popNarativeRep').popover(popNarativeRep);
                                             $('#popFarmPerf').popover(popFarmPerf);
                                             $('#popDistImp').popover(popDistImp);
-                                            
+
 
                                         });
 

@@ -161,12 +161,10 @@ public class ProblemsDB {
                 }
             }
         }
-     
-       
-        
+
         return orig;
     }
-    
+
     public ArrayList<Problems> getProblemsList() {
         try {
             // put functions here : previous week production, this week production
@@ -201,6 +199,46 @@ public class ProblemsDB {
         }
         return null;
     }
+
+    public ArrayList<Problems> getProblemsList(Date startDate, Date endDate, String status) {
+        try {
+            // put functions here : previous week production, this week production
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select p.id,p.name,p.description,pf.Fields_id,pf.date,pf.status,p.type,p.phase from `problems-fields` pf join problems p on pf.problems_id=p.id where pf.date>=? and pf.date <=? and status=?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+             pstmt.setDate(1, startDate);
+             pstmt.setDate(2, endDate);
+             pstmt.setString(3, status);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<Problems> pT = null;
+            Problems p;
+            if (rs.next()) {
+                pT = new ArrayList<Problems>();
+                do {
+                    p = new Problems();
+                    p.setProb_id(rs.getInt("id"));
+                    p.setProb_name(rs.getString("name"));
+                    p.setProb_details(rs.getString("description"));
+                    p.setStatus(rs.getString("status"));
+                    p.setType(rs.getString("type"));
+                    p.setDate_created(rs.getDate("date"));
+                    p.setFarm(rs.getString("Fields_id"));
+                    p.setPhase(rs.getString("phase"));
+                    pT.add(p);
+                } while (rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+
+            return pT;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProblemsDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
     public ArrayList<Problems> viewAllProblems() {
         try {
             // put functions here : previous week production, this week production
@@ -220,7 +258,7 @@ public class ProblemsDB {
                     p.setProb_details(rs.getString("description"));
                     p.setType(rs.getString("type"));
                     p.setPhase(rs.getString("phase"));
-               
+
                     pT.add(p);
                 } while (rs.next());
             }
@@ -235,14 +273,14 @@ public class ProblemsDB {
         return null;
     }
 
-    public ArrayList<Problems> viewSelectedProblems(ArrayList<String> list){
-         ArrayList<Problems> problems=new ArrayList<>();
-        for(int i=0; i<list.size();i++){
+    public ArrayList<Problems> viewSelectedProblems(ArrayList<String> list) {
+        ArrayList<Problems> problems = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
             problems.add(getProblemsDetails(Integer.parseInt(list.get(i))));
         }
         return problems;
     }
-    
+
     public ArrayList<Recommendation> getAllSolutions(int prob_id) {
         try {
             // put functions here : previous week production, this week production
@@ -424,7 +462,8 @@ public class ProblemsDB {
         }
         return null;
     }
-public ArrayList<Problems> getFarmProblemDetbyFarmComp(int id) {
+
+    public ArrayList<Problems> getFarmProblemDetbyFarmComp(int id) {
         try {
             CalendarDB caldb = new CalendarDB();
             ArrayList<Calendar> calist = caldb.getCurrentYearDetails();
@@ -462,6 +501,7 @@ public ArrayList<Problems> getFarmProblemDetbyFarmComp(int id) {
         }
         return null;
     }
+
     public Problems getAlertDetails(int id) {
         try {
             // put functions here : previous week production, this week production
