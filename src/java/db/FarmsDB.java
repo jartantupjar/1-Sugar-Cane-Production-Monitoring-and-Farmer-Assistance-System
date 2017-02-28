@@ -1419,10 +1419,11 @@ public class FarmsDB {
         ArrayList<Farm> list = new ArrayList<>();
         list = dalist;
         ArrayList<Recommendation> farmRec = new ArrayList<Recommendation>();
-
+  if (farm.getRecommendation()!=null) {
         if (!farm.getRecommendation().isEmpty()) {
             farmRec.addAll(farm.getRecommendation());
         }
+  }
 
         ArrayList<compRecommendation> reclist = new ArrayList<>();
 
@@ -1513,9 +1514,11 @@ public class FarmsDB {
         list = dalist;
         ArrayList<Recommendation> farmRec = new ArrayList<Recommendation>();
 //adds recommendation of FARM 1 if there is
+ if (farm.getRecommendation()!=null) {
         if (!farm.getRecommendation().isEmpty()) {
             farmRec.addAll(farm.getRecommendation());
         }
+ }
 
 //adds all recommendations of the farms to the list 'farmRec'
         ArrayList<compRecommendation> reclist = new ArrayList<>();
@@ -1651,10 +1654,11 @@ public class FarmsDB {
         ArrayList<Farm> list = new ArrayList<>();
         list = dalist;
         ArrayList<Problems> farmRec = new ArrayList<Problems>();
-
+if (farm.getProblems()!=null) {
         if (!farm.getProblems().isEmpty()) {
             farmRec.addAll(farm.getProblems());
         }
+}
 
         ArrayList<compProblems> reclist = new ArrayList<>();
 
