@@ -172,7 +172,7 @@
                                     </div>
 
                                     <div class="box-body">
-                                        <table id="probTable" class="table  dispTable table-hover" cellspacing="0" width="100%">
+                                        <table id="probTablet" class="table  dispTable table-hover" cellspacing="0" width="100%">
                                             <thead>
                                                 <tr>
                                                     <th></th>
@@ -386,14 +386,14 @@
                                     </div>
 
                                     <div class="box-body">
-                                        <table id="probTable1" class="table table-bordered">
+                                        <table id="probTables" class="table table-bordered">
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
                                                     <th>Problem</th>
-                                                    <th>Type</th>
-                                                    <th>Status</th>
                                                     <th>Description</th>
+                                                    <th>Count</th>
+                                                    <th>Status</th>
                                                 </tr>
                                             </thead>
                                         </table>
@@ -484,7 +484,6 @@
                 });
                 $("#cr").on("click", function () {
                     $('#rec').removeClass('hidden');
-                    
                     $('#prob').addClass('hidden');
                     $('#createp').addClass('hidden');
                 });
@@ -495,14 +494,14 @@
             $(document).ready(function () {
                 var rows_selected = [];
 
-                var table1 = $('#probTable').DataTable({
+                var table1 = $('#probTables').DataTable({
                     'ajax': {
                         'url': 'viewProbList'
                     },
                     'columnDefs': [{
                             'targets': 0,
-                            'searchable': false,
-                            'orderable': false,
+                            'searchable': true,
+                            'orderable': true,
                             'className': 'dt-body-center',
                             'render': function (data, type, full, meta) {
                                 return '<input type="checkbox" name="probid[]"  value="'
@@ -518,15 +517,6 @@
                         // Get row ID
                         var rowId = data[0];
                         var limit = 1;
-                        // alert(rowId);
-                        // If row ID is in the list of selected row IDs
-                        //  alert("notclicked");
-//                                         if($.inArray(rowId, rows_selected) !== -1){
-//                                              
-//                                            $(row).find('input[type="checkbox"]').prop('checked', true);
-//                                            $(row).addClass('selected');
-//                                          
-//                                         }
                         table1.$('input[type="checkbox"]', row).on('change', function (evt) {
                             console.log("outentered");
                             var tcounter = 0;
@@ -548,7 +538,7 @@
                     }
 
                 });
-                $('#probTable').DataTable().search('${post.phase}').draw();
+                $('#probTables').DataTable().search('${post.phase}').draw();
                 $('#frm-example').on('submit', function (e) {
                     var form = this;
 
@@ -570,7 +560,86 @@
 
                 });
 
+                
+                $('#probTable-select-all').on('click', function () {
+                    // Check/uncheck all checkboxes in the table
+                    var rows = table1.rows({'search': 'applied'}).nodes();
+                    $('input[type="checkbox"]', rows).prop('checked', this.checked);
+                });
+            });
+        </script>
+        <script>
 
+            $(document).ready(function () {
+                var rows_selected = [];
+
+                var table1 = $('#probTablet').DataTable({
+                    'ajax': {
+                        'url': 'viewProbList'
+                    },
+                    'columnDefs': [{
+                            'targets': 0,
+                            'searchable': true,
+                            'orderable': true,
+                            'className': 'dt-body-center',
+                            'render': function (data, type, full, meta) {
+                                return '<input type="checkbox" name="probid[]"  value="'
+                                        + $('<div/>').text(data).html() + '">';
+                            }
+                        }],
+                    'select': {
+                        'style': 'multi'
+                    },
+                    'order': [[1, 'asc']]
+                    ,
+                    'rowCallback': function (row, data, dataIndex) {
+                        // Get row ID
+                        var rowId = data[0];
+                        var limit = 1;
+                        table1.$('input[type="checkbox"]', row).on('change', function (evt) {
+                            console.log("outentered");
+                            var tcounter = 0;
+
+                            table1.$('input[type="checkbox"]').each(function () {
+                                if (this.checked) {
+
+                                    tcounter += 1;
+
+                                }
+
+                            });
+
+                            if (tcounter > limit) {
+                                console.log(tcounter);
+                                this.checked = false;
+                            }
+                        });
+                    }
+
+                });
+                $('#probTablet').DataTable().search('${post.phase}').draw();
+                $('#frm-example').on('submit', function (e) {
+                    var form = this;
+
+                    table1.$('input[type="checkbox"]').each(function () {
+                        // If checkbox doesn't exist in DOM
+                        if (!$.contains(document, this)) {
+                            // If checkbox is checked
+                            if (this.checked) {
+                                // Create a hidden element 
+                                $(form).append(
+                                        $('<input>')
+                                        .attr('type', 'hidden')
+                                        .attr('name', this.name)
+                                        .val(this.value)
+                                        );
+                            }
+                        }
+                    });
+
+                });
+
+                
                 $('#probTable-select-all').on('click', function () {
                     // Check/uncheck all checkboxes in the table
                     var rows = table1.rows({'search': 'applied'}).nodes();
