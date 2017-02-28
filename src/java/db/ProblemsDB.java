@@ -33,7 +33,7 @@ public class ProblemsDB {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "			(\n" +
-"			select p.name, p.type, p.phase, count(p.id) as 'count'\n" +
+"			select p.name, p.type, p.phase, count(p.id) as 'count', p.id \n" +
 "			from problems p join `problems-fields` pf on p.id = pf.Problems_id\n" +
 "			where pf.status = 'active' and pf.date<= (select current_date from configuration) and p.phase = 'Germination'\n" +
 "			group by p.id\n" +
@@ -44,7 +44,7 @@ public class ProblemsDB {
 "			union all\n" +
 "\n" +
 "			(\n" +
-"			select p.name, p.type, p.phase, count(p.id) as 'count'\n" +
+"			select p.name, p.type, p.phase, count(p.id) as 'count', p.id \n" +
 "			from problems p join `problems-fields` pf on p.id = pf.Problems_id\n" +
 "			where pf.status = 'active' and pf.date<= (select current_date from configuration) and p.phase = 'Tillering'\n" +
 "			group by p.id\n" +
@@ -55,7 +55,7 @@ public class ProblemsDB {
 "			union all\n" +
 "\n" +
 "			(\n" +
-"			select p.name, p.type, p.phase, count(p.id) as 'count'\n" +
+"			select p.name, p.type, p.phase, count(p.id) as 'count', p.id \n" +
 "			from problems p join `problems-fields` pf on p.id = pf.Problems_id\n" +
 "			where pf.status = 'active' and pf.date<= (select current_date from configuration) and p.phase = 'Stalk Elongation'\n" +
 "			group by p.id\n" +
@@ -66,7 +66,7 @@ public class ProblemsDB {
 "			union all\n" +
 "\n" +
 "			(\n" +
-"			select p.name, p.type, p.phase, count(p.id) as 'count'\n" +
+"			select p.name, p.type, p.phase, count(p.id) as 'count', p.id \n" +
 "			from problems p join `problems-fields` pf on p.id = pf.Problems_id\n" +
 "			where pf.status = 'active' and pf.date<= (select current_date from configuration) and p.phase = 'Yield Formation'\n" +
 "			group by p.id\n" +
@@ -77,7 +77,7 @@ public class ProblemsDB {
 "			union all\n" +
 "\n" +
 "			(\n" +
-"			select p.name, p.type, p.phase, count(p.id) as 'count'\n" +
+"			select p.name, p.type, p.phase, count(p.id) as 'count', p.id \n" +
 "			from problems p join `problems-fields` pf on p.id = pf.Problems_id\n" +
 "			where pf.status = 'active' and pf.date<= (select current_date from configuration) and p.phase = 'Ripening'\n" +
 "			group by p.id\n" +
@@ -88,7 +88,7 @@ public class ProblemsDB {
 "			union all\n" +
 "\n" +
 "			(\n" +
-"			select p.name, p.type, p.phase, count(p.id) as 'count'\n" +
+"			select p.name, p.type, p.phase, count(p.id) as 'count', p.id \n" +
 "			from problems p join `problems-fields` pf on p.id = pf.Problems_id\n" +
 "			where pf.status = 'active' and pf.date<= (select current_date from configuration) and p.phase = 'Milling'\n" +
 "			group by p.id\n" +
@@ -99,7 +99,7 @@ public class ProblemsDB {
 "			union all\n" +
 "\n" +
 "			(\n" +
-"			select p.name, p.type, p.phase, count(p.id) as 'count'\n" +
+"			select p.name, p.type, p.phase, count(p.id) as 'count', p.id \n" +
 "			from problems p join `problems-fields` pf on p.id = pf.Problems_id\n" +
 "			where pf.status = 'active' and pf.date<= (select current_date from configuration) and p.phase = 'Planting'\n" +
 "			group by p.id\n" +
@@ -110,7 +110,7 @@ public class ProblemsDB {
 "			union all\n" +
 "\n" +
 "			(\n" +
-"			select p.name, p.type, p.phase, count(p.id) as 'count'\n" +
+"			select p.name, p.type, p.phase, count(p.id) as 'count', p.id \n" +
 "			from problems p join `problems-fields` pf on p.id = pf.Problems_id\n" +
 "			where pf.status = 'active' and pf.date<= (select current_date from configuration) and p.phase = 'Year'\n" +
 "			group by p.id\n" +
@@ -121,7 +121,7 @@ public class ProblemsDB {
 "			union all\n" +
 "\n" +
 "			(\n" +
-"			select p.name, p.type, p.phase, count(p.id) as 'count'\n" +
+"			select p.name, p.type, p.phase, count(p.id) as 'count', p.id \n" +
 "			from problems p join `problems-fields` pf on p.id = pf.Problems_id\n" +
 "			where pf.status = 'active' and pf.date<= (select current_date from configuration) and p.phase = 'Land Preparation'\n" +
 "			group by p.id\n" +
@@ -133,6 +133,7 @@ public class ProblemsDB {
             if(rs.next()){
                 do{
                     p = new Problems();
+                    p.setProb_id(rs.getInt("id"));
                     p.setProb_name(rs.getString("name"));
                     p.setType(rs.getString("type"));
                     p.setPhase(rs.getString("phase"));

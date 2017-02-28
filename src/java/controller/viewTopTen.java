@@ -5,8 +5,11 @@
  */
 package controller;
 
+import db.CalendarDB;
 import db.ProblemsDB;
+import db.fixedRecDB;
 import db.subjectiveRecDB;
+import entity.Calendar;
 import entity.Problems;
 import entity.Recommendation;
 import java.io.IOException;
@@ -40,16 +43,35 @@ public class viewTopTen extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+            CalendarDB cdb = new CalendarDB();
+            ArrayList<Calendar> cT = new ArrayList<Calendar>();
+            ArrayList<Calendar> calist = cdb.getCurrentYearDetails();//gets the phases/today/crop yr
+            Integer cropyear = calist.get(0).getYear();
+            cT = cdb.getPhases(cropyear);
             subjectiveRecDB recdb = new subjectiveRecDB();
+            fixedRecDB fdb = new fixedRecDB();
             ProblemsDB pdb = new ProblemsDB();
             ArrayList<Problems> pT = new ArrayList<Problems>();
             ArrayList<Recommendation> rT = new ArrayList<Recommendation>();
+            ArrayList<Problems> problist = null;
+            ArrayList<Recommendation> reclist = null;
             rT = recdb.getTopRec();
             pT = pdb.getTopProb();
+            for(int i =0; i< pT.size();i++){
+                reclist = new ArrayList<Recommendation>();
+                reclist = pdb.getAllSolutions(pT.get(i).getProb_id());
+                pT.get(i).setReclist(reclist);
+            }
+            for(int i=0;i<rT.size();i++){
+                problist = new ArrayList<Problems>();
+                problist = fdb.viewProbRecTable(rT.get(i).getId());
+                rT.get(i).setProblist(problist);
+            }
             HttpSession session = request.getSession();
             ServletContext context = getServletContext();
             
             if(rT != null && pT != null){
+                session.setAttribute("cat", cT);
                 session.setAttribute("rec", rT);
                 session.setAttribute("pro", pT);
                 RequestDispatcher rd = context.getRequestDispatcher("/topRecommendations.jsp");

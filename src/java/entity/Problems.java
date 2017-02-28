@@ -6,6 +6,7 @@
 package entity;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,6 +18,7 @@ public class Problems {
     private Double prob_loss,damage;
     private double percent_affected;
     private Date date_updated ,date_created;
+    private ArrayList<Recommendation> reclist;
 
     /**
      * @return the prob_id
@@ -357,5 +359,19 @@ public class Problems {
      */
     public void setCount(Integer count) {
         this.count = count;
+    }
+
+    /**
+     * @return the reclist
+     */
+    public ArrayList<Recommendation> getReclist() {
+        return reclist;
+    }
+
+    /**
+     * @param reclist the reclist to set
+     */
+    public void setReclist(ArrayList<Recommendation> reclist) {
+        this.reclist = reclist;
     }
 }
