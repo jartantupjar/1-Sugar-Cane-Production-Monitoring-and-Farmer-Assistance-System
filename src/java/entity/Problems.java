@@ -12,7 +12,7 @@ import java.sql.Date;
  * @author Bryll Joey Delfin
  */
 public class Problems {
-    private Integer prob_id, totalFarms, fields_id,tSolutions, totalFields;
+    private Integer prob_id, totalFarms, fields_id,tSolutions, totalFields, count;
     private String prob_name, prob_details, barangay,municipality, status,type,impact,farmer,farm,validation,phase,user_name, district;
     private Double prob_loss,damage;
     private double percent_affected;
@@ -343,5 +343,19 @@ public class Problems {
      */
     public void setDistrict(String district) {
         this.district = district;
+    }
+
+    /**
+     * @return the count
+     */
+    public Integer getCount() {
+        return count;
+    }
+
+    /**
+     * @param count the count to set
+     */
+    public void setCount(Integer count) {
+        this.count = count;
     }
 }

@@ -1242,6 +1242,52 @@ var popVSelProb = {toggle: "popover", trigger: "focus", placement: "auto", html:
     
 };
 
+var popDbyDistrict = {toggle: "popover", trigger: "focus", placement: "auto", html: true,
+
+    title: 'Damage By District',
+    content: function () {
+        return '<dl>\n\
+                    <dt>Description</dt>\n\
+                  <dd>This is where the damage by district can be seen</dd>\n\
+                </dl>';
+    }
+    
+};
+
+var popDbyDisasterType = {toggle: "popover", trigger: "focus", placement: "auto", html: true,
+
+    title: 'Damage By Disaster Type',
+    content: function () {
+        return '<dl>\n\
+                    <dt>Description</dt>\n\
+                  <dd>This is where the damage by disaster type can be seen</dd>\n\
+                </dl>';
+    }
+    
+};
+var popTopProb = {toggle: "popover", trigger: "focus", placement: "auto", html: true,
+
+    title: 'Top Problems',
+    content: function () {
+        return '<dl>\n\
+                    <dt>Description</dt>\n\
+                  <dd>Shows the top problems per phase per year</dd>\n\
+                </dl>';
+    }
+    
+};
+var popTopRec = {toggle: "popover", trigger: "focus", placement: "auto", html: true,
+
+    title: 'Top Recommendation',
+    content: function () {
+        return '<dl>\n\
+                    <dt>Description</dt>\n\
+                  <dd>Shows the top recommendations per phase per year</dd>\n\
+                </dl>';
+    }
+    
+};
+
 //****another page****
 
 
