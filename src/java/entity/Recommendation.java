@@ -15,7 +15,7 @@ public class Recommendation {
     private Integer id , counter;
     private int config;
     private double trigger_num,duration;
-    private String recommendation_name, type, description, status, phase, improvement;
+    private String recommendation_name, type, description, status, phase, improvement,farm;
    
     private Date date_start, date_create, date_end , trigger_date; 
 
@@ -227,6 +227,20 @@ public class Recommendation {
      */
     public void setImprovement(String improvement) {
         this.improvement = improvement;
+    }
+
+    /**
+     * @return the farm
+     */
+    public String getFarm() {
+        return farm;
+    }
+
+    /**
+     * @param farm the farm to set
+     */
+    public void setFarm(String farm) {
+        this.farm = farm;
     }
 
     

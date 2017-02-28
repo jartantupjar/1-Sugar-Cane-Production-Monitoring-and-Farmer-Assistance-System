@@ -404,6 +404,18 @@
         <servlet-name>DistinctCropYearList</servlet-name>
         <servlet-class>controller.DistinctCropYearList</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>viewProbListWeek</servlet-name>
+        <servlet-class>controller.viewProbListWeek</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>selectReportList</servlet-name>
+        <servlet-class>controller.selectReportList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewRecListWeek</servlet-name>
+        <servlet-class>controller.viewRecListWeek</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
@@ -807,6 +819,18 @@
     <servlet-mapping>
         <servlet-name>DistinctCropYearList</servlet-name>
         <url-pattern>/DistinctCropYearList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewProbListWeek</servlet-name>
+        <url-pattern>/viewProbListWeek</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>selectReportList</servlet-name>
+        <url-pattern>/selectReportList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewRecListWeek</servlet-name>
+        <url-pattern>/viewRecListWeek</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

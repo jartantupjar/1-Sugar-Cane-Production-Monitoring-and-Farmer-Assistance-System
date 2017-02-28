@@ -270,7 +270,7 @@ public class CalendarDB {
             Connection conn = myFactory.getConnection();
             String query = "SELECT DATE(t1.ds + INTERVAL (6 - WEEKDAY(t1.ds)) DAY) as st,DATE(t1.de + INTERVAL (6 - WEEKDAY(t1.de)) DAY) as ed,year from (select min(cc.date_starting) as ds,max(cc.date_ending) as de,cc.year from crop_calendar cc where cc.year=? group by cc.year)t1;";
             PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setInt(1, cropyr);
+            pstmt.setInt(1, year);
             ResultSet rs = pstmt.executeQuery();
 
             Calendar cal = null;
