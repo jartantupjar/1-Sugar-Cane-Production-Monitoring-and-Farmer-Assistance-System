@@ -405,6 +405,10 @@
         <servlet-class>controller.DistinctCropYearList</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>viewTopTen</servlet-name>
+        <servlet-class>controller.viewTopTen</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>viewProbListWeek</servlet-name>
         <servlet-class>controller.viewProbListWeek</servlet-class>
     </servlet>
@@ -831,6 +835,10 @@
     <servlet-mapping>
         <servlet-name>viewRecListWeek</servlet-name>
         <url-pattern>/viewRecListWeek</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewTopTen</servlet-name>
+        <url-pattern>/viewTopTen</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

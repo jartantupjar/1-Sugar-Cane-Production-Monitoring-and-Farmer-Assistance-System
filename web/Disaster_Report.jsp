@@ -12,6 +12,16 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>SRA | Home</title>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <style type="text/css" media="print">
+            img
+            {
+                display:none;
+            }  
+            .hidethis
+            {
+                display:none;
+            }
+        </style>
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
@@ -30,7 +40,8 @@
                             <div class="box box-info">
                                 <div class="box-header with-border">
                                     <h1 class="box-title">Damage by District</h1>
-                                    <div class="box-tools pull-right">
+                                    <div class="box-tools pull-right hidethis">
+                                        <a tabindex="0" class="text-overflow" id="popDbyD" role="button"><i class="fa fa-question text-orange"></i></a>
                                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                         <!-- In box-tools add this button if you intend to use the contacts pane -->
                                         <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -63,7 +74,8 @@
                             <div class="box box-info">
                                 <div class="box-header with-border">
                                     <h1 class="box-title">Damage by Disaster Type</h1>
-                                    <div class="box-tools pull-right">
+                                    <div class="box-tools pull-right hidethis">
+                                        <a tabindex="0" class="text-overflow" id="popDbyDT" role="button"><i class="fa fa-question text-orange"></i></a>
                                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                         <!-- In box-tools add this button if you intend to use the contacts pane -->
                                         <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -90,13 +102,14 @@
                                 </div>
                             </div>
                         </div> 
-                        <div class="col-md-3 pull-right">
-                            <form id="frm-example" action="">
-                                <div class="form-group">
-                                    <button class="btn btn-warning" style="width: 100%" type="submit">Print Report</button>
+                        <div class="row">
+                                <div class="col-md-4 col-md-offset-4 hidethis">
+                                    <a  class="btn btn-primary btn-block" role="button" onClick="window.print();" ><i class="fa fa-print"></i> Print Report</a>
+                                    <!--                                <button id="cmd" type="button">print PDF</button>-->
+                                    <br>
                                 </div>
-                            </form>
-                        </div>
+
+                            </div>
 
                     </div>
                 </section>
@@ -107,5 +120,12 @@
         <script src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="dist/js/app.min.js"></script>
+        <script src="plugins/poptest/popoverText.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#popDbyD').popover(popDbyDistrict);
+                $('#popDbyDT').popover(popDbyDisasterType);
+            });
+        </script>
     </body>
 </html>

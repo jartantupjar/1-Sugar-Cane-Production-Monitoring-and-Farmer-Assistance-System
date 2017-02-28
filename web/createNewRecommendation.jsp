@@ -138,7 +138,7 @@
     <script src="plugins/poptest/popoverText.js"></script>
         <script>
             $(document).ready(function () {
-                $('#popCreateRec').popover(popAreaHarv);
+                $('#popCreateRec').popover(popCreateNR);
                 $('#popPlist').popover(popPL);
             });
 

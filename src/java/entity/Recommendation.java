@@ -6,6 +6,7 @@
 package entity;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,8 +16,8 @@ public class Recommendation {
     private Integer id , counter;
     private int config;
     private double trigger_num,duration;
-    private String recommendation_name, type, description, status, phase, improvement,farm;
-   
+    private String recommendation_name, type, description, status, phase, improvement;
+    private ArrayList<Problems> problist;
     private Date date_start, date_create, date_end , trigger_date; 
 
     /**
@@ -230,17 +231,17 @@ public class Recommendation {
     }
 
     /**
-     * @return the farm
+     * @return the problist
      */
-    public String getFarm() {
-        return farm;
+    public ArrayList<Problems> getProblist() {
+        return problist;
     }
 
     /**
-     * @param farm the farm to set
+     * @param problist the problist to set
      */
-    public void setFarm(String farm) {
-        this.farm = farm;
+    public void setProblist(ArrayList<Problems> problist) {
+        this.problist = problist;
     }
 
     

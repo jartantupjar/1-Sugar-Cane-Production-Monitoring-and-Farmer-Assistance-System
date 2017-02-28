@@ -20,6 +20,137 @@ import java.util.logging.Level;
  * @author Bryll Joey Delfin
  */
 public class subjectiveRecDB {
+    public ArrayList<Recommendation> getTopRec(){
+        try {
+            // put functions here : previous week production, this week production
+            ArrayList<Recommendation> rT = new ArrayList<Recommendation>();
+            Recommendation r = null;
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = " (\n" +
+"			select r.recommendation, r.type, r.description, r.phase, count(r.id) as'count', r.id \n" +
+"			from recommendations r join `recommendations-fields` rf on  r.id = rf.Recommendations_id\n" +
+"			where rf.status = 'active' and rf.date <= (select current_date from configuration) and r.phase = 'Germination'\n" +
+"			group by r.id\n" +
+"			order by count desc\n" +
+"			limit 3\n" +
+"			)\n" +
+"\n" +
+"			union all\n" +
+"\n" +
+"			(\n" +
+"			select r.recommendation, r.type, r.description, r.phase, count(r.id) as'count', r.id \n" +
+"			from recommendations r join `recommendations-fields` rf on  r.id = rf.Recommendations_id\n" +
+"			where rf.status = 'active' and rf.date <= (select current_date from configuration) and r.phase = 'Tillering'\n" +
+"			group by r.id\n" +
+"			order by count desc\n" +
+"			limit 3\n" +
+"			)\n" +
+"\n" +
+"\n" +
+"			union all\n" +
+"\n" +
+"			(\n" +
+"			select r.recommendation, r.type, r.description, r.phase, count(r.id) as'count', r.id \n" +
+"			from recommendations r join `recommendations-fields` rf on  r.id = rf.Recommendations_id\n" +
+"			where rf.status = 'active' and rf.date <= (select current_date from configuration) and r.phase = 'Stalk Elongation'\n" +
+"			group by r.id\n" +
+"			order by count desc\n" +
+"			limit 3\n" +
+"			)\n" +
+"\n" +
+"\n" +
+"			union all\n" +
+"\n" +
+"			(\n" +
+"			select r.recommendation, r.type, r.description, r.phase, count(r.id) as'count', r.id \n" +
+"			from recommendations r join `recommendations-fields` rf on  r.id = rf.Recommendations_id\n" +
+"			where rf.status = 'active' and rf.date <= (select current_date from configuration) and r.phase = 'Yield Formation'\n" +
+"			group by r.id\n" +
+"			order by count desc\n" +
+"			limit 3\n" +
+"			)\n" +
+"\n" +
+"\n" +
+"			union all\n" +
+"\n" +
+"			(\n" +
+"			select r.recommendation, r.type, r.description, r.phase, count(r.id) as'count', r.id \n" +
+"			from recommendations r join `recommendations-fields` rf on  r.id = rf.Recommendations_id\n" +
+"			where rf.status = 'active' and rf.date <= (select current_date from configuration) and r.phase = 'Ripening'\n" +
+"			group by r.id\n" +
+"			order by count desc\n" +
+"			limit 3\n" +
+"			)\n" +
+"\n" +
+"			union all\n" +
+"\n" +
+"			(\n" +
+"			select r.recommendation, r.type, r.description, r.phase, count(r.id) as'count', r.id \n" +
+"			from recommendations r join `recommendations-fields` rf on  r.id = rf.Recommendations_id\n" +
+"			where rf.status = 'active' and rf.date <= (select current_date from configuration) and r.phase = 'Milling'\n" +
+"			group by r.id\n" +
+"			order by count desc\n" +
+"			limit 3\n" +
+"			)\n" +
+"\n" +
+"\n" +
+"			union all\n" +
+"\n" +
+"			(\n" +
+"			select r.recommendation, r.type, r.description, r.phase, count(r.id) as'count', r.id \n" +
+"			from recommendations r join `recommendations-fields` rf on  r.id = rf.Recommendations_id\n" +
+"			where rf.status = 'active' and rf.date <= (select current_date from configuration) and r.phase = 'Planting'\n" +
+"			group by r.id\n" +
+"			order by count desc\n" +
+"			limit 3\n" +
+"			)\n" +
+"\n" +
+"\n" +
+"			union all\n" +
+"\n" +
+"			(\n" +
+"			select r.recommendation, r.type, r.description, r.phase, count(r.id) as'count', r.id \n" +
+"			from recommendations r join `recommendations-fields` rf on  r.id = rf.Recommendations_id\n" +
+"			where rf.status = 'active' and rf.date <= (select current_date from configuration) and r.phase = 'Year'\n" +
+"			group by r.id\n" +
+"			order by count desc\n" +
+"			limit 3\n" +
+"			)\n" +
+"\n" +
+"\n" +
+"			union all\n" +
+"\n" +
+"			(\n" +
+"			select r.recommendation, r.type, r.description, r.phase, count(r.id) as'count', r.id \n" +
+"			from recommendations r join `recommendations-fields` rf on  r.id = rf.Recommendations_id\n" +
+"			where rf.status = 'active' and rf.date <= (select current_date from configuration) and r.phase = 'Land Preparation'\n" +
+"			group by r.id\n" +
+"			order by count desc\n" +
+"			limit 3\n" +
+"			)";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                do{
+                    r = new Recommendation();
+                    r.setId(rs.getInt("id"));
+                    r.setRecommendation_name(rs.getString("recommendation"));
+                    r.setType(rs.getString("type"));
+                    r.setPhase(rs.getString("phase"));
+                    r.setCounter(rs.getInt("count"));
+                    rT.add(r);
+                }while(rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            return rT;
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(subjectiveRecDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     public int addRecommendation(Recommendation recommend) {
         try {
             // put functions here : previous week production, this week production
@@ -91,26 +222,26 @@ public class subjectiveRecDB {
         return 0;
     }
     public int getLastRecommendationId() {
-        try {
-            // put functions here : previous week production, this week production
-            int i = 0;
-            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
-            Connection conn = myFactory.getConnection();
-            String query = "SELECT  max(id)as id FROM sra.recommendations ;";
-            PreparedStatement pstmt = conn.prepareStatement(query);
-            ResultSet rs = pstmt.executeQuery();
-            if(rs.next()){
-                do{
-                i = rs.getInt("id");
-                }while(rs.next());
-            }
-            rs.close();
-            pstmt.close();
-            conn.close();
-            return i;
-        } catch (SQLException ex) {
-            java.util.logging.Logger.getLogger(subjectiveRecDB.class.getName()).log(Level.SEVERE, null, ex);
+    try {
+        // put functions here : previous week production, this week production
+        int i = 0;
+        DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+        Connection conn = myFactory.getConnection();
+        String query = "SELECT  max(id)as id FROM sra.recommendations ;";
+        PreparedStatement pstmt = conn.prepareStatement(query);
+        ResultSet rs = pstmt.executeQuery();
+        if(rs.next()){
+            do{
+            i = rs.getInt("id");
+            }while(rs.next());
         }
+        rs.close();
+        pstmt.close();
+        conn.close();
+        return i;
+    } catch (SQLException ex) {
+        java.util.logging.Logger.getLogger(subjectiveRecDB.class.getName()).log(Level.SEVERE, null, ex);
+    }
         return 0;
     }
 }

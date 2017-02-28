@@ -25,6 +25,133 @@ import java.util.logging.Logger;
  */
 public class ProblemsDB {
 
+    public ArrayList<Problems> getTopProb(){
+     try {
+            // put functions here : previous week production, this week production
+            ArrayList<Problems> pT = new ArrayList<Problems>();
+            Problems p = null;
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "			(\n" +
+"			select p.name, p.type, p.phase, count(p.id) as 'count', p.id \n" +
+"			from problems p join `problems-fields` pf on p.id = pf.Problems_id\n" +
+"			where pf.status = 'active' and pf.date<= (select current_date from configuration) and p.phase = 'Germination'\n" +
+"			group by p.id\n" +
+"			order by count desc\n" +
+"			limit 3\n" +
+"			)\n" +
+"\n" +
+"			union all\n" +
+"\n" +
+"			(\n" +
+"			select p.name, p.type, p.phase, count(p.id) as 'count', p.id \n" +
+"			from problems p join `problems-fields` pf on p.id = pf.Problems_id\n" +
+"			where pf.status = 'active' and pf.date<= (select current_date from configuration) and p.phase = 'Tillering'\n" +
+"			group by p.id\n" +
+"			order by count desc\n" +
+"			limit 3\n" +
+"			)\n" +
+"\n" +
+"			union all\n" +
+"\n" +
+"			(\n" +
+"			select p.name, p.type, p.phase, count(p.id) as 'count', p.id \n" +
+"			from problems p join `problems-fields` pf on p.id = pf.Problems_id\n" +
+"			where pf.status = 'active' and pf.date<= (select current_date from configuration) and p.phase = 'Stalk Elongation'\n" +
+"			group by p.id\n" +
+"			order by count desc\n" +
+"			limit 3\n" +
+"			)\n" +
+"\n" +
+"			union all\n" +
+"\n" +
+"			(\n" +
+"			select p.name, p.type, p.phase, count(p.id) as 'count', p.id \n" +
+"			from problems p join `problems-fields` pf on p.id = pf.Problems_id\n" +
+"			where pf.status = 'active' and pf.date<= (select current_date from configuration) and p.phase = 'Yield Formation'\n" +
+"			group by p.id\n" +
+"			order by count desc\n" +
+"			limit 3\n" +
+"			)\n" +
+"\n" +
+"			union all\n" +
+"\n" +
+"			(\n" +
+"			select p.name, p.type, p.phase, count(p.id) as 'count', p.id \n" +
+"			from problems p join `problems-fields` pf on p.id = pf.Problems_id\n" +
+"			where pf.status = 'active' and pf.date<= (select current_date from configuration) and p.phase = 'Ripening'\n" +
+"			group by p.id\n" +
+"			order by count desc\n" +
+"			limit 3\n" +
+"			)\n" +
+"\n" +
+"			union all\n" +
+"\n" +
+"			(\n" +
+"			select p.name, p.type, p.phase, count(p.id) as 'count', p.id \n" +
+"			from problems p join `problems-fields` pf on p.id = pf.Problems_id\n" +
+"			where pf.status = 'active' and pf.date<= (select current_date from configuration) and p.phase = 'Milling'\n" +
+"			group by p.id\n" +
+"			order by count desc\n" +
+"			limit 3\n" +
+"			)\n" +
+"\n" +
+"			union all\n" +
+"\n" +
+"			(\n" +
+"			select p.name, p.type, p.phase, count(p.id) as 'count', p.id \n" +
+"			from problems p join `problems-fields` pf on p.id = pf.Problems_id\n" +
+"			where pf.status = 'active' and pf.date<= (select current_date from configuration) and p.phase = 'Planting'\n" +
+"			group by p.id\n" +
+"			order by count desc\n" +
+"			limit 3\n" +
+"			)\n" +
+"\n" +
+"			union all\n" +
+"\n" +
+"			(\n" +
+"			select p.name, p.type, p.phase, count(p.id) as 'count', p.id \n" +
+"			from problems p join `problems-fields` pf on p.id = pf.Problems_id\n" +
+"			where pf.status = 'active' and pf.date<= (select current_date from configuration) and p.phase = 'Year'\n" +
+"			group by p.id\n" +
+"			order by count desc\n" +
+"			limit 3\n" +
+"			)\n" +
+"\n" +
+"			union all\n" +
+"\n" +
+"			(\n" +
+"			select p.name, p.type, p.phase, count(p.id) as 'count', p.id \n" +
+"			from problems p join `problems-fields` pf on p.id = pf.Problems_id\n" +
+"			where pf.status = 'active' and pf.date<= (select current_date from configuration) and p.phase = 'Land Preparation'\n" +
+"			group by p.id\n" +
+"			order by count desc\n" +
+"			limit 3\n" +
+"			);";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                do{
+                    p = new Problems();
+                    p.setProb_id(rs.getInt("id"));
+                    p.setProb_name(rs.getString("name"));
+                    p.setType(rs.getString("type"));
+                    p.setPhase(rs.getString("phase"));
+                    p.setCount(rs.getInt("count"));
+                    pT.add(p);
+                }while(rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+            return pT;
+        } catch (SQLException ex) {
+            java.util.logging.Logger.getLogger(subjectiveRecDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public ArrayList<Problems> removeSelectedProblems(ArrayList<Problems> orig, ArrayList<compProblems>selected){
+            if (!selected.isEmpty()) {
     public ArrayList<Problems> removeSelectedProblems(ArrayList<Problems> orig, ArrayList<compProblems> selected) {
         if (!selected.isEmpty()) {
             for (int i = 0; i < selected.size(); i++) {

@@ -17,6 +17,7 @@ public abstract class DBConnectionFactory {
         String username="root";
         String password="Jartan.Tupjar1";
 
+
     public static DBConnectionFactory getInstance(){
         return new DBConnectionFactoryImpl();
     }
