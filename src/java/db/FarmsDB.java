@@ -1419,12 +1419,11 @@ public class FarmsDB {
         ArrayList<Farm> list = new ArrayList<>();
         list = dalist;
         ArrayList<Recommendation> farmRec = new ArrayList<Recommendation>();
-  if (farm.getRecommendation()!=null) {
-        if (!farm.getRecommendation().isEmpty()) {
-            farmRec.addAll(farm.getRecommendation());
+        if (farm.getRecommendation() != null) {
+            if (!farm.getRecommendation().isEmpty()) {
+                farmRec.addAll(farm.getRecommendation());
+            }
         }
-  }
-
         ArrayList<compRecommendation> reclist = new ArrayList<>();
 
         for (int i = 0; i < list.size(); i++) {
@@ -1631,12 +1630,10 @@ public class FarmsDB {
     public boolean currPhaseChecker(Recommendation r) {
         CalendarDB caldb = new CalendarDB();
         ArrayList<Calendar> calist = caldb.getCurrentYearDetails();
-  
 
         boolean checker = false;
         //checks if the recommendation is part of the current phase/s
-        
-        
+
         for (int i = 0; i < calist.size(); i++) {
             if (calist.get(i).getPhase().equalsIgnoreCase(r.getPhase())) {
                 checker = true;
@@ -1654,12 +1651,11 @@ public class FarmsDB {
         ArrayList<Farm> list = new ArrayList<>();
         list = dalist;
         ArrayList<Problems> farmRec = new ArrayList<Problems>();
-if (farm.getProblems()!=null) {
-        if (!farm.getProblems().isEmpty()) {
-            farmRec.addAll(farm.getProblems());
+        if (farm.getProblems() != null) {
+            if (!farm.getProblems().isEmpty()) {
+                farmRec.addAll(farm.getProblems());
+            }
         }
-}
-
         ArrayList<compProblems> reclist = new ArrayList<>();
 
         for (int i = 0; i < list.size(); i++) {
