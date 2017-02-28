@@ -152,8 +152,6 @@ public class ProblemsDB {
     }
     public ArrayList<Problems> removeSelectedProblems(ArrayList<Problems> orig, ArrayList<compProblems>selected){
             if (!selected.isEmpty()) {
-    public ArrayList<Problems> removeSelectedProblems(ArrayList<Problems> orig, ArrayList<compProblems> selected) {
-        if (!selected.isEmpty()) {
             for (int i = 0; i < selected.size(); i++) {
                 for (int j = i; j < orig.size(); j++) {
                     if (selected.get(i).getProb_id().equals(orig.get(j).getProb_id())) {
