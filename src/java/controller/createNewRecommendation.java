@@ -100,7 +100,7 @@ public class createNewRecommendation extends HttpServlet {
                 while (parameterNames.hasMoreElements()) {
                     paramName = parameterNames.nextElement();
                     System.out.println(paramName + "parameter");
-                    if (paramName.startsWith("probTable1")) {
+                    if (paramName.startsWith("probTables")) {
                         for (int i = 0; i < request.getParameterValues(paramName).length; i++) {
                             pT.add(request.getParameterValues(paramName)[i]);
                             System.out.println(request.getParameterValues(paramName)[i]);
@@ -130,7 +130,7 @@ public class createNewRecommendation extends HttpServlet {
                 while (parameterNames.hasMoreElements()) {
                     paramName = parameterNames.nextElement();
                     System.out.println(paramName + "parameter");
-                    if (paramName.startsWith("probid")) {
+                    if (paramName.startsWith("probid[]")) {
                         for (int i = 0; i < request.getParameterValues(paramName).length; i++) {
                             pT.add(request.getParameterValues(paramName)[i]);
                             System.out.println(request.getParameterValues(paramName)[i]);

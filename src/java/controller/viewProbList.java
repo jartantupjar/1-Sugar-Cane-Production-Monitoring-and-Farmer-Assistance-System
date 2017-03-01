@@ -41,6 +41,7 @@ public class viewProbList extends HttpServlet {
         ProblemsDB pdb = new ProblemsDB();
         ArrayList<Problems> probT = new ArrayList<Problems>();
         probT = pdb.getProblemsList();
+        System.err.println(probT.get(0).getProb_name()+"NATRAJ ");
         JSONArray list = new JSONArray();
         for(int i=0;i<probT.size();i++){
             ArrayList<String> obj = new ArrayList<String>();
