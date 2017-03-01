@@ -50,6 +50,9 @@ public class viewDistCropEstimate extends BaseServlet {
        ArrayList<Calendar> calist = caldb.getCurrentYearDetails();//gets the phases/today/crop yr
        Calendar cal = caldb.getCalendarTypes(calist.get(0).getTodayDate());//weekofyear//month//day
          int year = Integer.parseInt(request.getParameter("year"));
+         DecimalFormat df = new DecimalFormat("#.00");
+                df.setGroupingUsed(true);
+                df.setGroupingSize(3);
          if(year <=2016){
         fct = estdb.viewDistrictEstimates(year);
          }
@@ -66,19 +69,19 @@ public class viewDistCropEstimate extends BaseServlet {
                 ArrayList<String> obj = new ArrayList<>();
                 obj.add(Integer.toString(fct.get(i).getYear()));
                 obj.add(fct.get(i).getWeek_ending().toString());
-                obj.add(Double.toString(fct.get(i).getArea()));
+                obj.add(df.format(fct.get(i).getArea()));
                 obj.add(Double.toString(fct.get(i).getRainfall()));
-                obj.add(Double.toString(fct.get(i).getActual()));
-                obj.add(Double.toString(fct.get(i).getForecasted()));
+                obj.add(df.format(fct.get(i).getActual()));
+                obj.add(df.format(fct.get(i).getForecasted()));
                  obj.add(Double.toString(fct.get(i).getDifference())+"%");
-                 obj.add(Double.toString(fct.get(i).getLkg()));
-                obj.add(Double.toString(fct.get(i).getForecastlkg()));
-                 obj.add(Double.toString(fct.get(i).getDifference())+"%");
+                 obj.add(df.format(fct.get(i).getLkg()));
+                obj.add(df.format(fct.get(i).getForecastlkg()));
+                 obj.add(df.format(fct.get(i).getDifference())+"%");
                 list.add(obj);
             }
         }
             else if(caldb.checkifMilling()){
-                DecimalFormat df = new DecimalFormat("###.00");
+                
                 if(production.size()>3){
                     ces = new ArrayList<>();
                     for(int i=0; i < production.size();i++){
@@ -96,9 +99,9 @@ public class viewDistCropEstimate extends BaseServlet {
                 ArrayList<String> obj = new ArrayList<>();
                 obj.add(Integer.toString(calist.get(0).getYear()));
                 obj.add(production.get(i).getWeek_ending().toString());
-                obj.add(production.get(i).getArea().toString());
+                obj.add(df.format(production.get(i).getArea()));
                 obj.add(production.get(i).getRainfall().toString());
-                obj.add(production.get(i).getTc().toString());
+                obj.add(df.format(production.get(i).getTc()));
                 if(i>3){
                     ces = new ArrayList<>();
                     for(int j=0;j<i;j++){
@@ -116,7 +119,7 @@ public class viewDistCropEstimate extends BaseServlet {
                 obj.add(df.format(dle));
                 double diff = ((dle-production.get(i).getTc())/dle)*100;
                 obj.add(df.format(diff));
-                obj.add(production.get(i).getLkg().toString());
+                obj.add(df.format(production.get(i).getLkg()));
                 obj.add(df.format(dlkg));
                 double difflkg = ((dlkg-production.get(i).getLkg())/dlkg)*100;
                 obj.add(df.format(difflkg));

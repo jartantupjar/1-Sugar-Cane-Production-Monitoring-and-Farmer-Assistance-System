@@ -161,7 +161,7 @@ on barangay selection
                                             </a>
                                         </li>
                                         <li class="list-group-item">
-                                            <b>Brix</b> <a class="pull-right">
+                                            <b>Brix(bx)</b> <a class="pull-right">
                                                 <c:out value="${farm.cropVal.brix}"/>
                                             </a>
                                         </li>
