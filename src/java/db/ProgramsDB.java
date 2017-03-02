@@ -56,7 +56,7 @@ public class ProgramsDB {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "insert into programs values (?,?,?,?,?,?,?)";
+            String query = "insert into programs values (?,?,?,?,?,?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(query);
 
             pstmt.setString(1, prog.getProg_name());
@@ -64,8 +64,9 @@ public class ProgramsDB {
             pstmt.setDate(3, (Date) prog.getDate_initial());
             pstmt.setDate(4, (Date) prog.getDate_end());
             pstmt.setString(5, prog.getDescription());
-            pstmt.setString(6, prog.getType());
+            pstmt.setString(6, "active");
             pstmt.setString(7, "Tarlac");
+              pstmt.setString(8, prog.getType());
             int isSuccess = pstmt.executeUpdate();
 
             kpis.get(0).setProgram_name(prog.getProg_name());
@@ -225,7 +226,7 @@ public class ProgramsDB {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select p.name,p.status,p.description,pf.Fields_id from programs p join `programs-problems` pp on p.name=pp.Programs_name join `problems-fields` pf on pp.Problems_id=pf.Problems_id where pf.Fields_id=?;";
+            String query = "select p.name,p.status,p.type,p.description,pf.Fields_id from programs p join `programs-problems` pp on p.name=pp.Programs_name join `problems-fields` pf on pp.Problems_id=pf.Problems_id where pf.Fields_id=? and pf.status='active';";
             PreparedStatement pstmt = conn.prepareStatement(query);
            pstmt.setString(1, farm);
             ResultSet rs = pstmt.executeQuery();
@@ -236,7 +237,8 @@ public class ProgramsDB {
                 do {
                     p = new Programs();
                     p.setProg_name(rs.getString("name"));
-                    p.setType(rs.getString("status"));
+                    p.setStatus(rs.getString("status"));
+                    p.setType(rs.getString("type"));
                     p.setDescription(rs.getString("description"));
                      list.add(p);
                 } while (rs.next());
@@ -257,7 +259,7 @@ public class ProgramsDB {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select p.name,p.description,pf.Fields_id from programs p join `programs-problems` pp on p.name=pp.Programs_name join `problems-fields` pf on pp.Problems_id=pf.Problems_id join fields f on pf.Fields_id=f.id where f.Farmers_name=? group by p.name;";
+            String query = "select p.name,p.description,pf.Fields_id from programs p join `programs-problems` pp on p.name=pp.Programs_name join `problems-fields` pf on pp.Problems_id=pf.Problems_id join fields f on pf.Fields_id=f.id where f.Farmers_name=? and pf.status='active' group by p.name;";
             PreparedStatement pstmt = conn.prepareStatement(query);
            pstmt.setString(1, farmer);
             ResultSet rs = pstmt.executeQuery();
@@ -518,7 +520,7 @@ public class ProgramsDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select pg.name,pg.date_created,pg.date_initial,pg.date_end,pg.description,pg.status,count(pf.fields_id) as count from programs pg join `programs-problems` pp on pg.name=pp.programs_name join `problems-fields` pf on pp.problems_id=pf.problems_id where pg.name=? group by pg.name;";
+            String query = "select pg.name,pg.date_created,pg.date_initial,pg.date_end,pg.description,pg.status,pg.type,count(pf.fields_id) as count from programs pg join `programs-problems` pp on pg.name=pp.programs_name join `problems-fields` pf on pp.problems_id=pf.problems_id where pg.name=? group by pg.name;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, prog_name);
             ResultSet rs = pstmt.executeQuery();
@@ -532,7 +534,8 @@ public class ProgramsDB {
                 p.setDate_initial(rs.getDate("date_initial"));
                 p.setDate_end(rs.getDate("date_end"));
                 p.setDescription(rs.getString("description"));
-                p.setType(rs.getString("status"));
+                p.setStatus(rs.getString("status"));
+                p.setType(rs.getString("type"));
                 //p.setProgress(rs.getInt("progress"));
                 p.settFarms(rs.getInt("count"));
 

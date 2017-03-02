@@ -42,6 +42,9 @@ current vs then diagram
 
                                         <ul class="list-group list-group-unbordered">
                                             <li class="list-group-item">
+                                                <b>Status of Program</b> <a class="pull-right"><c:out value="${progdet.status}"></c:out></a>
+                                            </li>
+                                            <li class="list-group-item">
                                                 <b>Type of Program</b> <a class="pull-right"><c:out value="${progdet.type}"></c:out></a>
                                             </li>
                                             <li class="list-group-item">
@@ -50,6 +53,7 @@ current vs then diagram
                                             <li class="list-group-item">
                                                 <b>Expected End Date:</b> <p class="pull-right"><c:out value="${progdet.date_end}"></c:out></p>
                                             </li>
+                                            
                                             <li class="list-group-item">
                                                 <b>Description</b> 
                                                 <p class="text-center text-center">

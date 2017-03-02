@@ -6,7 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>SRA | Home</title>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-        
+
         <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker-bs3.css">
         <link rel="stylesheet" href="plugins/datepicker/datepicker3.css">
         <link rel="stylesheet" href="plugins/select2/select2.min.css">
@@ -89,7 +89,7 @@
                                                                 </thead>
 
                                                             </table>
-                                                           
+
                                                             <div class="col-md-offset-9 col-md-9 pull-right">
                                                                 <a class="btn btn-outline green button-next"> Continue
                                                                     <i class="fa fa-angle-right"></i>
@@ -100,7 +100,7 @@
 
                                                         </div>
                                                         <div class="tab-pane" id="tab2">
-                                                             <h3 class="block">Provide the Program details</h3>
+                                                            <h3 class="block">Provide the Program details</h3>
                                                             <div class="form-group">
                                                                 <label class="control-label col-md-3">Program Name
                                                                     <span class="required" aria-required="true"> * </span>
@@ -115,10 +115,14 @@
                                                                     <span class="required" aria-required="true"> * </span>
                                                                 </label>
                                                                 <div class="col-md-4">
-                                                                    <select class="form-control">
-                                                                        <option>Technology</option>
-                                                                        <option>Training</option>
+                                                                    <select class="form-control" name="projecttype">
+                                                                        <option>Development</option>
+                                                                        <option>Education</option>
+                                                                        <option>Management</option>
                                                                         <option>Practices</option>
+                                                                        <option>Research</option>
+                                                                        <option>Technology</option>
+                                                                        <option>Weather</option>
                                                                     </select>
                                                                 </div>
                                                             </div>
@@ -146,7 +150,7 @@
                                                             </div>
                                                             <div class="col-md-offset-9 col-md-9 pull-right">
 
-                                                                <a class="btn btn-outline green button-next"> Continue
+                                                                <a class="btn btn-outline green progdetbtn button-next "> Continue
                                                                     <i class="fa fa-angle-right"></i>
                                                                 </a>
 
@@ -231,7 +235,49 @@
         <script src="plugins/daterangepicker/daterangepicker.js"></script>
         <script src="plugins/datepicker/bootstrap-datepicker.js"></script>
         <script src="dist/js/app.min.js"></script>
-
+        <!--<script type="text/javascript">
+                    $(document).ready(function () {
+                        
+                    $("#progdetbtn").on("click", function () {
+                        
+                        if(document.getElementById("reservation").value.length===0){
+                              $('#progdetbtn').addClass('hidden');
+                              $('#progdetbtn').remove('button-next');
+                              
+                        }
+                          
+                            //   $('#actionButton').addClass('hidden');
+        
+                        });
+                $('#reservation').keydown(function () {
+                            if ($(this).val().length !== 0)
+        //                        $('.btnprojdetails').attr('hidden', false);
+                                 $('.btnprojdetails').removeClass('hidden');
+                            else
+                                $('.btnprojdetails').addClass('hidden');
+                        });
+                        function stoppedTyping() {
+                          
+                            var x = 0;
+                            if (x === 0) {
+        
+        
+                                if (this.value.length > 0) {
+                                    document.getElementByClassName('.button-next').disabled = false;
+                                } else {
+                                    document.getElementByClassName('.button-next').disabled = true;
+                                }
+                            } else if (x === 1) {
+                                if (this.value.length > 0) {
+                                    $('.btnprojdetails').attr('disabled', false);
+                                } else {
+        
+                                    $('.btnprojdetails').attr('disabled', false);
+                                }
+                            }
+                        }
+                    });
+                </script>-->
         <script>
 
             $(document).ready(function () {
@@ -242,9 +288,33 @@
                     onTabClick: function (tab, navigation, index) {
                         return false;
                     },
-                    onTabShow: function (tab, navigation, index) {
+                    'tabClass': 'nav nav-pills',
+                    'onNext': function (tab, navigation, index) {
+                        //checks if values are empty or not
+       if (index === 1) {
+         
+           
+          var nocheck= $('#probTable').find('input[type="checkbox"]:checked').length;
+                            if (nocheck === 0) {
+                                return false;
+                            }
+                        }
+                      else if (index === 2) {
+                            if (document.getElementById('reservation').value.length === 0) {
+                                return false;
+                            }
+                        }
+                    }, onTabShow: function (tab, navigation, index) {
+                        //runs these when tabs are gonna show
                         if (index === 2 && chckr === false) {
                             chckr = true;
+                            if (document.getElementById('reservation').value.length === 0) {
+                                console.log(tab);
+                                console.log(navigation);
+                                console.log(index);
+                                index = index - 1;
+                                return false;
+                            }
                             var x = document.getElementById('reservation').value.split('-');
                             var ini = x[0].split('/');
                             var end = x[1].split('/');
@@ -281,7 +351,7 @@
                     var rowz = "";
                     for (var b = 0; b <= count; b++) {
 
-                        rowz += "<td><input class='form-control' name = 'y" + rowNum + "[]'  required/></td>";
+                        rowz += "<td><input class='form-control' type='number'value='0' name = 'y" + rowNum + "[]'  required/></td>";
                     }
 
                     $('#listOfTargets tbody:last').append("<tr>\n\
@@ -297,6 +367,7 @@
             });
 
         </script>
+
         <script>
             $(function () {
 
@@ -425,7 +496,7 @@
                             'orderable': false,
                             'className': 'dt-body-center',
                             'render': function (data, type, full, meta) {
-                                return '<input type="checkbox" name="probid[]"  value="'
+                                return '<input type="checkbox" id="inputbox" name="probid[]"  value="'
                                         + $('<div/>').text(data).html() + '">';
                             }
                         }],

@@ -409,7 +409,7 @@ on barangay selection
                                     <div class="box-header with-border">
                                         <h1 class="box-title">Programs List</h1>
                                         <div class="box-tools pull-right">
-                                            <a tabindex="0" class="text-overflow" id="popFarmRecList" role="button"><i class="fa fa-question text-orange"></i></a>
+                                            <a tabindex="0" class="text-overflow" id="popFarmProgList" role="button"><i class="fa fa-question text-orange"></i></a>
                                             <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                             <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                         </div>
@@ -421,6 +421,7 @@ on barangay selection
                                                 <tr>
                                                     <th>Program</th>
                                                     <th>Status</th>
+                                                    <th>type</th>
                                                     <th>Description</th>
                                                     <th></th>
                                                 </tr>
@@ -430,6 +431,7 @@ on barangay selection
                                                     <c:forEach items="${farm.programs}" var="prog">
                                                         <tr>
                                                             <td><c:out value="${prog.prog_name}"/></td>
+                                                            <td><c:out value="${prog.status}"/></td>
                                                             <td><c:out value="${prog.type}"/></td>
                                                             <td><c:out value="${prog.description}"/></td>
                                                             <td><a class="btn btn-primary" href="viewProgramDetails?name=${prog.prog_name}">details</a></td>
@@ -474,10 +476,10 @@ on barangay selection
                         </div>
                         <div id="observBlock" class="col-md-12 hidden">
                             <br>
-                            
-                          
+
+
                             <h1> Farm Observation <small><a tabindex="0" class="text-overflow" id="popFarmObs" role="button"><i class="fa fa-info-circle text-orange"></i></a></small></h1>
-                             
+
                             <div class="col-md-7">
                                 <div class="form-group">
                                     <select id="select2" class="select2" multiple="multiple" data-placeholder="Select a Tag" style="width: 100%;">
@@ -538,7 +540,7 @@ on barangay selection
                         </form>
 
                     </div>
-                   
+
                 </section>
 
             </div>
@@ -560,12 +562,12 @@ on barangay selection
 
         <script src="dist/js/app.min.js"></script>
         <script type="text/javascript">
-                               $(function () {
-                                   $('#cropVal-content-div').slimScroll({
-                                       height: '420px',
-                                       alwaysVisible: true
-                                   });
-                               });
+            $(function () {
+                $('#cropVal-content-div').slimScroll({
+                    height: '420px',
+                    alwaysVisible: true
+                });
+            });
         </script>
         <script type="text/javascript">
             $(function () {
@@ -730,19 +732,20 @@ on barangay selection
 
         <script src="plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
- <script src="plugins/poptest/popoverText.js"></script>
+        <script src="plugins/poptest/popoverText.js"></script>
         <script>
-                                   $(document).ready(function () {
-                                       $('#popCropVal').popover(popCropVal);
-                                       $('#popSoilAna').popover(popSoilAna);
-                                       $('#popFertInfo').popover(popFertInfo);
-                                       $('#popTillInfo').popover(popTillInfo);
-                                       $('#popFarmProbList').popover(popFarmProbList);
-                                       $('#popFarmRecList').popover(popFarmRecList);
-                                       $('#popFarmActionTools').popover(popFarmActionTools);
-                                       $('#popFarmObs').popover(popFarmObs);
+            $(document).ready(function () {
+                $('#popCropVal').popover(popCropVal);
+                $('#popSoilAna').popover(popSoilAna);
+                $('#popFertInfo').popover(popFertInfo);
+                $('#popTillInfo').popover(popTillInfo);
+                $('#popFarmProbList').popover(popFarmProbList);
+                $('#popFarmRecList').popover(popFarmRecList);
+                $('#popFarmActionTools').popover(popFarmActionTools);
+                $('#popFarmObs').popover(popFarmObs);
+                $('#popFarmProgList').popover(popFarmRecList);
 
-                                   });
+            });
 
 
         </script>
