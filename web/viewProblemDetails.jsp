@@ -56,6 +56,11 @@
                                             </a>
                                         </li>
                                         <li class="list-group-item">
+                                            <b>Number of Programs</b> <a class="pull-right" href="#myModal1" data-toggle="modal" data-target="#myModal1">
+                                            <c:out value="${problem.tPrograms}"></c:out>
+                                            </a>
+                                        </li>
+                                        <li class="list-group-item">
                                             <b>Description</b> <a class="">
                                             <c:out value="${problem.prob_details}"></c:out>
                                             </a>
@@ -86,6 +91,40 @@
                                                     <td>${sol.id}</td>
                                                     <td>${sol.recommendation_name}</td>
                                                     <td><button><a href="viewRecDetails?id=${sol.id}"><b> View Details</b></a></button></td>
+                                                </tr>
+                                            </c:forEach>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">Send Programs</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <table class="table table-bordered" >
+                                            <tbody>
+                                                <tr>
+                                                    <th>Programs Name</th>
+                                                    <th>Description</th>
+                                                    <th>More</th>
+                                                </tr>
+
+                                            <c:forEach var="prg" items="${programs}">
+                                                <tr>
+                                                    <td>${prg.prog_name}</td>
+                                                    <td>${prg.description}</td>
+                                                    <td><button><a href="viewProgramDetails?name=${prg.prog_name}"><b> View Details</b></a></button></td>
                                                 </tr>
                                             </c:forEach>
 
