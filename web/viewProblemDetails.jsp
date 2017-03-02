@@ -117,7 +117,10 @@
                                             <th style="width:15%">Farm</th>
                                             <th>Farmer</th>
                                             <th>Barangay</th>
+                                            <th>Date</th>
+                                            <th>Status</th>
                                             <th>Damage</th>
+                                            <th>Details</th>
                                         </tr>
                                     </thead>
                                 </table>
@@ -148,7 +151,15 @@
                 var table = $('#example').DataTable({
                     'ajax': {
                         'url': 'viewPRT?probid=${probid}'
-                    }
+                    },
+                    'columnDefs': [{
+                            'targets': 6,
+                            'render': function (data, type, full, meta) {
+                                    return   '<a class="btn btn-primary" target="blank" href="viewFieldDetails?id=' + data + '">details</a>';
+                               
+                            }}],'order': [[3, 'desc']]
+                    
+                    
                 });
             });
 

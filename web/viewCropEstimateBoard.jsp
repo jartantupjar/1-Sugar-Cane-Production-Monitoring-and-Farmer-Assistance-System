@@ -5,6 +5,7 @@
 --%>
 
 <%@include file="security.jsp" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -68,15 +69,15 @@
                                                 <c:forEach items="${est}" var="estims">
                                                     <tr>
                                                         <td><c:out value="${estims.year}"/></td>
-                                                        <td ><c:out value="${estims.area}"/></td>
+                                                        <td ><fmt:formatNumber type="number" pattern="#,###.##" value="${estims.area}"/></td>
                                                         <td ><c:out value="${estims.rainfall}"/></td>
-                                                        <td ><c:out value="${estims.tiller}"/></td>
+                                                        <td ><fmt:formatNumber type="number" pattern="#,###.##" value="${estims.tiller}"/></td>
                                                         <td ><c:out value="${estims.temp}"/></td>
-                                                        <td ><c:out value="${estims.actual}"/></td>
-                                                        <td ><c:out value="${estims.lkg}"/></td>
-                                                        <td ><c:out value="${estims.forecastlkg}"/></td>
-                                                        <td ><c:out value="${estims.forecastlkg2}"/></td>
-                                                        <td ><c:out value="${estims.forecastlkg3}"/></td>
+                                                        <td ><fmt:formatNumber type="number" pattern="#,###.##" value="${estims.actual}"/></td>
+                                                        <td ><fmt:formatNumber type="number" pattern="#,###.##" value="${estims.lkg}"/></td>
+                                                        <td ><fmt:formatNumber type="number" pattern="#,###.##" value="${estims.forecastlkg}"/></td>
+                                                        <td ><fmt:formatNumber type="number" pattern="#,###.##" value="${estims.forecastlkg2}"/></td>
+                                                        <td ><fmt:formatNumber type="number" pattern="#,###.##" value="${estims.forecastlkg3}"/></td>
                                                         <td>
                                                             <select name="status" class="form-control selectforc" style="width: 100%;">
                                                                 <c:forEach begin="1" end="3" var="i">
@@ -171,7 +172,7 @@
                                 <div class="box-header with-border">
                                     <h1 class="box-title">Generate Forecast</h1>
                                     <div class="box-tools pull-right">
-                                       <a tabindex="0" class="text-overflow" id="popLKGGenForc" role="button"><i class="fa fa-question text-orange"></i></a>
+                                        <a tabindex="0" class="text-overflow" id="popLKGGenForc" role="button"><i class="fa fa-question text-orange"></i></a>
                                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                         <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                     </div>
@@ -186,6 +187,15 @@
                                                 </label>
                                                 <div class="">
                                                     <input type="text" class="form-control"  maxlength="7" name="area" id="projectname" placeholder="Name...">
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label">Week Rainfall(mm)
+                                                    <span class="required" aria-required="true"> * </span>
+                                                </label>
+                                                <div class="">
+                                                    <input type="text" maxlength="5" class="form-control" name="rain" id="projectname" placeholder="Name...">
 
                                                 </div>
                                             </div>
@@ -208,15 +218,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="form-group">
-                                                <label class="control-label">Year Rainfall(mm)
-                                                    <span class="required" aria-required="true"> * </span>
-                                                </label>
-                                                <div class="">
-                                                    <input type="text" maxlength="5" class="form-control" name="rain" id="projectname" placeholder="Name...">
 
-                                                </div>
-                                            </div>
 
 
 
@@ -234,7 +236,7 @@
                                     <h1 class="box-title">Forecast Simulations</h1>
                                     <div class="box-tools pull-right">
                                         <a tabindex="0" class="text-overflow" id="popLKGForcSim" role="button"><i class="fa fa-question text-orange"></i></a>
-                                       <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                         <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                     </div>
                                 </div>

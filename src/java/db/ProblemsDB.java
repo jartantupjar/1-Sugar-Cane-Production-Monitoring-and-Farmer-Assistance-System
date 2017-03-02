@@ -539,7 +539,7 @@ public class ProblemsDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select f.Farmers_name,pf.Fields_id,f.barangay, round(pf.damage,2) as 'damage' from problems p join `problems-fields` pf on p.id = pf.Problems_id join `fields` f on pf.Fields_id = f.id where p.id = ?  ;";
+            String query = "select f.Farmers_name,pf.Fields_id,f.barangay,pf.date,pf.status,round(pf.damage,2) as 'damage' from problems p join `problems-fields` pf on p.id = pf.Problems_id join `fields` f on pf.Fields_id = f.id where p.id = ?  ;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
@@ -553,8 +553,8 @@ public class ProblemsDB {
                     p.setFarmer(rs.getString("Farmers_name"));
                     p.setBarangay(rs.getString("barangay"));
                     p.setProb_loss(rs.getDouble("damage"));
-                    // p.setStatus(rs.getString("status"));
-                    //p.setValidation(rs.getString("validated"));
+                     p.setStatus(rs.getString("status"));
+                    p.setDate_updated(rs.getDate("date"));
                     pT.add(p);
                 } while (rs.next());
             }

@@ -137,7 +137,7 @@
                         </a>
                         <ul class="treeview-menu" style="display: none;">
                             <li><a href="cropAssessmentList.jsp"><i class="fa fa-file"></i><span>Crop Assessment Reports</span></a></li>
-                            <li><a href="thereports.jsp"><i class="fa fa-file-o"></i><span>Year Report</span></a></li>
+                            <li><a href="viewTopTen"><i class="fa fa-file-o"></i><span>Yearly Improvement Report</span></a></li>
                         </ul>
                     </li>
 

@@ -11,9 +11,9 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
     <head>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>SRA | Home</title>
-        
+
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-     
+
         <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
@@ -67,13 +67,13 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                                 <!-- /.box-body -->
                             </div>    
                         </div>
-                    
+
                         <div class="col-md-4">
                             <div class="box box-primary">
-                                 <div class="box-tools pull-right">
-                                       <a tabindex="0" class="text-overflow" id="popFarmerProdDet" role="button"><i class="fa fa-question text-orange"></i></a>
-                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                          </div>
+                                <div class="box-tools pull-right">
+                                    <a tabindex="0" class="text-overflow" id="popFarmerProdDet" role="button"><i class="fa fa-question text-orange"></i></a>
+                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                </div>
                                 <div class="box-body box-profile">
 
                                     <h3 class="profile-username text-center">Production Details : <c:out value="${farmDet.tYears}"/> year/s worth of data </h3>
@@ -91,18 +91,18 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                                         <li class="list-group-item">
                                             <b>Current Yield(tc/ha)</b>  <a class="pull-right"><c:out value="${farmDet.curYield}"/></a>
                                         </li>
-<!--                                        <li class="list-group-item">
-                                            <b>Total Production</b> <a class="pull-right"><c:out value="${farmDet.totalProd}"/> </a>
-                                        </li>
-                                        
-                                        <li class="list-group-item">
-                                            <b>Total Average Production</b> <a class="pull-right"><c:out value="${farmDet.avgProd}"/> </a>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <b>Total Average Area Harvested</b> <a class="pull-right">
-                                               <%--<c:out value="${farmDet.avgArea}"/>--%> 
-                                            </a>
-                                        </li>-->
+                                        <!--                                        <li class="list-group-item">
+                                                                                    <b>Total Production</b> <a class="pull-right"><c:out value="${farmDet.totalProd}"/> </a>
+                                                                                </li>
+                                                                                
+                                                                                <li class="list-group-item">
+                                                                                    <b>Total Average Production</b> <a class="pull-right"><c:out value="${farmDet.avgProd}"/> </a>
+                                                                                </li>
+                                                                                <li class="list-group-item">
+                                                                                    <b>Total Average Area Harvested</b> <a class="pull-right">
+                                        <%--<c:out value="${farmDet.avgArea}"/>--%> 
+                                     </a>
+                                 </li>-->
                                         <li class="list-group-item">
                                             <b>Total Average Yield (tc/ha)</b> <a class="pull-right"><c:out value="${farmDet.tavgYield}"/> 
                                             </a>
@@ -114,62 +114,94 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                             </div>    
                         </div>
                         <div class="col-md-12">
-                        <div class="col-md-6" > 
-                            <div class="box box-info">
-                                <div class="box-header with-border">
-                                    <h1 class="box-title">Problems List</h1>
-                                    <div class="box-tools pull-right">
-                                         <a tabindex="0" class="text-overflow" id="popFarmerProbList" role="button"><i class="fa fa-question text-orange"></i></a>
-                                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                            <div class="col-md-6" > 
+                                <div class="box box-info">
+                                    <div class="box-header with-border">
+                                        <h1 class="box-title">Problems List</h1>
+                                        <div class="box-tools pull-right">
+                                            <a tabindex="0" class="text-overflow" id="popFarmerProbList" role="button"><i class="fa fa-question text-orange"></i></a>
+                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="box-body">
-                                    <table id="probTable" class="table  dispTable table-hover" cellspacing="0" width="100%">
-                                        <thead>
-                                            <tr>
-                                                <th>Problem</th>
-                                                <th>Description</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
+                                    <div class="box-body">
+                                        <table id="probTable" class="table  dispTable table-hover" cellspacing="0" width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Problem</th>
+                                                    <th>Description</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
 
-                                    </table>
-                                </div>
-
-                            </div>
-                        </div> 
-                        <div class="col-md-6"> 
-                            <div class="box box-info" >
-                                <div class="box-header with-border">
-                                    <h1 class="box-title">Rec & Proj List(add list of programs)</h1>
-                                    <div class="box-tools pull-right " >
-                                       <a tabindex="0" class="text-overflow" id="popRecProjList" role="button"><i class="fa fa-question text-orange"></i></a>
-                                         <button class="btn btn-box-tool"  data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                        </table>
                                     </div>
+
                                 </div>
 
-                                <div class="box-body">
-                                    <table id="recTable" class="table  display table-hover" cellspacing="0" width="100%">
-                                        <thead>
-                                            <tr>
-                                                <th>Rec/Program</th>
-                                                <th>Description</th>
-                                                <th></th>
+                            </div> 
+                            <div class="col-md-6"> 
+                                <div class="box box-info" >
+                                    <div class="box-header with-border">
+                                        <h1 class="box-title">Recommendation List</h1>
+                                        <div class="box-tools pull-right " >
+                                            <a tabindex="0" class="text-overflow" id="popRecProjList" role="button"><i class="fa fa-question text-orange"></i></a>
+                                            <button class="btn btn-box-tool"  data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                        </div>
+                                    </div>
 
-                                            </tr>
-                                        </thead>
+                                    <div class="box-body">
+                                        <table id="recTable" class="table  display table-hover" cellspacing="0" width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Recommendation</th>
+                                                    <th>Description</th>
+                                                    <th></th>
 
-                                    </table>
+                                                </tr>
+                                            </thead>
+
+                                        </table>
+                                    </div>
+
                                 </div>
 
                             </div>
 
                         </div>
-</div>
-<div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="col-md-6"> 
+                                <div class="box box-info collapsed-box" >
+                                    <div class="box-header with-border">
+                                        <h1 class="box-title">Program List</h1>
+                                        <div class="box-tools pull-right" >
+                                            <a tabindex="0" class="text-overflow" id="popFarmerProgList" role="button"><i class="fa fa-question text-orange"></i></a>
+                                            <button class="btn btn-box-tool"  data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                        </div>
+                                    </div>
+
+                                    <div class="box-body">
+                                        <table id="progTable" class="table  display table-hover" cellspacing="0" width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Program</th>
+                                                    <th>Description</th>
+                                                    <th></th>
+
+                                                </tr>
+                                            </thead>
+
+                                        </table>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-12">
                             <!-- LINE CHART -->
                             <div class="box box-info">
                                 <div class="box-header with-border">
@@ -177,7 +209,7 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
 
                                     <div class="box-tools pull-right">
                                         <a tabindex="0" class="text-overflow" id="popFarmerFarmList" role="button"><i class="fa fa-question text-orange"></i></a>
-                                       <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                                         </button>
                                         <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                     </div>
@@ -192,21 +224,21 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                                                 <th>Total Area(ha)</th>
                                                 <th>Tons Cane(tc)</th>
                                                 <th>Harvested Area(ha)</th>
-                                                
+
                                                 <th>Yield(tc/ha)</th>
                                                 <th>% completed</th>
-                                               
+
                                                 <th></th>
                                             </tr>
                                         </thead>
-                                   </table>
+                                    </table>
 
 
                                 </div>
                                 <!-- /.box-body -->
                             </div>
                         </div>
-                                           
+
                     </div>
                 </section>
 
@@ -228,33 +260,34 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
 
         <script src="plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
-<script src="plugins/poptest/popoverText.js"></script>
+        <script src="plugins/poptest/popoverText.js"></script>
         <script>
             $(document).ready(function () {
-            $('#popFarmerProdDet').popover(popFarmerProdDet);
+                $('#popFarmerProdDet').popover(popFarmerProdDet);
                 $('#popFarmerProbList').popover(popFarmerProbList);
                 $('#popRecProjList').popover(popRecProjList);
                 $('#popFarmerFarmList').popover(popFarmerFarmList);
+                 $('#popFarmerProgList').popover(popRecProjList);
 
             });
-            
-            </script>
+
+        </script>
         <script>
 
             $(document).ready(function () {
-                
-                
-                   var table = $('#fieldtable').DataTable({
+
+
+                var table = $('#fieldtable').DataTable({
                     'ajax': {
                         'url': 'viewFarmersFieldTable?name=${farm}'
                     },
                     'columnDefs': [{
                             'targets': 7,
                             'render': function (data, type, full, meta) {
-                                    return   '<div class="progress-group"> <span class="progress-number"><b>' + data + ' </b></span>  <div class="progress progress-sm progress-striped active"><div class="progress-bar progress-bar-primary" style="width: ' + data + '%"></div></div> </div>';
-                               
+                                return   '<div class="progress-group"> <span class="progress-number"><b>' + data + ' </b></span>  <div class="progress progress-sm progress-striped active"><div class="progress-bar progress-bar-primary" style="width: ' + data + '%"></div></div> </div>';
+
                             }
-                        },{
+                        }, {
                             'targets': 8,
                             'render': function (data, type, full, meta) {
                                 return '<a class="btn btn-primary" href="viewFieldDetails?id=' + data + '">details</a>';
@@ -284,27 +317,40 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                             }
                         }]
                 });
-                setInterval(function () { autoloadpage(); }, 30000);
- function autoloadpage() {
-      $('#fieldtable').DataTable({
-           destroy: true,
+                var table2 = $('#progTable').DataTable({
                     'ajax': {
-                        'url': 'viewFarmersFieldTable?name=${farm}'
+                        'url': 'viewFarmerProgT?name=${farm}'
                     },
                     'columnDefs': [{
-                            'targets': 7,
+                            'targets': 2,
                             'render': function (data, type, full, meta) {
-                                    return   '<div class="progress-group"> <span class="progress-number"><b>' + data + ' </b></span>  <div class="progress progress-sm progress-striped active"><div class="progress-bar progress-bar-primary" style="width: ' + data + '%"></div></div> </div>';
-                               
-                            }
-                        },{
-                            'targets': 8,
-                            'render': function (data, type, full, meta) {
-                                return '<a class="btn btn-primary" href="viewFieldDetails?id=' + data + '">details</a>';
+                                return '<a class="btn btn-primary" href="viewProgramDetails?name=' + data + '">details</a>';
                             }
                         }]
                 });
- }
+                setInterval(function () {
+                    autoloadpage();
+                }, 30000);
+                function autoloadpage() {
+                    $('#fieldtable').DataTable({
+                        destroy: true,
+                        'ajax': {
+                            'url': 'viewFarmersFieldTable?name=${farm}'
+                        },
+                        'columnDefs': [{
+                                'targets': 7,
+                                'render': function (data, type, full, meta) {
+                                    return   '<div class="progress-group"> <span class="progress-number"><b>' + data + ' </b></span>  <div class="progress progress-sm progress-striped active"><div class="progress-bar progress-bar-primary" style="width: ' + data + '%"></div></div> </div>';
+
+                                }
+                            }, {
+                                'targets': 8,
+                                'render': function (data, type, full, meta) {
+                                    return '<a class="btn btn-primary" href="viewFieldDetails?id=' + data + '">details</a>';
+                                }
+                            }]
+                    });
+                }
             });
 
 
