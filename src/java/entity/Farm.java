@@ -14,6 +14,20 @@ import java.util.ArrayList;
  */
 public class Farm {
 
+    /**
+     * @return the programs
+     */
+    public ArrayList<Programs> getPrograms() {
+        return programs;
+    }
+
+    /**
+     * @param programs the programs to set
+     */
+    public void setPrograms(ArrayList<Programs> programs) {
+        this.programs = programs;
+    }
+
     private int id,year;
     private String farmer,district,barangay,municipality;
     private SoilAnalysis soilanalysis;
@@ -21,6 +35,7 @@ public class Farm {
     private Fertilizer fertilizer;
     private Tillers tillers;
     private ArrayList<Recommendation> recommendation;
+      private ArrayList<Programs> programs;
     private ArrayList<Fertilizer> fertlist;
     private ArrayList<Tillers> tillist;
     private ArrayList<Problems> problems;

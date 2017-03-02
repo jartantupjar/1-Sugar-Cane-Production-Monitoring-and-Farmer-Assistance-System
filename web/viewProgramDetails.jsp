@@ -128,6 +128,8 @@ current vs then diagram
                                                 <tr>
                                                     <th>Problem</th>
                                                     <th>Description</th>
+                                                    <th>more details</th>
+                                                    <th>Farms</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -135,6 +137,9 @@ current vs then diagram
                                                 <tr>
                                                     <td><c:out value="${plist.prob_name}"></c:out></td>
                                                     <td><c:out value="${plist.prob_details}"></c:out></td>
+                                                    <td><c:out value="${plist.count}"></c:out></td>
+                                                    <td><a target="_blank" href="viewProbDetails?id=${plist.prob_id}" class="btn btn-primary">More details</a></td>
+                                                    
                                                     </tr>
                                             </c:forEach>
 

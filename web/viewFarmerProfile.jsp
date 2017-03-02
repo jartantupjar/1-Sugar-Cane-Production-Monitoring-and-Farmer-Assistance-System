@@ -139,11 +139,12 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                                 </div>
 
                             </div>
+                            
                         </div> 
                         <div class="col-md-6"> 
                             <div class="box box-info" >
                                 <div class="box-header with-border">
-                                    <h1 class="box-title">Rec & Proj List(add list of programs)</h1>
+                                    <h1 class="box-title">Recommendation List</h1>
                                     <div class="box-tools pull-right " >
                                        <a tabindex="0" class="text-overflow" id="popRecProjList" role="button"><i class="fa fa-question text-orange"></i></a>
                                          <button class="btn btn-box-tool"  data-widget="collapse"><i class="fa fa-minus"></i></button>
@@ -155,7 +156,7 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                                     <table id="recTable" class="table  display table-hover" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
-                                                <th>Rec/Program</th>
+                                                <th>Recommendation</th>
                                                 <th>Description</th>
                                                 <th></th>
 
@@ -168,7 +169,38 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                             </div>
 
                         </div>
+                           
 </div>
+                                             <div class="col-md-12">
+                         <div class="col-md-6"> 
+                            <div class="box box-info collapsed-box" >
+                                <div class="box-header with-border">
+                                    <h1 class="box-title">Program List</h1>
+                                    <div class="box-tools pull-right" >
+                                       <a tabindex="0" class="text-overflow" id="popRecProjList" role="button"><i class="fa fa-question text-orange"></i></a>
+                                         <button class="btn btn-box-tool"  data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                    </div>
+                                </div>
+
+                                <div class="box-body">
+                                    <table id="progTable" class="table  display table-hover" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>Program</th>
+                                                <th>Description</th>
+                                                <th></th>
+
+                                            </tr>
+                                        </thead>
+
+                                    </table>
+                                </div>
+
+                            </div>
+
+                        </div>
+                                                 </div>
 <div class="col-md-12">
                             <!-- LINE CHART -->
                             <div class="box box-info">
@@ -281,6 +313,17 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                             'targets': 2,
                             'render': function (data, type, full, meta) {
                                 return '<a class="btn btn-primary" href="viewProbDetails?id=' + data + '">details</a>';
+                            }
+                        }]
+                });
+                 var table2 = $('#progTable').DataTable({
+                    'ajax': {
+                        'url': 'viewFarmerProgT?name=${farm}'
+                    },
+                    'columnDefs': [{
+                            'targets': 2,
+                            'render': function (data, type, full, meta) {
+                                return '<a class="btn btn-primary" href="viewProgramDetails?name=' + data + '">details</a>';
                             }
                         }]
                 });

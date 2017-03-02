@@ -221,6 +221,68 @@ public class ProgramsDB {
 
         return null;
     }
+    public ArrayList<Programs> getProgramByFarm(String farm) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select p.name,p.status,p.description,pf.Fields_id from programs p join `programs-problems` pp on p.name=pp.Programs_name join `problems-fields` pf on pp.Problems_id=pf.Problems_id where pf.Fields_id=?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+           pstmt.setString(1, farm);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<Programs> list = null;
+            Programs p ;
+            if (rs.next()) {
+                list = new ArrayList<>();
+                do {
+                    p = new Programs();
+                    p.setProg_name(rs.getString("name"));
+                    p.setType(rs.getString("status"));
+                    p.setDescription(rs.getString("description"));
+                     list.add(p);
+                } while (rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(CropEstimateDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
+    
+     public ArrayList<Programs> getProgramByFarmer(String farmer) {
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select p.name,p.description,pf.Fields_id from programs p join `programs-problems` pp on p.name=pp.Programs_name join `problems-fields` pf on pp.Problems_id=pf.Problems_id join fields f on pf.Fields_id=f.id where f.Farmers_name=? group by p.name;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+           pstmt.setString(1, farmer);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<Programs> list = null;
+            Programs p ;
+            if (rs.next()) {
+                list = new ArrayList<>();
+                do {
+                    p = new Programs();
+                    p.setProg_name(rs.getString("name"));
+                    p.setDescription(rs.getString("description"));
+                    list.add(p);
+                } while (rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(CropEstimateDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
     public ArrayList<Programs> getOngoingProjects() {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
@@ -253,7 +315,8 @@ public class ProgramsDB {
         }
 
         return null;
-    }public ArrayList<Programs> getOngoingProjectsBoard(Date currDate) {
+    }
+    public ArrayList<Programs> getOngoingProjectsBoard(Date currDate) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
@@ -490,7 +553,7 @@ public class ProgramsDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select p.id,p.name,p.description from problems p join `programs-problems` pp on p.id=pp.Problems_id where pp.Programs_name=?;";
+            String query = "select p.id,p.name,p.description,count(pf.Fields_id) as count from problems p join `programs-problems` pp on p.id=pp.Problems_id join `problems-fields` pf on pf.Problems_id=p.id where pp.Programs_name=? group by p.id;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, prog_name);
             ResultSet rs = pstmt.executeQuery();
@@ -503,6 +566,7 @@ public class ProgramsDB {
                     p.setProb_id(rs.getInt("id"));
                     p.setProb_name(rs.getString("name"));
                     p.setProb_details(rs.getString("description"));
+                    p.setCount(rs.getInt("count"));
                     list.add(p);
                 } while (rs.next());
             }

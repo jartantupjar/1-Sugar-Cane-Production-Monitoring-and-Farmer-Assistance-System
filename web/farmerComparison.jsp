@@ -404,6 +404,47 @@ on barangay selection
 
                                 </div>
                             </div>
+                            <div class="col-md-6" > 
+                                <div class="box box-info">
+                                    <div class="box-header with-border">
+                                        <h1 class="box-title">Programs List</h1>
+                                        <div class="box-tools pull-right">
+                                            <a tabindex="0" class="text-overflow" id="popFarmRecList" role="button"><i class="fa fa-question text-orange"></i></a>
+                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                        </div>
+                                    </div>
+
+                                    <div class="box-body">
+                                        <table class="table  dispTable table-hover" cellspacing="0" width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Program</th>
+                                                    <th>Status</th>
+                                                    <th>Description</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <c:if test="${not empty farm.programs}">
+                                                    <c:forEach items="${farm.programs}" var="prog">
+                                                        <tr>
+                                                            <td><c:out value="${prog.prog_name}"/></td>
+                                                            <td><c:out value="${prog.type}"/></td>
+                                                            <td><c:out value="${prog.description}"/></td>
+                                                            <td><a class="btn btn-primary" href="viewProgramDetails?name=${prog.prog_name}">details</a></td>
+
+                                                        </tr>
+                                                    </c:forEach>
+
+
+                                                </c:if>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
                         </div>
 
                         <div class="col-md-offset-5 col-sm-3 ">
