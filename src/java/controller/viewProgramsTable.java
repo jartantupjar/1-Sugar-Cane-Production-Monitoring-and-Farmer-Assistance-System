@@ -35,12 +35,12 @@ public class viewProgramsTable extends BaseServlet {
         if (bct != null) {
             for (int i = 0; i < bct.size(); i++) {
                 ArrayList<String> obj = new ArrayList<String>();
-System.out.println(bct.get(i).getProg_name());
+                System.out.println(bct.get(i).getProg_name());
                 obj.add(bct.get(i).getProg_name());
-              
-               obj.add(bct.get(i).getDate_created().toString()+"-"+bct.get(i).getDate_end().toString());
+                obj.add(bct.get(i).getType());
+                obj.add(bct.get(i).getDate_created().toString() + "-" + bct.get(i).getDate_end().toString());
                 obj.add(Integer.toString(bct.get(i).gettFarms()));
-                   
+                obj.add(bct.get(i).getStatus());
                 obj.add(Double.toString(bct.get(i).getProgress()));
                 obj.add(bct.get(i).getProg_name());
 

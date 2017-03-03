@@ -473,7 +473,7 @@ public class ProgramsDB {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select pg.name,pg.date_created,pg.date_end, count(pf.fields_id) as count from programs pg join `programs-problems` pp on pg.name=pp.programs_name join `problems-fields` pf on pp.problems_id=pf.problems_id group by pg.name;";
+            String query = "select pg.name,pg.date_created,pg.status,pg.type,pg.date_end, count(pf.fields_id) as count from programs pg join `programs-problems` pp on pg.name=pp.programs_name join `problems-fields` pf on pp.problems_id=pf.problems_id group by pg.name;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             ResultSet rs = pstmt.executeQuery();
             ArrayList<Programs> list = null;
@@ -483,6 +483,8 @@ public class ProgramsDB {
                 do {
                     p = new Programs();
                     p.setProg_name(rs.getString("name"));
+                    p.setStatus(rs.getString("status"));
+                    p.setType(rs.getString("type"));
                     if (rs.getDate("date_created") == null) {
                         p.setDate_created(StringtoSQLDate("23/06/2015"));
                     } else {

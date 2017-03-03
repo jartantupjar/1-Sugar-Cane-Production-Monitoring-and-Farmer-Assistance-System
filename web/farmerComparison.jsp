@@ -743,7 +743,7 @@ on barangay selection
                 $('#popFarmRecList').popover(popFarmRecList);
                 $('#popFarmActionTools').popover(popFarmActionTools);
                 $('#popFarmObs').popover(popFarmObs);
-                $('#popFarmProgList').popover(popFarmRecList);
+                $('#popFarmProgList').popover(popFarmProgList);
 
             });
 
