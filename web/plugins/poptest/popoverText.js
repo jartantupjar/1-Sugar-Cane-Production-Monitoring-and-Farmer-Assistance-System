@@ -818,7 +818,7 @@ var popFarmRecList = {toggle: "popover", trigger: "focus", placement: "auto", ht
 };
 var popFarmProgList = {toggle: "popover", trigger: "focus", placement: "auto", html: true,
 
-    title: 'Farmer Program List',
+    title: 'Farm Program List',
     content: function () {
         return '<dl>\n\
                     <dt>Description</dt>\n\

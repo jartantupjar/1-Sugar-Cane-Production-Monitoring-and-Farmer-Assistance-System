@@ -115,7 +115,7 @@
                                                                     <span class="required" aria-required="true"> * </span>
                                                                 </label>
                                                                 <div class="col-md-4">
-                                                                    <select class="form-control" name="projecttype">
+                                                                    <select class="form-control" id="projecttype" name="projecttype">
                                                                         <option>Development</option>
                                                                         <option>Education</option>
                                                                         <option>Management</option>
@@ -144,7 +144,7 @@
                                                                     <span class="required" aria-required="true"> * </span>
                                                                 </label>
                                                                 <div class="col-md-4">
-                                                                    <textarea class="form-control" name="Description" rows="2"  placeholder="Enter ..."></textarea>
+                                                                    <textarea class="form-control" id="projectdescription" name="Description" rows="2"  placeholder="Enter ..."></textarea>
 
                                                                 </div>
                                                             </div>
@@ -181,7 +181,7 @@
                                                             <div class="col-md-offset-9 col-md-9 pull-right">
                                                                 <a  class="btn default button-previous" >
                                                                     <i class="fa fa-angle-left"></i> Back </a>
-                                                                <button class="btn green button-submit"  form="submit_form" value="submit">Submit  <i class="fa fa-check"></i></button>
+                                                                <button class="btn green finish" form="submit_form" value="submit">Submit  <i class="fa fa-check"></i></button>
 
                                                             </div>
                                                         </div>
@@ -291,16 +291,21 @@
                     'tabClass': 'nav nav-pills',
                     'onNext': function (tab, navigation, index) {
                         //checks if values are empty or not
-       if (index === 1) {
-         
-           
-          var nocheck= $('#probTable').find('input[type="checkbox"]:checked').length;
+                        if (index === 1) {
+
+
+                            var nocheck = $('#probTable').find('input[type="checkbox"]:checked').length;
                             if (nocheck === 0) {
                                 return false;
                             }
-                        }
-                      else if (index === 2) {
+                        } else if (index === 2) {
                             if (document.getElementById('reservation').value.length === 0) {
+                                return false;
+                            } else if (document.getElementById('projecttype').value.length === 0) {
+                                return false;
+                            } else if (document.getElementById('projectname').value.length === 0) {
+                                return false;
+                            } else if (document.getElementById('projectdescription').value.length === 0) {
                                 return false;
                             }
                         }
@@ -345,13 +350,20 @@
                     },
                     'nextSelector': '.button-next', 'previousSelector': '.button-previous'
                 });
+                $('#rootwizard .finish').click(function () {
+                    var nocheck = document.getElementsByClassName("dakpis").length;
+                    console.log(nocheck);
+                    if (nocheck === 0) {
+                        return false;
+                    }
 
+                });
 
                 $("#adddRow").on("click", function () {
                     var rowz = "";
                     for (var b = 0; b <= count; b++) {
 
-                        rowz += "<td><input class='form-control' type='number'value='0' name = 'y" + rowNum + "[]'  required/></td>";
+                        rowz += "<td><input class='form-control dakpis' type='number' value='0' name = 'y" + rowNum + "[]'  required/></td>";
                     }
 
                     $('#listOfTargets tbody:last').append("<tr>\n\
