@@ -12,6 +12,16 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>SRA | Home</title>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <style type="text/css" media="print">
+            img
+            {
+                display:none;
+            }  
+            .hidethis
+            {
+                display:none;
+            }
+        </style>
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
@@ -29,7 +39,7 @@
                         <div class="box box-info">
                             <div class="box-header with-border">
                                 <h1 class="box-title"><b>Weekly Production Statistics Report : ${todayDate}</b></h1>
-                                <div class="box-tools pull-right">
+                                <div class="box-tools pull-right hidethis">
                                     <a tabindex="0" class="text-overflow" id="popWeeklyProd" role="button"><i class="fa fa-question text-orange"></i></a>
                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                     <!-- In box-tools add this button if you intend to use the contacts pane -->
@@ -52,10 +62,10 @@
                                             <c:forEach var="prod" items="${crop}">
                                             <tr>
                                                 <td><a href="Homepage.jsp">${prod.district}</a></td>
-                                                <td>${prod.estimated}</td>
-                                                <td>${prod.area}</td>
-                                                <td>${prod.tc}</td>
-                                                <td>${prod.lkg}</td>
+                                                <td class="text-right">${prod.estimated}</td>
+                                                <td class="text-right">${prod.area}</td>
+                                                <td class="text-right">${prod.tc}</td>
+                                                <td class="text-right">${prod.lkg}</td>
                                             </tr>
                                             </c:forEach>
                                         </tbody>
@@ -64,6 +74,11 @@
 
                         </div>
                     </div>   
+                                <div class="col-md-4 col-md-offset-4 hidethis">
+                                    <a  class="btn btn-primary btn-block" role="button" onClick="window.print();" ><i class="fa fa-print"></i> Print Report</a>
+                                    <!--                                <button id="cmd" type="button">print PDF</button>-->
+                                    <br>
+                                </div>     
             </div>
                 </section>
             </div>

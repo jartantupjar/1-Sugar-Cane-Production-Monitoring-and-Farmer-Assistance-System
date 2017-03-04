@@ -11,6 +11,7 @@ import entity.CropBoard;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -53,6 +54,9 @@ public class viewWeeklyProducedReportByRegionT extends HttpServlet {
             System.out.println(todayYear +"TANGINA"+weekOfYear + " TAE NAMN");
             ArrayList<CropBoard> cT = new ArrayList<CropBoard>();
             JSONObject data = new JSONObject();
+            DecimalFormat df = new DecimalFormat("#.00");
+                df.setGroupingUsed(true);
+                df.setGroupingSize(3);
             if(todayYear <= 2016){
                 cT = cdb.getWeeklyProducedReportByRegionT(todayYear,cdate.toString(),weekOfYear);
             JSONArray prod = new JSONArray();
@@ -60,9 +64,9 @@ public class viewWeeklyProducedReportByRegionT extends HttpServlet {
                 for(int i=0;i<cT.size();i++){
                     ArrayList<String> list = new ArrayList<String>();
                     list.add(cT.get(i).getDistrict());
-                    list.add(cT.get(i).getArea().toString());
-                    list.add(cT.get(i).getTc().toString());
-                    list.add(cT.get(i).getLkg().toString());
+                    list.add(df.format(cT.get(i).getArea()));
+                    list.add(df.format(cT.get(i).getTc()));
+                    list.add(df.format(cT.get(i).getLkg()));
                     String id = cT.get(i).getDistrict()+","+cdate.toString();
                     list.add(id);
                     prod.add(list);
@@ -80,9 +84,9 @@ public class viewWeeklyProducedReportByRegionT extends HttpServlet {
                 for(int i=0;i<cT.size();i++){
                     ArrayList<String> list = new ArrayList<String>();
                     list.add(cT.get(i).getDistrict());
-                    list.add(cT.get(i).getArea().toString());
-                    list.add(cT.get(i).getTc().toString());
-                    list.add(cT.get(i).getLkg().toString());
+                    list.add(df.format(cT.get(i).getArea()));
+                    list.add(df.format(cT.get(i).getTc()));
+                    list.add(df.format(cT.get(i).getLkg()));
                     String id = cT.get(i).getDistrict()+","+cdate.toString();
                     list.add(id);
                     prod.add(list);

@@ -70,7 +70,7 @@
                             </div>
 
                             <div class="box-body">
-                                <table id="example2" class="table table-bordered">
+                                <table id="example2" class="table table-bordered text-right">
                                         <thead>
                                             <tr>
                                                 <th>Region</th>
@@ -84,11 +84,6 @@
                             </div>
                         </div>
                     </div> 
-                    <div class="col-md-3 pull-right">
-                        <div class="form-group">
-                            <button class="btn btn-warning" style="width: 100%"><a href="CitiesWeekView.jsp">Print Report</a></button>
-                        </div>
-                    </div>
                     </div>
                 </section>
 

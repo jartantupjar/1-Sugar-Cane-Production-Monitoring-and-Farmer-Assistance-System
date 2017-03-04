@@ -38,11 +38,6 @@
                                 </div>
 
                             </div>
-                            <div class="col-md-3 pull-right">
-                                <div class="form-group">
-                                    <button class="btn btn-warning" style="width: 100%">Print Report</button>
-                                </div>
-                            </div>
 
                             <div class="col-md-12" > 
                                 <div class="box box-info">
