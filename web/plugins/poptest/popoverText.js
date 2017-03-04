@@ -855,6 +855,7 @@ var popFarmObs = {toggle: "popover", trigger: "focus", placement: "auto", html: 
                         <dd> <ul>\n\
                             <li>Search for tag/s to filter the farms</li>\n\
                              <li>Select farms to create comparison</li>\n\
+                                <li>Only 5 farms can be selected for comparison</li>\n\
                             </ul>\n\
                         <dd>\n\
                 </dl>';
