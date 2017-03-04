@@ -68,7 +68,7 @@ public class createNewProgram extends BaseServlet {
         }
 
         newProg.setDescription(request.getParameter("Description"));
-        newProg.setType("P");
+        newProg.setType(request.getParameter("projecttype"));
 
         String paramName;
         ArrayList<programsKPI> kpis = new ArrayList();

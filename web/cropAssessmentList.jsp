@@ -107,6 +107,7 @@
              
                   $('#select3').on('change', function (evt) {
                     var test = $("#select3").val();
+                    console.log(test);
 
                     var table = $('#fieldtable').DataTable({
                         destroy: true,
@@ -132,12 +133,12 @@
                     type: 'POST',
                     dataType: "JSON",
                     success: function (data) {
-                        $("#select3").empty();
+                       
                         $("#select3").select2({
                             minimumResultsForSearch: Infinity,
                             data: data
                         }).trigger('change');
-                        var test = $("#select3").val();
+                     
 
                     }});
               

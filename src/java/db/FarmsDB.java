@@ -27,7 +27,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class FarmsDB {
-
+    
     public boolean createFarm(Farm farm) {
         //DOESNT WORK
         try {
@@ -35,7 +35,7 @@ public class FarmsDB {
             Connection conn = myFactory.getConnection();
             String query = "insert into farms(owner, farm_name, boundary, area) values (?,?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(query);
-
+            
             pstmt.setString(3, farm.getBoundaries());
             pstmt.setDouble(4, farm.getArea());
             int i = pstmt.executeUpdate();
@@ -47,7 +47,7 @@ public class FarmsDB {
         }
         return false;
     }
-
+    
     public boolean editFarm(Farm farm) {
         //DOESNT WORK
         try {
@@ -58,7 +58,7 @@ public class FarmsDB {
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, farm.getDistrict());
             pstmt.setString(2, farm.getManagement_type());
-
+            
             int i = pstmt.executeUpdate();
             pstmt.close();
             conn.close();
@@ -68,7 +68,7 @@ public class FarmsDB {
         }
         return false;
     }
-
+    
     public ArrayList<Farm> getFarmerFieldsTable(String fname, int cropyr) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
@@ -79,10 +79,10 @@ public class FarmsDB {
             ResultSet rs = pstmt.executeQuery();
             ArrayList<Farm> farms = null;
             Farm farm;
-
+            
             ProductionDB prodb = new ProductionDB();
             Farmer farmer = prodb.viewFarmerSummarybyYearTest(fname, fname, cropyr);
-
+            
             if (rs.next()) {
                 farms = new ArrayList<Farm>();
                 do {
@@ -96,7 +96,7 @@ public class FarmsDB {
                     farm.setBarangay(rs.getString("barangay"));
                     farm.setMunicipality(rs.getString("municipality"));
                     farms.add(farm);
-
+                    
                 } while (rs.next());
             }
             rs.close();
@@ -108,7 +108,7 @@ public class FarmsDB {
         }
         return null;
     }
-
+    
     public ArrayList<String> getAllFarmersFields(String fname) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
@@ -118,13 +118,13 @@ public class FarmsDB {
             pstmt.setString(1, fname);
             ResultSet rs = pstmt.executeQuery();
             ArrayList<String> farms = null;
-
+            
             ProductionDB prodb = new ProductionDB();
             if (rs.next()) {
                 farms = new ArrayList<String>();
                 do {
                     farms.add(rs.getString("id"));
-
+                    
                 } while (rs.next());
             }
             rs.close();
@@ -136,7 +136,7 @@ public class FarmsDB {
         }
         return null;
     }
-
+    
     public ArrayList<Farm> getCurrFarmerFieldsTable(String fname, int cropyr, Date todayDate) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
@@ -147,7 +147,7 @@ public class FarmsDB {
             ResultSet rs = pstmt.executeQuery();
             ArrayList<Farm> farms = null;
             Farm farm;
-
+            
             ProductionDB prodb = new ProductionDB();
             if (rs.next()) {
                 farms = new ArrayList<Farm>();
@@ -155,7 +155,7 @@ public class FarmsDB {
                     farm = new Farm();
                     farm.setId(rs.getInt("id"));
                     farm.setFarmer(fname);
-
+                    
                     Farmer farmer = new Farmer();
                     farmer = prodb.viewFieldSummarybyYear(farm.getId(), cropyr, todayDate);
                     farm.setProduction(farmer.getProduction());
@@ -165,7 +165,7 @@ public class FarmsDB {
                     farm.setBarangay(rs.getString("barangay"));
                     farm.setMunicipality(rs.getString("municipality"));
                     farms.add(farm);
-
+                    
                 } while (rs.next());
             }
             rs.close();
@@ -188,20 +188,24 @@ public class FarmsDB {
         farm.setYear(cropyr);
         // farmproductiondetails
         fixedRecDB fRecDB = new fixedRecDB();
-
+        
         ProblemsDB probdb = new ProblemsDB();
+        
+        ProgramsDB progdb = new ProgramsDB();
         //added date
         farm.setRecommendation(fRecDB.viewFarmRecTablebyFarm(fid));
         //added date
         farm.setProblems(probdb.getFarmProblemDetbyFarm(fid));
-
+//
+        farm.setPrograms(progdb.getProgramByFarm(Integer.toString(fid)));
+        
         farm.setSoilanalysis(getFieldSoilAnalysis(farm.getId()));
         farm.setFertilizer(getFieldFertilizers(farm.getId(), cropyr));
         farm.setTillist(getFieldTillersList(farm.getId(), cropyr));
         farm.setFertlist(getFieldFertilizersList(farm.getId(), cropyr));
         farm.setTillers(getFieldTillers(farm.getId(), cropyr));
         farm.setCropVal(getFieldCropValidation(farm.getId(), cropyr));
-
+        
         return farm;
     }
 
@@ -215,23 +219,23 @@ public class FarmsDB {
         farm.setYear(cropyr);
         // farmproductiondetails
         fixedRecDB fRecDB = new fixedRecDB();
-
+        
         ProblemsDB probdb = new ProblemsDB();
         //added date
         farm.setRecommendation(fRecDB.viewFarmRecTablebyFarmComparison(fid));
         //added date
         farm.setProblems(probdb.getFarmProblemDetbyFarmComp(fid));
-
+        
         farm.setSoilanalysis(getFieldSoilAnalysis(farm.getId()));
         farm.setFertilizer(getFieldFertilizers(farm.getId(), cropyr));
         farm.setTillist(getFieldTillersList(farm.getId(), cropyr));
         farm.setFertlist(getFieldFertilizersList(farm.getId(), cropyr));
         farm.setTillers(getFieldTillers(farm.getId(), cropyr));
         farm.setCropVal(getFieldCropValidation(farm.getId(), cropyr));
-
+        
         return farm;
     }
-
+    
     public ArrayList<Farm> getAllFieldComp(ArrayList<String> list) {
         ArrayList<Farm> flist = null;
         if (list != null) {
@@ -240,12 +244,12 @@ public class FarmsDB {
                 Farm farm = getAllFieldDetailsComp(Integer.parseInt(list.get(i)));
                 flist.add(farm);
             }
-
+            
         }
-
+        
         return flist;
     }
-
+    
     public Farm getBasicFieldDetails(int fid) {
         // **** TODO : GET (INTEGER)YEAR TO GIVE TO FERTILIZER, TILLERS,CROP VALIDATION AND MONTHLY
         try {
@@ -255,17 +259,17 @@ public class FarmsDB {
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, fid);
             ResultSet rs = pstmt.executeQuery();
-
+            
             Farm farm = null;
             if (rs.next()) {
-
+                
                 farm = new Farm();
                 farm.setId(fid);
                 farm.setFarmer(rs.getString("Farmers_name"));
                 farm.setArea(rs.getDouble("area"));
                 farm.setBarangay(rs.getString("barangay"));
                 farm.setMunicipality(rs.getString("municipality"));
-
+                
                 Farm yfarm = getFarmDet(Integer.toString(fid));
                 farm.setProduction(yfarm.getProduction());
                 farm.setTotalHa(yfarm.getTotalHa());
@@ -280,7 +284,7 @@ public class FarmsDB {
         }
         return null;
     }
-
+    
     public Farm getFieldProductionDet(int fid, int cropyr, Date todayDate) {
         // **** TODO : GET (INTEGER)YEAR TO GIVE TO FERTILIZER, TILLERS,CROP VALIDATION AND MONTHLY
         try {
@@ -291,12 +295,12 @@ public class FarmsDB {
             pstmt.setInt(1, fid);
             pstmt.setInt(2, cropyr);
             pstmt.setDate(3, todayDate);
-
+            
             ResultSet rs = pstmt.executeQuery();
-
+            
             Farm farm = null;
             if (rs.next()) {
-
+                
                 farm = new Farm();
                 farm.setId(fid);
                 farm.setProduction(rs.getDouble("production"));
@@ -312,7 +316,7 @@ public class FarmsDB {
         }
         return null;
     }
-
+    
     public Farm getHistFieldProductionDet(String farmers_name, int cropyr) {
         // **** TODO : GET (INTEGER)YEAR TO GIVE TO FERTILIZER, TILLERS,CROP VALIDATION AND MONTHLY
         try {
@@ -325,12 +329,12 @@ public class FarmsDB {
             pstmt.setString(1, farmers_name);
             pstmt.setString(2, farmers_name);
             pstmt.setInt(3, cropyr);
-
+            
             ResultSet rs = pstmt.executeQuery();
-
+            
             Farm farm = null;
             if (rs.next()) {
-
+                
                 farm = new Farm();
                 farm.setFarmer(farmers_name);
                 farm.setProduction(rs.getDouble("cane"));
@@ -346,7 +350,7 @@ public class FarmsDB {
         }
         return null;
     }
-
+    
     public SoilAnalysis getFieldSoilAnalysis(int id) {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
@@ -363,7 +367,7 @@ public class FarmsDB {
                 sa.setOrganic_matter(rs.getDouble("organic_matter"));
                 sa.setPhosphorus(rs.getDouble("phosphorus"));
                 sa.setPotassium(rs.getDouble("potassium"));
-
+                
             }
             rs.close();
             pstmt.close();
@@ -374,7 +378,7 @@ public class FarmsDB {
         }
         return null;
     }
-
+    
     public Fertilizer getFieldFertilizers(int id, int year) {
         // DB HAS MULTIPLE FOR THE SAME YEAR 
         try {
@@ -393,7 +397,7 @@ public class FarmsDB {
                 fz.setFertilizer(rs.getString("fertilizer"));
                 fz.setFirst_dose(rs.getDouble("first_dose"));
                 fz.setSecond_dose(rs.getDouble("second_dose"));
-
+                
             }
             rs.close();
             pstmt.close();
@@ -404,7 +408,7 @@ public class FarmsDB {
         }
         return null;
     }
-
+    
     public ArrayList<Fertilizer> getFieldFertilizersList(int id, int year) {
         // DB HAS MULTIPLE FOR THE SAME YEAR 
         try {
@@ -439,7 +443,7 @@ public class FarmsDB {
         }
         return null;
     }
-
+    
     public Tillers getFieldTillers(int id, int year) {
         //TODO YEAR
         try {
@@ -457,7 +461,7 @@ public class FarmsDB {
                 til.setFields_id(id);
                 til.setRep(rs.getInt("rep"));
                 til.setCount(rs.getInt("count"));
-
+                
             }
             rs.close();
             pstmt.close();
@@ -468,7 +472,7 @@ public class FarmsDB {
         }
         return null;
     }
-
+    
     public ArrayList<Tillers> getFieldTillersList(int id, int year) {
         //TODO YEAR
         try {
@@ -480,7 +484,7 @@ public class FarmsDB {
             pstmt.setInt(2, id);
             pstmt.setInt(3, year);
             ResultSet rs = pstmt.executeQuery();
-
+            
             ArrayList<Tillers> tilist = null;
             if (rs.next()) {
                 tilist = new ArrayList<>();
@@ -517,7 +521,7 @@ public class FarmsDB {
             pstmt.setInt(2, year);
             ResultSet rs = pstmt.executeQuery();
             CropValidation cv = null;
-
+            
             if (rs.next()) {
                 cv = new CropValidation();
                 cv.setYear(rs.getInt("year"));
@@ -548,25 +552,25 @@ public class FarmsDB {
         }
         return null;
     }
-
+    
     public ArrayList<Farm> getSearchTableResult(ArrayList<String> ids, int fid) {
         ArrayList<Farm> list = null;
-
+        
         if (ids != null) {
             list = new ArrayList<>();
             for (int i = 0; i < ids.size(); i++) {
-
+                
                 Farm farm = getFarmDet(ids.get(i));
                 Farm sFarmr = getFarmDet(Integer.toString(fid));
                 farm = getYieldDif(farm, sFarmr);
                 System.out.println(farm.getId());
                 list.add(farm);
             }
-
+            
         }
         return list;
     }
-
+    
     public Farm getYieldDif(Farm farm, Farm sfarm) {
         // CHECK IF FORMULA IS RIGHT !~~~ ITS STILL QUESTIONABLE
         double f = farm.getYield();
@@ -583,19 +587,19 @@ public class FarmsDB {
         //  System.out.println();
 
         return farm;
-
+        
     }
-
+    
     public Farm getFarmDet(String id) {
-
+        
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "select f.id,f.Farmers_name,f.barangay,f.municipality,avg(hp.tons_cane/hp.area) as avgyield from historicalproduction hp join fields f on hp.farmers_name=f.farmers_name where f.id=?;";
             PreparedStatement pstmt = conn.prepareStatement(query);
-
+            
             pstmt.setInt(1, Integer.parseInt(id));
-
+            
             ResultSet rs = pstmt.executeQuery();
             Farm f = null;
             if (rs.next()) {
@@ -624,7 +628,7 @@ public class FarmsDB {
                 f.setProduction(yfarm.getProduction());
                 f.setTotalHa(yfarm.getTotalHa());
                 f.setYield(yfarm.getYield());
-
+                
             }
             rs.close();
             pstmt.close();
@@ -635,7 +639,7 @@ public class FarmsDB {
         }
         return null;
     }
-
+    
     public ArrayList<String> getTags(Farm f) {
         ArrayList<String> taglist = new ArrayList<>();
         if (f.getArea() != 0) {
@@ -754,7 +758,7 @@ public class FarmsDB {
 
     public ArrayList<String> searchFarmsbyTags(String[] list, int id) {
         ArrayList<String> bfarm, sa, till, fz, cv, prod;
-
+        
         bfarm = checkFieldBasicDetails(list);
         prod = checkFieldProdDetails(list);
         sa = checkFieldSoilAnalysis(list);
@@ -784,7 +788,7 @@ public class FarmsDB {
         if (!cv.isEmpty()) {
             cv = (getAllCVbyTags(cv, id, cropyr));
         }
-
+        
         ArrayList<ArrayList<String>> idlists = new ArrayList<>();
         if (!bfarm.isEmpty()) {
             idlists.add(bfarm);
@@ -822,21 +826,21 @@ public class FarmsDB {
                 System.out.println(cv.get(i) + "CV post check");
             }
         }
-
+        
         System.out.println(idlists.size() + " TOTAL TABLES(Lists) USED");
-
+        
         if (!idlists.isEmpty() && idlists.size() > 1) {
             System.out.println("Entered filtering loop");
             for (int i = 1; i < idlists.size(); i++) {
                 idlists.get(0).retainAll(idlists.get(i));
-
+                
             }
-
+            
         }
-
+        
         return idlists.get(0);
     }
-
+    
     public ArrayList<String> getAllCVbyTags(ArrayList<String> list, int id, int year) {
         // I GROUPED THE QUERY BY FIELD ID ***TODO CHANGE IT// add year 
         try {
@@ -880,9 +884,9 @@ public class FarmsDB {
                 }
             }
             System.out.println("where query for cropval det::" + values);
-
+            
             CropValidation cv = getFieldCropValidation(id, year);
-
+            
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "select Fields_id from cropvalidationsurveys where " + values + "and year<=? group by Fields_id order by year DESC;";
@@ -925,7 +929,7 @@ public class FarmsDB {
                 }
             }
             pstmt.setInt(c = c + 1, year);
-
+            
             ResultSet rs = pstmt.executeQuery();
             ArrayList<String> fids = new ArrayList<>();
             if (rs.next()) {
@@ -943,13 +947,13 @@ public class FarmsDB {
         }
         return null;
     }
-
+    
     public ArrayList<String> getAllFzbyTags(ArrayList<String> list, int id, int year) {
         // I GROUPED THE QUERY BY FIELD ID ***TODO CHANGE IT
         try {
             String values = "";
             for (int i = 0; i < list.size(); i++) {
-
+                
                 if (list.get(i).equalsIgnoreCase("Fertilizer")) {
                     values += "fertilizer=?";
                 } else if (list.get(i).equalsIgnoreCase("first dose")) {
@@ -961,11 +965,11 @@ public class FarmsDB {
                     values += " and ";
                 }
             }
-
+            
             System.out.println("where query for Fertz det::" + values);
-
+            
             Fertilizer fz = getFieldFertilizers(id, year);
-
+            
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "select Fields_id from fertilizers where " + values + "and year=?;";
@@ -981,7 +985,7 @@ public class FarmsDB {
                 }
             }
             pstmt.setInt(c = c + 1, year);
-
+            
             ResultSet rs = pstmt.executeQuery();
             ArrayList<String> fids = new ArrayList<>();
             if (rs.next()) {
@@ -999,7 +1003,7 @@ public class FarmsDB {
         }
         return null;
     }
-
+    
     public ArrayList<String> getAllTillbyTags(ArrayList<String> list, int id, int year) {
         // I GROUPED THE QUERY BY FIELD ID ***TODO CHANGE IT
         try {
@@ -1010,16 +1014,16 @@ public class FarmsDB {
                 } else if (list.get(i).equalsIgnoreCase("Count")) {
                     values += "count=?";
                 }
-
+                
                 if (list.size() > 0 && i != list.size() - 1) {
                     values += " and ";
                 }
             }
-
+            
             System.out.println("where query for Till det::" + values);
-
+            
             Tillers till = getFieldTillers(id, year);
-
+            
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "select Fields_id from tillers where " + values + "and year=? group by Fields_id";
@@ -1033,7 +1037,7 @@ public class FarmsDB {
                 }
             }
             pstmt.setInt(c = c + 1, year);
-
+            
             ResultSet rs = pstmt.executeQuery();
             ArrayList<String> fids = new ArrayList<>();;
             if (rs.next()) {
@@ -1051,7 +1055,7 @@ public class FarmsDB {
         }
         return null;
     }
-
+    
     public ArrayList<String> getAllSAbyTags(ArrayList<String> list, int id) {
         try {
             String values = "";
@@ -1070,14 +1074,14 @@ public class FarmsDB {
                 }
             }
             System.out.println("where query for SoAna det::" + values);
-
+            
             SoilAnalysis sa = getFieldSoilAnalysis(id);
-
+            
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "select id from soilanalysis s where " + values;
             PreparedStatement pstmt = conn.prepareStatement(query);
-
+            
             int c = 0;
             for (int i = 0; i < list.size(); i++) {
                 if (list.get(i).equalsIgnoreCase("ph lvl")) {
@@ -1090,9 +1094,9 @@ public class FarmsDB {
                     pstmt.setDouble(c = c + 1, sa.getPotassium());
                 }
             }
-
+            
             ResultSet rs = pstmt.executeQuery();
-
+            
             ArrayList<String> fids = new ArrayList<>();
             if (rs.next()) {
                 fids = new ArrayList<>();
@@ -1108,15 +1112,15 @@ public class FarmsDB {
             Logger.getLogger(FarmsDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-
+        
     }
-
+    
     public ArrayList<String> getAllProdFieldDetbyTags(ArrayList<String> list, int id) {
         CalendarDB caldb = new CalendarDB();
         ArrayList<Calendar> calist = caldb.getCurrentYearDetails();
         int cropyr = calist.get(0).getYear();
         Date todayDate = calist.get(0).getTodayDate();
-
+        
         ArrayList<String> fids = new ArrayList<>();
         if (cropyr > 2016) {
             if (caldb.checkifMilling()) {
@@ -1126,21 +1130,21 @@ public class FarmsDB {
                 ProductionDB prodb = new ProductionDB();
                 ArrayList<Integer> histyrs = prodb.getDistinctHistProdYrs(cropyr);
                 fids = getAllProdDetbyTags(list, id, histyrs.get(0));
-
+                
             }
         } else {
             fids = getAllProdDetbyTags(list, id, cropyr);
         }
         return fids;
     }
-
+    
     public ArrayList<String> getAllProdDetbyTags(ArrayList<String> list, int id, int cropyr) {
-
+        
         try {
-
+            
             Farm getfarm = getFarmDet(Integer.toString(id));
             Farm farm = getHistFieldProductionDet(getfarm.getFarmer(), cropyr);
-
+            
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "select cane,area,cane/area as yield,t1.farmers_name\n"
@@ -1151,9 +1155,9 @@ public class FarmsDB {
             int c = 0;
             pstmt.setInt(c = c + 1, cropyr);
             pstmt.setDouble(c = c + 1, farm.getYield());
-
+            
             ResultSet rs = pstmt.executeQuery();
-
+            
             ArrayList<String> fids = new ArrayList<>();
             if (rs.next()) {
                 fids = new ArrayList<>();
@@ -1170,9 +1174,9 @@ public class FarmsDB {
         }
         return null;
     }
-
+    
     public ArrayList<String> getAllCurProdDetbyTags(ArrayList<String> list, int id, int cropyr, Date todayDate) {
-
+        
         try {
             String values = "";
             for (int i = 0; i < list.size(); i++) {
@@ -1192,9 +1196,9 @@ public class FarmsDB {
                 }
             }
             System.out.println("where query for prod det::" + values);
-
+            
             Farm farm = getFieldProductionDet(id, cropyr, todayDate);
-
+            
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "select fields_id from production where year=? and date<=? group by fields_id having " + values;
@@ -1213,7 +1217,7 @@ public class FarmsDB {
                 }
             }
             ResultSet rs = pstmt.executeQuery();
-
+            
             ArrayList<String> fids = new ArrayList<>();
             if (rs.next()) {
                 fids = new ArrayList<>();
@@ -1230,9 +1234,9 @@ public class FarmsDB {
         }
         return null;
     }
-
+    
     public ArrayList<String> getAllBasicDetbyTags(ArrayList<String> list, int id) {
-
+        
         try {
             String values = "";
             for (int i = 0; i < list.size(); i++) {
@@ -1254,9 +1258,9 @@ public class FarmsDB {
                 }
             }
             System.out.println("where query for basic det::" + values);
-
+            
             Farm farm = getBasicFieldDetails(id);
-
+            
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "select id from fields where " + values;
@@ -1284,7 +1288,7 @@ public class FarmsDB {
                 //   else if(list.get(i).equalsIgnoreCase("production")) values+="production=?" ;
             }
             ResultSet rs = pstmt.executeQuery();
-
+            
             ArrayList<String> fids = new ArrayList<>();
             if (rs.next()) {
                 fids = new ArrayList<>();
@@ -1301,7 +1305,7 @@ public class FarmsDB {
         }
         return null;
     }
-
+    
     public ArrayList<String> checkFieldCropVal(String[] list) {
         ArrayList<String> taglist = new ArrayList<>();
         for (int i = 0; i < list.length; i++) {
@@ -1341,7 +1345,7 @@ public class FarmsDB {
         }
         return taglist;
     }
-
+    
     public ArrayList<String> checkFieldFzer(String[] list) {
         ArrayList<String> taglist = new ArrayList<>();
         for (int i = 0; i < list.length; i++) {
@@ -1355,7 +1359,7 @@ public class FarmsDB {
         }
         return taglist;
     }
-
+    
     public ArrayList<String> checkFieldTill(String[] list) {
         ArrayList<String> taglist = new ArrayList<>();
         for (int i = 0; i < list.length; i++) {
@@ -1367,9 +1371,9 @@ public class FarmsDB {
         }
         return taglist;
     }
-
+    
     public ArrayList<String> checkFieldSoilAnalysis(String[] list) {
-
+        
         ArrayList<String> taglist = new ArrayList<>();
         for (int i = 0; i < list.length; i++) {
             if (list[i].equalsIgnoreCase("ph lvl")) {
@@ -1384,7 +1388,7 @@ public class FarmsDB {
         }
         return taglist;
     }
-
+    
     public ArrayList<String> checkFieldBasicDetails(String[] list) {
         ArrayList<String> chcklist = new ArrayList<>();
         for (int i = 0; i < list.length; i++) {
@@ -1400,7 +1404,7 @@ public class FarmsDB {
         }
         return chcklist;
     }
-
+    
     public ArrayList<String> checkFieldProdDetails(String[] list) {
         ArrayList<String> chcklist = new ArrayList<>();
         for (int i = 0; i < list.length; i++) {
@@ -1414,7 +1418,7 @@ public class FarmsDB {
         }
         return chcklist;
     }
-
+    
     public ArrayList<compRecommendation> getSimilarRecommendations(Farm farm, ArrayList<Farm> dalist) {
         ArrayList<Farm> list = new ArrayList<>();
         list = dalist;
@@ -1425,11 +1429,11 @@ public class FarmsDB {
             }
         }
         ArrayList<compRecommendation> reclist = new ArrayList<>();
-
+        
         for (int i = 0; i < list.size(); i++) {
             ArrayList<Recommendation> rec = new ArrayList<Recommendation>();
             rec = list.get(i).getRecommendation();
-
+            
             if (rec != null) {
 //          System.out.println(rec.size());
                 if (!rec.isEmpty()) {
@@ -1437,7 +1441,7 @@ public class FarmsDB {
                 }
             }
         }
-
+        
         if (!farmRec.isEmpty()) {
             for (int i = 0; i < farmRec.size(); i++) {
                 for (int j = i + 1; j < farmRec.size(); j++) {
@@ -1459,14 +1463,14 @@ public class FarmsDB {
                 reclist.add(cr);
             }
         }
-
+        
         if (!reclist.isEmpty()) {
             list.add(0, farm);
             for (int i = 0; i < reclist.size(); i++) {
                 ArrayList<Integer> fieldz = new ArrayList<>();
                 boolean chrk = false;
                 for (int c = 0; c < list.size(); c++) {
-
+                    
                     ArrayList<Recommendation> rec = new ArrayList<Recommendation>();
                     rec = list.get(c).getRecommendation();
                     if (rec != null) {
@@ -1476,7 +1480,7 @@ public class FarmsDB {
                                     System.out.println(list.get(c).getId());
                                     fieldz.add(list.get(c).getId());
                                     chrk = true;
-
+                                    
                                 }
                             }
                         }
@@ -1503,28 +1507,28 @@ public class FarmsDB {
 //                }
             }
         }
-
+        
         return reclist;
-
+        
     }
-
+    
     public ArrayList<compRecommendation> getPreSelectedRecommendations(Farm farm, ArrayList<Farm> dalist, ArrayList<compProblems> problist) {
         ArrayList<Farm> list = new ArrayList<>();
         list = dalist;
         ArrayList<Recommendation> farmRec = new ArrayList<Recommendation>();
 //adds recommendation of FARM 1 if there is
- if (farm.getRecommendation()!=null) {
-        if (!farm.getRecommendation().isEmpty()) {
-            farmRec.addAll(farm.getRecommendation());
+        if (farm.getRecommendation() != null) {
+            if (!farm.getRecommendation().isEmpty()) {
+                farmRec.addAll(farm.getRecommendation());
+            }
         }
- }
 
 //adds all recommendations of the farms to the list 'farmRec'
         ArrayList<compRecommendation> reclist = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
             ArrayList<Recommendation> rec = new ArrayList<Recommendation>();
             rec = list.get(i).getRecommendation();
-
+            
             if (rec != null) {
                 if (!rec.isEmpty()) {
                     farmRec.addAll(list.get(i).getRecommendation());
@@ -1561,7 +1565,7 @@ public class FarmsDB {
                     farmRec.remove(i);
                     i--;
                 }
-
+                
             }
         }
 
@@ -1584,7 +1588,7 @@ public class FarmsDB {
                 ArrayList<Integer> fieldz = new ArrayList<>();
                 boolean chrk = false;
                 for (int c = 0; c < list.size(); c++) {
-
+                    
                     ArrayList<Recommendation> rec = new ArrayList<Recommendation>();
                     rec = list.get(c).getRecommendation();
                     if (rec != null) {
@@ -1594,7 +1598,7 @@ public class FarmsDB {
                                     System.out.println(list.get(c).getId());
                                     fieldz.add(list.get(c).getId());
                                     chrk = true;
-
+                                    
                                 }
                             }
                         }
@@ -1621,16 +1625,16 @@ public class FarmsDB {
 //                }
             }
         }
-
+        
         return reclist;
-
+        
     }
 
     //Method to cehck acceptable phases (used to shortlist the preselection of recommendations)
     public boolean currPhaseChecker(Recommendation r) {
         CalendarDB caldb = new CalendarDB();
         ArrayList<Calendar> calist = caldb.getCurrentYearDetails();
-
+        
         boolean checker = false;
         //checks if the recommendation is part of the current phase/s
 
@@ -1644,9 +1648,9 @@ public class FarmsDB {
             checker = true;
         }
         return checker;
-
+        
     }
-
+    
     public ArrayList<compProblems> getSimilarProblems(Farm farm, ArrayList<Farm> dalist) {
         ArrayList<Farm> list = new ArrayList<>();
         list = dalist;
@@ -1657,11 +1661,11 @@ public class FarmsDB {
             }
         }
         ArrayList<compProblems> reclist = new ArrayList<>();
-
+        
         for (int i = 0; i < list.size(); i++) {
             ArrayList<Problems> rec = new ArrayList<Problems>();
             rec = list.get(i).getProblems();
-
+            
             if (rec != null) {
 //          System.out.println(rec.size());
                 if (!rec.isEmpty()) {
@@ -1669,7 +1673,7 @@ public class FarmsDB {
                 }
             }
         }
-
+        
         if (!farmRec.isEmpty()) {
             for (int i = 0; i < farmRec.size(); i++) {
                 for (int j = i + 1; j < farmRec.size(); j++) {
@@ -1691,14 +1695,14 @@ public class FarmsDB {
                 reclist.add(cr);
             }
         }
-
+        
         if (!reclist.isEmpty()) {
             list.add(0, farm);
             for (int i = 0; i < reclist.size(); i++) {
                 ArrayList<Integer> fieldz = new ArrayList<>();
                 boolean chrk = false;
                 for (int c = 0; c < list.size(); c++) {
-
+                    
                     ArrayList<Problems> rec = new ArrayList<Problems>();
                     rec = list.get(c).getProblems();
                     if (rec != null) {
@@ -1708,7 +1712,7 @@ public class FarmsDB {
                                     System.out.println(list.get(c).getId());
                                     fieldz.add(list.get(c).getId());
                                     chrk = true;
-
+                                    
                                 }
                             }
                         }
@@ -1730,19 +1734,19 @@ public class FarmsDB {
                 reclist.get(i).setReclist(probdb.getAllSolutions(reclist.get(i).getProb_id()));
                 for (int b = 0; b < reclist.get(i).getFarms().size(); b++) {
                     System.out.println(reclist.get(i).getFarms().get(b) + "farm");
-
+                    
                 }
             }
         }
-
+        
         return reclist;
-
+        
     }
-
+    
     public ArrayList<compRecommendation> getUnSimilarRecommendations(Farm farm, ArrayList<Farm> list) {
         ArrayList<Recommendation> farmRec = farm.getRecommendation();
         ArrayList<compRecommendation> reclist = new ArrayList<>();
-
+        
         if (farm.getRecommendation() != null) {
             for (int i = 0; i < farm.getRecommendation().size(); i++) {
                 compRecommendation rec = new compRecommendation();
@@ -1752,14 +1756,14 @@ public class FarmsDB {
                 System.out.println(reclist.get(i).getRecommendation_name() + "rec name" + farm.getId());
             }
         }
-
+        
         for (int b = 0; b < list.size(); b++) {
             if (list.get(b).getRecommendation() != null && !list.get(b).getRecommendation().isEmpty()) {
-
+                
                 for (int i = 0; i < list.get(i).getRecommendation().size(); i++) {
                     if (!reclist.isEmpty()) {
                         for (int d = 0; d < reclist.size(); d++) {
-
+                            
                             if (reclist.get(d).getId() != list.get(b).getRecommendation().get(i).getId()) {
                                 compRecommendation rec = new compRecommendation();
                                 rec.setId(list.get(b).getRecommendation().get(i).getId());
@@ -1790,5 +1794,5 @@ public class FarmsDB {
 //    }
         return reclist;
     }
-
+    
 }

@@ -67,8 +67,50 @@ public class fixedRecDB {
         }
         return null;
     }
-public ArrayList<Recommendation> removeSelectedRecommendations(ArrayList<Recommendation> orig, ArrayList<compRecommendation>selected){
-            if (!selected.isEmpty()) {
+
+    public ArrayList<Recommendation> viewRecList(Date startDate, Date endDate, String status) {
+        try {
+            // put functions here : previous week production, this week production
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select rec.id,rec.recommendation,rf.fields_id,rf.date,rec.phase,rec.type,rf.status,rec.description from `recommendations-fields` rf join recommendations rec on rf.recommendations_id=rec.id where rf.date>= ? and rf.date <=? and status=?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setDate(1, startDate);
+            pstmt.setDate(2, endDate);
+            pstmt.setString(3, status);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<Recommendation> list = null;
+            Recommendation r;
+            if (rs.next()) {
+                list = new ArrayList<Recommendation>();
+                do {
+
+                    r = new Recommendation();
+                    r.setId(rs.getInt("id"));
+                    r.setRecommendation_name(rs.getString("recommendation"));
+                    r.setFarm(rs.getString("fields_id"));
+                    r.setDate_end(rs.getDate("date"));
+                    r.setPhase(rs.getString("phase"));
+                    r.setType(rs.getString("type"));
+                    r.setStatus(rs.getString("status"));
+                    r.setDescription(rs.getString("description"));
+//                    
+                    list.add(r);
+                } while (rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProblemsDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public ArrayList<Recommendation> removeSelectedRecommendations(ArrayList<Recommendation> orig, ArrayList<compRecommendation> selected) {
+        if (!selected.isEmpty()) {
             for (int i = 0; i < selected.size(); i++) {
                 for (int j = i; j < orig.size(); j++) {
                     if (selected.get(i).getId().equals(orig.get(j).getId())) {
@@ -78,11 +120,10 @@ public ArrayList<Recommendation> removeSelectedRecommendations(ArrayList<Recomme
                 }
             }
         }
-     
-       
-        
+
         return orig;
     }
+
     public int linktoRecommendation(Integer field_id, Integer recomid, Date date, String status) {
         try {
             // put functions here : previous week production, this week production
@@ -260,6 +301,7 @@ public ArrayList<Recommendation> removeSelectedRecommendations(ArrayList<Recomme
         }
         return null;
     }
+
     public ArrayList<Recommendation> viewFarmRecTablebyFarmComparison(int id) {
         try {
             CalendarDB caldb = new CalendarDB();
@@ -451,13 +493,13 @@ public ArrayList<Recommendation> removeSelectedRecommendations(ArrayList<Recomme
             pstmt.setString(2, "N");
             pstmt.setString(3, farm);
             pstmt.setString(4, message);
-            
-             //get todaysdate
+
+            //get todaysdate
             CalendarDB caldb = new CalendarDB();
             ArrayList<Calendar> calist = caldb.getCurrentYearDetails();
             int cropyr = calist.get(0).getYear();
             Date todayDate = calist.get(0).getTodayDate();
-            
+
             pstmt.setDate(5, todayDate);
             pstmt.setString(6, rec);
             pstmt.setString(7, farm);

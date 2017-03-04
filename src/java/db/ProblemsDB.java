@@ -33,7 +33,7 @@ public class ProblemsDB {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = "			(\n" +
-"			select p.name, p.type, p.phase, count(p.id) as 'count'\n" +
+"			select p.name, p.type, p.phase, count(p.id) as 'count', p.id \n" +
 "			from problems p join `problems-fields` pf on p.id = pf.Problems_id\n" +
 "			where pf.status = 'active' and pf.date<= (select current_date from configuration) and p.phase = 'Germination'\n" +
 "			group by p.id\n" +
@@ -44,7 +44,7 @@ public class ProblemsDB {
 "			union all\n" +
 "\n" +
 "			(\n" +
-"			select p.name, p.type, p.phase, count(p.id) as 'count'\n" +
+"			select p.name, p.type, p.phase, count(p.id) as 'count', p.id \n" +
 "			from problems p join `problems-fields` pf on p.id = pf.Problems_id\n" +
 "			where pf.status = 'active' and pf.date<= (select current_date from configuration) and p.phase = 'Tillering'\n" +
 "			group by p.id\n" +
@@ -55,7 +55,7 @@ public class ProblemsDB {
 "			union all\n" +
 "\n" +
 "			(\n" +
-"			select p.name, p.type, p.phase, count(p.id) as 'count'\n" +
+"			select p.name, p.type, p.phase, count(p.id) as 'count', p.id \n" +
 "			from problems p join `problems-fields` pf on p.id = pf.Problems_id\n" +
 "			where pf.status = 'active' and pf.date<= (select current_date from configuration) and p.phase = 'Stalk Elongation'\n" +
 "			group by p.id\n" +
@@ -66,7 +66,7 @@ public class ProblemsDB {
 "			union all\n" +
 "\n" +
 "			(\n" +
-"			select p.name, p.type, p.phase, count(p.id) as 'count'\n" +
+"			select p.name, p.type, p.phase, count(p.id) as 'count', p.id \n" +
 "			from problems p join `problems-fields` pf on p.id = pf.Problems_id\n" +
 "			where pf.status = 'active' and pf.date<= (select current_date from configuration) and p.phase = 'Yield Formation'\n" +
 "			group by p.id\n" +
@@ -77,7 +77,7 @@ public class ProblemsDB {
 "			union all\n" +
 "\n" +
 "			(\n" +
-"			select p.name, p.type, p.phase, count(p.id) as 'count'\n" +
+"			select p.name, p.type, p.phase, count(p.id) as 'count', p.id \n" +
 "			from problems p join `problems-fields` pf on p.id = pf.Problems_id\n" +
 "			where pf.status = 'active' and pf.date<= (select current_date from configuration) and p.phase = 'Ripening'\n" +
 "			group by p.id\n" +
@@ -88,7 +88,7 @@ public class ProblemsDB {
 "			union all\n" +
 "\n" +
 "			(\n" +
-"			select p.name, p.type, p.phase, count(p.id) as 'count'\n" +
+"			select p.name, p.type, p.phase, count(p.id) as 'count', p.id \n" +
 "			from problems p join `problems-fields` pf on p.id = pf.Problems_id\n" +
 "			where pf.status = 'active' and pf.date<= (select current_date from configuration) and p.phase = 'Milling'\n" +
 "			group by p.id\n" +
@@ -99,7 +99,7 @@ public class ProblemsDB {
 "			union all\n" +
 "\n" +
 "			(\n" +
-"			select p.name, p.type, p.phase, count(p.id) as 'count'\n" +
+"			select p.name, p.type, p.phase, count(p.id) as 'count', p.id \n" +
 "			from problems p join `problems-fields` pf on p.id = pf.Problems_id\n" +
 "			where pf.status = 'active' and pf.date<= (select current_date from configuration) and p.phase = 'Planting'\n" +
 "			group by p.id\n" +
@@ -110,7 +110,7 @@ public class ProblemsDB {
 "			union all\n" +
 "\n" +
 "			(\n" +
-"			select p.name, p.type, p.phase, count(p.id) as 'count'\n" +
+"			select p.name, p.type, p.phase, count(p.id) as 'count', p.id \n" +
 "			from problems p join `problems-fields` pf on p.id = pf.Problems_id\n" +
 "			where pf.status = 'active' and pf.date<= (select current_date from configuration) and p.phase = 'Year'\n" +
 "			group by p.id\n" +
@@ -121,7 +121,7 @@ public class ProblemsDB {
 "			union all\n" +
 "\n" +
 "			(\n" +
-"			select p.name, p.type, p.phase, count(p.id) as 'count'\n" +
+"			select p.name, p.type, p.phase, count(p.id) as 'count', p.id \n" +
 "			from problems p join `problems-fields` pf on p.id = pf.Problems_id\n" +
 "			where pf.status = 'active' and pf.date<= (select current_date from configuration) and p.phase = 'Land Preparation'\n" +
 "			group by p.id\n" +
@@ -133,6 +133,7 @@ public class ProblemsDB {
             if(rs.next()){
                 do{
                     p = new Problems();
+                    p.setProb_id(rs.getInt("id"));
                     p.setProb_name(rs.getString("name"));
                     p.setType(rs.getString("type"));
                     p.setPhase(rs.getString("phase"));
@@ -160,12 +161,10 @@ public class ProblemsDB {
                 }
             }
         }
-     
-       
-        
+
         return orig;
     }
-    
+
     public ArrayList<Problems> getProblemsList() {
         try {
             // put functions here : previous week production, this week production
@@ -200,6 +199,46 @@ public class ProblemsDB {
         }
         return null;
     }
+
+    public ArrayList<Problems> getProblemsList(Date startDate, Date endDate, String status) {
+        try {
+            // put functions here : previous week production, this week production
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "select p.id,p.name,p.description,pf.Fields_id,pf.date,pf.status,p.type,p.phase from `problems-fields` pf join problems p on pf.problems_id=p.id where pf.date>=? and pf.date <=? and status=?;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+             pstmt.setDate(1, startDate);
+             pstmt.setDate(2, endDate);
+             pstmt.setString(3, status);
+            ResultSet rs = pstmt.executeQuery();
+            ArrayList<Problems> pT = null;
+            Problems p;
+            if (rs.next()) {
+                pT = new ArrayList<Problems>();
+                do {
+                    p = new Problems();
+                    p.setProb_id(rs.getInt("id"));
+                    p.setProb_name(rs.getString("name"));
+                    p.setProb_details(rs.getString("description"));
+                    p.setStatus(rs.getString("status"));
+                    p.setType(rs.getString("type"));
+                    p.setDate_created(rs.getDate("date"));
+                    p.setFarm(rs.getString("Fields_id"));
+                    p.setPhase(rs.getString("phase"));
+                    pT.add(p);
+                } while (rs.next());
+            }
+            rs.close();
+            pstmt.close();
+            conn.close();
+
+            return pT;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProblemsDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
     public ArrayList<Problems> viewAllProblems() {
         try {
             // put functions here : previous week production, this week production
@@ -219,7 +258,7 @@ public class ProblemsDB {
                     p.setProb_details(rs.getString("description"));
                     p.setType(rs.getString("type"));
                     p.setPhase(rs.getString("phase"));
-               
+
                     pT.add(p);
                 } while (rs.next());
             }
@@ -234,14 +273,14 @@ public class ProblemsDB {
         return null;
     }
 
-    public ArrayList<Problems> viewSelectedProblems(ArrayList<String> list){
-         ArrayList<Problems> problems=new ArrayList<>();
-        for(int i=0; i<list.size();i++){
+    public ArrayList<Problems> viewSelectedProblems(ArrayList<String> list) {
+        ArrayList<Problems> problems = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
             problems.add(getProblemsDetails(Integer.parseInt(list.get(i))));
         }
         return problems;
     }
-    
+
     public ArrayList<Recommendation> getAllSolutions(int prob_id) {
         try {
             // put functions here : previous week production, this week production
@@ -423,7 +462,8 @@ public class ProblemsDB {
         }
         return null;
     }
-public ArrayList<Problems> getFarmProblemDetbyFarmComp(int id) {
+
+    public ArrayList<Problems> getFarmProblemDetbyFarmComp(int id) {
         try {
             CalendarDB caldb = new CalendarDB();
             ArrayList<Calendar> calist = caldb.getCurrentYearDetails();
@@ -461,6 +501,7 @@ public ArrayList<Problems> getFarmProblemDetbyFarmComp(int id) {
         }
         return null;
     }
+
     public Problems getAlertDetails(int id) {
         try {
             // put functions here : previous week production, this week production
@@ -498,7 +539,7 @@ public ArrayList<Problems> getFarmProblemDetbyFarmComp(int id) {
             // put functions here : previous week production, this week production
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select f.Farmers_name,pf.Fields_id,f.barangay, round(pf.damage,2) as 'damage' from problems p join `problems-fields` pf on p.id = pf.Problems_id join `fields` f on pf.Fields_id = f.id where p.id = ?  ;";
+            String query = "select f.Farmers_name,pf.Fields_id,f.barangay,pf.date,pf.status,round(pf.damage,2) as 'damage' from problems p join `problems-fields` pf on p.id = pf.Problems_id join `fields` f on pf.Fields_id = f.id where p.id = ?  ;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
@@ -512,8 +553,8 @@ public ArrayList<Problems> getFarmProblemDetbyFarmComp(int id) {
                     p.setFarmer(rs.getString("Farmers_name"));
                     p.setBarangay(rs.getString("barangay"));
                     p.setProb_loss(rs.getDouble("damage"));
-                    // p.setStatus(rs.getString("status"));
-                    //p.setValidation(rs.getString("validated"));
+                     p.setStatus(rs.getString("status"));
+                    p.setDate_updated(rs.getDate("date"));
                     pT.add(p);
                 } while (rs.next());
             }

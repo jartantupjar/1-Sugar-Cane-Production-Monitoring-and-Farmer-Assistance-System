@@ -5,6 +5,7 @@
 --%>
 
 <%@include file="security.jsp" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -69,14 +70,14 @@
                                                 <c:forEach items="${est}" var="estims">
                                                     <tr>
                                                         <td><c:out value="${estims.year}"/></td>
-                                                        <td><c:out value="${estims.area}"/></td>
+                                                        <td><fmt:formatNumber type="number" pattern="#,###.##" value="${estims.area}"/></td>
                                                         <td><c:out value="${estims.rainfall}"/></td>
-                                                        <td><c:out value="${estims.tiller}"/></td>
+                                                        <td><fmt:formatNumber type="number" pattern="#,###.##" value="${estims.tiller}"/></td>
                                                         <td><c:out value="${estims.temp}"/></td>
-                                                        <td><c:out value="${estims.actual}"/></td>
-                                                        <td><c:out value="${estims.forecasted}"/></td>
-                                                        <td><c:out value="${estims.forecast2}"/></td>
-                                                        <td><c:out value="${estims.forecast3}"/></td>
+                                                        <td><fmt:formatNumber type="number" pattern="#,###.##" value="${estims.actual}"/></td>
+                                                        <td><fmt:formatNumber type="number" pattern="#,###.##" value="${estims.forecasted}"/></td>
+                                                        <td><fmt:formatNumber type="number" pattern="#,###.##" value="${estims.forecast2}"/></td>
+                                                        <td><fmt:formatNumber type="number" pattern="#,###.##" value="${estims.forecast3}"/></td>
                                                         <td>
                                                             <select name="status" class="form-control selectforc" style="width: 100%;">
                                                                 <c:forEach begin="1" end="3" var="i">
@@ -595,6 +596,12 @@
         </script>
         <script src="plugins/datatables/dataTables.select.min.js"></script>
         <script type="text/javascript">
+            
+            function numberWithCommas(x){
+                return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+            
+            
             var table4 = $('#testTable').DataTable({
                 'ajax': {
                     'url': 'viewTestEstimates'

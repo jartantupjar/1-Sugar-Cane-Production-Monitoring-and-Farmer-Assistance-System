@@ -11,6 +11,7 @@ import db.ProblemsDB;
 import entity.Problems;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -23,7 +24,7 @@ import org.json.simple.JSONObject;
  *
  * @author Bryll Joey Delfin
  */
-public class viewProbList extends HttpServlet {
+public class viewProbListWeek extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,20 +38,27 @@ public class viewProbList extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
-        JSONObject data= new JSONObject();
+        JSONObject data = new JSONObject();
         ProblemsDB pdb = new ProblemsDB();
+
+        String mweek = request.getParameter("mondayofweek");
+        String sweek = request.getParameter("sundayofweek");
+        String status = request.getParameter("status");
+        System.out.println(mweek);
+        System.out.println(sweek);
+        System.out.println(status);
         ArrayList<Problems> probT = new ArrayList<Problems>();
-        probT = pdb.getProblemsList();
-        System.err.println(probT.get(0).getProb_name()+"NATRAJ ");
+        probT = pdb.getProblemsList(Date.valueOf(mweek), Date.valueOf(sweek), status);
         JSONArray list = new JSONArray();
-        for(int i=0;i<probT.size();i++){
+        for (int i = 0; i < probT.size(); i++) {
             ArrayList<String> obj = new ArrayList<String>();
             obj.add(probT.get(i).getProb_id().toString());
-            obj.add(probT.get(i).getProb_name());         
-            obj.add(probT.get(i).getProb_details());
-            obj.add(probT.get(i).getTotalFarms().toString());
-            obj.add(probT.get(i).getStatus());
+            obj.add(probT.get(i).getProb_name());
+            obj.add(probT.get(i).getFarm());
+            obj.add(probT.get(i).getPhase());
             obj.add(probT.get(i).getType());
+            obj.add(probT.get(i).getStatus());
+            obj.add(probT.get(i).getProb_details());
             obj.add(probT.get(i).getProb_id().toString());
             list.add(obj);
         }
@@ -58,9 +66,8 @@ public class viewProbList extends HttpServlet {
         response.setContentType("applications/json");
         response.setCharacterEncoding("utf-8");
         response.getWriter().write(data.toString());
-        
-        }
-        
+
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -94,6 +101,3 @@ public class viewProbList extends HttpServlet {
     }// </editor-fold>
 
 }
-
-
-

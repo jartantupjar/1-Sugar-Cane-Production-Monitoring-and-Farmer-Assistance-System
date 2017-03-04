@@ -184,7 +184,7 @@
                                 return '<a href="viewFieldDetails?id=' + data + '" class="btn btn-primary">Details</a>';
                             }
 
-                        }]
+                        }],'order': [[4, 'desc']]
 
                 });
             });

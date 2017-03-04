@@ -42,6 +42,9 @@ current vs then diagram
 
                                         <ul class="list-group list-group-unbordered">
                                             <li class="list-group-item">
+                                                <b>Status of Program</b> <a class="pull-right"><c:out value="${progdet.status}"></c:out></a>
+                                            </li>
+                                            <li class="list-group-item">
                                                 <b>Type of Program</b> <a class="pull-right"><c:out value="${progdet.type}"></c:out></a>
                                             </li>
                                             <li class="list-group-item">
@@ -50,6 +53,7 @@ current vs then diagram
                                             <li class="list-group-item">
                                                 <b>Expected End Date:</b> <p class="pull-right"><c:out value="${progdet.date_end}"></c:out></p>
                                             </li>
+                                            
                                             <li class="list-group-item">
                                                 <b>Description</b> 
                                                 <p class="text-center text-center">
@@ -128,6 +132,8 @@ current vs then diagram
                                                 <tr>
                                                     <th>Problem</th>
                                                     <th>Description</th>
+                                                    <th>more details</th>
+                                                    <th>Farms</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -135,6 +141,9 @@ current vs then diagram
                                                 <tr>
                                                     <td><c:out value="${plist.prob_name}"></c:out></td>
                                                     <td><c:out value="${plist.prob_details}"></c:out></td>
+                                                    <td><c:out value="${plist.count}"></c:out></td>
+                                                    <td><a target="_blank" href="viewProbDetails?id=${plist.prob_id}" class="btn btn-primary">More details</a></td>
+                                                    
                                                     </tr>
                                             </c:forEach>
 

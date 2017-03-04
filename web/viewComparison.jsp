@@ -118,7 +118,7 @@ comparison page add current vs historical details(past 2yrs)
                                             </tr>
 
                                             <tr>
-                                                <th>Production(TC)</th>
+                                                <th>Production(tc)</th>
                                                 <td class="text-blue"><c:out value="${farm.production}"/></td>
                                                 <c:forEach var="flow" items="${flist}">
                                                     <c:choose>
@@ -164,7 +164,7 @@ comparison page add current vs historical details(past 2yrs)
                                             </tr>
 
                                             <tr>
-                                                <th>Current Yield(TC/HA)</th>
+                                                <th>Current Yield(tc/ha)</th>
                                                 <td class="text-blue"><c:out value="${farm.yield}"/></td>
                                                 <c:forEach var="flow" items="${flist}">
                                                     <c:choose>
@@ -359,7 +359,7 @@ comparison page add current vs historical details(past 2yrs)
                                                         </c:forEach>
                                                     </tr>
                                                     <tr>
-                                                        <th>Brix</th>
+                                                        <th>Brix(bx)</th>
                                                         <td class="text-blue"><c:out value="${farm.cropVal.brix}"/></td>
                                                         <c:forEach var="flow" items="${flist}">
                                                             <c:choose>
@@ -996,7 +996,7 @@ comparison page add current vs historical details(past 2yrs)
                             </div>
                             <div class="col-md-12 hidden" id="probBlock">
                                 <br>
-                                <h1> Report Problems<small><a tabindex="0" class="text-overflow" id="popSendProb" role="button"><i class="fa fa-info-circle text-orange"></i></a></small></h1><h3>shorten the preselection using phase?</h3>
+                                <h1> Report Problems<small><a tabindex="0" class="text-overflow" id="popSendProb" role="button"><i class="fa fa-info-circle text-orange"></i></a></small></h1>
                                 
                                 <div class="col-md-6" > 
 

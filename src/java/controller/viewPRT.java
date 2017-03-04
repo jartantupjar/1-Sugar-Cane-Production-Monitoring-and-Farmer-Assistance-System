@@ -49,8 +49,11 @@ public class viewPRT extends HttpServlet {
                 obj.add(probT.get(i).getFields_id().toString());
                 obj.add(probT.get(i).getFarmer());
                 obj.add(probT.get(i).getBarangay());
+                obj.add(probT.get(i).getDate_updated().toString());
+                obj.add(probT.get(i).getStatus());
                 obj.add(probT.get(i).getProb_loss().toString());
-                //obj.add(probT.get(i).getStatus());
+                obj.add(probT.get(i).getFields_id().toString());
+                
                 //obj.add(probT.get(i).getValidation());
                 list.add(obj);
             }

@@ -710,6 +710,18 @@ var popRecProjList = {toggle: "popover", trigger: "focus", placement: "auto", ht
     }
 };
 
+var popFarmerProgList = {toggle: "popover", trigger: "focus", placement: "auto", html: true,
+
+    title: 'Farmer Program List',
+    content: function () {
+        return '<dl>\n\
+                    <dt>Description</dt>\n\
+                        <dd>This shows all the programs that the farmer is involved in based on his problems</dd>\n\
+                    \n\
+                </dl>';
+    }
+};
+
 var popFarmerFarmList = {toggle: "popover", trigger: "focus", placement: "auto", html: true,
 
     title: 'Farmer Farm List',
@@ -800,6 +812,17 @@ var popFarmRecList = {toggle: "popover", trigger: "focus", placement: "auto", ht
         return '<dl>\n\
                     <dt>Description</dt>\n\
                         <dd>This shows all the recommendations that the farm is implementing</dd>\n\
+                    \n\
+                </dl>';
+    }
+};
+var popFarmProgList = {toggle: "popover", trigger: "focus", placement: "auto", html: true,
+
+    title: 'Farm Program List',
+    content: function () {
+        return '<dl>\n\
+                    <dt>Description</dt>\n\
+                        <dd>This shows all the programs that the farm is involved in based on his problems</dd>\n\
                     \n\
                 </dl>';
     }

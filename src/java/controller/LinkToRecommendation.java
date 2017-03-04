@@ -77,8 +77,8 @@ public class LinkToRecommendation extends BaseServlet {
                 }
             }
             test = rdb.linktoRecommendation(fields_id, recom_id, rdate, "Active");
-            notif = fdb.addRecommendationNotification(fields_id, "You have been suggested to do this recommendation: "+recom_id+" hell yeah", rdate, recom_id, fields_id);
-            if (test > 0 && test2 >0){
+            notif = fdb.addRecommendationNotification(fields_id, "You have been suggested to do this recommendation: "+recom_id, rdate, recom_id, fields_id);
+            if (test > 0 || test2 >0){
                 
                 ServletContext context = getServletContext();
                 RequestDispatcher rd = context.getRequestDispatcher("/Forum.jsp");

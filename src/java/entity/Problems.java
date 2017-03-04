@@ -6,17 +6,19 @@
 package entity;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  *
  * @author Bryll Joey Delfin
  */
 public class Problems {
-    private Integer prob_id, totalFarms, fields_id,tSolutions, totalFields, count;
+    private Integer prob_id, totalFarms, fields_id,tSolutions, totalFields, count ,tPrograms ;
     private String prob_name, prob_details, barangay,municipality, status,type,impact,farmer,farm,validation,phase,user_name, district;
     private Double prob_loss,damage;
     private double percent_affected;
     private Date date_updated ,date_created;
+    private ArrayList<Recommendation> reclist;
 
     /**
      * @return the prob_id
@@ -357,5 +359,33 @@ public class Problems {
      */
     public void setCount(Integer count) {
         this.count = count;
+    }
+
+    /**
+     * @return the reclist
+     */
+    public ArrayList<Recommendation> getReclist() {
+        return reclist;
+    }
+
+    /**
+     * @param reclist the reclist to set
+     */
+    public void setReclist(ArrayList<Recommendation> reclist) {
+        this.reclist = reclist;
+    }
+
+    /**
+     * @return the tPrograms
+     */
+    public Integer gettPrograms() {
+        return tPrograms;
+    }
+
+    /**
+     * @param tPrograms the tPrograms to set
+     */
+    public void settPrograms(Integer tPrograms) {
+        this.tPrograms = tPrograms;
     }
 }

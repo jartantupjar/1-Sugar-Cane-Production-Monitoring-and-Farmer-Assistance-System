@@ -408,6 +408,22 @@
         <servlet-name>viewTopTen</servlet-name>
         <servlet-class>controller.viewTopTen</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>viewProbListWeek</servlet-name>
+        <servlet-class>controller.viewProbListWeek</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>selectReportList</servlet-name>
+        <servlet-class>controller.selectReportList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewRecListWeek</servlet-name>
+        <servlet-class>controller.viewRecListWeek</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewFarmerProgT</servlet-name>
+        <servlet-class>controller.viewFarmerProgT</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
@@ -813,8 +829,24 @@
         <url-pattern>/DistinctCropYearList</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>viewProbListWeek</servlet-name>
+        <url-pattern>/viewProbListWeek</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>selectReportList</servlet-name>
+        <url-pattern>/selectReportList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewRecListWeek</servlet-name>
+        <url-pattern>/viewRecListWeek</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>viewTopTen</servlet-name>
         <url-pattern>/viewTopTen</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewFarmerProgT</servlet-name>
+        <url-pattern>/viewFarmerProgT</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

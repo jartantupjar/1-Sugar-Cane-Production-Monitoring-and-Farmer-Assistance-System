@@ -12,6 +12,7 @@ import entity.Recommendation;
 import entity.cropEstimate;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -41,14 +42,19 @@ public class viewMuniCropEst extends BaseServlet {
         
         JSONObject data = new JSONObject();
         JSONArray list = new JSONArray();
+        
+        
+          DecimalFormat df = new DecimalFormat("#.00");
+                df.setGroupingUsed(true);
+                df.setGroupingSize(3);
         if (fct != null) {
             for (int i = 0; i < fct.size(); i++) {
                 ArrayList<String> obj = new ArrayList<>();
                 obj.add(Integer.toString(fct.get(i).getYear()));
                 obj.add(fct.get(i).getMunicipality());
-                obj.add(Double.toString(fct.get(i).getArea()));
-                obj.add(Double.toString(fct.get(i).getActual()));
-                obj.add(Double.toString(fct.get(i).getForecasted()));
+                obj.add(df.format(fct.get(i).getArea()));
+                obj.add(df.format(fct.get(i).getActual()));
+                obj.add(df.format(fct.get(i).getForecasted()));
                  obj.add(Double.toString(fct.get(i).getDifference())+"%");
                  obj.add(fct.get(i).getMunicipality());
                 list.add(obj);

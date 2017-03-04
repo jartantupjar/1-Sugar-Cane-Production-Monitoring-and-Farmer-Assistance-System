@@ -8,9 +8,12 @@ package controller;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import db.ProblemsDB;
+import db.fixedRecDB;
 import entity.Problems;
+import entity.Recommendation;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -23,7 +26,7 @@ import org.json.simple.JSONObject;
  *
  * @author Bryll Joey Delfin
  */
-public class viewProbList extends HttpServlet {
+public class viewRecListWeek extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,30 +40,38 @@ public class viewProbList extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
-        JSONObject data= new JSONObject();
-        ProblemsDB pdb = new ProblemsDB();
-        ArrayList<Problems> probT = new ArrayList<Problems>();
-        probT = pdb.getProblemsList();
-        System.err.println(probT.get(0).getProb_name()+"NATRAJ ");
+        JSONObject data = new JSONObject();
+        fixedRecDB frb = new fixedRecDB();
+
+        String mweek = request.getParameter("mondayofweek");
+        String sweek = request.getParameter("sundayofweek");
+        String status = request.getParameter("status");
+        System.out.println(mweek);
+        System.out.println(sweek);
+        System.out.println(status);
+        ArrayList<Recommendation> recList = new ArrayList<Recommendation>();
+        recList = frb.viewRecList(Date.valueOf(mweek),Date.valueOf(sweek),status);
         JSONArray list = new JSONArray();
-        for(int i=0;i<probT.size();i++){
-            ArrayList<String> obj = new ArrayList<String>();
-            obj.add(probT.get(i).getProb_id().toString());
-            obj.add(probT.get(i).getProb_name());         
-            obj.add(probT.get(i).getProb_details());
-            obj.add(probT.get(i).getTotalFarms().toString());
-            obj.add(probT.get(i).getStatus());
-            obj.add(probT.get(i).getType());
-            obj.add(probT.get(i).getProb_id().toString());
-            list.add(obj);
+        if (recList != null) {
+            for (int i = 0; i < recList.size(); i++) {
+                ArrayList<String> obj = new ArrayList<String>();
+                obj.add(recList.get(i).getRecommendation_name());
+                obj.add(recList.get(i).getFarm());
+                obj.add(recList.get(i).getPhase());
+                obj.add(recList.get(i).getType());
+                obj.add(recList.get(i).getStatus());
+                obj.add(recList.get(i).getDescription());
+                obj.add(Integer.toString(recList.get(i).getId()));
+                list.add(obj);
+                System.out.println(recList.get(i).getId());
+            }
         }
         data.put("data", list);
         response.setContentType("applications/json");
         response.setCharacterEncoding("utf-8");
         response.getWriter().write(data.toString());
-        
-        }
-        
+
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -94,6 +105,3 @@ public class viewProbList extends HttpServlet {
     }// </editor-fold>
 
 }
-
-
-

@@ -28,7 +28,7 @@ public class subjectiveRecDB {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
             String query = " (\n" +
-"			select r.recommendation, r.type, r.description, r.phase, count(r.id) as'count'\n" +
+"			select r.recommendation, r.type, r.description, r.phase, count(r.id) as'count', r.id \n" +
 "			from recommendations r join `recommendations-fields` rf on  r.id = rf.Recommendations_id\n" +
 "			where rf.status = 'active' and rf.date <= (select current_date from configuration) and r.phase = 'Germination'\n" +
 "			group by r.id\n" +
@@ -39,7 +39,7 @@ public class subjectiveRecDB {
 "			union all\n" +
 "\n" +
 "			(\n" +
-"			select r.recommendation, r.type, r.description, r.phase, count(r.id) as'count'\n" +
+"			select r.recommendation, r.type, r.description, r.phase, count(r.id) as'count', r.id \n" +
 "			from recommendations r join `recommendations-fields` rf on  r.id = rf.Recommendations_id\n" +
 "			where rf.status = 'active' and rf.date <= (select current_date from configuration) and r.phase = 'Tillering'\n" +
 "			group by r.id\n" +
@@ -51,7 +51,7 @@ public class subjectiveRecDB {
 "			union all\n" +
 "\n" +
 "			(\n" +
-"			select r.recommendation, r.type, r.description, r.phase, count(r.id) as'count'\n" +
+"			select r.recommendation, r.type, r.description, r.phase, count(r.id) as'count', r.id \n" +
 "			from recommendations r join `recommendations-fields` rf on  r.id = rf.Recommendations_id\n" +
 "			where rf.status = 'active' and rf.date <= (select current_date from configuration) and r.phase = 'Stalk Elongation'\n" +
 "			group by r.id\n" +
@@ -63,7 +63,7 @@ public class subjectiveRecDB {
 "			union all\n" +
 "\n" +
 "			(\n" +
-"			select r.recommendation, r.type, r.description, r.phase, count(r.id) as'count'\n" +
+"			select r.recommendation, r.type, r.description, r.phase, count(r.id) as'count', r.id \n" +
 "			from recommendations r join `recommendations-fields` rf on  r.id = rf.Recommendations_id\n" +
 "			where rf.status = 'active' and rf.date <= (select current_date from configuration) and r.phase = 'Yield Formation'\n" +
 "			group by r.id\n" +
@@ -75,7 +75,7 @@ public class subjectiveRecDB {
 "			union all\n" +
 "\n" +
 "			(\n" +
-"			select r.recommendation, r.type, r.description, r.phase, count(r.id) as'count'\n" +
+"			select r.recommendation, r.type, r.description, r.phase, count(r.id) as'count', r.id \n" +
 "			from recommendations r join `recommendations-fields` rf on  r.id = rf.Recommendations_id\n" +
 "			where rf.status = 'active' and rf.date <= (select current_date from configuration) and r.phase = 'Ripening'\n" +
 "			group by r.id\n" +
@@ -86,7 +86,7 @@ public class subjectiveRecDB {
 "			union all\n" +
 "\n" +
 "			(\n" +
-"			select r.recommendation, r.type, r.description, r.phase, count(r.id) as'count'\n" +
+"			select r.recommendation, r.type, r.description, r.phase, count(r.id) as'count', r.id \n" +
 "			from recommendations r join `recommendations-fields` rf on  r.id = rf.Recommendations_id\n" +
 "			where rf.status = 'active' and rf.date <= (select current_date from configuration) and r.phase = 'Milling'\n" +
 "			group by r.id\n" +
@@ -98,7 +98,7 @@ public class subjectiveRecDB {
 "			union all\n" +
 "\n" +
 "			(\n" +
-"			select r.recommendation, r.type, r.description, r.phase, count(r.id) as'count'\n" +
+"			select r.recommendation, r.type, r.description, r.phase, count(r.id) as'count', r.id \n" +
 "			from recommendations r join `recommendations-fields` rf on  r.id = rf.Recommendations_id\n" +
 "			where rf.status = 'active' and rf.date <= (select current_date from configuration) and r.phase = 'Planting'\n" +
 "			group by r.id\n" +
@@ -110,7 +110,7 @@ public class subjectiveRecDB {
 "			union all\n" +
 "\n" +
 "			(\n" +
-"			select r.recommendation, r.type, r.description, r.phase, count(r.id) as'count'\n" +
+"			select r.recommendation, r.type, r.description, r.phase, count(r.id) as'count', r.id \n" +
 "			from recommendations r join `recommendations-fields` rf on  r.id = rf.Recommendations_id\n" +
 "			where rf.status = 'active' and rf.date <= (select current_date from configuration) and r.phase = 'Year'\n" +
 "			group by r.id\n" +
@@ -122,7 +122,7 @@ public class subjectiveRecDB {
 "			union all\n" +
 "\n" +
 "			(\n" +
-"			select r.recommendation, r.type, r.description, r.phase, count(r.id) as'count'\n" +
+"			select r.recommendation, r.type, r.description, r.phase, count(r.id) as'count', r.id \n" +
 "			from recommendations r join `recommendations-fields` rf on  r.id = rf.Recommendations_id\n" +
 "			where rf.status = 'active' and rf.date <= (select current_date from configuration) and r.phase = 'Land Preparation'\n" +
 "			group by r.id\n" +
@@ -134,6 +134,7 @@ public class subjectiveRecDB {
             if(rs.next()){
                 do{
                     r = new Recommendation();
+                    r.setId(rs.getInt("id"));
                     r.setRecommendation_name(rs.getString("recommendation"));
                     r.setType(rs.getString("type"));
                     r.setPhase(rs.getString("phase"));
