@@ -1296,12 +1296,8 @@ var popProbMsg = {toggle: "popover", trigger: "focus", placement: "auto", html: 
     content: function () {
         return '<dl>\n\
                     <dt>Description</dt>\n\
-                        <dd>hello world</dd>\n\
-                    <dt>Tips</dt>\n\
-                        <dd> <ul>\n\
-                            <li>hello world</li>\n\
-                            </ul>\n\
-                        <dd>\n\
+                        <dd>This is the message to be inputted when sending problems</dd>\n\
+                    \
                 </dl>';
     }
 };
