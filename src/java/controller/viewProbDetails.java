@@ -6,8 +6,10 @@
 package controller;
 
 import db.ProblemsDB;
+import db.ProgramsDB;
 import db.fixedRecDB;
 import entity.Problems;
+import entity.Programs;
 import entity.Recommendation;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -46,16 +48,28 @@ public class viewProbDetails extends HttpServlet {
             int i = Integer.parseInt(request.getParameter("id"));
             fixedRecDB recDB = new fixedRecDB();
             ProblemsDB probDB = new ProblemsDB();
+            ProgramsDB progDB = new ProgramsDB();
             Problems p = probDB.getProblemsDetails(i);
             Recommendation r;
+            Programs pg;
             ArrayList<Recommendation> recomList = probDB.getAllSolutions(p.getProb_id());
+            ArrayList<Programs>progList = progDB.getallPrograms(p.getProb_id());
             ArrayList<Problems> probList = null;
             ArrayList<Recommendation> solution = new ArrayList<Recommendation>();
+            ArrayList<Programs> prg = new ArrayList<Programs>();
             if(recomList != null){
             for (int j = 0; j < recomList.size(); j++){
                 r = new Recommendation();
                 r = recDB.viewRecDetails(recomList.get(j).getId());
                 solution.add(r);
+            }
+            }
+            if(progList !=null){
+                for (int k = 0; k<progList.size(); k++){
+                pg = new Programs();
+                    System.out.println(progList.get(k).getProg_name()+"WHET");
+                pg = progDB.viewProgDetailForProblem(progList.get(k).getProg_name());
+                prg.add(pg);
             }
             }
             if(p != null){
@@ -65,12 +79,20 @@ public class viewProbDetails extends HttpServlet {
                 else{
                     p.settSolutions(0);
                 }
+                if(progList !=null){
+                    p.settPrograms(progList.size());
+                }
+                else{
+                    p.settPrograms(0);
+                }
+                
                 probList = new ArrayList<Problems>();
                 probList = probDB.showProblembyFarm(i);
                 HttpSession session = request.getSession();
                 session.setAttribute("problem", p);
                 session.setAttribute("probid", i);
                 session.setAttribute("solution", solution);
+                session.setAttribute("programs", prg);
                 ServletContext context = getServletContext();
                 RequestDispatcher rd = context.getRequestDispatcher("/viewProblemDetails.jsp");
                 rd.forward(request, response);

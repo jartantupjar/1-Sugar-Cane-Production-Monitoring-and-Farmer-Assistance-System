@@ -40,7 +40,7 @@
                                     </div>
                                 </div>   
                                 <div class="box-body">
-                                    <table id="munitable" class="table table-bordered">
+                                    <table id="munitable" class="table table-bordered text-right">
                                         <thead>
                                             <tr>
                                                 <th style="width: 5%">Year</th>
@@ -118,10 +118,10 @@
                                                 <c:forEach var="ca" items="${CropAss}">
                                                     <tr>	
                                                         <td>${ca.particulars}</td>
-                                                        <td>${ca.estimated}</td>
-                                                        <td>${ca.previous}</td>
-                                                        <td>${ca.thisweek}</td>
-                                                        <td>${ca.todate}</td>
+                                                        <td><span class="pull-right">${ca.estimated}</span></td>
+                                                        <td><span class="pull-right">${ca.previous}</span></td>
+                                                        <td><span class="pull-right">${ca.thisweek}</span></td>
+                                                        <td><span class="pull-right">${ca.todate}</span></td>
                                                         <td>
                                                             <div class="progress-group" >
                                                                 <span class="progress-number">
@@ -166,8 +166,8 @@
                                             <tbody>
                                                 <c:forEach var="ca" items="${CropAss}">
                                                     <tr>	
-                                                        <td>${ca.particulars}</td>
-                                                        <td>${ca.standing}</td>
+                                                        <td><span class="pull-left">${ca.particulars}</span></td>
+                                                        <td><span class="pull-right">${ca.standing}</span></td>
                                                     </tr>
                                                 </c:forEach>
                                             </tbody>
@@ -201,7 +201,7 @@
                                             <tbody>
                                                 <c:forEach var="r" items="${rainfall}">
 
-                                                <td>${r.rainfall} mm</td>
+                                                <td> <span class="pull-right">${r.rainfall} mm</span></td>
 
                                             </c:forEach>
                                             </tbody>

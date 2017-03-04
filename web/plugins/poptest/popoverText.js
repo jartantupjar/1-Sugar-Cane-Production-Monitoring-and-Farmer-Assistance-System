@@ -577,7 +577,7 @@ var popMuniYrProdChart = {toggle: "popover", trigger: "focus", placement: "auto"
                         <dd>The graph shows the yearly production of the municipal</dd>\n\
                     <dt>Tips</dt>\n\
                         <dd> <ul>\n\
-                            <li>The line bar is the average district production/li>\n\
+                            <li>The line bar is the average district production</li>\n\
                             </ul>\n\
                         <dd>\n\
                 </dl>';
@@ -818,7 +818,7 @@ var popFarmRecList = {toggle: "popover", trigger: "focus", placement: "auto", ht
 };
 var popFarmProgList = {toggle: "popover", trigger: "focus", placement: "auto", html: true,
 
-    title: 'Farmer Program List',
+    title: 'Farm Program List',
     content: function () {
         return '<dl>\n\
                     <dt>Description</dt>\n\
@@ -1007,10 +1007,10 @@ var popDisasterR = {toggle: "popover", trigger: "focus", placement: "auto", html
     content: function () {
         return '<dl>\n\
                     <dt>Description</dt>\n\
-                        <dd>hello world</dd>\n\
+                        <dd>This shows all of the disaster reports around the district</dd>\n\
                     <dt>Tips</dt>\n\
                         <dd> <ul>\n\
-                            <li>hello world</li>\n\
+                            <li>Click Print Report to generate a compilation of all of the disasters by type</li>\n\
                             </ul>\n\
                         <dd>\n\
                 </dl>';
@@ -1042,10 +1042,10 @@ var popWeatherT = {toggle: "popover", trigger: "focus", placement: "auto", html:
     content: function () {
         return '<dl>\n\
                     <dt>Description</dt>\n\
-                        <dd>hello world</dd>\n\
+                        <dd>The graph shows the amount of rainfall which correlates to the production for each month</dd>\n\
                     <dt>Tips</dt>\n\
                         <dd> <ul>\n\
-                            <li>hello world</li>\n\
+                            <li>Use the dropdown to select the year for comparison</li>\n\
                             </ul>\n\
                         <dd>\n\
                 </dl>';
@@ -1059,7 +1059,7 @@ var popForumD = {toggle: "popover", trigger: "focus", placement: "auto", html: t
     content: function () {
         return '<dl>\n\
                     <dt>Description</dt>\n\
-                        <dd>This shows the lists of post in the forum/dd>\n\
+                        <dd>This shows the lists of post in the forum\n\
                     <dt>Tips</dt>\n\
                         <dd> <ul>\n\
                             <li>The status can be filtered to find pending posts</li>\n\
@@ -1079,6 +1079,7 @@ var popPostpage = {toggle: "popover", trigger: "focus", placement: "auto", html:
                     <dt>Tips</dt>\n\
                         <dd> <ul>\n\
                             <li>Accept the if the post is new</li>\n\
+\n\                         <li>Rejecting the post will give options to link to problem, recommendation or post</li>\n\
                             </ul>\n\
                         <dd>\n\
                 </dl>';

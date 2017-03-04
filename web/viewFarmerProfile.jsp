@@ -267,7 +267,7 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                 $('#popFarmerProbList').popover(popFarmerProbList);
                 $('#popRecProjList').popover(popRecProjList);
                 $('#popFarmerFarmList').popover(popFarmerFarmList);
-                 $('#popFarmerProgList').popover(popRecProjList);
+                 $('#popFarmerProgList').popover(popFarmerProgList);
 
             });
 
