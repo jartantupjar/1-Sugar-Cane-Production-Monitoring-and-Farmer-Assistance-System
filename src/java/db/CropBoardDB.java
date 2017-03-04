@@ -11,6 +11,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -502,6 +503,7 @@ public class CropBoardDB {
                     + "group by rd.district\n"
                     + "order by p.date;";
             PreparedStatement pstmt = conn.prepareStatement(query);
+            DecimalFormat df = new DecimalFormat("#.##");
             pstmt.setInt(1, cropyear);
             pstmt.setString(2, we);
             pstmt.setInt(3, weekofyear);
@@ -513,9 +515,9 @@ public class CropBoardDB {
                 cT = new ArrayList<CropBoard>();
                 do {
                     c = new CropBoard();
-                    c.setArea(rs.getDouble("area"));
-                    c.setTc(rs.getDouble("actual"));
-                    c.setLkg(rs.getDouble("lkg"));
+                    c.setArea(Double.valueOf(df.format(rs.getDouble("area"))));
+                    c.setTc(Double.valueOf(df.format(rs.getDouble("actual"))));
+                    c.setLkg(Double.valueOf(df.format(rs.getDouble("lkg"))));
                     c.setDistrict(rs.getString("district"));
                     c.setWeek_ending(rs.getDate("date"));
                     c.setEstimated(0.00);
