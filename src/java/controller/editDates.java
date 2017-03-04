@@ -120,8 +120,10 @@ public class editDates extends HttpServlet {
                 cal.setPhase("Yield Formation");
                 String reserv = request.getParameter("ystart");
                 String[] lines = reserv.split("-");
+                System.out.println(lines[1]+"ENDDDDDDDDDDDDDDDDD");
                 Date start = cdb.convertStringtoSQLDate(lines[0]);
                 Date end = cdb.convertStringtoSQLDate(lines[1]);
+                System.out.println(end+"ENDDDDDDDDDDDDDDDDD");
                 cal.setStarting(start);
                 cal.setEnding(end);
                 cT.add(cal);

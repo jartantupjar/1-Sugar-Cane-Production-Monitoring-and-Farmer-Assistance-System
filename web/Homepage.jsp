@@ -45,10 +45,10 @@
                                             <tr>
                                                 <th style="width: 5%">Year</th>
                                                 <th>Week Ending</th>
-                                                <th>Harvest Area</th>
-                                                <th>Rainfall</th>
-                                                <th>Actual Production</th>
-                                                <th>Estimated Production</th>
+                                                <th>Harvest Area (ha)</th>
+                                                <th>Rainfall (mm)</th>
+                                                <th>Actual Production (tc)</th>
+                                                <th>Estimated Production (tc)</th>
                                                 <th>% Difference</th>
                                             </tr>
                                         </thead>
@@ -118,10 +118,10 @@
                                                 <c:forEach var="ca" items="${CropAss}">
                                                     <tr>	
                                                         <td>${ca.particulars}</td>
-                                                        <td><span class="pull-right">${ca.estimated}</span></td>
-                                                        <td><span class="pull-right">${ca.previous}</span></td>
-                                                        <td><span class="pull-right">${ca.thisweek}</span></td>
-                                                        <td><span class="pull-right">${ca.todate}</span></td>
+                                                        <td><span class="pull-right">${ca.estimated} </span></td>
+                                                        <td><span class="pull-right">${ca.previous} </span></td>
+                                                        <td><span class="pull-right">${ca.thisweek} </span></td>
+                                                        <td><span class="pull-right">${ca.todate} </span></td>
                                                         <td>
                                                             <div class="progress-group" >
                                                                 <span class="progress-number">
