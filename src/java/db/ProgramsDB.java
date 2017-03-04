@@ -211,9 +211,17 @@ public class ProgramsDB {
 
     public ArrayList<cropEstimate> getProgramPostProduction(int year, String progname) {
         try {
+            
+            CalendarDB caldb=new CalendarDB();
+            ArrayList<entity.Calendar> cal=null;
+            cal=caldb.getCurrentYearDetails();
+          Integer todayyear=  cal.get(0).getYear();
+            
+            
+            
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "select sum(hp.tons_cane)as production, hp.year\n"
+            String query = "(select sum(hp.tons_cane)as production, hp.year\n"
                     + "from historicalproduction hp\n"
                     + "where hp.Farmers_name in (\n"
                     + "						select Farmers_name\n"
@@ -228,11 +236,19 @@ public class ProgramsDB {
                     + "                                                    where Programs_name = ? \n"
                     + "														)\n"
                     + "                                )\n"
-                    + "						) and year >=? \n"
-                    + "group by year;";
+                    + "						) and year >=? and year<=? \n"
+                    + "group by year)\n" +
+"union all\n" +
+"(select sum(p.tons_cane) as production, p.year from production p  where p.Fields_id in\n" +
+" (select Fields_id from `Problems-fields` where Problems_id in (select Problems_id from `programs-problems` where programs_name=?) and year>=? and year<=?)\n" +
+"group by year);";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, progname);
             pstmt.setInt(2, year);
+            pstmt.setInt(3, todayyear);
+            pstmt.setString(4, progname);
+            pstmt.setInt(5, year);
+            pstmt.setInt(6, todayyear);
             ResultSet rs = pstmt.executeQuery();
             ArrayList<cropEstimate> list = null;
 
