@@ -5,6 +5,7 @@
  */
 package controller;
 
+import db.CalendarDB;
 import db.CropAssessmentDB;
 import db.CropEstimateDB;
 import entity.CropAssessment;
@@ -35,6 +36,26 @@ public class viewCropEstimateBoard extends BaseServlet {
         ServletContext context = getServletContext();
         HttpSession session = request.getSession();
     CropEstimateDB estdb = new CropEstimateDB();
+     CalendarDB caldb=new CalendarDB();
+   ArrayList<entity.Calendar> cal= caldb.getCurrentYearDetails();
+   Integer cropyear=cal.get(0).getYear();
+   System.out.println("THIS IS WHAT PASSES US AND Y CROP ESTIMATE DIDNT UPDATE"+cropyear);
+    if(cropyear>2016){
+                     if(!estdb.checkExistingCropEstYear(cropyear)){
+                  
+                         estdb.generateYearlyEstimate(1,1); 
+                         estdb.updateYearlyEstimate();
+                     }else{
+                         cropEstimate ces= estdb.viewDistEstbyYear(cropyear);
+                       
+                            estdb.deleteSelectedDistrictYear(cropyear);
+                            estdb.generateYearlyEstimate(ces.getSelection(),ces.getSelectionlkg());
+                            estdb.updateYearlyEstimate();
+                     }
+                     
+                 }
+    
+    
                 ArrayList<cropEstimate> fct = estdb.viewAllDiffEstimates();
    
              session.setAttribute("est", fct);
