@@ -297,7 +297,7 @@ public class CalendarDB {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT *, DATE_FORMAT(date_starting,'%m-%d-%Y') as 'datepickers',DATE_FORMAT(date_ending,'%m-%d-%Y') as 'datepickere'FROM crop_calendar where year = ? order by date_starting;";
+            String query = "SELECT *, DATE_FORMAT((date_starting+Interval 1 year),'%m/%d/%Y') as 'datepickers',DATE_FORMAT((date_ending+Interval 1 year),'%m/%d/%Y') as 'datepickere' FROM crop_calendar where year = ? order by date_starting;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, cyear);
             ResultSet rs = pstmt.executeQuery();

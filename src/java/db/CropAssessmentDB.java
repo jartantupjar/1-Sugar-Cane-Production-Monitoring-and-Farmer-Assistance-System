@@ -52,10 +52,9 @@ public class CropAssessmentDB {
         double etc = Double.valueOf(df.format(getTotalEstimatedTonsCane(year))); // change into the crop year
         double eah = Double.valueOf(df.format(getTotalEstimatedArea(year)));
         double elkg = Double.valueOf(df.format(getTotalEstimatedLKG(year)));
-        ca.setParticulars("Area"); // crop asessment for area particulars
+        ca.setParticulars("Area (ha)"); // crop asessment for area particulars
         ca.setEstimated(commaformat.format(eah));
         String prev = commaformat.format(prevT.get(0).getPrevArea());
-        System.out.println(prevT.get(0).getPrevArea() + "LOLOLOL");
         ca.setPrevious(prev); // previous
         String curr = commaformat.format(currT.get(0).getThisArea());
         ca.setThisweek(curr); // this week
@@ -69,7 +68,7 @@ public class CropAssessmentDB {
         String standing = commaformat.format(Double.valueOf(df.format(eah - todate)));
         ca.setStanding(standing); // remaining
         ca.setWeek_ending(currT.get(0).getWeek_ending());
-        ca2.setParticulars("Tons Cane"); // crop assessment for tons cane particulars
+        ca2.setParticulars("Tons Cane (tc)"); // crop assessment for tons cane particulars
         ca2.setEstimated(commaformat.format(etc));
         String prevt = commaformat.format(prevT.get(0).getPrevTons_Cane());
         ca2.setPrevious(prevt); // previous
@@ -82,7 +81,7 @@ public class CropAssessmentDB {
         ca2.setPercent(commaformat.format(percentb)); // difference
         String standingt = commaformat.format(Double.valueOf(df.format(etc - todate2)));
         ca2.setStanding(standingt); //remaining
-        ca3.setParticulars("LKG"); // crop assessment for lkg particulars
+        ca3.setParticulars("LKG (lkg)"); // crop assessment for lkg particulars
         ca3.setEstimated(df.format(elkg));
         String prevl = commaformat.format(prevT.get(0).getPrevLKG());
         ca3.setPrevious(prevl);
