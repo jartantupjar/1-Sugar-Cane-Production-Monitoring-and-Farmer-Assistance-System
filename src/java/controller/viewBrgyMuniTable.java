@@ -8,6 +8,7 @@ import entity.FarmRecTable;
 import entity.Recommendation;
 import entity.brgySummary;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -48,7 +49,9 @@ if(cropyr>2016){
    fct = prodb.viewBrgyMuniTable(muni,cropyr);
 }
         
-        
+        DecimalFormat df = new DecimalFormat("#.00");
+                df.setGroupingUsed(true);
+                df.setGroupingSize(3);
         
         JSONObject data = new JSONObject();
         JSONArray list = new JSONArray();
@@ -58,8 +61,8 @@ if(cropyr>2016){
                 obj.add(fct.get(i).getBarangay());
                 obj.add(Integer.toString(fct.get(i).getTfarmers()));
                 obj.add(Integer.toString(fct.get(i).getYear()));
-                obj.add(Double.toString(fct.get(i).getArea()));
-                obj.add(Double.toString(fct.get(i).getActual()));
+                obj.add(df.format(fct.get(i).getArea()));
+                obj.add(df.format(fct.get(i).getActual()));
 //                obj.add(Double.toString(fct.get(i).getYield()));
                 obj.add(fct.get(i).getBarangay());
                  list.add(obj);

@@ -267,7 +267,7 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                 $('#popFarmerProbList').popover(popFarmerProbList);
                 $('#popRecProjList').popover(popRecProjList);
                 $('#popFarmerFarmList').popover(popFarmerFarmList);
-                 $('#popFarmerProgList').popover(popFarmerProgList);
+                $('#popFarmerProgList').popover(popFarmerProgList);
 
             });
 
@@ -281,7 +281,9 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                     'ajax': {
                         'url': 'viewFarmersFieldTable?name=${farm}'
                     },
-                    'columnDefs': [{
+                    'columnDefs': [
+                       
+                        {
                             'targets': 7,
                             'render': function (data, type, full, meta) {
                                 return   '<div class="progress-group"> <span class="progress-number"><b>' + data + ' </b></span>  <div class="progress progress-sm progress-striped active"><div class="progress-bar progress-bar-primary" style="width: ' + data + '%"></div></div> </div>';
@@ -292,7 +294,7 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                             'render': function (data, type, full, meta) {
                                 return '<a class="btn btn-primary" href="viewFieldDetails?id=' + data + '">details</a>';
                             }
-                        }]
+                        }, {className: "text-right", "targets": [3, 4,5,6]}]
                 });
                 var table = $('#recTable').DataTable({
                     'ajax': {
@@ -337,7 +339,8 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                         'ajax': {
                             'url': 'viewFarmersFieldTable?name=${farm}'
                         },
-                        'columnDefs': [{
+                        'columnDefs': [
+                     {className: "text-right", "targets": [3,4,5,6]},{
                                 'targets': 7,
                                 'render': function (data, type, full, meta) {
                                     return   '<div class="progress-group"> <span class="progress-number"><b>' + data + ' </b></span>  <div class="progress progress-sm progress-striped active"><div class="progress-bar progress-bar-primary" style="width: ' + data + '%"></div></div> </div>';

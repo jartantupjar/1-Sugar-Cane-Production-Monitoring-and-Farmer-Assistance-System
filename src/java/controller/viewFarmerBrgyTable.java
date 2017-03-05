@@ -9,6 +9,7 @@ import entity.Farmer;
 import entity.Recommendation;
 import entity.brgySummary;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -48,6 +49,10 @@ public class viewFarmerBrgyTable extends BaseServlet {
    }
         JSONObject data = new JSONObject();
         JSONArray list = new JSONArray();
+        DecimalFormat df = new DecimalFormat("#.00");
+                df.setGroupingUsed(true);
+                df.setGroupingSize(3);
+        
         if (fct != null) {
             for (int i = 0; i < fct.size(); i++) {
                 ArrayList<String> obj = new ArrayList<>();
@@ -55,8 +60,8 @@ public class viewFarmerBrgyTable extends BaseServlet {
               
                 obj.add(Integer.toString(fct.get(i).getTfarms()));
                   obj.add(fct.get(i).getYear());
-                obj.add(Double.toString(fct.get(i).getTotalArea()));
-                obj.add(Double.toString(fct.get(i).getProduction()));
+                obj.add(df.format(fct.get(i).getTotalArea()));
+                obj.add(df.format(fct.get(i).getProduction()));
                 obj.add(fct.get(i).getName());
                  list.add(obj);
             }
