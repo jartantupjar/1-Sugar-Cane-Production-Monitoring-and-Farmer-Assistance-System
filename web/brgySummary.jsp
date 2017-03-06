@@ -322,6 +322,7 @@ var categ2;
                         'url': 'viewFarmerBrgyTable?name=${brgydet.barangay}'
                     },
                     'columnDefs': [
+                { className: "text-right", "targets": [3,4] },
                         {
                             'targets': 5,
                             'render': function (data, type, full, meta) {

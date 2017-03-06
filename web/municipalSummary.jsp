@@ -116,7 +116,7 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                                 </div>
                                 <div class="box-body table-responsive">
 
-                                    <table id="fieldtable" class="table table-hover">
+                                    <table id="fieldtable" class="table table-hover ">
                                         <thead><tr>
                                                 <th>Barangay</th>
                                                 <th># of Farms</th>
@@ -127,6 +127,7 @@ ADD MUNICIPAL/BRGY/FARMER DISTINCTION(CODE) FOR THE TREEMAP LINK SELECTION
                                                 <th>Details</th>
                                         </tr>
                                         </thead>
+                                      
                                     </table>
 
 
@@ -323,6 +324,7 @@ var categ2;
                         'url': 'viewBrgyMuniTable?name=${munidet.municipality}'
                     },
                     'columnDefs': [
+                { className: "text-right", "targets": [3,4] },
                         {
                             'targets': 5,
                             'render': function (data, type, full, meta) {
