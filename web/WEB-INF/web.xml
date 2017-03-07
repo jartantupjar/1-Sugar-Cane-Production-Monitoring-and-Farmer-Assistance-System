@@ -424,6 +424,10 @@
         <servlet-name>viewFarmerProgT</servlet-name>
         <servlet-class>controller.viewFarmerProgT</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>viewOtherProblems</servlet-name>
+        <servlet-class>controller.viewOtherProblems</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseServlet</servlet-name>
         <url-pattern>/BaseServlet</url-pattern>
@@ -847,6 +851,10 @@
     <servlet-mapping>
         <servlet-name>viewFarmerProgT</servlet-name>
         <url-pattern>/viewFarmerProgT</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewOtherProblems</servlet-name>
+        <url-pattern>/viewOtherProblems</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

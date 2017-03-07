@@ -141,7 +141,7 @@
 
             var table = $('#example').DataTable({
                 'ajax': {
-                    'url': 'viewSelectedProblems?farmid=${flist}'
+                    'url': 'viewOtherProblems'
                 },
                 'columnDefs': [{
                         'targets': 0,
