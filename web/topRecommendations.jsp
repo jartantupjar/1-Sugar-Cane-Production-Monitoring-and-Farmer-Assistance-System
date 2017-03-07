@@ -34,8 +34,7 @@
             <div class="content-wrapper">
                 <section class="content-header">
                     <h1>
-                        Page Header
-                        <small>Optional description</small>
+                        Yearly Improvement Report
                     </h1>
                 </section>
                 <section class="content">
