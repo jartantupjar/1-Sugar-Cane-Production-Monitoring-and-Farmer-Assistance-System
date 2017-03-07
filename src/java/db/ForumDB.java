@@ -5,6 +5,7 @@
  */
 package db;
 
+import entity.Calendar;
 import entity.Forum;
 import java.sql.Connection;
 import java.sql.Date;
@@ -173,7 +174,7 @@ public class ForumDB {
         try {
             DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
             Connection conn = myFactory.getConnection();
-            String query = "SELECT p.id,p.Fields_id,p.message,p.date_started,p.date_posted,p.title ,p.status, p.Recommendations_id, p.Problems_id,p.phase  from posts p  where p.title = ?  ;";
+            String query = "SELECT p.id,p.Fields_id,p.message,p.date_started,p.date_posted,p.title ,p.status, p.Recommendations_id, p.Problems_id,p.phase  from posts p  where p.title = ?  and p.status = 'Accepted' ;";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1,id);
             ResultSet rs = pstmt.executeQuery();
@@ -212,6 +213,26 @@ public class ForumDB {
                 pstmt.close();
                 conn.close();            
             return f;
+                 }catch (SQLException ex) {
+            Logger.getLogger(ForumDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public Integer updateDateofPost(Integer id){
+        try {
+            DBConnectionFactory myFactory = DBConnectionFactory.getInstance();
+            Connection conn = myFactory.getConnection();
+            String query = "update posts set date_posted =?  where id = ? ;";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            CalendarDB caldb=new CalendarDB();
+            ArrayList<Calendar> cal= caldb.getCurrentYearDetails();
+            pstmt.setDate(1,   cal.get(0).getTodayDate());
+            pstmt.setInt(2,id);
+            int check = pstmt.executeUpdate();
+                System.out.println(check + " This is the test");
+                pstmt.close();
+                conn.close();            
+            return check;
                  }catch (SQLException ex) {
             Logger.getLogger(ForumDB.class.getName()).log(Level.SEVERE, null, ex);
         }

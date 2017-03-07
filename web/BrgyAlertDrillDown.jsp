@@ -101,9 +101,8 @@
                                                        return '<a class="btn btn-primary" href="sendAlert?id=' + data + '">' + 'Send Alert' + '</a>';
                                                    }
 
-                                               }]
+                                               }], 'order': [[3, 'desc']]
                                        });
-                                       table.order( [ 1, 'asc' ] )
                                    });
 
 

@@ -70,7 +70,7 @@ public class linktoPost extends HttpServlet {
             Forum f = new Forum();
             f = fdb.getForumDetailByName(param);
             if(f.getProb_id()!= null){
-            int pfid = pdb.linktoProblems(fields_id, f.getProb_id(), tdate, "Veryfying");
+            int pfid = pdb.linktoProblems(fields_id, f.getProb_id(), tdate, "Verfying");
             test  = fdb.addRedirectionNotification(fields_id, "You been redirected to this post : " + f.getTitle(), tdate,f.getId(),pfid,0);
             }
             else if(f.getRecom_id() != null){
