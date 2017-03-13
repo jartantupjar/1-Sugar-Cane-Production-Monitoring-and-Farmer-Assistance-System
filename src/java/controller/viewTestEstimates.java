@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -38,7 +39,15 @@ public class viewTestEstimates extends BaseServlet {
         HttpSession session = request.getSession();
 
         ArrayList<cropEstimate> fct = estdb.viewTestEstimates();
-
+        if (fct != null) {
+            for (int i = 0; i < fct.size(); i++) {
+                List<Double> doublist = new ArrayList<>();
+                doublist.add(fct.get(i).getForecasted());
+                doublist.add(fct.get(i).getForecast2());
+                doublist.add(fct.get(i).getForecast3());
+                fct.get(i).setClosest(estdb.closest(fct.get(i).getActual(), doublist));
+            }
+        }
         JSONObject data = new JSONObject();
         JSONArray list = new JSONArray();
         if (fct != null) {
@@ -52,11 +61,15 @@ public class viewTestEstimates extends BaseServlet {
                 obj.add(commaformat.format(fct.get(i).getTiller()));
                 obj.add(Double.toString(fct.get(i).getTemp()));
                 obj.add(commaformat.format(fct.get(i).getActual()));
-//                obj.add(Double.toString(fct.get(i).getActual()));
+                
+               
                 obj.add(commaformat.format(fct.get(i).getForecasted()));
                 obj.add(commaformat.format(fct.get(i).getForecast2()));
                 obj.add(commaformat.format(fct.get(i).getForecast3()));
+               
                 obj.add(Integer.toString(fct.get(i).getId()));
+                 obj.add(commaformat.format(fct.get(i).getClosest()));
+
                 list.add(obj);
             }
         }

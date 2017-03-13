@@ -16,6 +16,7 @@ import java.sql.Date;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -57,6 +58,13 @@ public class viewCropEstimateBoard extends BaseServlet {
     
     
                 ArrayList<cropEstimate> fct = estdb.viewAllDiffEstimates();
+                 for (int i = 0; i < fct.size(); i++) {
+            List<Double> doublist = new ArrayList<>();
+            doublist.add(fct.get(i).getForecastlkg());
+            doublist.add(fct.get(i).getForecastlkg2());
+            doublist.add(fct.get(i).getForecastlkg3());
+            fct.get(i).setClosest(estdb.closest(fct.get(i).getLkg(), doublist));
+        }
    
              session.setAttribute("est", fct);
        

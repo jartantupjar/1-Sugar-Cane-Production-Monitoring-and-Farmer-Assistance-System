@@ -18,7 +18,7 @@
         <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
         <link rel="stylesheet" href="plugins/datatables/select.dataTables.min.css">
         <link rel="stylesheet" href="plugins/poptest/popover-min.css">
-       
+
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
@@ -75,11 +75,11 @@
                                                         <td><fmt:formatNumber type="number" pattern="#,###.##" value="${estims.tiller}"/></td>
                                                         <td><c:out value="${estims.temp}"/></td>
                                                         <td><fmt:formatNumber type="number" pattern="#,###.##" value="${estims.actual}"/></td>
-                                                        <td><fmt:formatNumber type="number" pattern="#,###.##" value="${estims.forecasted}"/></td>
-                                                        <td><fmt:formatNumber type="number" pattern="#,###.##" value="${estims.forecast2}"/></td>
-                                                        <td><fmt:formatNumber type="number" pattern="#,###.##" value="${estims.forecast3}"/></td>
-                                                        <td>
-                                                            <select name="status" class="form-control selectforc" style="width: 100%;">
+                                                        <td <c:if test="${estims.closest eq estims.forecasted}">class="info"</c:if> ><fmt:formatNumber type="number" pattern="#,###.##" value="${estims.forecasted}"/></td>
+                                                        <td <c:if test="${estims.closest eq estims.forecast2}">class="info"</c:if>><fmt:formatNumber type="number" pattern="#,###.##" value="${estims.forecast2}"/></td>
+                                                        <td <c:if test="${estims.closest eq estims.forecast3}">class="info"</c:if>><fmt:formatNumber type="number" pattern="#,###.##" value="${estims.forecast3}"/></td>
+                                                            <td>
+                                                                <select name="status" class="form-control selectforc" style="width: 100%;">
                                                                 <c:forEach begin="1" end="3" var="i">
                                                                     <c:choose>
                                                                         <c:when test="${i eq estims.selection}">
@@ -596,21 +596,51 @@
         </script>
         <script src="plugins/datatables/dataTables.select.min.js"></script>
         <script type="text/javascript">
-            
-            function numberWithCommas(x){
+
+            function numberWithCommas(x) {
                 return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             }
-            
-            
+
+
             var table4 = $('#testTable').DataTable({
                 'ajax': {
                     'url': 'viewTestEstimates'
                 },
                 'columnDefs': [{
+
+                        'targets': 5,
+                        "createdCell": function (td, cellData, rowData, row, col) {
+                            if (cellData === rowData[9]) {
+                                $(td).addClass('info');
+                            }
+
+                        }
+                    }, {
+
+                        'targets': 6,
+                        "createdCell": function (td, cellData, rowData, row, col) {
+                            if (cellData === rowData[9]) {
+                                $(td).addClass('info');
+                            }
+
+                        }
+                    }, {
+
+                        'targets': 7,
+                        "createdCell": function (td, cellData, rowData, row, col) {
+                            if (cellData === rowData[9]) {
+                                $(td).addClass('info');
+                            }
+
+                        }
+                    }, {
                         'targets': 8,
                         'render': function (data, type, full, meta) {
                             return '<td class="dliker""><button class="btn btn-danger   cliker" id="' + data + '" type="button" >delete</button></td>';
                         }
+                    }, {
+                        'targets': [9],
+                        "visible": false
                     }],
                 "paging": false,
 //                    "ordering": false,

@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class cropEstimate {
     private int year,selection,selectionlkg,id;
-    private double area,actual,forecasted,forecast2,forecast3,difference,differencelkg,rainfall,tiller,temp, lkg;
+    private double area,actual,forecasted,forecast2,forecast3,difference,differencelkg,rainfall,tiller,temp, lkg,closest;
     private double forecastlkg,forecastlkg2,forecastlkg3;
     private String district,municipality;
     private Date week_ending;
@@ -329,6 +329,20 @@ public class cropEstimate {
      */
     public void setDifferencelkg(double differencelkg) {
         this.differencelkg = differencelkg;
+    }
+
+    /**
+     * @return the closest
+     */
+    public double getClosest() {
+        return closest;
+    }
+
+    /**
+     * @param closest the closest to set
+     */
+    public void setClosest(double closest) {
+        this.closest = closest;
     }
     
 }

@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -39,6 +40,15 @@ public class viewLkgTestEstimates extends BaseServlet {
       
 
         ArrayList<cropEstimate> fct = estdb.viewLkgTestEstimates();
+        if (fct != null) {
+            for (int i = 0; i < fct.size(); i++) {
+                List<Double> doublist = new ArrayList<>();
+                doublist.add(fct.get(i).getForecastlkg());
+                doublist.add(fct.get(i).getForecastlkg2());
+                doublist.add(fct.get(i).getForecastlkg3());
+                fct.get(i).setClosest(estdb.closest(fct.get(i).getLkg(), doublist));
+            }
+        }
         
         JSONObject data = new JSONObject();
         JSONArray list = new JSONArray();
@@ -56,6 +66,7 @@ public class viewLkgTestEstimates extends BaseServlet {
                 obj.add(commaformat.format(fct.get(i).getForecastlkg2()));
                 obj.add(commaformat.format(fct.get(i).getForecastlkg3()));
                 obj.add(Integer.toString(fct.get(i).getId()));
+                obj.add(commaformat.format(fct.get(i).getClosest()));
                 list.add(obj);
             }
         }

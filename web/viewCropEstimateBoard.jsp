@@ -75,9 +75,9 @@
                                                         <td ><c:out value="${estims.temp}"/></td>
                                                         <td ><fmt:formatNumber type="number" pattern="#,###.##" value="${estims.actual}"/></td>
                                                         <td ><fmt:formatNumber type="number" pattern="#,###.##" value="${estims.lkg}"/></td>
-                                                        <td ><fmt:formatNumber type="number" pattern="#,###.##" value="${estims.forecastlkg}"/></td>
-                                                        <td ><fmt:formatNumber type="number" pattern="#,###.##" value="${estims.forecastlkg2}"/></td>
-                                                        <td ><fmt:formatNumber type="number" pattern="#,###.##" value="${estims.forecastlkg3}"/></td>
+                                                        <td <c:if test="${estims.closest eq estims.forecastlkg}">class="info"</c:if> ><fmt:formatNumber type="number" pattern="#,###.##" value="${estims.forecastlkg}"/></td>
+                                                        <td <c:if test="${estims.closest eq estims.forecastlkg2}">class="info"</c:if> ><fmt:formatNumber type="number" pattern="#,###.##" value="${estims.forecastlkg2}"/></td>
+                                                        <td <c:if test="${estims.closest eq estims.forecastlkg3}">class="info"</c:if> ><fmt:formatNumber type="number" pattern="#,###.##" value="${estims.forecastlkg3}"/></td>
                                                         <td>
                                                             <select name="status" class="form-control selectforc" style="width: 100%;">
                                                                 <c:forEach begin="1" end="3" var="i">
@@ -539,10 +539,41 @@
                     'url': 'viewLkgTestEstimates'
                 },
                 'columnDefs': [{
+
+                        'targets': 4,
+                        "createdCell": function (td, cellData, rowData, row, col) {
+                            if (cellData === rowData[8]) {
+                                $(td).addClass('info');
+                            }
+
+                        }
+                    },{
+
+                        'targets': 5,
+                        "createdCell": function (td, cellData, rowData, row, col) {
+                            if (cellData === rowData[8]) {
+                                $(td).addClass('info');
+                            }
+
+                        }
+                    },{
+
+                        'targets': 6,
+                        "createdCell": function (td, cellData, rowData, row, col) {
+                            if (cellData === rowData[8]) {
+                                $(td).addClass('info');
+                            }
+
+                        }
+                    },{
                         'targets': 7,
                         'render': function (data, type, full, meta) {
                             return '<td class="dliker""><button class="btn btn-danger   cliker" id="' + data + '" type="button" >delete</button></td>';
                         }
+                    },
+                {
+                        'targets': [8],
+                        "visible": false
                     }],
                 "paging": false,
 //                    "ordering": false,
